@@ -1,0 +1,13 @@
+#ifdef __CINT__
+
+#pragma link off all globals;
+#pragma link off all classes;
+#pragma link off all functions;
+#pragma link C++ all typedef;
+
+#pragma link C++ class NucDBDataPoint+;
+//#pragma link C++ function sane_pol_(double * ,double * ,double * ,int * ,int * ,double * )+;
+//#pragma link C++ enum  InSANEPDFBase::InSANEPartonFlavor;
+//#pragma link C++ global fgInSANEFunctionManager+;
+
+#endif
