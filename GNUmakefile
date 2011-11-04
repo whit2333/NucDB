@@ -30,7 +30,7 @@ CPPFLAGS +=  -g -pipe  -D_LARGEFILE_SOURCE -fno-strict-aliasing
 LDLIBS += $(shell root-config --ldflags)
 # LDLIBS +=  -lGeomPainter -lGeom -lSpectrum -lSpectrumPainter
 #LDLIBS += $(shell gsl-config --libs)
-LDLIBS += $(shell root-config --glibs --libs ) 
+LDLIBS += $(shell root-config --glibs --libs )
 #-lTreePlayer -lGeomPainter -lGed -lRGL -lEve -lEG 
 LDLIBS += -lg2c -lgfortran
 LDLIBS += $(shell mysql_config --libs) 
@@ -47,7 +47,7 @@ F77FLAGS += -g -O2 -Wall -fPIC -Iinclude
 default : nucdb
 
 nucdb : shared_libs
-	g++ -o nucdb NucDB.C $(CXXFLAGS) $(LDLIBS)
+	g++ -o nucdb NucDB.C $(CXXFLAGS) $(LDLIBS) lib/lib$(SOLIBNAMES).so.$(LIBMAJOR).$(LIBMINOR)
 	mv nucdb bin/.
 
 

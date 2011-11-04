@@ -1,0 +1,14 @@
+#ifndef NucDBDatabaseManager_HH
+#define NucDBDatabaseManager_HH
+#include "TObject.h"
+
+class NucDBDatabaseManager : public TObject {
+public :
+
+protected: 
+
+
+ClassDef(NucDBDatabaseManager,1)
+};
+
+#endif 

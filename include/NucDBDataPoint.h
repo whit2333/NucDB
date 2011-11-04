@@ -1,12 +1,82 @@
 #ifndef NucDBDataPoint_HH
 #define NucDBDataPoint_HH 1
-#include "TObject.h"
 
-class NucDBDataPoint : public TObject {
+#include "TNamed.h"
+#include "TObject.h"
+#include "TList.h"
+#include "NucDBManager.h"
+
+/** A binned variable, e.g., Qsquared, x, W, etc... 
+ */
+class NucDBBinnedVariable : public TNamed {
 public :
-   NucDBDataPoint(){}
+   NucDBBinnedVariable(const char* name = "BinnedVariable", const char* title = "A Binned Variable"): TNamed(name, title) {
+      fMinimum  = 0.0;
+      fMaximum  = 0.0;
+      fMean     = 0.0;
+      fAverage  = 0.0;
+   }
+   ~NucDBBinnedVariable(){}
+
+   Double_t GetBinMinimum(){return(fMinimum);}
+   void     SetBinMinimum(Double_t val){fMinimum =val;}
+   Double_t GetBinMaximum(){return(fMaximum);}
+   void     SetBinMaximum(Double_t val){fMaximum =val;}
+
+   Double_t fMinimum;
+   Double_t fMaximum;
+   Double_t fMean;
+   Double_t fAverage;
+
+ClassDef(NucDBBinnedVariable,1)
+};
+
+/** Base class for an error bar
+ * 
+ */
+class NucDBErrorBar : public TObject {
+public:
+   NucDBErrorBar(){}
+   ~NucDBErrorBar(){}
+
+   void SetErrorSize(Double_t tot) { fTotalError=tot;fErrorPlus=tot/2.0;fErrorMinus=tot/2.0; }
+   void SetErrorSize(Double_t plus, Double_t minus) { fErrorPlus=plus;;fErrorMinus=minus;fTotalError=plus+minus ;}
+   void SetErrorRange(Double_t low, Double_t high){ SetErrorRange(low,high,(high+low)/2.0);}
+   void SetErrorRange(Double_t low, Double_t high,Double_t central) {
+      fErrorMinus = central - low; // should be that central > low
+      fErrorPlus =  high - central; // should be that high > central
+      fTotalError = fErrorMinus+fErrorPlus;
+   }
+
+   Double_t GetTotalError(){ return(fTotalError);}
+   Double_t GetMinusError(){ return(fErrorMinus);}
+   Double_t GetPlusError(){ return(fErrorPlus);}
+
+   /// total = plus + minus
+   Double_t fTotalError;
+   Double_t fErrorPlus;
+   Double_t fErrorMinus;
+
+ClassDef(NucDBErrorBar,1)
+};
+
+/** ABC  for a data point
+ */
+class NucDBDataPoint : public TNamed {
+public :
+   NucDBDataPoint(const char* name = "DataPoint", const char* title = "A Data Point"): TNamed(name, title){
+      fDimension=1;
+      fVariables.Clear();
+      fBinnedVariables.Clear();
+   }
    ~NucDBDataPoint(){}
 
+   Double_t fValue;
+   Double_t fError;
+
+   TList fVariables;
+   TList fBinnedVariables;
+   Int_t fDimension;
 
 ClassDef(NucDBDataPoint,1)
 };

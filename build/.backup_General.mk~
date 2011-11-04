@@ -3,10 +3,10 @@ GeneralLibName := NucDBGeneral
 
 GeneralLibObjs := lib/NucDBDataPoint.o
 
-#FortranLibObjs := 
+FortranLibObjs := 
 
-#$(FortranLibObjs) : $(builddir)/%.o :
-#	$(FC) -c $(F77FLAGS) -o $@  $(@:$(builddir)/%.o=$(srcdir)/%.f)
+$(FortranLibObjs) : $(builddir)/%.o :
+	$(FC) -c $(F77FLAGS) -o $@  $(@:$(builddir)/%.o=$(srcdir)/%.f)
 
 
 GeneralLibHead := $(GeneralLibObjs:lib/%.o=$(incdir)/%.h)

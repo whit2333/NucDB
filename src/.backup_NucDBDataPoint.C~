@@ -1,0 +1,7 @@
+#include "NucDBDataPoint.h"
+
+
+ClassImp(NucDBDataPoint)
+
+ClassImp(NucDBDataPoint)
+

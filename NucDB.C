@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <getopt.h>
 #include "NucDBDataPoint.h"
+#include "NucDBManager.h"
+#include "TRint.h"
 
 #define PACKAGE    "getoptex"
 #define VERSION    "0.0.1"
@@ -14,8 +16,9 @@ int main(int argc, char *argv[]) {
   fprintf(stderr, "This program needs arguments....\n\n");
   print_help(1);
  }
-
- while((opt = getopt(argc, argv, "hVvf:o:")) != -1) {
+    TRint * theApp = new TRint("NucDB", &argc, argv);
+    NucDBManager * man = 0;
+ while((opt = getopt(argc, argv, "hVvaf:o:")) != -1) {
   switch(opt) {
    case 'h':
     print_help(0);
@@ -26,6 +29,11 @@ int main(int argc, char *argv[]) {
     break;
    case 'v':
     printf("%s: Verbose option is set `%c'\n", PACKAGE, optopt);
+    break;
+   case 'a':
+    printf("List the measurments \n");
+/*    man = NucDBManager::GetManager();*/
+/*    theApp->Run(true);*/
     break;
    case 'f':
     printf("%s: Filename %s\n", PACKAGE, optarg);
@@ -53,6 +61,7 @@ int main(int argc, char *argv[]) {
 }
 
 void print_help(int exval) {
+ printf("=========================================\n");
  printf("%s,%s show working getopt example\n", PACKAGE, VERSION); 
  printf("%s [-h] [-V] [-f FILE] [-o FILE]\n\n", PACKAGE);
  printf("  -h              print this help and exit\n");
@@ -60,5 +69,6 @@ void print_help(int exval) {
  printf("  -v              set verbose flag\n");
  printf("  -f FILE         set intput file\n");
  printf("  -o FILE         set output file\n\n");
+ printf("=========================================\n");
 
 }
