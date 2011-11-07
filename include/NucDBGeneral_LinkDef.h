@@ -8,11 +8,10 @@
 #pragma link C++ global fgDBManager+;
 #pragma link C++ class NucDBManager+;
 
-
+#pragma link C++ class NucDBDiscreteVariable+;
 #pragma link C++ class NucDBBinnedVariable+;
 #pragma link C++ class NucDBErrorBar+;
 #pragma link C++ class NucDBDataPoint+;
-// #pragma link C++ class NucDBXQ2DataPoint+;
 
 #pragma link C++ class NucDBMeasurement+;
 #pragma link C++ class NucDBExperiment+;

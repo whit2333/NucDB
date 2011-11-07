@@ -2,6 +2,7 @@
 GeneralLibName := NucDBGeneral
 
 GeneralLibObjs := lib/NucDBDataPoint.o \
+                  lib/NucDBMeasurement.o \
                   lib/NucDBManager.o \
                   lib/NucDBExperiments.o
 

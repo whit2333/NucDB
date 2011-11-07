@@ -43,7 +43,9 @@ public :
       else {
          if(exp) {
             fFile->cd();
-            exp->Write(GetName(), kWriteDelete);
+/*            exp->Write(GetName(), kWriteDelete);*/
+            exp->Write(exp->GetName(), kWriteDelete);
+/*            exp->Write(exp->GetName());*/
          }
          else printf(" NULL pointer\n");
       }

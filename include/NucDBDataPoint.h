@@ -6,6 +6,28 @@
 #include "TList.h"
 #include <iostream>
 
+/** A Discrete variable stored in a single integer value
+ *  
+ */
+class NucDBDiscreteVariable : public TNamed {
+   NucDBDiscreteVariable(const char* name = "DiscreteVariable", const char* title = "A Discrete Variable") : TNamed(name,title) {
+      fValue=0;
+   }
+
+   ~NucDBDiscreteVariable(){
+   }
+
+   Int_t fValue;
+
+   void Print() {
+      std::cout << " " << GetName() << " = " << fValue << "\n";
+   }
+
+
+ClassDef(NucDBDiscreteVariable,2)
+};
+
+
 /** A binned variable, e.g., Qsquared, x, W, etc... 
  */
 class NucDBBinnedVariable : public TNamed {
@@ -36,7 +58,7 @@ public :
    Double_t fAverage;
 
    void Print() {
-      std::cout << "|" << GetName() << "|=" << fAverage << "\n"
+      std::cout << "  |" << GetName() << "|=" << fAverage << "       "
                 << "  " << fMinimum << " < " << GetName() << " < " << fMaximum << "\n";
    }
 
@@ -55,19 +77,41 @@ public:
    }
    ~NucDBErrorBar(){}
 
+   /** sets the error where value = number +- error */
+   void     SetError(Double_t err) { SetErrorSize(err*2.0); } 
+
+   /** */
    void SetErrorSize(Double_t tot) { fTotalError=tot;fErrorPlus=tot/2.0;fErrorMinus=tot/2.0; }
-   void SetErrorSize(Double_t plus, Double_t minus) { fErrorPlus=plus;;fErrorMinus=minus;fTotalError=plus+minus ;}
+   /** */
+   void SetErrorSize(Double_t plus, Double_t minus) {
+      fErrorPlus=plus;
+      fErrorMinus=minus;
+      fTotalError=plus+minus ;
+   }
+   /** */
    void SetErrorRange(Double_t low, Double_t high){ SetErrorRange(low,high,(high+low)/2.0);}
+   /** */
    void SetErrorRange(Double_t low, Double_t high,Double_t central) {
       fErrorMinus = central - low; // should be that central > low
       fErrorPlus =  high - central; // should be that high > central
       fTotalError = fErrorMinus+fErrorPlus;
    }
 
+   /** returns error  where value = number +- error */
+   Double_t GetError() { return(fTotalError/2.0); }
+
+   /** returns errorPlus + errorMinus */
    Double_t GetTotalError(){ return(fTotalError);}
    Double_t GetMinusError(){ return(fErrorMinus);}
    Double_t GetPlusError(){ return(fErrorPlus);}
 
+   void Clear(){
+      fTotalError=0.0;
+      fErrorPlus=0.0;
+      fErrorMinus=0.0;
+   }
+
+protected:
    /// total = plus + minus
    Double_t fTotalError;
    Double_t fErrorPlus;
@@ -76,28 +120,48 @@ public:
 ClassDef(NucDBErrorBar,1)
 };
 
-/** ABC  for a data point
+/** Base class for a data point
  */
 class NucDBDataPoint : public TObject {
 public :
    NucDBDataPoint(Double_t val=0.0, Double_t err=0.0) {
       fValue = val;
-      fError=err;
       fDimension=1;
+      fDiscreteVariables.Clear();
       fVariables.Clear();
       fBinnedVariables.Clear();
+      fName=" ";
+      fTotalError.Clear();
+      fSystematicError.Clear();
+      fStatisticalError.Clear();
+
    }
    ~NucDBDataPoint(){}
 
    Double_t fValue;
-   Double_t fError;
+
+   NucDBErrorBar fStatisticalError;
+   NucDBErrorBar fSystematicError;
+   NucDBErrorBar fTotalError;
+
+   /** Set the values of the total using the current
+    *  systematic and statistical errors
+    */
+   void CalculateTotalError(){
+      Double_t sys = fSystematicError.GetError();
+      Double_t stat = fStatisticalError.GetError();
+      fTotalError.SetError(sys+stat);
+   }
 
    TList fVariables;
+   TList fDiscreteVariables;
    TList fBinnedVariables;
    Int_t fDimension;
 
+   TString fName;
+
    void Print(){
-      std::cout << " X=" << fValue << " += " << fError << "\n";
+      std::cout << fName.Data() << " = " << fValue << " += " << fTotalError.GetError() << "\n";
    }
    
    NucDBBinnedVariable* GetBinVariable(const char * name) {
@@ -111,29 +175,5 @@ public :
 ClassDef(NucDBDataPoint,1)
 };
 
-/** Data point for data binned in x and Qsquared
- */
-// class NucDBXQ2DataPoint : public NucDBDataPoint {
-//    NucDBXQ2DataPoint(Double_t val=0.0, Double_t err=0.0) : NucDBDataPoint(val,err) {
-//       fDimension=2;
-//       NucDBBinnedVariable * aVar = 0;
-//       aVar = new NucDBBinnedVariable("x","x");
-//       fBinnedVariables.Add(aVar);
-//       aVar = new NucDBBinnedVariable("Qsquared","Q^{2}");
-//       fBinnedVariables.Add(aVar);
-//    }
-// 
-//    ~NucDBXQ2DataPoint(){
-//    }
-// 
-//    void Print(){
-//       NucDBDataPoint::Print();
-//       for(int i = 0;i<fBinnedVariables.GetEntries();i++)
-//           ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print();
-//    }
-// 
-// 
-// ClassDef(NucDBXQ2DataPoint,1)
-// };
 
 #endif

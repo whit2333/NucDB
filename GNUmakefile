@@ -75,8 +75,7 @@ shared_libs : $(SOLIBNAMES)
 ##############################################################################/
 
 doc: 
-	doxygen doc/NucDB_Doxyfile #	doxygen doc/Doxyfile_insaneweb
-	cd ..
+	doxygen doc/Doxyfile_NucDB #	doxygen doc/Doxyfile_insaneweb
 	@echo "HTML Documentation created"
 
 .PHONY : clean printstuff doc snapshot
