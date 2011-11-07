@@ -61,6 +61,7 @@ int main(int argc, char *argv[]) {
 }
 
 void print_help(int exval) {
+ printf("  Nuclear Database \n");
  printf("=========================================\n");
  printf("%s,%s show working getopt example\n", PACKAGE, VERSION); 
  printf("%s [-h] [-V] [-f FILE] [-o FILE]\n\n", PACKAGE);

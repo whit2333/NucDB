@@ -44,7 +44,7 @@ CXXFLAGS  += $(CPPFLAGS)
 
 F77FLAGS += -g -O2 -Wall -fPIC -Iinclude 
 ##############################################################################/
-default : nucdb
+default : nucdb link
 
 nucdb : shared_libs
 	g++ -o nucdb NucDB.C $(CXXFLAGS) $(LDLIBS) lib/lib$(SOLIBNAMES).so.$(LIBMAJOR).$(LIBMINOR)
@@ -65,8 +65,8 @@ convert : $(SOLIBNAMES)
 
 shared_libs : $(SOLIBNAMES)
 	g++ $(CXXFLAGS) -shared  -Wl,-soname,$(LIBRARY).$(LIBMAJOR).$(LIBMINOR)\
-	 -o lib/$(LIBRARY).$(LIBMAJOR).$(LIBMINOR)  \
-	  $(SOLIBS) $(LDLIBS)
+          -o lib/$(LIBRARY).$(LIBMAJOR).$(LIBMINOR)  \
+            $(SOLIBS) $(LDLIBS)
 #	ln -s $(builddir)/libInSANE.so.1.1 $(builddir)/libInSANE.so
 #	ln -s $(builddir)/libInSANE.so.1.1 $(builddir)/libInSANE.so.1
 #	ln -s $(builddir)/libInSANE.so.1.1 $(builddir)/libInSANE.so
@@ -102,7 +102,10 @@ makefiledir := build
 include  $(makefiledir)/General.mk
 
 link:
-# 	cd lib/ ; ln -sf libInSANEGeneral.so.$(LIBMAJOR).$(LIBMINOR) libInSANEGeneral.so
+	cd lib/ ; ln -sf libNucDBGeneral.so.$(LIBMAJOR).$(LIBMINOR) libNucDBGeneral.so
+	cd lib/ ; ln -sf libNucDB.so.$(LIBMAJOR).$(LIBMINOR) libNucDB.so
+	cp lib/*.so $(HOME)/lib/.
+	cp lib/*.so.* $(HOME)/lib/.
 # 	cd lib/ ; ln -sf libInSANECut.so.$(LIBMAJOR).$(LIBMINOR) libInSANECut.so
 # 	cd lib/ ; ln -sf libInSANEGeo.so.$(LIBMAJOR).$(LIBMINOR) libInSANEGeo.so
 # 	cd lib/ ; ln -sf libInSANECluster.so.$(LIBMAJOR).$(LIBMINOR) libInSANECluster.so

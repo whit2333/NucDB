@@ -2,7 +2,8 @@
 GeneralLibName := NucDBGeneral
 
 GeneralLibObjs := lib/NucDBDataPoint.o \
-                  lib/NucDBManager.o
+                  lib/NucDBManager.o \
+                  lib/NucDBExperiments.o
 
 FortranLibObjs := 
 

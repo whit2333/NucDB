@@ -4,7 +4,7 @@
 #include "TNamed.h"
 #include "TObject.h"
 #include "TList.h"
-#include "NucDBManager.h"
+#include <iostream>
 
 /** A binned variable, e.g., Qsquared, x, W, etc... 
  */
@@ -23,10 +23,22 @@ public :
    Double_t GetBinMaximum(){return(fMaximum);}
    void     SetBinMaximum(Double_t val){fMaximum =val;}
 
+   void     SetBinValueSize(Double_t val, Double_t size) {
+      fMean = val;
+      fAverage = val;
+      SetBinMinimum(val-size/2.0);
+      SetBinMaximum(val+size/2.0);
+   }
+
    Double_t fMinimum;
    Double_t fMaximum;
    Double_t fMean;
    Double_t fAverage;
+
+   void Print() {
+      std::cout << "|" << GetName() << "|=" << fAverage << "\n"
+                << "  " << fMinimum << " < " << GetName() << " < " << fMaximum << "\n";
+   }
 
 ClassDef(NucDBBinnedVariable,1)
 };
@@ -36,7 +48,11 @@ ClassDef(NucDBBinnedVariable,1)
  */
 class NucDBErrorBar : public TObject {
 public:
-   NucDBErrorBar(){}
+   NucDBErrorBar(){
+      fTotalError=0.0;
+      fErrorPlus=0.0;
+      fErrorMinus=0.0;
+   }
    ~NucDBErrorBar(){}
 
    void SetErrorSize(Double_t tot) { fTotalError=tot;fErrorPlus=tot/2.0;fErrorMinus=tot/2.0; }
@@ -62,9 +78,11 @@ ClassDef(NucDBErrorBar,1)
 
 /** ABC  for a data point
  */
-class NucDBDataPoint : public TNamed {
+class NucDBDataPoint : public TObject {
 public :
-   NucDBDataPoint(const char* name = "DataPoint", const char* title = "A Data Point"): TNamed(name, title){
+   NucDBDataPoint(Double_t val=0.0, Double_t err=0.0) {
+      fValue = val;
+      fError=err;
       fDimension=1;
       fVariables.Clear();
       fBinnedVariables.Clear();
@@ -78,7 +96,44 @@ public :
    TList fBinnedVariables;
    Int_t fDimension;
 
+   void Print(){
+      std::cout << " X=" << fValue << " += " << fError << "\n";
+   }
+   
+   NucDBBinnedVariable* GetBinVariable(const char * name) {
+      for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
+          if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
+             return((NucDBBinnedVariable*)fBinnedVariables.At(i));
+      }
+      return(0);
+   }
+
 ClassDef(NucDBDataPoint,1)
 };
+
+/** Data point for data binned in x and Qsquared
+ */
+// class NucDBXQ2DataPoint : public NucDBDataPoint {
+//    NucDBXQ2DataPoint(Double_t val=0.0, Double_t err=0.0) : NucDBDataPoint(val,err) {
+//       fDimension=2;
+//       NucDBBinnedVariable * aVar = 0;
+//       aVar = new NucDBBinnedVariable("x","x");
+//       fBinnedVariables.Add(aVar);
+//       aVar = new NucDBBinnedVariable("Qsquared","Q^{2}");
+//       fBinnedVariables.Add(aVar);
+//    }
+// 
+//    ~NucDBXQ2DataPoint(){
+//    }
+// 
+//    void Print(){
+//       NucDBDataPoint::Print();
+//       for(int i = 0;i<fBinnedVariables.GetEntries();i++)
+//           ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print();
+//    }
+// 
+// 
+// ClassDef(NucDBXQ2DataPoint,1)
+// };
 
 #endif
