@@ -38,6 +38,36 @@ public :
       return(exp);
    }
 
+   /** returns the list of experiments */
+   TList * GetExperiments() {
+      TList * list = new TList();
+      list->Clear();
+      const char *sql = "select exp_name from experiments ORDER BY exp_name DESC"
+                       /* "WHERE "*/;
+      res = fSQLServer->Query(sql);
+      int nrows = res->GetRowCount();
+      int nfields = res->GetFieldCount();
+      for (int i = 0; i < nrows; i++) {
+         row = res->Next();
+         NucDBExperiment * anExp = GetExperiment(row->GetField(0));
+         if(anExp) list->Add(anExp);
+         delete row;
+      }
+      delete res;
+      return(list);
+   }
+
+   TList * GetMeasurements(const char * measurement) {
+      TList * expList = GetExperiments(); 
+      TList * measList = new TList();
+      measList->Clear();
+      for(int i = 0;i<expList->GetEntries();i++) {
+         NucDBMeasurement * aMeas = ((NucDBExperiment*)expList->At(i))->GetMeasurement(measurement);
+         if(aMeas) measList->Add(aMeas);
+      }
+      return(measList);
+   }
+
    void SaveExperiment(NucDBExperiment * exp) {
       if(!fFile){ printf(" NO FILE OPENED!!! \n"); }
       else {

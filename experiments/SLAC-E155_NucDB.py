@@ -96,26 +96,29 @@ if not experiment :
 #g1pOverF1p = experiment.GetMeasurement("g1pOverF1p")
 #if not g1pOverF1p :
     #g1pOverF1p = NucDBMeasurement("g1pOverF1p","g_{1}^{p}/F_{1}^{p}")
-#experiment.fMeasurements.Add(g1pOverF1p)
+#experiment.AddMeasurement(g1pOverF1p)
 #g1pOverF1p.fColor=2
 
 g1p = experiment.GetMeasurement("g1p")
 if not g1p :
     g1p = NucDBMeasurement("g1p","g_{1}^{p}")
-experiment.fMeasurements.Add(g1p)
-g1p.fColor=2
+    experiment.AddMeasurement(g1p)
+g1p.ClearDataPoints()
+g1p.fColor=1
 
 g1d = experiment.GetMeasurement("g1d")
 if not g1d :
     g1d = NucDBMeasurement("g1d","g_{1}^{d}")
-experiment.fMeasurements.Add(g1d)
-g1d.fColor=2
+    experiment.AddMeasurement(g1d)
+g1d.ClearDataPoints()
+g1d.fColor=1
 
 g1n = experiment.GetMeasurement("g1n")
 if not g1n :
     g1n = NucDBMeasurement("g1n","g_{1}^{n}")
-experiment.fMeasurements.Add(g1n)
-g1n.fColor=2
+    experiment.AddMeasurement(g1n)
+g1n.ClearDataPoints()
+g1n.fColor=1
 
 g1pExtractor = SLACE155Extractorxg1p()
 g1pExtractor.SetMeasurement(g1p)
@@ -160,14 +163,16 @@ g1d.BuildGraph()
 g2p = experiment.GetMeasurement("g2p")
 if not g2p :
     g2p = NucDBMeasurement("g2p","g_{2}^{p}")
-experiment.fMeasurements.Add(g2p)
-g2p.fColor=2
+    experiment.AddMeasurement(g2p)
+g2p.ClearDataPoints()
+g2p.fColor=1
 
 g2d = experiment.GetMeasurement("g2d")
 if not g2d :
     g2d = NucDBMeasurement("g2d","g_{2}^{d}")
-experiment.fMeasurements.Add(g2d)
-g2d.fColor=2
+    experiment.AddMeasurement(g2d)
+g2d.ClearDataPoints()
+g2d.fColor=1
 
 g2pExtractor = SLACE155Extractorxg2p()
 g2pExtractor.SetMeasurement(g2p)
@@ -194,25 +199,8 @@ g2dExtractor.ExtractAllValues()
 g2d.BuildGraph()
 
 
-#g1pOverF1pExtractor = SLACE143Extractor_g1pOverF1p()
-#g1pOverF1pExtractor.SetMeasurement(g1pOverF1p)
-#g1pOverF1pExtractor.fCurrentDataPoint.fName = "g1p/F1p"
-## create x variable
-#Xbjorken = NucDBBinnedVariable("x","x")
-#g1pOverF1pExtractor.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-## create x variable
-#Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-#g1pOverF1pExtractor.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
-#g1pOverF1pExtractor.SetInputFile("experiments/SLAC-E143/G1F1_AV.txt")
-#g1pOverF1pExtractor.linestoskip=0
-#g1pOverF1pExtractor.Initialize()
-#g1pOverF1pExtractor.ExtractAllValues()
-#g1pOverF1p.BuildGraph()
 
-#datapoint = NucDBDataPoint(1.0,0.2)
-#Aperp.AddDataPoint(datapoint)
 experiment.Print()
-
 manager.SaveExperiment(experiment)
 
 

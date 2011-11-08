@@ -82,42 +82,46 @@ experiment = manager.GetExperiment("RSS")
 if not experiment :
     experiment = NucDBExperiment("RSS","RSS")
 
-
-
 Apara = experiment.GetMeasurement("Aparap")
 if not Apara :
     Apara = NucDBMeasurement("Aparap","A_{\para}^{p}")
-experiment.fMeasurements.Add(Apara)
+    experiment.AddMeasurement(Apara)
+Apara.ClearDataPoints()
 Apara.fColor=4
 
 Aperp = experiment.GetMeasurement("Aperpp")
 if not Aperp :
     Aperp = NucDBMeasurement("Aperpp","A_{\perp}^{p}")
-experiment.fMeasurements.Add(Aperp)
+    experiment.AddMeasurement(Aperp)
+Aperp.ClearDataPoints()
 Aperp.fColor=4
 
 g1p = experiment.GetMeasurement("g1p")
 if not g1p :
     g1p = NucDBMeasurement("g1p","g_{1}^{p}")
-experiment.fMeasurements.Add(g1p)
+    experiment.AddMeasurement(g1p)
+g1p.ClearDataPoints()
 g1p.fColor=4
 
 g2p = experiment.GetMeasurement("g2p")
 if not g2p :
     g2p = NucDBMeasurement("g2p","g_{2}^{p}")
-experiment.fMeasurements.Add(g2p)
+    experiment.AddMeasurement(g2p)
+g2p.ClearDataPoints()
 g2p.fColor=4
 
 A1p = experiment.GetMeasurement("A1p")
 if not A1p :
     A1p = NucDBMeasurement("A1p","A_{1}^{p}")
-experiment.fMeasurements.Add(A1p)
+    experiment.AddMeasurement(A1p)
+A1p.ClearDataPoints()
 A1p.fColor=4
 
 A2p = experiment.GetMeasurement("A2p")
 if not A2p :
     A2p = NucDBMeasurement("A2p","A_{2}^{p}")
-experiment.fMeasurements.Add(A2p)
+    experiment.AddMeasurement(A2p)
+A2p.ClearDataPoints()
 A2p.fColor=4
 
 
@@ -194,10 +198,7 @@ A1Extractor.ExtractAllValues()
 A1p.BuildGraph()
 
 
-#datapoint = NucDBDataPoint(1.0,0.2)
-#Aperp.AddDataPoint(datapoint)
 experiment.Print()
-
 manager.SaveExperiment(experiment)
 
 

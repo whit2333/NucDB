@@ -78,7 +78,17 @@ doc:
 	doxygen doc/Doxyfile_NucDB #	doxygen doc/Doxyfile_insaneweb
 	@echo "HTML Documentation created"
 
-.PHONY : clean printstuff doc snapshot
+.PHONY : clean printstuff doc snapshot database databaseclean
+
+database:
+	python experiments/SLAC-E143_NucDB.py
+	python experiments/SLAC-E155_NucDB.py
+	python experiments/SLAC-E154_NucDB.py
+	python experiments/OLDSLAC_NucDB.py
+	python experiments/RSS_NucDB.py
+
+databaseclean:
+	rm data/NucDB.root
 
 snapshot:
 	git archive HEAD --format=tar | gzip >NucDB-`date +%m_%d_%Y_`.tar.gz
