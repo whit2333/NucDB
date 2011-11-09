@@ -158,7 +158,7 @@ protected :
    static NucDBManager * fgDBManager;
 
    NucDBManager() {
-      fSQLServer = TSQLServer::Connect("mysql://localhost/nuclearDB", "bjorken", "drell");
+      fSQLServer = TSQLServer::Connect("mysql://quarks.temple.edu/nuclearDB", "bjorken", "drell");
       if(!fSQLServer) std::cout << " xxxxxx FAILED TO CONNECT TO SERVER !!! \n";
       fFile = 0;
       fFile = new TFile("data/NucDB.root","UPDATE");

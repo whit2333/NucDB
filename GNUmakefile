@@ -116,8 +116,8 @@ include  $(makefiledir)/General.mk
 link:
 	cd lib/ ; ln -sf libNucDBGeneral.so.$(LIBMAJOR).$(LIBMINOR) libNucDBGeneral.so
 	cd lib/ ; ln -sf libNucDB.so.$(LIBMAJOR).$(LIBMINOR) libNucDB.so
-	cp lib/*.so $(HOME)/lib/.
-	cp lib/*.so.* $(HOME)/lib/.
+# 	cp lib/*.so $(HOME)/lib/.
+# 	cp lib/*.so.* $(HOME)/lib/.
 # 	cd lib/ ; ln -sf libInSANECut.so.$(LIBMAJOR).$(LIBMINOR) libInSANECut.so
 # 	cd lib/ ; ln -sf libInSANEGeo.so.$(LIBMAJOR).$(LIBMINOR) libInSANEGeo.so
 # 	cd lib/ ; ln -sf libInSANECluster.so.$(LIBMAJOR).$(LIBMINOR) libInSANECluster.so

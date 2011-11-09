@@ -25,13 +25,29 @@
 /*! \page install Installation
 
    \section requirements Requirements 
+    - ROOT
+    - Python
+    - MySQL database access
 
    \section git Download the code
 
-   \section envvariables Configure your environment 
-      Add lib directory to $LD_LIBRARY_PATH and python directory to $PYTHON_PATH
+   \section envvariables Configure your environment
+   put thins in your $HOME/.rootlogon.C
+\code
+  /// NucDB Libraries
+  gSystem->AddIncludePath("-I${NucDB_DIR}/include");
+  gSystem->Load("${NucDB_DIR}/lib/libNucDB.so");
+\endcode
+      Add lib directory to $LD_LIBRARY_PATH and python directory to $PYTHON_PATH in your $HOME/.bashrc
+\code
+# NucDB
+  export NucDB_DIR=$HOME/work/NucDB 
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NucDB_DIR/lib
+  export PYTHON_PATH=$PYTHON_PATH:$NucDB_DIR/python    
+\endcode
 
    \section compile  Compile and Build
+   Compile and build the database
    \code
    make
    make database
