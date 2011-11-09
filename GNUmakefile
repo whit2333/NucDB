@@ -86,6 +86,8 @@ database:
 	python experiments/SLAC-E154_NucDB.py
 	python experiments/OLDSLAC_NucDB.py
 	python experiments/RSS_NucDB.py
+	python experiments/SMC_NucDB.py
+
 
 databaseclean:
 	rm data/NucDB.root

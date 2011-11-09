@@ -7,6 +7,67 @@
 #define PACKAGE    "getoptex"
 #define VERSION    "0.0.1"
 
+/*! \mainpage Nucleon Database NucDB
+
+    \section Introduction
+
+    \subpage install
+
+    \subpage howto
+
+    \subpage tutorial
+
+    \subpage addingdata   
+
+    
+
+ */ 
+/*! \page install Installation
+
+   \section requirements Requirements 
+
+   \section git Download the code
+
+   \section envvariables Configure your environment 
+      Add lib directory to $LD_LIBRARY_PATH and python directory to $PYTHON_PATH
+
+   \section compile  Compile and Build
+   \code
+   make
+   make database
+   \endcode
+
+
+ */ 
+/*! \page howto How to use NucDB
+
+
+  
+  
+ */ 
+/*! \page addingdata Adding New Data to NucDB
+  
+  So you want to add more data.
+
+ You will need the following things:
+   - experiment name (eg, SLAC_E143,SMC,EMC)
+   - measurement name (eg, F2p, F1n, g1p/F1p)
+   - data points and bin sizes. Usually x and Q^2
+   - data point errors (statisitcal and systematic)
+   - 
+
+   \todo Figure out how to deal with evolved data in a nice way 
+
+
+ */ 
+/*! \page tutorial A Brief Tutorial
+
+
+  
+ */ 
+/*! \page install Installation
+
+ */ 
 void print_help(int exval);
 
 int main(int argc, char *argv[]) {

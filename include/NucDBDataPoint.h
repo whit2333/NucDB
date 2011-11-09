@@ -40,10 +40,51 @@ public :
    }
    ~NucDBBinnedVariable(){}
 
-   Double_t GetBinMinimum(){return(fMinimum);}
-   void     SetBinMinimum(Double_t val){fMinimum =val;}
-   Double_t GetBinMaximum(){return(fMaximum);}
-   void     SetBinMaximum(Double_t val){fMaximum =val;}
+   NucDBBinnedVariable(const NucDBBinnedVariable& v) {
+      SetNameTitle(v.GetName(),v.GetTitle());
+      fMinimum  = v.fMinimum;
+      fMaximum  = v.fMaximum;
+      fMean     = v.fMean;
+      fAverage  = v.fAverage;
+   }
+
+   NucDBBinnedVariable& operator=(const NucDBBinnedVariable& v) {
+      if (this != &v) {  
+         SetNameTitle(v.GetName(),v.GetTitle());
+         fMinimum  = v.fMinimum;
+         fMaximum  = v.fMaximum;
+         fMean     = v.fMean;
+         fAverage  = v.fAverage;
+      }
+      return *this;    // Return ref for multiple assignment
+   }
+
+   /** returns true if the bin values overlap */
+   bool BinsOverlap(const NucDBBinnedVariable &var) const {
+      std::cout << " Min " <<  var.GetMinimum() 
+                << " <" << fMinimum 
+                << " < " << var.GetMaximum() << "\n";
+      if(fMinimum > var.GetMinimum()  && fMinimum < var.GetMaximum()) return true;
+      else if(fMaximum > var.GetMinimum()  && fMaximum < var.GetMaximum()) return true;
+      else return false;
+   }
+
+   /** Compares two binned variables returns true if they overlap */
+  bool operator==(const NucDBBinnedVariable &other) const {
+     return(BinsOverlap(other));
+  }
+
+  bool operator!=(const NucDBBinnedVariable &other) const {
+    return !(*this == other);
+  }
+
+   Double_t GetBinMinimum() const {return(fMinimum);}
+   void     SetBinMinimum(Double_t val)  {fMinimum =val;}
+   Double_t GetBinMaximum() const {return(fMaximum);}
+   void     SetBinMaximum(Double_t val) {fMaximum =val;}
+
+   Double_t GetMinimum() const {return(fMinimum);}
+   Double_t GetMaximum() const {return(fMaximum);}
 
    void     SetBinValueSize(Double_t val, Double_t size) {
       fMean = val;
@@ -62,7 +103,7 @@ public :
                 << "  " << fMinimum << " < " << GetName() << " < " << fMaximum << "\n";
    }
 
-ClassDef(NucDBBinnedVariable,1)
+ClassDef(NucDBBinnedVariable,2)
 };
 
 /** Base class for an error bar
@@ -78,7 +119,7 @@ public:
    ~NucDBErrorBar(){}
 
    /** sets the error where value = number +- error */
-   void     SetError(Double_t err) { SetErrorSize(err*2.0); } 
+   void  SetError(Double_t err) { SetErrorSize(err*2.0); } 
 
    /** */
    void SetErrorSize(Double_t tot) { fTotalError=tot;fErrorPlus=tot/2.0;fErrorMinus=tot/2.0; }
@@ -101,9 +142,9 @@ public:
    Double_t GetError() { return(fTotalError/2.0); }
 
    /** returns errorPlus + errorMinus */
-   Double_t GetTotalError(){ return(fTotalError);}
-   Double_t GetMinusError(){ return(fErrorMinus);}
-   Double_t GetPlusError(){ return(fErrorPlus);}
+   Double_t GetTotalError() const { return(fTotalError);}
+   Double_t GetMinusError() const { return(fErrorMinus);}
+   Double_t GetPlusError() const { return(fErrorPlus);}
 
    void Clear(){
       fTotalError=0.0;

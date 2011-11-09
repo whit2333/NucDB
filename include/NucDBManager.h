@@ -57,6 +57,7 @@ public :
       return(list);
    }
 
+   /** Get a list of measurments with that name, (eg, F2p,g1p ) */
    TList * GetMeasurements(const char * measurement) {
       TList * expList = GetExperiments(); 
       TList * measList = new TList();
@@ -68,6 +69,7 @@ public :
       return(measList);
    }
 
+   /** Saves data in root file: data/NucDB.root */
    void SaveExperiment(NucDBExperiment * exp) {
       if(!fFile){ printf(" NO FILE OPENED!!! \n"); }
       else {
@@ -111,15 +113,6 @@ public :
       }
       delete res;
       printf("\n");
-//       TList* lst = fSQLServer->GetTablesList("%");
-//       TIter next(lst);
-//       TObject* obj;
-//       Int_t tablecount =0;
-//       while (obj = next()) {
-//          tablecount++;
-//          std::cout << " " << obj->GetName() << std::endl;
-//       }
-//       delete lst;
       return(nrows);
    }
 
