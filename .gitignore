@@ -1,0 +1,7 @@
+doc/html/*
+doc/latex/*
+doc/*.tmp
+.back*~
+*~
+*/*~
+*/*/*~
