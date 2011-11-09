@@ -87,6 +87,7 @@ database:
 	python experiments/OLDSLAC_NucDB.py
 	python experiments/RSS_NucDB.py
 	python experiments/SMC_NucDB.py
+	python experiments/JLAB-E94010_NucDB.py
 
 
 databaseclean:

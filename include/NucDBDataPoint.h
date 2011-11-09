@@ -61,9 +61,9 @@ public :
 
    /** returns true if the bin values overlap */
    bool BinsOverlap(const NucDBBinnedVariable &var) const {
-      std::cout << " Min " <<  var.GetMinimum() 
-                << " <" << fMinimum 
-                << " < " << var.GetMaximum() << "\n";
+//       std::cout << " Min " <<  var.GetMinimum() 
+//                 << " <" << fMinimum 
+//                 << " < " << var.GetMaximum() << "\n";
       if(fMinimum > var.GetMinimum()  && fMinimum < var.GetMaximum()) return true;
       else if(fMaximum > var.GetMinimum()  && fMaximum < var.GetMaximum()) return true;
       else return false;
