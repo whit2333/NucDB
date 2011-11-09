@@ -1,0 +1,68 @@
+<title> HEPDATA DIS Structure Function Review </title>
+<body bgcoloR=#FFFFFF>
+<pre>
+EXPeriment      = SLAC-E-155                     
+REACtion        = e- DEUT  --> e- X                               
+Collaboration   = E155                      
+Author          = Anthony et al. 
+REFerence       = Phys.Lett.B463(1999)339
+Additional info = Measurement of the spin-dependent structure function g1d 
+                  (and of the ratio g1d/F1d) of the deuteron in deep 
+                  inelastic scattering polarised electrons at an incident 
+                  energy of 48.3 GeV on a polarised Lithium Deuteride 
+                  target. Data are given for the three different angular
+                  spectrometers and cover the kinematical x range 0.010 
+                  to 0.9 and Q^2 from 1 to 40 GeV^2.
+
+--------------------------------------------------------------------------
+
+  x     Q^2   g1d/F1d    Errors        g1d      Errors 
+ mean  GeV^2           stat    sys            stat    sys
+
+            Data from the 2.75 degree spectrometer  
+
+0.015  1.22  -0.033   0.016   0.001  -0.234   0.115   0.011 
+0.025  1.59   0.011   0.014   0.001   0.051   0.068   0.006 
+0.035  2.05   0.016   0.014   0.001   0.059   0.052   0.005 
+0.050  2.57   0.030   0.015   0.002   0.082   0.041   0.004 
+0.080  3.24   0.059   0.016   0.003   0.103   0.028   0.005 
+0.125  4.03   0.079   0.021   0.005   0.089   0.024   0.006 
+0.175  4.62   0.107   0.041   0.008   0.083   0.032   0.006 
+0.250  5.06   0.192   0.042   0.012   0.096   0.021   0.006 
+0.350  5.51   0.301   0.098   0.017   0.086   0.028   0.005 
+0.500  5.77   0.389   0.129   0.024   0.047   0.016   0.003 
+
+           Data from the 5.5 degree spectrometer  
+
+0.050  4.00  -0.266   0.170   0.002  -0.787   0.504   0.006 
+0.080  5.37   0.006   0.020   0.003   0.012   0.038   0.006 
+0.125  7.16   0.079   0.014   0.005   0.094   0.016   0.006 
+0.175  8.90   0.099   0.022   0.008   0.080   0.018   0.006 
+0.250 10.62   0.184   0.020   0.012   0.090   0.010   0.006 
+0.350 12.59   0.305   0.044   0.017   0.081   0.012   0.005 
+0.500 14.01   0.349   0.057   0.025   0.034   0.006   0.002 
+0.750 15.73   0.576   0.220   0.029   0.006   0.002   0.001 
+
+           Data from the 10.5 degree spectrometer  
+
+0.125  10.98  -0.020   0.095   0.006 \-0.025   0.117   0.008 
+0.175  13.19   0.157   0.042   0.008   0.127   0.034   0.007 
+0.250  17.22   0.194   0.027   0.012   0.094   0.013   0.006 
+0.350  22.65   0.309   0.053   0.017   0.077   0.013   0.005 
+0.500  26.97   0.330   0.092   0.024   0.028   0.008   0.002 
+0.750  34.79   0.428   0.903   0.028   0.003   0.007   0.001 
+
+
+--------------------------------------------------------------------------
+</pre>
+<table cellspacing=40 align=center>
+<td>
+<a href="/online/structure/E155/PL463B339/e155g1d.ps">
+<img border=0 src="/online/structure/E155/PL463B339/e155g1d.gif">
+</a>
+<tr>
+<td><font size=-1>
+g1d/F1d and g1d as measured by the SLAC E155 Collaboration.
+</table>     
+</pre>
+</body>

@@ -1,0 +1,61 @@
+<title> HEPDATA DIS Structure Function Review </title>
+<body bgcoloR=#FFFFFF>
+<pre>
+EXPeriment      = SLAC-E-154                     
+REACtion        = e- NEUTRON  --> e- X                               
+Collaboration   = E154                      
+Author          = Abe et al. 
+REFerence       = Phys.Lett.B404(1997)377-382
+Additional info = Measurement of the virtual photon asymmetry A2n and the
+                  spin-dependent structure function G2n of the neutron i
+                  deep inelastic scattering polarised electrons at an 
+                  incident energy of 48.3 GeV on a polarised Helium-3 
+                  target. Data cover the kinematical x range 0.014 to 0.7 
+                  and mean Q^2 from 1 to 17 GeV^2;
+----------------------------------------------------------------------
+
+Data from the 2.75 degree spectrometer.
+
+   x      x      x       Q^2     A2n    Errors       G2n    Errors    
+  min    max    mean    GeV^2          stat  sys           stat  sys
+
+  0.014  0.02   0.017    1.2     0.03  0.07  0.01    7.36 15.74  2.24  
+  0.02   0.03   0.025    1.6     0.00  0.06  0.01    0.15  7.19  0.98
+  0.03   0.04   0.035    2.1    -0.11  0.06  0.01   -7.90  4.91  0.96
+  0.04   0.06   0.049    2.6     0.10  0.06  0.01    4.60  2.50  0.54  
+  0.06   0.10   0.077    3.4     0.06  0.06  0.01    1.32  1.34  0.25 
+  0.10   0.15   0.122    4.1     0.13  0.11  0.03    1.22  0.95  0.24  
+  0.15   0.20   0.173    4.7    -0.03  0.18  0.03   -0.08  0.81  0.14 
+  0.20   0.30   0.242    5.1    -0.25  0.24  0.05   -0.48  0.51  0.11
+  0.30   0.40   0.341    5.6     0.63  0.55  0.13    0.54  0.46  0.15 
+  0.40   0.50   0.425    5.9     0.16  1.40  0.04    0.04  0.57  0.02    
+
+----------------------------------------------------------------------
+
+Data from the 5.5 degree spectrometer.
+
+   x      x      x       Q^2     A2n    Errors       G2n    Errors   
+  min    max    mean    GeV^2          stat  sys           stat  sys
+
+  0.06   0.10   0.084    5.5     0.16  0.10  0.02    4.08  2.40  0.43
+  0.10   0.15   0.123    7.2     0.01  0.08  0.02    0.23  1.00  0.20
+  0.15   0.20   0.173    8.9     0.05  0.11  0.02    0.40  0.72  0.15
+  0.20   0.30   0.242   10.7     0.15  0.14  0.03    0.48  0.41  0.10
+  0.30   0.40   0.342   12.5    -0.21  0.27  0.03   -0.22  0.31  0.04 
+  0.40   0.50   0.442   13.8    -0.36  0.53  0.05   -0.16  0.24  0.03
+  0.50   0.70   0.564   15.0    -0.04  0.96  0.06   -0.01  0.13  0.01
+
+----------------------------------------------------------------------
+</pre>
+<table cellspacing=40 align=center>
+<td>
+<a href="/online/structure/E154/PL404B377/e154pol4.ps">
+<img border=0 src="/online/structure/E154/PL404B377/e154pol4.gif">
+</a>
+<tr>
+<td><font size=-1>
+A2n and g2n as measured by the SLAC E154 Collaboration. 
+The filled (open) circles are the 2.75 degree (5.5 degree) spectrometer data.
+</table>     
+</pre>
+</body>

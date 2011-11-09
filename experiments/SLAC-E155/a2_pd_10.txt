@@ -1,0 +1,26 @@
+! E155 virtual photon asymmetry A2 for the proton and deuteron. 
+! Beam Energy: 38.80 GeV; Scattering Angle: ~10.5 deg; 
+! Source: P.L. Anthony, et al., 
+!         "Measurement of the Proton and Deuteron Spin Structure Functions g2 and Asymmetry A2", pg532, 
+!         Phys. Lett. B458: 529-535 (1999). 
+! 
+! "x" pertains to the kinematic variable Bjorken x. 
+!      The data presented here use coarse binning from SLAC E143. 
+! <x>  is the statistically weighted average value of x for a particular bin. 
+! <Q2> is the statistically weighted average value of the 4-momentum transferred squared. 
+! A2   is the virtual photon absorption asymmetry. See reference source above for details.  
+! "stat" is the statistical error on A2. 
+! The angle (eg. 2.75, 5.5, or 10.5) represents the scattering angle at the    
+!       center of a particular spectrometer's acceptance. It is measured      
+!       relative to the beam direction. The angle "name" of the spectrometer 
+!       is an approximate scattering angle for the electrons detected in that spectrometer. 
+! Notes: 
+!       
+!------------------------ ~10.5 deg----------------------------! 
+! x bin range                    !----proton---!!---deuteron---! 
+! low     high    <x>      <Q2>   A2    +-stat    A2    +-stat   
+  0.120   0.193   0.168    9.77   0.034   0.071  -0.069   0.049 
+  0.193   0.310   0.258   13.70   0.049   0.061   0.006   0.044 
+  0.310   0.498   0.432   20.06   0.100   0.082   0.016   0.068 
+  0.498   0.700   0.643   25.46   0.186   0.136   0.357   0.133 
+  0.700   0.900   0.841   29.25   0.670   0.309  -0.295   0.322 

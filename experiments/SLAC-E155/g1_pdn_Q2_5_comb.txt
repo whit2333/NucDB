@@ -1,0 +1,30 @@
+! E155 g1 and g1/F1 for the proton, deuteron, and neutron.             
+! Beam Energy: 48.35 GeV.                                              
+! Source: http://www.slac.stanford.edu/~mitchell/e155/                 
+! Data from all three spectrometers are combined at an                 
+! average Q^2 of 5 GeV^2.                                              
+!                                                                      
+! "x" pertains to the kinematic variable Bjorken x and               
+! <x> is the bin center. These data are in E155 coarse bins.           
+! g1 is the spin dependent structure function.                         
+!    See Phys. Lett. B493, 19 (2000) and                               
+!    Phys. Lett. B 463 (1999) 339-345 for details.                     
+! "stat" is the statistical error on g1.                             
+! Notes: (1) These data correspond to those presented in               
+!            Phys. Lett. B493, 19 (2000) (proton and neutron)          
+!            and Phys. Lett. B 463 (1999) 339-345 (deuteron)           
+!                                                                      
+!---------------- g1 at Q^2 = 5 GeV^2 for p,d, & n--------------------!
+! bin x range                                                          
+! low     high    <x>     g1p   +-stat    g1d   +-stat    g1n   +-stat 
+  0.010   0.020   0.015   0.526   0.069  -0.291   0.115  -1.103   0.257 
+  0.020   0.030   0.025   0.392   0.040   0.046   0.068  -0.277   0.152 
+  0.030   0.040   0.035   0.341   0.030   0.066   0.052  -0.194   0.116 
+  0.040   0.060   0.050   0.362   0.024   0.085   0.040  -0.178   0.091 
+  0.060   0.100   0.080   0.306   0.014   0.074   0.023  -0.148   0.051 
+  0.100   0.150   0.125   0.257   0.008   0.088   0.013  -0.065   0.030 
+  0.150   0.200   0.175   0.231   0.009   0.084   0.014  -0.047   0.032 
+  0.200   0.300   0.250   0.214   0.005   0.090   0.007  -0.017   0.017 
+  0.300   0.400   0.350   0.168   0.005   0.084   0.008   0.016   0.019 
+  0.400   0.600   0.500   0.091   0.002   0.042   0.004   0.003   0.010 
+  0.600   0.900   0.750   0.020   0.001   0.011   0.002   0.004   0.005 

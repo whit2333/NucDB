@@ -1,0 +1,36 @@
+! E155 Inclusive pion asymmetries A_LL for the proton.       
+! Beam Energy: 48.35 GeV; Scattering Angle: ~5.5  deg;                          
+! Source: T.S. Toole, "A Precision Measurement of the Spin Structure                       
+!         Functions g1p and g1d", pg198,                             
+!         Doctoral Dissertation, American University (2000) unpublished.                    
+!                                                                                           
+! p    is the momentum of the detected particle.                                            
+! A_LL is the inclusive hadron asymmetry, defined as                                        
+!                      (antiparallel - parallel) / (antiparallel + parallel)                
+!      where antiparallel (parallel) refers to the number of events counted, normalized to  
+!      incident beam charge, when the spins of the incident electrons and the target        
+!      nucleons were anti-aligned (aligned).                                                
+! "stat" is the statistical error.                                                        
+! The angle (eg. theta = 2.75, 5.5, or 10.5) represents the scattering angle at the         
+!       center of a particular spectrometer's acceptance. It is measured      
+!       relative to the beam direction. The angle "name" of the spectrometer 
+!       is an approximate scattering angle for the electrons detected in that spectrometer. 
+! h^(+) indicates when the detected particle was a positively charged hadron.               
+! h^(-)     "      "    "     "       "       "  " negatively    "      "   .      
+! pi^(+)    "      "    "     "       "       "  " positively    "     pion.        
+! pi^(-)    "      "    "     "       "       "  " negatively    "     pion.        
+! Notes: These data differ slightly from those presented in Phys. Lett. B458:536-544,(1999) 
+!        (aka, the E155 Hadron Paper). The differences are primarily due to:                
+!        (1) The inclusion of additional runs.                                              
+!        (2) These data take advantage of the final corrections to the proton polarization. 
+!                                                                                           
+!--------- A_LL(p) for proton at ~5.5 ------!     
+!  p(GeV)     ~5.5  pi^(-)       ~5.5  pi^(+) 
+!           A_LL   +-stat     A_LL   +-stat   
+   16.0     ---      ---      0.040    0.077 
+   17.0     0.015    0.022    0.086    0.082 
+   18.0    -0.003    0.025    0.165    0.098 
+   19.0     0.014    0.031    0.288    0.121 
+   20.0     0.033    0.038    0.120    0.149 
+   21.0    -0.006    0.047    0.303    0.191 
+   22.0     0.113    0.058    ---      ---   

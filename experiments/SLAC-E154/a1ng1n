@@ -1,0 +1,68 @@
+<title> HEPDATA DIS Structure Function Review </title>
+<body bgcoloR=#FFFFFF>
+<pre>
+EXPeriment      = SLAC-E-154                     
+REACtion        = e- NEUTRON  --> e- X                               
+Collaboration   = E154                      
+Author          = Abe et al. 
+REFerence       = Phys.Rev.Lett.79(1997)26
+Additional info = Measurement of the vitrual photon asymmetry A1n and the
+                  spin-dependent structure function G1n of the neutron in 
+                  deep inelastic scattering polarised electrons at an 
+                  incident energy of 48.3 GeV on a polarised Helium-3 
+                  target. Data cover the kinematical x range 0.014 
+                  to 0.7 and mean Q^2 from 1 to 17 GeV^2.
+                  These data are further supplemented by the data given in
+                  the later publication Abe et al. Phys.Lett.B405(97)180.
+
+--------------------------------------------------------------------------
+
+   x     x      x     Q^2      A1n     Errors          G1n      Errors 
+  min   max    mean  GeV^2           stat    sys             stat    sys
+
+  0.014 0.02  0.017   1.2    -0.058  0.019  0.018    -0.351  0.115  0.110 
+  0.02  0.03  0.024   1.6    -0.080  0.015  0.014    -0.374  0.071  0.065
+  0.03  0.04  0.035   2.0    -0.078  0.018  0.011    -0.290  0.061  0.039
+  0.04  0.06  0.049   2.6    -0.086  0.016  0.010    -0.204  0.040  0.022
+  0.06  0.10  0.081   4.4    -0.092  0.013  0.011    -0.137  0.021  0.016
+  0.10  0.15  0.123   6.6    -0.106  0.014  0.012    -0.108  0.015  0.012
+  0.15  0.20  0.173   8.2    -0.092  0.021  0.012    -0.061  0.014  0.009  
+  0.20  0.30  0.242   9.8    -0.112  0.028  0.020    -0.042  0.011  0.007
+  0.30  0.40  0.342   11.7   -0.068  0.065  0.025    -0.017  0.011  0.005 
+  0.40  0.50  0.441   13.3   -0.003  0.142  0.022    -0.007  0.011  0.002 
+  0.50  0.70  0.564   15.0    0.100  0.294  0.039     0.003  0.008  0.001 
+
+--------------------------------------------------------------------------
+</pre>
+<table cellspacing=40 align=center>
+<td>
+<a href="/online/structure/E154/PRL7926/e154pol2.ps">
+<img border=0 src="/online/structure/E154/PRL7926/e154pol2.gif">
+</a>
+<tr>
+<td><font size=-1>
+A1n and g1n as measured by the SLAC E154 Collaboration
+</table>     
+<pre>
+--------------------------------------------------------------------------
+
+ Data evolved to Q^2 of 5 GeV^2.
+
+   x       x       x         G1n        Errors    
+  min     max    mean                 stat     sys
+
+  0.014   0.02   0.017     -0.497     0.163   0.155 
+  0.02    0.03   0.024     -0.481     0.092   0.083 
+  0.03    0.04   0.035     -0.345     0.073   0.047 
+  0.04    0.06   0.049     -0.228     0.045   0.025 
+  0.06    0.10   0.081     -0.139     0.022   0.016 
+  0.10    0.15   0.123     -0.105     0.014   0.012 
+  0.15    0.20   0.173     -0.060     0.014   0.009 
+  0.20    0.30   0.242     -0.043     0.011   0.007 
+  0.30    0.40   0.342     -0.018     0.013   0.005 
+  0.40    0.50   0.441     -0.009     0.014   0.003 
+  0.50    0.70   0.564      0.005     0.012   0.002  
+
+--------------------------------------------------------------------
+</pre>
+</body>

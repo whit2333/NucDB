@@ -1,0 +1,47 @@
+! E155 g1 and g1/F1 for the deuteron.                           
+! Beam Energy: 48.35 GeV.                                                  
+! Source: T.S. Toole, "A Precision Measurement of the Spin Structure      
+!         Functions g1p and g1d", pg204,                    
+!         Ph. D. thesis, American University, (2000) unpublished.          
+!  
+! "x" pertains to the kinematic variable Bjorken x.                                         
+! <x> is the statistically weighted average value of x for a particular bin.                  
+!       These data use E155 coarse bins.                                                        
+! <Q2> is the statistically weighted average value of the 4-momentum transferred squared.     
+! g1 is the spin dependent structure function.                                                
+!       See E155 Collaboration, P.L. Anthony et al., Phys. Lett. B493, 19 (2000) for details. 
+! F1 is taken from the NMC fit (NMC, P. Ardeodo et al., Phys. Lett. B364 (1995) 107).         
+! "stat" and "syst" are the statistical and systematic errors on g1 or g1/F1.             
+! The angle (eg. 2.75, 5.5, or 10.5) represents the scattering angle at the center of a particular 
+!       spectrometer's acceptance. It is measured relative to the beam direction. The angle "name" of 
+!       the spectrometer is an approximate scattering angle of the electrons detected in that spectrometer. 
+! "spect." indicates the spectrometer arm which was used to make the measurement.                  
+! Notes: (1) These data correspond to those presented in Phys. Lett. B493, 19 (2000). 
+!        
+!------------------------------------- deuteron --------------------------------------! 
+!         bin x range                                                                         
+! spect.  low     high    <x>      <Q2>   g1    +-stat  +-syst    g1/F1 +-stat  +-syst    
+      2   0.010   0.020   0.015    1.22  -0.234   0.115   0.011  -0.033   0.016   0.001 
+      2   0.020   0.030   0.025    1.59   0.051   0.068   0.006   0.011   0.014   0.001 
+      2   0.030   0.040   0.035    2.05   0.059   0.052   0.005   0.016   0.014   0.001 
+      2   0.040   0.060   0.050    2.57   0.082   0.041   0.004   0.030   0.015   0.002 
+      2   0.060   0.100   0.080    3.24   0.103   0.028   0.005   0.059   0.016   0.003 
+      2   0.100   0.150   0.125    4.03   0.089   0.024   0.006   0.079   0.021   0.005 
+      2   0.150   0.200   0.175    4.62   0.083   0.032   0.006   0.107   0.041   0.008 
+      2   0.200   0.300   0.250    5.06   0.096   0.021   0.006   0.192   0.042   0.012 
+      2   0.300   0.400   0.350    5.51   0.086   0.028   0.005   0.301   0.098   0.017 
+      2   0.400   0.600   0.500    5.77   0.047   0.016   0.003   0.389   0.129   0.024 
+      5   0.040   0.060   0.050    4.00  -0.787   0.504   0.006  -0.266   0.170   0.002 
+      5   0.060   0.100   0.080    5.37   0.012   0.038   0.006   0.006   0.020   0.003 
+      5   0.100   0.150   0.125    7.16   0.094   0.016   0.006   0.079   0.014   0.005 
+      5   0.150   0.200   0.175    8.90   0.080   0.018   0.006   0.099   0.022   0.008 
+      5   0.200   0.300   0.250   10.62   0.090   0.010   0.006   0.184   0.020   0.012 
+      5   0.300   0.400   0.350   12.59   0.081   0.012   0.005   0.305   0.044   0.017 
+      5   0.400   0.600   0.500   14.01   0.034   0.006   0.002   0.349   0.057   0.025 
+      5   0.600   0.900   0.750   15.73   0.006   0.002   0.001   0.576   0.220   0.029 
+     10   0.100   0.150   0.125   10.98  -0.025   0.117   0.008  -0.020   0.095   0.006 
+     10   0.150   0.200   0.175   13.19   0.127   0.034   0.007   0.157   0.042   0.008 
+     10   0.200   0.300   0.250   17.22   0.094   0.013   0.006   0.194   0.027   0.012 
+     10   0.300   0.400   0.350   22.65   0.077   0.013   0.005   0.309   0.053   0.017 
+     10   0.400   0.600   0.500   26.97   0.028   0.008   0.002   0.330   0.092   0.024 
+     10   0.600   0.900   0.750   34.79   0.003   0.007   0.001   0.428   0.903   0.028 

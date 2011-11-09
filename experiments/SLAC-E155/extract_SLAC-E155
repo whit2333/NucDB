@@ -1,0 +1,125 @@
+#! /bin/bash
+
+# for proton and deuteron
+########################### xg2 ######################################
+##
+#! spect x bin range !----proton---!!---deuteron---!
+#! theta  low high <x> <Q2> xg2 +-stat xg2 +-stat
+filename="extractors/SLAC-E155/xg2_pd_all.dat"
+measurement="xg2" 
+tableName="${measurement}_e155"
+aCMD=`echo -e "Create table ${tableName} ( \nnucleon varchar(10), \n xbjorken double ,\n Qsquared double ,\n ${measurement} double ,\n ${measurement}_error_stat double ,\n ${measurement}_error_sys double\n )"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+exec 3< ${filename}
+while read <&3 #### LOOP OVER LINES
+do  # use $REPLY
+ set -- $REPLY
+#  echo $1 $2 $3 $4 $5
+aCMD=`echo -e "INSERT INTO ${tableName} set "`
+aCMD=`echo -e "${aCMD} xbjorken=${4}, "`
+aCMD=`echo -e "${aCMD} Qsquared=${5}, "	`
+aCMD=`echo -e "${aCMD} ${measurement}=${6}, ${measurement}_error_stat=${7}, ${measurement}_error_sys=0,"` # !!! no sys error
+aCMD=`echo -e "${aCMD} nucleon='p' ;"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+done
+
+filename="extractors/SLAC-E155/xg2_pd_all.dat" ## could use xg2_pd_comb.dat but these would not match point to point the not combined g1 measurements
+measurement="xg2" 
+tableName="${measurement}_e155"
+#aCMD=`echo -e "Create table ${tableName} ( \nnucleon varchar(10), \n xbjorken double ,\n Qsquared double ,\n ${measurement} double ,\n ${measurement}_error_stat double ,\n ${measurement}_error_sys double\n )"`
+#mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+exec 3< ${filename}
+while read <&3 #### LOOP OVER LINES
+do  # use $REPLY
+ set -- $REPLY
+#  echo $1 $2 $3 $4 $5
+aCMD=`echo -e "INSERT INTO ${tableName} set "`
+aCMD=`echo -e "${aCMD} xbjorken=${4}, "`
+aCMD=`echo -e "${aCMD} Qsquared=${5}, "	`
+aCMD=`echo -e "${aCMD} ${measurement}=${8}, ${measurement}_error_stat=${9}, ${measurement}_error_sys=0,"` # !!! no sys error
+aCMD=`echo -e "${aCMD} nucleon='d' ;"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+done
+
+
+
+########################### g1/F1 ######################################
+# spect.  low     high    <x>      <Q2>   g1    +-stat  +-syst    g1/F1 +-stat  +-syst    
+filename="extractors/SLAC-E155/g1_p_all.dat"
+measurement="g1_over_F1" 
+tableName="${measurement}_e155"
+aCMD=`echo -e "Create table ${tableName} ( \nnucleon varchar(10), \n xbjorken double ,\n Qsquared double ,\n ${measurement} double ,\n ${measurement}_error_stat double ,\n ${measurement}_error_sys double\n )"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+exec 3< ${filename}
+while read <&3 #### LOOP OVER LINES
+do  # use $REPLY
+ set -- $REPLY
+#  echo $1 $2 $3 $4 $5
+aCMD=`echo -e "INSERT INTO ${tableName} set "`
+aCMD=`echo -e "${aCMD} xbjorken=${4}, "`
+aCMD=`echo -e "${aCMD} Qsquared=${5}, "	`
+aCMD=`echo -e "${aCMD} ${measurement}=${9}, ${measurement}_error_stat=${10}, ${measurement}_error_sys=${11}, "`
+aCMD=`echo -e "${aCMD} nucleon='p' ;"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+done
+
+
+filename="extractors/SLAC-E155/g1_d_all.dat"
+measurement="g1_over_F1" 
+tableName="${measurement}_e155"
+#aCMD=`echo -e "Create table ${tableName} ( \nnucleon varchar(10), \n xbjorken double ,\n Qsquared double ,\n ${measurement} double ,\n ${measurement}_error_stat double ,\n ${measurement}_error_sys double\n )"`
+#mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+exec 3< ${filename}
+while read <&3 #### LOOP OVER LINES
+do  # use $REPLY
+ set -- $REPLY
+#  echo $1 $2 $3 $4 $5
+aCMD=`echo -e "INSERT INTO ${tableName} set "`
+aCMD=`echo -e "${aCMD} xbjorken=${1}, "`
+aCMD=`echo -e "${aCMD} Qsquared=${2}, "	`
+aCMD=`echo -e "${aCMD} ${measurement}=${6}, ${measurement}_error_stat=${7}, ${measurement}_error_sys=${8}, "`
+aCMD=`echo -e "${aCMD} nucleon='d' ;"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+done
+
+########################### g1 ######################################
+### using F1 calculated from fits to get just g1 ... See .txt files
+# spect.  low     high    <x>      <Q2>   g1    +-stat  +-syst    g1/F1 +-stat  +-syst    
+filename="extractors/SLAC-E155/g1_p_all.dat"
+measurement="g1" 
+tableName="${measurement}_e155"
+aCMD=`echo -e "Create table ${tableName} ( \nnucleon varchar(10), \n xbjorken double ,\n Qsquared double ,\n ${measurement} double ,\n ${measurement}_error_stat double ,\n ${measurement}_error_sys double\n )"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+exec 3< ${filename}
+while read <&3 #### LOOP OVER LINES
+do  # use $REPLY
+ set -- $REPLY
+#  echo $1 $2 $3 $4 $5
+aCMD=`echo -e "INSERT INTO ${tableName} set "`
+aCMD=`echo -e "${aCMD} xbjorken=${4}, "`
+aCMD=`echo -e "${aCMD} Qsquared=${5}, "	`
+aCMD=`echo -e "${aCMD} ${measurement}=${6}, ${measurement}_error_stat=${7}, ${measurement}_error_sys=${8}, "`
+aCMD=`echo -e "${aCMD} nucleon='p' ;"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+done
+
+
+filename="extractors/SLAC-E155/g1_d_all.dat"
+measurement="g1" 
+tableName="${measurement}_e155"
+#aCMD=`echo -e "Create table ${tableName} ( \nnucleon varchar(10), \n xbjorken double ,\n Qsquared double ,\n ${measurement} double ,\n ${measurement}_error_stat double ,\n ${measurement}_error_sys double\n )"`
+#mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+exec 3< ${filename}
+while read <&3 #### LOOP OVER LINES
+do  # use $REPLY
+ set -- $REPLY
+#  echo $1 $2 $3 $4 $5
+aCMD=`echo -e "INSERT INTO ${tableName} set "`
+aCMD=`echo -e "${aCMD} xbjorken=${1}, "`
+aCMD=`echo -e "${aCMD} Qsquared=${2}, "	`
+aCMD=`echo -e "${aCMD} ${measurement}=${6}, ${measurement}_error_stat=${7}, ${measurement}_error_sys=${8}, "`
+aCMD=`echo -e "${aCMD} nucleon='d' ;"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+done
+
+

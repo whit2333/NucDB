@@ -1,0 +1,49 @@
+! E155 Inclusive hadron asymmetries A_LL for the deuteron.       
+! Beam Energy: 48.35 GeV; Scattering Angle: ~2.75 deg;                          
+! Source: T.S. Toole, "A Precision Measurement of the Spin Structure                       
+!         Functions g1p and g1d", pg199,                             
+!         Doctoral Dissertation, American University (2000) unpublished.                    
+!                                                                                           
+! p    is the momentum of the detected particle.                                            
+! A_LL is the inclusive hadron asymmetry, defined as                                        
+!                      (antiparallel - parallel) / (antiparallel + parallel)                
+!      where antiparallel (parallel) refers to the number of events counted, normalized to  
+!      incident beam charge, when the spins of the incident electrons and the target        
+!      nucleons were anti-aligned (aligned).                                                
+! "stat" is the statistical error.                                                        
+! The angle (eg. theta = 2.75, 5.5, or 10.5) represents the scattering angle at the         
+!       center of a particular spectrometer's acceptance. It is measured      
+!       relative to the beam direction. The angle "name" of the spectrometer 
+!       is an approximate scattering angle for the electrons detected in that spectrometer. 
+! h^(+) indicates when the detected particle was a positively charged hadron.               
+! h^(-)     "      "    "     "       "       "  " negatively    "      "   .      
+! pi^(+)    "      "    "     "       "       "  " positively    "     pion.        
+! pi^(-)    "      "    "     "       "       "  " negatively    "     pion.        
+! Notes: These data differ slightly from those presented in Phys. Lett. B458:536-544,(1999) 
+!        (aka, the E155 Hadron Paper). The differences are primarily due to:                
+!        (1) The inclusion of additional runs.                                              
+!        (2) These data take advantage of the final corrections to the proton polarization. 
+!                                                                                           
+!--------- A_LL(p) for deuteron at ~2.75------!     
+!  p(GeV)     ~2.75 h^(-)       ~2.75 h^(+) 
+!           A_LL   +-stat     A_LL   +-stat   
+   10.0     0.000    0.003    0.015    0.006 
+   11.0    -0.003    0.003   -0.003    0.006 
+   12.0    -0.004    0.004   -0.006    0.006 
+   13.0    -0.006    0.004    0.004    0.007 
+   14.0     0.002    0.004    0.001    0.007 
+   15.0     0.001    0.005    0.004    0.008 
+   16.0    -0.003    0.005   -0.007    0.009 
+   17.0     0.017    0.006   -0.003    0.011 
+   18.0    -0.006    0.007   -0.006    0.012 
+   19.0     0.007    0.009   -0.001    0.015 
+   20.0    -0.015    0.010    0.017    0.017 
+   21.0    -0.016    0.012    0.015    0.020 
+   22.0    -0.006    0.014    0.000    0.024 
+   23.0     0.029    0.017    0.014    0.029 
+   24.0     0.051    0.019    0.065    0.034 
+   25.0    -0.019    0.022    0.014    0.041 
+   26.0     0.038    0.026   -0.017    0.048 
+   27.0    -0.048    0.029    0.006    0.056 
+   28.0    -0.011    0.032   -0.075    0.066 
+   29.0     0.039    0.035    ---      ---   

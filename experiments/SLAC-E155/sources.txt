@@ -1,0 +1,12 @@
+The data in this directory is from HEPDATA DIS SFs.
+
+Retrieved by :
+
+ wget http://hepdata.cedar.ac.uk/view/irn4909437/plain -O E155_g2p_and_g2d.txt
+
+ wget http://durpdg.dur.ac.uk/cgi-hepdata/struct3/E155/PL493B19/g1pg1n -O E155_g1p_and_g1n.txt
+
+ wget http://durpdg.dur.ac.uk/cgi-hepdata/struct3/E155/PL463B339/g1d -O E155_g1d.txt
+
+ wget http://durpdg.dur.ac.uk/cgi-hepdata/struct3/E155/PL493B19/g1pg1n -O E155_g1p_and_g1d.txt
+

@@ -1,0 +1,60 @@
+! E155 measurement of the virtual photon asymmetry A1 for a proton target.
+! Beam Energy: 48.35 GeV; Scattering Angle: ~2.75 deg;                        
+! Source: These data were previously unreleased.                                            
+! 
+! "x" pertains to the kinematic variable Bjorken x.                                       
+!      The data presented here use E155's fine binning.                                    
+! <x>  is the statistically weighted average value of x for a particular bin.               
+! <Q2> is the statistically weighted average value of the 4-momentum transferred squared.   
+! A1   is the virtual photon asymmetry.                                                     
+!      A1 = (1./D_prime) * A_|| *( 1.+x_*M_*y_/(E_+Eprime_*cos(theta_)) )                   
+!          - (g2ww/F1) * (4.*x_*M_*Eprime_*cos(theta_/2.)*cos(theta_/2.))                   
+!               / (nu_*(E_+Eprime_*cos(theta_)))                                            
+!      This is Equation 5 from PRD58:112003,(1998) (aka the E143 Long Paper). See the       
+!      E143 Long Paper for details of the equation. The quantity g2WW was used for g2.      
+! "stat" is the statistical error on A1.                                                  
+! The angle (eg. 2.75, 5.5, or 10.5) represents the scattering angle at the                 
+!       center of a particular spectrometer's acceptance. It is measured                   
+!       relative to the beam direction. The angle "name" of the spectrometer              
+!       is an approximate scattering angle for the electrons detected in that spectrometer. 
+! Notes: 
+!       
+!------------- ~2.75 deg---- proton ----------!                    
+! x bin range                                                                               
+! low     high    <x>      <Q2>   A1    +-stat                                              
+  0.013   0.014   0.014    1.00   0.039   0.051 
+  0.014   0.016   0.015    1.09   0.049   0.021 
+  0.016   0.018   0.017    1.20   0.062   0.015 
+  0.018   0.020   0.019    1.32   0.048   0.015 
+  0.020   0.023   0.022    1.45   0.046   0.014 
+  0.023   0.026   0.024    1.58   0.056   0.014 
+  0.026   0.029   0.027    1.73   0.066   0.014 
+  0.029   0.033   0.031    1.89   0.068   0.014 
+  0.033   0.037   0.035    2.04   0.083   0.014 
+  0.037   0.041   0.039    2.22   0.058   0.014 
+  0.041   0.047   0.044    2.40   0.102   0.014 
+  0.047   0.052   0.049    2.59   0.116   0.015 
+  0.052   0.059   0.056    2.78   0.112   0.015 
+  0.059   0.067   0.063    2.97   0.124   0.017 
+  0.067   0.075   0.071    3.17   0.141   0.018 
+  0.075   0.084   0.079    3.37   0.183   0.019 
+  0.084   0.095   0.089    3.57   0.144   0.020 
+  0.095   0.107   0.101    3.77   0.178   0.022 
+  0.107   0.120   0.113    3.97   0.124   0.023 
+  0.120   0.135   0.128    4.17   0.175   0.025 
+  0.135   0.152   0.143    4.36   0.249   0.028 
+  0.152   0.171   0.162    4.54   0.278   0.031 
+  0.171   0.193   0.182    4.72   0.256   0.035 
+  0.193   0.217   0.205    4.88   0.288   0.040 
+  0.217   0.245   0.230    5.04   0.337   0.045 
+  0.245   0.275   0.259    5.18   0.422   0.051 
+  0.275   0.310   0.292    5.33   0.405   0.058 
+  0.310   0.349   0.328    5.46   0.463   0.067 
+  0.349   0.393   0.370    5.58   0.412   0.078 
+  0.393   0.442   0.416    5.68   0.619   0.091 
+  0.442   0.498   0.468    5.78   0.675   0.112 
+  0.498   0.560   0.527    5.87   0.393   0.142 
+  0.560   0.631   0.593    5.94   0.590   0.184 
+  0.631   0.710   0.667    6.00   0.621   0.235 
+  0.710   0.799   0.751    6.06   0.886   0.289 
+  0.799   0.900   0.846    6.12   1.465   0.441 

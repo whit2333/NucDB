@@ -1,0 +1,43 @@
+! E155 A_perpendicular for the proton and deuteron. 
+! Beam Energy: 38.80 GeV; Scattering Angle: ~10.5 deg; 
+! Source: P.M. King, 
+!         "Precision Measurements of the Proton and Deuteron Polarized Structure Functions", pg158, 
+!         Doctoral Dissertation, The College of William and Mary, (2000) unpublished. 
+! 
+! "x" pertains to the kinematic variable Bjorken x. 
+! <x> is the statistically weighted average value of x for a particular bin. 
+! <Q2> is the statistically weighted average value of the 4-momentum transferred squared. 
+! Aperp is the cross section asymmetry defined as:  
+!       [sigma(downarrow Rightarrow) - sigma(uparrow Rightarrow)]/[sigma(downarrow Rightarrow) + sigma(uparrow Rightarrow)] 
+!       where sigma is the cross section of a longitudinally polarized electron incident upon 
+!       transverse polarized target. uparrow/downarrow indicates an electron polarization with/against the 
+!       direction of travel of the incident electron. Rightarrow indicates the transversely polarized target nucleon. 
+! "stat" is the statistical error on Aperp. 
+! The angle (eg. 2.75, 5.5, or 10.5) represents the scattering angle at the center of a particular 
+!       spectrometer's acceptance. It is measured relative to the beam direction. The angle "name" of 
+!       the spectrometer is an approximate scattering angle of the electrons detected in that spectrometer. 
+! Notes: 
+!       1. These data correspond to those presented in 
+!          G. Mitchell,  "Precision Measurement of the Spin Structure Function g1(x,Q^2) for the Proton and Deuteron", 
+!          Doctoral Dissertation, University of Wisconsin, (May 1999). 
+!       
+!--------------------------------- ~10.5 deg------------------------------------! 
+! bin x range    !-------------proton-----------!!-----------deuteron-----------! 
+! low     high    <x>      <Q2>   Aperp +-stat    <x>      <Q2>   Aperp +-stat    
+  0.120   0.135   0.129    7.58   0.009   0.186   0.129    7.58  -0.018   0.139 
+  0.135   0.152   0.144    8.38   0.007   0.120   0.144    8.38  -0.128   0.090 
+  0.152   0.171   0.162    9.27  -0.145   0.106   0.162    9.27  -0.023   0.079 
+  0.171   0.193   0.182   10.32   0.100   0.098   0.182   10.33  -0.173   0.075 
+  0.193   0.217   0.205   11.44   0.072   0.093   0.205   11.46  -0.136   0.070 
+  0.217   0.245   0.230   12.62  -0.105   0.095   0.230   12.63   0.077   0.074 
+  0.245   0.275   0.259   13.78  -0.090   0.103   0.259   13.77   0.022   0.080 
+  0.275   0.310   0.292   14.97   0.121   0.114   0.292   14.94  -0.172   0.090 
+  0.310   0.349   0.328   16.14  -0.033   0.119   0.329   16.09  -0.136   0.097 
+  0.349   0.393   0.370   17.23  -0.054   0.121   0.370   17.23  -0.051   0.102 
+  0.393   0.442   0.416   18.43   0.041   0.130   0.417   18.42  -0.100   0.111 
+  0.442   0.498   0.468   19.44   0.092   0.135   0.469   19.47   0.080   0.119 
+  0.498   0.560   0.528   20.44   0.044   0.144   0.527   20.49   0.098   0.136 
+  0.560   0.631   0.593   21.49   0.014   0.158   0.593   21.59  -0.040   0.156 
+  0.631   0.710   0.668   22.64   0.012   0.177   0.667   22.73   0.448   0.179 
+  0.710   0.799   0.750   23.72   0.503   0.217   0.750   23.77  -0.356   0.209 
+  0.799   0.900   0.845   24.84  -0.264   0.327   0.845   24.94  -0.053   0.241 

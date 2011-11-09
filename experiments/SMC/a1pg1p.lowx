@@ -1,0 +1,54 @@
+<title> HEPDATA DIS Structure Function Review </title>
+<body bgcoloR=#FFFFFF>
+<pre>
+EXPeriment      = CERN-NA-047                     
+REACtion        = muon P  --> muon X                               
+Collaboration   = SMC                      
+Author          = Adeva et al. 
+REFerence       = Phys.Rev.D60(1999)072004
+Additional info = The virtual photon  asymmetry A1p at mean values of x and 
+                  Q^2$ and the derived spin-dependent structure  function g1p
+                  as presented by the SMC collaboration in deep-inelastic 
+                  scattering of 190 GeV polarised muons off a polarised 
+                  ammonia target.
+                  This data is primarily at low x and Q^2 and compiliment 
+                  the data from <A HREF=../PR58D112001/a1pg1p>Adeva et al. Phys.Rev.D58(98)112001</A>, hence g1p
+                  is only determined for x < 0.003. The data cover the 
+                  kinematic range of x from 0.00006 to 0.15 and Q^2 from 0.01 
+                  to 20 GeV^2.
+
+----------------------------------------------------------------------------
+
+      x       x       x     Q^2    A1p      Errors      G1p   Errors
+     min     max     mean  GeV^2          stat    sys        stat sys
+
+   0.00006 0.00015 0.00010  0.02   0.016  0.016  0.008    2.2  2.2  0.3 
+   0.00015 0.00030 0.00022  0.06   0.015  0.015  0.005    2.0  2.1  0.4 
+   0.0003  0.0005  0.00039  0.10   0.002  0.018  0.002    0.2  2.3  0.2 
+   0.0005  0.0008  0.00063  0.17  -0.004  0.020  0.002   -0.4  2.2  0.2 
+   0.0008  0.0012  0.0010   0.26   0.021  0.023  0.005    1.9  2.1  0.4 
+   0.0012  0.0020  0.0016   0.40   0.045  0.022  0.010    3.2  1.5  0.6 
+   0.002   0.003   0.0025   0.63   0.018  0.026  0.004    0.9  1.4  0.2  
+   0.003   0.006   0.0043   1.09  -0.007  0.024  0.002     -    -    -  
+   0.006   0.010   0.0078   1.85   0.028  0.030  0.003     -    -    -  
+   0.010   0.020   0.0143   3.15   0.090  0.027  0.006     -    -    -   
+   0.020   0.030   0.0245   5.10   0.073  0.039  0.006     -    -    -   
+   0.030   0.040   0.0346   7.0    0.107  0.052  0.007     -    -    -  
+   0.040   0.060   0.0487   9.7    0.029  0.049  0.003     -    -    -   
+   0.060   0.100   0.077   14.8     0.248  0.054  0.016    -    -    -  
+   0.100   0.150   0.121   23.1     0.345  0.078  0.020    -    -    - 
+----------------------------------------------------------------------------
+</pre>
+<table cellspacing=40 align=center>
+<td>
+<a href="/online/structure/SMC/PR60D072004/smclowxp.ps">
+<img border=0 src="/online/structure/SMC/PR60D072004/smclowxp.gif">
+</a>
+<tr>
+<td><font size=-1>
+(a) A1p and (b) g1p as a function of x 
+at the mean Q^2 values at low x and Q^2 
+as measured by the SMC collaboration.
+</table>     
+</pre>
+</body>

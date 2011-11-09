@@ -1,0 +1,43 @@
+<title> HEPDATA DIS Structure Function Review </title>
+<body bgcoloR=#FFFFFF>
+<pre>
+EXPeriment      = DESY-HERA-H1                      
+REACtion        = E- P  --> E- X                                     
+Collaboration   = H1                          
+Author          = Abt et al 
+REFerence       = Nucl. Phys. B407 (1993) 515       
+Additional info : First measurement of the proton structure function F2 by the 
+                  H1 Collaboration from about 1000 neutral deep inelastic 
+                  scattering events in the x range 10-2 to 10-4 and Q**2 > 
+                  5 GeV**2. Data come from 22.5 nb-1 luminosity with 26.7 GeV 
+                  electrons colliding with 820 GeV protons. There is an 
+                  additional overall normalization uncertainty of 8%.
+
+
+                mean     mean     F2          errors
+                 x       Q**2              stat.    sys.
+
+              0.00018    8.5     1.43      0.30     0.43  
+              0.00024    8.5     1.62      0.25     0.30  
+              0.00032    8.5     1.28      0.18     0.20  
+              0.00043   15.0     1.56      0.19     0.30  
+              0.00063   15.0     1.13      0.14     0.19  
+              0.00100   15.0     1.30      0.11     0.25  
+              0.00237   15.0     0.87      0.10     0.16  
+              0.00421   15.0     0.78      0.10     0.16  
+              0.00750   15.0     0.71      0.10     0.15  
+              0.01334   15.0     0.46      0.09     0.12  
+              0.00060   30.0     2.35      0.37     0.67  
+              0.00096   30.0     1.43      0.32     0.30  
+              0.00138   30.0     1.19      0.25     0.22  
+              0.00237   30.0     1.03      0.12     0.22  
+              0.00421   30.0     0.92      0.11     0.17  
+              0.00750   30.0     0.62      0.09     0.12  
+              0.01334   30.0     0.63      0.11     0.14  
+              0.00237   60.0     1.50      0.31     0.43  
+              0.00421   60.0     0.92      0.19     0.21  
+              0.00750   60.0     1.34      0.20     0.30  
+              0.01334   60.0     0.67      0.14     0.15  
+
+</pre>
+</body>

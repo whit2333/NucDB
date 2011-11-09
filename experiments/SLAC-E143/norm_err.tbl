@@ -1,0 +1,13 @@
+\begin{table}
+\caption{Normalization systematic uncertainties (\%).}
+\label{tb:norm_err}
+\begin{tabular}{lcc}
+Parameter           & Proton  & Deuteron   \\ \hline
+Beam Polarization   & 2.4   & 2.4\\
+Target Polarization & 2.5   & 4.0 \\
+Dilution Factor     & 1.2   & 1.4 \\
+Nitrogen Correction & 0.4   &   -  \\
+\hline
+Total               &3.7    & 4.9 \\
+\end{tabular}
+\end{table}

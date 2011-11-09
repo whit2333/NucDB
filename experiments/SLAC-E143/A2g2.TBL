@@ -1,0 +1,95 @@
+
+%PROTON:
+\begin{table}[t]
+\caption{ Results for $A_2$, $g_2$ and $\overline{g_2}$ for the proton 
+measured in the $4.5^\circ$ and  $7.0^\circ$ spectrometers at the 
+indicated average values of 
+$x$ and $Q^2$ and beam energy of 29.1 GeV. The highest $x$ bin shown is in 
+the resonance region defined by missing mass $W^2<4$ GeV$^2$. }
+\label{tb:g2A2p}
+\begin{tabular}{cccccc} 
+$x$ interval & $<x>$ & $<Q^2>$ & $A_2^p$ & $g_2^p$ & $\overline{g_2^p}$ \\
+  & &  (GeV/c)$^2$ &$\pm$stat $\pm$syst  &$\pm$stat $\pm$syst  & $\pm$stat $\pm$syst    \\
+\hline
+
+%  XMIN  XMAX        XAV   Q2       A2     A2ERR                G2         G2ERR            G2BAR       G2BARERR
+$  0.029-0.047$ & 0.038& 1.49& $  0.016\pm 0.018\pm 0.006$& $\phantom{+} 0.489\pm 0.980\pm 0.332$& $\phantom{+} 0.223\pm 0.983\pm 0.332$\\
+$  0.047-0.075$ & 0.060& 2.01& $  0.025\pm 0.014\pm 0.005$& $\phantom{+} 0.397\pm 0.374\pm 0.138$& $\phantom{+} 0.223\pm 0.375\pm 0.138$\\
+$  0.075-0.120$ & 0.095& 2.60& $  0.004\pm 0.015\pm 0.006$& $      -0.236\pm 0.203\pm 0.074$&      $ -0.295\pm 0.204\pm 0.074$\\
+$  0.120-0.193$ & 0.152& 3.21& $  0.021\pm 0.021\pm 0.008$& $      -0.136\pm 0.125\pm 0.049$&      $ -0.127\pm 0.127\pm 0.049$\\
+$  0.193-0.310$ & 0.241& 3.77& $  0.091\pm 0.032\pm 0.011$& $      -0.046\pm 0.079\pm 0.026$&$\phantom{+}  0.027\pm 0.080\pm 0.026$\\
+$  0.310-0.498$ & 0.379& 4.22& $  0.135\pm 0.060\pm 0.014$& $      -0.050\pm 0.048\pm 0.009$&$\phantom{+}  0.051\pm 0.050\pm 0.009$\\
+$  0.498-0.799$ & 0.595& 4.55& $  0.061\pm 0.154\pm 0.028$& $      -0.037\pm 0.020\pm 0.004$&      $ -0.005\pm 0.022\pm 0.004$\\
+\hline
+$  0.075-0.120$ & 0.101& 3.76& $  0.025\pm 0.025\pm 0.007$& $\phantom{+} 0.060\pm 0.366\pm 0.116$& $\phantom{+} 0.000\pm 0.368\pm 0.116$\\
+$  0.120-0.193$ & 0.155& 4.97& $  0.048\pm 0.019\pm 0.007$& $\phantom{+} 0.171\pm 0.141\pm 0.049$& $\phantom{+} 0.198\pm 0.142\pm 0.049$\\
+$  0.193-0.310$ & 0.243& 6.37& $  0.053\pm 0.022\pm 0.007$& $      -0.068\pm 0.070\pm 0.021$& $\phantom{+} 0.023\pm 0.071\pm 0.021$\\
+$  0.310-0.498$ & 0.382& 7.76& $  0.077\pm 0.035\pm 0.008$& $      -0.039\pm 0.034\pm 0.007$& $\phantom{+} 0.043\pm 0.035\pm 0.007$\\
+$  0.498-0.799$ & 0.584& 8.85& $  0.106\pm 0.083\pm 0.016$& $      -0.022\pm 0.011\pm 0.002$& $\phantom{+} 0.001\pm 0.012\pm 0.002$\\
+\end{tabular}
+\end{table}
+%%%%%%%%%% END TABLE %%%%%%%%%%%%%%
+%%%%%%%%%% BEGIN TABLE %%%%%%%%%%%%%%
+
+%DEUTERON:
+\begin{table}[t]
+\caption{ Results for $A_2$, $g_2$ and $\overline{g_2}$ for the deuteron 
+measured in the $4.5^\circ$ and $7^\circ$ spectrometers at the indicated 
+average values of $x$ and $Q^2$ and beam energy of 29.1 GeV. 
+The highest $x$ bin shown is in the resonance region defined 
+by missing mass $W^2<4$ GeV$^2$. } 
+\label{tb:g2A2d}
+\begin{tabular}{cccccc}
+ $x$ interval & $<x>$ & $<Q^2>$ & $A_2^d$ & $g_2^d$ & $\overline{g_2^d}$ \\
+ &  &  (GeV/c)$^2$ & $\pm$stat $\pm$syst & $\pm$stat $\pm$syst &    $\pm$stat $\pm$syst \\
+\hline
+%ELT SUM RULE=   .0077 +-   .0876
+%  XMIN  XMAX   XAV   Q2       A2        A2ERR                    G2      G2ERR                   G2BAR G2BARERR
+ $0.029-0.047$ & 0.038&  1.49& $\phantom{+} 0.070\pm 0.045\pm 0.010$& $       3.426\pm 2.157\pm 0.575$& $        3.275\pm  2.161\pm 0.575$\\
+ $0.047-0.075$ & 0.060&  2.01& $      -0.025\pm 0.028\pm 0.006$& $      -0.655\pm 0.707\pm 0.157$& $       -0.799\pm  0.709\pm 0.157$\\
+ $0.075-0.120$ & 0.095&  2.60& $\phantom{+} 0.008\pm 0.032\pm 0.010$& $\phantom{+} 0.008\pm 0.390\pm 0.118$& $       -0.048\pm  0.392\pm 0.118$\\
+ $0.120-0.193$ & 0.152&  3.21& $\phantom{+} 0.005\pm 0.045\pm 0.016$& $      -0.118\pm 0.243\pm 0.080$& $       -0.095\pm  0.245\pm 0.080$\\
+ $0.193-0.310$ & 0.241&  3.77& $\phantom{+} 0.078\pm 0.072\pm 0.020$& $\phantom{+} 0.127\pm 0.154\pm 0.041$& $\phantom{+}  0.134\pm  0.156\pm 0.041$\\
+ $0.310-0.498$ & 0.378&  4.22& $      -0.079\pm 0.144\pm 0.017$& $      -0.127\pm 0.094\pm 0.010$& $       -0.095\pm  0.096\pm 0.010$\\
+ $0.498-0.799$ & 0.595&  4.56& $\phantom{+} 0.327\pm 0.390\pm 0.044$& $\phantom{+} 0.037\pm 0.039\pm 0.004$& $\phantom{+}  0.027\pm  0.041\pm 0.004$\\
+\hline
+ $0.075-0.120$ & 0.101&  3.77& $\phantom{+} 0.024\pm 0.046\pm 0.009$& $\phantom{+} 0.172\pm 0.621\pm 0.133$& $\phantom{+}  0.084\pm  0.624\pm 0.133$\\
+ $0.120-0.193$ & 0.154&  4.97& $      -0.007\pm 0.036\pm 0.011$& $      -0.109\pm 0.235\pm 0.076$& $       -0.086\pm  0.237\pm 0.076$\\
+ $0.193-0.310$ & 0.242&  6.37& $      -0.043\pm 0.043\pm 0.015$& $      -0.133\pm 0.116\pm 0.041$& $       -0.117\pm  0.118\pm 0.041$\\
+ $0.310-0.498$ & 0.381&  7.76& $\phantom{+} 0.000\pm 0.073\pm 0.014$& $      -0.042\pm 0.056\pm 0.011$& $       -0.006\pm  0.057\pm 0.011$\\
+ $0.498-0.799$ & 0.584&  8.86& $\phantom{+} 0.235\pm 0.183\pm 0.030$& $\phantom{+} 0.000\pm 0.018\pm 0.003$& $\phantom{+}  0.011\pm  0.019\pm 0.003$\\
+\end{tabular}
+\end{table}
+%%%%%%%%%% END TABLE %%%%%%%%%%%%%%
+
+%%%%%%%%%% BEGIN TABLE %%%%%%%%%%%%%%
+
+%NEUTRON:
+\begin{table}[t]
+\caption{ Results for $A_2$, $g_2$ and $\overline{g_2}$ for the neutron 
+measured in the $4.5^\circ$ and $7^\circ$ spectrometers at the indicated 
+average values of $x$ and $Q^2$ and beam energy of 29.1 GeV. 
+The highest $x$ bin shown is in the resonance region defined 
+by missing mass $W^2<4$ GeV$^2$. } 
+\label{tb:g2A2n}
+\begin{tabular}{cccccc}
+ $x$ interval & $<x>$ & $<Q^2>$ & $A_2^n$ & $g_2^n$ & $\overline{g_2^n}$ \\
+ &  &  (GeV/c)$^2$ & $\pm$stat $\pm$syst & $\pm$stat $\pm$syst &    $\pm$stat $\pm$syst \\
+\hline
+%ELT SUM RULE=   .0077 +-   .0876
+%  XMIN  XMAX   XAV   Q2       A2        A2ERR                    G2      G2ERR                   G2BAR G2BARERR
+ $0.029-0.047$ & 0.038&  1.49& $\phantom{+} 0.143\pm 0.105\pm 0.023$& $\phantom{+} 7.024\pm 4.777\pm 1.288$& $\phantom{+}  6.963\pm  4.787\pm 1.288$\\
+ $0.047-0.075$ & 0.060&  2.01& $      -0.085\pm 0.065\pm 0.015$& $     -1.811\pm  1.574\pm 0.367$& $       -1.948\pm  1.579\pm 0.367$\\
+ $0.075-0.120$ & 0.095&  2.60& $\phantom{+} 0.013\pm 0.076\pm 0.025$& $\phantom{+} 0.254\pm 0.868\pm 0.266$& $\phantom{+}  0.192\pm  0.872\pm 0.266$\\
+ $0.120-0.193$ & 0.152&  3.21& $      -0.013\pm 0.114\pm 0.040$& $      -0.118\pm 0.541\pm 0.180$& $       -0.079\pm  0.545\pm 0.180$\\
+ $0.193-0.310$ & 0.241&  3.77& $\phantom{+} 0.067\pm 0.192\pm 0.056$& $\phantom{+} 0.320\pm 0.342\pm 0.093$& $\phantom{+}  0.263\pm  0.347\pm 0.093$\\
+ $0.310-0.498$ & 0.378&  4.22& $      -0.433\pm 0.419\pm 0.058$& $      -0.225\pm 0.209\pm 0.024$& $       -0.256\pm  0.214\pm 0.024$\\
+ $0.498-0.799$ & 0.595&  4.56& $\phantom{+} 0.926\pm 1.302\pm 0.200$& $\phantom{+} 0.116\pm 0.086\pm 0.010$& $\phantom{+}  0.064\pm  0.091\pm 0.010$\\
+\hline
+ $0.075-0.120$ & 0.101&  3.77& $\phantom{+} 0.028\pm 0.113\pm 0.024$& $\phantom{+} 0.315\pm 1.392\pm 0.312$& $\phantom{+}  0.184\pm  1.399\pm 0.312$\\
+ $0.120-0.193$ & 0.154&  4.97& $      -0.078\pm 0.091\pm 0.029$& $      -0.407\pm 0.528\pm 0.172$& $       -0.384\pm  0.533\pm 0.172$\\
+ $0.193-0.310$ & 0.242&  6.37& $      -0.195\pm 0.118\pm 0.041$& $      -0.219\pm 0.261\pm 0.091$& $       -0.276\pm  0.265\pm 0.091$\\
+ $0.310-0.498$ & 0.381&  7.76& $      -0.131\pm 0.218\pm 0.045$& $      -0.052\pm 0.125\pm 0.025$& $       -0.057\pm  0.128\pm 0.025$\\
+ $0.498-0.799$ & 0.584&  8.86& $\phantom{+} 0.544\pm 0.627\pm 0.120$& $\phantom{+} 0.021\pm 0.041\pm 0.006$& $\phantom{+}  0.023\pm  0.042\pm 0.006$\\
+\end{tabular}
+\end{table}

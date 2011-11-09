@@ -1,0 +1,36 @@
+#!/bin/bash
+  echo "x Q^2 F2 statistic systematic"
+
+# for proton and deuteron
+
+tableName="F2_oldslac"
+aCMD=`echo -e "Create table ${tableName} ( \nnucleon varchar(10), \n xbjorken double ,\n Qsquared double ,\n F2 double ,\n F2_error_stat double ,\n f2_error_sys double\n )" `
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+exec 3< extractors/OLDSLAC/f2prot.dat
+while read <&3 #### LOOP OVER LINES
+do  # use $REPLY
+  set -- $REPLY
+#  echo $1 $2 $3 $4 $5
+aCMD=`echo -e "INSERT INTO ${tableName} set "`
+aCMD=`echo -e "${aCMD} xbjorken=${1}, "`
+aCMD=`echo -e "${aCMD} Qsquared=${2}, "	`
+aCMD=`echo -e "${aCMD} F2=${3}, F2_error_stat=${4}, F2_error_sys=${5}, "`
+aCMD=`echo -e "${aCMD} nucleon='p' ;"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+done
+
+tableName="F2_oldslac"
+#aCMD=`echo -e "Create table ${tableName} ( \nnucleon varchar(10), \n xbjorken double ,\n Qsquared double ,\n F2 double ,\n F2_error_stat double ,\n f2_error_sys double\n )" `
+#mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+exec 3< extractors/OLDSLAC/f2nucl.dat
+while read <&3 #### LOOP OVER LINES
+do  # use $REPLY
+  set -- $REPLY
+#  echo $1 $2 $3 $4 $5
+aCMD=`echo -e "INSERT INTO ${tableName} set "`
+aCMD=`echo -e "${aCMD} xbjorken=${1}, "`
+aCMD=`echo -e "${aCMD} Qsquared=${2}, "	`
+aCMD=`echo -e "${aCMD} F2=${3}, F2_error_stat=${4}, F2_error_sys=${5}, "`
+aCMD=`echo -e "${aCMD} nucleon='N' ;"`
+mysql nuclearDB -u bjorken -pdrell -N -e"${aCMD}"
+done

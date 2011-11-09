@@ -1,0 +1,38 @@
+#! /bin/bash
+
+#For processing tex tables from E143. Deletes all lines except for x and Q^2 etc....
+# should implement extraction of spectrometer kinematic settings.
+
+rm -rf "${2}"
+filename="${1}"
+
+ 
+## NOTE all data lines begin with a space
+## some nondata start with a space but have " ==" 
+exec 3< ${filename}
+while read <&3 #### LOOP OVER LINES
+do  # use $REPLY
+if [ "${REPLY:0:1}" == " " ] ; then
+#echo "test" 
+if [[ "${REPLY:0:3}" == " ==" || "${REPLY:0:2}" == " %" ]] ; then
+#echo "test2"
+continue;
+fi
+
+#echo -e "data of interest : ${REPLY}"
+echo -e "${REPLY}" >> "${2}"
+
+fi
+
+#echo $REPLY
+
+# set -- $REPLY
+#  echo $1 $2 $3 $4 $5
+done
+
+
+sed -i 's/\&//g' "${2}"
+sed -i 's/==pm//g' "${2}"
+sed -i 's/\$//g' "${2}"
+sed -i 's/====//g' "${2}"
+sed -i 's/ \+/ /g' "${2}"
