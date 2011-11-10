@@ -33,6 +33,40 @@ class SLACE143Extractor(NucDBRawDataExtractor):
         self.fCurrentDataPoint.CalculateTotalError()
         self.fCurrentDataPoint.Print()
 
+class SLACE143ExtractorR(NucDBRawDataExtractor):
+    '''Extractor for experiment E143'''
+    def __init__(self):
+        NucDBRawDataExtractor.__init__(self) 
+        self.iValueRow=3
+        self.isysErr=4
+        self.istatErr=5
+
+    def ParseLine(self):
+        """ See input file for column structures
+        """
+        ixbjorken= 0 #
+        iQsq=1
+        iEpsilon=2
+        values = self.currentline.split()
+        self.rowcut.currentValue=int(0) # does nothign
+        x = self.fCurrentDataPoint.GetBinVariable('x')
+        if x :
+            x.SetBinValueSize(float(values[ixbjorken]),0.005)
+            x.Print()
+        Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
+        if Qsq :
+            Qsq.SetBinValueSize(float(values[iQsq]),0.1)
+            Qsq.Print()
+        epsilon = self.fCurrentDataPoint.GetBinVariable("epsilon")
+        if epsilon :
+            epsilon.SetBinValueSize(float(values[iEpsilon]),0.001)
+            epsilon.Print()
+        self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
+        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.istatErr]))
+        self.fCurrentDataPoint.fSystematicError.SetError(float(values[self.isysErr]))
+        self.fCurrentDataPoint.CalculateTotalError()
+        self.fCurrentDataPoint.Print()
+
 manager = NucDBManager.GetManager()
 
 experiment = manager.GetExperiment("SLAC_E143")
@@ -80,6 +114,29 @@ g2pExtractor.linestoskip=11
 g2pExtractor.Initialize()
 g2pExtractor.ExtractAllValues()
 g2p.BuildGraph()
+
+R = experiment.GetMeasurement("R") # get measurement if it already exists
+if not R :
+    R = NucDBMeasurement("R","R")
+    experiment.AddMeasurement(R)
+R.ClearDataPoints() # in case datapoints already exist
+R.fColor=2 # default color used for plotting
+
+RExtractor = SLACE143ExtractorR()
+RExtractor.SetMeasurement(R)
+RExtractor.fCurrentDataPoint.fName = "R"
+Xbjorken = NucDBBinnedVariable("x","x")
+Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+Epsilon = NucDBBinnedVariable("epsilon","#epsilon")
+RExtractor.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+RExtractor.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+RExtractor.fCurrentDataPoint.fBinnedVariables.Add(Epsilon)
+RExtractor.SetInputFile("experiments/SLAC-E143/R.dat")
+RExtractor.linestoskip=15
+RExtractor.Initialize()
+RExtractor.ExtractAllValues()
+R.BuildGraph()
+
 
 experiment.Print()
 
