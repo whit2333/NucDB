@@ -89,6 +89,9 @@ database:
 	python experiments/SMC_NucDB.py
 	python experiments/JLAB-E94010_NucDB.py
 	python experiments/CLAS_NucDB.py
+	python experiments/EMC_NucDB.py
+	python experiments/HERMES-nucDB.py
+	python experiments/JLAB-E99117_NucDB.py
 
 databaseclean:
 	rm data/NucDB.root

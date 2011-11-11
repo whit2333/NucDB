@@ -1,0 +1,26 @@
+Path: /HepData/3088/d1-x1-y1
+Measured values of A1 and G1/F1.
+Location: T 1,F 1
+RE(Q=N) : E- N --> E- X
+PLAB : 5.7 GeV
+x: X
+x2: Q**2 IN GEV**2
+y: A1(Q=N)
+x	xlow	xhigh	x2	y	dy+	dy-	dy+	dy-	
+0.33	0.33	0.33	2.71	-0.048	+0.024	-0.024	+0.015	-0.016
+0.47	0.47	0.47	3.52	-0.0060	+0.027	-0.027	+0.01	-0.01
+0.6	0.6	0.6	4.83	0.175	+0.048	-0.048	+0.026	-0.028
+
+Path: /HepData/3088/d1-x1-y2
+Measured values of A1 and G1/F1.
+Location: T 1,F 1
+RE(Q=N) : E- N --> E- X
+PLAB : 5.7 GeV
+x: X
+x2: Q**2 IN GEV**2
+y: G1(Q=N)/F1(Q=N)
+x	xlow	xhigh	x2	y	dy+	dy-	dy+	dy-	
+0.33	0.33	0.33	2.71	-0.043	+0.022	-0.022	+0.00	-0.00
+0.47	0.47	0.47	3.52	0.04	+0.035	-0.035	+0.011	-0.011
+0.6	0.6	0.6	4.83	0.124	+0.045	-0.045	+0.016	-0.017
+
