@@ -1,0 +1,25 @@
+EXPeriment      = SLAC-E-142                     
+REACtion        = e- NEUTRON  --> e- X                               
+Collaboration   = E142                      
+Author          = Anthony et al. 
+REFerence       = Phys.Rev.D54(96)6620
+Additional info = Measurement of the virtual photon asymmetry A2n and the
+                  spin-dependent structure function G2n of  the neutron in 
+                  deep inelastic scattering polarised electrons at incident 
+                  energies of 19.42, 22.66 and 25.51 GeV on a polarised 
+                  Helium-3 target. Data cover the kinematical x range 0.03 
+                  to 0.6 at a mean Q^2 of 2 GeV^2;
+
+---------------------------------------------------------------------------
+
+     x      x      x     Q^2      A2n     Errors         G2n      Errors    
+    min    max    mean  GeV^2           stat    sys             stat    sys
+ 
+   0.03   0.04   0.036   1.1    -0.225  0.270  0.068    -10.68 12.22   3.17 
+   0.04   0.06   0.050   1.2     0.084  0.191  0.062     2.44   4.92   1.63
+   0.06   0.10   0.081   1.8    -0.058  0.163  0.073    -0.74   1.96   0.87
+   0.10   0.15   0.124   2.5    -0.074  0.181  0.087    -0.29   1.07   0.49    
+   0.15   0.20   0.174   3.1    -0.365  0.234  0.119    -0.88   0.74   0.34 
+   0.20   0.30   0.245   3.8    -0.147  0.261  0.128    -0.11   0.39   0.18 
+   0.30   0.40   0.341   4.4     0.365  0.480  0.171     0.16   0.28   0.09  
+   0.40   0.60   0.466   5.5    -0.975  0.885  0.218    -0.22   0.20   0.05

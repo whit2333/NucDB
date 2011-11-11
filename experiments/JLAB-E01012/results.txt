@@ -1,0 +1,4 @@
+x Q^2 A1n A1n_stat_err A1n_syst_err_PLUS A1n_syst_err_Minus g1n/F1n  g1n/F1n_stat_err     g1n/F1n_syst_err_PLUS g1n/F1n_syst_err_Minus
+0.33  2.71 -0.048 0.024 0.015 0.016 -0.43 0.022 0.009 0.009
+0.47  3.52 -0.006 0.027 0.019 0.019 0.040 0.035 0.011 0.011
+0.60  4.83  0.175 0.048 0.026 0.028 0.124 0.045 0.016 0.017

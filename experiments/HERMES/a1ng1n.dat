@@ -1,0 +1,26 @@
+EXPeriment      = DESY-HERA-HERMES                     
+REACtion        = e+ NEUTRON  --> e+ X                               
+Collaboration   = HERMES                      
+Author          = Ackerstaff et al. 
+REFerence       = Phys.Lett.B404(1997)383
+Additional info = Measurement of the virtual photon asymmetry A1n and the
+                  spin-dependent structure function G1n of the neutron in 
+                  deep inelastic scattering of polarised positrons at an 
+                  incident energy of 27.5 GeV on a polarised Helium-3 target. 
+                  Data cover the kinematical x range 0.023 to 0.6 and  Q^2 
+                  from 1 to 15 GeV^2.
+                  
+--------------------------------------------------------------------------------
+
+    x       x       x       Q^2       A1n      Errors        G1n      Errors   
+   min     max     mean    GeV^2            stat    sys            stat    sys
+   
+  0.023   0.040   0.033     1.22    -0.111  0.048  0.018   -0.367  0.157  0.052  
+  0.040   0.055   0.047     1.47    -0.117  0.052  0.013   -0.263  0.124  0.028    
+  0.055   0.075   0.065     1.73    -0.077  0.055  0.011   -0.135  0.100  0.016   
+  0.075   0.10    0.087     1.99    -0.126  0.064  0.014   -0.172  0.088  0.015  
+  0.10    0.14    0.119     2.30    -0.097  0.068  0.015   -0.096  0.069  0.012 
+  0.14    0.20    0.168     2.65    -0.158  0.085  0.020   -0.104  0.057  0.010   
+  0.20    0.30    0.244     3.07    -0.078  0.113  0.019   -0.031  0.046  0.005   
+  0.30    0.40    0.342     3.86     0.146  0.219  0.052    0.031  0.046  0.005   
+  0.40    0.60    0.464     5.25    -0.149  0.374  0.103   -0.013  0.033  0.003   

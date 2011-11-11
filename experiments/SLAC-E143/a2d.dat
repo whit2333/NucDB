@@ -1,0 +1,40 @@
+EXPeriment      = SLAC-E-143                     
+REACtion        = e- DEUT  --> e- X                               
+Collaboration   = E143                      
+Author          = Abe et al. 
+REFerence       = SLAC-PUB-7753 (Feb 1998) 
+                  submitted to Phys.Rev.D.
+Additional info = Measurement of the virtual photon asymmetry A2d of 
+                  the deuteron in deep inelastic scattering polarised 
+                  electrons at incident energy of 29.1 GeV on a polarised 
+                  Ammonia target. Data cover the kinematical x range 0.02
+                  to 0.75 and  Q**2 from  0.5 to 10 Gev**2;
+                  This final data supersedes those given in previous papers
+                  Phys.Rev.Lett.74(95)346, Phys.Lett.B364(95)61,
+                  Phys.Rev.Lett.75(95)25, Phys.Rev.Lett.76(96)587 and
+                  Phys.Rev.Lett.78(97)815.
+
+=============================================================
+
+  A2d at mean Q**2 (for Q**2 > 1 GeV**2 data)
+  
+  W**2 > 4 GeV**2  (DIS region)
+  except for highest x bin which is the W**2 < 4 (resonance region)
+ 
+  Additional normalisation uncertainty = 4.9%.
+
+    x      x       x     Q**2      A2d       Errors     
+   min    max     mean  GeV**2             stat    sys 
+ 
+  0.029  0.047   0.038   1.49     0.070   0.045   0.010
+  0.047  0.075   0.060   2.01    -0.025   0.028   0.006
+  0.075  0.120   0.095   2.60     0.008   0.032   0.010
+  0.120  0.193   0.152   3.21     0.005   0.045   0.016
+  0.193  0.310   0.241   3.77     0.078   0.072   0.020
+  0.310  0.498   0.378   4.22    -0.079   0.144   0.017
+  0.498  0.799   0.595   4.56     0.327   0.390   0.044
+  0.075  0.120   0.101   3.77     0.024   0.046   0.009 
+  0.120  0.193   0.154   4.97    -0.007   0.03    0.011
+  0.193  0.310   0.242   6.37    -0.043   0.043   0.015
+  0.310  0.498   0.381   7.76     0.000   0.073   0.014
+  0.498  0.799   0.584   8.86     0.235   0.183   0.030

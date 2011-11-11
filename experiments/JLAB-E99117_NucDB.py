@@ -52,7 +52,6 @@ if __name__ == "__main__":
         experiment.AddMeasurement(A1n)
     A1n.ClearDataPoints()
     A1n.fColor=6
-
     extractor1 = JLABE99117Extractor()
     extractor1.SetMeasurement(A1n)
     extractor1.SetInputFile("experiments/JLAB-E99117/plain.txt")
@@ -124,6 +123,161 @@ if __name__ == "__main__":
     extractor4.Initialize()
     extractor4.ExtractAllValues()
     A2He3.BuildGraph()
+
+    g1He3OverF1He3 = experiment.GetMeasurement("g1He3/F1He3")
+    if not g1He3OverF1He3 :
+        g1He3OverF1He3 = NucDBMeasurement("g1He3/F1He3","g_{1}^{He3}/F_{1}^{He3}")
+        experiment.AddMeasurement(g1He3OverF1He3)
+    g1He3OverF1He3.ClearDataPoints()
+    g1He3OverF1He3.fColor=6
+    extractor7 = JLABE99117Extractor()
+    extractor7.SetMeasurement(g1He3OverF1He3)
+    extractor7.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
+    extractor7.linestoskip=36
+    extractor7.NumberOfLines=38-36
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor7.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor7.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor7.Initialize()
+    extractor7.ExtractAllValues()
+    g1He3OverF1He3.BuildGraph()
+
+    g2He3OverF2He3 = experiment.GetMeasurement("g2He3/F2He3")
+    if not g2He3OverF2He3 :
+        g2He3OverF2He3 = NucDBMeasurement("g2He3/F2He3","g_{2}^{He3}/F_{2}^{He3}")
+        experiment.AddMeasurement(g2He3OverF2He3)
+    g2He3OverF2He3.ClearDataPoints()
+    g2He3OverF2He3.fColor=6
+    extractor8 = JLABE99117Extractor()
+    extractor8.SetMeasurement(g2He3OverF2He3)
+    extractor8.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
+    extractor8.linestoskip=49
+    extractor8.NumberOfLines=51-49
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor8.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor8.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor8.Initialize()
+    extractor8.ExtractAllValues()
+    g2He3OverF2He3.BuildGraph()
+
+    g1He3 = experiment.GetMeasurement("g1He3")
+    if not g1He3 :
+        g1He3 = NucDBMeasurement("g1He3","g_{1}^{He3}")
+        experiment.AddMeasurement(g1He3)
+    g1He3.ClearDataPoints()
+    g1He3.fColor=6
+    extractor9 = JLABE99117Extractor()
+    extractor9.SetMeasurement(g1He3)
+    extractor9.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
+    extractor9.linestoskip=62
+    extractor9.NumberOfLines=64-62
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor9.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor9.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor9.Initialize()
+    extractor9.ExtractAllValues()
+    g1He3.BuildGraph()
+
+    g2He3 = experiment.GetMeasurement("g2He3")
+    if not g2He3 :
+        g2He3 = NucDBMeasurement("g2He3","g_{2}^{He3}")
+        experiment.AddMeasurement(g2He3)
+    g2He3.ClearDataPoints()
+    g2He3.fColor=6
+    extractor10 = JLABE99117Extractor()
+    extractor10.SetMeasurement(g2He3)
+    extractor10.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
+    extractor10.linestoskip=75
+    extractor10.NumberOfLines=77-75
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor10.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor10.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor10.Initialize()
+    extractor10.ExtractAllValues()
+    g2He3.BuildGraph()
+
+   # repeat of same data from E01012????? 
+    A1n = experiment.GetMeasurement("A1n")
+    if not A1n :
+        A1n = NucDBMeasurement("A1n","A_{1}^{n}")
+        experiment.AddMeasurement(A1n)
+    A1n.ClearDataPoints()
+    A1n.fColor=6
+    extractor11 = JLABE99117Extractor()
+    extractor11.SetMeasurement(A1n)
+    extractor11.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
+    extractor11.linestoskip=88
+    extractor11.NumberOfLines=90-88
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor11.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor11.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor11.Initialize()
+    extractor11.ExtractAllValues()
+    A1n.BuildGraph()
+
+
+    A2n = experiment.GetMeasurement("A2n")
+    if not A2n :
+        A2n = NucDBMeasurement("A2n","A_{2}^{n}")
+        experiment.AddMeasurement(A2n)
+    A2n.ClearDataPoints()
+    A2n.fColor=6
+    extractor12 = JLABE99117Extractor()
+    extractor12.SetMeasurement(A2n)
+    extractor12.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
+    extractor12.linestoskip=101
+    extractor12.NumberOfLines=103-101
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor12.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor12.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor12.Initialize()
+    extractor12.ExtractAllValues()
+    A2n.BuildGraph()
+
+    # Repeat of same data from E01012
+    g1nOverF1n = experiment.GetMeasurement("g1n/F1n")
+    if not g1nOverF1n :
+        g1nOverF1n = NucDBMeasurement("g1n/F1n","g_{1}^{n}/F_{1}^{n}")
+        experiment.AddMeasurement(g1nOverF1n)
+    g1nOverF1n.ClearDataPoints()
+    g1nOverF1n.fColor=6
+    extractor13 = JLABE99117Extractor()
+    extractor13.SetMeasurement(g1nOverF1n)
+    extractor13.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
+    extractor13.linestoskip=114
+    extractor13.NumberOfLines=116-114
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor13.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor13.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor13.Initialize()
+    extractor13.ExtractAllValues()
+    g1nOverF1n.BuildGraph()
+
+    g2nOverF2n = experiment.GetMeasurement("g2n/F2n")
+    if not g2nOverF2n :
+        g2nOverF2n = NucDBMeasurement("g2n/F2n","g_{2}^{n}/F_{2}^{n}")
+        experiment.AddMeasurement(g2nOverF2n)
+    g2nOverF2n.ClearDataPoints()
+    g2nOverF2n.fColor=6
+    extractor14 = JLABE99117Extractor()
+    extractor14.SetMeasurement(g2nOverF2n)
+    extractor14.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
+    extractor14.linestoskip=114
+    extractor14.NumberOfLines=116-114
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor14.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor14.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor14.Initialize()
+    extractor14.ExtractAllValues()
+    g2nOverF2n.BuildGraph()
 
     g1n = experiment.GetMeasurement("g1n")
     if not g1n :

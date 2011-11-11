@@ -1,0 +1,55 @@
+EXPeriment      = SLAC-E-143                     
+REACtion        = e- DEUT  --> e- X                               
+Collaboration   = E143                      
+Author          = Abe et al. 
+REFerence       = SLAC-PUB-7753 (Feb 1998) 
+                  submitted to Phys.Rev.D.
+Additional info = Measurement of the virtual photon asymmetry A1p of 
+                  the deuteron in deep inelastic scattering polarised 
+                  electrons at incident energies of 9.7, 16.2 and 
+                  29.1 GeV on a polarised Ammonia target. Data cover the 
+                  kinematical x range 0.024 to 0.75 and  Q**2 from  0.5
+                  to 10 Gev**2;
+                  This final data supersedes those given in previous papers
+                  Phys.Rev.Lett.74(95)346, Phys.Lett.B364(95)61,
+                  Phys.Rev.Lett.75(95)25, Phys.Rev.Lett.76(96)587 and
+                  Phys.Rev.Lett.78(97)815.
+
+=============================================================
+
+  A1d at mean Q**2 (for Q**2 > 1 GeV**2 data)
+  
+  W**2 > 4 GeV**2  (DIS region)
+  Additional normalisation uncertainty = 4.9.
+
+   x     Q**2     A1d       Errors     
+        GeV**2           stat     sys 
+
+ 0.031   1.27     0.050   0.040   0.008
+ 0.035   1.40     0.002   0.028   0.007
+ 0.039   1.52     0.059   0.026   0.007
+ 0.044   1.65    -0.019   0.025   0.006
+ 0.049   1.78    -0.016   0.024   0.005
+ 0.056   1.91     0.023   0.023   0.005
+ 0.063   2.04     0.019   0.022   0.004
+ 0.071   2.19     0.028   0.022   0.004
+ 0.079   2.41     0.024   0.022   0.004
+ 0.090   2.55     0.080   0.022   0.004
+ 0.101   2.85     0.063   0.022   0.004
+ 0.113   3.13     0.058   0.022   0.005
+ 0.128   3.41     0.128   0.023   0.005
+ 0.144   3.71     0.154   0.024   0.006
+ 0.162   4.03     0.086   0.026   0.007
+ 0.182   4.34     0.204   0.027   0.008
+ 0.205   4.15     0.123   0.027   0.010
+ 0.230   4.37     0.142   0.030   0.011
+ 0.259   5.26     0.071   0.038   0.011
+ 0.292   5.53     0.245   0.043   0.013
+ 0.329   6.01     0.308   0.052   0.015
+ 0.370   6.29     0.319   0.061   0.016
+ 0.416   6.56     0.258   0.074   0.018
+ 0.468   6.79     0.383   0.093   0.019
+ 0.526   7.72     0.456   0.135   0.022
+ 0.592   7.97     0.159   0.182   0.023
+ 0.666   9.26     0.423   0.284   0.024
+ 0.749   9.52     0.769   0.443   0.039

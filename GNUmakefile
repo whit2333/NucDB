@@ -81,16 +81,17 @@ doc:
 .PHONY : clean printstuff doc snapshot database databaseclean
 
 database:
+	python experiments/OLDSLAC_NucDB.py
+	python experiments/SLAC-E142_NucDB.py
 	python experiments/SLAC-E143_NucDB.py
 	python experiments/SLAC-E155_NucDB.py
 	python experiments/SLAC-E154_NucDB.py
-	python experiments/OLDSLAC_NucDB.py
-	python experiments/RSS_NucDB.py
-	python experiments/SMC_NucDB.py
-	python experiments/JLAB-E94010_NucDB.py
-	python experiments/CLAS_NucDB.py
 	python experiments/EMC_NucDB.py
-	python experiments/HERMES-nucDB.py
+	python experiments/SMC_NucDB.py
+	python experiments/HERMES_NucDB.py
+	python experiments/CLAS_NucDB.py
+	python experiments/RSS_NucDB.py
+	python experiments/JLAB-E94010_NucDB.py
 	python experiments/JLAB-E99117_NucDB.py
 
 databaseclean:

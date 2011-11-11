@@ -50,7 +50,6 @@ if __name__ == "__main__":
         experiment.AddMeasurement(g1p)
     g1p.ClearDataPoints()
     g1p.fColor=6
-
     extractor1 = HERMESExtractor()
     extractor1.SetMeasurement(g1p)
     extractor1.SetInputFile("experiments/HERMES/g1p")
@@ -64,103 +63,143 @@ if __name__ == "__main__":
     extractor1.ExtractAllValues()
     g1p.BuildGraph()
     
-    #g1nOverF1n = experiment.GetMeasurement("g1n/F1n")
-    #if not g1nOverF1n :
-        #g1nOverF1n = NucDBMeasurement("g1n/F1n","g_{1}^{n}/F_{1}^{n}")
-        #experiment.AddMeasurement(g1nOverF1n)
-    #g1nOverF1n.ClearDataPoints()
-    #g1nOverF1n.fColor=6
-    #extractor2 = JLABE99117Extractor()
-    #extractor2.SetMeasurement(g1nOverF1n)
-    #extractor2.SetInputFile("experiments/JLAB-E99117/plain.txt")
-    #extractor2.linestoskip=23
-    #extractor2.NumberOfLines=25-23
-    #Xbjorken = NucDBBinnedVariable("x","x")
-    #Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    #extractor2.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    #extractor2.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
-    #extractor2.Initialize()
-    #extractor2.ExtractAllValues()
-    #g1nOverF1n.BuildGraph()
-
-    #A1He3 = experiment.GetMeasurement("A1He3")
-    #if not A1He3 :
-        #A1He3 = NucDBMeasurement("A1He3","A_{1}^{He3}")
-        #experiment.AddMeasurement(g1nOverF1n)
-    #A1He3.ClearDataPoints()
-    #A1He3.fColor=6
-    #extractor3 = JLABE99117Extractor()
-    #extractor3.SetMeasurement(A1He3)
-    #extractor3.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    #extractor3.QsqMin=0.27
-    #extractor3.QsqMax=0.5
-    #extractor3.linestoskip=10
-    #extractor3.NumberOfLines=12-10
-    #Xbjorken = NucDBBinnedVariable("x","x")
-    #Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    #extractor3.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    #extractor3.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
-    #extractor3.Initialize()
-    #extractor3.ExtractAllValues()
-    #A1He3.BuildGraph()
-
-    #A2He3 = experiment.GetMeasurement("A1He3")
-    #if not A2He3 :
-        #A2He3 = NucDBMeasurement("A2He3","A_{2}^{He3}")
-        #experiment.AddMeasurement(g1nOverF1n)
-    #A2He3.ClearDataPoints()
-    #A2He3.fColor=6
-    #extractor4 = JLABE99117Extractor()
-    #extractor4.SetMeasurement(A2He3)
-    #extractor4.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    #extractor4.linestoskip=23
-    #extractor4.NumberOfLines=25-23
-    #Xbjorken = NucDBBinnedVariable("x","x")
-    #Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    #extractor4.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    #extractor4.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
-    #extractor4.Initialize()
-    #extractor4.ExtractAllValues()
-    #A2He3.BuildGraph()
-
-    #g1n = experiment.GetMeasurement("g1n")
-    #if not g1n :
-        #g1n = NucDBMeasurement("g1n","g_{1}^{n}")
-        #experiment.AddMeasurement(g1n)
-    #g1n.ClearDataPoints()
-    #g1n.fColor=6
-    #extractor5 = JLABE99117Extractor()
-    #extractor5.SetMeasurement(g1n)
-    #extractor5.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    #extractor5.linestoskip=140
-    #extractor5.NumberOfLines=142-140
-    #Xbjorken = NucDBBinnedVariable("x","x")
-    #Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    #extractor5.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    #extractor5.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
-    #extractor5.Initialize()
-    #extractor5.ExtractAllValues()
-    #g1n.BuildGraph()
-
-    #g2n = experiment.GetMeasurement("g2n")
-    #if not g2n :
-        #g2n = NucDBMeasurement("g2n","g_{2}^{n}")
-        #experiment.AddMeasurement(g2n)
-    #g2n.ClearDataPoints()
-    #g2n.fColor=6
-    #extractor6 = JLABE99117Extractor()
-    #extractor6.SetMeasurement(g2n)
-    #extractor6.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    #extractor6.linestoskip=153
-    #extractor6.NumberOfLines=155-153
-    #Xbjorken = NucDBBinnedVariable("x","x")
-    #Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    #extractor6.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    #extractor6.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
-    #extractor6.Initialize()
-    #extractor6.ExtractAllValues()
-    #g2n.BuildGraph()
+    g1pOverF1p = experiment.GetMeasurement("g1p/F1p")
+    if not g1pOverF1p :
+        g1pOverF1p = NucDBMeasurement("g1p/F1p","g_{1}^{p}/F_{1}^{p}")
+        experiment.AddMeasurement(g1pOverF1p)
+    g1pOverF1p.ClearDataPoints()
+    g1pOverF1p.fColor=6
+    extractor2 = HERMESExtractor()
+    extractor2.iValueRow=2
+    extractor2.istatErr=3
+    extractor2.isysErr=4
+    extractor2.SetMeasurement(g1pOverF1p)
+    extractor2.SetInputFile("experiments/HERMES/g1p")
+    extractor2.linestoskip=25
+    extractor2.NumberOfLines=44-25
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor2.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor2.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor2.Initialize()
+    extractor2.ExtractAllValues()
+    g1pOverF1p.BuildGraph()
     
+    #Using data set with most bins .... @todo add all binning schemes?
+    A1p = experiment.GetMeasurement("A1p")
+    if not A1p :
+        A1p = NucDBMeasurement("A1p","A_{1}^{p}")
+        experiment.AddMeasurement(A1p)
+    A1p.ClearDataPoints()
+    A1p.fColor=6
+    extractor3 = HERMESExtractor()
+    extractor3.iValueRow=2
+    extractor3.istatErr=3
+    extractor3.isysErr=4
+    extractor3.SetMeasurement(A1p)
+    extractor3.SetInputFile("experiments/HERMES/a1pd.dat")
+    extractor3.linestoskip=26
+    extractor3.NumberOfLines=70-26
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor3.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor3.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor3.Initialize()
+    extractor3.ExtractAllValues()
+    A1p.BuildGraph()
+
+    #Using data set with most bins .... @todo add all binning schemes?
+    A1d = experiment.GetMeasurement("A1d")
+    if not A1d :
+        A1d = NucDBMeasurement("A1d","A_{1}^{d}")
+        experiment.AddMeasurement(A1d)
+    A1d.ClearDataPoints()
+    A1d.fColor=6
+    extractor4 = HERMESExtractor()
+    extractor4.iValueRow=6
+    extractor4.istatErr=7
+    extractor4.isysErr=8
+    extractor4.SetMeasurement(A1d)
+    extractor4.SetInputFile("experiments/HERMES/a1pd.dat")
+    extractor4.linestoskip=26
+    extractor4.NumberOfLines=70-26
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor4.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor4.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor4.Initialize()
+    extractor4.ExtractAllValues()
+    A1d.BuildGraph()
+
+    #Using data set with most bins .... @todo add all binning schemes?
+    g1p = experiment.GetMeasurement("g1p")
+    if not g1p :
+        g1p = NucDBMeasurement("g1p","g_{1}^{p}")
+        experiment.AddMeasurement(A1p)
+    #g1p.ClearDataPoints()
+    g1p.fColor=6
+    extractor5 = HERMESExtractor()
+    extractor5.iValueRow=2
+    extractor5.istatErr=3
+    extractor5.isysErr=4
+    extractor5.SetMeasurement(g1p)
+    extractor5.SetInputFile("experiments/HERMES/g1pd.dat")
+    extractor5.linestoskip=26
+    extractor5.NumberOfLines=70-26
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor5.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor5.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor5.Initialize()
+    extractor5.ExtractAllValues()
+    g1p.BuildGraph()
+
+    #Using data set with most bins .... @todo add all binning schemes?
+    g1d = experiment.GetMeasurement("g1d")
+    if not g1d :
+        g1d = NucDBMeasurement("g1d","g_{1}^{d}")
+        experiment.AddMeasurement(g1d)
+    #A1d.ClearDataPoints()
+    g1d.fColor=6
+    extractor6 = HERMESExtractor()
+    extractor6.iValueRow=6
+    extractor6.istatErr=7
+    extractor6.isysErr=8
+    extractor6.SetMeasurement(g1d)
+    extractor6.SetInputFile("experiments/HERMES/g1pd.dat")
+    extractor6.linestoskip=26
+    extractor6.NumberOfLines=70-26
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor6.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor6.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor6.Initialize()
+    extractor6.ExtractAllValues()
+    g1d.BuildGraph()
+
+    #Using data set with most bins .... @todo add all binning schemes?
+    g1n = experiment.GetMeasurement("g1n")
+    if not g1n :
+        g1n = NucDBMeasurement("g1n","g_{1}^{n}")
+        experiment.AddMeasurement(g1n)
+    g1n.ClearDataPoints()
+    g1n.fColor=6
+    extractor7 = HERMESExtractor()
+    extractor7.iValueRow=2
+    extractor7.istatErr=3
+    extractor7.isysErr=4
+    extractor7.SetMeasurement(g1n)
+    extractor7.SetInputFile("experiments/HERMES/g1n.dat")
+    extractor7.linestoskip=27
+    extractor7.NumberOfLines=71-27
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor7.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
+    extractor7.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor7.Initialize()
+    extractor7.ExtractAllValues()
+    g1n.BuildGraph()
+
     experiment.Print()
     manager.SaveExperiment(experiment)
 

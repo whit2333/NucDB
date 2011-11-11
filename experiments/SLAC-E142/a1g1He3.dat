@@ -1,0 +1,25 @@
+EXPeriment      = SLAC-E-142                     
+REACtion        = e- HE3  --> e- X                               
+Collaboration   = E142                      
+Author          = Anthony et al. 
+REFerence       = Phys.Rev.D54(96)6620
+Additional info = Measurement of the virtual photon asymmetry A1(HE) and the
+                  spin-dependent structure function G1(HE) in deep inelastic
+                  scattering polarised electrons at incident energies of 19.42, 
+                  22.66 and 25.51 GeV on a polarised Helium-3 target. Data cover 
+                  the kinematical x range 0.03 to 0.6 at a mean Q^2 of 2  GeV^2.
+
+-------------------------------------------------------------------------------
+  
+     x      x      x      Q^2     A1(HE)     Errors        G1(HE)     Errors    
+    min    max    mean   GeV^2             stat    sys             stat    sys
+
+   0.03   0.04   0.035    1.1    -0.0264  0.0168  0.0054   -0.248  0.159  0.055 
+   0.04   0.06   0.050    1.2    -0.0238  0.0102  0.0039   -0.168  0.072  0.027 
+   0.06   0.10   0.082    1.8    -0.0317  0.0081  0.0048   -0.146  0.038  0.020  
+   0.10   0.15   0.124    2.5    -0.0447  0.0083  0.0068   -0.141  0.027  0.018 
+   0.15   0.20   0.175    3.1    -0.0463  0.0098  0.0094   -0.105  0.023  0.014
+   0.20   0.30   0.246    3.7    -0.0333  0.0099  0.0121   -0.051  0.016  0.007 
+   0.30   0.40   0.343    4.4    -0.0003  0.0172  0.0220    0.000  0.017  0.004 
+   0.40   0.60   0.466    5.5    -0.0145  0.0301  0.0199   -0.007  0.014  0.002    
+
