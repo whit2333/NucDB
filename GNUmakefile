@@ -90,7 +90,6 @@ database:
 	python experiments/JLAB-E94010_NucDB.py
 	python experiments/CLAS_NucDB.py
 
-
 databaseclean:
 	rm data/NucDB.root
 
