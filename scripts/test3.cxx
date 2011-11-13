@@ -23,14 +23,14 @@ Int_t test3() {
 
    leg->AddEntry(F2p->fGraph,Form("%s %s",F2p->fExperiment.Data(),F2p->GetTitle() ),"ep");
 
-   F2pQsq1->SetDataPoints(F2p->FilterWithBin(Qsq));
+   F2pQsq1->AddDataPoints(F2p->FilterWithBin(Qsq));
    F2pQsq1->BuildGraph();
    F2pQsq1->fGraph->SetMarkerColor(4);
    F2pQsq1->fGraph->SetLineColor(4);
    F2pQsq1->fGraph->Draw("p");
    leg->AddEntry(F2pQsq1->fGraph,Form("%s %s",F2p->fExperiment.Data(),F2pQsq1->GetTitle() ),"ep");
 
-   F2pQsq2->SetDataPoints(F2p->FilterWithBin(Qsq2));
+   F2pQsq2->AddDataPoints(F2p->FilterWithBin(Qsq2));
    F2pQsq2->BuildGraph();
    F2pQsq2->fGraph->SetMarkerColor(2);
    F2pQsq2->fGraph->SetLineColor(2);
