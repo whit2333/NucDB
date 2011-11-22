@@ -93,6 +93,7 @@ database:
 	python experiments/RSS_NucDB.py
 	python experiments/JLAB-E94010_NucDB.py
 	python experiments/JLAB-E99117_NucDB.py
+	python experiments/JLAB_E00108_NucDB.py
 
 databaseclean:
 	rm data/NucDB.root

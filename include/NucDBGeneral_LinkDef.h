@@ -16,7 +16,11 @@
 #pragma link C++ class NucDBMeasurement+;
 #pragma link C++ class NucDBExperiment+;
 
-//#pragma link C++ function sane_pol_(double * ,double * ,double * ,int * ,int * ,double * )+;
-//#pragma link C++ enum  InSANEPDFBase::InSANEPartonFlavor;
+#pragma link C++ class NucDBUnit+;
+#pragma link C++ class NucDBEnergyUnit+;
+#pragma link C++ class NucDBMomentumUnit+;
+#pragma link C++ class NucDBMassUnit+;
+#pragma link C++ class NucDBXSectionUnit+;
+
 
 #endif

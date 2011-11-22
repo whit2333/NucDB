@@ -18,19 +18,19 @@ Int_t E94010() {
 //    dsigi->BuildGraph("nu");
 //    dsigi->fGraph->Draw("ap");
 
-   dsigi_low->SetDataPoints(dsigi->FilterWithBin(EbeamBin));
+   dsigi_low->AddDataPoints(dsigi->FilterWithBin(EbeamBin));
    dsigi_low->BuildGraph("nu");
    dsigi_low->fGraph->SetMarkerColor(1);
    dsigi_low->fGraph->SetLineColor(1);
    dsigi_low->fGraph->Draw("ap");
 
-   dsigf_low->SetDataPoints(dsigf->FilterWithBin(EbeamBin));
+   dsigf_low->AddDataPoints(dsigf->FilterWithBin(EbeamBin));
    dsigf_low->BuildGraph("nu");
    dsigf_low->fGraph->SetMarkerColor(2);
    dsigf_low->fGraph->SetLineColor(2);
    dsigf_low->fGraph->Draw("p");
 
-   dsigfc_low->SetDataPoints(dsigfc->FilterWithBin(EbeamBin));
+   dsigfc_low->AddDataPoints(dsigfc->FilterWithBin(EbeamBin));
    dsigfc_low->BuildGraph("nu");
    dsigfc_low->fGraph->SetMarkerColor(3);
    dsigfc_low->fGraph->SetLineColor(3);

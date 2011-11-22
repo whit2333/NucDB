@@ -8,12 +8,27 @@
 #include "TList.h"
 #include "NucDBExperiments.h"
 #include "TFile.h"
-
+#include "NucDBUnits.h"
 
 /** Database Manager 
  *
  */
 class NucDBManager : public TObject {
+protected:
+   NucDBManager() {
+      fStandardUnits.Clear();
+      fStandardUnits.Add(new NucDBEnergyUnit());
+      fStandardUnits.Add(new NucDBMomentumUnit());
+      fStandardUnits.Add(new NucDBMassUnit());
+      fStandardUnits.Add(new NucDBXSectionUnit());
+   
+      fSQLServer = TSQLServer::Connect("mysql://quarks.temple.edu/nuclearDB", "bjorken", "drell");
+      if(!fSQLServer) std::cout << " xxxxxx FAILED TO CONNECT TO SERVER !!! \n";
+      fFile = 0;
+      fFile = new TFile("data/NucDB.root","UPDATE");
+   }
+
+
 public :
    static NucDBManager * GetManager(){
       if(!fgDBManager) fgDBManager = new NucDBManager();
@@ -150,19 +165,16 @@ public :
 
    TSQLServer * GetServer(){return(fSQLServer);}
 
+
+
 protected :
    TSQLServer * fSQLServer;
    TSQLRow *row;
    TSQLResult *res;
 
-   static NucDBManager * fgDBManager;
+   TList fStandardUnits;
 
-   NucDBManager() {
-      fSQLServer = TSQLServer::Connect("mysql://quarks.temple.edu/nuclearDB", "bjorken", "drell");
-      if(!fSQLServer) std::cout << " xxxxxx FAILED TO CONNECT TO SERVER !!! \n";
-      fFile = 0;
-      fFile = new TFile("data/NucDB.root","UPDATE");
-   }
+   static NucDBManager * fgDBManager;
 
 
 ClassDef(NucDBManager,1)

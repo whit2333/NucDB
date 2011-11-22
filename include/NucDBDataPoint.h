@@ -5,6 +5,7 @@
 #include "TObject.h"
 #include "TList.h"
 #include <iostream>
+#include "NucDBUnits.h"
 
 /** A Discrete variable stored in a single integer value
  *  
@@ -161,11 +162,13 @@ protected:
 ClassDef(NucDBErrorBar,1)
 };
 
+
 /** Base class for a data point
  */
 class NucDBDataPoint : public TObject {
 public :
    NucDBDataPoint(Double_t val=0.0, Double_t err=0.0) {
+      fUnits = 0;
       fValue = val;
       fDimension=1;
       fDiscreteVariables.Clear();
@@ -212,6 +215,8 @@ public :
       }
       return(0);
    }
+
+   NucDBUnit * fUnits; //->
 
 ClassDef(NucDBDataPoint,1)
 };

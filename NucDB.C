@@ -169,6 +169,28 @@ Additional info : Measurement of R (R = sig(L)/sig(T)) in deep inelastic
  */ 
 /*! \page tutorial A Brief Tutorial
 
+   \section usage Using NucDB 
+
+   \subsection themanager The Manager
+   The singleton class for database management. 
+   \include usage.cxx
+   
+   See \ref NucDBManager for complete doc.
+
+   \subsection expandmeas Experiments and Measurements
+   See \ref NucDBExperiment and \ref NucDBMeasurement for complete doc.
+
+   \section usageexamples Examples demonstrating usage
+
+   \subsection example1 F2p
+   Plot the unpolarized structure fucntion \f$ F_2^p(x) \f$.
+   From examples/F2p.cxx
+   \include F2p.cxx
+   
+   \subsection example2 \ref A1p.cxx
+   Plot the virtual Compton scattering asymmetry \f$ A_1^p(x) \f$..
+   From examples/A1p.cxx
+   \include A1p.cxx
 
   
  */ 
