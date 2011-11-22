@@ -28,30 +28,36 @@
     - MySQL database access
 
    \section git Download the code
-
+Grab it from the git repository with the following command:
+\code
    git clone http://quarks.temple.edu/~git/NucDB.git
+\endcode
 
    \section envvariables Configure your environment
-   put thins in your $HOME/.rootlogon.C
-\code
-  /// NucDB Libraries
-  gSystem->AddIncludePath("-I${NucDB_DIR}/include");
-  gSystem->Load("${NucDB_DIR}/lib/libNucDB.so");
-\endcode
-In your $HOME/.rootlogon.py you might want to add something like this
-\code 
-from ROOT import gROOT,gSystem
-gSystem.Load( 'libNucDB' )
-\endcode
+
       Add lib directory to $LD_LIBRARY_PATH and python directory to $PYTHON_PATH in your $HOME/.bashrc
-\code
+   \code
 # NucDB
   export NucDB_DIR=$HOME/work/NucDB 
   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NucDB_DIR/lib
-  export PYTHON_PATH=$PYTHON_PATH:$NucDB_DIR/python    
-\endcode
+  export PYTHON_PATH=$PYTHON_PATH:$NucDB_DIR/python
+   \endcode
+   \section rootlogon Configure your ROOT logon scripts
 
-   \section compile  Compile and Build
+   Put thins in your $HOME/.rootlogon.C
+   \code
+  /// NucDB Libraries
+  gSystem->AddIncludePath("-I$NucDB_DIR/include");
+  gSystem->Load("$NucDB_DIR/lib/libNucDB.so");
+   \endcode
+   In your $HOME/.rootlogon.py you might want to add something like this
+   \code 
+   from ROOT import gROOT,gSystem
+   gSystem.Load( 'libNucDB' )
+   \endcode
+
+
+   \section compile  Compile and Build Database
    Compile and build the database
    \code
    make
