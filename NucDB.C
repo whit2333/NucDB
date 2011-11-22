@@ -23,10 +23,18 @@
 /*! \page install Installation
 
    \section requirements Requirements 
-    - ROOT
+    - ROOT ( cd $ROOTSYS; ./configure --enable-python --enable-mysql ; make)
     - Python
     - MySQL database access
-
+    \subsection easyinstallopt Easy install (optional)
+    - # sudo apt-get install python-setuptools
+    See <a href="http://mg.pov.lt/blog/easy-easy-install.html"> easyinstall setup </a>
+\code
+   # easy_install
+   # directions from http://mg.pov.lt/blog/easy-easy-install.html
+   export PYTHONPATH=$HOME/py-lib:$PYTHONPATH 
+   alias easy_install="easy_install -s ~/bin -d ~/py-lib"
+\endcode
    \section git Download the code
 Grab it from the git repository with the following command:
 \code
@@ -39,8 +47,8 @@ Grab it from the git repository with the following command:
    \code
 # NucDB
   export NucDB_DIR=$HOME/work/NucDB 
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NucDB_DIR/lib
-  export PYTHON_PATH=$PYTHON_PATH:$NucDB_DIR/python
+  export LD_LIBRARY_PATH=$NucDB_DIR/lib:$ROOTSYS/lib:$LD_LIBRARY_PATH
+  export PYTHONPATH=$NucDB_DIR/python:$ROOTSYS/lib:$PYTHONPATH
    \endcode
    \section rootlogon Configure your ROOT logon scripts
 
@@ -52,6 +60,8 @@ Grab it from the git repository with the following command:
    \endcode
    In your $HOME/.rootlogon.py you might want to add something like this
    \code 
+   print 'o  Found .rootlogon.py !!!'
+   import os
    from ROOT import gROOT,gSystem
    gSystem.Load( 'libNucDB' )
    \endcode

@@ -5,7 +5,6 @@ gSystem.Load( 'libInSANE' )
 gSystem.Load( 'libNucDB' )
 
 import numpy as np
-import pylab as plt
 import matplotlib.mlab as mlab
 import sys
 import time
