@@ -1,0 +1,94 @@
+#!/bin/bash
+
+files=`cat analyses/MAID2007/mult1p_list.txt`
+measurements=`cat analyses/MAID2007/mult1p_meas.txt`
+titles=`cat analyses/MAID2007/mult1p_title.txt`
+i=0
+for file in $files ; do
+  j=0
+  for ameas in $measurements ; do
+    if [ "${i}" == "${j}" ] ; then
+      k=0
+      for atitle in $titles ; do
+        if [ "${i}" == "${k}" ] ; then
+          echo $file
+          echo $ameas
+          echo $atitle
+          python analyses/MAID2007_NucDB.py -f $file -m "$ameas" -t "$atitle" 
+        fi
+        k=`expr $k + 1`
+      done
+    fi
+    j=`expr $j + 1`
+  done
+  i=`expr $i + 1`
+done
+
+files=`cat analyses/MAID2007/mult1n_list.txt`
+measurements=`cat analyses/MAID2007/mult1n_meas.txt`
+titles=`cat analyses/MAID2007/mult1n_title.txt`
+i=0
+for file in $files ; do
+  j=0
+  for ameas in $measurements ; do
+    if [ "${i}" == "${j}" ] ; then
+      k=0
+      for atitle in $titles ; do
+        if [ "${i}" == "${k}" ] ; then
+          echo $file
+          echo $ameas
+          echo $atitle
+          python analyses/MAID2007_NucDB.py -f $file -m "$ameas" -t "$atitle" 
+        fi
+        k=`expr $k + 1`
+      done
+    fi
+    j=`expr $j + 1`
+  done
+  i=`expr $i + 1`
+done
+
+
+files=`cat analyses/MAID2007/mult3_list.txt`
+measurements=`cat analyses/MAID2007/mult3_meas.txt`
+titles=`cat analyses/MAID2007/mult3_title.txt`
+i=0
+for file in $files ; do
+  j=0
+  for ameas in $measurements ; do
+    if [ "${i}" == "${j}" ] ; then
+      k=0
+      for atitle in $titles ; do
+        if [ "${i}" == "${k}" ] ; then
+          echo $file
+          echo $ameas
+          echo $atitle
+          python analyses/MAID2007_NucDB.py -f $file -m "$ameas" -t "$atitle" 
+        fi
+        k=`expr $k + 1`
+      done
+    fi
+    j=`expr $j + 1`
+  done
+  i=`expr $i + 1`
+done
+
+
+
+
+files=`cat analyses/MAID2007/helamp08_list.txt`
+measurements=`cat analyses/MAID2007/helamp08_resonance.txt`
+i=0
+for file in $files ; do
+  j=0
+  for ameas in $measurements ; do
+    if [ "${i}" == "${j}" ] ; then
+          echo $file
+          echo $ameas
+          echo $atitle
+          python analyses/MAID2007_helamp08_NucDB.py -f $file -m "$ameas" -t "$ameas" 
+    fi
+    j=`expr $j + 1`
+  done
+  i=`expr $i + 1`
+done

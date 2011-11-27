@@ -1,0 +1,17 @@
+ Maid2007 analysis:  D13(1520) helicity asymmetry A
+
+      Q2             A              reference to c.s. data
+    0.400     -0.09      0.05           Joo02
+    0.525      0.12      0.11           Joo02
+    0.650      0.38      0.04           Joo02
+    0.750      0.47      0.10           Joo02
+    0.900      0.64      0.10           Joo02
+    1.150      0.75      0.12           Joo02
+    1.450      0.95      0.10           Joo02
+
+these results should be quoted as: 
+D. Drechsel, S.S. Kamalov, and L. Tiator, Eur. Phys. J. A 34, 69 (2007)
+
+references to cross section data:
+Joo02:  K. Joo et al. (JLab-CLAS), Phys. Rev. Lett. 88, 122001-1 (2002)
+

@@ -1,0 +1,15 @@
+ Maid2008 single-Q2 analysis:  P13(1720) helicity amplitudes in units of 10^(-3) GeV^(-1/2)
+
+ Update from 2007 analysis with data from K. Park et al, Phys. Rev. C 77, 015208 (2008).
+
+  Q2           A1/2           A3/2              S1/2            
+ 1.720    38.73    0.00    -99.97    0.00      7.70    0.00
+ 2.050    22.89    0.00   -104.18    0.00      5.89    0.00
+ 2.440     9.48    0.00    -90.06    0.00      6.16    1.39
+ 2.910    -1.56    0.00    -73.20    0.00      2.57    1.26
+ 3.480    -7.08    0.00    -70.16    0.00      1.54    0.37
+ 4.160   -25.64    0.00    -36.35    0.00     -2.10    1.12
+
+
+the helicity amplitudes data should be quoted as: 
+L. Tiator, D. Drechsel, S.S. Kamalov, M. Vanderhaeghen, Chinese Phys. C 33, 1069 (2009).

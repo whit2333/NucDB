@@ -10,7 +10,7 @@ builddir := lib
 PROJECTNAME := NucDB
 LIBNAME	  := NucDB
 
-SOLIBNAMES := NucDBGeneral
+SOLIBNAMES := NucDBGeneral NucDBFunctions
 LIBRARY	  = lib$(LIBNAME).so
 LIBMAJOR  = 1
 LIBOBJS	  = 1
@@ -47,7 +47,7 @@ F77FLAGS += -g -O2 -Wall -fPIC -Iinclude
 default : nucdb link
 
 nucdb : shared_libs
-	g++ -o nucdb NucDB.C $(CXXFLAGS) $(LDLIBS) lib/lib$(SOLIBNAMES).so.$(LIBMAJOR).$(LIBMINOR)
+	g++ -o nucdb NucDB.C $(CXXFLAGS) $(LDLIBS) $(SOLIBS)
 	mv nucdb bin/.
 
 
@@ -94,6 +94,7 @@ database:
 	python experiments/JLAB-E94010_NucDB.py
 	python experiments/JLAB-E99117_NucDB.py
 	python experiments/JLAB_E00108_NucDB.py
+	./analyses/maid_all
 
 databaseclean:
 	rm data/NucDB.root
@@ -117,9 +118,11 @@ printstuff :
 
 makefiledir := build
 include  $(makefiledir)/General.mk
+include  $(makefiledir)/Functions.mk
 
 link:
 	cd lib/ ; ln -sf libNucDBGeneral.so.$(LIBMAJOR).$(LIBMINOR) libNucDBGeneral.so
+	cd lib/ ; ln -sf libNucDBFunctions.so.$(LIBMAJOR).$(LIBMINOR) libNucDBFunctions.so
 	cd lib/ ; ln -sf libNucDB.so.$(LIBMAJOR).$(LIBMINOR) libNucDB.so
 # 	cp lib/*.so $(HOME)/lib/.
 # 	cp lib/*.so.* $(HOME)/lib/.

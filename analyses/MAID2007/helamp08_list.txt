@@ -1,0 +1,9 @@
+analyses/MAID2007/data/helamp08/D13_park16.dat
+analyses/MAID2007/data/helamp08/D15_park16.dat
+analyses/MAID2007/data/helamp08/D33_park16.dat
+analyses/MAID2007/data/helamp08/F15_park16.dat
+analyses/MAID2007/data/helamp08/P11_park16.dat
+analyses/MAID2007/data/helamp08/P13_park16.dat
+analyses/MAID2007/data/helamp08/S11f_park16.dat
+analyses/MAID2007/data/helamp08/S11s_park16.dat
+analyses/MAID2007/data/helamp08/S31_park16.dat

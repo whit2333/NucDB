@@ -1,0 +1,35 @@
+ Maid2007 single-Q2 analysis:  P33(1232) helicity amplitudes in units of 10^(-3) GeV^(-1/2)
+
+  Q2           A1/2           A3/2              S1/2             reference to c.s. data
+ 0.127  -155.81    0.71   -296.32    0.68     26.16    0.5          Mer01
+ 0.400  -126.38    1.50   -243.60    1.09     22.70    1.26         Joo02
+ 0.525  -114.03    1.40   -215.56    1.01     21.06    1.23         Joo02
+ 0.630  -107.62    0.78   -197.86    0.68     18.82    0.71         Ban02                  
+ 0.650  -100.85    1.39   -192.20    0.99     20.09    1.15         Joo02
+ 0.750   -92.85    1.46   -171.57    1.05     16.75    1.23         Joo02
+ 0.900   -81.75    1.11   -154.84    0.78     17.67    0.93         Joo02
+ 1.000   -70.27    1.49   -160.76    2.68     17.17    0.81         Lav04 
+ 1.150   -66.59    1.18   -126.34    0.81     15.20    1.05         Joo02
+ 1.450   -52.58    1.42   -100.18    0.97     12.19    1.31         Joo02
+ 2.781   -22.81    0.41    -42.42    0.41      5.73    0.38         Fro99
+ 3.000   -19.73    0.38    -36.76    0.36      4.99    0.30         Ung06
+ 3.500   -15.32    0.35    -29.12    0.33      4.03    0.31         Ung06
+ 4.030   -12.77    0.27    -23.80    0.25      4.62    0.34         Fro99
+ 4.200   -10.31    0.36    -21.74    0.35      3.30    0.34         Ung06
+ 5.000    -8.04    0.51    -15.72    0.53      2.51    0.42         Ung06
+ 6.000    -5.09    0.43    -10.72    0.41      1.36    0.51         Ung06
+
+
+the helicity amplitude data should be quoted as: 
+D. Drechsel, S.S. Kamalov, and L. Tiator, Eur. Phys. J. A 34, 69 (2007)
+
+references to cross section data:
+Fro99:  V.V. Frolov al. (JLab-Hall C), Phys. Rev. Lett. 82, 45 (1999)
+Mer01:  C. Mertz et al. (MIT-Bates), Phys. Rev. Lett. 86, 2963 (2001)
+Joo02:  K. Joo et al. (JLab-CLAS), Phys. Rev. Lett. 88, 122001-1 (2002)
+Ban02:  T. Bantes and R. Gothe (Bonn), private communication 2002
+Lav04:  G. Laveissiere et al. (JLab-Hall A), Phys. Rev. C 69, 045202 (2004)
+Ung06:  M. Ungaro et al. (JLab-CLAS), Phys. Rev. Lett. C 90, 112003 (2006)
+                  
+ 
+               

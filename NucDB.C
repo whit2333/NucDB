@@ -24,11 +24,11 @@
 
    \section requirements Requirements 
     - ROOT ( cd $ROOTSYS; ./configure --enable-python --enable-mysql ; make)
-    - Python
+    - Python (with modules:)
+      - numpy
+      - MySQLdb
     - MySQL database access
-    \subsection easyinstallopt Easy install (optional)
-    - # sudo apt-get install python-setuptools
-    See <a href="http://mg.pov.lt/blog/easy-easy-install.html"> easyinstall setup </a>
+    - easy_install (optional) See <a href="http://mg.pov.lt/blog/easy-easy-install.html"> easyinstall setup </a>
 \code
    # easy_install
    # directions from http://mg.pov.lt/blog/easy-easy-install.html

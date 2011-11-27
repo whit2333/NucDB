@@ -1,0 +1,12 @@
+analyses/MAID2007/data/mult1p/Maid2007_E0p_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_E1p_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_E2m_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_E2p_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_E3m_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_E3p_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_M1m_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_M1p_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_M2m_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_M2p_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_M3m_1p.dat
+analyses/MAID2007/data/mult1p/Maid2007_M3p_1p.dat

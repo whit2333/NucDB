@@ -1,11 +1,8 @@
 from ROOT import gROOT,gSystem
-gSystem.Load( 'libFoam' )
 gSystem.Load( 'libTreeViewer' )
-gSystem.Load( 'libInSANE' )
 gSystem.Load( 'libNucDB' )
 
 import numpy as np
-import matplotlib.mlab as mlab
 import sys
 import time
 import datetime

@@ -1,0 +1,18 @@
+ Maid2007 analysis:  P33(1232) Gm* form factors and E/M and S/M ratios
+              Gm*/3Gdipole are given in Ash convention.
+              
+      Q2       Gm*/3Gd              REM(%)             RSM(%)         reference to c.s. data
+    3.00    0.490 +/- 0.003   -1.673 +/- 0.412   -7.356 +/- 0.480         Ung06
+    3.50    0.451 +/- 0.003   -2.168 +/- 0.489   -7.233 +/- 0.561         Ung06
+    4.20    0.393 +/- 0.004   -4.644 +/- 0.669   -8.521 +/- 0.828         Ung06
+    5.00    0.343 +/- 0.005   -3.025 +/- 1.142  -10.211 +/- 1.413         Ung06
+    6.00    0.277 +/- 0.007   -4.750 +/- 1.612   -7.917 +/- 2.579         Ung06
+
+
+these results should be quoted as: 
+D. Drechsel, S.S. Kamalov, and L. Tiator, Eur. Phys. J. A 34, 69 (2007)
+
+references to cross section data:
+Ung06:  M. Ungaro et al. (JLab-CLAS), Phys. Rev. Lett. C 90, 112003 (2006)
+                  
+
