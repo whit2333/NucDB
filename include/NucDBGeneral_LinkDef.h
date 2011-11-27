@@ -12,12 +12,15 @@
 #pragma link C++ class NucDBBinnedVariable+;
 #pragma link C++ class NucDBErrorBar+;
 #pragma link C++ class NucDBDataPoint+;
+#pragma link C++ class NucDBDependentVariable+;
 
 #pragma link C++ class NucDBMeasurement+;
 #pragma link C++ class NucDBExperiment+;
 
 #pragma link C++ class NucDBUnit+;
+#pragma link C++ class NucDBInverseUnit+;
 #pragma link C++ class NucDBEnergyUnit+;
+#pragma link C++ class NucDBEnergyMeV+;
 #pragma link C++ class NucDBMomentumUnit+;
 #pragma link C++ class NucDBMassUnit+;
 #pragma link C++ class NucDBXSectionUnit+;

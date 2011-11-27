@@ -2,6 +2,7 @@
 #define NucDBUnits_HH
 #include "TNamed.h"
 #include "TList.h"
+#include "TString.h"
 
 /** Units  
  *
@@ -27,6 +28,17 @@ public:
    }
    virtual ~NucDBUnit(){ }
 
+   NucDBUnit& operator*=(const NucDBUnit& rhs){
+           TString name(Form("%s%s",this->GetName(),rhs.GetName()));
+	   TString title(Form("%s %s",this->GetTitle(),rhs.GetTitle()));
+	   //NucDBUnit combined(name.Data(),title.Data());
+	   this->SetNameTitle(name.Data(),title.Data());
+	   Double_t factor = this->GetConversionFactor();
+	   factor *=  rhs.GetConversionFactor() ;
+	   this->SetConversionFactor( factor );
+	   return *this;
+   }
+
 public:
    /** Returns conversion factor from natural units, \f$ (\hbar c)^2 = 0.38939129 GeV^2 mb \f$ */
    Double_t GetHbarCsquared(){return fhbarc2;}
@@ -46,6 +58,8 @@ public:
     */
    virtual Double_t ConvertToStandardUnits(Double_t val) { return(fConversionFactor*val); }
 
+   virtual Double_t  GetConversionFactor()const { return fConversionFactor ; }
+   void      SetConversionFactor(Double_t f) { fConversionFactor = f; }
 protected:
    Double_t fConversionFactor;
    Double_t fhbarc2;// GeV^2 mb
@@ -53,7 +67,27 @@ protected:
    Double_t fhbar; //GeV s
    Double_t fSpeedOfLight; // fm s
 
-ClassDef(NucDBUnit,1)
+ClassDef(NucDBUnit,2)
+};
+
+class NucDBInverseUnit : public NucDBUnit {
+	public:
+		NucDBInverseUnit(NucDBUnit * unit = 0){
+		   if(unit) {
+			   SetInvertedUnit(unit);
+		   }
+		}
+		~NucDBInverseUnit(){}
+
+        void SetInvertedUnit(NucDBUnit * unit){
+            if(!unit) printf(" Null unit to be inverted\n");
+	    else {
+		    SetNameTitle(Form("1/%s",unit->GetName()),Form("1/%s",unit->GetTitle()));
+	            fConversionFactor = 1.0/unit->GetConversionFactor();
+	    }
+	}
+
+ClassDef(NucDBInverseUnit,1)
 };
 
 /** Standard energy unit, GeV */
@@ -64,6 +98,16 @@ public:
    }
    virtual ~NucDBEnergyUnit(){ }
 ClassDef(NucDBEnergyUnit,1)
+};
+
+class NucDBEnergyMeV : public NucDBEnergyUnit {
+	public:
+		NucDBEnergyMeV(const char * n = "MeV",const char * t ="MeV"):NucDBEnergyUnit(n,t){
+		   fConversionFactor = 1.0/1000.0;
+		}
+		~NucDBEnergyMeV(){}
+
+ClassDef(NucDBEnergyMeV,1)
 };
 
 /** Standard momentum unit, GeV/c */
@@ -97,3 +141,5 @@ ClassDef(NucDBXSectionUnit,1)
 };
 
 #endif
+
+

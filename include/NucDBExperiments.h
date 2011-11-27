@@ -55,12 +55,12 @@ public:
    }
 
 
-   void PlotMeasurements(){
+   void PlotMeasurements(const char * var = "x"){
       TCanvas * c1 = new TCanvas( Form("%splots",GetName()),Form("%s plots",GetTitle() ) );
-      c1->Divide(2,2);
+      c1->Divide(2,fMeasurements.GetEntries()/2);
       for(int i =0; i<fMeasurements.GetEntries();i++) {
           c1->cd(i+1);
-          ((NucDBMeasurement*)fMeasurements.At(i))->BuildGraph();
+          ((NucDBMeasurement*)fMeasurements.At(i))->BuildGraph(var);
           ((NucDBMeasurement*)fMeasurements.At(i))->fGraph->Draw("ap");
       }
    }

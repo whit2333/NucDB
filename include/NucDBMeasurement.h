@@ -81,9 +81,10 @@ public:
    Int_t fNumberOfDataPoints;
    TList & GetDataPoints() {return(fDataPoints);}
 
+   TList * GetDataPointsList(){return &fDataPoints ;}
    TString fExperiment;
 
-protected : 
+//protected : 
    TList fDataPoints;
 
 public: 
@@ -101,7 +102,7 @@ public:
       fGraph=0;
       fGraph= new TGraphErrors(fNumberOfDataPoints);
       for(int i = 0; i < fNumberOfDataPoints;i++) {
-         NucDBDataPoint *point = (NucDBDataPoint *) fDataPoints.At(i);
+         NucDBDataPoint * point = (NucDBDataPoint *) fDataPoints.At(i);
          NucDBBinnedVariable * var = point->GetBinVariable(varName);
          if(i==0) fGraph->GetXaxis()->SetTitle(varName);
          fGraph->SetPoint(i,var->fMean,point->fValue);
@@ -113,7 +114,7 @@ public:
       fGraph->SetMarkerStyle(20);
       fGraph->SetLineStyle(1);
       fGraph->SetLineWidth(2);
-      
+      fGraph->GetXaxis()->SetTitle(varName);      
       return(fGraph);
    }
 

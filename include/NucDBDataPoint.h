@@ -24,6 +24,10 @@ class NucDBDiscreteVariable : public TNamed {
       std::cout << " " << GetName() << " = " << fValue << "\n";
    }
 
+   void SetUnit(NucDBUnit * u) { fUnit =u; }
+   NucDBUnit * GetUnit(){return fUnit;}
+	protected: 
+NucDBUnit * fUnit;//!  
 
 ClassDef(NucDBDiscreteVariable,2)
 };
@@ -104,7 +108,11 @@ public :
                 << "  " << fMinimum << " < " << GetName() << " < " << fMaximum << "\n";
    }
 
-ClassDef(NucDBBinnedVariable,2)
+   void SetUnit(NucDBUnit * u) { fUnit =u; }
+   NucDBUnit * GetUnit(){return fUnit;}
+NucDBUnit * fUnit;  //!
+
+ClassDef(NucDBBinnedVariable,3)
 };
 
 /** Base class for an error bar
@@ -168,7 +176,7 @@ ClassDef(NucDBErrorBar,1)
 class NucDBDataPoint : public TObject {
 public :
    NucDBDataPoint(Double_t val=0.0, Double_t err=0.0) {
-      fUnits = 0;
+      fUnit = 0;
       fValue = val;
       fDimension=1;
       fDiscreteVariables.Clear();
@@ -216,10 +224,24 @@ public :
       return(0);
    }
 
-   NucDBUnit * fUnits; //->
+   void AddBinVariable(NucDBBinnedVariable * var) { 
+      if( ! GetBinVariable(var->GetName()) ) {
+         fBinnedVariables.Add(var);
+      } else {
+         printf(" variable, %s, already exists",var->GetName());
+      }
 
-ClassDef(NucDBDataPoint,1)
+      
+   } 
+
+   void SetUnit(NucDBUnit * u) { fUnit =u; }
+   NucDBUnit * GetUnit(){return fUnit;}
+   NucDBUnit * fUnit;//! 
+
+
+ClassDef(NucDBDataPoint,2)
 };
 
 
 #endif
+
