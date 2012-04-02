@@ -40,7 +40,7 @@ class JLABE99117Extractor(NucDBRawDataExtractor):
 
 
 if __name__ == "__main__":
-    manager = NucDBManager.GetManager()
+    manager = NucDBManager.GetManager(1)
 
     experiment = manager.GetExperiment("JLAB_E99117")
     if not experiment :

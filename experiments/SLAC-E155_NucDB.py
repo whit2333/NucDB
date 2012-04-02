@@ -87,7 +87,7 @@ class SLACE155Extractorxg1n(SLACE155Extractor2):
         self.iValueRow=7
         self.iValueRowErr=8
 
-manager = NucDBManager.GetManager()
+manager = NucDBManager.GetManager(1)
 
 experiment = manager.GetExperiment("SLAC_E155")
 if not experiment :

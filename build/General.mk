@@ -6,6 +6,8 @@ GeneralLibObjs := lib/NucDBDataPoint.o \
                   lib/NucDBUnits.o \
                   lib/NucDBManager.o \
                   lib/NucDBDependentVariable.o \
+                  lib/NucDBCalculation.o \
+                  lib/NucDBPaper.o \
                   lib/NucDBExperiments.o
 
 
@@ -22,7 +24,7 @@ $(GeneralLibObjs) : $(builddir)/%.o : %.h
 
 $(srcdir)/$(GeneralLibName)Dict.cxx $(srcdir)/$(GeneralLibName)Dict.h : $(GeneralLibHead)\
        $(incdir)/$(GeneralLibName)_LinkDef.h 
-	rootcint -f $(srcdir)/$(GeneralLibName)Dict.cxx -c $(CXXFLAGS) -p -DDebug  \
+	rootcint -f $(srcdir)/$(GeneralLibName)Dict.cxx $(RCINTFLAGS)  \
 	$(GeneralLibHead)   $(incdir)/$(GeneralLibName)_LinkDef.h 
 	mv $(srcdir)/$(GeneralLibName)Dict.h $(incdir)/.
 #_____________________________________________________________________________/

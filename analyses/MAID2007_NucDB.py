@@ -35,7 +35,7 @@ class MAID2007Extractor(NucDBRawDataExtractor) :
 
 
 if __name__ == "__main__":
-    manager = NucDBManager.GetManager()
+    manager = NucDBManager.GetManager(1)
     file=' '
 #    file = 'analyses/MAID2007/data/mult1p/Maid2007_E0p_1p.dat'
 #    meas = 'E0+(p,1/2)'

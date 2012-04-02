@@ -38,7 +38,7 @@ class EMCExtractor(NucDBRawDataExtractor):
 
 
 if __name__ == "__main__":
-    manager = NucDBManager.GetManager()
+    manager = NucDBManager.GetManager(1)
 
     experiment = manager.GetExperiment("EMC")
     if not experiment :

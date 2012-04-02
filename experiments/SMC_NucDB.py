@@ -91,7 +91,7 @@ class SMCExtractorgXN(SMCExtractor) :
 
 
 if __name__ == "__main__":
-    manager = NucDBManager.GetManager()
+    manager = NucDBManager.GetManager(1)
 
     experiment = manager.GetExperiment("SMC")
     if not experiment :

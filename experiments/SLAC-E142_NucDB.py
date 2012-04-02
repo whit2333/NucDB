@@ -39,7 +39,7 @@ class SLACE142Extractor(NucDBRawDataExtractor):
         self.linesRead+=1
 
 if __name__ == "__main__":
-    manager = NucDBManager.GetManager()
+    manager = NucDBManager.GetManager(1)
     
     experiment = manager.GetExperiment("SLAC_E142")
     if not experiment :

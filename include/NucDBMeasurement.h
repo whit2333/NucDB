@@ -96,6 +96,15 @@ public:
       std::cout << "  fNumberOfDataPoints = " << fNumberOfDataPoints <<  "\n";
    }
 
+   void PrintData(){
+      Print();
+      for(int i=0; i<fDataPoints.GetEntries(); i++){
+         NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(i);
+	 std::cout << "[" << i << "] " << GetName();
+	 aPoint->Print();
+      }
+   }
+
    /** Build a graph with errors */
    TGraphErrors * BuildGraph(const char * varName = "x") {
       if(fGraph) delete fGraph;

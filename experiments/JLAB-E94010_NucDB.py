@@ -56,7 +56,7 @@ class JLABExtractorXSfc(JLABExtractor) :
         self.isysErr=6
         self.istatErr=5
 
-manager = NucDBManager.GetManager()
+manager = NucDBManager.GetManager(1)
 
 experiment = manager.GetExperiment("JLAB_E94010")
 if not experiment :

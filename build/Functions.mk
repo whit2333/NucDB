@@ -17,7 +17,7 @@ $(FunctionsLibObjs) : $(builddir)/%.o : %.h
 
 $(srcdir)/$(FunctionsLibName)Dict.cxx $(srcdir)/$(FunctionsLibName)Dict.h : $(FunctionsLibHead)\
        $(incdir)/$(FunctionsLibName)_LinkDef.h 
-	rootcint -f $(srcdir)/$(FunctionsLibName)Dict.cxx -c $(CXXFLAGS) -p -DDebug  \
+	rootcint -f $(srcdir)/$(FunctionsLibName)Dict.cxx $(RCINTFLAGS)  \
 	$(FunctionsLibHead)   $(incdir)/$(FunctionsLibName)_LinkDef.h 
 	mv $(srcdir)/$(FunctionsLibName)Dict.h $(incdir)/.
 #_____________________________________________________________________________/

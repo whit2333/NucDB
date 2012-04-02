@@ -63,7 +63,7 @@ class Pion2008Extractor(NucDBRawDataExtractor) :
 
 
 if __name__ == "__main__":
-    manager = NucDBManager.GetManager()
+    manager = NucDBManager.GetManager(1)
 
     experiment = manager.GetExperiment("JLAB_E00108")
     if not experiment :

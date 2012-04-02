@@ -8,9 +8,9 @@
 #include "TGraphErrors.h"
 #include "TCanvas.h"
 
-/** Base class for an experiment
+/** Base class for an experiment object.
  * 
- * An experiment includes all measured quantities.
+ * An experiment then includes all measured quantities as measurements.
  * The name should be the name used to query the database and the title
  * is used for display purposes.
  */
@@ -33,16 +33,16 @@ public:
       return(meas);
    }
 
-
+   TList * GetMeasurements(){ return(&fMeasurements); }
    
 protected: 
    TList fMeasurements;
+
 public:
    void AddMeasurement(NucDBMeasurement* meas){
       if(meas) meas->fExperiment = GetName();
       if(meas) fMeasurements.Add(meas);
    }
-
 
    void Print(){
       std::cout << "===================================\n";
@@ -53,6 +53,7 @@ public:
       for(int i =0; i<fMeasurements.GetEntries();i++)
           ((NucDBMeasurement*)fMeasurements.At(i))->Print();
    }
+
 
 
    void PlotMeasurements(const char * var = "x"){

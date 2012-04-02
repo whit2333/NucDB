@@ -19,12 +19,18 @@ LIBREVIS  = 0
 SOLIBS := $(SOLIBNAMES:%=lib/lib%.so.$(LIBMAJOR).$(LIBMINOR) )
 
 
+RCINTFLAGS += -c -DDebug 
+
 CPPFLAGS += $(shell root-config --cflags )
 CPPFLAGS += -Iinclude -I.
 #CPPFLAGS += -I$(shell lhapdf-config --incdir ) 
 #LDLIBS += $(shell lhapdf-config --libdir ) 
 CPPFLAGS += $(shell mysql_config --include ) 
-CPPFLAGS +=  -g -pipe  -D_LARGEFILE_SOURCE -fno-strict-aliasing
+CPPFLAGS +=  -g -pipe  
+#-D_LARGEFILE_SOURCE -fno-strict-aliasing
+
+CPPFLAGS += -D"NUCDB_DATA_DIR=\"$(shell echo ${NucDB_DATA_DIR})\"" 
+#RCINTFLAGS += -D'NUCDB_DATA_DIR=$(shell echo ${NucDB_DATA_DIR})' 
 
 #LDLIBS += $(shell lhapdf-config --ldflags)
 LDLIBS += $(shell root-config --ldflags)
@@ -95,6 +101,7 @@ database:
 	python experiments/JLAB-E99117_NucDB.py
 	python experiments/JLAB_E00108_NucDB.py
 	./analyses/maid_all
+	python analyses/LATTICE_NucDB.py
 
 databaseclean:
 	rm data/NucDB.root
@@ -105,12 +112,12 @@ snapshot:
 #git archive HEAD --format=tar | gzip >InSANE-`date +%m_%d_%Y_`.tar.gz
 
 clean:
-	rm src/*Dict.cxx
 	rm -rf lib/libNucDB*
 	rm -rf lib/InSANE*Dict.o
-	rm include/*Dict.h 
 	rm -rf lib/*.o
 	rm -rf bin/nucdb
+	rm -rf src/*Dict.cxx
+	rm -rf include/*Dict.h 
 
 printstuff : 
 	@echo $(SOLIBS)

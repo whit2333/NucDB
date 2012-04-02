@@ -76,7 +76,7 @@ class RSSExtractorA1p(RSSExtractor):
         self.iValueRowErr=22-1
 
 
-manager = NucDBManager.GetManager()
+manager = NucDBManager.GetManager(1)
 
 experiment = manager.GetExperiment("RSS")
 if not experiment :
@@ -197,6 +197,28 @@ A1Extractor.Initialize()
 A1Extractor.ExtractAllValues()
 A1p.BuildGraph()
 
+# from nucl-ex/0608003
+d2p = experiment.GetMeasurement("d2p")
+if not d2p :
+    d2p = NucDBMeasurement("d2p","d_{2}^{p}")
+    experiment.AddMeasurement(d2p)
+d2p.ClearDataPoints()
+d2p.fColor=8
+
+Qsquared = NucDBBinnedVariable("Qsquared","Q^{2}")
+
+d2p_data = NucDBDataPoint();
+d2p_data.fBinnedVariables.Add(Qsquared)
+
+Qsquared.SetBinValueSize(1.3,1.0)
+d2p_data.SetValue(0.0057)
+d2p_data.GetSystError().SetError(0.0007)
+d2p_data.GetStatError().SetError(0.0009)  
+d2p_data.CalculateTotalError();
+
+d2p.AddDataPoint(copy.deepcopy( d2p_data )) 
+
+d2p.BuildGraph("Qsquared")
 
 experiment.Print()
 manager.SaveExperiment(experiment)

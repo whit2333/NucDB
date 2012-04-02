@@ -48,7 +48,7 @@ class SLACE155ExtractorgXn(SLACE154Extractor):
         self.istatErr=9
 
 
-manager = NucDBManager.GetManager()
+manager = NucDBManager.GetManager(1)
 
 experiment = manager.GetExperiment("SLAC_E154")
 if not experiment :

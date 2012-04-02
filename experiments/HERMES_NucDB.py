@@ -38,7 +38,7 @@ class HERMESExtractor(NucDBRawDataExtractor):
 
 
 if __name__ == "__main__":
-    manager = NucDBManager.GetManager()
+    manager = NucDBManager.GetManager(1)
 
     experiment = manager.GetExperiment("HERMES")
     if not experiment :

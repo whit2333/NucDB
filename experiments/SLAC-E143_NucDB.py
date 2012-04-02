@@ -98,7 +98,7 @@ class SLACE143ExtractorA1p(NucDBRawDataExtractor):
         self.fCurrentDataPoint.Print()
 
 if __name__ == "__main__":
-    manager = NucDBManager.GetManager()
+    manager = NucDBManager.GetManager(1)
 
     experiment = manager.GetExperiment("SLAC_E143")
     if not experiment :

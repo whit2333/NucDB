@@ -42,7 +42,7 @@ class CLASExtractor(NucDBRawDataExtractor):
         self.linesRead+=1
 
 
-manager = NucDBManager.GetManager()
+manager = NucDBManager.GetManager(1)
 
 experiment = manager.GetExperiment("CLAS")
 if not experiment :

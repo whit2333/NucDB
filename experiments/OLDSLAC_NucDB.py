@@ -30,7 +30,7 @@ class OLDSLACExtractor(NucDBRawDataExtractor) :
         self.fCurrentDataPoint.CalculateTotalError()
         self.fCurrentDataPoint.Print()
 
-manager = NucDBManager.GetManager()
+manager = NucDBManager.GetManager(1)
 
 experiment = manager.GetExperiment("OLDSLAC")
 if not experiment :

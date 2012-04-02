@@ -24,10 +24,10 @@ class NucDBDiscreteVariable : public TNamed {
       std::cout << " " << GetName() << " = " << fValue << "\n";
    }
 
-   void SetUnit(NucDBUnit * u) { fUnit =u; }
-   NucDBUnit * GetUnit(){return fUnit;}
+   void SetUnit(NucDBUnit * u) { fUnit = *u; }
+   NucDBUnit * GetUnit(){return &fUnit;}
 	protected: 
-NucDBUnit * fUnit;//!  
+NucDBUnit fUnit;  
 
 ClassDef(NucDBDiscreteVariable,2)
 };
@@ -97,20 +97,23 @@ public :
       SetBinMinimum(val-size/2.0);
       SetBinMaximum(val+size/2.0);
    }
-
+//protected:
    Double_t fMinimum;
    Double_t fMaximum;
    Double_t fMean;
    Double_t fAverage;
 
+public:
    void Print() {
       std::cout << "  |" << GetName() << "|=" << fAverage << "       "
                 << "  " << fMinimum << " < " << GetName() << " < " << fMaximum << "\n";
    }
 
-   void SetUnit(NucDBUnit * u) { fUnit =u; }
-   NucDBUnit * GetUnit(){return fUnit;}
-NucDBUnit * fUnit;  //!
+   void SetUnit(NucDBUnit * u) { fUnit = *u; }
+   NucDBUnit * GetUnit(){return &fUnit;}
+
+//protected:   
+   NucDBUnit fUnit;  
 
 ClassDef(NucDBBinnedVariable,3)
 };
@@ -155,11 +158,13 @@ public:
    Double_t GetMinusError() const { return(fErrorMinus);}
    Double_t GetPlusError() const { return(fErrorPlus);}
 
+
    void Clear(){
       fTotalError=0.0;
       fErrorPlus=0.0;
       fErrorMinus=0.0;
    }
+
 
 protected:
    /// total = plus + minus
@@ -190,11 +195,18 @@ public :
    }
    ~NucDBDataPoint(){}
 
+   Double_t GetValue(){ return fValue ; }
+   void     SetValue(Double_t v) { fValue = v; }
+//protected:
    Double_t fValue;
 
    NucDBErrorBar fStatisticalError;
    NucDBErrorBar fSystematicError;
    NucDBErrorBar fTotalError;
+
+public:
+   NucDBErrorBar * GetStatError(){ return(&fStatisticalError); }   
+   NucDBErrorBar * GetSystError(){ return(&fSystematicError); }   
 
    /** Set the values of the total using the current
     *  systematic and statistical errors
@@ -213,7 +225,11 @@ public :
    TString fName;
 
    void Print(){
-      std::cout << fName.Data() << " = " << fValue << " += " << fTotalError.GetError() << "\n";
+      std::cout << fName.Data() << " = " << fValue << " +- " << fTotalError.GetError() << "\n";
+      for(int i=0; i<fBinnedVariables.GetEntries();i++) {
+         ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print(); 
+         
+      }
    }
    
    NucDBBinnedVariable* GetBinVariable(const char * name) {
