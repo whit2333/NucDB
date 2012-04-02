@@ -38,8 +38,9 @@ LDLIBS += $(shell root-config --ldflags)
 #LDLIBS += $(shell gsl-config --libs)
 LDLIBS += $(shell root-config --glibs --libs )
 #-lTreePlayer -lGeomPainter -lGed -lRGL -lEve -lEG 
-LDLIBS += -lg2c -lgfortran
 LDLIBS += $(shell mysql_config --libs) 
+LDLIBS += -lgfortran
+#LDLIBS += -lg2c -lgfortran
 
 CXX = g++
 FC  = gfortran
