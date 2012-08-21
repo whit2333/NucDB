@@ -113,12 +113,12 @@ snapshot:
 #git archive HEAD --format=tar | gzip >InSANE-`date +%m_%d_%Y_`.tar.gz
 
 clean:
-	rm -rf lib/libNucDB*
-	rm -rf lib/InSANE*Dict.o
-	rm -rf lib/*.o
-	rm -rf bin/nucdb
-	rm -rf src/*Dict.cxx
-	rm -rf include/*Dict.h 
+	rm -f lib/libNucDB*
+	rm -f lib/InSANE*Dict.o
+	rm -f lib/*.o
+	rm -f bin/nucdb
+	rm -f src/*Dict.cxx
+	rm -f include/*Dict.h 
 
 printstuff : 
 	@echo $(SOLIBS)
