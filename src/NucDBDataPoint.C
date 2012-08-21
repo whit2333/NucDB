@@ -141,6 +141,9 @@ void NucDBErrorBar::Clear(){
       fErrorMinus=0.0;
    }
 //_____________________________________________________________________________
+//_____________________________________________________________________________
+
+
 
 ClassImp(NucDBDataPoint)
 //_____________________________________________________________________________
@@ -151,7 +154,6 @@ NucDBDataPoint::NucDBDataPoint(Double_t val, Double_t err) {
       fDiscreteVariables.Clear();
       fVariables.Clear();
       fBinnedVariables.Clear();
-      fName=" ";
       fTotalError.Clear();
       fSystematicError.Clear();
       fStatisticalError.Clear();
@@ -170,7 +172,7 @@ void NucDBDataPoint::CalculateTotalError(){
 //_____________________________________________________________________________
 
 void NucDBDataPoint::Print(){
-      std::cout << fName.Data() << " = " << fValue << " +- " << fTotalError.GetError() << "\n";
+      std::cout << GetName() << " = " << GetValue() << " +- " << fTotalError.GetError() << "\n";
       for(int i=0; i<fBinnedVariables.GetEntries();i++) {
          ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print(); 
          
@@ -190,6 +192,7 @@ NucDBBinnedVariable* NucDBDataPoint::GetBinVariable(const char * name) {
 void NucDBDataPoint::AddBinVariable(NucDBBinnedVariable * var) { 
       if( ! GetBinVariable(var->GetName()) ) {
          fBinnedVariables.Add(var);
+         fDimension++;
       } else {
          printf(" variable, %s, already exists",var->GetName());
       }

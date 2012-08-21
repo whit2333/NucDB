@@ -82,22 +82,27 @@ void NucDBMeasurement::PrintData() const {
 
 TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
       if(fGraph) delete fGraph;
+      std::cout << "DER123\n";
       fGraph=0;
       fGraph= new TGraphErrors(fNumberOfDataPoints);
-      for(int i = 0; i < fNumberOfDataPoints;i++) {
-         NucDBDataPoint * point = (NucDBDataPoint *) fDataPoints.At(i);
-         NucDBBinnedVariable * var = point->GetBinVariable(varName);
-         if(i==0) fGraph->GetXaxis()->SetTitle(varName);
-         fGraph->SetPoint(i,var->GetMean(),point->GetValue());
-         fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
-      }
+      std::cout << "ndata = " << fDataPoints.GetEntries() << " \n";
+
+//       for(int i = 0; i < fNumberOfDataPoints;i++) {
+//          NucDBDataPoint * point = (NucDBDataPoint *) fDataPoints.At(i);
+//          NucDBBinnedVariable * var = point->GetBinVariable(varName);
+//          if(i==0) fGraph->GetXaxis()->SetTitle(varName);
+//             std::cout << "i = " <<  i << " \n";
+//          fGraph->SetPoint(i,var->GetMean(),point->GetValue());
+//          fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
+//       }
+      std::cout << "DER123\n";
       fGraph->SetTitle(GetTitle());
       fGraph->SetMarkerColor(fColor);
       fGraph->SetLineColor(fColor);
       fGraph->SetMarkerStyle(20);
       fGraph->SetLineStyle(1);
       fGraph->SetLineWidth(2);
-      fGraph->GetXaxis()->SetTitle(varName);      
+      fGraph->GetXaxis()->SetTitle(varName);
       return(fGraph);
    }
 //_____________________________________________________________________________

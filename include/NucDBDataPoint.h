@@ -136,20 +136,22 @@ ClassDef(NucDBErrorBar,1)
 };
 
 
+
 /** Base class for a data point.
  *  
  */
-class NucDBDataPoint : public TObject {
+class NucDBDataPoint : public TNamed {
+private:
+   Int_t          fDimension;
+
 protected:
    Double_t       fValue;
    TList          fVariables;
    TList          fDiscreteVariables;
    TList          fBinnedVariables;
-   Int_t          fDimension;
    NucDBErrorBar  fStatisticalError;
    NucDBErrorBar  fSystematicError;
    NucDBErrorBar  fTotalError;
-   TString        fName;
    NucDBUnit      fUnit;
 
 public :
@@ -170,11 +172,12 @@ public :
     */
    void CalculateTotalError();
 
-   NucDBBinnedVariable* GetBinVariable(const char * name);
-   void                 AddBinVariable(NucDBBinnedVariable * var);
-
-   void        SetUnit(NucDBUnit * u) { fUnit = *u; }
-   NucDBUnit * GetUnit(){return &fUnit;}
+   NucDBBinnedVariable * GetBinVariable(const char * name);
+   void                  AddBinVariable(NucDBBinnedVariable * var);
+   TList *               GetBinnedVariables() { return(&fBinnedVariables);}
+   Int_t                 GetDimension() const { return(fDimension);}
+   void                  SetUnit(NucDBUnit * u) { fUnit = *u; }
+   NucDBUnit *           GetUnit(){return &fUnit;}
 
 ClassDef(NucDBDataPoint,2)
 };

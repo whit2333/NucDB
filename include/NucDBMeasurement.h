@@ -21,9 +21,9 @@
  */
 class NucDBMeasurement : public TNamed {
 private:
+   Int_t    fColor;
 
 protected:
-   Int_t    fColor;
    TList    fDataPoints;
    TList    fGraphs;
    TString  fExperimentName;
@@ -61,6 +61,9 @@ public:
    
    TString GetExperimentName() {return(fExperimentName);}
    void    SetExperimentName(TString s){fExperimentName = s;}
+   Int_t   GetNDataPoints(){ return(fNumberOfDataPoints);}
+   void    SetColor(Int_t col){fColor = col;}
+   Int_t   GetColor(){return(fColor);}
 
    /** Build a graph with errors */
    TGraphErrors * BuildGraph(const char * varName = "x"); //*MENU*

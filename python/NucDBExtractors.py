@@ -46,8 +46,8 @@ class NucDBRawDataExtractor:
         self.fMeasurement=0
         self.rowcut = RowCut()
         self.fCurrentDataPoint = NucDBDataPoint()
-        self.fCurrentDataPoint.fName = "A"
-        self.fCurrentDataPoint.fDimension=2
+        self.fCurrentDataPoint.SetName("A")
+        #self.fCurrentDataPoint.fDimension=2
 
     def ParseLine(self):
         """ Specific to file structure. Should be reimplemented/modified for every measurment
