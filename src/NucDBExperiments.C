@@ -2,7 +2,32 @@
 
 ClassImp(NucDBExperiment)
 //_____________________________________________________________________________
+NucDBExperiment::NucDBExperiment(const char * name ,const char * title) : TNamed(name,title) {
+      fMeasurements.Clear();
+   }
+//_____________________________________________________________________________
 
+NucDBExperiment::~NucDBExperiment(){}
+//_____________________________________________________________________________
+
+void NucDBExperiment::AddMeasurement(NucDBMeasurement* meas){
+      if(meas) meas->SetExperimentName( GetName() );
+      if(meas) fMeasurements.Add(meas);
+   }
+//_____________________________________________________________________________
+
+NucDBMeasurement * NucDBExperiment::GetMeasurement(const char * name) {
+      NucDBMeasurement * meas = 0;
+      for(int i = 0;i<fMeasurements.GetEntries();i++) {
+         if( !strcmp(((NucDBMeasurement *)fMeasurements.At(i))->GetName(),name) ) {
+            meas = (NucDBMeasurement *)fMeasurements.At(i) ;
+            break;
+         }
+      }
+      if(!meas) std::cout << " Measurement named " << name << " NOT FOUND!\n";
+      return(meas);
+   }
+//_____________________________________________________________________________
 
 void NucDBExperiment::PlotMeasurements(const char * var ){
       TCanvas * c1 = new TCanvas( Form("%splots",GetName()),Form("%s plots",GetTitle() ) );

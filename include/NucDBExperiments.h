@@ -21,41 +21,20 @@ protected:
    TList fPapers;
 
 public:
-   NucDBExperiment(const char * name ="unknownexp",const char * title="unknown"):TNamed(name,title) {
-      fMeasurements.Clear();
-   }
-   ~NucDBExperiment(){}
+   NucDBExperiment(const char * name ="unknownexp",const char * title="unknown");
+   virtual ~NucDBExperiment();
 
    /** Necessary for Browsing */
-   Bool_t IsFolder() const {
-      return kTRUE;
-   }
-   /** Needed to make object browsable. */
+   Bool_t IsFolder() const { return kTRUE; }
    void Browse(TBrowser* b) {
       b->Add(&fMeasurements, "Measurements");
       b->Add(&fPapers, "Papers");
    }
 
-   NucDBMeasurement * GetMeasurement(const char * name) {
-      NucDBMeasurement * meas = 0;
-      for(int i = 0;i<fMeasurements.GetEntries();i++) {
-         if( !strcmp(((NucDBMeasurement *)fMeasurements.At(i))->GetName(),name) ) {
-            meas = (NucDBMeasurement *)fMeasurements.At(i) ;
-            break;
-         }
-      }
-      if(!meas) std::cout << " Measurement named " << name << " NOT FOUND!\n";
-      return(meas);
-   }
+   NucDBMeasurement * GetMeasurement(const char * name);
+   TList *            GetMeasurements(){ return(&fMeasurements); }
 
-   TList * GetMeasurements(){ return(&fMeasurements); }
-
-public:
-   void AddMeasurement(NucDBMeasurement* meas){
-      if(meas) meas->fExperiment = GetName();
-      if(meas) fMeasurements.Add(meas);
-   }
-
+   void AddMeasurement(NucDBMeasurement* meas);
    void Print(); // *MENU*
    void PlotMeasurements(const char * var = "x"); // *MENU*
 

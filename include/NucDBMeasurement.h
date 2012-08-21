@@ -7,8 +7,9 @@
 #include "TGraphErrors.h"
 #include "TString.h"
 #include "TAxis.h"
+#include "TBrowser.h"
 
-/** A measured quantitiy
+/** A measured quantitiy.
  * 
  *  Many of these may fall under a single experiment, for example "F1p" and "F2p"
  *   may belong to SLAC143, while the measured ratio "F2C/F2D" would be apart of 
@@ -19,114 +20,50 @@
  *  For example, name="F2p" and title="F_{2}^{p}".
  */
 class NucDBMeasurement : public TNamed {
+private:
+
+protected:
+   Int_t    fColor;
+   TList    fDataPoints;
+   TList    fGraphs;
+   TString  fExperimentName;
+   Int_t    fNumberOfDataPoints;
+
 public:
-   NucDBMeasurement(const char * name ="unknownexp",const char * title="unknown")
-     :TNamed(name,title) {
-      fNumberOfDataPoints=0;
-      fDataPoints.Clear();
-      fGraph=0;
-      fColor=1;
-      fExperiment="";
-   }
-   ~NucDBMeasurement(){ }
+   NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
+   ~NucDBMeasurement();
 
-   Int_t fColor;
-
-   void ClearDataPoints(){
-      fDataPoints.Clear();
-      fNumberOfDataPoints=0;
+   /** Necessary for Browsing */
+   Bool_t IsFolder() const { return kTRUE; }
+   void Browse(TBrowser* b) {
+      b->Add(&fDataPoints,"Data Points");
+      b->Add(&fGraphs,"Graphs");
    }
+
+   void ClearDataPoints();
 
    /** Add a data point to the list of datapoints */
-   void AddDataPoint(NucDBDataPoint *point) {
-      if(point) {
-         fDataPoints.Add(point);
-         fNumberOfDataPoints++;
-      } else {
-         printf(" NULL NucDBDataPoint pointer \n");
-      } 
-   }
+   void AddDataPoint(NucDBDataPoint *point);
 
    /** Adds a list data point to the list of datapoints with the option to
     *  clear exisiting datapoints
     */
-   void AddDataPoints(TList * listOfPoints, bool clear=false ) {
-      if(listOfPoints) {
-         if(clear) ClearDataPoints();
-         for(int i = 0; i < listOfPoints->GetEntries();i++) 
-            AddDataPoint((NucDBDataPoint*)listOfPoints->At(i));
-      } else {
-         printf(" NULL TList pointer \n");
-      } 
-   }
+   void AddDataPoints(TList * listOfPoints, bool clear=false );
 
-   /** Returns a list of datapoints falling in the bin */
-   TList *  FilterWithBin(NucDBBinnedVariable const *bin) {
-      TList * list = new TList();
-      list->Clear();
-      if(!bin) {
-         printf(" NULL NucDBBinnedVariable pointer. Returning list with no entries. \n");
-         return list;
-      }
-      for(int i = 0; i < fDataPoints.GetEntries();i++) {
-         NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
-         NucDBBinnedVariable * var = point->GetBinVariable(bin->GetName());
-         if(var){
-            if ( (*var) == (*bin) ) list->Add(point);
-         }
-      }
-      return list;
-   }
+   /** Returns a list of datapoints falling in the bin.
+    */
+   TList *  FilterWithBin(NucDBBinnedVariable const *bin);
 
-   Int_t fNumberOfDataPoints;
-   TList & GetDataPoints() {return(fDataPoints);}
+   TList * GetDataPoints() {return(&fDataPoints);}
 
-   TList * GetDataPointsList(){return &fDataPoints ;}
-   TString fExperiment;
-
-//protected : 
-   TList fDataPoints;
-
-public: 
-   void Print(){
-      std::cout << "   --------------------------\n";
-      std::cout << "   " << GetName() << "\n";
-      std::cout << "   --------------------------\n";
-      std::cout << "  title = " << GetTitle() << "\n";
-      std::cout << "  fNumberOfDataPoints = " << fNumberOfDataPoints <<  "\n";
-   }
-
-   void PrintData(){
-      Print();
-      for(int i=0; i<fDataPoints.GetEntries(); i++){
-         NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(i);
-	 std::cout << "[" << i << "] " << GetName();
-	 aPoint->Print();
-      }
-   }
+   void Print() const ; // *MENU*
+   void PrintData() const ; // *MENU*
+   
+   TString GetExperimentName() {return(fExperimentName);}
+   void    SetExperimentName(TString s){fExperimentName = s;}
 
    /** Build a graph with errors */
-   TGraphErrors * BuildGraph(const char * varName = "x") {
-      if(fGraph) delete fGraph;
-      fGraph=0;
-      fGraph= new TGraphErrors(fNumberOfDataPoints);
-      for(int i = 0; i < fNumberOfDataPoints;i++) {
-         NucDBDataPoint * point = (NucDBDataPoint *) fDataPoints.At(i);
-         NucDBBinnedVariable * var = point->GetBinVariable(varName);
-         if(i==0) fGraph->GetXaxis()->SetTitle(varName);
-         fGraph->SetPoint(i,var->fMean,point->fValue);
-         fGraph->SetPointError(i,0.0,point->fTotalError.GetError());
-      }
-      fGraph->SetTitle(GetTitle());
-      fGraph->SetMarkerColor(fColor);
-      fGraph->SetLineColor(fColor);
-      fGraph->SetMarkerStyle(20);
-      fGraph->SetLineStyle(1);
-      fGraph->SetLineWidth(2);
-      fGraph->GetXaxis()->SetTitle(varName);      
-      return(fGraph);
-   }
-
+   TGraphErrors * BuildGraph(const char * varName = "x"); //*MENU*
    TGraphErrors * fGraph; //->
 
 ClassDef(NucDBMeasurement,1)

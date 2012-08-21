@@ -12,7 +12,7 @@
  */
 class NucDBDiscreteVariable : public TNamed {
 protected:
-   NucDBUnit  fUnit;  
+   NucDBUnit  fUnit;
 
 public:
    NucDBDiscreteVariable(const char* name = "DiscreteVariable", const char* title = "A Discrete Variable") : TNamed(name,title) {

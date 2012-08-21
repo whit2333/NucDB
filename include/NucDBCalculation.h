@@ -43,7 +43,7 @@ public:
 
 public:
    void AddMeasurement(NucDBMeasurement* meas){
-      if(meas) meas->fExperiment = GetName();
+      if(meas) meas->SetExperimentName(GetName());
       if(meas) fMeasurements.Add(meas);
    }
 
