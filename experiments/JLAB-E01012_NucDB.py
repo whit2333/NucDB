@@ -32,16 +32,16 @@ class JLABE01012Extractor(NucDBRawDataExtractor):
         x = self.fCurrentDataPoint.GetBinVariable('x')
         if x :
             x.SetBinValueSize(float(values[self.ixbjorken]),deltax)
-            x.Print()
+            #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         if Qsq : 
             Qsq.SetBinValueSize(float(values[self.iQsq]),0.1)
-            Qsq.Print()
+            #Qsq.Print()
         self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
-        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.istatErr].lstrip('+')))
-        self.fCurrentDataPoint.fSystematicError.SetErrorSize(float(values[self.isysErrPlus]),float(values[self.isysErrMinus]))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr].lstrip('+')))
+        self.fCurrentDataPoint.GetSystError().SetErrorSize(float(values[self.isysErrPlus]),float(values[self.isysErrMinus]))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
         self.linesRead+=1
 
 
@@ -65,8 +65,8 @@ if __name__ == "__main__":
     extractor1.linestoskip=2
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor1.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor1.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor1.Initialize()
     extractor1.ExtractAllValues()
     A1n.BuildGraph()
@@ -87,8 +87,8 @@ if __name__ == "__main__":
     extractor2.linestoskip=2
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor2.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor2.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor2.Initialize()
     extractor2.ExtractAllValues()
     g1nOverF1n.BuildGraph()

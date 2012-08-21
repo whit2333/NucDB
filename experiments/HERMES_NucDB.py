@@ -25,15 +25,15 @@ class HERMESExtractor(NucDBRawDataExtractor):
         deltax=0.01
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[ixbjorken]),deltax)
-        x.Print()
+        #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[self.iQsq]),0.1)
-        Qsq.Print()
+        #Qsq.Print()
         self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
-        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.istatErr].lstrip('+')))
-        self.fCurrentDataPoint.fSystematicError.SetError(float(values[self.isysErr].lstrip('+')))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr].lstrip('+')))
+        self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr].lstrip('+')))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
         self.linesRead+=1
 
 
@@ -57,8 +57,8 @@ if __name__ == "__main__":
     extractor1.NumberOfLines=44-25
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor1.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor1.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor1.Initialize()
     extractor1.ExtractAllValues()
     g1p.BuildGraph()
@@ -79,8 +79,8 @@ if __name__ == "__main__":
     extractor2.NumberOfLines=44-25
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor2.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor2.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor2.Initialize()
     extractor2.ExtractAllValues()
     g1pOverF1p.BuildGraph()
@@ -102,8 +102,8 @@ if __name__ == "__main__":
     extractor3.NumberOfLines=70-26
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor3.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor3.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor3.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor3.Initialize()
     extractor3.ExtractAllValues()
     A1p.BuildGraph()
@@ -125,8 +125,8 @@ if __name__ == "__main__":
     extractor4.NumberOfLines=70-26
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor4.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor4.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor4.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor4.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor4.Initialize()
     extractor4.ExtractAllValues()
     A1d.BuildGraph()
@@ -148,8 +148,8 @@ if __name__ == "__main__":
     extractor5.NumberOfLines=70-26
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor5.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor5.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor5.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor5.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor5.Initialize()
     extractor5.ExtractAllValues()
     g1p.BuildGraph()
@@ -171,8 +171,8 @@ if __name__ == "__main__":
     extractor6.NumberOfLines=70-26
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor6.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor6.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor6.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor6.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor6.Initialize()
     extractor6.ExtractAllValues()
     g1d.BuildGraph()
@@ -194,8 +194,8 @@ if __name__ == "__main__":
     extractor7.NumberOfLines=71-27
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor7.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor7.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor7.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor7.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor7.Initialize()
     extractor7.ExtractAllValues()
     g1n.BuildGraph()

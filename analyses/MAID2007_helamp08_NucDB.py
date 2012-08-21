@@ -29,13 +29,13 @@ class MAID2007Extractor(NucDBRawDataExtractor) :
             self.rowcut.currentValue=int(0) # data will be used
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[self.iQsq]),0.01)
-        Qsq.Print()
+        #Qsq.Print()
         
         self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
-        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.iStatErr]))
-        self.fCurrentDataPoint.fSystematicError.SetError(float(0.0))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.iStatErr]))
+        self.fCurrentDataPoint.GetSystError().SetError(float(0.0))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
 
 
 if __name__ == "__main__":
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     extractor1.SetInputFile(file)
     extractor1.linestoskip=6
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor1.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
     #energyunit = NucDBEnergyMeV()
     #energy.SetUnit(energyunit)
     extractor1.Initialize()
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     extractor2.SetInputFile(file)
     extractor2.linestoskip=6
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor2.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
     #energyunit = NucDBEnergyMeV()
     #energy.SetUnit(energyunit)
     extractor2.Initialize()
@@ -117,7 +117,7 @@ if __name__ == "__main__":
     extractor3.SetInputFile(file)
     extractor3.linestoskip=6
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor3.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor3.fCurrentDataPoint.AddBinVariable(Qsq)
     #energyunit = NucDBEnergyMeV()
     #energy.SetUnit(energyunit)
     extractor3.Initialize()

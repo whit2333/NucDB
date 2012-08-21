@@ -24,15 +24,15 @@ class SLACE143Extractor(NucDBRawDataExtractor):
         self.rowcut.currentValue=int(0) # does nothign
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[self.ixbjorken]),deltax)
-        x.Print()
+        #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[self.iQsq]),0.1)
-        Qsq.Print()
+        #Qsq.Print()
         self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
-        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.istatErr]))
-        self.fCurrentDataPoint.fSystematicError.SetError(float(values[self.isysErr]))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
+        self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
 
 class SLACE143ExtractorR(NucDBRawDataExtractor):
     ''' for rows with (x,qsq,epsilon, V,Vstat,Vsys) '''
@@ -63,8 +63,8 @@ class SLACE143ExtractorR(NucDBRawDataExtractor):
             epsilon.SetBinValueSize(float(values[iEpsilon]),0.001)
             epsilon.Print()
         self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
-        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.istatErr]))
-        self.fCurrentDataPoint.fSystematicError.SetError(float(values[self.isysErr]))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
+        self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()
         self.fCurrentDataPoint.Print()
 
@@ -92,8 +92,8 @@ class SLACE143ExtractorA1p(NucDBRawDataExtractor):
             Qsq.SetBinValueSize(float(values[iQsq]),0.1)
             Qsq.Print()
         self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
-        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.istatErr]))
-        self.fCurrentDataPoint.fSystematicError.SetError(float(values[self.isysErr]))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
+        self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()
         self.fCurrentDataPoint.Print()
 
@@ -117,9 +117,9 @@ if __name__ == "__main__":
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     Epsilon = NucDBBinnedVariable("epsilon","#epsilon")
-    RExtractor.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    RExtractor.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
-    RExtractor.fCurrentDataPoint.fBinnedVariables.Add(Epsilon)
+    RExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    RExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    RExtractor.fCurrentDataPoint.AddBinVariable(Epsilon)
     RExtractor.SetInputFile("experiments/SLAC-E143/R.dat")
     RExtractor.linestoskip=15
     RExtractor.Initialize()
@@ -138,8 +138,8 @@ if __name__ == "__main__":
     g1pExtractor.fCurrentDataPoint.fName = "g1p"
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    g1pExtractor.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    g1pExtractor.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    g1pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    g1pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
     g1pExtractor.SetInputFile("experiments/SLAC-E143/g1p.dat")
     g1pExtractor.linestoskip=11
     g1pExtractor.Initialize()
@@ -158,8 +158,8 @@ if __name__ == "__main__":
     g2pExtractor.fCurrentDataPoint.fName = "g2p"
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    g2pExtractor.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    g2pExtractor.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    g2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    g2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
     g2pExtractor.SetInputFile("experiments/SLAC-E143/g2p.dat")
     g2pExtractor.linestoskip=11
     g2pExtractor.Initialize()
@@ -177,8 +177,8 @@ if __name__ == "__main__":
     Extractor3.fCurrentDataPoint.fName = "A1p"
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    Extractor3.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    Extractor3.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    Extractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    Extractor3.fCurrentDataPoint.AddBinVariable(Qsq)
     Extractor3.SetInputFile("experiments/SLAC-E143/a1p.dat")
     Extractor3.linestoskip=11
     Extractor3.Initialize()
@@ -196,8 +196,8 @@ if __name__ == "__main__":
     Extractor4.fCurrentDataPoint.fName = "A2p"
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    Extractor4.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    Extractor4.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    Extractor4.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    Extractor4.fCurrentDataPoint.AddBinVariable(Qsq)
     Extractor4.SetInputFile("experiments/SLAC-E143/a2p.dat")
     Extractor4.linestoskip=13
     Extractor4.Initialize()
@@ -216,8 +216,8 @@ if __name__ == "__main__":
     Extractor5.fCurrentDataPoint.fName = "g1n"
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    Extractor5.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    Extractor5.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    Extractor5.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    Extractor5.fCurrentDataPoint.AddBinVariable(Qsq)
     Extractor5.SetInputFile("experiments/SLAC-E143/g1n.dat")
     Extractor5.linestoskip=28
     Extractor5.Initialize()
@@ -236,8 +236,8 @@ if __name__ == "__main__":
     Extractor6.fCurrentDataPoint.fName = "g2n"
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    Extractor6.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    Extractor6.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    Extractor6.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    Extractor6.fCurrentDataPoint.AddBinVariable(Qsq)
     Extractor6.SetInputFile("experiments/SLAC-E143/g2n.dat")
     Extractor6.linestoskip=29
     Extractor6.Initialize()
@@ -255,8 +255,8 @@ if __name__ == "__main__":
     Extractor7.fCurrentDataPoint.fName = "A1n"
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    Extractor7.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    Extractor7.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    Extractor7.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    Extractor7.fCurrentDataPoint.AddBinVariable(Qsq)
     Extractor7.SetInputFile("experiments/SLAC-E143/a1n.dat")
     Extractor7.linestoskip=9
     Extractor7.Initialize()
@@ -274,8 +274,8 @@ if __name__ == "__main__":
     Extractor8.fCurrentDataPoint.fName = "A2n"
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    Extractor8.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    Extractor8.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    Extractor8.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    Extractor8.fCurrentDataPoint.AddBinVariable(Qsq)
     Extractor8.SetInputFile("experiments/SLAC-E143/a2n.dat")
     Extractor8.linestoskip=29
     Extractor8.Initialize()

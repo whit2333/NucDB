@@ -30,15 +30,15 @@ class CLASExtractor(NucDBRawDataExtractor):
         deltax=float(values[ixMax])-float(values[ixMin])
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[ixbjorken]),deltax)
-        x.Print()
+        #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(self.QsqMean),float(self.QsqMax-self.QsqMin))
-        Qsq.Print()
+        #Qsq.Print()
         self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
-        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.istatErr].lstrip('+')))
-        self.fCurrentDataPoint.fSystematicError.SetError(float(values[self.isysErr].lstrip('+')))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr].lstrip('+')))
+        self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr].lstrip('+')))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
         self.linesRead+=1
 
 
@@ -63,8 +63,8 @@ extractor1.linestoskip=10
 extractor1.NumberOfLines=35-10
 Xbjorken = NucDBBinnedVariable("x","x")
 Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-extractor1.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-extractor1.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
 extractor1.Initialize()
 extractor1.ExtractAllValues()
 
@@ -75,8 +75,8 @@ extractor2.QsqMin=0.27
 extractor2.QsqMax=0.5
 extractor2.linestoskip=46
 extractor2.NumberOfLines=83-46
-extractor2.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-extractor2.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
+extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
 extractor2.Initialize()
 extractor2.ExtractAllValues()
 
@@ -87,8 +87,8 @@ extractor3.QsqMin=0.5
 extractor3.QsqMax=0.74
 extractor3.linestoskip=94
 extractor3.NumberOfLines=129-94
-extractor3.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-extractor3.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+extractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
+extractor3.fCurrentDataPoint.AddBinVariable(Qsq)
 extractor3.Initialize()
 extractor3.ExtractAllValues()
 
@@ -99,8 +99,8 @@ extractor4.QsqMin=0.74
 extractor4.QsqMax=1.1
 extractor4.linestoskip=140
 extractor4.NumberOfLines=172-140
-extractor4.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-extractor4.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+extractor4.fCurrentDataPoint.AddBinVariable(Xbjorken)
+extractor4.fCurrentDataPoint.AddBinVariable(Qsq)
 extractor4.Initialize()
 extractor4.ExtractAllValues()
 
@@ -111,8 +111,8 @@ extractor5.QsqMin=1.1
 extractor5.QsqMax=1.64
 extractor5.linestoskip=183
 extractor5.NumberOfLines=212-183
-extractor5.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-extractor5.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+extractor5.fCurrentDataPoint.AddBinVariable(Xbjorken)
+extractor5.fCurrentDataPoint.AddBinVariable(Qsq)
 extractor5.Initialize()
 extractor5.ExtractAllValues()
 

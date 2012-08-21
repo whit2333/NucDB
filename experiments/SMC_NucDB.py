@@ -27,15 +27,15 @@ class SMCExtractor(NucDBRawDataExtractor) :
             self.rowcut.currentValue=int(0) # data will be used
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[ixbjorken]),deltax)
-        x.Print()
+        #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[iQsq]),0.1)
-        Qsq.Print()
+        #Qsq.Print()
         self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
-        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.istatErr]))
-        self.fCurrentDataPoint.fSystematicError.SetError(float(values[self.isysErr]))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
+        self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
 
 class SMCExtractorg2p(NucDBRawDataExtractor) :
     def __init__(self):
@@ -64,8 +64,8 @@ class SMCExtractorg2p(NucDBRawDataExtractor) :
         Qsq.SetBinValueSize(float(values[iQsq]),0.1)
         Qsq.Print()
         self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
-        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.istatErr]))
-        self.fCurrentDataPoint.fSystematicError.SetError(float(0))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
+        self.fCurrentDataPoint.GetSystError().SetError(float(0))
         self.fCurrentDataPoint.CalculateTotalError()
         self.fCurrentDataPoint.Print()
 
@@ -111,8 +111,8 @@ if __name__ == "__main__":
     extractor1.linestoskip=4
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor1.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor1.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor1.Initialize()
     extractor1.ExtractAllValues()
     A1p.BuildGraph()
@@ -129,8 +129,8 @@ if __name__ == "__main__":
     extractor2.linestoskip=4
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor2.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor2.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor2.Initialize()
     extractor2.ExtractAllValues()
     g1p.BuildGraph()
@@ -147,8 +147,8 @@ if __name__ == "__main__":
     extractor3.linestoskip=4
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor3.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor3.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor3.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor3.Initialize()
     extractor3.ExtractAllValues()
     A2p.BuildGraph()
@@ -165,8 +165,8 @@ if __name__ == "__main__":
     extractor4.linestoskip=4
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor4.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor4.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor4.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor4.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor4.Initialize()
     extractor4.ExtractAllValues()
     g2p.BuildGraph()
@@ -188,8 +188,8 @@ if __name__ == "__main__":
     extractor5.linestoskip=18
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor5.fCurrentDataPoint.fBinnedVariables.Add(Xbjorken)
-    extractor5.fCurrentDataPoint.fBinnedVariables.Add(Qsq)
+    extractor5.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor5.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor5.Initialize()
     extractor5.ExtractAllValues()
     g1n.BuildGraph()

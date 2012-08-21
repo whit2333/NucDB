@@ -31,9 +31,9 @@ if __name__ == "__main__":
 
     # Q^2 = \mu^2 = 5.0 GeV^2  From table 5
     Qsquared = NucDBBinnedVariable("Qsquared","Q^{2}")
-    aDataPoint.fBinnedVariables.Add(Qsquared)
+    aDataPoint.AddBinVariable(Qsquared)
     beta     = NucDBBinnedVariable("beta","#beta")
-    aDataPoint.fBinnedVariables.Add(beta)
+    aDataPoint.AddBinVariable(beta)
 
 
     # 1
@@ -125,7 +125,7 @@ if __name__ == "__main__":
     d2p_155.fColor=2
 
     baDataPoint = NucDBDataPoint()
-    baDataPoint.fBinnedVariables.Add(Qsquared)
+    baDataPoint.AddBinVariable(Qsquared)
 
     Qsquared.SetBinValueSize(5.0,1.0)
     baDataPoint.SetValue(0.0085)

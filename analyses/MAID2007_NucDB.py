@@ -26,12 +26,12 @@ class MAID2007Extractor(NucDBRawDataExtractor) :
 	energy = self.fCurrentDataPoint.GetBinVariable('energy')
         if energy : 
             energy.SetBinValueSize(float(values[self.iEnergy]),0.1)
-            energy.Print()
+            #energy.Print()
         self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
-        self.fCurrentDataPoint.fStatisticalError.SetError(float(values[self.iStatErr]))
-        self.fCurrentDataPoint.fSystematicError.SetError(float(0.0))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.iStatErr]))
+        self.fCurrentDataPoint.GetSystError().SetError(float(0.0))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
 
 
 if __name__ == "__main__":
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     extractor1.SetInputFile(file)
     extractor1.linestoskip=4
     energy = NucDBBinnedVariable("energy","E_{#gamma}")
-    extractor1.fCurrentDataPoint.fBinnedVariables.Add(energy)
+    extractor1.fCurrentDataPoint.AddBinVariable(energy)
     energyunit = NucDBEnergyMeV()
     energy.SetUnit(energyunit)
     extractor1.Initialize()
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     extractor2.SetInputFile(file)
     extractor2.linestoskip=4
     energy = NucDBBinnedVariable("energy","E_{#gamma}")
-    extractor2.fCurrentDataPoint.fBinnedVariables.Add(energy)
+    extractor2.fCurrentDataPoint.AddBinVariable(energy)
     #energyunit = NucDBEnergyMeV()
     #energy.SetUnit(energyunit)
     extractor2.Initialize()
