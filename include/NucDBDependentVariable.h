@@ -28,7 +28,7 @@ public :
       if(n>=fNDepVars){ printf(" variable index is too large ! \n"); }
       else {
          fVars[n] = avar;
-	 x[n]=avar->fMean;
+	 x[n]=avar->GetMean();
 	 x_low[n]=avar->GetBinMinimum();
 	 x_high[n]=avar->GetBinMaximum();
       }
@@ -44,7 +44,7 @@ public :
 	 SetBinMinimum(fFunction->EvalPar(x_low,p));
 	 SetBinMaximum(fFunction->EvalPar(x_high,p));
          fMean = fFunction->EvalPar(x,p);
-	 fAverage=fMean;
+	 fAverage=GetMean();
       }
       return(fAverage);
    }

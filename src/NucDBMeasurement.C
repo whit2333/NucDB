@@ -88,7 +88,7 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
          NucDBDataPoint * point = (NucDBDataPoint *) fDataPoints.At(i);
          NucDBBinnedVariable * var = point->GetBinVariable(varName);
          if(i==0) fGraph->GetXaxis()->SetTitle(varName);
-         fGraph->SetPoint(i,var->fMean,point->fValue);
+         fGraph->SetPoint(i,var->GetMean(),point->GetValue());
          fGraph->SetPointError(i,0.0,point->fTotalError.GetError());
       }
       fGraph->SetTitle(GetTitle());
