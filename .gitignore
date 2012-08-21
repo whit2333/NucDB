@@ -7,3 +7,9 @@ doc/*.tmp
 */*/*~
 */*.pyc
 *.pyc
+*.o
+*.a
+*.so
+bin/*
+lib/*
+
