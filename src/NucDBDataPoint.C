@@ -99,11 +99,13 @@ NucDBErrorBar::~NucDBErrorBar(){
 //_____________________________________________________________________________
 
 NucDBErrorBar::NucDBErrorBar(const NucDBErrorBar& v) {
-   (*this) = v;
+      fTotalError = v.fTotalError;
+      fErrorPlus  = v.fErrorPlus;
+      fErrorMinus = v.fErrorMinus;
 }
 //_____________________________________________________________________________
 
-NucDBErrorBar NucDBErrorBar::operator=(const NucDBErrorBar &v){
+NucDBErrorBar& NucDBErrorBar::operator=(const NucDBErrorBar &v){
    if (this != &v) {
       fTotalError = v.fTotalError;
       fErrorPlus  = v.fErrorPlus;
@@ -122,8 +124,8 @@ NucDBErrorBar& NucDBErrorBar::operator+=(const NucDBErrorBar &v){
 
 //_____________________________________________________________________________
 
-NucDBErrorBar NucDBErrorBar::operator+(const NucDBErrorBar &other) const {
-    return NucDBErrorBar(*this) += other;
+NucDBErrorBar& NucDBErrorBar::operator+(const NucDBErrorBar &v) const {
+    return NucDBErrorBar(*this) += v ;
   }
 //_____________________________________________________________________________
 

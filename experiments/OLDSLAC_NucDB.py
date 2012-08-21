@@ -28,7 +28,7 @@ class OLDSLACExtractor(NucDBRawDataExtractor) :
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
 
 manager = NucDBManager.GetManager(1)
 
@@ -55,7 +55,6 @@ F2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
 F2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
 F2pExtractor.Initialize()
 F2pExtractor.ExtractAllValues()
-F2p.Print()
 F2p.BuildGraph()
 print "testing 1,2,3"
 

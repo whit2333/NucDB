@@ -66,7 +66,7 @@ public:
    Int_t   GetColor(){return(fColor);}
 
    /** Build a graph with errors */
-   TGraphErrors * BuildGraph(const char * varName = "x"); //*MENU*
+   TGraphErrors * BuildGraph(const char * varName = "x");
    TGraphErrors * fGraph; //->
 
 ClassDef(NucDBMeasurement,1)

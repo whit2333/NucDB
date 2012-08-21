@@ -93,9 +93,9 @@ public:
    NucDBErrorBar();
    virtual ~NucDBErrorBar();
    NucDBErrorBar(const NucDBErrorBar& v) ;
-   NucDBErrorBar operator=(const NucDBErrorBar& v) ;
+   NucDBErrorBar& operator=(const NucDBErrorBar& v) ;
    NucDBErrorBar& operator+=(const NucDBErrorBar& v) ;
-   NucDBErrorBar operator+(const NucDBErrorBar& v) const ;
+   NucDBErrorBar& operator+(const NucDBErrorBar& v) const ;
 
    /** sets the error where value = number +- error
     */

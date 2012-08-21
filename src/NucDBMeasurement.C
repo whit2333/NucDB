@@ -82,20 +82,20 @@ void NucDBMeasurement::PrintData() const {
 
 TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
       if(fGraph) delete fGraph;
-      std::cout << "DER123\n";
       fGraph=0;
-      fGraph= new TGraphErrors(fNumberOfDataPoints);
-      std::cout << "ndata = " << fDataPoints.GetEntries() << " \n";
-
-//       for(int i = 0; i < fNumberOfDataPoints;i++) {
-//          NucDBDataPoint * point = (NucDBDataPoint *) fDataPoints.At(i);
-//          NucDBBinnedVariable * var = point->GetBinVariable(varName);
-//          if(i==0) fGraph->GetXaxis()->SetTitle(varName);
-//             std::cout << "i = " <<  i << " \n";
-//          fGraph->SetPoint(i,var->GetMean(),point->GetValue());
-//          fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
-//       }
-      std::cout << "DER123\n";
+      NucDBDataPoint * point = 0;
+      NucDBBinnedVariable * var = 0;
+      fGraph = new TGraphErrors(fNumberOfDataPoints);
+      for(int i = 0; i < fNumberOfDataPoints;i++) {
+         point = (NucDBDataPoint *) fDataPoints.At(i);
+         var = point->GetBinVariable(varName);
+         if(i==0) fGraph->GetXaxis()->SetTitle(varName);
+         std::cout << "i = " <<  i << " \n";
+         std::cout <<" var addr = " << var->GetMean() << "\n";
+         std::cout <<" point addr = " << point->GetValue() << " \n";
+         if(point && var ) fGraph->SetPoint(i,var->GetMean(),point->GetValue());
+         if(point && var )fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
+      }
       fGraph->SetTitle(GetTitle());
       fGraph->SetMarkerColor(fColor);
       fGraph->SetLineColor(fColor);
