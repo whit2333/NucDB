@@ -29,7 +29,7 @@ class JLABExtractor(NucDBRawDataExtractor) :
         Ebeam = self.fCurrentDataPoint.GetBinVariable("E")
         Ebeam.SetBinValueSize(float(values[iEbeam]),0.001)
         #Ebeam.Print()
-        self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()

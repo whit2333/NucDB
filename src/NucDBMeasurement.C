@@ -81,28 +81,35 @@ void NucDBMeasurement::PrintData() const {
 //_____________________________________________________________________________
 
 TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
-      if(fGraph) delete fGraph;
+      //if(fGraph) delete fGraph;
       fGraph=0;
       NucDBDataPoint * point = 0;
       NucDBBinnedVariable * var = 0;
       fGraph = new TGraphErrors(fNumberOfDataPoints);
+      fGraph->SetName(Form("%sVS%s",GetName(),varName));
       for(int i = 0; i < fNumberOfDataPoints;i++) {
          point = (NucDBDataPoint *) fDataPoints.At(i);
          var = point->GetBinVariable(varName);
-         if(i==0) fGraph->GetXaxis()->SetTitle(varName);
+         if(i==0){
+            fGraph->GetXaxis()->SetTitle(varName);
+            fGraph->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
+
+         }
+         
 //          std::cout << "i = " <<  i << " \n";
 //          std::cout <<" var addr = " << var->GetMean() << "\n";
 //          std::cout <<" point addr = " << point->GetValue() << " \n";
          if(point && var ) fGraph->SetPoint(i,var->GetMean(),point->GetValue());
          if(point && var )fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
       }
-      fGraph->SetTitle(GetTitle());
+/*      fGraph->SetTitle(GetTitle());*/
       fGraph->SetMarkerColor(fColor);
       fGraph->SetLineColor(fColor);
       fGraph->SetMarkerStyle(20);
       fGraph->SetLineStyle(1);
       fGraph->SetLineWidth(2);
-      fGraph->GetXaxis()->SetTitle(varName);
+/*      fGraph->GetXaxis()->SetTitle(varName);*/
+      fGraphs.Add(fGraph);
       return(fGraph);
    }
 //_____________________________________________________________________________

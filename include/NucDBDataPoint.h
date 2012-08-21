@@ -6,6 +6,7 @@
 #include "TList.h"
 #include <iostream>
 #include "NucDBUnits.h"
+#include "TBrowser.h"
 
 /** A Discrete variable stored in a single integer value.
  *
@@ -157,6 +158,18 @@ protected:
 public :
    NucDBDataPoint(Double_t val=0.0, Double_t err=0.0);
    virtual ~NucDBDataPoint();
+
+   /** Necessary for Browsing */
+   Bool_t  IsFolder() const { return kTRUE; }
+   void    Browse(TBrowser* b) {
+      b->Add(&fVariables,"fVariables");
+      b->Add(&fDiscreteVariables,"fDiscreteVariables");
+      b->Add(&fBinnedVariables,"fBinnedVariables");
+      b->Add(&fStatisticalError,"StatisticalError");
+      b->Add(&fSystematicError,"SystematicError");
+      b->Add(&fTotalError,"TotalError");
+      b->Add(&fUnit,"Unit");
+   }
 
    virtual void Print(); // *MENU*
 

@@ -37,7 +37,7 @@ class JLABE01012Extractor(NucDBRawDataExtractor):
         if Qsq : 
             Qsq.SetBinValueSize(float(values[self.iQsq]),0.1)
             #Qsq.Print()
-        self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr].lstrip('+')))
         self.fCurrentDataPoint.GetSystError().SetErrorSize(float(values[self.isysErrPlus]),float(values[self.isysErrMinus]))
         self.fCurrentDataPoint.CalculateTotalError()

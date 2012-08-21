@@ -28,7 +28,7 @@ class SLACE143Extractor(NucDBRawDataExtractor):
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[self.iQsq]),0.1)
         #Qsq.Print()
-        self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()
@@ -62,7 +62,7 @@ class SLACE143ExtractorR(NucDBRawDataExtractor):
         if epsilon :
             epsilon.SetBinValueSize(float(values[iEpsilon]),0.001)
             epsilon.Print()
-        self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()
@@ -91,7 +91,7 @@ class SLACE143ExtractorA1p(NucDBRawDataExtractor):
         if Qsq :
             Qsq.SetBinValueSize(float(values[iQsq]),0.1)
             Qsq.Print()
-        self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()

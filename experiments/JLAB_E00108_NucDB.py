@@ -35,7 +35,7 @@ class Pion2008Extractor(NucDBRawDataExtractor) :
         if z : 
             z.SetBinValueSize(float(values[self.iz]),0.01)
             #z.Print()
-        self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.iStatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(0.0))
         self.fCurrentDataPoint.CalculateTotalError()

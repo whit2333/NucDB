@@ -82,4 +82,5 @@ class NucDBRawDataExtractor:
             return
         self.ParseLine()
         if self.rowcut.IsGoodRow():
+            self.fCurrentDataPoint.SetName("p"+str(self.fMeasurement.GetNDataPoints()));
             self.fMeasurement.AddDataPoint(copy.deepcopy(self.fCurrentDataPoint))

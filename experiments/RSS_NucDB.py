@@ -25,7 +25,7 @@ class RSSExtractor(NucDBRawDataExtractor):
         Qsq.SetBinValueSize(float(values[iQsq]),0.5)
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.iValueRowErr]))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         #self.fCurrentDataPoint.Print()
         #x.Print()
         #Qsq.Print()

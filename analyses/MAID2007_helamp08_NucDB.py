@@ -31,7 +31,7 @@ class MAID2007Extractor(NucDBRawDataExtractor) :
         Qsq.SetBinValueSize(float(values[self.iQsq]),0.01)
         #Qsq.Print()
         
-        self.fCurrentDataPoint.fValue=float(values[self.iValueRow])
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.iStatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(0.0))
         self.fCurrentDataPoint.CalculateTotalError()
