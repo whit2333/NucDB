@@ -92,6 +92,10 @@ protected:
 public:
    NucDBErrorBar();
    virtual ~NucDBErrorBar();
+   NucDBErrorBar(const NucDBErrorBar& v) ;
+   NucDBErrorBar operator=(const NucDBErrorBar& v) ;
+   NucDBErrorBar& operator+=(const NucDBErrorBar& v) ;
+   NucDBErrorBar operator+(const NucDBErrorBar& v) const ;
 
    /** sets the error where value = number +- error
     */
@@ -132,84 +136,45 @@ ClassDef(NucDBErrorBar,1)
 };
 
 
-/** Base class for a data point
+/** Base class for a data point.
+ *  
  */
 class NucDBDataPoint : public TObject {
+protected:
+   Double_t       fValue;
+   TList          fVariables;
+   TList          fDiscreteVariables;
+   TList          fBinnedVariables;
+   Int_t          fDimension;
+   NucDBErrorBar  fStatisticalError;
+   NucDBErrorBar  fSystematicError;
+   NucDBErrorBar  fTotalError;
+   TString        fName;
+   NucDBUnit      fUnit;
+
 public :
-   NucDBDataPoint(Double_t val=0.0, Double_t err=0.0) {
-      fUnit = 0;
-      fValue = val;
-      fDimension=1;
-      fDiscreteVariables.Clear();
-      fVariables.Clear();
-      fBinnedVariables.Clear();
-      fName=" ";
-      fTotalError.Clear();
-      fSystematicError.Clear();
-      fStatisticalError.Clear();
+   NucDBDataPoint(Double_t val=0.0, Double_t err=0.0);
+   virtual ~NucDBDataPoint();
 
-   }
-   ~NucDBDataPoint(){}
+   virtual void Print(); // *MENU*
 
-   Double_t GetValue(){ return fValue ; }
-   void     SetValue(Double_t v) { fValue = v; }
-//protected:
-   Double_t fValue;
+   Double_t  GetValue() const { return fValue ; }
+   void      SetValue(Double_t v) { fValue = v; }
 
-   NucDBErrorBar fStatisticalError;
-   NucDBErrorBar fSystematicError;
-   NucDBErrorBar fTotalError;
-
-public:
-   NucDBErrorBar * GetStatError(){ return(&fStatisticalError); }   
-   NucDBErrorBar * GetSystError(){ return(&fSystematicError); }   
+   NucDBErrorBar * GetStatError(){ return(&fStatisticalError); }
+   NucDBErrorBar * GetSystError(){ return(&fSystematicError); }
+   NucDBErrorBar * GetTotalError(){fTotalError=fSystematicError+fStatisticalError; return(&fTotalError);}
 
    /** Set the values of the total using the current
     *  systematic and statistical errors
     */
-   void CalculateTotalError(){
-      Double_t sys = fSystematicError.GetError();
-      Double_t stat = fStatisticalError.GetError();
-      fTotalError.SetError(sys+stat);
-   }
+   void CalculateTotalError();
 
-   TList fVariables;
-   TList fDiscreteVariables;
-   TList fBinnedVariables;
-   Int_t fDimension;
+   NucDBBinnedVariable* GetBinVariable(const char * name);
+   void                 AddBinVariable(NucDBBinnedVariable * var);
 
-   TString fName;
-
-   void Print(){
-      std::cout << fName.Data() << " = " << fValue << " +- " << fTotalError.GetError() << "\n";
-      for(int i=0; i<fBinnedVariables.GetEntries();i++) {
-         ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print(); 
-         
-      }
-   }
-   
-   NucDBBinnedVariable* GetBinVariable(const char * name) {
-      for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
-          if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
-             return((NucDBBinnedVariable*)fBinnedVariables.At(i));
-      }
-      return(0);
-   }
-
-   void AddBinVariable(NucDBBinnedVariable * var) { 
-      if( ! GetBinVariable(var->GetName()) ) {
-         fBinnedVariables.Add(var);
-      } else {
-         printf(" variable, %s, already exists",var->GetName());
-      }
-
-      
-   } 
-
-   void SetUnit(NucDBUnit * u) { fUnit =u; }
-   NucDBUnit * GetUnit(){return fUnit;}
-   NucDBUnit * fUnit;//! 
-
+   void        SetUnit(NucDBUnit * u) { fUnit = *u; }
+   NucDBUnit * GetUnit(){return &fUnit;}
 
 ClassDef(NucDBDataPoint,2)
 };

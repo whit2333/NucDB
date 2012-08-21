@@ -16,6 +16,9 @@ void NucDBDiscreteVariable::Print() {
       std::cout << " " << GetName() << " = " << fValue << "\n";
    }
 //_____________________________________________________________________________
+//_____________________________________________________________________________
+
+
 
 ClassImp(NucDBBinnedVariable)
 //_____________________________________________________________________________
@@ -75,6 +78,11 @@ void      NucDBBinnedVariable::Print() {
                 << "  " << fMinimum << " < " << GetName() << " < " << fMaximum << "\n";
    }
 //_____________________________________________________________________________
+//_____________________________________________________________________________
+
+
+
+
 
 ClassImp(NucDBErrorBar)
 //_____________________________________________________________________________
@@ -87,8 +95,36 @@ NucDBErrorBar::NucDBErrorBar(){
 //_____________________________________________________________________________
 
 NucDBErrorBar::~NucDBErrorBar(){
-
 }
+//_____________________________________________________________________________
+
+NucDBErrorBar::NucDBErrorBar(const NucDBErrorBar& v) {
+   (*this) = v;
+}
+//_____________________________________________________________________________
+
+NucDBErrorBar NucDBErrorBar::operator=(const NucDBErrorBar &v){
+   if (this != &v) {
+      fTotalError = v.fTotalError;
+      fErrorPlus  = v.fErrorPlus;
+      fErrorMinus = v.fErrorMinus;;
+   }
+   return *this;
+}
+//_____________________________________________________________________________
+
+NucDBErrorBar& NucDBErrorBar::operator+=(const NucDBErrorBar &v){
+   fTotalError += v.fTotalError;
+   fErrorPlus  += v.fErrorPlus;
+   fErrorMinus += v.fErrorMinus;;
+   return *this;
+}
+
+//_____________________________________________________________________________
+
+NucDBErrorBar NucDBErrorBar::operator+(const NucDBErrorBar &other) const {
+    return NucDBErrorBar(*this) += other;
+  }
 //_____________________________________________________________________________
 
 void NucDBErrorBar::Print() const {
@@ -108,9 +144,56 @@ void NucDBErrorBar::Clear(){
 
 ClassImp(NucDBDataPoint)
 //_____________________________________________________________________________
+NucDBDataPoint::NucDBDataPoint(Double_t val, Double_t err) {
+      fUnit = 0;
+      fValue = val;
+      fDimension=1;
+      fDiscreteVariables.Clear();
+      fVariables.Clear();
+      fBinnedVariables.Clear();
+      fName=" ";
+      fTotalError.Clear();
+      fSystematicError.Clear();
+      fStatisticalError.Clear();
 
+   }
 //_____________________________________________________________________________
 
+NucDBDataPoint::~NucDBDataPoint(){}
+//_____________________________________________________________________________
+
+void NucDBDataPoint::CalculateTotalError(){
+      Double_t sys = fSystematicError.GetError();
+      Double_t stat = fStatisticalError.GetError();
+      fTotalError.SetError(sys+stat);
+   }
+//_____________________________________________________________________________
+
+void NucDBDataPoint::Print(){
+      std::cout << fName.Data() << " = " << fValue << " +- " << fTotalError.GetError() << "\n";
+      for(int i=0; i<fBinnedVariables.GetEntries();i++) {
+         ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print(); 
+         
+      }
+   }
+//_____________________________________________________________________________
+
+NucDBBinnedVariable* NucDBDataPoint::GetBinVariable(const char * name) {
+      for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
+          if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
+             return((NucDBBinnedVariable*)fBinnedVariables.At(i));
+      }
+      return(0);
+   }
+//_____________________________________________________________________________
+
+void NucDBDataPoint::AddBinVariable(NucDBBinnedVariable * var) { 
+      if( ! GetBinVariable(var->GetName()) ) {
+         fBinnedVariables.Add(var);
+      } else {
+         printf(" variable, %s, already exists",var->GetName());
+      }
+   }
 //_____________________________________________________________________________
 
 //_____________________________________________________________________________
