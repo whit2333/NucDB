@@ -8,17 +8,20 @@
 #include "NucDBUnits.h"
 
 /** A Discrete variable stored in a single integer value
- *  
+ *
  */
 class NucDBDiscreteVariable : public TNamed {
+protected:
+   NucDBUnit  fUnit;  
+
+public:
    NucDBDiscreteVariable(const char* name = "DiscreteVariable", const char* title = "A Discrete Variable") : TNamed(name,title) {
       fValue=0;
    }
 
    ~NucDBDiscreteVariable(){
    }
-
-   Int_t fValue;
+   Int_t      fValue;
 
    void Print() {
       std::cout << " " << GetName() << " = " << fValue << "\n";
@@ -26,8 +29,6 @@ class NucDBDiscreteVariable : public TNamed {
 
    void SetUnit(NucDBUnit * u) { fUnit = *u; }
    NucDBUnit * GetUnit(){return &fUnit;}
-	protected: 
-NucDBUnit fUnit;  
 
 ClassDef(NucDBDiscreteVariable,2)
 };
@@ -122,6 +123,12 @@ ClassDef(NucDBBinnedVariable,3)
  * 
  */
 class NucDBErrorBar : public TObject {
+protected:
+   /// total = plus + minus
+   Double_t fTotalError;
+   Double_t fErrorPlus;
+   Double_t fErrorMinus;
+
 public:
    NucDBErrorBar(){
       fTotalError=0.0;
@@ -165,12 +172,6 @@ public:
       fErrorMinus=0.0;
    }
 
-
-protected:
-   /// total = plus + minus
-   Double_t fTotalError;
-   Double_t fErrorPlus;
-   Double_t fErrorMinus;
 
 ClassDef(NucDBErrorBar,1)
 };

@@ -7,6 +7,7 @@
 #include "NucDBDataPoint.h"
 #include "TGraphErrors.h"
 #include "TCanvas.h"
+#include "TBrowser.h"
 
 /** Representation of a published or unpublished Paper.
  * 
@@ -18,6 +19,14 @@ public:
       fCalculations.Clear();
    }
    ~NucDBPaper(){}
+   /** Necessary for Browsing */
+   Bool_t IsFolder() const {
+      return kTRUE;
+   }
+   /** Needed to make object browsable. */
+   void Browse(TBrowser* b) {
+       b->Add(&fCalculations, "Calculations");
+   }
 
    NucDBCalculation * GetCalculation(const char * name) {
       NucDBCalculation * meas = 0;
@@ -34,7 +43,7 @@ public:
    const char * GetReference(){ return( fReference.Data() ); }
 
 protected: 
-   TList fCalculations;
+   TList   fCalculations;
    TString fReference;
    TString fAuthor;
    TString fijef;

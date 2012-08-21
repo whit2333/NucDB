@@ -7,6 +7,7 @@
 #include "NucDBDataPoint.h"
 #include "TGraphErrors.h"
 #include "TCanvas.h"
+#include "TBrowser.h"
 
 /** Base class for an experiment object.
  * 
@@ -15,11 +16,25 @@
  * is used for display purposes.
  */
 class NucDBExperiment : public TNamed {
+protected: 
+   TList fMeasurements;
+   TList fPapers;
+
 public:
    NucDBExperiment(const char * name ="unknownexp",const char * title="unknown"):TNamed(name,title) {
       fMeasurements.Clear();
    }
    ~NucDBExperiment(){}
+
+   /** Necessary for Browsing */
+   Bool_t IsFolder() const {
+      return kTRUE;
+   }
+   /** Needed to make object browsable. */
+   void Browse(TBrowser* b) {
+      b->Add(&fMeasurements, "Measurements");
+      b->Add(&fPapers, "Papers");
+   }
 
    NucDBMeasurement * GetMeasurement(const char * name) {
       NucDBMeasurement * meas = 0;
@@ -34,9 +49,6 @@ public:
    }
 
    TList * GetMeasurements(){ return(&fMeasurements); }
-   
-protected: 
-   TList fMeasurements;
 
 public:
    void AddMeasurement(NucDBMeasurement* meas){
@@ -44,27 +56,8 @@ public:
       if(meas) fMeasurements.Add(meas);
    }
 
-   void Print(){
-      std::cout << "===================================\n";
-      std::cout << "   " << GetName() << "\n";
-      std::cout << "===================================\n";
-      std::cout << "  title = " << GetTitle() << "\n";
-      std::cout << "+++++ Measurements +++++\n";
-      for(int i =0; i<fMeasurements.GetEntries();i++)
-          ((NucDBMeasurement*)fMeasurements.At(i))->Print();
-   }
-
-
-
-   void PlotMeasurements(const char * var = "x"){
-      TCanvas * c1 = new TCanvas( Form("%splots",GetName()),Form("%s plots",GetTitle() ) );
-      c1->Divide(2,fMeasurements.GetEntries()/2);
-      for(int i =0; i<fMeasurements.GetEntries();i++) {
-          c1->cd(i+1);
-          ((NucDBMeasurement*)fMeasurements.At(i))->BuildGraph(var);
-          ((NucDBMeasurement*)fMeasurements.At(i))->fGraph->Draw("ap");
-      }
-   }
+   void Print(); // *MENU*
+   void PlotMeasurements(const char * var = "x"); // *MENU*
 
 ClassDef(NucDBExperiment,1)
 };

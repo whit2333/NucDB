@@ -214,6 +214,8 @@ Additional info : Measurement of R (R = sig(L)/sig(T)) in deep inelastic
 
  */ 
 void print_help(int exval);
+void list_measurments();
+void print_experiments();
 
 int main(int argc, char *argv[]) {
  int opt;
@@ -222,9 +224,11 @@ int main(int argc, char *argv[]) {
   fprintf(stderr, "This program needs arguments....\n\n");
   print_help(1);
  }
-    TRint * theApp = new TRint("NucDB", &argc, argv);
-    NucDBManager * man = 0;
- while((opt = getopt(argc, argv, "hVvaf:o:")) != -1) {
+    int fnargs = 2;
+    char * fargs[2] = {"NucDB","-l"};
+    TRint * theApp = new TRint("NucDB",  &fnargs, &fargs[0], NULL, 2);
+
+ while((opt = getopt(argc, argv, "lhVvaf:o:")) != -1) {
   switch(opt) {
    case 'h':
     print_help(0);
@@ -235,6 +239,9 @@ int main(int argc, char *argv[]) {
     break;
    case 'v':
     printf("%s: Verbose option is set `%c'\n", PACKAGE, optopt);
+    break;
+   case 'l':
+    list_measurments();
     break;
    case 'a':
     printf("List the measurments \n");
@@ -274,8 +281,19 @@ void print_help(int exval) {
  printf("  -h              print this help and exit\n");
  printf("  -V              print version and exit\n\n");
  printf("  -v              set verbose flag\n");
+ printf("  -l              list the measurements\n");
  printf("  -f FILE         set intput file\n");
  printf("  -o FILE         set output file\n\n");
  printf("=========================================\n");
+}
+
+void list_measurments(){
+   NucDBManager * man = NucDBManager::GetManager();
+   /*TList * meas = */man->ListExperiments();
+//    meas->Print();
+}
+
+void print_experiments(){
+   
 
 }
