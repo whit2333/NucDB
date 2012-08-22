@@ -33,7 +33,12 @@ protected:
 
 public:
    NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
-   ~NucDBMeasurement();
+   virtual ~NucDBMeasurement();
+   NucDBMeasurement(const NucDBMeasurement& v){
+      fColor = v.fColor;
+      fExperimentName = v.fExperimentName;
+      fNumberOfDataPoints = v.fNumberOfDataPoints;
+   }
 
    /** Necessary for Browsing */
    Bool_t  IsFolder() const { return kTRUE; }

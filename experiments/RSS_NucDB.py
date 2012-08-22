@@ -1,6 +1,6 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable
+from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV
 from ROOT import TCanvas,TGraphErrors
 from NucDBExtractors import *
 import os
@@ -26,6 +26,16 @@ class RSSExtractor(NucDBRawDataExtractor):
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.iValueRowErr]))
         self.fCurrentDataPoint.CalculateTotalError()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
+        #
         #self.fCurrentDataPoint.Print()
         #x.Print()
         #Qsq.Print()

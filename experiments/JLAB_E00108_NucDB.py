@@ -1,6 +1,6 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable
+from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV
 from NucDBExtractors import *
 import os
 
@@ -39,6 +39,16 @@ class Pion2008Extractor(NucDBRawDataExtractor) :
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.iStatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(0.0))
         self.fCurrentDataPoint.CalculateTotalError()
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
+        #
         #self.fCurrentDataPoint.Print()
 
 #class SMCExtractorA2p(Pion2008Extractor) :

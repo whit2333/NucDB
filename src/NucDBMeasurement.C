@@ -108,8 +108,10 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
             break;
          }
       }
-      fGraph->GetXaxis()->SetTitle(var->GetTitle());
-      fGraph->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
+      if(var){
+         fGraph->GetXaxis()->SetTitle(var->GetTitle());
+         fGraph->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
+      }
       fGraph->SetMarkerColor(GetColor());
       //fGraph->SetLineColor(GetColor());
       fGraph->SetMarkerStyle(20);

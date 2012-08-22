@@ -1,6 +1,6 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable
+from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV
 from NucDBExtractors import *
 import os
 
@@ -32,6 +32,16 @@ class SLACE143Extractor(NucDBRawDataExtractor):
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
+        #
         #self.fCurrentDataPoint.Print()
 
 class SLACE143ExtractorR(NucDBRawDataExtractor):
@@ -66,7 +76,17 @@ class SLACE143ExtractorR(NucDBRawDataExtractor):
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
+        #
+        #self.fCurrentDataPoint.Print()
 
 class SLACE143ExtractorA1p(NucDBRawDataExtractor):
     ''' for rows with (x,qsq, A,Astat,Asys) '''
@@ -86,16 +106,26 @@ class SLACE143ExtractorA1p(NucDBRawDataExtractor):
         x = self.fCurrentDataPoint.GetBinVariable('x')
         if x :
             x.SetBinValueSize(float(values[ixbjorken]),0.01)
-            x.Print()
+            #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         if Qsq :
             Qsq.SetBinValueSize(float(values[iQsq]),0.1)
-            Qsq.Print()
+            #Qsq.Print()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
+        #
+        #self.fCurrentDataPoint.Print()
 
 if __name__ == "__main__":
     manager = NucDBManager.GetManager(1)
@@ -109,7 +139,7 @@ if __name__ == "__main__":
         R = NucDBMeasurement("R","R")
         experiment.AddMeasurement(R)
     R.ClearDataPoints() # in case datapoints already exist
-    R.fColor=2 # default color used for plotting
+    R.SetColor(2)# default color used for plotting
 
     RExtractor = SLACE143ExtractorR()
     RExtractor.SetMeasurement(R)
@@ -132,7 +162,7 @@ if __name__ == "__main__":
         g1p = NucDBMeasurement("g1p","g_{1}^{p}")
         experiment.AddMeasurement(g1p)
     g1p.ClearDataPoints()
-    g1p.fColor=2
+    g1p.SetColor(2)# default color used for plotting
     g1pExtractor = SLACE143Extractor()
     g1pExtractor.SetMeasurement(g1p)
     g1pExtractor.fCurrentDataPoint.fName = "g1p"
@@ -152,7 +182,7 @@ if __name__ == "__main__":
         g2p = NucDBMeasurement("g2p","g_{2}^{p}")
         experiment.AddMeasurement(g2p)
     g2p.ClearDataPoints()
-    g2p.fColor=2
+    g2p.SetColor(2)# default color used for plotting
     g2pExtractor = SLACE143Extractor()
     g2pExtractor.SetMeasurement(g2p)
     g2pExtractor.fCurrentDataPoint.fName = "g2p"
@@ -190,7 +220,7 @@ if __name__ == "__main__":
         A2p = NucDBMeasurement("A2p","A_{2}^{p}")
         experiment.AddMeasurement(A2p)
     A2p.ClearDataPoints()
-    A2p.fColor=1
+    A2p.SetColor(2)# default color used for plotting
     Extractor4 = SLACE143Extractor()
     Extractor4.SetMeasurement(A2p)
     Extractor4.fCurrentDataPoint.fName = "A2p"
@@ -210,7 +240,7 @@ if __name__ == "__main__":
         g1n = NucDBMeasurement("g1n","g_{1}^{n}")
         experiment.AddMeasurement(g1n)
     g1n.ClearDataPoints()
-    g1n.fColor=2
+    g1n.SetColor(2)# default color used for plotting
     Extractor5 = SLACE143Extractor()
     Extractor5.SetMeasurement(g1n)
     Extractor5.fCurrentDataPoint.fName = "g1n"
@@ -230,7 +260,7 @@ if __name__ == "__main__":
         g2n = NucDBMeasurement("g2n","g_{2}^{n}")
         experiment.AddMeasurement(g2n)
     g2n.ClearDataPoints()
-    g2n.fColor=2
+    g2n.SetColor(2)# default color used for plotting
     Extractor6 = SLACE143Extractor()
     Extractor6.SetMeasurement(g2p)
     Extractor6.fCurrentDataPoint.fName = "g2n"
@@ -249,7 +279,7 @@ if __name__ == "__main__":
         A1n = NucDBMeasurement("A1n","A_{1}^{n}")
         experiment.AddMeasurement(A1n)
     A1n.ClearDataPoints()
-    A1n.fColor=1
+    A1n.SetColor(2)# default color used for plotting
     Extractor7 = SLACE143ExtractorA1p()
     Extractor7.SetMeasurement(A1n)
     Extractor7.fCurrentDataPoint.fName = "A1n"
@@ -268,7 +298,7 @@ if __name__ == "__main__":
         A2n = NucDBMeasurement("A2n","A_{2}^{n}")
         experiment.AddMeasurement(A2n)
     A2n.ClearDataPoints()
-    A2n.fColor=1
+    A2n.SetColor(2)# default color used for plotting
     Extractor8 = SLACE143Extractor()
     Extractor8.SetMeasurement(A2n)
     Extractor8.fCurrentDataPoint.fName = "A2n"
