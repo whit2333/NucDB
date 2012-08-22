@@ -20,6 +20,7 @@
 
 #pragma link C++ function NucDB::Kine::W2_xQ2(double,double,double);
 #pragma link C++ function NucDB::Kine::W_xQ2(double,double,double);
+#pragma link C++ function NucDB::Kine::W_xQ2_proton(double,double);
 
 #pragma link C++ function NucDB::Kine::xiNachan_xQ2(double,double,double);
 

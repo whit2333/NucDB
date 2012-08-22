@@ -1,89 +1,5 @@
 #include "NucDBDataPoint.h"
 
-ClassImp(NucDBDiscreteVariable)
-//_____________________________________________________________________________
-
-NucDBDiscreteVariable::NucDBDiscreteVariable(const char* name , const char* title) : TNamed(name,title) {
-      fValue=0;
-   }
-//_____________________________________________________________________________
-
-NucDBDiscreteVariable::~NucDBDiscreteVariable(){
-}
-//_____________________________________________________________________________
-
-void NucDBDiscreteVariable::Print() {
-      std::cout << " " << GetName() << " = " << fValue << "\n";
-   }
-//_____________________________________________________________________________
-//_____________________________________________________________________________
-
-
-
-ClassImp(NucDBBinnedVariable)
-//_____________________________________________________________________________
-
-NucDBBinnedVariable::NucDBBinnedVariable(const char* name, const char* title): TNamed(name, title) {
-      fMinimum  = 0.0;
-      fMaximum  = 0.0;
-      fMean     = 0.0;
-      fAverage  = 0.0;
-   }
-//_____________________________________________________________________________
-
-NucDBBinnedVariable::~NucDBBinnedVariable(){}
-//_____________________________________________________________________________
-
-NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v) {
-      SetNameTitle(v.GetName(),v.GetTitle());
-      fMinimum  = v.fMinimum;
-      fMaximum  = v.fMaximum;
-      fMean     = v.fMean;
-      fAverage  = v.fAverage;
-   }
-//_____________________________________________________________________________
-
-NucDBBinnedVariable& NucDBBinnedVariable::operator=(const NucDBBinnedVariable& v) {
-      if ( this != &v) {  
-         SetNameTitle(v.GetName(),v.GetTitle());
-         fMinimum  = v.fMinimum;
-         fMaximum  = v.fMaximum;
-         fMean     = v.fMean;
-         fAverage  = v.fAverage;
-      }
-      return *this;    // Return ref for multiple assignment
-   }
-//_____________________________________________________________________________
-
-bool NucDBBinnedVariable::BinsOverlap(const NucDBBinnedVariable &var) const {
-//       std::cout << " Min " <<  var.GetMinimum() 
-//                 << " <" << fMinimum 
-//                 << " < " << var.GetMaximum() << "\n";
-      if(fMinimum > var.GetMinimum()  && fMinimum < var.GetMaximum()) return true;
-      else if(fMaximum > var.GetMinimum()  && fMaximum < var.GetMaximum()) return true;
-      else return false;
-   }
-//_____________________________________________________________________________
-
-void      NucDBBinnedVariable::SetBinValueSize(Double_t val, Double_t size) {
-      fMean = val;
-      fAverage = val;
-      SetBinMinimum(val-size/2.0);
-      SetBinMaximum(val+size/2.0);
-}
-//_____________________________________________________________________________
-
-void      NucDBBinnedVariable::Print() {
-      std::cout << "  |" << GetName() << "|=" << fAverage << "       "
-                << "  " << fMinimum << " < " << GetName() << " < " << fMaximum << "\n";
-   }
-//_____________________________________________________________________________
-//_____________________________________________________________________________
-
-
-
-
-
 ClassImp(NucDBErrorBar)
 //_____________________________________________________________________________
 
@@ -201,6 +117,29 @@ void NucDBDataPoint::AddBinVariable(NucDBBinnedVariable * var) {
    }
 //_____________________________________________________________________________
 
+NucDBDependentVariable* NucDBDataPoint::GetDependentVariable(const char * name) {
+      for(int i = 0;i<fVariables.GetEntries();i++) {
+          if( !strcmp( ((NucDBDependentVariable*)fVariables.At(i))->GetName(),name) ) 
+             return((NucDBDependentVariable*)fVariables.At(i));
+      }
+      return(0);
+   }
 //_____________________________________________________________________________
 
+void NucDBDataPoint::AddDependentVariable(NucDBDependentVariable * var) { 
+      if( ! GetDependentVariable(var->GetName()) ) {
+         fVariables.Add(var);
+      } else {
+         Error("AddDependentVariable",Form(" variable, %s, already exists",var->GetName()));
+      }
+   }
+//_____________________________________________________________________________
+
+void NucDBDataPoint::CalculateDependentVariables(){
+   NucDBDependentVariable * var = 0;
+   for(int i = 0;i<fVariables.GetEntries(); i++ ){
+      var = (NucDBDependentVariable*)fVariables.At(i);
+      var->Calculate();
+   }
+}
 //_____________________________________________________________________________

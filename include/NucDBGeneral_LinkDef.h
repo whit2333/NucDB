@@ -16,6 +16,8 @@
 #pragma link C++ class NucDBDataPoint+;
 #pragma link C++ class NucDBDependentVariable+;
 
+#pragma link C++ class NucDBInvariantMassDV+;
+
 #pragma link C++ class NucDBMeasurement+;
 #pragma link C++ class NucDBExperiment+;
 #pragma link C++ class NucDBCalculation+;

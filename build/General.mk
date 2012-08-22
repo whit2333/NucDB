@@ -5,6 +5,7 @@ GeneralLibObjs := lib/NucDBDataPoint.o \
                   lib/NucDBMeasurement.o \
                   lib/NucDBUnits.o \
                   lib/NucDBManager.o \
+                  lib/NucDBBinnedVariable.o \
                   lib/NucDBDependentVariable.o \
                   lib/NucDBCalculation.o \
                   lib/NucDBPaper.o \

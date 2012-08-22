@@ -36,11 +36,10 @@ namespace NucDB{
         /** Invariant Mass as a function of Q2 and x */	
         double W_xQ2(double x, double Q2, double M = Mproton );
 
+        double W_xQ2_proton(double x, double Q2);
+
         /** Nachman scaling variable \f$ \xi \f$ */
         double xiNachan_xQ2(double x, double Q2, double M=Mproton);
-
-
-
 
    } // end Kine namespace
 } // end NucDB namespace
