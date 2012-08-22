@@ -80,6 +80,14 @@ void NucDBMeasurement::PrintData() const {
    }
 //_____________________________________________________________________________
 
+void  NucDBMeasurement::ListVariables(){
+   if(fDataPoints.GetEntries()>0) {
+      NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(0);
+      aPoint->ListVariables();
+   }
+}
+//_____________________________________________________________________________
+
 TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
       //if(fGraph) delete fGraph;
       fGraph=0;
@@ -89,26 +97,25 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
       fGraph->SetName(Form("%sVS%s",GetName(),varName));
       for(int i = 0; i < fNumberOfDataPoints;i++) {
          point = (NucDBDataPoint *) fDataPoints.At(i);
-         var = point->GetBinVariable(varName);
-         if(i==0){
-            fGraph->GetXaxis()->SetTitle(varName);
-            fGraph->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
-
+         var = point->FindVariable(varName);
+         if( var ) {
+            fGraph->SetPoint(i,var->GetMean(),point->GetValue());
+            fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
+         } else {
+            Error("BuildGraph",Form("Variable, %s, not found!",varName));
+            fGraph->SetPoint(i,0,0);
+            fGraph->SetPointError(i,0,1);
+            break;
          }
-         
-//          std::cout << "i = " <<  i << " \n";
-//          std::cout <<" var addr = " << var->GetMean() << "\n";
-//          std::cout <<" point addr = " << point->GetValue() << " \n";
-         if(point && var ) fGraph->SetPoint(i,var->GetMean(),point->GetValue());
-         if(point && var )fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
       }
-/*      fGraph->SetTitle(GetTitle());*/
-      fGraph->SetMarkerColor(fColor);
-      fGraph->SetLineColor(fColor);
+      fGraph->GetXaxis()->SetTitle(var->GetTitle());
+      fGraph->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
+      fGraph->SetMarkerColor(GetColor());
+      //fGraph->SetLineColor(GetColor());
       fGraph->SetMarkerStyle(20);
-      fGraph->SetLineStyle(1);
-      fGraph->SetLineWidth(2);
-/*      fGraph->GetXaxis()->SetTitle(varName);*/
+      //fGraph->SetLineStyle(1);
+      //fGraph->SetLineWidth(0);
+      fGraph->SetDrawOption("aep");
       fGraphs.Add(fGraph);
       return(fGraph);
    }

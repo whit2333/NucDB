@@ -98,14 +98,22 @@ void NucDBDataPoint::Print(){
    }
 //_____________________________________________________________________________
 
+NucDBBinnedVariable* NucDBDataPoint::FindVariable(const char * name) {
+   NucDBBinnedVariable * avar = 0;
+   if( !avar ) avar = GetBinVariable(name);
+   if( !avar ) avar = GetDependentVariable(name);
+/*   if( !avar ) avar = GetDiscreteVariable(name);*/
+   return(avar);
+}
+//_____________________________________________________________________________
+
 NucDBBinnedVariable* NucDBDataPoint::GetBinVariable(const char * name) {
       for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
           if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
              return((NucDBBinnedVariable*)fBinnedVariables.At(i));
       }
       return(0);
-   }
-//_____________________________________________________________________________
+   }//_____________________________________________________________________________
 
 void NucDBDataPoint::AddBinVariable(NucDBBinnedVariable * var) { 
       if( ! GetBinVariable(var->GetName()) ) {
@@ -141,5 +149,25 @@ void NucDBDataPoint::CalculateDependentVariables(){
       var = (NucDBDependentVariable*)fVariables.At(i);
       var->Calculate();
    }
+}
+//_____________________________________________________________________________
+
+NucDBDiscreteVariable* NucDBDataPoint::GetDiscreteVariable(const char * name) {
+      for(int i = 0;i<fDiscreteVariables.GetEntries();i++) {
+          if( !strcmp( ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->GetName(),name) ) 
+             return((NucDBDiscreteVariable*)fDiscreteVariables.At(i));
+      }
+      return(0);
+   }
+//_____________________________________________________________________________
+
+void  NucDBDataPoint::ListVariables(){
+   std::cout << "Variables: \n";
+      for(int i = 0;i<fVariables.GetEntries();i++) {
+         std::cout << " - " << fVariables.At(i)->GetName() << "\n";
+      }
+      for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
+         std::cout << " - " << fBinnedVariables.At(i)->GetName() << "\n";
+      }
 }
 //_____________________________________________________________________________

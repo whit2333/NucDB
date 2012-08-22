@@ -60,7 +60,7 @@ public:
 
    void    Print() const ; // *MENU*
    void    PrintData() const ; // *MENU*
-   
+   void    ListVariables() ; // *MENU*
    TString GetExperimentName() {return(fExperimentName);}
    void    SetExperimentName(TString s){fExperimentName = s;}
    Int_t   GetNDataPoints(){ return(fNumberOfDataPoints);}

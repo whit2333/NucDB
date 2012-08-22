@@ -10,6 +10,7 @@
 #pragma link C++ class NucDBManager+;
 #pragma link C++ class NucDBDatabase+;
 
+#pragma link C++ class NucDBVariable+;
 #pragma link C++ class NucDBDiscreteVariable+;
 #pragma link C++ class NucDBBinnedVariable+;
 #pragma link C++ class NucDBErrorBar+;

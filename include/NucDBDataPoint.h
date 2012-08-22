@@ -112,6 +112,9 @@ public :
     *  systematic and statistical errors
     */
    void                  CalculateTotalError();
+   void                  CalculateDependentVariables(); // *MENU*
+   void                  ListVariables(); // *MENU*
+   NucDBBinnedVariable * FindVariable(const char * name);
    NucDBBinnedVariable * GetBinVariable(const char * name);
    void                  AddBinVariable(NucDBBinnedVariable * var);
    TList *               GetBinnedVariables() { return(&fBinnedVariables);}
@@ -120,7 +123,7 @@ public :
    NucDBUnit *           GetUnit(){return &fUnit;}
    void                  AddDependentVariable(NucDBDependentVariable * var);
    NucDBDependentVariable * GetDependentVariable(const char * name);
-   void                  CalculateDependentVariables(); // *MENU*
+   NucDBDiscreteVariable *  GetDiscreteVariable(const char * name);
 
 ClassDef(NucDBDataPoint,2)
 };

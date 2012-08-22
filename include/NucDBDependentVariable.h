@@ -41,6 +41,8 @@ public :
    void                  SetVariable(Int_t n, NucDBBinnedVariable * avar );
    NucDBBinnedVariable * GetVariable(Int_t n );
    Double_t              GetValue();
+   Double_t              FindMaximum();
+   Double_t              FindMinimum();
    void                  Calculate(); // *MENU* 
    void                  SetNDependentVariables(Int_t n){ fNDepVars = n;}
    Int_t                 GetNDependentVariables(){ return(fNDepVars);}
@@ -50,7 +52,6 @@ public :
    void                  SetFunc1(double (*pt2func)(double)){ fFunc1 = pt2func;}
    void                  SetFunc2(double (*pt2func)(double,double)){ fFunc2 = pt2func;}
    void                  SetFunc3(double (*pt2func)(double,double,double)){ fFunc3 = pt2func;}
-
 
    double              (*fFunc1) (double);  //->
    double              (*fFunc2) (double,double); //->

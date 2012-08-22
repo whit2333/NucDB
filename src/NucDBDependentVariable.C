@@ -73,13 +73,60 @@ Double_t NucDBDependentVariable::GetValue(){
 void NucDBDependentVariable::Calculate(){
    /// \todo determine the min and max 
    if( fDependentVariables.GetEntries() >= fNDepVars ) {
-      SetBinValueSize(GetValue(),0.1);
+      SetMean(GetValue());
+      SetBinMaximum(FindMaximum());
+      SetBinMinimum(FindMinimum());
+      SetAverage( (GetBinMaximum()+GetBinMinimum())/2.0 );
+
    } else {
       SetBinValueSize(0.0,0.1);
    }
-   Print();
+/*   Print();*/
 }
 //_____________________________________________________________________________
+
+Double_t   NucDBDependentVariable::FindMaximum(){
+   Double_t res  = -99999;
+   if(fDependentVariables.GetEntries() < fNDepVars) {
+      Error("GetValue","not enough variables to calculate value");
+      return(0.0);
+   }
+   if(fNDepVars ==2 && fFunc2 != 0 ) {
+      Double_t temp = 0;
+      temp = (*fFunc2)(x_low[0],x_low[1]);
+      res = temp;
+      if( temp > res ) res = temp;
+      temp = (*fFunc2)(x_high[0],x_high[1]);
+      if( temp > res ) res = temp;
+      temp = (*fFunc2)(x_low[0],x_high[1]);
+      if( temp > res ) res = temp;
+      temp = (*fFunc2)(x_high[0],x_low[1]);
+      if( temp > res ) res = temp;
+   }
+   return(res);
+}
+//_____________________________________________________________________________
+
+Double_t   NucDBDependentVariable::FindMinimum(){
+   Double_t res  = 99999;
+   if(fDependentVariables.GetEntries() < fNDepVars) {
+      Error("GetValue","not enough variables to calculate value");
+      return(0.0);
+   }
+   if(fNDepVars ==2 && fFunc2 != 0 ) {
+      Double_t temp = 0;
+      temp = (*fFunc2)(x_low[0],x_low[1]);
+      res = temp;
+      if( temp < res ) res = temp;
+      temp = (*fFunc2)(x_high[0],x_high[1]);
+      if( temp < res ) res = temp;
+      temp = (*fFunc2)(x_low[0],x_high[1]);
+      if( temp < res ) res = temp;
+      temp = (*fFunc2)(x_high[0],x_low[1]);
+      if( temp < res ) res = temp;
+   }
+   return(res);
+}
 
 
 ClassImp(NucDBInvariantMassDV)

@@ -8,6 +8,31 @@
 #include "NucDBUnits.h"
 #include "TBrowser.h"
 
+/** Variable Base Class.
+ * All variables have a
+ *   - unit
+ *   - value
+ *   - name
+ *   - print method
+ */
+class NucDBVariable : public TNamed {
+protected:
+   NucDBUnit  fUnit;
+   Double_t   fValue;
+
+public:
+   NucDBVariable(const char* n = "aVariable", const char* t = "A Variable");
+   virtual ~NucDBVariable();
+
+   virtual void         Print(); // *MENU*
+
+   virtual Double_t     GetValue() const {return(fValue);}
+   virtual void         Setvalue(Int_t v){fValue = v;} // *MENU*
+   void                 SetUnit(NucDBUnit * u) { fUnit = *u; }
+   NucDBUnit *          GetUnit(){return &fUnit;}
+
+ClassDef(NucDBVariable,1)
+};
 
 /** A Discrete variable stored in a single integer value.
  *

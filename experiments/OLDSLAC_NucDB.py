@@ -74,7 +74,7 @@ if not F2d :
     F2d = NucDBMeasurement("F2d","F_{2}^{d}")
     experiment.AddMeasurement(F2d)
 F2d.ClearDataPoints()
-F2d.SetColor(1)
+F2d.SetColor(2)
 
 F2dExtractor = OLDSLACExtractor()
 F2dExtractor.SetMeasurement(F2d)
