@@ -41,6 +41,10 @@ namespace NucDB{
         /** Nachman scaling variable \f$ \xi \f$ */
         double xiNachman_xQ2(double x, double Q2, double M=Mproton);
 
+        double nu_xQ2(double x, double Q2, double M=Mproton  );
+        double nu_xQ2_proton(double x, double Q2);
+
+
    } // end Kine namespace
 } // end NucDB namespace
 

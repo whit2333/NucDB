@@ -1,6 +1,6 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV
+from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV
 from NucDBExtractors import *
 import os
 
@@ -43,6 +43,13 @@ class SMCExtractor(NucDBRawDataExtractor) :
         if W :
             W.SetVariable(0,x)
             W.SetVariable(1,Qsq)
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
         #
         #self.fCurrentDataPoint.Print()
@@ -114,7 +121,7 @@ if __name__ == "__main__":
         A1p = NucDBMeasurement("A1p","A_{1}^{p}")
         experiment.AddMeasurement(A1p)
     A1p.ClearDataPoints()
-    A1p.fColor=8
+    A1p.SetColor(3)
     extractor1 = SMCExtractorAXN()
     extractor1.SetMeasurement(A1p)
     extractor1.SetInputFile("experiments/SMC/a1pg1p.dat")
@@ -132,7 +139,7 @@ if __name__ == "__main__":
         g1p = NucDBMeasurement("g1p","g_{1}^{p}")
         experiment.AddMeasurement(g1p)
     g1p.ClearDataPoints()
-    g1p.fColor=8
+    g1p.SetColor(3)
     extractor2 = SMCExtractorgXN()
     extractor2.SetMeasurement(g1p)
     extractor2.SetInputFile("experiments/SMC/a1pg1p.dat")
@@ -150,7 +157,7 @@ if __name__ == "__main__":
         A2p = NucDBMeasurement("A2p","A_{2}^{p}")
         experiment.AddMeasurement(A2p)
     A2p.ClearDataPoints()
-    A2p.fColor=8
+    A2p.SetColor(3)
     extractor3 = SMCExtractorA2p()
     extractor3.SetMeasurement(A2p)
     extractor3.SetInputFile("experiments/SMC/a2p.dat")
@@ -168,7 +175,7 @@ if __name__ == "__main__":
         g2p = NucDBMeasurement("g2p","g_{2}^{p}")
         experiment.AddMeasurement(g2p)
     g2p.ClearDataPoints()
-    g2p.fColor=8
+    g2p.SetColor(3)
     extractor4 = SMCExtractorg2p()
     extractor4.SetMeasurement(g2p)
     extractor4.SetInputFile("experiments/SMC/g2p.dat")
@@ -191,7 +198,7 @@ if __name__ == "__main__":
         g1n = NucDBMeasurement("g1n","g_{1}^{n}")
         experiment.AddMeasurement(g1n)
     g1n.ClearDataPoints()
-    g1n.fColor=8
+    g1n.SetColor(3)
     extractor5 = SMCExtractorAXN()
     extractor5.SetMeasurement(g1n)
     extractor5.SetInputFile("experiments/SMC/g1n.dat")

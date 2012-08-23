@@ -1,6 +1,6 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV
+from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV
 from NucDBExtractors import *
 import os
 
@@ -27,12 +27,23 @@ class OLDSLACExtractor(NucDBRawDataExtractor) :
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))
+        #
         W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
         if W :
             W.SetVariable(0,x)
             W.SetVariable(1,Qsq)
-        self.fCurrentDataPoint.CalculateTotalError()
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
+        #
 
         #self.fCurrentDataPoint.Print()
 
@@ -55,15 +66,11 @@ F2pExtractor.SetInputFile("experiments/OLDSLAC/f2prot.dat")
 F2pExtractor.linestoskip=0
 Xbjorken = NucDBBinnedVariable("x","x")
 Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-W   = NucDBInvariantMassDV()
-W.SetVariable(0,Xbjorken)
-W.SetVariable(1,Qsq)
 
 #F2pExtractor.fCurrentDataPoint.GetBinnedVariables().Add(Xbjorken)
 #F2pExtractor.fCurrentDataPoint.GetBinnedVariables().Add(Qsq)
 F2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
 F2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
-F2pExtractor.fCurrentDataPoint.AddDependentVariable(W)
 F2pExtractor.Initialize()
 F2pExtractor.ExtractAllValues()
 F2p.BuildGraph()
@@ -89,7 +96,6 @@ F2dExtractor.linestoskip=0
 #F2dExtractor.fCurrentDataPoint.GetBinnedVariables().Add(Qsq)
 F2dExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
 F2dExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
-F2dExtractor.fCurrentDataPoint.AddDependentVariable(W)
 
 F2dExtractor.Initialize()
 F2dExtractor.ExtractAllValues()

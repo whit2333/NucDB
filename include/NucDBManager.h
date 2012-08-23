@@ -38,10 +38,10 @@ public:
       b->Add(&fPapers, "Papers");
    }
 
-   void ListExperiments();   // *MENU*
-   void ListMeasurements();  // *MENU*
-   void ListPapers();        // *MENU*
-   void Print();             // *MENU*
+   void ListExperiments() const ;   // *MENU*
+   void ListMeasurements() const ;  // *MENU*
+   void ListPapers() const ;        // *MENU*
+   void Print() const ;             // *MENU*
 
    TList * GetExperiments(){return(&fExperiments);}
    TList * GetMeasurements(){return(&fMeasurements);}

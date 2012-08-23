@@ -1,6 +1,6 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV
+from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV
 from NucDBExtractors import *
 import os
 
@@ -43,6 +43,13 @@ class JLABE99117Extractor(NucDBRawDataExtractor):
         if W :
             W.SetVariable(0,x)
             W.SetVariable(1,Qsq)
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
         #
         #self.fCurrentDataPoint.Print()
@@ -61,7 +68,7 @@ if __name__ == "__main__":
         A1n = NucDBMeasurement("A1n","A_{1}^{n}")
         experiment.AddMeasurement(A1n)
     A1n.ClearDataPoints()
-    A1n.fColor=6
+    A1n.SetColor(7)
     extractor1 = JLABE99117Extractor()
     extractor1.SetMeasurement(A1n)
     extractor1.SetInputFile("experiments/JLAB-E99117/plain.txt")
@@ -80,7 +87,7 @@ if __name__ == "__main__":
         g1nOverF1n = NucDBMeasurement("g1n/F1n","g_{1}^{n}/F_{1}^{n}")
         experiment.AddMeasurement(g1nOverF1n)
     g1nOverF1n.ClearDataPoints()
-    g1nOverF1n.fColor=6
+    g1nOverF1n.SetColor(7)
     extractor2 = JLABE99117Extractor()
     extractor2.SetMeasurement(g1nOverF1n)
     extractor2.SetInputFile("experiments/JLAB-E99117/plain.txt")
@@ -99,7 +106,7 @@ if __name__ == "__main__":
         A1He3 = NucDBMeasurement("A1He3","A_{1}^{He3}")
         experiment.AddMeasurement(g1nOverF1n)
     A1He3.ClearDataPoints()
-    A1He3.fColor=6
+    A1He3.SetColor(7)
     extractor3 = JLABE99117Extractor()
     extractor3.SetMeasurement(A1He3)
     extractor3.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -120,7 +127,7 @@ if __name__ == "__main__":
         A2He3 = NucDBMeasurement("A2He3","A_{2}^{He3}")
         experiment.AddMeasurement(g1nOverF1n)
     A2He3.ClearDataPoints()
-    A2He3.fColor=6
+    A2He3.SetColor(7)
     extractor4 = JLABE99117Extractor()
     extractor4.SetMeasurement(A2He3)
     extractor4.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -139,7 +146,7 @@ if __name__ == "__main__":
         g1He3OverF1He3 = NucDBMeasurement("g1He3/F1He3","g_{1}^{He3}/F_{1}^{He3}")
         experiment.AddMeasurement(g1He3OverF1He3)
     g1He3OverF1He3.ClearDataPoints()
-    g1He3OverF1He3.fColor=6
+    g1He3OverF1He3.SetColor(7)
     extractor7 = JLABE99117Extractor()
     extractor7.SetMeasurement(g1He3OverF1He3)
     extractor7.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -158,7 +165,7 @@ if __name__ == "__main__":
         g2He3OverF2He3 = NucDBMeasurement("g2He3/F2He3","g_{2}^{He3}/F_{2}^{He3}")
         experiment.AddMeasurement(g2He3OverF2He3)
     g2He3OverF2He3.ClearDataPoints()
-    g2He3OverF2He3.fColor=6
+    g2He3OverF2He3.SetColor(7)
     extractor8 = JLABE99117Extractor()
     extractor8.SetMeasurement(g2He3OverF2He3)
     extractor8.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -177,7 +184,7 @@ if __name__ == "__main__":
         g1He3 = NucDBMeasurement("g1He3","g_{1}^{He3}")
         experiment.AddMeasurement(g1He3)
     g1He3.ClearDataPoints()
-    g1He3.fColor=6
+    g1He3.SetColor(7)
     extractor9 = JLABE99117Extractor()
     extractor9.SetMeasurement(g1He3)
     extractor9.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -196,7 +203,7 @@ if __name__ == "__main__":
         g2He3 = NucDBMeasurement("g2He3","g_{2}^{He3}")
         experiment.AddMeasurement(g2He3)
     g2He3.ClearDataPoints()
-    g2He3.fColor=6
+    g2He3.SetColor(7)
     extractor10 = JLABE99117Extractor()
     extractor10.SetMeasurement(g2He3)
     extractor10.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -216,7 +223,7 @@ if __name__ == "__main__":
         A1n = NucDBMeasurement("A1n","A_{1}^{n}")
         experiment.AddMeasurement(A1n)
     A1n.ClearDataPoints()
-    A1n.fColor=6
+    A1n.SetColor(7)
     extractor11 = JLABE99117Extractor()
     extractor11.SetMeasurement(A1n)
     extractor11.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -236,7 +243,7 @@ if __name__ == "__main__":
         A2n = NucDBMeasurement("A2n","A_{2}^{n}")
         experiment.AddMeasurement(A2n)
     A2n.ClearDataPoints()
-    A2n.fColor=6
+    A2n.SetColor(7)
     extractor12 = JLABE99117Extractor()
     extractor12.SetMeasurement(A2n)
     extractor12.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -256,7 +263,7 @@ if __name__ == "__main__":
         g1nOverF1n = NucDBMeasurement("g1n/F1n","g_{1}^{n}/F_{1}^{n}")
         experiment.AddMeasurement(g1nOverF1n)
     g1nOverF1n.ClearDataPoints()
-    g1nOverF1n.fColor=6
+    g1nOverF1n.SetColor(7)
     extractor13 = JLABE99117Extractor()
     extractor13.SetMeasurement(g1nOverF1n)
     extractor13.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -275,7 +282,7 @@ if __name__ == "__main__":
         g2nOverF2n = NucDBMeasurement("g2n/F2n","g_{2}^{n}/F_{2}^{n}")
         experiment.AddMeasurement(g2nOverF2n)
     g2nOverF2n.ClearDataPoints()
-    g2nOverF2n.fColor=6
+    g2nOverF2n.SetColor(7)
     extractor14 = JLABE99117Extractor()
     extractor14.SetMeasurement(g2nOverF2n)
     extractor14.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -294,7 +301,7 @@ if __name__ == "__main__":
         g1n = NucDBMeasurement("g1n","g_{1}^{n}")
         experiment.AddMeasurement(g1n)
     g1n.ClearDataPoints()
-    g1n.fColor=6
+    g1n.SetColor(7)
     extractor5 = JLABE99117Extractor()
     extractor5.SetMeasurement(g1n)
     extractor5.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
@@ -313,7 +320,7 @@ if __name__ == "__main__":
         g2n = NucDBMeasurement("g2n","g_{2}^{n}")
         experiment.AddMeasurement(g2n)
     g2n.ClearDataPoints()
-    g2n.fColor=6
+    g2n.SetColor(7)
     extractor6 = JLABE99117Extractor()
     extractor6.SetMeasurement(g2n)
     extractor6.SetInputFile("experiments/JLAB-E99117/plain.txt.1")

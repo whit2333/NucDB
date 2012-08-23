@@ -81,6 +81,27 @@ public:
 ClassDef(NucDBInvariantMassDV,1);
 };
 
+/**  Concrete imp of NucDBDependentVariable for invariant mass.
+ *   This is a Work around until I figure out how to handle the function pointer stream...?
+ */
+class NucDBPhotonEnergyDV  : public NucDBDependentVariable {
+public:
+   NucDBPhotonEnergyDV(const char * n = "nu",const char * t = "#nu") : NucDBDependentVariable(n,t) {
+      NucDBBinnedVariable    * x  = new NucDBBinnedVariable("x","x");
+      x->SetBinValueSize(0.6,0.1);
+      NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+      Q2->SetBinValueSize(3.0,0.5);
+      SetNDependentVariables(2);
+      SetVariable(0,x);
+      SetVariable(1,Q2);
+      SetFunc2( &NucDB::Kine::nu_xQ2_proton);
+   }
+   ~NucDBPhotonEnergyDV(){}
+
+ClassDef(NucDBPhotonEnergyDV,1);
+};
+
+
 #endif
 
 

@@ -23,6 +23,8 @@
 #pragma link C++ function NucDB::Kine::W_xQ2_proton(double,double);
 
 #pragma link C++ function NucDB::Kine::xiNachman_xQ2(double,double,double);
+#pragma link C++ function NucDB::Kine::nu_xQ2(double,double,double);
+#pragma link C++ function NucDB::Kine::nu_xQ2_proton(double,double);
 
 
 #pragma link C++ nestedclass;

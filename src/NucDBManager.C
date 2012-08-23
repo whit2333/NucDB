@@ -3,14 +3,14 @@
 ClassImp(NucDBDatabase)
 //_____________________________________________________________________________
 
-void NucDBDatabase::Print(){
+void NucDBDatabase::Print() const {
       std::cout << "Database : " << GetName() << " , title = " << GetTitle() << "\n";
       ListExperiments();
       ListPapers();
    }
 //_____________________________________________________________________________
 
-void NucDBDatabase::ListExperiments() {
+void NucDBDatabase::ListExperiments() const {
       std::cout << "Experiments:\n";
       for(int i = 0; i< fExperiments.GetEntries();i++){
          NucDBExperiment * exp  = (NucDBExperiment*)fExperiments.At(i);
@@ -19,7 +19,7 @@ void NucDBDatabase::ListExperiments() {
    }
 //_____________________________________________________________________________
 
-void NucDBDatabase::ListMeasurements() {
+void NucDBDatabase::ListMeasurements() const {
       std::cout << "Measurements:\n";
       for(int i = 0; i< fMeasurements.GetEntries();i++){
          TObjString * meas  = (TObjString*)fMeasurements.At(i);
@@ -28,7 +28,7 @@ void NucDBDatabase::ListMeasurements() {
    }
 //_____________________________________________________________________________
 
-void NucDBDatabase::ListPapers() {
+void NucDBDatabase::ListPapers() const {
       std::cout << "Papers:\n";
       for(int i = 0; i< fPapers.GetEntries();i++){
          NucDBPaper * pap  = (NucDBPaper*)fPapers.At(i);

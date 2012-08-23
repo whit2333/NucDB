@@ -113,8 +113,8 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
          fGraph->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
       }
       fGraph->SetMarkerColor(GetColor());
-      //fGraph->SetLineColor(GetColor());
-      fGraph->SetMarkerStyle(20);
+      fGraph->SetLineColor(GetColor());
+      //fGraph->SetMarkerStyle(20);
       //fGraph->SetLineStyle(1);
       //fGraph->SetLineWidth(0);
       fGraph->SetDrawOption("aep");

@@ -47,7 +47,12 @@ namespace NucDB{
          return( Q2/(M*nu*(1.0 + sqrt(1.0 + Q2/pow(nu,2)))) );
       }
 
-
+      double nu_xQ2(double x, double Q2, double M  ){
+         return( Q2/(2.0*M*x) );
+      }
+      double nu_xQ2_proton(double x, double Q2 ){
+         return( nu_xQ2(x,Q2) );
+      }
 
 
    } // end Kine namespace

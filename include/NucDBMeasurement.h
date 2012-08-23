@@ -35,9 +35,15 @@ public:
    NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
    virtual ~NucDBMeasurement();
    NucDBMeasurement(const NucDBMeasurement& v){
-      fColor = v.fColor;
-      fExperimentName = v.fExperimentName;
+      SetNameTitle(v.GetName(),v.GetTitle());
+      fColor = v.GetColor();
+      SetExperimentName(v.GetExperimentName());
       fNumberOfDataPoints = v.fNumberOfDataPoints;
+
+      fDataPoints.AddAll(v.GetDataPoints());
+      fBinnedVariables.AddAll(v.GetBinnedVariables());
+      fDependentVariables.AddAll(v.GetDependentVariables());
+      fGraphs.AddAll(v.GetGraphs());
    }
 
    /** Necessary for Browsing */
@@ -61,22 +67,22 @@ public:
    /** Returns a list of datapoints falling in the bin.
     */
    TList * FilterWithBin(NucDBBinnedVariable const *bin);
-   TList * GetDataPoints() {return(&fDataPoints);}
+   const TList * GetDataPoints() const {return(&fDataPoints);}
 
    void    Print() const ; // *MENU*
    void    PrintData() const ; // *MENU*
    void    ListVariables() ; // *MENU*
-   TString GetExperimentName() {return(fExperimentName);}
+   TString GetExperimentName() const {return(fExperimentName);}
    void    SetExperimentName(TString s){fExperimentName = s;}
    Int_t   GetNDataPoints(){ return(fNumberOfDataPoints);}
    void    SetColor(Int_t col){fColor = col;}
-   Int_t   GetColor(){return(fColor);}
+   Int_t   GetColor() const {return(fColor);}
 
    /** Build a graph with errors */
    TGraphErrors * BuildGraph(const char * varName = "x"); // *MENU*
    TGraphErrors * fGraph; //->
 
-   TList *              GetBinnedVariables() { return(&fBinnedVariables);}
+   const TList *              GetBinnedVariables() const { return(&fBinnedVariables);}
    void                 AddBinnedVariable(NucDBBinnedVariable * var){fBinnedVariables.Add(var);}
    NucDBBinnedVariable* GetBinnedVariable(const char * name) {
       for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
@@ -86,7 +92,7 @@ public:
       return(0);
    }
 
-   TList *              GetDependentVariables() { return(&fDependentVariables);}
+   const TList *              GetDependentVariables() const { return(&fDependentVariables);}
    void                 AddDependentVariables(NucDBBinnedVariable * var){fDependentVariables.Add(var);}
    NucDBBinnedVariable* GetDependentVariable(const char * name) {
       for(int i = 0;i<fDependentVariables.GetEntries();i++) {
@@ -95,6 +101,8 @@ public:
       }
       return(0);
    }
+
+   const TList *              GetGraphs() const { return(&fGraphs);}
 
 
 ClassDef(NucDBMeasurement,1)

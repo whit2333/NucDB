@@ -1,6 +1,6 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV
+from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV
 from NucDBExtractors import *
 import os
 
@@ -37,6 +37,13 @@ class SLACE155Extractor(NucDBRawDataExtractor):
         if W :
             W.SetVariable(0,x)
             W.SetVariable(1,Qsq)
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
         #
         #self.fCurrentDataPoint.Print()
@@ -86,6 +93,13 @@ class SLACE155Extractor2(SLACE155Extractor):
         if W :
             W.SetVariable(0,x)
             W.SetVariable(1,Qsq)
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
         #
 
@@ -124,21 +138,21 @@ if not g1p :
     g1p = NucDBMeasurement("g1p","g_{1}^{p}")
     experiment.AddMeasurement(g1p)
 g1p.ClearDataPoints()
-g1p.fColor=1
+g1p.SetColor(1)
 
 g1d = experiment.GetMeasurement("g1d")
 if not g1d :
     g1d = NucDBMeasurement("g1d","g_{1}^{d}")
     experiment.AddMeasurement(g1d)
 g1d.ClearDataPoints()
-g1d.fColor=1
+g1d.SetColor(1)
 
 g1n = experiment.GetMeasurement("g1n")
 if not g1n :
     g1n = NucDBMeasurement("g1n","g_{1}^{n}")
     experiment.AddMeasurement(g1n)
 g1n.ClearDataPoints()
-g1n.fColor=1
+g1n.SetColor(1)
 
 g1pExtractor = SLACE155Extractorxg1p()
 g1pExtractor.SetMeasurement(g1p)
@@ -185,14 +199,14 @@ if not g2p :
     g2p = NucDBMeasurement("g2p","g_{2}^{p}")
     experiment.AddMeasurement(g2p)
 g2p.ClearDataPoints()
-g2p.fColor=1
+g2p.SetColor(1)
 
 g2d = experiment.GetMeasurement("g2d")
 if not g2d :
     g2d = NucDBMeasurement("g2d","g_{2}^{d}")
     experiment.AddMeasurement(g2d)
 g2d.ClearDataPoints()
-g2d.fColor=1
+g2d.SetColor(1)
 
 g2pExtractor = SLACE155Extractorxg2p()
 g2pExtractor.SetMeasurement(g2p)
