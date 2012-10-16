@@ -11,3 +11,5 @@ Environment
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NucDB_DIR/lib
     export PYTHONPATH=$PYTHONPATH:$NucDB_DIR/python
 
+checkout [the doc page](http://quarks.temple.edu/~whit/code/nucdb/ "NucDB")
+
