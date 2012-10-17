@@ -223,7 +223,7 @@ Int_t NucDBManager::ListExperiments() {
       exps->SetOwner(false);
       exps->Print();
       Int_t n = exps->GetEntries();
-      delete exps;
+      //delete exps;
       return(n);
    }
 //_____________________________________________________________________________
