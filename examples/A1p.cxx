@@ -14,8 +14,6 @@ Int_t A1p()
       NucDBMeasurement * g1p = (NucDBMeasurement*)measurementsList->At(i);
       TGraphErrors * graph = g1p->BuildGraph("x");
       leg->AddEntry(graph, Form("%s A1p", g1p->GetExperimentName().Data()), "ep");
-      graph->SetMarkerSize(1.2);
-      graph->SetMarkerStyle(20);
       if (i == 0)graph->Draw("ap");
       graph->Draw("p");
    }

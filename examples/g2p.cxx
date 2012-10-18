@@ -19,9 +19,9 @@ Int_t g2p()
 
    for (int i = 0; i < g2p_meas->GetEntries() ; i++) {
       NucDBMeasurement * g2p = (NucDBMeasurement*)g2p_meas->At(i);
-      g2p->BuildGraph();
-      if (i == 0)g2p->fGraph->Draw("a,p,same");
-      else g2p->fGraph->Draw("p");
+      TGraphErrors * graph = g2p->BuildGraph("x");
+      if (i == 0)graph->Draw("a,p");
+      else graph->Draw("p");
    }
    /*
       F2pQsq1->AddDataPoints(F2p->FilterWithBin(Qsq));
@@ -36,7 +36,7 @@ Int_t g2p()
       F2pQsq2->fGraph->SetLineColor(2);
       F2pQsq2->fGraph->Draw("p");
    */
-   c->SaveAs("examples/F2p.png");
+   c->SaveAs("examples/g2p.png");
 
 
    return(0);

@@ -63,5 +63,7 @@ Int_t g1p()
    }
    mg->Draw("a");
 
+   c->SaveAs("examples/g1p.png");
+
    return(0);
 }
