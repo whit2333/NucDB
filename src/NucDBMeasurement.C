@@ -114,7 +114,7 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
       }
       fGraph->SetMarkerColor(GetColor());
       fGraph->SetLineColor(GetColor());
-      //fGraph->SetMarkerStyle(20);
+      fGraph->SetMarkerStyle(20);
       //fGraph->SetLineStyle(1);
       //fGraph->SetLineWidth(0);
       fGraph->SetDrawOption("aep");
