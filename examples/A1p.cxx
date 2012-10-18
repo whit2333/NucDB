@@ -7,13 +7,15 @@ Int_t A1p()
    NucDBManager * manager = NucDBManager::GetManager();
 
    TLegend * leg = new TLegend(0.1, 0.7, 0.48, 0.9);
-   leg->SetHeader("The Legend Title");
+   leg->SetHeader("A_1^p measurments");
 
    TList * measurementsList = manager->GetMeasurements("A1p");
    for (int i = 0; i < measurementsList->GetEntries(); i++) {
       NucDBMeasurement * g1p = (NucDBMeasurement*)measurementsList->At(i);
       TGraphErrors * graph = g1p->BuildGraph("x");
       leg->AddEntry(graph, Form("%s A1p", g1p->GetExperimentName().Data()), "ep");
+      graph->SetMarkerSize(1.2);
+      graph->SetMarkerStyle(20);
       if (i == 0)graph->Draw("ap");
       graph->Draw("p");
    }
