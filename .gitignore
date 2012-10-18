@@ -12,4 +12,5 @@ doc/*.tmp
 *.so
 bin/*
 lib/*
+examples/*.png
 
