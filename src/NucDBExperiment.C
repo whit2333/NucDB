@@ -24,7 +24,7 @@ NucDBMeasurement * NucDBExperiment::GetMeasurement(const char * name) {
             break;
          }
       }
-      if(!meas) std::cout << " Measurement named " << name << " NOT FOUND!\n";
+      //if(!meas) std::cout << " Measurement named " << name << " NOT FOUND!\n";
       return(meas);
    }
 //_____________________________________________________________________________

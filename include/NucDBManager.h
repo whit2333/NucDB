@@ -99,9 +99,10 @@ public :
     */
    Int_t              ListMeasurements();
 
-   /** Prints the measurements for each experiment;
+   /** Prints the measurements for each experiment.
+    *  If a measurment name is provided, only experments with that measurement are listed.
     */ 
-   Int_t              ListMeasurementsByExperiment(); 
+   Int_t              ListMeasurementsByExperiment(const char * measurement = ""); 
 
    ClassDef(NucDBManager,1)
 };

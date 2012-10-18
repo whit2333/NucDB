@@ -23,23 +23,6 @@ NucDBManager::NucDBManager(Int_t opt) {
    fFile->cd();
 
    Load();
-   
-
-
-//    fFile->GetObject("Experiments",fExpDir);
-//    if(!fExpDir) fExpDir = fFile->mkdir("Experiments","Experiments");
-// 
-//       fFile->cd();
-//       fCalcDir=0;
-//       fFile->GetObject("Calculations",fCalcDir);
-//       //if(!fCalcDir) fCalcDir = new TDirectory("Calculations","Calculations");
-//       if(!fCalcDir) fCalcDir = fFile->mkdir("Calculations","Calculations");
-// 
-//       fFile->cd();
-//       fPapersDir=0;
-//       fFile->GetObject("Papers",fPapersDir);
-//       //if(!fPapersDir) fPapersDir = new TDirectory("Papers","Papers");
-//       if(!fPapersDir) fPapersDir = fFile->mkdir("Papers","Papers");
 
 }
 //_____________________________________________________________________________
@@ -109,21 +92,14 @@ TList * NucDBManager::GetMeasurements(const char * measurement) {
    }
 //_____________________________________________________________________________
 
-   void NucDBManager::SavePaper(NucDBPaper * p) {
-      if(!fFile){ Error("SavePaper"," NO FILE OPENED!!! "); }
+void NucDBManager::SavePaper(NucDBPaper * p) {
+   if(!fFile){ Error("SavePaper"," NO FILE OPENED!!! "); }
       fPapers->Add(p);
       SaveDatabase();
-//       else {
-//          if(p) {
-//             fPapersDir->cd();
-//             p->Write(p->GetName(), kWriteDelete);
-//          }
-//          else printf(" NULL pointer\n");
-//       }
-   }
+}
 //_____________________________________________________________________________
 
-   void NucDBManager::SaveExperiment(NucDBExperiment * exp) {
+void NucDBManager::SaveExperiment(NucDBExperiment * exp) {
       if(!fFile){ printf(" NO FILE OPENED!!! \n"); }
       // Check to see if experiment already exists
       NucDBExperiment * anexp = (NucDBExperiment*)fExperiments->FindObject(exp->GetName());
@@ -132,14 +108,7 @@ TList * NucDBManager::GetMeasurements(const char * measurement) {
       AddNewMeasurements(exp);
       SaveDatabase();
 
-//       else {
-//          if(exp) {
-//             fExpDir->cd();
-//             exp->Write(exp->GetName(), kWriteDelete);
-//          }
-//          else printf(" NULL pointer\n");
-//       }
-   }
+}
 //_____________________________________________________________________________
 
 void   NucDBManager::AddNewMeasurements(NucDBExperiment * exp){
@@ -166,18 +135,7 @@ TList * NucDBManager::GetExperiments() {
          fExperiments = fDatabase->GetExperiments();
       }
       return(fExperiments);
-//          NucDBExperiment * anExp = 0;
-// 	 fExperiments->Clear();
-// 	 TList * keys = fExpDir->GetListOfKeys();     
-//          for(int i=0;i<keys->GetEntries();i++){
-// 	    if( !strcmp(  ((TKey*)keys->At(i))->GetClassName(),"NucDBExperiment") ) {
-// 	       fExpDir->GetObject( ((TKey*)keys->At(i))->GetName(),anExp ) ;
-// //	       std::cout << anExp << "\n";
-// 	       fExperiments.Add(anExp);
-// 	    }
-// 	 }
-// 	 return(fExperiments);
-//       }
+
    }
 //_____________________________________________________________________________
 
@@ -191,9 +149,34 @@ Int_t NucDBManager::ListExperiments() {
    }
 //_____________________________________________________________________________
 
-Int_t NucDBManager::ListMeasurementsByExperiment() {
-   fDatabase->ListMeasurementsByExperiment();
-   return(0);   
+Int_t NucDBManager::ListMeasurementsByExperiment(const char * measurement)  {
+   // No argument
+   if( !strcmp("",measurement) ) {
+      TList * exps = GetExperiments();
+      for(int i = 0; i< exps->GetEntries();i++){
+         NucDBExperiment * exp  = (NucDBExperiment*)exps->At(i);
+         std::cout << " - " << exp->GetName() << "\n";
+         TList * meas = exp->GetMeasurements();
+         for(int j = 0; j<  meas->GetEntries();j++){
+            NucDBMeasurement * am = (NucDBMeasurement*)(meas->At(j));
+            std::cout << "   - " << am->GetName() << "\n";
+         }
+      }
+   } else {
+      TList * exps = GetExperiments();
+      for(int i = 0; i< exps->GetEntries();i++){
+         NucDBExperiment * exp  = (NucDBExperiment*)exps->At(i);
+         if(exp->GetMeasurement(measurement) ) {
+            std::cout << " - " << exp->GetName() << "\n";
+            TList * meas = exp->GetMeasurements();
+            for(int j = 0; j<  meas->GetEntries();j++){
+               NucDBMeasurement * am = (NucDBMeasurement*)(meas->At(j));
+               std::cout << "   - " << am->GetName() << "\n";
+            }
+         }
+      }
+   }
+   return(0);
 }
 //_____________________________________________________________________________
 
@@ -213,28 +196,6 @@ Int_t NucDBManager::ListMeasurements() {
       }
       for (it=measurements.begin(); it!=measurements.end(); it++)
          std::cout << " " << *it << "\n";
-//      const char *sql = "select quantity from measurements "
-//                       /* "WHERE "*/;
-//      res = fSQLServer->Query(sql);
-//      int nrows = res->GetRowCount();
-/*      printf("\nGot %d rows in result\n", nrows);*/
-//      int nfields = res->GetFieldCount();
-//      for (int i = 0; i < nfields; i++)
-//         printf("%40s", res->GetFieldName(i));
-//      printf("\n");
-//      for (int i = 0; i < nfields*40; i++)
-//         printf("=");
-//      printf("\n");
-//      for (int i = 0; i < nrows; i++) {
-//         row = res->Next();
-//         for (int j = 0; j < nfields; j++) {
-//            printf("%40s", row->GetField(j));
-//         }
-//         printf("\n");
-//         delete row;
-//      }
-//      delete res;
-//      printf("\n");
-//      return(nrows);
+
       return(0);  
    }

@@ -28,7 +28,6 @@ public:
    }
 
    void ListExperiments() const ;   // *MENU*
-   void ListMeasurementsByExperiment() const ; // *MENU*
    void ListMeasurements() const ;  // *MENU*
    void ListPapers() const ;        // *MENU*
    void Print() const ;             // *MENU*
