@@ -28,6 +28,19 @@ void NucDBDatabase::ListMeasurements() const {
    }
 //_____________________________________________________________________________
 
+void NucDBDatabase::ListMeasurementsByExperiment() const {
+      for(int i = 0; i< fExperiments.GetEntries();i++){
+         NucDBExperiment * exp  = (NucDBExperiment*)fExperiments.At(i);
+         std::cout << " - " << exp->GetName() << "\n";
+         TList * meas = exp->GetMeasurements();
+         for(int j = 0; j<  meas->GetEntries();j++){
+            NucDBMeasurement * am = (NucDBMeasurement*)(meas->At(j));
+            std::cout << "   - " << am->GetName() << "\n";
+         }
+      }
+   }
+//_____________________________________________________________________________
+
 void NucDBDatabase::ListPapers() const {
       std::cout << "Papers:\n";
       for(int i = 0; i< fPapers.GetEntries();i++){
@@ -226,6 +239,12 @@ Int_t NucDBManager::ListExperiments() {
       //delete exps;
       return(n);
    }
+//_____________________________________________________________________________
+
+Int_t NucDBManager::ListMeasurementsByExperiment() {
+   fDatabase->ListMeasurementsByExperiment();
+   return(0);   
+}
 //_____________________________________________________________________________
 
 Int_t NucDBManager::ListMeasurements() {

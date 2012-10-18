@@ -39,6 +39,7 @@ public:
    }
 
    void ListExperiments() const ;   // *MENU*
+   void ListMeasurementsByExperiment() const ; // *MENU*
    void ListMeasurements() const ;  // *MENU*
    void ListPapers() const ;        // *MENU*
    void Print() const ;             // *MENU*
@@ -50,9 +51,8 @@ public:
    ClassDef(NucDBDatabase,1)
 };
 
+
 /** NucDB Database Manager.
- *  
- *  The 
  *
  */
 class NucDBManager : public TObject {
@@ -133,6 +133,10 @@ public :
     *  Returns the total number of measurements
     */
    Int_t              ListMeasurements();
+
+   /** Prints the measurements for each experiment;
+    */ 
+   Int_t              ListMeasurementsByExperiment(); 
 
    ClassDef(NucDBManager,1)
 };
