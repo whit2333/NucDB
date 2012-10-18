@@ -92,6 +92,18 @@ TList * NucDBManager::GetMeasurements(const char * measurement) {
    }
 //_____________________________________________________________________________
 
+TMultiGraph *      NucDBManager::GetMultiGraph(const char * measurement, const char * var){
+   TMultiGraph * mg = new TMultiGraph();
+   TList * meas = GetMeasurements(measurement);
+   for(int i = 0 ; i < meas->GetEntries(); i++) {
+      NucDBMeasurement * am = (NucDBMeasurement*)meas->At(i);
+      TGraphErrors * gr = am->BuildGraph(var);
+      mg->Add(gr,"p");
+   }
+   return(mg);
+}
+//_____________________________________________________________________________
+
 void NucDBManager::SavePaper(NucDBPaper * p) {
    if(!fFile){ Error("SavePaper"," NO FILE OPENED!!! "); }
       fPapers->Add(p);

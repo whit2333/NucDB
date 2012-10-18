@@ -16,6 +16,7 @@
 #include "TBrowser.h"
 #include "TObjString.h"
 #include "NucDBDatabase.h"
+#include "TMultiGraph.h"
 
 /** NucDB Database Manager.
  *
@@ -79,6 +80,9 @@ public :
     *  It combs through all experiments looking for the measurment.
     */
    TList *            GetMeasurements(const char * measurement);
+
+   /** Returns a TMultiGraph of the measurment for the given variable. */
+   TMultiGraph *      GetMultiGraph(const char * measurment, const char * var = "x");
 
    /** Saves data in root file: data/NucDB.root. 
     */
