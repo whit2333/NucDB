@@ -9,7 +9,7 @@ GeneralLibObjs := lib/NucDBDataPoint.o \
                   lib/NucDBDependentVariable.o \
                   lib/NucDBCalculation.o \
                   lib/NucDBPaper.o \
-                  lib/NucDBExperiments.o
+                  lib/NucDBExperiment.o
 
 
 FortranLibObjs := 
