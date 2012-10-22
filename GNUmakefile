@@ -17,43 +17,41 @@ LIBOBJS	  = 1
 LIBMINOR  = 1
 LIBREVIS  = 0
 SOLIBS := $(SOLIBNAMES:%=lib/lib%.so.$(LIBMAJOR).$(LIBMINOR) )
+SOLINKLIBS := $(SOLIBNAMES:%=-Llib/lib%.so.$(LIBMAJOR).$(LIBMINOR) )
 
 
-RCINTFLAGS += -c -DDebug 
+RCINTFLAGS += -c 
+#RCINTFLAGS += -DDebug 
 
 CPPFLAGS += $(shell root-config --cflags )
 CPPFLAGS += -Iinclude -I.
-#CPPFLAGS += -I$(shell lhapdf-config --incdir ) 
-#LDLIBS += $(shell lhapdf-config --libdir ) 
-CPPFLAGS += $(shell mysql_config --include ) 
 CPPFLAGS +=  -g -pipe  
 #-D_LARGEFILE_SOURCE -fno-strict-aliasing
 
 CPPFLAGS += -D"NUCDB_DATA_DIR=\"$(shell echo ${NucDB_DATA_DIR})\"" 
 #RCINTFLAGS += -D'NUCDB_DATA_DIR=$(shell echo ${NucDB_DATA_DIR})' 
 
-#LDLIBS += $(shell lhapdf-config --ldflags)
 LDLIBS += $(shell root-config --ldflags)
-# LDLIBS +=  -lGeomPainter -lGeom -lSpectrum -lSpectrumPainter
-#LDLIBS += $(shell gsl-config --libs)
 LDLIBS += $(shell root-config --glibs --libs )
-#-lTreePlayer -lGeomPainter -lGed -lRGL -lEve -lEG 
-LDLIBS += $(shell mysql_config --libs) 
-LDLIBS += -lgfortran
+#LDLIBS += -lgfortran
 #LDLIBS += -lg2c -lgfortran
 
 CXX = g++
 FC  = gfortran
 
-
 CXXFLAGS  += -O2 -Wall -fPIC 
 CXXFLAGS  += $(CPPFLAGS)
 
 F77FLAGS += -g -O2 -Wall -fPIC -Iinclude 
+
 ##############################################################################/
+
 default : nucdb link
 
 nucdb : shared_libs
+	@echo 
+	@echo === Building binary ===
+	@echo 
 	g++ -o nucdb NucDB.C $(CXXFLAGS) $(LDLIBS) $(SOLIBS)
 	mv nucdb bin/.
 
@@ -64,16 +62,19 @@ nucdb : shared_libs
 convert : $(SOLIBNAMES)
 	g++ $(CXXFLAGS) -shared  -Wl,-soname,$(LIBRARY).$(LIBMAJOR).$(LIBMINOR)\
 	 -o lib/$(LIBRARY).$(LIBMAJOR).$(LIBMINOR)  \
-	  $(SOLIBS) $(LDLIBS)
+	  $(SOLIBS) $(LDLIBS) 
 
 
 # Shared Libraries
 ##############################################################################/
 
 shared_libs : $(SOLIBNAMES)
+	@echo 
+	@echo === Building main shared library ===
+	@echo 
 	g++ $(CXXFLAGS) -shared  -Wl,-soname,$(LIBRARY).$(LIBMAJOR).$(LIBMINOR)\
           -o lib/$(LIBRARY).$(LIBMAJOR).$(LIBMINOR)  \
-            $(SOLIBS) $(LDLIBS)
+            $(SOLIBS) $(LDLIBS) lib/*.o
 #	ln -s $(builddir)/libInSANE.so.1.1 $(builddir)/libInSANE.so
 #	ln -s $(builddir)/libInSANE.so.1.1 $(builddir)/libInSANE.so.1
 #	ln -s $(builddir)/libInSANE.so.1.1 $(builddir)/libInSANE.so
