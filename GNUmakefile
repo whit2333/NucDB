@@ -74,7 +74,8 @@ shared_libs : $(SOLIBNAMES)
 	@echo 
 	g++ $(CXXFLAGS) -shared  -Wl,-soname,$(LIBRARY).$(LIBMAJOR).$(LIBMINOR)\
           -o lib/$(LIBRARY).$(LIBMAJOR).$(LIBMINOR)  \
-            $(SOLIBS) $(LDLIBS) lib/*.o
+            $(LDLIBS) lib/*.o
+#            $(SOLIBS) $(LDLIBS) lib/*.o
 #	ln -s $(builddir)/libInSANE.so.1.1 $(builddir)/libInSANE.so
 #	ln -s $(builddir)/libInSANE.so.1.1 $(builddir)/libInSANE.so.1
 #	ln -s $(builddir)/libInSANE.so.1.1 $(builddir)/libInSANE.so
