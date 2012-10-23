@@ -123,5 +123,43 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
    }
 //_____________________________________________________________________________
 
+TGraphErrors * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , const char * var2Name ) {
+      //if(fGraph) delete fGraph;
+      fGraph=0;
+      NucDBDataPoint * point = 0;
+      NucDBBinnedVariable * var1 = 0;
+      NucDBBinnedVariable * var2 = 0;
+      fGraph = new TGraphErrors(fNumberOfDataPoints);
+      fGraph->SetName(Form("%sVS%s",var1Name,var2Name));
+      for(int i = 0; i < fNumberOfDataPoints;i++) {
+         point = (NucDBDataPoint *) fDataPoints.At(i);
+         var1 = point->FindVariable(var1Name);
+         var2 = point->FindVariable(var2Name);
+         if( var1 && var2 ) {
+            fGraph->SetPoint(i,var1->GetMean(),var2->GetMean());
+            fGraph->SetPointError(i,0.0,0.0);
+         } else {
+            Error("BuildGraph",Form("Variable, %s or %s, not found!",var1Name,var2Name));
+            fGraph->SetPoint(i,0,0);
+            fGraph->SetPointError(i,0,1);
+            break;
+         }
+      }
+      if(var1 && var2){
+         fGraph->GetXaxis()->SetTitle(var1->GetTitle());
+         fGraph->GetYaxis()->SetTitle(var2->GetTitle());
+         fGraph->SetTitle(Form("%s Vs %s",var1->GetTitle(),var2->GetTitle()));
+      }
+      fGraph->SetMarkerColor(GetColor());
+      fGraph->SetLineColor(GetColor());
+      fGraph->SetMarkerStyle(20);
+      //fGraph->SetLineStyle(1);
+      //fGraph->SetLineWidth(0);
+      fGraph->SetDrawOption("aep");
+      fGraphs.Add(fGraph);
+      return(fGraph);
+
+
+}
 //_____________________________________________________________________________
 

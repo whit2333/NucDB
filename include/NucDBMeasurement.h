@@ -80,6 +80,7 @@ public:
 
    /** Build a graph with errors */
    TGraphErrors * BuildGraph(const char * varName = "x"); // *MENU*
+   TGraphErrors * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
    TGraphErrors * fGraph; //->
 
    const TList *              GetBinnedVariables() const { return(&fBinnedVariables);}
