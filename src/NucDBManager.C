@@ -103,7 +103,17 @@ TMultiGraph *      NucDBManager::GetMultiGraph(const char * measurement, const c
    return(mg);
 }
 //_____________________________________________________________________________
-
+TMultiGraph *      NucDBManager::GetKinematicMultiGraph(const char * measurement, const char * var1 ,const char * var2 ){
+   TMultiGraph * mg = new TMultiGraph();
+   TList * meas = GetMeasurements(measurement);
+   for(int i = 0 ; i < meas->GetEntries(); i++) {
+      NucDBMeasurement * am = (NucDBMeasurement*)meas->At(i);
+      TGraphErrors * gr = am->BuildKinematicGraph(var1,var2);
+      mg->Add(gr,"p");
+   }
+   return(mg);
+}
+//_____________________________________________________________________________
 void NucDBManager::SavePaper(NucDBPaper * p) {
    if(!fFile){ Error("SavePaper"," NO FILE OPENED!!! "); }
       fPapers->Add(p);

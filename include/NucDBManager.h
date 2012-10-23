@@ -82,7 +82,8 @@ public :
    TList *            GetMeasurements(const char * measurement);
 
    /** Returns a TMultiGraph of the measurment for the given variable. */
-   TMultiGraph *      GetMultiGraph(const char * measurment, const char * var = "x");
+   TMultiGraph *      GetMultiGraph(const char * measurement, const char * var = "x");
+   TMultiGraph *      GetKinematicMultiGraph(const char * measurement, const char * var1 = "x",const char * var2 = "Qsquared");
 
    /** Saves data in root file: data/NucDB.root. 
     */
