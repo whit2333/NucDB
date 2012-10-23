@@ -66,7 +66,7 @@ if __name__ == "__main__":
         F2p = NucDBMeasurement("F2p","F_{2}^{p}")
         experiment.AddMeasurement(F2p)
     F2p.ClearDataPoints()
-    F2p.fColor=6
+    F2p.SetColor(4008)
     extractor1 = NMCExtractor()
     extractor1.SetMeasurement(F2p)
     extractor1.SetInputFile("experiments/NMC/f2pmerge.dat")

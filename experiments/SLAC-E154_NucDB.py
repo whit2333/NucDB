@@ -76,28 +76,28 @@ if not g1n :
     g1n = NucDBMeasurement("g1n","g_{1}^{n}")
     experiment.AddMeasurement(g1n)
 g1n.ClearDataPoints()
-g1n.fColor=6
+g1n.SetColor(4013)
 
 A1n = experiment.GetMeasurement("A1n")
 if not A1n :
     A1n = NucDBMeasurement("A1n","A_{1}^{n}")
     experiment.AddMeasurement(A1n)
 A1n.ClearDataPoints()
-A1n.fColor=6
+A1n.SetColor(4013)
 
 g2n = experiment.GetMeasurement("g2n")
 if not g2n :
     g2n = NucDBMeasurement("g2n","g_{2}^{n}")
     experiment.AddMeasurement(g2n)
 g2n.ClearDataPoints()
-g2n.fColor=6
+g2n.SetColor(4013)
 
 A2n = experiment.GetMeasurement("A2n")
 if not A2n :
     A2n = NucDBMeasurement("A2n","A_{2}^{n}")
     experiment.AddMeasurement(A2n)
 A2n.ClearDataPoints()
-A2n.fColor=6
+A2n.SetColor(4013)
 
 g1nExtractor = SLACE155ExtractorgXn()
 g1nExtractor.SetMeasurement(g1n)

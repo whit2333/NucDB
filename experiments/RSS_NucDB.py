@@ -104,42 +104,42 @@ if not Apara :
     Apara = NucDBMeasurement("Aparap","A_{\para}^{p}")
     experiment.AddMeasurement(Apara)
 Apara.ClearDataPoints()
-Apara.SetColor(4)
+Apara.SetColor(4010)
 
 Aperp = experiment.GetMeasurement("Aperpp")
 if not Aperp :
     Aperp = NucDBMeasurement("Aperpp","A_{\perp}^{p}")
     experiment.AddMeasurement(Aperp)
 Aperp.ClearDataPoints()
-Aperp.SetColor(4)
+Aperp.SetColor(4010)
 
 g1p = experiment.GetMeasurement("g1p")
 if not g1p :
     g1p = NucDBMeasurement("g1p","g_{1}^{p}")
     experiment.AddMeasurement(g1p)
 g1p.ClearDataPoints()
-g1p.SetColor(4)
+g1p.SetColor(4010)
 
 g2p = experiment.GetMeasurement("g2p")
 if not g2p :
     g2p = NucDBMeasurement("g2p","g_{2}^{p}")
     experiment.AddMeasurement(g2p)
 g2p.ClearDataPoints()
-g2p.SetColor(4)
+g2p.SetColor(4010)
 
 A1p = experiment.GetMeasurement("A1p")
 if not A1p :
     A1p = NucDBMeasurement("A1p","A_{1}^{p}")
     experiment.AddMeasurement(A1p)
 A1p.ClearDataPoints()
-A1p.SetColor(4)
+A1p.SetColor(4010)
 
 A2p = experiment.GetMeasurement("A2p")
 if not A2p :
     A2p = NucDBMeasurement("A2p","A_{2}^{p}")
     experiment.AddMeasurement(A2p)
 A2p.ClearDataPoints()
-A2p.SetColor(4)
+A2p.SetColor(4010)
 
 
 AparaExtractor = RSSExtractorApara()
@@ -220,7 +220,7 @@ if not d2p :
     d2p = NucDBMeasurement("d2p","d_{2}^{p}")
     experiment.AddMeasurement(d2p)
 d2p.ClearDataPoints()
-d2p.SetColor(8)
+d2p.SetColor(4010)
 
 Qsquared = NucDBBinnedVariable("Qsquared","Q^{2}")
 

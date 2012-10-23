@@ -68,7 +68,7 @@ if __name__ == "__main__":
         g1He3 = NucDBMeasurement("g1He3","g_{1}^{He3}")
         experiment.AddMeasurement(g1He3)
     g1He3.ClearDataPoints()
-    g1He3.fColor=414#kGreen-2
+    g1He3.SetColor(4011)
     extractor1 = SLACE142Extractor()
     extractor1.iValueRow=7
     extractor1.istatErr=8
@@ -90,7 +90,7 @@ if __name__ == "__main__":
         A1He3 = NucDBMeasurement("A1He3","A_{1}^{He3}")
         experiment.AddMeasurement(A1He3)
     A1He3.ClearDataPoints()
-    A1He3.fColor=414#kGreen-2
+    A1He3.SetColor(4011)
     extractor2 = SLACE142Extractor()
     extractor2.iValueRow=4
     extractor2.isysErr=5
@@ -112,7 +112,7 @@ if __name__ == "__main__":
         g2He3 = NucDBMeasurement("g2He3","g_{2}^{He3}")
         experiment.AddMeasurement(g2He3)
     g2He3.ClearDataPoints()
-    g2He3.fColor=414#kGreen-2
+    g2He3.SetColor(4011)
     extractor3 = SLACE142Extractor()
     extractor3.iValueRow=7
     extractor3.istatErr=8
@@ -134,7 +134,7 @@ if __name__ == "__main__":
         A2He3 = NucDBMeasurement("A2He3","A_{2}^{He3}")
         experiment.AddMeasurement(A2He3)
     A2He3.ClearDataPoints()
-    A2He3.fColor=414#kGreen-2
+    A2He3.SetColor(4011)
     extractor4 = SLACE142Extractor()
     extractor4.iValueRow=4
     extractor4.isysErr=5
@@ -158,7 +158,7 @@ if __name__ == "__main__":
         g1n = NucDBMeasurement("g1n","g_{1}^{n}")
         experiment.AddMeasurement(g1n)
     g1n.ClearDataPoints()
-    g1n.fColor=414#kGreen-2
+    g1n.SetColor(4011)
     extractor11 = SLACE142Extractor()
     extractor11.iValueRow=7
     extractor11.istatErr=8
@@ -180,7 +180,7 @@ if __name__ == "__main__":
         A1n = NucDBMeasurement("A1n","A_{1}^{n}")
         experiment.AddMeasurement(A1n)
     A1n.ClearDataPoints()
-    A1n.fColor=414#kGreen-2
+    A1n.SetColor(4011)
     extractor12 = SLACE142Extractor()
     extractor12.iValueRow=4
     extractor12.isysErr=5
@@ -202,7 +202,7 @@ if __name__ == "__main__":
         g2n = NucDBMeasurement("g2n","g_{2}^{n}")
         experiment.AddMeasurement(g2n)
     g2n.ClearDataPoints()
-    g2n.fColor=414#kGreen-2
+    g2n.SetColor(4011)
     extractor13 = SLACE142Extractor()
     extractor13.iValueRow=7
     extractor13.istatErr=8
@@ -224,7 +224,7 @@ if __name__ == "__main__":
         A2n = NucDBMeasurement("A2n","A_{2}^{n}")
         experiment.AddMeasurement(A2n)
     A2n.ClearDataPoints()
-    A2n.fColor=414#kGreen-2
+    A2n.SetColor(4011)
     extractor14 = SLACE142Extractor()
     extractor14.iValueRow=4
     extractor14.isysErr=5

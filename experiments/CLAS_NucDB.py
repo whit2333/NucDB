@@ -70,7 +70,7 @@ if not g1p :
     g1p = NucDBMeasurement("g1p","g_{1}^{p}")
     experiment.AddMeasurement(g1p)
 g1p.ClearDataPoints()
-g1p.SetColor(6)
+g1p.SetColor(4001)
 
 
 extractor1 = CLASExtractor()

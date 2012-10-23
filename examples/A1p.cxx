@@ -7,7 +7,7 @@ Int_t A1p()
    NucDBManager * manager = NucDBManager::GetManager();
 
    TLegend * leg = new TLegend(0.1, 0.7, 0.48, 0.9);
-   leg->SetHeader("A_1^p measurments");
+   leg->SetHeader("A_{1}^{p} measurments");
 
    TList * measurementsList = manager->GetMeasurements("A1p");
    for (int i = 0; i < measurementsList->GetEntries(); i++) {

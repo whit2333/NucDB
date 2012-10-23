@@ -92,7 +92,7 @@ if __name__ == "__main__":
         sigpPlus = NucDBMeasurement("sig_p(pi+)","#frac{d #sigma_{p}}{dE_{e}d#Omega_{e}dzdP_{t}^{2}d#phi} nb/GeV^{3}-sr")
         experiment.AddMeasurement(sigpPlus)
     sigpPlus.ClearDataPoints()
-    sigpPlus.fColor=8
+    sigpPlus.SetColor(4003)
     extractor1 = Pion2008Extractor()
     extractor1.SetMeasurement(sigpPlus)
     extractor1.SetInputFile("experiments/JLAB-E00108/inc_elec_production.dat")
@@ -112,7 +112,7 @@ if __name__ == "__main__":
         sigpMinus = NucDBMeasurement("sig_p(pi-)","#frac{d #sigma_{p}}{dE_{e}d#Omega_{e}dzdP_{t}^{2}d#phi} nb/GeV^{3}-sr")
         experiment.AddMeasurement(sigpMinus)
     sigpMinus.ClearDataPoints()
-    sigpMinus.fColor=4
+    sigpMinus.SetColor(4003)
     extractor2 = Pion2008Extractor()
     extractor2.iValueRow=3
     extractor2.iStatErr=4
@@ -135,7 +135,7 @@ if __name__ == "__main__":
         sigdPlus = NucDBMeasurement("sig_d(pi+)","#frac{d #sigma_{d}}{dE_{e}d#Omega_{e}dzdP_{t}^{2}d#phi} nb/GeV^{3}-sr")
         experiment.AddMeasurement(sigdPlus)
     sigdPlus.ClearDataPoints()
-    sigdPlus.fColor=2
+    sigdPlus.SetColor(4003)
     extractor3 = Pion2008Extractor()
     extractor3.iValueRow=5
     extractor3.iStatErr=6
@@ -157,7 +157,7 @@ if __name__ == "__main__":
         sigdMinus = NucDBMeasurement("sig_d(pi-)","#frac{d #sigma_{p}}{dE_{e}d#Omega_{e}dzdP_{t}^{2}d#phi} nb/GeV^{3}-sr")
         experiment.AddMeasurement(sigdMinus)
     sigdMinus.ClearDataPoints()
-    sigdMinus.fColor=6
+    sigdMinus.SetColor(4003)
     extractor4 = Pion2008Extractor()
     extractor4.iValueRow=7
     extractor4.iStatErr=8

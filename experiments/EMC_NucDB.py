@@ -66,7 +66,7 @@ if __name__ == "__main__":
         g1p = NucDBMeasurement("g1p","g_{1}^{p}")
         experiment.AddMeasurement(g1p)
     g1p.ClearDataPoints()
-    g1p.fColor=6
+    g1p.SetColor(4002)
     extractor1 = EMCExtractor()
     extractor1.SetMeasurement(g1p)
     extractor1.SetInputFile("experiments/EMC/a1pg1p.txt")
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         F2p = NucDBMeasurement("F2p","F_{2}^{p}")
         experiment.AddMeasurement(F2p)
     F2p.ClearDataPoints()
-    F2p.SetColor(7)
+    F2p.SetColor(4002)
     extractor2 = EMCExtractor()
     extractor2.SetMeasurement(F2p)
     extractor2.SetInputFile("experiments/EMC/f2protcomb.txt")

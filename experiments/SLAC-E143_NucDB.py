@@ -160,7 +160,7 @@ if __name__ == "__main__":
         R = NucDBMeasurement("R","R")
         experiment.AddMeasurement(R)
     R.ClearDataPoints() # in case datapoints already exist
-    R.SetColor(2)# default color used for plotting
+    R.SetColor(4012)# default color used for plotting
 
     RExtractor = SLACE143ExtractorR()
     RExtractor.SetMeasurement(R)
@@ -183,7 +183,7 @@ if __name__ == "__main__":
         g1p = NucDBMeasurement("g1p","g_{1}^{p}")
         experiment.AddMeasurement(g1p)
     g1p.ClearDataPoints()
-    g1p.SetColor(2)# default color used for plotting
+    g1p.SetColor(4012)# default color used for plotting
     g1pExtractor = SLACE143Extractor()
     g1pExtractor.SetMeasurement(g1p)
     g1pExtractor.fCurrentDataPoint.fName = "g1p"
@@ -203,7 +203,7 @@ if __name__ == "__main__":
         g2p = NucDBMeasurement("g2p","g_{2}^{p}")
         experiment.AddMeasurement(g2p)
     g2p.ClearDataPoints()
-    g2p.SetColor(2)# default color used for plotting
+    g2p.SetColor(4012)# default color used for plotting
     g2pExtractor = SLACE143Extractor()
     g2pExtractor.SetMeasurement(g2p)
     g2pExtractor.fCurrentDataPoint.fName = "g2p"
@@ -222,7 +222,7 @@ if __name__ == "__main__":
         A1p = NucDBMeasurement("A1p","A_{1}^{p}")
         experiment.AddMeasurement(A1p)
     A1p.ClearDataPoints()
-    A1p.fColor=1
+    A1p.SetColor(4012)
     Extractor3 = SLACE143ExtractorA1p()
     Extractor3.SetMeasurement(A1p)
     Extractor3.fCurrentDataPoint.fName = "A1p"
@@ -241,7 +241,7 @@ if __name__ == "__main__":
         A2p = NucDBMeasurement("A2p","A_{2}^{p}")
         experiment.AddMeasurement(A2p)
     A2p.ClearDataPoints()
-    A2p.SetColor(2)# default color used for plotting
+    A2p.SetColor(4012)# default color used for plotting
     Extractor4 = SLACE143Extractor()
     Extractor4.SetMeasurement(A2p)
     Extractor4.fCurrentDataPoint.fName = "A2p"
@@ -261,7 +261,7 @@ if __name__ == "__main__":
         g1n = NucDBMeasurement("g1n","g_{1}^{n}")
         experiment.AddMeasurement(g1n)
     g1n.ClearDataPoints()
-    g1n.SetColor(2)# default color used for plotting
+    g1n.SetColor(4012)# default color used for plotting
     Extractor5 = SLACE143Extractor()
     Extractor5.SetMeasurement(g1n)
     Extractor5.fCurrentDataPoint.fName = "g1n"
@@ -281,7 +281,7 @@ if __name__ == "__main__":
         g2n = NucDBMeasurement("g2n","g_{2}^{n}")
         experiment.AddMeasurement(g2n)
     g2n.ClearDataPoints()
-    g2n.SetColor(2)# default color used for plotting
+    g2n.SetColor(4012)# default color used for plotting
     Extractor6 = SLACE143Extractor()
     Extractor6.SetMeasurement(g2p)
     Extractor6.fCurrentDataPoint.fName = "g2n"
@@ -300,7 +300,7 @@ if __name__ == "__main__":
         A1n = NucDBMeasurement("A1n","A_{1}^{n}")
         experiment.AddMeasurement(A1n)
     A1n.ClearDataPoints()
-    A1n.SetColor(2)# default color used for plotting
+    A1n.SetColor(4012)# default color used for plotting
     Extractor7 = SLACE143ExtractorA1p()
     Extractor7.SetMeasurement(A1n)
     Extractor7.fCurrentDataPoint.fName = "A1n"
@@ -319,7 +319,7 @@ if __name__ == "__main__":
         A2n = NucDBMeasurement("A2n","A_{2}^{n}")
         experiment.AddMeasurement(A2n)
     A2n.ClearDataPoints()
-    A2n.SetColor(2)# default color used for plotting
+    A2n.SetColor(4012)# default color used for plotting
     Extractor8 = SLACE143Extractor()
     Extractor8.SetMeasurement(A2n)
     Extractor8.fCurrentDataPoint.fName = "A2n"

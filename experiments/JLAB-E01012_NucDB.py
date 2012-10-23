@@ -74,7 +74,7 @@ if __name__ == "__main__":
         A1n = NucDBMeasurement("A1n","A_{1}^{n}")
         experiment.AddMeasurement(A1n)
     A1n.ClearDataPoints()
-    A1n.SetColor(6)
+    A1n.SetColor(4005)
 
     extractor1 = JLABE01012Extractor()
     extractor1.SetMeasurement(A1n)
@@ -93,7 +93,7 @@ if __name__ == "__main__":
         g1nOverF1n = NucDBMeasurement("g1n/F1n","g_{1}^{n}/F_{1}^{n}")
         experiment.AddMeasurement(g1nOverF1n)
     g1nOverF1n.ClearDataPoints()
-    g1nOverF1n.SetColor(6)
+    g1nOverF1n.SetColor(4005)
     extractor2 = JLABE01012Extractor()
     extractor2.iValueRow=6
     extractor2.istatErr=7

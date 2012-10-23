@@ -67,7 +67,7 @@ if not sigi_He3 :
     sigi_He3 = NucDBMeasurement("sigi_He3","#frac{d #sigma_{i}}{dE^{'}d#Omega} pb/MeV-sr")
     experiment.AddMeasurement(sigi_He3)
 sigi_He3.ClearDataPoints()
-sigi_He3.SetColor(4)
+sigi_He3.SetColor(4006)
 
 sigi_He3Extractor = JLABExtractorXSi()
 sigi_He3Extractor.SetMeasurement(sigi_He3)
@@ -89,7 +89,7 @@ if not sigf_He3 :
     sigf_He3 = NucDBMeasurement("sigf_He3","#frac{d #sigma_{f}}{dE^{'}d#Omega} pb/MeV-sr")
     experiment.AddMeasurement(sigf_He3)
 sigf_He3.ClearDataPoints()
-sigf_He3.SetColor(4)
+sigf_He3.SetColor(4006)
 
 sigf_He3Extractor = JLABExtractorXSf()
 sigf_He3Extractor.SetMeasurement(sigf_He3)
@@ -110,7 +110,7 @@ if not sigfc_He3 :
     sigfc_He3 = NucDBMeasurement("sigfc_He3","#frac{d #sigma_{fc}}{dE^{'}d#Omega} pb/MeV-sr")
     experiment.AddMeasurement(sigfc_He3)
 sigfc_He3.ClearDataPoints()
-sigfc_He3.SetColor(4)
+sigfc_He3.SetColor(4006)
 
 sigfc_He3Extractor = JLABExtractorXSfc()
 sigfc_He3Extractor.SetMeasurement(sigfc_He3)

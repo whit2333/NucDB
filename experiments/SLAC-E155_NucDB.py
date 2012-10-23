@@ -138,21 +138,21 @@ if not g1p :
     g1p = NucDBMeasurement("g1p","g_{1}^{p}")
     experiment.AddMeasurement(g1p)
 g1p.ClearDataPoints()
-g1p.SetColor(1)
+g1p.SetColor(4014)
 
 g1d = experiment.GetMeasurement("g1d")
 if not g1d :
     g1d = NucDBMeasurement("g1d","g_{1}^{d}")
     experiment.AddMeasurement(g1d)
 g1d.ClearDataPoints()
-g1d.SetColor(1)
+g1d.SetColor(4014)
 
 g1n = experiment.GetMeasurement("g1n")
 if not g1n :
     g1n = NucDBMeasurement("g1n","g_{1}^{n}")
     experiment.AddMeasurement(g1n)
 g1n.ClearDataPoints()
-g1n.SetColor(1)
+g1n.SetColor(4014)
 
 g1pExtractor = SLACE155Extractorxg1p()
 g1pExtractor.SetMeasurement(g1p)

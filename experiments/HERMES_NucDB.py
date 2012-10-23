@@ -66,7 +66,7 @@ if __name__ == "__main__":
         g1p = NucDBMeasurement("g1p","g_{1}^{p}")
         experiment.AddMeasurement(g1p)
     g1p.ClearDataPoints()
-    g1p.fColor=6
+    g1p.SetColor(4003)
     extractor1 = HERMESExtractor()
     extractor1.SetMeasurement(g1p)
     extractor1.SetInputFile("experiments/HERMES/g1p")
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         g1pOverF1p = NucDBMeasurement("g1p/F1p","g_{1}^{p}/F_{1}^{p}")
         experiment.AddMeasurement(g1pOverF1p)
     g1pOverF1p.ClearDataPoints()
-    g1pOverF1p.fColor=6
+    g1pOverF1p.SetColor(4003)
     extractor2 = HERMESExtractor()
     extractor2.iValueRow=2
     extractor2.istatErr=3
@@ -108,7 +108,7 @@ if __name__ == "__main__":
         A1p = NucDBMeasurement("A1p","A_{1}^{p}")
         experiment.AddMeasurement(A1p)
     A1p.ClearDataPoints()
-    A1p.fColor=6
+    A1p.SetColor(4004)
     extractor3 = HERMESExtractor()
     extractor3.iValueRow=2
     extractor3.istatErr=3
@@ -131,7 +131,7 @@ if __name__ == "__main__":
         A1d = NucDBMeasurement("A1d","A_{1}^{d}")
         experiment.AddMeasurement(A1d)
     A1d.ClearDataPoints()
-    A1d.fColor=6
+    A1d.SetColor(4004)
     extractor4 = HERMESExtractor()
     extractor4.iValueRow=6
     extractor4.istatErr=7
@@ -154,7 +154,7 @@ if __name__ == "__main__":
         g1p = NucDBMeasurement("g1p","g_{1}^{p}")
         experiment.AddMeasurement(A1p)
     #g1p.ClearDataPoints()
-    g1p.fColor=6
+    g1p.SetColor(4004)
     extractor5 = HERMESExtractor()
     extractor5.iValueRow=2
     extractor5.istatErr=3
@@ -177,7 +177,7 @@ if __name__ == "__main__":
         g1d = NucDBMeasurement("g1d","g_{1}^{d}")
         experiment.AddMeasurement(g1d)
     #A1d.ClearDataPoints()
-    g1d.fColor=6
+    g1d.SetColor(4004)
     extractor6 = HERMESExtractor()
     extractor6.iValueRow=6
     extractor6.istatErr=7
@@ -200,7 +200,7 @@ if __name__ == "__main__":
         g1n = NucDBMeasurement("g1n","g_{1}^{n}")
         experiment.AddMeasurement(g1n)
     g1n.ClearDataPoints()
-    g1n.fColor=6
+    g1n.SetColor(4004)
     extractor7 = HERMESExtractor()
     extractor7.iValueRow=2
     extractor7.istatErr=3
