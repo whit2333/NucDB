@@ -98,6 +98,9 @@ database:
 	python experiments/EMC_NucDB.py
 	python experiments/SMC_NucDB.py
 	python experiments/HERMES_NucDB.py
+	python experiments/ZEUS_NucDB.py
+	python experiments/BCDMS_NucDB.py
+	python experiments/NMC_NucDB.py
 	python experiments/CLAS_NucDB.py
 	python experiments/RSS_NucDB.py
 	python experiments/JLAB-E94010_NucDB.py
