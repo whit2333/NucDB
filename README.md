@@ -13,3 +13,5 @@ Environment
 
 checkout [the doc page](http://quarks.temple.edu/~whit/code/nucdb/ "NucDB")
 
+Also the look at the ["official" webiste](http://whit2333.github.com/NucDB "NucDB")
+
