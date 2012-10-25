@@ -13,7 +13,8 @@ Int_t pion_production()
    for (int i = 0; i < measurementsList->GetEntries(); i++) {
       NucDBMeasurement * ameas = (NucDBMeasurement*)measurementsList->At(i);
       ameas->BuildGraph("z");
-      leg->AddEntry(ameas->fGraph, Form("%s %s", ameas->fExperiment.Data(), ameas->GetName()), "ep");
+      ameas->fGraph->SetMarkerStyle(20);
+      leg->AddEntry(ameas->fGraph, Form("%s %s", ameas->GetExperimentName().Data(), ameas->GetName()), "ep");
       if (i == 0)ameas->fGraph->Draw("ap");
       ameas->fGraph->Draw("p");
    }
@@ -22,7 +23,8 @@ Int_t pion_production()
    for (int i = 0; i < measurementsList->GetEntries(); i++) {
       NucDBMeasurement * ameas = (NucDBMeasurement*)measurementsList->At(i);
       ameas->BuildGraph("z");
-      leg->AddEntry(ameas->fGraph, Form("%s %s", ameas->fExperiment.Data(), ameas->GetName()), "ep");
+      ameas->fGraph->SetMarkerStyle(21);
+      leg->AddEntry(ameas->fGraph, Form("%s %s", ameas->GetExperimentName().Data(), ameas->GetName()), "ep");
       if (i == 0)ameas->fGraph->Draw("p");
       ameas->fGraph->Draw("p");
    }
@@ -31,7 +33,8 @@ Int_t pion_production()
    for (int i = 0; i < measurementsList->GetEntries(); i++) {
       NucDBMeasurement * ameas = (NucDBMeasurement*)measurementsList->At(i);
       ameas->BuildGraph("z");
-      leg->AddEntry(ameas->fGraph, Form("%s %s", ameas->fExperiment.Data(), ameas->GetName()), "ep");
+      ameas->fGraph->SetMarkerStyle(22);
+      leg->AddEntry(ameas->fGraph, Form("%s %s", ameas->GetExperimentName().Data(), ameas->GetName()), "ep");
       if (i == 0)ameas->fGraph->Draw("p");
       ameas->fGraph->Draw("p");
    }
@@ -40,7 +43,8 @@ Int_t pion_production()
    for (int i = 0; i < measurementsList->GetEntries(); i++) {
       NucDBMeasurement * ameas = (NucDBMeasurement*)measurementsList->At(i);
       ameas->BuildGraph("z");
-      leg->AddEntry(ameas->fGraph, Form("%s %s", ameas->fExperiment.Data(), ameas->GetName()), "ep");
+      ameas->fGraph->SetMarkerStyle(23);
+      leg->AddEntry(ameas->fGraph, Form("%s %s", ameas->GetExperimentName().Data(), ameas->GetName()), "ep");
       if (i == 0)ameas->fGraph->Draw("p");
       ameas->fGraph->Draw("p");
    }

@@ -14,7 +14,7 @@ Int_t F2p()
    Qsq2->SetBinMinimum(4.0);
    Qsq2->SetBinMaximum(5.0);
 
-   TLegend * leg = new TLegend(0.1, 0.7, 0.48, 0.9);
+   TLegend * leg = new TLegend(0.6, 0.7, 0.9, 0.9);
    leg->SetHeader("F_{2}^{p} measurments");
 
    TList * measurementsList = manager->GetMeasurements("F2p");
@@ -37,12 +37,14 @@ Int_t F2p()
    F2pQsq1->fGraph->SetMarkerColor(4);
    F2pQsq1->fGraph->SetLineColor(4);
    F2pQsq1->fGraph->Draw("p");
+   leg->AddEntry(F2pQsq1->fGraph,  F2pQsq1->GetTitle(), "ep");
 
    F2pQsq2->AddDataPoints(F2p->FilterWithBin(Qsq2));
    F2pQsq2->BuildGraph();
    F2pQsq2->fGraph->SetMarkerColor(2);
    F2pQsq2->fGraph->SetLineColor(2);
    F2pQsq2->fGraph->Draw("p");
+   leg->AddEntry(F2pQsq2->fGraph, F2pQsq2->GetTitle(), "ep");
 
    leg->Draw();
 
