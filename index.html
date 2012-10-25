@@ -48,11 +48,31 @@
 	</p>
 
 	<p>
-Most of the data is from unpolarized and polarized DIS experiments but ideally this will be expanded to include many other experiments. The Durham HEP data project is a great source of data but not the only source.
+        Most of the data is from unpolarized and polarized DIS experiments but ideally this will be expanded to include many other experiments. The Durham HEP data project is a great source of data but not the only source.
 	</p>
 
 
+        <p> Written in C++, NucDB takes advantage object oriented programming in a way that generalizes data and how we plot it.
+        There is one singleton manager class, <b>NucDBManager</b>, which is used to facilitate searching, adding, and retrieving data.
+        For now, there are major two branches of data stored:  experimental results and calculation results.  
+        Each <b>NucDBExperiment</b> is added to the database, which is just an instance of a <b>NucDBDatabase</b> that is saved to a root file, taking full advantage of the ROOT object streaming.
+        An experiment is given a unique name for identification and a title which is used in generating plots and legends.
+        </p>
+        <p>
+        A  <b>NucDBMeasurement</b> is added to an experiment. <b>NucDBDataPoints</b> are added to measurements in order to build up the data.
+        Each <b>NucDBDataPoint</b> has a few data members which are instances of <b>NucDBErrorBar</b> representing statistical and systematic errors. 
+        There are also a lot of useful methods for getting and setting these values.    
+        </p>
+        <p>
+        Because measurments are often given in kinematic bins or variables that are not quite same there is a generalized variable called <b>NucDBBinnedVariable</b>.
+        It represents one variable and has a width, average, and everything else you would expect. 
+        Each <b>NucDBBinnedVariable</b> is add to the data point. The class <b>NucDBDependentVariable</b> derives from <b>NucDBBinnedVariable</b> and represents
+        a variable that is not given, but can be calculated. Concrete implmentations of this class assign a function which relates one or more variables to the calculated dependent variable.
+        For example, given a measurement like F2p in bins of x and Q2, one can easily plot all data as function of W using the concrete implementation <b>NucDBInvariantMassDV</b>. In this way we can easily combine data from many experiments together on one plot.      
+        </p>
+
         <h3> Examples </h3>
+ <p> Here are some plots that were easily created using NucDB. </p>
 
 <a href="images/F2p_kinematic_coverage.png"><img src="images/F2p_kinematic_coverage.png"></a>
 <br />
