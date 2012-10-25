@@ -16,10 +16,12 @@ Int_t g2p()
    Qsq2->SetBinMaximum(5.0);
 
    TList * g2p_meas = manager->GetMeasurements("g2p");
-
+   
    for (int i = 0; i < g2p_meas->GetEntries() ; i++) {
       NucDBMeasurement * g2p = (NucDBMeasurement*)g2p_meas->At(i);
       TGraphErrors * graph = g2p->BuildGraph("x");
+      graph->SetMaximum(1.0);
+      graph->SetMinimum(-1.0);
       if (i == 0)graph->Draw("a,p");
       else graph->Draw("p");
    }
