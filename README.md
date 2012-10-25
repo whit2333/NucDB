@@ -16,7 +16,8 @@ You should configure your environment like the following example for bash.
     export PYTHONPATH=$PYTHONPATH:$NucDB_DIR/python
 
 ###Building
-Should be simple.
+Should be as simple as:
+   make
 
 ###Configuring ROOT
 Added libraries in $HOME/.rootlogon.C or other logon script.
