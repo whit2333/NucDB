@@ -17,7 +17,8 @@ You should configure your environment like the following example for bash.
 
 ###Building
 Should be as simple as:
-   make
+
+    make
 
 ###Configuring ROOT
 Added libraries in $HOME/.rootlogon.C or other logon script.
