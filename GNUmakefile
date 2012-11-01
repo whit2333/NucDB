@@ -97,15 +97,18 @@ database:
 	python experiments/SLAC-E154_NucDB.py
 	python experiments/EMC_NucDB.py
 	python experiments/SMC_NucDB.py
+	python experiments/CERN-NA-2_NucDB.py
 	python experiments/HERMES_NucDB.py
 	python experiments/ZEUS_NucDB.py
 	python experiments/BCDMS_NucDB.py
 	python experiments/NMC_NucDB.py
 	python experiments/CLAS_NucDB.py
+	python experiments/CLAS/E93009_NucDB.py
 	python experiments/RSS_NucDB.py
 	python experiments/JLAB-E94010_NucDB.py
 	python experiments/JLAB-E99117_NucDB.py
 	python experiments/JLAB_E00108_NucDB.py
+	python experiments/JLAB-E94110_NucDB.py
 	./analyses/maid_all
 	python analyses/LATTICE_NucDB.py
 

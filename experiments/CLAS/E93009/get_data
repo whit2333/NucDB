@@ -1,0 +1,13 @@
+#!/bin/bash
+
+files=`seq 1 306`
+
+rm plain.txt*
+
+for file in $files
+do
+   wget http://hepdata.cedar.ac.uk/view/irn6652603/d${file}/plain.txt
+   mv plain.txt clasdata.${file}.txt
+
+done
+

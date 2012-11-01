@@ -1,0 +1,34 @@
+Email from Peter:
+
+Hi Whitney
+
+My apologies for the delay in emailing you these results files. You should find attached two text files of data; one for the experimental results and one for the structure functions calculated from those results.
+
+"e94110_final.dat" - this is the experimental results file, where the columns headers are: Q-squared, omega-squared, x, sigma-L, error-sigma-L, sigma-T, error-sigma-T, ratio R = sL/sT, error-ratio-R.
+
+"e94100_sfcalc.dat" - this is the data file of structure functions F2, F1 and FL which I calculated from the sigma-L and sigma-T values in the experimental results file. The column headers in this file are: Q-squared, Bjorken-x, F2, error-F2, F1, error-F1, FL, error-FL.
+
+The data file with the cross-sections and the experimental measurements of E, E', theta, epsilon etc. can be found on our 'Resonance Data Archive' at,
+
+https://hallcweb.jlab.org/resdata/
+
+The file is on the first page there if you need those numbers. Hope this helps and if you need anything else or have any questions, feel free to email me.
+
+All the best
+
+Peter
+
+
++-------------------------------------------------------+
+  Dr. Peter Monaghan
+  Senior Postdoctoral Fellow
+  Hampton University
+
+  Telephone: +1-757-269-7325
+  Fax: +1-757-269-5235
++-------------------------------------------------------+
+
+  12-F341, Jefferson Lab,
+  12000 Jefferson Avenue, Newport News,
+  VA 23606
++-------------------------------------------------------+

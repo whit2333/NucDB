@@ -1,0 +1,13 @@
+Path: /HepData/7076/d300-x1-y1
+A1 and g1/F1 for the DEUT target at incident energy 5.7000 GeV and W = 2.7350 GeV
+Location: F 1, 2, 3, 4
+ELAB : 5.7 GeV
+RE : E- DEUT --> E- X
+W : 2.735 GeV
+x: X
+x2: Q**2 IN GEV**2
+y : A1 : G1/F1
+x	xlow	xhigh	x2	x2low	x2high	y	dy+	dy-	dy+	dy-	y	dy+	dy-	dy+	dy-	
+0.0968	0.0968	0.0968	0.707	0.707	0.707	-0.2965	+0.2124	-0.2124	+0.04	-0.04	-0.2719	+0.1983	-0.1983	+0.0364	-0.0364
+0.1134	0.1134	0.1134	0.844	0.844	0.844	0.1455	+0.2198	-0.2198	+0.0246	-0.0246	0.1406	+0.2039	-0.2039	+0.0214	-0.0214
+
