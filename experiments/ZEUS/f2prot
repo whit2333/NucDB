@@ -1,0 +1,106 @@
+EXPeriment      = DESY-HERA-ZEUS                      
+REACtion        = E- P --> E- X                                     
+Collaboration   = ZEUS                    
+Author          = Derrick et al  
+REFerence       = Zeit. Phys. C65 (1995) 379                               
+Additional info : The data  represents an integrated luminosity of  0.54 pb-1 
+                  taken with a 26.7 GeV electron beam in collision with a 820 
+                  GeV proton beam covering a Q**2 range 7 to 10**4 GeV**2 and 
+                  x values down to 3 x 10**-4. Additional overall normalization 
+                  uncertainty 3.5%.
+
+
+       x            mean         Q**2       mean     F2          errors
+     range            x        (GEV**2)     Q**2             stat.    sys.
+
+0.0003 - 0.0006    0.00042     7 -    10     8.5    1.09     0.03     0.10  
+0.0006 - 0.0012    0.00085     7 -    10     8.5    0.87     0.03     0.08  
+0.0003 - 0.0006    0.00042    10 -    14    12      1.27     0.03     0.10  
+0.0006 - 0.0012    0.00085    10 -    14    12      1.02     0.02     0.10  
+0.0012 - 0.0020    0.00160    10 -    14    12      0.81     0.02     0.11   
+0.0020 - 0.0036    0.00270    10 -    14    12      0.73     0.03     0.17  
+0.0003 - 0.0006    0.00042    14 -    20    15      1.21     0.04     0.18  
+0.0006 - 0.0012    0.00085    14 -    20    15      1.12     0.03     0.10  
+0.0012 - 0.0020    0.00160    14 -    20    15      0.89     0.02     0.08  
+0.0020 - 0.0036    0.00270    14 -    20    15      0.73     0.02     0.11  
+0.0036 - 0.0060    0.00470    14 -    20    15      0.68     0.04     0.09  
+0.0003 - 0.0006    0.00042    20 -    28    25      1.64     0.10     0.29  
+0.0006 - 0.0012    0.00085    20 -    28    25      1.33     0.04     0.11  
+0.0012 - 0.0020    0.00160    20 -    28    25      0.97     0.03     0.06  
+0.0020 - 0.0036    0.00270    20 -    28    25      0.88     0.03     0.09  
+0.0036 - 0.0060    0.00470    20 -    28    25      0.64     0.03     0.10  
+0.0006 - 0.0012    0.00085    28 -    40    35      1.56     0.08     0.19  
+0.0012 - 0.0020    0.00160    28 -    40    35      1.16     0.06     0.04  
+0.0020 - 0.0036    0.00270    28 -    40    35      0.95     0.04     0.06  
+0.0036 - 0.0060    0.00470    28 -    40    35      0.83     0.04     0.12  
+0.0060 - 0.0100    0.00770    28 -    40    35      0.62     0.04     0.14  
+0.0006 - 0.0012    0.00085    40 -    56    50      1.70     0.10     0.32  
+0.0012 - 0.0020    0.00160    40 -    56    50      1.33     0.08     0.08  
+0.0020 - 0.0036    0.00270    40 -    56    50      1.11     0.06     0.07  
+0.0036 - 0.0060    0.00470    40 -    56    50      1.02     0.07     0.10  
+0.0060 - 0.0100    0.00770    40 -    56    50      0.72     0.05     0.12  
+0.0100 - 0.0200    0.01400    40 -    56    50      0.61     0.07     0.13  
+0.0012 - 0.0020    0.00160    56 -    80    65      1.29     0.11     0.07  
+0.0020 - 0.0036    0.00270    56 -    80    65      1.20     0.09     0.07  
+0.0036 - 0.0060    0.00470    56 -    80    65      0.92     0.07     0.06  
+0.0060 - 0.0100    0.00770    56 -    80    65      0.75     0.05     0.11  
+0.0100 - 0.0200    0.01400    56 -    80    65      0.57     0.04     0.12  
+0.0012 - 0.0020    0.00160    80 -   160   125      1.57     0.16     0.19  
+0.0020 - 0.0036    0.00270    80 -   160   125      1.26     0.08     0.08  
+0.0036 - 0.0060    0.00470    80 -   160   125      1.11     0.08     0.05  
+0.0060 - 0.0100    0.00770    80 -   160   125      1.02     0.08     0.07  
+0.0100 - 0.0200    0.01400    80 -   160   125      0.69     0.04     0.07  
+0.0200 - 0.0400    0.02800    80 -   160   125      0.60     0.05     0.10  
+0.0036 - 0.0060    0.00470   160 -   320   250      1.19     0.13     0.12  
+0.0060 - 0.0100    0.00770   160 -   320   250      0.81     0.07     0.03  
+0.0100 - 0.0200    0.01400   160 -   320   250      0.76     0.06     0.04  
+0.0200 - 0.0400    0.02800   160 -   320   250      0.59     0.05     0.05  
+0.0400 - 0.0800    0.05700   160 -   320   250      0.50     0.06     0.12  
+0.0060 - 0.0100    0.00770   320 -   640   500      0.86     0.14     0.18  
+0.0100 - 0.0200    0.01400   320 -   640   500      0.71     0.08     0.04  
+0.0200 - 0.0400    0.02800   320 -   640   500      0.63     0.08     0.05  
+0.0400 - 0.0800    0.05700   320 -   640   500      0.48     0.06     0.07  
+0.0800 - 0.1600    0.11000   320 -   640   500      0.32     0.05     0.10  
+0.0100 - 0.0200    0.01400   640 -  1280  1000      0.84     0.13     0.20   
+0.0200 - 0.0400    0.02800   640 -  1280  1000      0.48     0.08     0.05  
+0.0400 - 0.0800    0.05700   640 -  1280  1000      0.41     0.07     0.03  
+0.0800 - 0.1600    0.11000   640 -  1280  1000      0.36     0.06     0.04  
+0.0200 - 0.0400    0.02800  1280 -  2560  2000      1.01     0.48     0.47  
+0.0400 - 0.0800    0.05700  1280 -  2560  2000      0.39     0.10     0.08  
+0.0800 - 0.1600    0.11000  1280 -  2560  2000      0.36     0.10     0.02  
+0.0800 - 0.1600    0.11000  2560 - 10000  5000      0.46     0.21     0.11  
+===========================================================================
+</pre>
+<table cellspacing=40 align=center>
+<td>
+<a href="/review/f2/data/ZEUS/ZP65C379/zf2pa.ps">
+<img border=0  src="/review/f2/data/ZEUS/ZP65C379/zf2pa.gif">
+</a>
+<td>
+<a href="/review/f2/data/ZEUS/ZP65C379/zf2pax.ps">
+<img border=0 src="/review/f2/data/ZEUS/ZP65C379/zf2pax.gif"> 
+</a>
+<tr>
+<td><font size=-1>
+F2p as a function of Q^2 in various x bins as measured by the DESY
+ZEUS Collaboration from the 1993 HERA running period with 26.7 GeV electron 
+colliding with 820 GeV protons. 
+For clarity of presentation the data have been
+scaled successively by a factor of 2 for the different x bins. Also shown 
+for comparison of the different data sets are the predictions using the MRS98
+and CTEQ4 parton distribution functions. There is in addition a 3.5% 
+overall normalization error not included.
+<td><font size=-1>
+F2p as a function of x in various Q^2 bins as measured by the DESY
+ZEUS Collaboration from the 1993 HERA running period with 26.7 GeV electron 
+colliding with 820 GeV protons. 
+For clarity of presentation the data have been
+scaled successively by a factor of 2 for the different Q^2 bins. Also shown 
+for comparison of the different data sets are the predictions using the MRS98
+and CTEQ4 parton distribution functions. There is in addition a 3.5% 
+overall normalization error not included.
+</table>     
+
+</pre>
+</body>
+</html>
