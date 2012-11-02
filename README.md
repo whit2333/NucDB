@@ -26,6 +26,12 @@ Added libraries in $HOME/.rootlogon.C or other logon script.
     gSystem->AddIncludePath(" -I$NucDB_DIR/include ");
     gSystem->Load("$NucDB_DIR/lib/libNucDB.so");
 
+In your $HOME/.rootlogon.py you might want to add something like this
+
+    import os
+    from ROOT import gROOT,gSystem
+    gSystem.Load( 'libNucDB' )
+
 ###Building the database
 Once ROOT has the libraries you can build the database.
 
