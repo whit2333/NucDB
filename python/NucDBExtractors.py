@@ -2,11 +2,11 @@ from ROOT import gROOT,gSystem
 gSystem.Load( 'libTreeViewer' )
 gSystem.Load( 'libNucDB' )
 
-import numpy as np
+#import numpy as np
 import sys
 import time
 import datetime
-import MySQLdb
+#import MySQLdb
 import math
 import os
 from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDataPoint,NucDBBinnedVariable,NucDBDiscreteVariable

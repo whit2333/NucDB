@@ -3,8 +3,8 @@
 #include "TNamed.h"
 #include "TList.h"
 #include <iostream>
-#include "NucDBCalculation.h"
-#include "NucDBDataPoint.h"
+//#include "NucDBCalculation.h"
+//#include "NucDBDataPoint.h"
 #include "TGraphErrors.h"
 #include "TCanvas.h"
 #include "TBrowser.h"
@@ -19,6 +19,7 @@ public:
       fCalculations.Clear();
    }
    ~NucDBPaper(){}
+
    /** Necessary for Browsing */
    Bool_t IsFolder() const {
       return kTRUE;
@@ -28,6 +29,7 @@ public:
        b->Add(&fCalculations, "Calculations");
    }
 
+   /*
    NucDBCalculation * GetCalculation(const char * name) {
       NucDBCalculation * meas = 0;
       for(int i = 0;i<fCalculations.GetEntries();i++) {
@@ -39,24 +41,29 @@ public:
       if(!meas) std::cout << " Calculation named " << name << " NOT FOUND!\n";
       return(meas);
    }
-
+   */
    const char * GetReference(){ return( fReference.Data() ); }
 
+   TString   fJoural;
+   TString   fAuthor;
+   TString   fTitle;
+   TString   fShortRef;
+   TString   fBibtex;
+
 protected: 
-   TList   fCalculations;
-   TString fReference;
-   TString fAuthor;
-   TString fijef;
+   TList     fCalculations;
+   TString   fReference;
+   TString   fijef;
 
 public:
-   void AddCalculation(NucDBCalculation* c){
+   /*
+      void AddCalculation(NucDBCalculation* c){
       if(c){
 	 c->fPaper = GetName();
          c->fReference = GetReference();
          fCalculations.Add(c);
       }
    }
-
    void Print(){
       std::cout << "===================================\n";
       std::cout << "   " << GetName() << "\n";
@@ -67,6 +74,7 @@ public:
           ((NucDBCalculation*)fCalculations.At(i))->Print();
    }
 
+   */
 
 //    void PlotCl(const char * var = "x"){
 //       TCanvas * c1 = new TCanvas( Form("%splots",GetName()),Form("%s plots",GetTitle() ) );

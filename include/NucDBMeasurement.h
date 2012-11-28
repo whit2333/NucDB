@@ -8,6 +8,7 @@
 #include "TString.h"
 #include "TAxis.h"
 #include "TBrowser.h"
+#include "NucDBPaper.h"
 
 /** A measured quantitiy.
  * 
@@ -30,6 +31,7 @@ protected:
    TList    fGraphs;
    TString  fExperimentName;
    Int_t    fNumberOfDataPoints;
+   TList    fPapers;
 
 public:
    NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
@@ -83,7 +85,7 @@ public:
    TGraphErrors * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
    TGraphErrors * fGraph; //->
 
-   const TList *              GetBinnedVariables() const { return(&fBinnedVariables);}
+   const TList *        GetBinnedVariables() const { return(&fBinnedVariables);}
    void                 AddBinnedVariable(NucDBBinnedVariable * var){fBinnedVariables.Add(var);}
    NucDBBinnedVariable* GetBinnedVariable(const char * name) {
       for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
@@ -93,7 +95,7 @@ public:
       return(0);
    }
 
-   const TList *              GetDependentVariables() const { return(&fDependentVariables);}
+   const TList *        GetDependentVariables() const { return(&fDependentVariables);}
    void                 AddDependentVariables(NucDBBinnedVariable * var){fDependentVariables.Add(var);}
    NucDBBinnedVariable* GetDependentVariable(const char * name) {
       for(int i = 0;i<fDependentVariables.GetEntries();i++) {
@@ -105,6 +107,8 @@ public:
 
    const TList *              GetGraphs() const { return(&fGraphs);}
 
+   TList  * GetPapers(){ return(&fPapers); }
+   void     AddPapers(NucDBPaper * p) { fPapers.Add(p); }
 
 ClassDef(NucDBMeasurement,1)
 };
