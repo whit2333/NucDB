@@ -4,6 +4,52 @@ from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVari
 from NucDBExtractors import *
 import os
 
+class E94110SigmaExtractor(NucDBRawDataExtractor) :
+    def __init__(self):
+        NucDBRawDataExtractor.__init__(self)
+        self.iValueRow=3
+        self.istatErr=4
+
+    def ParseLine(self):
+        """ See input file for column structures
+        """
+        ixbjorken=2
+        iQsq=0
+        iW2=1
+        print self.currentline
+        values = self.currentline.split()
+        self.rowcut.currentValue=int(0) # does nothign
+        x = self.fCurrentDataPoint.GetBinVariable('x')
+        x.SetBinValueSize(float(values[ixbjorken]),0.001)
+        x.Print()
+        Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
+        Qsq.SetBinValueSize(float(values[iQsq]),0.001)
+        Qsq.Print()
+        W2 = self.fCurrentDataPoint.GetBinVariable("W2")
+        W2.SetBinValueSize(float(values[iW2]),0.001)
+        W2.Print()
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
+        self.fCurrentDataPoint.GetSystError().SetError(0)
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
+        #
+        #self.fCurrentDataPoint.Print()
+
 class E94110Extractor(NucDBRawDataExtractor) :
     def __init__(self):
         NucDBRawDataExtractor.__init__(self)
@@ -46,6 +92,8 @@ class E94110Extractor(NucDBRawDataExtractor) :
         #
         #self.fCurrentDataPoint.Print()
 
+
+
 class E94110Extractor2(E94110Extractor) :
     def __init__(self):
         NucDBRawDataExtractor.__init__(self)
@@ -58,7 +106,11 @@ class E94110Extractor3(E94110Extractor) :
         self.iValueRow=6
         self.istatErr=7
 
-
+class E94110SigmaExtractor2(E94110SigmaExtractor) :
+    def __init__(self):
+        NucDBRawDataExtractor.__init__(self)
+        self.iValueRow=5
+        self.istatErr=6
 
 
 
@@ -70,6 +122,50 @@ if __name__ == "__main__":
     if not experiment :
         experiment = NucDBExperiment("JLAB-E94110","JLAB-E94110")
     
+    # sigma_L 
+    sigmaL = experiment.GetMeasurement("sigma_L")
+    if not sigmaL :
+        sigmaL = NucDBMeasurement("sigma_L","#sigma_{L}^{p}")
+        experiment.AddMeasurement(sigmaL)
+    sigmaL.ClearDataPoints()
+    sigmaL.SetColor(4019)
+    sigmaLExtractor = E94110SigmaExtractor2()
+    sigmaLExtractor.SetMeasurement(sigmaL)
+    sigmaLExtractor.SetInputFile("experiments/JLAB-E94110/e94110_final.dat")
+    sigmaLExtractor.linestoskip=3
+    sigmaLExtractor.NumberOfLines=169-3
+    Xbjorken = NucDBBinnedVariable("x","x")
+    W2 = NucDBBinnedVariable("W2","W2")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    sigmaLExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    sigmaLExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    sigmaLExtractor.fCurrentDataPoint.AddBinVariable(W2)
+    sigmaLExtractor.Initialize()
+    sigmaLExtractor.ExtractAllValues()
+    sigmaL.BuildGraph()
+
+    # sigma_T 
+    sigmaT = experiment.GetMeasurement("sigma_T")
+    if not sigmaT :
+        sigmaT = NucDBMeasurement("sigma_T","#sigma_{T}^{p}")
+        experiment.AddMeasurement(sigmaT)
+    sigmaT.ClearDataPoints()
+    sigmaT.SetColor(4019)
+    sigmaTExtractor = E94110SigmaExtractor()
+    sigmaTExtractor.SetMeasurement(sigmaT)
+    sigmaTExtractor.SetInputFile("experiments/JLAB-E94110/e94110_final.dat")
+    sigmaTExtractor.linestoskip=3
+    sigmaTExtractor.NumberOfLines=169-3
+    Xbjorken = NucDBBinnedVariable("x","x")
+    W2 = NucDBBinnedVariable("W2","W2")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    sigmaTExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    sigmaTExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    sigmaTExtractor.fCurrentDataPoint.AddBinVariable(W2)
+    sigmaTExtractor.Initialize()
+    sigmaTExtractor.ExtractAllValues()
+    sigmaT.BuildGraph()
+
     F2p = experiment.GetMeasurement("F2p")
     if not F2p :
         F2p = NucDBMeasurement("F2p","F_{2}^{p}")
