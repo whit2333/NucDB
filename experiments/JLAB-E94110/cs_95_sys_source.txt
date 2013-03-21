@@ -1,0 +1,3 @@
+https://hallcweb.jlab.org/resdata/cs_94_sys.dat
+The data files linked below have the following format for their columns:
+ E, E', theta, Q2, W2, nu, epsilon, flux, NA, sigma, delta sigma 
