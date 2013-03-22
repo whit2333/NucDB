@@ -115,6 +115,30 @@ public:
       if(N>0) return( tot/double(N) );
       return(0);
    }
+
+   /** Returns the mean value of the variable. */
+   Double_t GetBinnedVariableVariance(const char * name) {
+      Double_t mean = GetBinnedVariableMean(name);
+      Double_t tot = 0;
+      Int_t N = 0;
+      const TList * datapoints = GetDataPoints();
+      NucDBDataPoint * p = 0;
+      NucDBBinnedVariable * v = 0;
+      for(int i = 0;i<datapoints->GetEntries();i++) {
+         p = (NucDBDataPoint*)datapoints->At(i);
+         if(p) {
+            v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+            if(v){
+               Double_t vmean = v->GetMean();
+               tot += (vmean*vmean);
+               N++;
+            }
+         }
+      }
+      if(N>0) return( tot/double(N) - mean*mean );
+      return(0);
+   }
+
    const TList *        GetDependentVariables() const { return(&fDependentVariables);}
    void                 AddDependentVariables(NucDBBinnedVariable * var){fDependentVariables.Add(var);}
    NucDBBinnedVariable* GetDependentVariable(const char * name) {
