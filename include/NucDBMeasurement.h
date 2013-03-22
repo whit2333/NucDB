@@ -72,6 +72,11 @@ public:
    /** Returns a list of datapoints falling in the bin.
     */
    TList * FilterWithBin(NucDBBinnedVariable const *bin);
+   NucDBMeasurement * CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) {
+      NucDBMeasurement * m = new NucDBMeasurement(Form("%s-%s",this->GetName(),bin->GetName()));
+      m->AddDataPoints(this->FilterWithBin(bin) );
+      return m;
+   }  
    const TList * GetDataPoints() const {return(&fDataPoints);}
 
    void    Print() const ; // *MENU*
