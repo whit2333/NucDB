@@ -9,6 +9,9 @@
 #include "TAxis.h"
 #include "TBrowser.h"
 #include "NucDBPaper.h"
+#include <vector>
+#include <algorithm>
+
 
 /** A measured quantitiy.
  * 
@@ -116,6 +119,7 @@ public:
       return(0);
    }
 
+
    /** Returns the mean value of the variable. */
    Double_t GetBinnedVariableVariance(const char * name) {
       Double_t mean = GetBinnedVariableMean(name);
@@ -138,6 +142,36 @@ public:
       if(N>0) return( tot/double(N) - mean*mean );
       return(0);
    }
+
+   /** fills the vector with unique values of the binned variable. */ 
+   void GetUniqueBinnedVariableValues(const char * name,std::vector<double> * vect){
+      if(!vect) return;
+      Int_t N = 0;
+      const TList * datapoints = GetDataPoints();
+      NucDBDataPoint * p = 0;
+      NucDBBinnedVariable * v = 0;
+      for(int i = 0;i<datapoints->GetEntries();i++) {
+         p = (NucDBDataPoint*)datapoints->At(i);
+         if(p) {
+            v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+            if(v){
+               Double_t vmean = v->GetMean();
+               vect->push_back(vmean);
+               N++;
+            }
+         }
+      }
+      std::sort(vect->begin(),vect->end());
+      Int_t n1 = vect->size();
+      vect->erase(std::unique(vect->begin(),vect->end()),vect->end());
+      Int_t n2 = vect->size();
+      std::cout << " out of " << n1 << " values, " << n2 << " are unique\n";
+
+      for(int i = 0; i< vect->size() ; i++) {
+         std::cout << name << "[" << i << "] = " << vect->at(i) << "\n";
+      }
+   }
+
 
    const TList *        GetDependentVariables() const { return(&fDependentVariables);}
    void                 AddDependentVariables(NucDBBinnedVariable * var){fDependentVariables.Add(var);}
