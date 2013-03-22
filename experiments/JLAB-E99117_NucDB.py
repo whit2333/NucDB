@@ -71,9 +71,9 @@ if __name__ == "__main__":
     A1n.SetColor(4007)
     extractor1 = JLABE99117Extractor()
     extractor1.SetMeasurement(A1n)
-    extractor1.SetInputFile("experiments/JLAB-E99117/plain.txt")
-    extractor1.linestoskip=10
-    extractor1.NumberOfLines=12-10
+    extractor1.SetInputFile("experiments/JLAB-E99117/plain.txt",9,12-9)
+    #extractor1.linestoskip=10
+    #extractor1.NumberOfLines=12-10
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -90,9 +90,9 @@ if __name__ == "__main__":
     g1nOverF1n.SetColor(4007)
     extractor2 = JLABE99117Extractor()
     extractor2.SetMeasurement(g1nOverF1n)
-    extractor2.SetInputFile("experiments/JLAB-E99117/plain.txt")
-    extractor2.linestoskip=23
-    extractor2.NumberOfLines=25-23
+    extractor2.SetInputFile("experiments/JLAB-E99117/plain.txt",22,25-22)
+    #extractor2.linestoskip=23
+    #extractor2.NumberOfLines=25-23
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -109,11 +109,11 @@ if __name__ == "__main__":
     A1He3.SetColor(4007)
     extractor3 = JLABE99117Extractor()
     extractor3.SetMeasurement(A1He3)
-    extractor3.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
+    extractor3.SetInputFile("experiments/JLAB-E99117/plain.txt.1",9,12-9)
     extractor3.QsqMin=0.27
     extractor3.QsqMax=0.5
-    extractor3.linestoskip=10
-    extractor3.NumberOfLines=12-10
+    #extractor3.linestoskip=10
+    #extractor3.NumberOfLines=12-10
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -130,9 +130,9 @@ if __name__ == "__main__":
     A2He3.SetColor(4007)
     extractor4 = JLABE99117Extractor()
     extractor4.SetMeasurement(A2He3)
-    extractor4.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor4.linestoskip=23
-    extractor4.NumberOfLines=25-23
+    extractor4.SetInputFile("experiments/JLAB-E99117/plain.txt.1",22,25-22)
+    #extractor4.linestoskip=23
+    #extractor4.NumberOfLines=25-23
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor4.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -149,9 +149,9 @@ if __name__ == "__main__":
     g1He3OverF1He3.SetColor(4007)
     extractor7 = JLABE99117Extractor()
     extractor7.SetMeasurement(g1He3OverF1He3)
-    extractor7.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor7.linestoskip=36
-    extractor7.NumberOfLines=38-36
+    extractor7.SetInputFile("experiments/JLAB-E99117/plain.txt.1",35,38-35)
+    #extractor7.linestoskip=36
+    #extractor7.NumberOfLines=38-36
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor7.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -168,9 +168,9 @@ if __name__ == "__main__":
     g2He3OverF2He3.SetColor(4007)
     extractor8 = JLABE99117Extractor()
     extractor8.SetMeasurement(g2He3OverF2He3)
-    extractor8.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor8.linestoskip=49
-    extractor8.NumberOfLines=51-49
+    extractor8.SetInputFile("experiments/JLAB-E99117/plain.txt.1",48,51-48)
+    #extractor8.linestoskip=49
+    #extractor8.NumberOfLines=51-49
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor8.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -187,9 +187,9 @@ if __name__ == "__main__":
     g1He3.SetColor(4007)
     extractor9 = JLABE99117Extractor()
     extractor9.SetMeasurement(g1He3)
-    extractor9.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor9.linestoskip=62
-    extractor9.NumberOfLines=64-62
+    extractor9.SetInputFile("experiments/JLAB-E99117/plain.txt.1",61,64-61)
+    #extractor9.linestoskip=62
+    #extractor9.NumberOfLines=64-62
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor9.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -206,9 +206,9 @@ if __name__ == "__main__":
     g2He3.SetColor(4007)
     extractor10 = JLABE99117Extractor()
     extractor10.SetMeasurement(g2He3)
-    extractor10.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor10.linestoskip=75
-    extractor10.NumberOfLines=77-75
+    extractor10.SetInputFile("experiments/JLAB-E99117/plain.txt.1",74,77-74)
+    #extractor10.linestoskip=75
+    #extractor10.NumberOfLines=77-75
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor10.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -226,9 +226,9 @@ if __name__ == "__main__":
     A1n.SetColor(4007)
     extractor11 = JLABE99117Extractor()
     extractor11.SetMeasurement(A1n)
-    extractor11.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor11.linestoskip=88
-    extractor11.NumberOfLines=90-88
+    extractor11.SetInputFile("experiments/JLAB-E99117/plain.txt.1",87,90-87)
+    #extractor11.linestoskip=88
+    #extractor11.NumberOfLines=90-88
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor11.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -246,9 +246,9 @@ if __name__ == "__main__":
     A2n.SetColor(4007)
     extractor12 = JLABE99117Extractor()
     extractor12.SetMeasurement(A2n)
-    extractor12.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor12.linestoskip=101
-    extractor12.NumberOfLines=103-101
+    extractor12.SetInputFile("experiments/JLAB-E99117/plain.txt.1",100,103-100)
+    #extractor12.linestoskip=101
+    #extractor12.NumberOfLines=103-101
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor12.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -266,9 +266,9 @@ if __name__ == "__main__":
     g1nOverF1n.SetColor(4007)
     extractor13 = JLABE99117Extractor()
     extractor13.SetMeasurement(g1nOverF1n)
-    extractor13.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor13.linestoskip=114
-    extractor13.NumberOfLines=116-114
+    extractor13.SetInputFile("experiments/JLAB-E99117/plain.txt.1",113,116-113)
+    #extractor13.linestoskip=114
+    #extractor13.NumberOfLines=116-114
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor13.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -285,9 +285,9 @@ if __name__ == "__main__":
     g2nOverF2n.SetColor(4007)
     extractor14 = JLABE99117Extractor()
     extractor14.SetMeasurement(g2nOverF2n)
-    extractor14.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor14.linestoskip=114
-    extractor14.NumberOfLines=116-114
+    extractor14.SetInputFile("experiments/JLAB-E99117/plain.txt.1",113,116-113)
+    #extractor14.linestoskip=114
+    #extractor14.NumberOfLines=116-114
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor14.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -304,9 +304,9 @@ if __name__ == "__main__":
     g1n.SetColor(4007)
     extractor5 = JLABE99117Extractor()
     extractor5.SetMeasurement(g1n)
-    extractor5.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor5.linestoskip=140
-    extractor5.NumberOfLines=142-140
+    extractor5.SetInputFile("experiments/JLAB-E99117/plain.txt.1",139,142-139)
+    #extractor5.linestoskip=140
+    #extractor5.NumberOfLines=142-140
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor5.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -323,9 +323,9 @@ if __name__ == "__main__":
     g2n.SetColor(4007)
     extractor6 = JLABE99117Extractor()
     extractor6.SetMeasurement(g2n)
-    extractor6.SetInputFile("experiments/JLAB-E99117/plain.txt.1")
-    extractor6.linestoskip=153
-    extractor6.NumberOfLines=155-153
+    extractor6.SetInputFile("experiments/JLAB-E99117/plain.txt.1",152,155-152)
+    #extractor6.linestoskip=153
+    #extractor6.NumberOfLines=155-153
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor6.fCurrentDataPoint.AddBinVariable(Xbjorken)

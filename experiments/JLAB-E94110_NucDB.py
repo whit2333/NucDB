@@ -205,8 +205,8 @@ if __name__ == "__main__":
     sigmaExtractor = E94110FullSigmaExtractor()
     sigmaExtractor.SetMeasurement(sigma)
     sigmaExtractor.SetInputFile("experiments/JLAB-E94110/cs_94_sys.dat")
-    sigmaExtractor.linestoskip=1
-    sigmaExtractor.NumberOfLines=1273-1
+    #sigmaExtractor.linestoskip=1
+    #sigmaExtractor.NumberOfLines=1273-1
     Ebeam    = NucDBBinnedVariable("E","E")
     Eprime   = NucDBBinnedVariable("Eprime","E'")
     theta    = NucDBBinnedVariable("theta","#theta")
@@ -239,9 +239,9 @@ if __name__ == "__main__":
     sigmaL.SetColor(4019)
     sigmaLExtractor = E94110SigmaExtractor2()
     sigmaLExtractor.SetMeasurement(sigmaL)
-    sigmaLExtractor.SetInputFile("experiments/JLAB-E94110/e94110_final.dat")
-    sigmaLExtractor.linestoskip=3
-    sigmaLExtractor.NumberOfLines=169-3
+    sigmaLExtractor.SetInputFile("experiments/JLAB-E94110/e94110_final.dat",2)
+    #sigmaLExtractor.linestoskip=3
+    #sigmaLExtractor.NumberOfLines=169-3
     Xbjorken = NucDBBinnedVariable("x","x")
     W2 = NucDBBinnedVariable("W2","W2")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
@@ -261,9 +261,9 @@ if __name__ == "__main__":
     sigmaT.SetColor(4019)
     sigmaTExtractor = E94110SigmaExtractor()
     sigmaTExtractor.SetMeasurement(sigmaT)
-    sigmaTExtractor.SetInputFile("experiments/JLAB-E94110/e94110_final.dat")
-    sigmaTExtractor.linestoskip=3
-    sigmaTExtractor.NumberOfLines=169-3
+    sigmaTExtractor.SetInputFile("experiments/JLAB-E94110/e94110_final.dat",2)
+    #sigmaTExtractor.linestoskip=3
+    #sigmaTExtractor.NumberOfLines=169-3
     Xbjorken = NucDBBinnedVariable("x","x")
     W2 = NucDBBinnedVariable("W2","W2")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
@@ -282,9 +282,9 @@ if __name__ == "__main__":
     F2p.SetColor(4019)
     F2pExtractor = E94110Extractor()
     F2pExtractor.SetMeasurement(F2p)
-    F2pExtractor.SetInputFile("experiments/JLAB-E94110/e94110_sfcalc.dat")
-    F2pExtractor.linestoskip=2
-    F2pExtractor.NumberOfLines=168-1
+    F2pExtractor.SetInputFile("experiments/JLAB-E94110/e94110_sfcalc.dat",1)
+    #F2pExtractor.linestoskip=2
+    #F2pExtractor.NumberOfLines=168-1
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     F2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -302,9 +302,9 @@ if __name__ == "__main__":
     F1p.SetColor(4019)
     F1pExtractor = E94110Extractor2()
     F1pExtractor.SetMeasurement(F1p)
-    F1pExtractor.SetInputFile("experiments/JLAB-E94110/e94110_sfcalc.dat")
-    F1pExtractor.linestoskip=2
-    F1pExtractor.NumberOfLines=168-1
+    F1pExtractor.SetInputFile("experiments/JLAB-E94110/e94110_sfcalc.dat",1)
+    #F1pExtractor.linestoskip=2
+    #F1pExtractor.NumberOfLines=168-1
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     F1pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -322,9 +322,9 @@ if __name__ == "__main__":
     FLp.SetColor(4019)
     FLpExtractor = E94110Extractor3()
     FLpExtractor.SetMeasurement(FLp)
-    FLpExtractor.SetInputFile("experiments/JLAB-E94110/e94110_sfcalc.dat")
-    FLpExtractor.linestoskip=2
-    FLpExtractor.NumberOfLines=168-1
+    FLpExtractor.SetInputFile("experiments/JLAB-E94110/e94110_sfcalc.dat",1)
+    #FLpExtractor.linestoskip=2
+    #FLpExtractor.NumberOfLines=168-1
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     FLpExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)

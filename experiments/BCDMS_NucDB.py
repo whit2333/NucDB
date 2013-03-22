@@ -69,9 +69,9 @@ if __name__ == "__main__":
     F2p.SetColor(4000)
     extractor1 = BCDMSExtractor()
     extractor1.SetMeasurement(F2p)
-    extractor1.SetInputFile("experiments/BCDMS/f2protcomb.dat")
-    extractor1.linestoskip=0
-    extractor1.NumberOfLines=178
+    extractor1.SetInputFile("experiments/BCDMS/f2protcomb.dat",0,178)
+    #extractor1.linestoskip=0
+    #extractor1.NumberOfLines=178
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)

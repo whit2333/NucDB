@@ -102,7 +102,7 @@ A2n.SetColor(4013)
 g1nExtractor = SLACE155ExtractorgXn()
 g1nExtractor.SetMeasurement(g1n)
 g1nExtractor.SetInputFile("experiments/SLAC-E154/a1ng1n.dat")
-g1nExtractor.linestoskip=0
+#g1nExtractor.linestoskip=0
 Xbjorken = NucDBBinnedVariable("x","x")
 Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
 g1nExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -114,7 +114,7 @@ g1n.BuildGraph()
 A1nExtractor = SLACE155ExtractorAXn()
 A1nExtractor.SetMeasurement(A1n)
 A1nExtractor.SetInputFile("experiments/SLAC-E154/a1ng1n.dat")
-A1nExtractor.linestoskip=0
+#A1nExtractor.linestoskip=0
 Xbjorken = NucDBBinnedVariable("x","x")
 Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
 A1nExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -126,7 +126,7 @@ A1n.BuildGraph()
 g2nExtractor = SLACE155ExtractorgXn()
 g2nExtractor.SetMeasurement(g2n)
 g2nExtractor.SetInputFile("experiments/SLAC-E154/a2ng2n.dat")
-g2nExtractor.linestoskip=0
+#g2nExtractor.linestoskip=0
 Xbjorken = NucDBBinnedVariable("x","x")
 Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
 g2nExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -138,7 +138,7 @@ g2n.BuildGraph()
 A2nExtractor = SLACE155ExtractorAXn()
 A2nExtractor.SetMeasurement(A2n)
 A2nExtractor.SetInputFile("experiments/SLAC-E154/a2ng2n.dat")
-A2nExtractor.linestoskip=0
+#A2nExtractor.linestoskip=0
 Xbjorken = NucDBBinnedVariable("x","x")
 Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
 A2nExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)

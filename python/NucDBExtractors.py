@@ -51,6 +51,7 @@ class NucDBRawDataExtractor:
         self.linestoskip       = 0
         self.currentline       = 0
         self._line_number      = 0
+        self._lines_read       = 0
         self.inputfile         = 0
         self.inputfilename     = 0
         self.fMeasurement      = 0
@@ -92,26 +93,34 @@ class NucDBRawDataExtractor:
         skip = self.linestoskip 
         for i in range(skip):
             self.currentline = self.inputfile.readline() # keep it one line ahead of searchfile
-            _line_number     = _line_number + 1
+            self._line_number     = self._line_number + 1
             #print self.currentline
-        print "Initialization Complete"
+        #print "Initialization Complete"
+        #print "NInputLines: " + str(self.NInputLines)
+        #print "linestoskip: " + str(self.linestoskip)
 
     def GetNextLine(self):
         self.currentline = self.inputfile.readline()
-        _line_number     = _line_number + 1
-
-    def ExtractAllValues(self):
-        for self.currentline in self.inputfile:
-            self.GetNextValue()
-        print "Extraction Complete"
+        self._line_number     = self._line_number + 1
+        self._lines_read      = self._lines_read + 1
 
     def GetNextValue(self):
         if not self.fMeasurement :
             return
+        if self._lines_read > self.NInputLines : 
+            return
+        #print "lines_read: " + str(self._lines_read)
         self.ParseLine()
         if self.rowcut.IsGoodRow():
             self.fCurrentDataPoint.SetName("p"+str(self.fMeasurement.GetNDataPoints()));
             self.fMeasurement.AddDataPoint(copy.deepcopy(self.fCurrentDataPoint))
+
+    def ExtractAllValues(self):
+        #for currentline in self.inputfile:
+        for i in range(self.NInputLines):
+            self.GetNextLine()
+            self.GetNextValue()
+        print "Extraction Complete"
 
 
 

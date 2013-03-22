@@ -74,7 +74,7 @@ if __name__ == "__main__":
     extractor1.istatErr=8
     extractor1.isysErr=9
     extractor1.SetMeasurement(g1He3)
-    extractor1.SetInputFile("experiments/SLAC-E142/a1g1He3.dat")
+    extractor1.SetInputFile("experiments/SLAC-E142/a1g1He3.dat",16,24-16)
     extractor1.linestoskip=17
     extractor1.NumberOfLines=24-17
     Xbjorken = NucDBBinnedVariable("x","x")
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     extractor2.isysErr=5
     extractor2.istatErr=6
     extractor2.SetMeasurement(A1He3)
-    extractor2.SetInputFile("experiments/SLAC-E142/a1g1He3.dat")
+    extractor2.SetInputFile("experiments/SLAC-E142/a1g1He3.dat",16,24-16)
     extractor2.linestoskip=17
     extractor2.NumberOfLines=24-17
     Xbjorken = NucDBBinnedVariable("x","x")
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     extractor3.istatErr=8
     extractor3.isysErr=9
     extractor3.SetMeasurement(g2He3)
-    extractor3.SetInputFile("experiments/SLAC-E142/a2g2He3.dat")
+    extractor3.SetInputFile("experiments/SLAC-E142/a2g2He3.dat",16,24-16)
     extractor3.linestoskip=17
     extractor3.NumberOfLines=24-17
     Xbjorken = NucDBBinnedVariable("x","x")
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     extractor4.isysErr=5
     extractor4.istatErr=6
     extractor4.SetMeasurement(A2He3)
-    extractor4.SetInputFile("experiments/SLAC-E142/a1g1He3.dat")
+    extractor4.SetInputFile("experiments/SLAC-E142/a1g1He3.dat",16,24-16)
     extractor4.linestoskip=17
     extractor4.NumberOfLines=24-17
     Xbjorken = NucDBBinnedVariable("x","x")
@@ -164,7 +164,7 @@ if __name__ == "__main__":
     extractor11.istatErr=8
     extractor11.isysErr=9
     extractor11.SetMeasurement(g1n)
-    extractor11.SetInputFile("experiments/SLAC-E142/a1g1n.dat")
+    extractor11.SetInputFile("experiments/SLAC-E142/a1g1n.dat",18,26-18)
     extractor11.linestoskip=19
     extractor11.NumberOfLines=26-19
     Xbjorken = NucDBBinnedVariable("x","x")
@@ -186,7 +186,7 @@ if __name__ == "__main__":
     extractor12.isysErr=5
     extractor12.istatErr=6
     extractor12.SetMeasurement(A1n)
-    extractor12.SetInputFile("experiments/SLAC-E142/a1g1n.dat")
+    extractor12.SetInputFile("experiments/SLAC-E142/a1g1n.dat",18,26-18)
     extractor12.linestoskip=19
     extractor12.NumberOfLines=26-19
     Xbjorken = NucDBBinnedVariable("x","x")
@@ -208,7 +208,7 @@ if __name__ == "__main__":
     extractor13.istatErr=8
     extractor13.isysErr=9
     extractor13.SetMeasurement(g2n)
-    extractor13.SetInputFile("experiments/SLAC-E142/a2g2n.dat")
+    extractor13.SetInputFile("experiments/SLAC-E142/a2g2n.dat",17,25-18)
     extractor13.linestoskip=18
     extractor13.NumberOfLines=25-18
     Xbjorken = NucDBBinnedVariable("x","x")
@@ -230,7 +230,7 @@ if __name__ == "__main__":
     extractor14.isysErr=5
     extractor14.istatErr=6
     extractor14.SetMeasurement(A2n)
-    extractor14.SetInputFile("experiments/SLAC-E142/a2g2n.dat")
+    extractor14.SetInputFile("experiments/SLAC-E142/a2g2n.dat",17,25-17)
     extractor14.linestoskip=18
     extractor14.NumberOfLines=25-18
     Xbjorken = NucDBBinnedVariable("x","x")

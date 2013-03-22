@@ -69,9 +69,9 @@ if __name__ == "__main__":
     F2p.SetColor(4008)
     extractor1 = NMCExtractor()
     extractor1.SetMeasurement(F2p)
-    extractor1.SetInputFile("experiments/NMC/f2pmerge.dat")
-    extractor1.linestoskip=0
-    extractor1.NumberOfLines=158
+    extractor1.SetInputFile("experiments/NMC/f2pmerge.dat",0,158)
+    #extractor1.linestoskip=0
+    #extractor1.NumberOfLines=158
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)

@@ -124,8 +124,8 @@ if __name__ == "__main__":
     A1p.SetColor(4015)
     extractor1 = SMCExtractorAXN()
     extractor1.SetMeasurement(A1p)
-    extractor1.SetInputFile("experiments/SMC/a1pg1p.dat")
-    extractor1.linestoskip=4
+    extractor1.SetInputFile("experiments/SMC/a1pg1p.dat",3)
+    #extractor1.linestoskip=4
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -142,8 +142,8 @@ if __name__ == "__main__":
     g1p.SetColor(4015)
     extractor2 = SMCExtractorgXN()
     extractor2.SetMeasurement(g1p)
-    extractor2.SetInputFile("experiments/SMC/a1pg1p.dat")
-    extractor2.linestoskip=4
+    extractor2.SetInputFile("experiments/SMC/a1pg1p.dat",3)
+    #extractor2.linestoskip=4
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -160,8 +160,8 @@ if __name__ == "__main__":
     A2p.SetColor(4015)
     extractor3 = SMCExtractorA2p()
     extractor3.SetMeasurement(A2p)
-    extractor3.SetInputFile("experiments/SMC/a2p.dat")
-    extractor3.linestoskip=4
+    extractor3.SetInputFile("experiments/SMC/a2p.dat",3)
+    #extractor3.linestoskip=4
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -178,8 +178,8 @@ if __name__ == "__main__":
     g2p.SetColor(4015)
     extractor4 = SMCExtractorg2p()
     extractor4.SetMeasurement(g2p)
-    extractor4.SetInputFile("experiments/SMC/g2p.dat")
-    extractor4.linestoskip=4
+    extractor4.SetInputFile("experiments/SMC/g2p.dat",3)
+    #extractor4.linestoskip=4
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor4.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -201,8 +201,8 @@ if __name__ == "__main__":
     g1n.SetColor(4015)
     extractor5 = SMCExtractorAXN()
     extractor5.SetMeasurement(g1n)
-    extractor5.SetInputFile("experiments/SMC/g1n.dat")
-    extractor5.linestoskip=18
+    extractor5.SetInputFile("experiments/SMC/g1n.dat",17)
+    #extractor5.linestoskip=18
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor5.fCurrentDataPoint.AddBinVariable(Xbjorken)

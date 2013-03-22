@@ -78,8 +78,8 @@ if __name__ == "__main__":
 
     extractor1 = JLABE01012Extractor()
     extractor1.SetMeasurement(A1n)
-    extractor1.SetInputFile("experiments/JLAB-E01012/results.txt")
-    extractor1.linestoskip=2
+    extractor1.SetInputFile("experiments/JLAB-E01012/results.txt",1)
+    #extractor1.linestoskip=2
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)

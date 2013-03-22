@@ -69,9 +69,9 @@ if __name__ == "__main__":
     g1p.SetColor(4002)
     extractor1 = EMCExtractor()
     extractor1.SetMeasurement(g1p)
-    extractor1.SetInputFile("experiments/EMC/a1pg1p.txt")
-    extractor1.linestoskip=0
-    extractor1.NumberOfLines=10
+    extractor1.SetInputFile("experiments/EMC/a1pg1p.txt",0,10)
+    #extractor1.linestoskip=0
+    #extractor1.NumberOfLines=10
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -88,9 +88,9 @@ if __name__ == "__main__":
     F2p.SetColor(4002)
     extractor2 = EMCExtractor()
     extractor2.SetMeasurement(F2p)
-    extractor2.SetInputFile("experiments/EMC/f2protcomb.txt")
-    extractor2.linestoskip=0
-    extractor2.NumberOfLines=95
+    extractor2.SetInputFile("experiments/EMC/f2protcomb.txt",0,95)
+    #extractor2.linestoskip=0
+    #extractor2.NumberOfLines=95
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)

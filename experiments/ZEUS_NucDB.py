@@ -69,9 +69,9 @@ if __name__ == "__main__":
     F2p.SetColor(4016)
     extractor1 = ZEUSExtractor()
     extractor1.SetMeasurement(F2p)
-    extractor1.SetInputFile("experiments/ZEUS/f2prot.dat")
-    extractor1.linestoskip=0
-    extractor1.NumberOfLines=56
+    extractor1.SetInputFile("experiments/ZEUS/f2prot.dat",0,56)
+    #extractor1.linestoskip=0
+    #extractor1.NumberOfLines=56
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)

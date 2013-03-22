@@ -171,8 +171,8 @@ if __name__ == "__main__":
     RExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
     RExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
     RExtractor.fCurrentDataPoint.AddBinVariable(Epsilon)
-    RExtractor.SetInputFile("experiments/SLAC-E143/R.dat")
-    RExtractor.linestoskip=15
+    RExtractor.SetInputFile("experiments/SLAC-E143/R.dat",14)
+    #RExtractor.linestoskip=15
     RExtractor.Initialize()
     RExtractor.ExtractAllValues()
     R.BuildGraph()
@@ -191,8 +191,8 @@ if __name__ == "__main__":
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     g1pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
     g1pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
-    g1pExtractor.SetInputFile("experiments/SLAC-E143/g1p.dat")
-    g1pExtractor.linestoskip=11
+    g1pExtractor.SetInputFile("experiments/SLAC-E143/g1p.dat",10)
+    #g1pExtractor.linestoskip=11
     g1pExtractor.Initialize()
     g1pExtractor.ExtractAllValues()
     g1p.BuildGraph()
@@ -211,8 +211,8 @@ if __name__ == "__main__":
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     g2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
     g2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
-    g2pExtractor.SetInputFile("experiments/SLAC-E143/g2p.dat")
-    g2pExtractor.linestoskip=11
+    g2pExtractor.SetInputFile("experiments/SLAC-E143/g2p.dat",10)
+    #g2pExtractor.linestoskip=11
     g2pExtractor.Initialize()
     g2pExtractor.ExtractAllValues()
     g2p.BuildGraph()
@@ -230,8 +230,8 @@ if __name__ == "__main__":
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     Extractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
     Extractor3.fCurrentDataPoint.AddBinVariable(Qsq)
-    Extractor3.SetInputFile("experiments/SLAC-E143/a1p.dat")
-    Extractor3.linestoskip=11
+    Extractor3.SetInputFile("experiments/SLAC-E143/a1p.dat",10)
+    #Extractor3.linestoskip=11
     Extractor3.Initialize()
     Extractor3.ExtractAllValues()
     A1p.BuildGraph()
@@ -249,8 +249,8 @@ if __name__ == "__main__":
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     Extractor4.fCurrentDataPoint.AddBinVariable(Xbjorken)
     Extractor4.fCurrentDataPoint.AddBinVariable(Qsq)
-    Extractor4.SetInputFile("experiments/SLAC-E143/a2p.dat")
-    Extractor4.linestoskip=13
+    Extractor4.SetInputFile("experiments/SLAC-E143/a2p.dat",12)
+    #Extractor4.linestoskip=13
     Extractor4.Initialize()
     Extractor4.ExtractAllValues()
     A2p.BuildGraph()
@@ -269,8 +269,8 @@ if __name__ == "__main__":
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     Extractor5.fCurrentDataPoint.AddBinVariable(Xbjorken)
     Extractor5.fCurrentDataPoint.AddBinVariable(Qsq)
-    Extractor5.SetInputFile("experiments/SLAC-E143/g1n.dat")
-    Extractor5.linestoskip=28
+    Extractor5.SetInputFile("experiments/SLAC-E143/g1n.dat",27)
+    #Extractor5.linestoskip=28
     Extractor5.Initialize()
     Extractor5.ExtractAllValues()
     g1n.BuildGraph()
@@ -289,8 +289,8 @@ if __name__ == "__main__":
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     Extractor6.fCurrentDataPoint.AddBinVariable(Xbjorken)
     Extractor6.fCurrentDataPoint.AddBinVariable(Qsq)
-    Extractor6.SetInputFile("experiments/SLAC-E143/g2n.dat")
-    Extractor6.linestoskip=29
+    Extractor6.SetInputFile("experiments/SLAC-E143/g2n.dat",28)
+    #Extractor6.linestoskip=29
     Extractor6.Initialize()
     Extractor6.ExtractAllValues()
     g2n.BuildGraph()
@@ -308,8 +308,8 @@ if __name__ == "__main__":
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     Extractor7.fCurrentDataPoint.AddBinVariable(Xbjorken)
     Extractor7.fCurrentDataPoint.AddBinVariable(Qsq)
-    Extractor7.SetInputFile("experiments/SLAC-E143/a1n.dat")
-    Extractor7.linestoskip=9
+    Extractor7.SetInputFile("experiments/SLAC-E143/a1n.dat",8)
+    #Extractor7.linestoskip=9
     Extractor7.Initialize()
     Extractor7.ExtractAllValues()
     A1n.BuildGraph()
@@ -327,8 +327,8 @@ if __name__ == "__main__":
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     Extractor8.fCurrentDataPoint.AddBinVariable(Xbjorken)
     Extractor8.fCurrentDataPoint.AddBinVariable(Qsq)
-    Extractor8.SetInputFile("experiments/SLAC-E143/a2n.dat")
-    Extractor8.linestoskip=29
+    Extractor8.SetInputFile("experiments/SLAC-E143/a2n.dat",28)
+    #Extractor8.linestoskip=29
     Extractor8.Initialize()
     Extractor8.ExtractAllValues()
     A2n.BuildGraph()

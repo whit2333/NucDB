@@ -205,9 +205,9 @@ if __name__ == "__main__":
     sigma.SetColor(4020)
     sigmaExtractor = E99118FullSigmaExtractor()
     sigmaExtractor.SetMeasurement(sigma)
-    sigmaExtractor.SetInputFile("experiments/JLAB-E99118/hydrogen.global.table.text")
-    sigmaExtractor.linestoskip=5
-    sigmaExtractor.NumberOfLines=1204-5
+    sigmaExtractor.SetInputFile("experiments/JLAB-E99118/hydrogen.global.table.text",4)
+    #sigmaExtractor.linestoskip=5
+    #sigmaExtractor.NumberOfLines=1204-5
     Ebeam    = NucDBBinnedVariable("E","E")
     Eprime   = NucDBBinnedVariable("Eprime","E'")
     theta    = NucDBBinnedVariable("theta","#theta")

@@ -70,9 +70,9 @@ if __name__ == "__main__":
     F2n.SetColor(4017)
     extractor1 = CERNNA2Extractor()
     extractor1.SetMeasurement(F2n)
-    extractor1.SetInputFile("experiments/CERN-NA-2/f2neutron.dat")
-    extractor1.linestoskip=0
-    extractor1.NumberOfLines=65
+    extractor1.SetInputFile("experiments/CERN-NA-2/f2neutron.dat",0,65)
+    #extractor1.linestoskip=0
+    #extractor1.NumberOfLines=65
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)

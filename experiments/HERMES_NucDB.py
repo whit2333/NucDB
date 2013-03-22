@@ -25,7 +25,7 @@ class HERMESExtractor(NucDBRawDataExtractor):
         deltax=0.01
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[ixbjorken]),deltax)
-        #x.Print()
+        x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[self.iQsq]),0.1)
         #Qsq.Print()
@@ -69,9 +69,9 @@ if __name__ == "__main__":
     g1p.SetColor(4003)
     extractor1 = HERMESExtractor()
     extractor1.SetMeasurement(g1p)
-    extractor1.SetInputFile("experiments/HERMES/g1p")
-    extractor1.linestoskip=25
-    extractor1.NumberOfLines=44-25
+    extractor1.SetInputFile("experiments/HERMES/g1p",24,20)
+    #extractor1.linestoskip=25
+    #extractor1.NumberOfLines=44-25
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -91,9 +91,9 @@ if __name__ == "__main__":
     extractor2.istatErr=3
     extractor2.isysErr=4
     extractor2.SetMeasurement(g1pOverF1p)
-    extractor2.SetInputFile("experiments/HERMES/g1p")
-    extractor2.linestoskip=25
-    extractor2.NumberOfLines=44-25
+    extractor2.SetInputFile("experiments/HERMES/g1p",24,20)
+    #extractor2.linestoskip=25
+    #extractor2.NumberOfLines=44-25
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -114,9 +114,9 @@ if __name__ == "__main__":
     extractor3.istatErr=3
     extractor3.isysErr=4
     extractor3.SetMeasurement(A1p)
-    extractor3.SetInputFile("experiments/HERMES/a1pd.dat")
-    extractor3.linestoskip=26
-    extractor3.NumberOfLines=70-26
+    extractor3.SetInputFile("experiments/HERMES/a1pd.dat",25, 70-25)
+    #extractor3.linestoskip=26
+    #extractor3.NumberOfLines=70-26
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -137,9 +137,9 @@ if __name__ == "__main__":
     extractor4.istatErr=7
     extractor4.isysErr=8
     extractor4.SetMeasurement(A1d)
-    extractor4.SetInputFile("experiments/HERMES/a1pd.dat")
-    extractor4.linestoskip=26
-    extractor4.NumberOfLines=70-26
+    extractor4.SetInputFile("experiments/HERMES/a1pd.dat",25,70-26)
+    #extractor4.linestoskip=26
+    #extractor4.NumberOfLines=70-26
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor4.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -160,9 +160,9 @@ if __name__ == "__main__":
     extractor5.istatErr=3
     extractor5.isysErr=4
     extractor5.SetMeasurement(g1p)
-    extractor5.SetInputFile("experiments/HERMES/g1pd.dat")
-    extractor5.linestoskip=26
-    extractor5.NumberOfLines=70-26
+    extractor5.SetInputFile("experiments/HERMES/g1pd.dat",25,70-26)
+    #extractor5.linestoskip=26
+    #extractor5.NumberOfLines=70-26
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor5.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -183,9 +183,9 @@ if __name__ == "__main__":
     extractor6.istatErr=7
     extractor6.isysErr=8
     extractor6.SetMeasurement(g1d)
-    extractor6.SetInputFile("experiments/HERMES/g1pd.dat")
-    extractor6.linestoskip=26
-    extractor6.NumberOfLines=70-26
+    extractor6.SetInputFile("experiments/HERMES/g1pd.dat",25,70-25)
+    #extractor6.linestoskip=26
+    #extractor6.NumberOfLines=70-26
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor6.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -206,9 +206,9 @@ if __name__ == "__main__":
     extractor7.istatErr=3
     extractor7.isysErr=4
     extractor7.SetMeasurement(g1n)
-    extractor7.SetInputFile("experiments/HERMES/g1n.dat")
-    extractor7.linestoskip=27
-    extractor7.NumberOfLines=71-27
+    extractor7.SetInputFile("experiments/HERMES/g1n.dat",26,71-26)
+    #extractor7.linestoskip=27
+    #extractor7.NumberOfLines=71-27
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor7.fCurrentDataPoint.AddBinVariable(Xbjorken)
