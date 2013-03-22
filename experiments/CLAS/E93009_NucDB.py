@@ -25,6 +25,9 @@ class E93009Extractor(NucDBRawDataExtractor):
         if self.linesRead > self.NumberOfLines :
              self.rowcut.currentValue=1
              return
+        if not self.is_number(values[ixbjorken]) :
+             self.rowcut.currentValue=1
+             return
         deltax=0.01
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[ixbjorken]),deltax)
@@ -53,7 +56,7 @@ class E93009Extractor(NucDBRawDataExtractor):
             nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
         #
-        #self.fCurrentDataPoint.Print()
+        self.fCurrentDataPoint.Print()
         self.linesRead+=1
 
 # for G1/F1
@@ -116,9 +119,9 @@ def ExtractFromClasDat(lines,fname) :
         A1p.SetColor(4018)
         extractor1 = E93009Extractor()
         extractor1.SetMeasurement(A1p)
-        extractor1.SetInputFile(datafilename)
+        extractor1.SetInputFile(datafilename,10,int(lines)-14)
         #extractor1.linestoskip=0
-        extractor1.NumberOfLines=float(lines)-13
+        #extractor1.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
         Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
         extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -136,9 +139,9 @@ def ExtractFromClasDat(lines,fname) :
         g1pOverF1p.SetColor(4018)
         extractor2 = E93009Extractor2()
         extractor2.SetMeasurement(g1pOverF1p)
-        extractor2.SetInputFile(datafilename)
+        extractor2.SetInputFile(datafilename,10,int(lines)-14)
         #extractor1.linestoskip=0
-        extractor2.NumberOfLines=float(lines)-13
+        #extractor2.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
         Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
         extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -153,13 +156,13 @@ def ExtractFromClasDat(lines,fname) :
         if not A1d :
                 A1d = NucDBMeasurement("A1d","A_{1}^{d}")
                 experiment.AddMeasurement(A1d)
-            #A1p.ClearDataPoints()
+        #A1d.ClearDataPoints()
         A1d.SetColor(4018)
         extractor1 = E93009Extractor()
         extractor1.SetMeasurement(A1d)
-        extractor1.SetInputFile(datafilename)
+        extractor1.SetInputFile(datafilename,10,int(lines)-14)
         #extractor1.linestoskip=0
-        extractor1.NumberOfLines=float(lines)-13
+        #extractor1.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
         Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
         extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -173,13 +176,13 @@ def ExtractFromClasDat(lines,fname) :
         if not g1dOverF1d :
                 g1dOverF1d = NucDBMeasurement("g1d/F1d","g_{1}^{d}/F_{1}^{d}")
                 experiment.AddMeasurement(g1dOverF1d)
-            #A1p.ClearDataPoints()
+        #g1dOverF1d.ClearDataPoints()
         g1dOverF1d.SetColor(4018)
         extractor2 = E93009Extractor2()
         extractor2.SetMeasurement(g1dOverF1d)
-        extractor2.SetInputFile(datafilename)
+        extractor2.SetInputFile(datafilename,10,int(lines)-14)
         #extracto2.linestoskip=0
-        extractor2.NumberOfLines=float(lines)-13
+        #extractor2.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
         Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
         extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -220,7 +223,7 @@ if __name__ == "__main__":
                 nlines = values[0]
                 datfile = str(values[1])
         #print nlines
-        #print datfile 
+        print datfile 
         ExtractFromClasDat(nlines,datfile) 
    
 

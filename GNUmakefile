@@ -106,11 +106,14 @@ database:
 	python experiments/CLAS/E93009_NucDB.py
 	python experiments/RSS_NucDB.py
 	python experiments/JLAB-E94010_NucDB.py
-	python experiments/JLAB-E99117_NucDB.py
-	python experiments/JLAB_E00108_NucDB.py
 	python experiments/JLAB-E94110_NucDB.py
+	python experiments/JLAB-E99117_NucDB.py
+	python experiments/JLAB-E99118_NucDB.py
+	python experiments/JLAB-E00002_NucDB.py
+	python experiments/JLAB-E01012_NucDB.py
+	python experiments/JLAB-E00108_NucDB.py
 	./analyses/maid_all
-	python analyses/LATTICE_NucDB.py
+	#python analyses/LATTICE_NucDB.py
 
 databaseclean:
 	rm data/NucDB.root

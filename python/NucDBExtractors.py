@@ -48,6 +48,7 @@ class NucDBRawDataExtractor:
         ::ExtractAllValues
     """
     def __init__(self):
+        self._skip_line_       = 0
         self.linestoskip       = 0
         self.currentline       = 0
         self._line_number      = 0
@@ -85,6 +86,13 @@ class NucDBRawDataExtractor:
                 pass
             return i + 1
 
+    def is_number(self,s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+         
     def SetMeasurement(self, meas):
         self.fMeasurement = meas
 
@@ -100,14 +108,20 @@ class NucDBRawDataExtractor:
         #print "linestoskip: " + str(self.linestoskip)
 
     def GetNextLine(self):
+        self._skip_line  = 0
         self.currentline = self.inputfile.readline()
         self._line_number     = self._line_number + 1
         self._lines_read      = self._lines_read + 1
+        if self.currentline.__len__() < 2 :
+            self._skip_line = 1
 
     def GetNextValue(self):
         if not self.fMeasurement :
             return
         if self._lines_read > self.NInputLines : 
+            return
+        if self._skip_line : 
+            print " Bad line: " + self.currentline
             return
         #print "lines_read: " + str(self._lines_read)
         self.ParseLine()
