@@ -17,6 +17,7 @@
 #include "TObjString.h"
 #include "NucDBDatabase.h"
 #include "TMultiGraph.h"
+#include "NucDBReference.h"
 
 /** NucDB Database Manager.
  *
@@ -32,6 +33,7 @@ private:
    Int_t   fVerbosity;
 
 protected:
+
    /** If opt is not zero it is opened in UPDATE mode, otherwise it is readonly.
     */ 
    NucDBManager(Int_t opt = 0);
@@ -97,6 +99,9 @@ public :
     *  Returns the total number of experiments
     */
    Int_t              ListExperiments();
+
+   TList * GetRefs(); 
+      
 
    /** Prints the measurements which are stored in the database. 
     *  A measurement would be, for example, F1p, g2P, F2C/F2D,...

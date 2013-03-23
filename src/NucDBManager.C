@@ -221,3 +221,17 @@ Int_t NucDBManager::ListMeasurements() {
 
       return(0);  
    }
+//_____________________________________________________________________________
+
+TList * NucDBManager::GetRefs() {
+      TList * refs = new TList();
+      TList * exps = GetExperiments();
+      for(int i=0;i<exps->GetEntries();i++) {
+         NucDBExperiment * anExp = (NucDBExperiment*)exps->At(i);
+         refs->AddAll(anExp->GetRefs());
+      }
+      refs->Print();
+      return( refs );
+}
+//_____________________________________________________________________________
+

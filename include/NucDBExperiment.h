@@ -34,6 +34,19 @@ public:
    NucDBMeasurement * GetMeasurement(const char * name);
    TList *            GetMeasurements(){ return(&fMeasurements); }
 
+   /** Returns a new list containing all the refs from each measurement. 
+    */
+   TList * GetRefs(){
+      TList * refs = new TList();
+      NucDBMeasurement * m = 0;
+      for(int i = 0;i<fMeasurements.GetEntries();i++){
+         m = (NucDBMeasurement*)fMeasurements.At(i);
+         if(m->GetRefs()->GetEntries()>0)refs->AddAll(m->GetRefs());
+      }
+      return(refs);
+   }
+
+
    void AddMeasurement(NucDBMeasurement* meas);
    void Print(); // *MENU*
    void PlotMeasurements(const char * var = "x"); // *MENU*
