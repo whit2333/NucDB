@@ -73,8 +73,9 @@ public:
     */
    TList * FilterWithBin(NucDBBinnedVariable const *bin);
    NucDBMeasurement * CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) {
-      NucDBMeasurement * m = new NucDBMeasurement(Form("%s-%s",this->GetName(),bin->GetName()));
-      m->AddDataPoints(this->FilterWithBin(bin) );
+      NucDBMeasurement * m = new NucDBMeasurement(Form("%s_%s",this->GetName(),bin->GetName()),
+                                                  Form("%s %s",this->GetTitle(),bin->GetTitle()) );
+      m->AddDataPoints(this->FilterWithBin(bin));
       return m;
    }  
    const TList * GetDataPoints() const {return(&fDataPoints);}
