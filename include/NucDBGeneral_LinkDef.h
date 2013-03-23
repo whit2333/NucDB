@@ -24,6 +24,7 @@
 #pragma link C++ class NucDBExperiment+;
 #pragma link C++ class NucDBCalculation+;
 #pragma link C++ class NucDBPaper+;
+#pragma link C++ class NucDBReference+;
 
 #pragma link C++ class NucDBUnit+;
 #pragma link C++ class NucDBInverseUnit+;

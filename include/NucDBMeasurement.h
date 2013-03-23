@@ -11,7 +11,7 @@
 #include "NucDBPaper.h"
 #include <vector>
 #include <algorithm>
-
+#include "NucDBReference.h"
 
 /** A measured quantitiy.
  * 
@@ -35,6 +35,8 @@ protected:
    TString  fExperimentName;
    Int_t    fNumberOfDataPoints;
    TList    fPapers;
+
+   NucDBReference fReference;
 
 public:
    NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
@@ -88,6 +90,8 @@ public:
    Int_t   GetNDataPoints(){ return(fNumberOfDataPoints);}
    void    SetColor(Int_t col){fColor = col;}
    Int_t   GetColor() const {return(fColor);}
+
+   NucDBReference *  GetReference() { return &fReference ; }
 
    /** Build a graph with errors */
    TGraphErrors * BuildGraph(const char * varName = "x"); // *MENU*

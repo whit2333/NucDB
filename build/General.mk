@@ -9,6 +9,7 @@ GeneralLibObjs := lib/NucDBDataPoint.o \
                   lib/NucDBDependentVariable.o \
                   lib/NucDBCalculation.o \
                   lib/NucDBPaper.o \
+                  lib/NucDBReference.o \
                   lib/NucDBExperiment.o \
                   lib/NucDBDatabase.o
 
