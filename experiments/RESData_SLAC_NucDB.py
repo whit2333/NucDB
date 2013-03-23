@@ -319,3 +319,45 @@ if __name__ == "__main__":
     experiment.Print()
     manager.SaveExperiment(experiment)
 
+    # SLAC E49a6
+    experiment = manager.GetExperiment("SLAC-E49a6")
+    if not experiment :
+        experiment = NucDBExperiment("SLAC-E49a6","SLAC-E49a6")
+    # sigma full 
+    sigma = experiment.GetMeasurement("sigma")
+    if not sigma :
+        sigma = NucDBMeasurement("sigma","#sigma^{p}")
+        experiment.AddMeasurement(sigma)
+    sigma.ClearDataPoints()
+    sigma.SetColor(4021)
+    sigmaExtractor = JLABResDataExtractor() 
+    sigmaExtractor.SetMeasurement(sigma)
+    sigmaExtractor.SetInputFile("experiments/RESData/e49a6.txt",6)
+    sigmaExtractor.DeclareVariables()
+    sigmaExtractor.Initialize()
+    sigmaExtractor.ExtractAllValues()
+    sigma.BuildGraph()
+    experiment.Print()
+    manager.SaveExperiment(experiment)
+
+    # SLAC ONEN1HAF
+    experiment = manager.GetExperiment("SLAC-ONEN1HAF")
+    if not experiment :
+        experiment = NucDBExperiment("SLAC-ONEN1HAF","SLAC-ONEN1HAF")
+    # sigma full 
+    sigma = experiment.GetMeasurement("sigma")
+    if not sigma :
+        sigma = NucDBMeasurement("sigma","#sigma^{p}")
+        experiment.AddMeasurement(sigma)
+    sigma.ClearDataPoints()
+    sigma.SetColor(4021)
+    sigmaExtractor = JLABResDataExtractor() 
+    sigmaExtractor.SetMeasurement(sigma)
+    sigmaExtractor.SetInputFile("experiments/RESData/onen1haf.txt",6)
+    sigmaExtractor.DeclareVariables()
+    sigmaExtractor.Initialize()
+    sigmaExtractor.ExtractAllValues()
+    sigma.BuildGraph()
+    experiment.Print()
+    manager.SaveExperiment(experiment)
+
