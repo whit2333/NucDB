@@ -35,8 +35,7 @@ protected:
    TString  fExperimentName;
    Int_t    fNumberOfDataPoints;
    TList    fPapers;
-
-   NucDBReference fReference;
+   TList    fReferences;
 
 public:
    NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
@@ -58,6 +57,7 @@ public:
    void    Browse(TBrowser* b) {
       b->Add(&fDataPoints,"Data Points");
       b->Add(&fGraphs,"Graphs");
+      b->Add(&fReferences,"Refs");
       if(fGraph)b->Add(fGraph,"vs x");
    }
 
@@ -91,7 +91,8 @@ public:
    void    SetColor(Int_t col){fColor = col;}
    Int_t   GetColor() const {return(fColor);}
 
-   NucDBReference *  GetReference() { return &fReference ; }
+   const TList *  GetRefs() const { return &fReferences ; }
+   void           AddRef(NucDBReference * r) { fReferences.Add(r); }
 
    /** Build a graph with errors */
    TGraphErrors * BuildGraph(const char * varName = "x"); // *MENU*
