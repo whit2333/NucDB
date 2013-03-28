@@ -21,13 +21,13 @@ class JLABExtractor(NucDBRawDataExtractor) :
             #print v
         self.rowcut.currentValue=int(0) # does nothign
         nu = self.fCurrentDataPoint.GetBinVariable('nu')
-        nu.SetBinValueSize(float(values[inu]),0.001)
+        nu.SetBinValueSize(float(values[inu])/1000.0,0.001)
         #nu.Print()
         theta = self.fCurrentDataPoint.GetBinVariable('theta')
         theta.SetBinValueSize(float(15.5),0.001)
         #theta.Print()
         Ebeam = self.fCurrentDataPoint.GetBinVariable("E")
-        Ebeam.SetBinValueSize(float(values[iEbeam]),0.001)
+        Ebeam.SetBinValueSize(float(values[iEbeam])/1000.0,0.001)
         #Ebeam.Print()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
