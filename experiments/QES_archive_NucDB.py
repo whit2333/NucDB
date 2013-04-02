@@ -24,7 +24,7 @@ class QESArchiveDataExtractor(NucDBRawDataExtractor) :
         iNu=4
         #print self.currentline
         values = self.currentline.split()
-        Ebeam=float(values[iNu])+flaot(values[iEprime])
+        Ebeam=float(values[iNu])+float(values[iEprime])
         self.rowcut.currentValue=int(0) # does nothign
         Eb = self.fCurrentDataPoint.GetBinVariable('E')
         Eb.SetBinValueSize(float(Ebeam),0.001)
@@ -118,7 +118,8 @@ if __name__ == "__main__":
         sigma = NucDBMeasurement("sigma_3He","#sigma^{^3He}")
         experiment.AddMeasurement(sigma)
 
-    refname="Dow1988rk"
+    refname='Dow1988rk'
+    filename='experiments/QES_archive/data/3He_'+refname+'.dat'
     sigma.ClearDataPoints()
     ref = NucDBReference("QES-Archive","QES Archive website")
     ref.SetURL("http://faculty.virginia.edu/qes-archive/index.html")
@@ -126,11 +127,12 @@ if __name__ == "__main__":
     ref.SetDescription("Quasielastic electron Nucleus scattering archive website.")
     sigma.AddRef(ref)
     ref1 = NucDBReference(refname,refname)
-    ref.SetRefType(NucDBReference.kPublished)
+    ref1.SetRefType(NucDBReference.kPublished)
+    sigma.AddRef(ref1)
     sigma.SetColor(1)
     sigmaExtractor = QESArchiveDataExtractor() 
     sigmaExtractor.SetMeasurement(sigma)
-    sigmaExtractor.SetInputFile("experiments/QES_Archive/data/3He_"+refname+".dat")
+    sigmaExtractor.SetInputFile(filename)
     sigmaExtractor.DeclareVariables()
     sigmaExtractor.Initialize()
     sigmaExtractor.ExtractAllValues()
