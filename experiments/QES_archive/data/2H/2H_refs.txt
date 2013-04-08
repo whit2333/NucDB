@@ -1,0 +1,7 @@
+Arnold:1988us
+Arrington:1995hs
+Arrington:1998ps
+Lung-thesis:1992
+Parker:1986
+Rock:1991jy
+Schutz:1976he

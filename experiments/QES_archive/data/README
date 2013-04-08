@@ -1,0 +1,8 @@
+
+ls -l | grep ^d | awk '{print $8}' > QES_nuclei.txt
+
+To get a list of refs:
+  awk < 3He.dat '{ print $8 }' | sort  | uniq > 3He_refs.txt
+
+To get all data from a given ref:
+  awk < 3He.dat ' $8=="Dow:1988rk" { print $0 }' > 3He_Dow1988rk.dat

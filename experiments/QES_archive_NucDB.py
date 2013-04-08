@@ -3,6 +3,7 @@ gSystem.Load( 'libNucDB' )
 from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV,NucDBReference
 from NucDBExtractors import *
 import os
+import fileinput
 
 class QESArchiveDataExtractor(NucDBRawDataExtractor) :
     #Full data extractor.Format :
@@ -102,6 +103,31 @@ class QESArchiveDataExtractor(NucDBRawDataExtractor) :
         #self.fCurrentDataPoint.AddBinVariable(Qsq)
         #self.fCurrentDataPoint.AddBinVariable(W2)
 
+def QESAddMeasurement(exp,refName,nucleus,refFile):
+    sigma = experiment.GetMeasurement("sigma_"+nucleus)
+    if not sigma :
+        sigma = NucDBMeasurement("sigma_"+nucleus,"#sigma^{^"+nucleus+"}")
+        experiment.AddMeasurement(sigma)
+    # References:
+    #  - QES database website
+    ref = NucDBReference("QES-Archive","QES Archive website")
+    ref.SetURL("http://faculty.virginia.edu/qes-archive/index.html")
+    ref.SetRefType(NucDBReference.kWebsite)
+    ref.SetDescription("Quasielastic electron Nucleus scattering archive website.")
+    sigma.AddRef(ref)
+    #  - Actual data reference
+    ref1 = NucDBReference(refName,refName)
+    ref1.SetRefType(NucDBReference.kPublished)
+    sigma.AddRef(ref1)
+
+    sigma.SetColor(1)
+    sigmaExtractor = QESArchiveDataExtractor() 
+    sigmaExtractor.SetMeasurement(sigma)
+    sigmaExtractor.SetInputFile(refFile)
+    sigmaExtractor.DeclareVariables()
+    sigmaExtractor.Initialize()
+    sigmaExtractor.ExtractAllValues()
+    sigma.BuildGraph("nu")
 
 
 if __name__ == "__main__":
@@ -112,31 +138,51 @@ if __name__ == "__main__":
     experiment = manager.GetExperiment("QES-Archive")
     if not experiment :
         experiment = NucDBExperiment("QES-Archive","QES-Archive")
+    
+    nucleiListFile = open("experiments/QES_archive/data/QES_nuclei.txt","r")
+    for nucleus in nucleiListFile : 
+        nucleus=nucleus.rstrip()
+        print "Nucleus: ", nucleus 
+        measFileName = "experiments/QES_archive/data/" + str(nucleus) + "/" + str(nucleus) + "_list.txt"
+        refFileName = "experiments/QES_archive/data/" + str(nucleus) + "/" + str(nucleus) + "_refs.txt"
+        print measFileName
+        print refFileName
+        measListFile = open(measFileName,'r')
+        refListFile = open(refFileName,'r')
+        for aRefFileName in measListFile :  
+            aRefName = refListFile.readline()
+            aRefName = aRefName.rstrip()
+            aRefFileName = aRefFileName.rstrip()
+            datfile = "experiments/QES_archive/data/" + str(nucleus) + "/" + aRefFileName
+            print aRefName
+            print "File: ", datfile 
+            QESAddMeasurement(experiment,aRefName,nucleus,datfile)
+            
+        
     # sigma full 
-    sigma = experiment.GetMeasurement("sigma_3He")
-    if not sigma :
-        sigma = NucDBMeasurement("sigma_3He","#sigma^{^3He}")
-        experiment.AddMeasurement(sigma)
-
-    refname='Dow1988rk'
-    filename='experiments/QES_archive/data/3He_'+refname+'.dat'
-    sigma.ClearDataPoints()
-    ref = NucDBReference("QES-Archive","QES Archive website")
-    ref.SetURL("http://faculty.virginia.edu/qes-archive/index.html")
-    ref.SetRefType(NucDBReference.kWebsite)
-    ref.SetDescription("Quasielastic electron Nucleus scattering archive website.")
-    sigma.AddRef(ref)
-    ref1 = NucDBReference(refname,refname)
-    ref1.SetRefType(NucDBReference.kPublished)
-    sigma.AddRef(ref1)
-    sigma.SetColor(1)
-    sigmaExtractor = QESArchiveDataExtractor() 
-    sigmaExtractor.SetMeasurement(sigma)
-    sigmaExtractor.SetInputFile(filename)
-    sigmaExtractor.DeclareVariables()
-    sigmaExtractor.Initialize()
-    sigmaExtractor.ExtractAllValues()
-    sigma.BuildGraph()
+    #sigma = experiment.GetMeasurement("sigma_3He")
+    #if not sigma :
+    #    sigma = NucDBMeasurement("sigma_3He","#sigma^{^3He}")
+    #    experiment.AddMeasurement(sigma)
+    #refname='Dow1988rk'
+    #filename='experiments/QES_archive/data/3He/3He_'+refname+'.dat'
+    #sigma.ClearDataPoints()
+    #ref = NucDBReference("QES-Archive","QES Archive website")
+    #ref.SetURL("http://faculty.virginia.edu/qes-archive/index.html")
+    #ref.SetRefType(NucDBReference.kWebsite)
+    #ref.SetDescription("Quasielastic electron Nucleus scattering archive website.")
+    #sigma.AddRef(ref)
+    #ref1 = NucDBReference(refname,refname)
+    #ref1.SetRefType(NucDBReference.kPublished)
+    #sigma.AddRef(ref1)
+    #sigma.SetColor(1)
+    #sigmaExtractor = QESArchiveDataExtractor() 
+    #sigmaExtractor.SetMeasurement(sigma)
+    #sigmaExtractor.SetInputFile(filename)
+    #sigmaExtractor.DeclareVariables()
+    #sigmaExtractor.Initialize()
+    #sigmaExtractor.ExtractAllValues()
+    #sigma.BuildGraph()
 
     experiment.Print()
     manager.SaveExperiment(experiment)

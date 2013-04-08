@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ \( ! $1 \) ] ; then
+  echo "Error: no input file given"
+  exit 1
+fi
+
+if [ ! -e $1 ] ; then
+  echo "File $1 does not exist"
+  exit 1
+fi
+
+datafile=$1
+
+prefix=`echo $datafile |  sed s/\.[^\.]*$//` 
+../qes_list_refs $1 > ${prefix}_refs.txt
+rm ${prefix}_list.txt
+
+refs=`../qes_list_refs $1`
+for ref in $refs; do 
+   echo $ref
+   refname=`echo $ref | sed s/://`
+   echo $refname
+   echo $prefix
+   outfile="${prefix}_${refname}.dat"
+   ../qes_filter_ref $ref $1 > $outfile 
+   echo $outfile >> ${prefix}_list.txt 
+done
+

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ ! $1 ]; then
+   echo "Error: ${0} requires 1 argument."
+   echo "For example: ${0} inputfile.txt "
+   exit 1  
+fi
+if [ ! -e $1 ]; then
+   echo "File: $1 does not exist"
+   exit 1
+fi
+
+file=${1}
+awk < $file '{ print $8 }' | sort  | uniq  
+

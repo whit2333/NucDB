@@ -1,0 +1,29 @@
+#!/bin/bash
+
+error_print() {
+   echo "Error: ${0} requires 2 arguments. For example:"
+   echo " \$ ${0} ref-name inputfile "
+   exit 1  
+}
+
+if [ \( ! $1 \) -o \( ! $2 \) ]; then 
+   error_print
+fi
+if [  ! -e $2 ]; then 
+   echo "File: $2 does not exist"
+   exit 1 
+fi
+
+#if [[ "$(grep ${2})" != "0" ]]; then
+#   echo "Error: no matching ref in inputfile"
+#   exit 1
+#fi
+
+ref=${1}
+infile=${2}
+awkscript="\$8==\"${ref}\" { print \$0 }"
+#echo $awkscript
+awk < $infile "$awkscript"  
+#awk < $infile ' $8=="${ref}" { print $0 }' > 3He_Dow1988rk.dat
+
+

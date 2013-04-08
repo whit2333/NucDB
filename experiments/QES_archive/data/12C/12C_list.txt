@@ -1,0 +1,10 @@
+12C_Arrington1995hs.dat
+12C_Arrington1998ps.dat
+12C_Bagdasaryan1988hp.dat
+12C_Baran1988tw.dat
+12C_Barreau1983ht.dat
+12C_Day1993md.dat
+12C_O'Connell1987ag.dat
+12C_Sealock1989nx.dat
+12C_Whitney1974hr.dat
+12C_Zeller1973ge.dat

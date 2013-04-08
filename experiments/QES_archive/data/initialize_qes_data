@@ -1,0 +1,12 @@
+#!/bin/bash
+
+nuclei=`cat QES_nuclei.txt`
+
+for nucleus in $nuclei; do
+   echo $nucleus
+   cd $nucleus
+   rm ${nucleus}_*
+   ../qes_breakup_refs ${nucleus}.dat 
+   ls
+   cd ..
+done
