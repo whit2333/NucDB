@@ -113,6 +113,7 @@ database:
 	python experiments/JLAB-E01012_NucDB.py
 	python experiments/JLAB-E00108_NucDB.py
 	python experiments/RESData_SLAC_NucDB.py
+	python experiments/QES_archive_NucDB.py
 	./analyses/maid_all
 	#python analyses/LATTICE_NucDB.py
 

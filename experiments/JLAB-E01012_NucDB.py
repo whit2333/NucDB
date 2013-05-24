@@ -16,6 +16,7 @@ class JLABE01012Extractor(NucDBRawDataExtractor):
         self.iQsq= 1
         self.iValueRow=2
         self.istatErr=3
+        self.isysErr=4
         self.isysErrPlus=4
         self.isysErrMinus=5
         self.NumberOfLines=9999
@@ -39,7 +40,8 @@ class JLABE01012Extractor(NucDBRawDataExtractor):
             #Qsq.Print()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr].lstrip('+')))
-        self.fCurrentDataPoint.GetSystError().SetErrorSize(float(values[self.isysErrPlus]),float(values[self.isysErrMinus]))
+        #self.fCurrentDataPoint.GetSystError().SetErrorSize(float(values[self.isysErrPlus]),float(values[self.isysErrMinus]))
+        self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr].lstrip('+')))
         self.fCurrentDataPoint.CalculateTotalError()
         #
         W = self.fCurrentDataPoint.GetDependentVariable("W")
@@ -78,7 +80,7 @@ if __name__ == "__main__":
 
     extractor1 = JLABE01012Extractor()
     extractor1.SetMeasurement(A1n)
-    extractor1.SetInputFile("experiments/JLAB-E01012/results.txt",1)
+    extractor1.SetInputFile("experiments/JLAB-E01012/E01012.dat",0)
     #extractor1.linestoskip=2
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
@@ -88,27 +90,27 @@ if __name__ == "__main__":
     extractor1.ExtractAllValues()
     A1n.BuildGraph()
     
-    g1nOverF1n = experiment.GetMeasurement("g1n/F1n")
-    if not g1nOverF1n :
-        g1nOverF1n = NucDBMeasurement("g1n/F1n","g_{1}^{n}/F_{1}^{n}")
-        experiment.AddMeasurement(g1nOverF1n)
-    g1nOverF1n.ClearDataPoints()
-    g1nOverF1n.SetColor(4005)
-    extractor2 = JLABE01012Extractor()
-    extractor2.iValueRow=6
-    extractor2.istatErr=7
-    extractor2.isysErrPlus=8
-    extractor2.isysErrMinus=9
-    extractor2.SetMeasurement(g1nOverF1n)
-    extractor2.SetInputFile("experiments/JLAB-E01012/results.txt")
-    extractor2.linestoskip=2
-    Xbjorken = NucDBBinnedVariable("x","x")
-    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
-    extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
-    extractor2.Initialize()
-    extractor2.ExtractAllValues()
-    g1nOverF1n.BuildGraph()
+    #g1nOverF1n = experiment.GetMeasurement("g1n/F1n")
+    #if not g1nOverF1n :
+    #    g1nOverF1n = NucDBMeasurement("g1n/F1n","g_{1}^{n}/F_{1}^{n}")
+    #    experiment.AddMeasurement(g1nOverF1n)
+    #g1nOverF1n.ClearDataPoints()
+    #g1nOverF1n.SetColor(4005)
+    #extractor2 = JLABE01012Extractor()
+    #extractor2.iValueRow=6
+    #extractor2.istatErr=7
+    #extractor2.isysErrPlus=8
+    #extractor2.isysErrMinus=9
+    #extractor2.SetMeasurement(g1nOverF1n)
+    #extractor2.SetInputFile("experiments/JLAB-E01012/results.txt")
+    #extractor2.linestoskip=2
+    #Xbjorken = NucDBBinnedVariable("x","x")
+    #Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    #extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    #extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
+    #extractor2.Initialize()
+    #extractor2.ExtractAllValues()
+    #g1nOverF1n.BuildGraph()
     
     experiment.Print()
     manager.SaveExperiment(experiment)
