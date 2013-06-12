@@ -20,18 +20,18 @@ class QESArchiveDataExtractor(NucDBRawDataExtractor) :
         """
         iZ=0
         iA=1
-        iEprime=2
+        iEbeam=2
         iTheta=3
         iNu=4
         #print self.currentline
         values = self.currentline.split()
-        Ebeam=float(values[iNu])+float(values[iEprime])
+        Eprime = float(values[iEbeam]) - float(values[iNu])
         self.rowcut.currentValue=int(0) # does nothign
         Eb = self.fCurrentDataPoint.GetBinVariable('E')
-        Eb.SetBinValueSize(float(Ebeam),0.001)
+        Eb.SetBinValueSize(float(values[iEbeam]),0.001)
         #Eb.Print()
         Ep = self.fCurrentDataPoint.GetBinVariable('Eprime')
-        Ep.SetBinValueSize(float(values[iEprime]),0.001)
+        Ep.SetBinValueSize(Eprime,0.001)
         #Ep.Print()
         th = self.fCurrentDataPoint.GetBinVariable('theta')
         th.SetBinValueSize(float(values[iTheta]),0.001)
