@@ -1,0 +1,26 @@
+From the webpage : http://faculty.virginia.edu/qes-archive/index.html
+
+Quasielastic Electron Nucleus Scattering Archive
+
+Welcome to Quasielastic Electron Nucleus Scattering Archive 
+
+In connection with a review article (Quasielastic Electron-Nucleus Scattering, by O. Benhar, D. Day and I. Sick) published in the Reviews of Modern Physics [Rev. Mod. Phys. 80, 189-224, 2008], we have collected here an extensive set of quasielastic electron scattering data in order to preserve and make available these data to the nuclear physics community.
+
+ We have chosen to provide the cross section only and not the separated response functions. Unless explicitly indicated the data do not include Coulomb corrections. 
+
+ Our criteria for inclusion into the data base is the following: 
+Data published in tabular form in journal, thesis or preprint.
+Radiative corrections applied to data.
+No known or acknowledged pathologies
+
+ At present there are about 600 different combinations of targets, energies and angles consisting of some 19,000 data points. 
+
+ In the infrequent event that corrections were made to the data after the original publications, we included the latest data set, adding an additional reference, usually a private communication. 
+
+ As additional data become known to us, we will add to the data sets. 
+
+If you wish to be alerted to changes in the archive or to the inclusion of new data, send an email to me (Donal Day) [dbd at virginia.edu]. Send any comments or corrections you might have as well. 
+
+ Finally, we would appreciate an reference (e-Print Archive: nucl-ex/0603032) if you make use of the data in this archive in your work. 
+ Donal Day
+ October 4, 2007
