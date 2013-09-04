@@ -14,6 +14,8 @@ Int_t g1p()
    /// Get the g1p measurments from all experiments.
    TList *   g1p_measurements = manager->GetMeasurements("g1p");
 
+   TLegend * leg = new TLegend(0.7,0.7,0.9,0.9);
+
    TGraphErrors *     aGraph  = 0;
    NucDBMeasurement * aMeas   = 0;
    TMultiGraph *      mg      = 0; 
@@ -25,9 +27,10 @@ Int_t g1p()
    for (int i = 0;  i < g1p_measurements->GetEntries(); i++) {
       aMeas  = (NucDBMeasurement*)(g1p_measurements->At(i));
       aGraph = aMeas->BuildGraph(variable.Data());
+      leg->AddEntry(aGraph,aMeas->GetExperimentName(),"ep");
       mg->Add(aGraph,"ep");
    }
-   
+   leg->Draw(); 
    mg->Draw("a");
 
    c->cd(2);
