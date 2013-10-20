@@ -13,7 +13,20 @@ NucDBMeasurement::NucDBMeasurement(const char * name,const char * title)
    }
 //_____________________________________________________________________________
 
-NucDBMeasurement::~NucDBMeasurement(){ }
+NucDBMeasurement::~NucDBMeasurement(){ 
+}
+//_____________________________________________________________________________
+NucDBMeasurement::NucDBMeasurement(const NucDBMeasurement& v){
+   SetNameTitle(v.GetName(),v.GetTitle());
+   fColor = v.GetColor();
+   SetExperimentName(v.GetExperimentName());
+   fNumberOfDataPoints = v.fNumberOfDataPoints;
+
+   fDataPoints.AddAll(v.GetDataPoints());
+   fBinnedVariables.AddAll(v.GetBinnedVariables());
+   fDependentVariables.AddAll(v.GetDependentVariables());
+   fGraphs.AddAll(v.GetGraphs());
+}
 //_____________________________________________________________________________
 
 void NucDBMeasurement::ClearDataPoints(){
@@ -40,7 +53,14 @@ void NucDBMeasurement::AddDataPoints(TList * listOfPoints, bool clear) {
       } else {
          printf(" NULL TList pointer \n");
       } 
-   }
+}
+//_____________________________________________________________________________
+NucDBMeasurement * NucDBMeasurement::CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) {
+   NucDBMeasurement * m = new NucDBMeasurement(Form("%s_%s",this->GetName(),bin->GetName()),
+         Form("%s %s",this->GetTitle(),bin->GetTitle()) );
+   m->AddDataPoints(this->FilterWithBin(bin));
+   return m;
+}  
 //_____________________________________________________________________________
 
 TList *  NucDBMeasurement::FilterWithBin(NucDBBinnedVariable const *bin) {

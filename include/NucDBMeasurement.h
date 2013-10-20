@@ -1,5 +1,6 @@
 #ifndef NucDBMeasurement_HH
 #define NucDBMeasurement_HH
+
 #include "TNamed.h"
 #include "TList.h"
 #include <iostream>
@@ -22,184 +23,172 @@
  * 
  *  Name is used in the database queries and title is used for display purposes
  *  For example, name="F2p" and title="F_{2}^{p}".
+ *
+ * \todo develop (or adopt) a naming convention  
+ *
  */
 class NucDBMeasurement : public TNamed {
-private:
-   Int_t    fColor;
+   private:
+      Int_t    fColor;
 
-protected:
-   TList    fDataPoints;
-   TList    fBinnedVariables;
-   TList    fDependentVariables;
-   TList    fGraphs;
-   TString  fExperimentName;
-   Int_t    fNumberOfDataPoints;
-   TList    fPapers;
-   TList    fReferences;
+   protected:
+      TList    fDataPoints;
+      TList    fBinnedVariables;
+      TList    fDependentVariables;
+      TList    fGraphs;
+      TString  fExperimentName;
+      Int_t    fNumberOfDataPoints;
+      TList    fPapers;
+      TList    fReferences;
 
-public:
-   NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
-   virtual ~NucDBMeasurement();
-   NucDBMeasurement(const NucDBMeasurement& v){
-      SetNameTitle(v.GetName(),v.GetTitle());
-      fColor = v.GetColor();
-      SetExperimentName(v.GetExperimentName());
-      fNumberOfDataPoints = v.fNumberOfDataPoints;
+   public:
+      NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
+      virtual ~NucDBMeasurement();
 
-      fDataPoints.AddAll(v.GetDataPoints());
-      fBinnedVariables.AddAll(v.GetBinnedVariables());
-      fDependentVariables.AddAll(v.GetDependentVariables());
-      fGraphs.AddAll(v.GetGraphs());
-   }
+      NucDBMeasurement(const NucDBMeasurement& v);
 
-   /** Necessary for Browsing */
-   Bool_t  IsFolder() const { return kTRUE; }
-   void    Browse(TBrowser* b) {
-      b->Add(&fDataPoints,"Data Points");
-      b->Add(&fGraphs,"Graphs");
-      b->Add(&fReferences,"Refs");
-      if(fGraph)b->Add(fGraph,"vs x");
-   }
-
-   void    ClearDataPoints();
-
-   /** Add a data point to the list of datapoints */
-   void    AddDataPoint(NucDBDataPoint *point);
-
-   /** Adds a list data point to the list of datapoints with the option to
-    *  clear exisiting datapoints
-    */
-   void    AddDataPoints(TList * listOfPoints, bool clear=false );
-
-   /** Returns a list of datapoints falling in the bin.
-    */
-   TList * FilterWithBin(NucDBBinnedVariable const *bin);
-   NucDBMeasurement * CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) {
-      NucDBMeasurement * m = new NucDBMeasurement(Form("%s_%s",this->GetName(),bin->GetName()),
-                                                  Form("%s %s",this->GetTitle(),bin->GetTitle()) );
-      m->AddDataPoints(this->FilterWithBin(bin));
-      return m;
-   }  
-   const TList * GetDataPoints() const {return(&fDataPoints);}
-
-   void    Print() const ; // *MENU*
-   void    PrintData() const ; // *MENU*
-   void    ListVariables() ; // *MENU*
-   TString GetExperimentName() const {return(fExperimentName);}
-   void    SetExperimentName(TString s){fExperimentName = s;}
-   Int_t   GetNDataPoints(){ return(fNumberOfDataPoints);}
-   void    SetColor(Int_t col){fColor = col;}
-   Int_t   GetColor() const {return(fColor);}
-
-   const TList *  GetRefs() const { return &fReferences ; }
-   void           AddRef(NucDBReference * r) { fReferences.Add(r); }
-
-   /** Build a graph with errors */
-   TGraphErrors * BuildGraph(const char * varName = "x"); // *MENU*
-   TGraphErrors * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
-   TGraphErrors * fGraph; //->
-
-   const TList *        GetBinnedVariables() const { return(&fBinnedVariables);}
-   void                 AddBinnedVariable(NucDBBinnedVariable * var){fBinnedVariables.Add(var);}
-   NucDBBinnedVariable* GetBinnedVariable(const char * name) {
-      for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
-          if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
-             return((NucDBBinnedVariable*)fBinnedVariables.At(i));
+      /** Necessary for Browsing */
+      Bool_t  IsFolder() const { return kTRUE; }
+      void    Browse(TBrowser* b) {
+         b->Add(&fDataPoints     , "Data Points");
+         b->Add(&fGraphs         , "Graphs");
+         b->Add(&fReferences     , "Refs");
+         if(fGraph)b->Add(fGraph , "vs x");
       }
-      return(0);
-   }
 
-   /** Returns the mean value of the variable. */
-   Double_t GetBinnedVariableMean(const char * name) {
-      Double_t tot = 0;
-      Int_t N = 0;
-      const TList * datapoints = GetDataPoints();
-      NucDBDataPoint * p = 0;
-      NucDBBinnedVariable * v = 0;
-      for(int i = 0;i<datapoints->GetEntries();i++) {
-         p = (NucDBDataPoint*)datapoints->At(i);
-         if(p) {
-            v = (NucDBBinnedVariable*)p->GetBinVariable(name);
-            if(v){
-               tot += v->GetMean();
-               N++;
+      void    ClearDataPoints();
+
+      /** Add a data point to the list of datapoints */
+      void    AddDataPoint(NucDBDataPoint *point);
+
+      /** Adds a list data point to the list of datapoints with the option to
+       *  clear exisiting datapoints
+       */
+      void    AddDataPoints(TList * listOfPoints, bool clear=false );
+
+      /** Returns a list of datapoints falling in the bin.
+      */
+      TList * FilterWithBin(NucDBBinnedVariable const *bin);
+      NucDBMeasurement * CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) ;
+      const TList * GetDataPoints() const {return(&fDataPoints);}
+
+      void    Print() const ; // *MENU*
+      void    PrintData() const ; // *MENU*
+      void    ListVariables() ; // *MENU*
+      TString GetExperimentName() const {return(fExperimentName);}
+      void    SetExperimentName(TString s){fExperimentName = s;}
+      Int_t   GetNDataPoints(){ return(fNumberOfDataPoints);}
+      void    SetColor(Int_t col){fColor = col;}
+      Int_t   GetColor() const {return(fColor);}
+
+      const TList *  GetRefs() const { return &fReferences ; }
+      void           AddRef(NucDBReference * r) { fReferences.Add(r); }
+
+      /** Build a graph with errors */
+      TGraphErrors * BuildGraph(const char * varName = "x"); // *MENU*
+      TGraphErrors * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
+      TGraphErrors * fGraph; //->
+
+      const TList *        GetBinnedVariables() const { return(&fBinnedVariables);}
+      void                 AddBinnedVariable(NucDBBinnedVariable * var){fBinnedVariables.Add(var);}
+      NucDBBinnedVariable* GetBinnedVariable(const char * name) {
+         for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
+            if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
+               return((NucDBBinnedVariable*)fBinnedVariables.At(i));
+         }
+         return(0);
+      }
+
+      /** Returns the mean value of the variable. */
+      Double_t GetBinnedVariableMean(const char * name) {
+         Double_t tot = 0;
+         Int_t N = 0;
+         const TList * datapoints = GetDataPoints();
+         NucDBDataPoint * p = 0;
+         NucDBBinnedVariable * v = 0;
+         for(int i = 0;i<datapoints->GetEntries();i++) {
+            p = (NucDBDataPoint*)datapoints->At(i);
+            if(p) {
+               v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+               if(v){
+                  tot += v->GetMean();
+                  N++;
+               }
             }
          }
+         if(N>0) return( tot/double(N) );
+         return(0);
       }
-      if(N>0) return( tot/double(N) );
-      return(0);
-   }
 
 
-   /** Returns the mean value of the variable. */
-   Double_t GetBinnedVariableVariance(const char * name) {
-      Double_t mean = GetBinnedVariableMean(name);
-      Double_t tot = 0;
-      Int_t N = 0;
-      const TList * datapoints = GetDataPoints();
-      NucDBDataPoint * p = 0;
-      NucDBBinnedVariable * v = 0;
-      for(int i = 0;i<datapoints->GetEntries();i++) {
-         p = (NucDBDataPoint*)datapoints->At(i);
-         if(p) {
-            v = (NucDBBinnedVariable*)p->GetBinVariable(name);
-            if(v){
-               Double_t vmean = v->GetMean();
-               tot += (vmean*vmean);
-               N++;
+      /** Returns the mean value of the variable. */
+      Double_t GetBinnedVariableVariance(const char * name) {
+         Double_t mean = GetBinnedVariableMean(name);
+         Double_t tot = 0;
+         Int_t N = 0;
+         const TList * datapoints = GetDataPoints();
+         NucDBDataPoint * p = 0;
+         NucDBBinnedVariable * v = 0;
+         for(int i = 0;i<datapoints->GetEntries();i++) {
+            p = (NucDBDataPoint*)datapoints->At(i);
+            if(p) {
+               v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+               if(v){
+                  Double_t vmean = v->GetMean();
+                  tot += (vmean*vmean);
+                  N++;
+               }
             }
          }
+         if(N>0) return( tot/double(N) - mean*mean );
+         return(0);
       }
-      if(N>0) return( tot/double(N) - mean*mean );
-      return(0);
-   }
 
-   /** fills the vector with unique values of the binned variable. */ 
-   void GetUniqueBinnedVariableValues(const char * name,std::vector<double> * vect){
-      if(!vect) return;
-      Int_t N = 0;
-      const TList * datapoints = GetDataPoints();
-      NucDBDataPoint * p = 0;
-      NucDBBinnedVariable * v = 0;
-      for(int i = 0;i<datapoints->GetEntries();i++) {
-         p = (NucDBDataPoint*)datapoints->At(i);
-         if(p) {
-            v = (NucDBBinnedVariable*)p->GetBinVariable(name);
-            if(v){
-               Double_t vmean = v->GetMean();
-               vect->push_back(vmean);
-               N++;
+      /** fills the vector with unique values of the binned variable. */ 
+      void GetUniqueBinnedVariableValues(const char * name,std::vector<double> * vect){
+         if(!vect) return;
+         Int_t N = 0;
+         const TList * datapoints = GetDataPoints();
+         NucDBDataPoint * p = 0;
+         NucDBBinnedVariable * v = 0;
+         for(int i = 0;i<datapoints->GetEntries();i++) {
+            p = (NucDBDataPoint*)datapoints->At(i);
+            if(p) {
+               v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+               if(v){
+                  Double_t vmean = v->GetMean();
+                  vect->push_back(vmean);
+                  N++;
+               }
             }
          }
+         std::sort(vect->begin(),vect->end());
+         Int_t n1 = vect->size();
+         vect->erase(std::unique(vect->begin(),vect->end()),vect->end());
+         Int_t n2 = vect->size();
+         //std::cout << " out of " << n1 << " values, " << n2 << " are unique\n";
+         //for(int i = 0; i< vect->size() ; i++) {
+         //   std::cout << name << "[" << i << "] = " << vect->at(i) << "\n";
+         //}
       }
-      std::sort(vect->begin(),vect->end());
-      Int_t n1 = vect->size();
-      vect->erase(std::unique(vect->begin(),vect->end()),vect->end());
-      Int_t n2 = vect->size();
-      std::cout << " out of " << n1 << " values, " << n2 << " are unique\n";
 
-      for(int i = 0; i< vect->size() ; i++) {
-         std::cout << name << "[" << i << "] = " << vect->at(i) << "\n";
+
+      const TList *        GetDependentVariables() const { return(&fDependentVariables);}
+      void                 AddDependentVariables(NucDBBinnedVariable * var){fDependentVariables.Add(var);}
+      NucDBBinnedVariable* GetDependentVariable(const char * name) {
+         for(int i = 0;i<fDependentVariables.GetEntries();i++) {
+            if( !strcmp( ((NucDBBinnedVariable*)fDependentVariables.At(i))->GetName(),name) ) 
+               return((NucDBBinnedVariable*)fDependentVariables.At(i));
+         }
+         return(0);
       }
-   }
 
+      const TList *              GetGraphs() const { return(&fGraphs);}
 
-   const TList *        GetDependentVariables() const { return(&fDependentVariables);}
-   void                 AddDependentVariables(NucDBBinnedVariable * var){fDependentVariables.Add(var);}
-   NucDBBinnedVariable* GetDependentVariable(const char * name) {
-      for(int i = 0;i<fDependentVariables.GetEntries();i++) {
-          if( !strcmp( ((NucDBBinnedVariable*)fDependentVariables.At(i))->GetName(),name) ) 
-             return((NucDBBinnedVariable*)fDependentVariables.At(i));
-      }
-      return(0);
-   }
+      TList  * GetPapers(){ return(&fPapers); }
+      void     AddPapers(NucDBPaper * p) { fPapers.Add(p); }
 
-   const TList *              GetGraphs() const { return(&fGraphs);}
-
-   TList  * GetPapers(){ return(&fPapers); }
-   void     AddPapers(NucDBPaper * p) { fPapers.Add(p); }
-
-ClassDef(NucDBMeasurement,1)
+      ClassDef(NucDBMeasurement,1)
 };
 
 

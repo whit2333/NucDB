@@ -1,6 +1,6 @@
 Int_t A1p()
 {
-
+   gStyle->SetPaperSize(10.,10.);
    gSystem->Load("libNucDB");
 
    TCanvas * c = new TCanvas();
@@ -24,6 +24,7 @@ Int_t A1p()
 
    c->SaveAs("examples/A1p.png");
    c->SaveAs("examples/A1p.pdf");
+   gPad->Print("examples/A1p.tex");
 
    return(0);
 }

@@ -1,5 +1,7 @@
 #ifndef NucDBManager_HH
-#define NucDBManager_HH
+#define NucDBManager_HH 1
+
+
 #include "TNamed.h"
 #include "TObject.h"
 #include "TROOT.h"
@@ -19,102 +21,100 @@
 #include "TMultiGraph.h"
 #include "NucDBReference.h"
 
-/** NucDB Database Manager.
- *
- */
 class NucDBManager : public TObject {
-private:
-   NucDBDatabase * fDatabase;
-   TList * fExperiments;
-   TList * fPapers;
-   TList * fMeasurements; /// List TObjString names
 
-   TList   fStandardUnits;
-   Int_t   fVerbosity;
+   private:
+      NucDBDatabase * fDatabase;
+      TList * fExperiments;
+      TList * fPapers;
+      TList * fMeasurements; /// List TObjString names
 
-protected:
+      TList   fStandardUnits;
+      Int_t   fVerbosity;
 
-   /** If opt is not zero it is opened in UPDATE mode, otherwise it is readonly.
-    */ 
-   NucDBManager(Int_t opt = 0);
+   protected:
 
-   TFile      * fFile;
-   TDirectory * fExpDir;
-   TDirectory * fPapersDir;
-   TDirectory * fCalcDir;
+      /** If opt is not zero it is opened in UPDATE mode, otherwise it is readonly.
+      */ 
+      NucDBManager(Int_t opt = 0);
 
-   static NucDBManager * fgDBManager;
+      TFile      * fFile;
+      TDirectory * fExpDir;
+      TDirectory * fPapersDir;
+      TDirectory * fCalcDir;
 
-   /** Adds a new TObjString to fMeasurments list if measurment
-    *  does not exist. This is done in order to list the available 
-    *  measurments and not every single time there is an instance of the 
-    *  measurement from a different experiment.
-    */
-   void   AddNewMeasurements(NucDBExperiment * exp);
+      static NucDBManager * fgDBManager;
 
-public :
-   static NucDBManager * GetManager(Int_t opt = 0){
-      if(!fgDBManager) fgDBManager = new NucDBManager(opt);
-      return(fgDBManager);
-   }
+      /** Adds a new TObjString to fMeasurments list if measurment
+       *  does not exist. This is done in order to list the available 
+       *  measurments and not every single time there is an instance of the 
+       *  measurement from a different experiment.
+       */
+      void   AddNewMeasurements(NucDBExperiment * exp);
 
-   ~NucDBManager();
+   public :
+      static NucDBManager * GetManager(Int_t opt = 0){
+         if(!fgDBManager) fgDBManager = new NucDBManager(opt);
+         return(fgDBManager);
+      }
 
-   Int_t   GetVerbosity(){return fVerbosity;}
-   void    SetVerbosity(Int_t v) {fVerbosity = v;}
+      ~NucDBManager();
 
-   Int_t   Load(const char * n = "NucDB-database");
-   void    SaveDatabase();
+      Int_t   GetVerbosity(){return fVerbosity;}
+      void    SetVerbosity(Int_t v) {fVerbosity = v;}
 
-   /** Gets an experiment by name. 
-    */
-   NucDBExperiment *  GetExperiment(const char * expName);
+      Int_t   Load(const char * n = "NucDB-database");
+      void    SaveDatabase();
 
-   /** Gets a paper by name. 
-    */
-   NucDBPaper *       GetPaper(const char * name);
+      /** Gets an experiment by name. 
+      */
+      NucDBExperiment *  GetExperiment(const char * expName);
 
-   /** Returns the list of experiments.
-    */
-   TList *            GetExperiments();
+      /** Gets a paper by name. 
+      */
+      NucDBPaper *       GetPaper(const char * name);
 
-   /** Get a new list of measurments with that name, (eg, F2p,g1p ).
-    *  It combs through all experiments looking for the measurment.
-    */
-   TList *            GetMeasurements(const char * measurement);
+      /** Returns the list of experiments.
+      */
+      TList *            GetExperiments();
 
-   /** Returns a TMultiGraph of the measurment for the given variable. */
-   TMultiGraph *      GetMultiGraph(const char * measurement, const char * var = "x");
-   TMultiGraph *      GetKinematicMultiGraph(const char * measurement, const char * var1 = "x",const char * var2 = "Qsquared");
+      /** Get a new list of measurments with that name, (eg, F2p,g1p ).
+       *  It combs through all experiments looking for the measurment.
+       */
+      TList *            GetMeasurements(const char * measurement);
 
-   /** Saves data in root file: data/NucDB.root. 
-    */
-   void               SaveExperiment(NucDBExperiment * exp);
+      /** Returns a TMultiGraph of the measurment for the given variable. */
+      TMultiGraph *      GetMultiGraph(const char * measurement, const char * var = "x");
+      TMultiGraph *      GetKinematicMultiGraph(const char * measurement, const char * var1 = "x",const char * var2 = "Qsquared");
 
-   /** Saves data in root file: data/NucDB.root. 
-    */
-   void               SavePaper(NucDBPaper * p) ;
+      /** Saves data in root file: data/NucDB.root. 
+      */
+      void               SaveExperiment(NucDBExperiment * exp);
 
-   /** Prints the experiments which are available in the database. 
-    *  Returns the total number of experiments
-    */
-   Int_t              ListExperiments();
+      /** Saves data in root file: data/NucDB.root. 
+      */
+      void               SavePaper(NucDBPaper * p) ;
 
-   TList * GetRefs(); 
-      
+      /** Prints the experiments which are available in the database. 
+       *  Returns the total number of experiments
+       */
+      Int_t              ListExperiments();
 
-   /** Prints the measurements which are stored in the database. 
-    *  A measurement would be, for example, F1p, g2P, F2C/F2D,...
-    *  Returns the total number of measurements
-    */
-   Int_t              ListMeasurements();
+      TList * GetRefs(); 
 
-   /** Prints the measurements for each experiment.
-    *  If a measurment name is provided, only experments with that measurement are listed.
-    */ 
-   Int_t              ListMeasurementsByExperiment(const char * measurement = ""); 
 
-   ClassDef(NucDBManager,1)
+      /** Prints the measurements which are stored in the database. 
+       *  A measurement would be, for example, F1p, g2P, F2C/F2D,...
+       *  Returns the total number of measurements
+       */
+      Int_t              ListMeasurements();
+
+      /** Prints the measurements for each experiment.
+       *  If a measurment name is provided, only experments with that measurement are listed.
+       */ 
+      Int_t              ListMeasurementsByExperiment(const char * measurement = ""); 
+
+      ClassDef(NucDBManager,1)
 };
 
 #endif 

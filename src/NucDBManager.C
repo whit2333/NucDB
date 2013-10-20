@@ -2,6 +2,10 @@
 
 
 ClassImp(NucDBManager)
+//_____________________________________________________________
+// A description of the class starts with the line above, and
+// will take place here !
+//
 
 NucDBManager * NucDBManager::fgDBManager = 0;
 //_____________________________________________________________________________
