@@ -9,7 +9,7 @@
 #include "TString.h"
 #include "TAxis.h"
 #include "TBrowser.h"
-#include "NucDBPaper.h"
+//#include "NucDBPaper.h"
 #include <vector>
 #include <algorithm>
 #include "NucDBReference.h"
@@ -32,14 +32,13 @@ class NucDBMeasurement : public TNamed {
       Int_t    fColor;
 
    protected:
-      TList    fDataPoints;
-      TList    fBinnedVariables;
-      TList    fDependentVariables;
-      TList    fGraphs;
-      TString  fExperimentName;
-      Int_t    fNumberOfDataPoints;
-      TList    fPapers;
-      TList    fReferences;
+      TList    fDataPoints;           // data points
+      TList    fBinnedVariables;      // binned variables
+      TList    fDependentVariables;   // dependent (calculated) binned variables
+      TList    fGraphs;               // graphs generated 
+      TString  fExperimentName;       // experiment name
+      Int_t    fNumberOfDataPoints;   //
+      TList    fReferences;           // List of references
 
    public:
       NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
@@ -62,13 +61,16 @@ class NucDBMeasurement : public TNamed {
       void    AddDataPoint(NucDBDataPoint *point);
 
       /** Adds a list data point to the list of datapoints with the option to
-       *  clear exisiting datapoints
+       *  clear exisiting datapoints.
        */
       void    AddDataPoints(TList * listOfPoints, bool clear=false );
 
-      /** Returns a list of datapoints falling in the bin.
-      */
+      /** Returns a list of datapoints falling in the bin.  */
       TList * FilterWithBin(NucDBBinnedVariable const *bin);
+
+      /** Same as FilterWithBin(bin) but it modifies the measurement */
+      TList * ApplyFilterWithBin(NucDBBinnedVariable const *bin);
+
       NucDBMeasurement * CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) ;
       const TList * GetDataPoints() const {return(&fDataPoints);}
 
@@ -185,8 +187,8 @@ class NucDBMeasurement : public TNamed {
 
       const TList *              GetGraphs() const { return(&fGraphs);}
 
-      TList  * GetPapers(){ return(&fPapers); }
-      void     AddPapers(NucDBPaper * p) { fPapers.Add(p); }
+      //TList  * GetPapers(){ return(&fPapers); }
+      //void     AddPapers(NucDBPaper * p) { fPapers.Add(p); }
 
       ClassDef(NucDBMeasurement,1)
 };

@@ -80,6 +80,12 @@ TList *  NucDBMeasurement::FilterWithBin(NucDBBinnedVariable const *bin) {
       return list;
    }
 //_____________________________________________________________________________
+TList *  NucDBMeasurement::ApplyFilterWithBin(NucDBBinnedVariable const *bin) {
+   TList * list = FilterWithBin(bin); 
+   AddDataPoints(list,true);
+   return list;
+}
+//_____________________________________________________________________________
 
 void NucDBMeasurement::Print() const {
       std::cout << "   --------------------------\n";

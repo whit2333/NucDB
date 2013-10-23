@@ -78,6 +78,8 @@ class NucDBRawDataExtractor:
         self.NumberOfLines = self.FileLen(filename)
         if not nread:
             self.NInputLines = self.NumberOfLines - nskip
+        if self.inputfile:
+            self.inputfile.close()
         self.inputfile     = open(self.inputfilename, "r")
 
     def FileLen(self,fname):
@@ -98,6 +100,9 @@ class NucDBRawDataExtractor:
 
     def Initialize(self):
         "  "
+        self._lines_read  = 0
+        self._skip_line  = 0
+        self._line_number = 0
         skip = self.linestoskip 
         for i in range(skip):
             self.currentline = self.inputfile.readline() # keep it one line ahead of searchfile

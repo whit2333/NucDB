@@ -48,13 +48,56 @@ class SLACE155Extractor(NucDBRawDataExtractor):
         #
         #self.fCurrentDataPoint.Print()
 
-class SLACE155Extractorxg2p(SLACE155Extractor):
+class SLACE155ExtractorxA1p(SLACE155Extractor):
     def __init__(self):
         NucDBRawDataExtractor.__init__(self)
         self.iValueRow=4
         self.iValueRowErr=5
 
-class SLACE155Extractorxg2d(SLACE155Extractor):
+class SLACE155Extractorxg2p(SLACE155Extractor):
+    def __init__(self):
+        NucDBRawDataExtractor.__init__(self)
+        self.iValueRow=4
+        self.iValueRowErr=5
+    def ParseLine(self):
+        """ See input file for column structures
+        """
+        ixMin=0
+        ixMax=1
+        ixbjorken=2
+        iQsq=3
+        values = self.currentline.split()
+        deltax=float(values[ixMax])-float(values[ixMin])
+        self.rowcut.currentValue=int(0) # does nothign
+        x = self.fCurrentDataPoint.GetBinVariable('x')
+        x.SetBinValueSize(float(values[ixbjorken]),deltax)
+        #x.Print()
+        Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
+        Qsq.SetBinValueSize(float(values[iQsq]),0.5)
+        #Qsq.Print()
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow])/float(values[ixbjorken]))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.iValueRowErr])/float(values[ixbjorken]))
+        self.fCurrentDataPoint.CalculateTotalError()
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
+        #
+        #self.fCurrentDataPoint.Print()
+
+class SLACE155Extractorxg2d(SLACE155Extractorxg2p):
     def __init__(self):
         NucDBRawDataExtractor.__init__(self)
         self.iValueRow=6
@@ -121,6 +164,114 @@ class SLACE155Extractorxg1n(SLACE155Extractor2):
         self.iValueRow=7
         self.iValueRowErr=8
 
+class SLACE155xExtractor(NucDBRawDataExtractor):
+    def __init__(self):
+        NucDBRawDataExtractor.__init__(self)
+        self.iValueRow      = 9
+        self.iValueRowErrHi = 10
+        self.iValueRowErrLo = 11
+
+    def ParseLine(self):
+        """ See input file for column structures
+        """
+        ixMin     = 0
+        ixMax     = 1
+        ixbjorken = 2
+        iQsq      = 3
+        iQsqMin   = 4
+        iQsqMax   = 5
+        values = self.currentline.split()
+        self.rowcut.currentValue=int(0) # does nothign
+
+        x = self.fCurrentDataPoint.GetBinVariable('x')
+        x.SetMean(float(values[ixbjorken]))
+        x.SetBinMinimum(float(values[ixMin]))
+        x.SetBinMaximum(float(values[ixMax]))
+        #x.Print()
+
+        Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
+        Qsq.SetMean(float(values[iQsq]))
+        Qsq.SetBinMinimum(float(values[iQsqMin]))
+        Qsq.SetBinMaximum(float(values[iQsqMax]))
+        #Qsq.Print()
+
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow])/float(values[ixbjorken]))
+        self.fCurrentDataPoint.GetStatError().SetErrorSize(float(values[self.iValueRowErrHi])/float(values[ixbjorken]),abs(float(values[self.iValueRowErrLo]))/float(values[ixbjorken]))
+        self.fCurrentDataPoint.CalculateTotalError()
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
+        #
+        #self.fCurrentDataPoint.Print()
+
+class SLACE155xExtractorA(NucDBRawDataExtractor):
+    def __init__(self):
+        NucDBRawDataExtractor.__init__(self)
+        self.iValueRow      = 6
+        self.iValueRowErrHi = 7
+        self.iValueRowErrLo = 8 
+
+    def ParseLine(self):
+        """ See input file for column structures
+        """
+        ixMin     = 0
+        ixMax     = 1
+        ixbjorken = 2
+        iQsq      = 3
+        iQsqMin   = 4
+        iQsqMax   = 5
+        values = self.currentline.split()
+        self.rowcut.currentValue=int(0) # does nothign
+
+        x = self.fCurrentDataPoint.GetBinVariable('x')
+        x.SetMean(float(values[ixbjorken]))
+        x.SetBinMinimum(float(values[ixMin]))
+        x.SetBinMaximum(float(values[ixMax]))
+        #x.Print()
+
+        Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
+        Qsq.SetMean(float(values[iQsq]))
+        Qsq.SetBinMinimum(float(values[iQsqMin]))
+        Qsq.SetBinMaximum(float(values[iQsqMax]))
+        #Qsq.Print()
+
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
+        self.fCurrentDataPoint.GetStatError().SetErrorSize(float(values[self.iValueRowErrHi]),abs(float(values[self.iValueRowErrLo])))
+        self.fCurrentDataPoint.CalculateTotalError()
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
+        #
+        #self.fCurrentDataPoint.Print()
+
+
+
 if __name__ == "__main__":
     manager = NucDBManager.GetManager(1)
     
@@ -139,21 +290,21 @@ if __name__ == "__main__":
         g1p = NucDBMeasurement("g1p","g_{1}^{p}")
         experiment.AddMeasurement(g1p)
     g1p.ClearDataPoints()
-    g1p.SetColor(4014)
+    g1p.SetColor(4)
     
     g1d = experiment.GetMeasurement("g1d")
     if not g1d :
         g1d = NucDBMeasurement("g1d","g_{1}^{d}")
         experiment.AddMeasurement(g1d)
     g1d.ClearDataPoints()
-    g1d.SetColor(4014)
+    g1d.SetColor(4)
     
     g1n = experiment.GetMeasurement("g1n")
     if not g1n :
         g1n = NucDBMeasurement("g1n","g_{1}^{n}")
         experiment.AddMeasurement(g1n)
     g1n.ClearDataPoints()
-    g1n.SetColor(4014)
+    g1n.SetColor(4)
     
     g1pExtractor = SLACE155Extractorxg1p()
     g1pExtractor.SetMeasurement(g1p)
@@ -200,14 +351,14 @@ if __name__ == "__main__":
         g2p = NucDBMeasurement("g2p","g_{2}^{p}")
         experiment.AddMeasurement(g2p)
     g2p.ClearDataPoints()
-    g2p.SetColor(1)
+    g2p.SetColor(4)
     
     g2d = experiment.GetMeasurement("g2d")
     if not g2d :
         g2d = NucDBMeasurement("g2d","g_{2}^{d}")
         experiment.AddMeasurement(g2d)
     g2d.ClearDataPoints()
-    g2d.SetColor(1)
+    g2d.SetColor(4)
     
     g2pExtractor = SLACE155Extractorxg2p()
     g2pExtractor.SetMeasurement(g2p)
@@ -233,10 +384,226 @@ if __name__ == "__main__":
     g2dExtractor.ExtractAllValues()
     g2d.BuildGraph()
     
+    # ------ A1p
+    A1p = experiment.GetMeasurement("A1p")
+    if not A1p :
+        A1p = NucDBMeasurement("A1p","A_{1}^{p}")
+        experiment.AddMeasurement(A1p)
+    A1p.ClearDataPoints()
+    A1p.SetColor(2)
+
+    A1pExtractor = SLACE155ExtractorxA1p()
+    A1pExtractor.SetMeasurement(A1p)
+    A1pExtractor.SetInputFile("experiments/SLAC-E155/a1_p_2.txt",24)
+    #A1pExtractor.linestoskip=18
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    A1pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    A1pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    A1pExtractor.Initialize()
+    A1pExtractor.ExtractAllValues()
+
+    A1pExtractor2 = SLACE155ExtractorxA1p()
+    A1pExtractor2.SetMeasurement(A1p)
+    A1pExtractor2.SetInputFile("experiments/SLAC-E155/a1_p_5.txt",24)
+    A1pExtractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    A1pExtractor2.fCurrentDataPoint.AddBinVariable(Qsq)
+    A1pExtractor2.Initialize()
+    A1pExtractor2.ExtractAllValues()
     
+    A1pExtractor3 = SLACE155ExtractorxA1p()
+    A1pExtractor3.SetMeasurement(A1p)
+    A1pExtractor3.SetInputFile("experiments/SLAC-E155/a1_p_10.txt",24)
+    A1pExtractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    A1pExtractor3.fCurrentDataPoint.AddBinVariable(Qsq)
+    A1pExtractor3.Initialize()
+    A1pExtractor3.ExtractAllValues()
+
+    # ------ A1p
+    A2p = experiment.GetMeasurement("A2p")
+    if not A2p :
+        A2p = NucDBMeasurement("A2p","A_{2}^{p}")
+        experiment.AddMeasurement(A2p)
+    A2p.ClearDataPoints()
+    A2p.SetColor(4)
+
+    A2pExtractor = SLACE155ExtractorxA1p()
+    A2pExtractor.SetMeasurement(A2p)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/a2_pd_2.txt",21)
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    A2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    A2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    A2pExtractor.Initialize()
+    A2pExtractor.ExtractAllValues()
     
+    A2pExtractor2 = SLACE155ExtractorxA1p()
+    A2pExtractor2.SetMeasurement(A2p)
+    A2pExtractor2.SetInputFile("experiments/SLAC-E155/a2_pd_5.txt",21)
+    A2pExtractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    A2pExtractor2.fCurrentDataPoint.AddBinVariable(Qsq)
+    A2pExtractor2.Initialize()
+    A2pExtractor2.ExtractAllValues()
+
+    A2pExtractor3 = SLACE155ExtractorxA1p()
+    A2pExtractor3.SetMeasurement(A2p)
+    A2pExtractor3.SetInputFile("experiments/SLAC-E155/a2_pd_10.txt",21)
+    A2pExtractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    A2pExtractor3.fCurrentDataPoint.AddBinVariable(Qsq)
+    A2pExtractor3.Initialize()
+    A2pExtractor3.ExtractAllValues()
+
+    experiment.Print()
+    manager.SaveExperiment(experiment)
+  
+    #
+    # SLAC E155x
+    #
+
+    experiment = manager.GetExperiment("SLAC_E155x")
+    if not experiment :
+        experiment = NucDBExperiment("SLAC_E155x","SLAC_E155x")
+    
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq      = NucDBBinnedVariable("Qsquared","Q^{2}")
+    Ebeam    = NucDBBinnedVariable("Ebeam","E")
+    theta    = NucDBBinnedVariable("theta","#theta")
+
+    g2p = experiment.GetMeasurement("g2p")
+    if not g2p :
+        g2p = NucDBMeasurement("g2p","g_{2}^{p}")
+        experiment.AddMeasurement(g2p)
+    g2p.ClearDataPoints()
+    g2p.SetColor(8)
+    
+    g2d = experiment.GetMeasurement("g2d")
+    if not g2d :
+        g2d = NucDBMeasurement("g2d","g_{2}^{d}")
+        experiment.AddMeasurement(g2d)
+    g2d.ClearDataPoints()
+    g2d.SetColor(8)
+
+    A2p = experiment.GetMeasurement("A2p")
+    if not A2p :
+        A2p = NucDBMeasurement("A2p","A_{2}^{p}")
+        experiment.AddMeasurement(A2p)
+    A2p.SetColor(8)
+    
+    A2d = experiment.GetMeasurement("A2d")
+    if not A2d :
+        A2d = NucDBMeasurement("A2d","A_{2}^{d}")
+        experiment.AddMeasurement(A2d)
+    A2d.SetColor(8)
+   
+    Ebeam.SetBinValueSize(29.1,0.0001)
+    theta.SetBinValueSize(2.75,0.01)
+    g2pExtractor = SLACE155xExtractor()
+    g2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    g2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    g2pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    g2pExtractor.fCurrentDataPoint.AddBinVariable(theta)
+    g2pExtractor.SetMeasurement(g2p)
+
+    # E = 29.1 GeV
+    Ebeam = g2pExtractor.fCurrentDataPoint.GetBinVariable("Ebeam")
+    Ebeam.SetMean(29.1)
+
+    theta = g2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(2.75)
+    g2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",10,8)
+    g2pExtractor.Initialize()
+    g2pExtractor.ExtractAllValues()
+
+    theta = g2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(5.5)
+    g2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",29,36-29)
+    g2pExtractor.Initialize()
+    g2pExtractor.ExtractAllValues()
+
+    theta = g2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(10.5)
+    g2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",48,52-48)
+    g2pExtractor.Initialize()
+    g2pExtractor.ExtractAllValues()
+
+    # E = 32.3 GeV
+    Ebeam = g2pExtractor.fCurrentDataPoint.GetBinVariable("Ebeam")
+    Ebeam.SetMean(32.3)
+
+    theta = g2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(2.75)
+    g2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",63,71-63)
+    g2pExtractor.Initialize()
+    g2pExtractor.ExtractAllValues()
+
+    theta = g2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(5.5)
+    g2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",82,89-82)
+    g2pExtractor.Initialize()
+    g2pExtractor.ExtractAllValues()
+
+    theta = g2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(10.5)
+    g2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",100,105-100)
+    g2pExtractor.Initialize()
+    g2pExtractor.ExtractAllValues()
+
+
+    Ebeam.SetBinValueSize(29.1,0.0001)
+    theta.SetBinValueSize(2.75,0.01)
+    A2pExtractor = SLACE155xExtractorA()
+    A2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    A2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    A2pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    A2pExtractor.fCurrentDataPoint.AddBinVariable(theta)
+    A2pExtractor.SetMeasurement(A2p)
+
+    # E = 29.1 GeV
+    Ebeam = A2pExtractor.fCurrentDataPoint.GetBinVariable("Ebeam")
+    Ebeam.SetMean(29.1)
+
+    theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(2.75)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",10,8)
+    A2pExtractor.Initialize()
+    A2pExtractor.ExtractAllValues()
+
+    theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(5.5)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",29,36-29)
+    A2pExtractor.Initialize()
+    A2pExtractor.ExtractAllValues()
+
+    theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(10.5)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",48,52-48)
+    A2pExtractor.Initialize()
+    A2pExtractor.ExtractAllValues()
+
+    # E = 32.3 GeV
+    Ebeam = A2pExtractor.fCurrentDataPoint.GetBinVariable("Ebeam")
+    Ebeam.SetMean(32.3)
+
+    theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(2.75)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",63,71-63)
+    A2pExtractor.Initialize()
+    A2pExtractor.ExtractAllValues()
+
+    theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(5.5)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",82,89-82)
+    A2pExtractor.Initialize()
+    A2pExtractor.ExtractAllValues()
+
+    theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
+    theta.SetMean(10.5)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",100,105-100)
+    A2pExtractor.Initialize()
+    A2pExtractor.ExtractAllValues()
+
+
     experiment.Print()
     manager.SaveExperiment(experiment)
     
-    
-    
+
