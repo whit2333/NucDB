@@ -549,6 +549,7 @@ if __name__ == "__main__":
     g2pExtractor.ExtractAllValues()
 
 
+    # A2p
     Ebeam.SetBinValueSize(29.1,0.0001)
     theta.SetBinValueSize(2.75,0.01)
     A2pExtractor = SLACE155xExtractorA()
@@ -564,19 +565,19 @@ if __name__ == "__main__":
 
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
     theta.SetMean(2.75)
-    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",10,8)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",10,8)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
     theta.SetMean(5.5)
-    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",29,36-29)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",29,36-29)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
     theta.SetMean(10.5)
-    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",48,52-48)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",48,52-48)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
@@ -586,19 +587,19 @@ if __name__ == "__main__":
 
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
     theta.SetMean(2.75)
-    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",63,71-63)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",63,71-63)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
     theta.SetMean(5.5)
-    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",82,89-82)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",82,89-82)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
     theta.SetMean(10.5)
-    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_A2p_and_g2d.txt",100,105-100)
+    A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",100,105-100)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 

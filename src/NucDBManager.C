@@ -1,5 +1,8 @@
 #include "NucDBManager.h"
-
+#include <iomanip>
+#include <string>       // std::string
+#include <iostream>     // std::cout
+#include <sstream>      // std::stringstream
 
 ClassImp(NucDBManager)
 //_____________________________________________________________
@@ -206,25 +209,37 @@ Int_t NucDBManager::ListMeasurementsByExperiment(const char * measurement)  {
 }
 //_____________________________________________________________________________
 
-Int_t NucDBManager::ListMeasurements() {
-      TList * exps = GetExperiments();
-      std::set<std::string> measurements;
-      std::set<std::string>::iterator it;
+Int_t NucDBManager::ListMeasurements(const char * n ) {
+   TList * exps = GetExperiments();
 
-      std::pair<std::set<std::string>::iterator,bool> ret;
-      for(int i=0;i<exps->GetEntries();i++) {
-         NucDBExperiment * anExp = (NucDBExperiment*)exps->At(i);
-	 TList * expMeas = anExp->GetMeasurements();
-         for(int j=0;j<expMeas->GetEntries();j++) {
-            NucDBMeasurement * aMeas = (NucDBMeasurement*)expMeas->At(j);
-	    ret = measurements.insert(aMeas->GetName());
-	 }
+   std::set<std::string>                           measurements;
+   std::set<std::string>::iterator                 it;
+   std::pair<std::set<std::string>::iterator,bool> ret;
+
+   for(int i=0;i<exps->GetEntries();i++) {
+      NucDBExperiment * anExp = (NucDBExperiment*)exps->At(i);
+      TList * expMeas = anExp->GetMeasurements();
+      for(int j=0;j<expMeas->GetEntries();j++) {
+         NucDBMeasurement * aMeas = (NucDBMeasurement*)expMeas->At(j);
+         TString aName            = aMeas->GetName();
+         TString aTitle           = aMeas->GetTitle();
+         std::stringstream ss;
+         ss << " " << std::setw(15) << aName.Data() << "\t"  << aTitle.Data() ;
+         if(n) {
+            if(aName.BeginsWith(n)) {
+               ret = measurements.insert(ss.str());
+            }
+         } else {
+            ret    = measurements.insert(ss.str());
+         }
       }
-      for (it=measurements.begin(); it!=measurements.end(); it++)
-         std::cout << " " << *it << "\n";
-
-      return(0);  
    }
+   for (it=measurements.begin(); it!=measurements.end(); it++) {
+      std::cout << " " << *it << std::endl;//"\t"  << *it_title << std::endl;
+   }
+
+   return(0);  
+}
 //_____________________________________________________________________________
 
 TList * NucDBManager::GetRefs() {
