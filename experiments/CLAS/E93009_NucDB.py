@@ -56,7 +56,7 @@ class E93009Extractor(NucDBRawDataExtractor):
             nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
         #
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
         self.linesRead+=1
 
 # for G1/F1
@@ -74,10 +74,10 @@ class E93009Extractor2(E93009Extractor):
 def ExtractFromClasDat(lines,fname) :
     manager = NucDBManager.GetManager(1)
 
-    experiment = manager.GetExperiment("E93009")
+    experiment = manager.GetExperiment("CLAS-E93009")
     
     if not experiment :
-        experiment = NucDBExperiment("E93009","CLAS E93-009")
+        experiment = NucDBExperiment("CLAS-E93009","CLAS E93-009")
     dir = "experiments/CLAS/"
     datafilename = dir + fname
     datfile = open(datafilename,"r")
@@ -102,7 +102,7 @@ def ExtractFromClasDat(lines,fname) :
         targ = "p"
     if values[3] == "DEUT" :
         targ = "d"
-    
+    print targ
     line = datfile.readline()
     values = line.split()
     invmass = float(values[2]) 
@@ -119,7 +119,7 @@ def ExtractFromClasDat(lines,fname) :
         A1p.SetColor(4018)
         extractor1 = E93009Extractor()
         extractor1.SetMeasurement(A1p)
-        extractor1.SetInputFile(datafilename,10,int(lines)-14)
+        extractor1.SetInputFile(datafilename,11,int(lines)-11)
         #extractor1.linestoskip=0
         #extractor1.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
@@ -139,7 +139,7 @@ def ExtractFromClasDat(lines,fname) :
         g1pOverF1p.SetColor(4018)
         extractor2 = E93009Extractor2()
         extractor2.SetMeasurement(g1pOverF1p)
-        extractor2.SetInputFile(datafilename,10,int(lines)-14)
+        extractor2.SetInputFile(datafilename,11,int(lines)-11)
         #extractor1.linestoskip=0
         #extractor2.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
@@ -160,7 +160,7 @@ def ExtractFromClasDat(lines,fname) :
         A1d.SetColor(4018)
         extractor1 = E93009Extractor()
         extractor1.SetMeasurement(A1d)
-        extractor1.SetInputFile(datafilename,10,int(lines)-14)
+        extractor1.SetInputFile(datafilename,10,int(lines)-10)
         #extractor1.linestoskip=0
         #extractor1.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
@@ -180,7 +180,7 @@ def ExtractFromClasDat(lines,fname) :
         g1dOverF1d.SetColor(4018)
         extractor2 = E93009Extractor2()
         extractor2.SetMeasurement(g1dOverF1d)
-        extractor2.SetInputFile(datafilename,10,int(lines)-14)
+        extractor2.SetInputFile(datafilename,10,int(lines)-10)
         #extracto2.linestoskip=0
         #extractor2.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
@@ -211,6 +211,11 @@ if __name__ == "__main__":
     # line count for each data file.
     # wc -l E93009/clasdata* > E93009_summary.txt 
     in_file = open("experiments/CLAS/E93009_summary.txt", "r")
+
+    manager = NucDBManager.GetManager(1)
+    experiment = manager.GetExperiment("CLAS-E93009")
+    if experiment :
+        experiment.GetMeasurements().Clear();
     
     for i in range(1,306) : 
         line = in_file.readline()

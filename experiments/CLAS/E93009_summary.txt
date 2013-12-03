@@ -1,3 +1,4 @@
+    27 E93009/clasdata.9.txt
     22 E93009/clasdata.100.txt
     26 E93009/clasdata.101.txt
     22 E93009/clasdata.102.txt
@@ -303,5 +304,4 @@
     26 E93009/clasdata.97.txt
     22 E93009/clasdata.98.txt
     26 E93009/clasdata.99.txt
-    27 E93009/clasdata.9.txt
   6686 total

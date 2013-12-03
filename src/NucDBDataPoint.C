@@ -32,9 +32,9 @@ NucDBErrorBar& NucDBErrorBar::operator=(const NucDBErrorBar &v){
 //_____________________________________________________________________________
 
 NucDBErrorBar& NucDBErrorBar::operator+=(const NucDBErrorBar &v){
-   fTotalError += v.fTotalError;
-   fErrorPlus  += v.fErrorPlus;
-   fErrorMinus += v.fErrorMinus;;
+   fTotalError = TMath::Sqrt(TMath::Power(fTotalError,2.0) + TMath::Power(v.fTotalError,2.0) );
+   fErrorPlus  = TMath::Sqrt(TMath::Power(fErrorPlus ,2.0) + TMath::Power(v.fErrorPlus ,2.0) );
+   fErrorMinus = TMath::Sqrt(TMath::Power(fErrorMinus,2.0) + TMath::Power(v.fErrorMinus,2.0) );
    return *this;
 }
 
