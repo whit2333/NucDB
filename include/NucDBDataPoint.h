@@ -106,7 +106,7 @@ public :
 
    NucDBErrorBar * GetStatError(){ return(&fStatisticalError); }
    NucDBErrorBar * GetSystError(){ return(&fSystematicError); }
-   NucDBErrorBar * GetTotalError(){fTotalError= TMath::Sqrt(fSystematicError+fStatisticalError; return(&fTotalError);}
+   NucDBErrorBar * GetTotalError(){fTotalError= fSystematicError+fStatisticalError; return(&fTotalError);}
 
    /** Set the values of the total using the current
     *  systematic and statistical errors

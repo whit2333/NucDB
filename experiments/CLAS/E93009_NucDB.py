@@ -119,7 +119,7 @@ def ExtractFromClasDat(lines,fname) :
         A1p.SetColor(4018)
         extractor1 = E93009Extractor()
         extractor1.SetMeasurement(A1p)
-        extractor1.SetInputFile(datafilename,11,int(lines)-11)
+        extractor1.SetInputFile(datafilename,11,int(lines)-12)
         #extractor1.linestoskip=0
         #extractor1.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
@@ -139,7 +139,7 @@ def ExtractFromClasDat(lines,fname) :
         g1pOverF1p.SetColor(4018)
         extractor2 = E93009Extractor2()
         extractor2.SetMeasurement(g1pOverF1p)
-        extractor2.SetInputFile(datafilename,11,int(lines)-11)
+        extractor2.SetInputFile(datafilename,11,int(lines)-12)
         #extractor1.linestoskip=0
         #extractor2.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
@@ -160,7 +160,7 @@ def ExtractFromClasDat(lines,fname) :
         A1d.SetColor(4018)
         extractor1 = E93009Extractor()
         extractor1.SetMeasurement(A1d)
-        extractor1.SetInputFile(datafilename,10,int(lines)-10)
+        extractor1.SetInputFile(datafilename,10,int(lines)-11)
         #extractor1.linestoskip=0
         #extractor1.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
@@ -180,7 +180,7 @@ def ExtractFromClasDat(lines,fname) :
         g1dOverF1d.SetColor(4018)
         extractor2 = E93009Extractor2()
         extractor2.SetMeasurement(g1dOverF1d)
-        extractor2.SetInputFile(datafilename,10,int(lines)-10)
+        extractor2.SetInputFile(datafilename,10,int(lines)-11)
         #extracto2.linestoskip=0
         #extractor2.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
