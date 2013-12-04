@@ -34,11 +34,11 @@ namespace NucDB{
       }
 
       double W2_xQ2(double x, double Q2, double M  ){
-         return( pow(M,2) - Q2 + Q2/x );
+         return( TMath::Power(M,2) - Q2 + Q2/x );
       }
 
       double W_xQ2(double x, double Q2, double M  ){
-         return( W2_xQ2(x,Q2,M) );
+         return(TMath::Sqrt( W2_xQ2(x,Q2,M)) );
       }
 
       double W_xQ2_proton(double x, double Q2){ return(W_xQ2(x,Q2)); }
