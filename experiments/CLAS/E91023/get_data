@@ -1,0 +1,13 @@
+#!/bin/bash
+
+files=`seq 1 8`
+
+rm plain.txt*
+
+for file in $files
+do
+   wget http://durpdg.dur.ac.uk/view/irn5581044/d${file}/plain.txt
+   mv plain.txt clasdata.E91023.${file}.txt
+
+done
+

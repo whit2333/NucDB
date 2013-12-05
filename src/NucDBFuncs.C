@@ -5,7 +5,7 @@ namespace NucDB{
    namespace Kine{
 
       double xBjorken_Etheta(double Ebeam, double Eprime,double th, double M) {
-         return( (2*Ebeam*Eprime*pow(sin(th/2.),2))/((Ebeam - Eprime)*M) );
+         return( (2*Ebeam*Eprime*TMath::Power(sin(th/2.),2))/((Ebeam - Eprime)*M) );
       }
 
 
@@ -13,19 +13,28 @@ namespace NucDB{
          return( Q2/(2.0*M*nu));
       }
 
+      double xBjorken_WQsq(double W, double Qsq, double Mtarg)
+      {
+         return(Qsq / (W * W + Qsq - Mtarg * Mtarg));
+      }
+
+      double xBjorken_WQsq_proton(double W, double Qsq)
+      {
+         return xBjorken_WQsq(W,Qsq,Mproton);
+      }
 
       double Qsquared_Wx(double W, double x, double M ){
-         return((-pow(M,2) + pow(W,2))/(-1 + 1/x) );
+         return((-TMath::Power(M,2) + TMath::Power(W,2))/(-1 + 1/x) );
       }
 
 
       double Qsquared_Etheta(double Ebeam, double Eprime, double th  ){
-         return((4.0*Ebeam*Eprime*pow(sin(th/2.),2)) );
+         return((4.0*Ebeam*Eprime*TMath::Power(sin(th/2.),2)) );
       }
 
 
       double W2_Q2nu(double Q2, double nu, double M  ){
-         return( pow(M,2) + 2.0*M*nu - Q2  );
+         return( TMath::Power(M,2) + 2.0*M*nu - Q2  );
       }
 
 
@@ -44,7 +53,7 @@ namespace NucDB{
       double W_xQ2_proton(double x, double Q2){ return(W_xQ2(x,Q2)); }
 
       double xiNachman_xQ2(double Q2, double nu, double M){
-         return( Q2/(M*nu*(1.0 + sqrt(1.0 + Q2/pow(nu,2)))) );
+         return( Q2/(M*nu*(1.0 + sqrt(1.0 + Q2/TMath::Power(nu,2)))) );
       }
 
       double nu_xQ2(double x, double Q2, double M  ){

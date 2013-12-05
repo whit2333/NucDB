@@ -1,0 +1,14 @@
+Path: /HepData/1323/d7-x1-y1
+First moments of the spin structure function G1. The integral is normalizedto the number of nucleons in deuterium.
+Location: T 7, F 8
+RE : E- P --> E- X
+sqrts : 2.36 GeV
+x: Q**2 IN GEV**2
+x2: W(C=MAX) IN GEV
+y : INT(G1)(C=MEAS) : INT(G1)(C=FULL)
+x	xlow	xhigh	x2	x2low	x2high	y	dy+	dy-	dy+	dy-	y	dy+	dy-	
+0.34	0.34	0.34	2.0	2.0	2.0	-0.027	+0.012	-0.012	+0.005	-0.005	-0.034	+0.008	-0.008
+0.53	0.53	0.53	2.0	2.0	2.0	-0.008	+0.004	-0.004	+0.002	-0.002	-0.013	+0.007	-0.007
+0.79	0.79	0.79	1.96	1.96	1.96	0.008	+0.003	-0.003	+0.003	-0.003	0.009	+0.008	-0.008
+1.1	1.1	1.1	1.8	1.8	1.8	0.007	+0.003	-0.003	+0.002	-0.002	0.016	+0.009	-0.009
+

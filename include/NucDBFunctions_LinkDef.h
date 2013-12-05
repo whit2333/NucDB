@@ -11,6 +11,8 @@
 
 #pragma link C++ function NucDB::Kine::xBjorken_Etheta(double,double,double);
 #pragma link C++ function NucDB::Kine::xBjorken_Q2nu(double,double,double);
+#pragma link C++ function NucDB::Kine::xBjorken_WQ2(double,double,double);
+#pragma link C++ function NucDB::Kine::xBjorken_WQ2_proton(double,double);
 
 #pragma link C++ function NucDB::Kine::Qsquared_Wx(double,double,double);
 #pragma link C++ function NucDB::Kine::Qsquared_Etheta(double,double,double);

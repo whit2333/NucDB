@@ -17,6 +17,9 @@ namespace NucDB{
         /** Bjorken scaling variable x */
         double xBjorken_Q2nu(double Q2,double nu, double M=Mproton);
 
+        double xBjorken_WQsq(double W, double Qsq, double Mtarg=Mproton);
+        double xBjorken_WQsq_proton(double W, double Qsq);
+
 	/** Qsquared   */
 	double Qsquared_Wx(double W, double x, double M = Mproton);
 
