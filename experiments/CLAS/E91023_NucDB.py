@@ -1,6 +1,6 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV
+from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV,NucDBxBjorkenDV
 from NucDBExtractors import *
 import os
 
@@ -24,30 +24,33 @@ class E91023Extractor(NucDBRawDataExtractor):
         W = self.fCurrentDataPoint.GetBinVariable('W')
         W.SetBinValueSize(float(values[self.iW]),deltaW)
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
-        Qsq.SetBinMinimum(self.fQsqMin)
-        Qsq.SetBinMaximum(self.fQsqMax)
+        Qsq.SetBinMinimum(float(self.fQsqMin))
+        Qsq.SetBinMaximum(float(self.fQsqMax))
+        Q2avg = (float(self.fQsqMin) + float(self.fQsqMax))/2.0
+        Qsq.SetMean(Q2avg)
+        Qsq.SetAverage(Q2avg)
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr].lstrip('+')))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr].lstrip('+')))
         self.fCurrentDataPoint.CalculateTotalError()
         # x(W,Q2)
-        x = self.fCurrentDataPoint.GetDependentVariable("W")
+        x = self.fCurrentDataPoint.GetDependentVariable("x")
         if not x :
-            x   = NucDBInvariantMassDV()
+            x   = NucDBxBjorkenDV()
             self.fCurrentDataPoint.AddDependentVariable(x)
         if x :
             x.SetVariable(0,W)
             x.SetVariable(1,Qsq)
         # nu(x,Q2)
-        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
-        if not nu :
-            nu   = NucDBPhotonEnergyDV()
-            self.fCurrentDataPoint.AddDependentVariable(nu)
-        if nu :
-            nu.SetVariable(0,x)
-            nu.SetVariable(1,Qsq)
+        #nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        #if not nu :
+        #    nu   = NucDBPhotonEnergyDV()
+        #    self.fCurrentDataPoint.AddDependentVariable(nu)
+        #if nu :
+        #    nu.SetVariable(0,x)
+        #    nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
         #self.linesRead+=1
 
 # ---------------------------------------------------------------
@@ -72,7 +75,7 @@ def ExtractFromClasDat(lines,fname) :
     values = line.split()
     beamenergy = float(values[2])
     #print values[2]
-    Ebeam = NucDBBinnedVariable("E","E")
+    Ebeam = NucDBBinnedVariable("Ebeam","E")
     Ebeam.SetBinValueSize(beamenergy,0.00001)
 
     # line 5: Q2 range 
@@ -99,7 +102,7 @@ def ExtractFromClasDat(lines,fname) :
     if targ == "p" :
         meas = experiment.GetMeasurement("AparapOverD")
         if not meas :
-                meas = NucDBMeasurement("AparaOverD","A_{para}^{p}/D")
+                meas = NucDBMeasurement("AparapOverD","A_{para}^{p}/D")
                 experiment.AddMeasurement(meas)
             #A1p.ClearDataPoints()
         meas.SetColor(4001)

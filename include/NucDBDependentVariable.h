@@ -106,7 +106,7 @@ ClassDef(NucDBPhotonEnergyDV,1);
  */
 class NucDBxBjorkenDV  : public NucDBDependentVariable {
 public:
-   NucDBxBjorkenDV(const char * n = "W",const char * t = "W") : NucDBDependentVariable(n,t) {
+   NucDBxBjorkenDV(const char * n = "x",const char * t = "x") : NucDBDependentVariable(n,t) {
       NucDBBinnedVariable    * W  = new NucDBBinnedVariable("W","W");
       W->SetBinValueSize(1.6,0.1);
       NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
@@ -118,7 +118,7 @@ public:
    }
    ~NucDBxBjorkenDV(){}
 
-ClassDef(NucDBxBjorkenDV,1);
+ClassDef(NucDBxBjorkenDV,2);
 };
 
 #endif
