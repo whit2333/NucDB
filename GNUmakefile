@@ -20,8 +20,6 @@ SOLIBS := $(SOLIBNAMES:%=lib/lib%.so.$(LIBMAJOR).$(LIBMINOR) )
 SOLINKLIBS := $(SOLIBNAMES:%=-Llib/lib%.so.$(LIBMAJOR).$(LIBMINOR) )
 
 
-RCINTFLAGS += -c 
-#RCINTFLAGS += -DDebug 
 
 CPPFLAGS += $(shell root-config --cflags )
 CPPFLAGS += -Iinclude -I.
@@ -29,7 +27,9 @@ CPPFLAGS +=  -g -pipe
 #-D_LARGEFILE_SOURCE -fno-strict-aliasing
 
 CPPFLAGS += -D"NUCDB_DATA_DIR=\"$(shell echo ${NucDB_DATA_DIR})\"" 
-#RCINTFLAGS += -D'NUCDB_DATA_DIR=$(shell echo ${NucDB_DATA_DIR})' 
+
+ROOTCINTFLAGS += -c -p
+ROOTCINTFLAGS += -D'NUCDB_DATA_DIR=$(shell echo ${NucDB_DATA_DIR})' 
 
 LDLIBS += $(shell root-config --ldflags)
 LDLIBS += $(shell root-config --glibs --libs )
@@ -104,6 +104,8 @@ database:
 	python experiments/NMC_NucDB.py
 	python experiments/CLAS_NucDB.py
 	python experiments/CLAS/E93009_NucDB.py
+	#python experiments/CLAS/E93031_NucDB.py
+	python experiments/CLAS/E91023_NucDB.py
 	python experiments/RSS_NucDB.py
 	python experiments/JLAB-E94010_NucDB.py
 	python experiments/JLAB-E94110_NucDB.py

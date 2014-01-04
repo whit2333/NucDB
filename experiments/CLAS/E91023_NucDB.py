@@ -1,6 +1,7 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV,NucDBxBjorkenDV
+from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV
+from ROOT import NucDBPhotonEnergyDV,NucDBxBjorkenDV
 from NucDBExtractors import *
 import os
 
@@ -18,7 +19,7 @@ class E91023Extractor(NucDBRawDataExtractor):
     def ParseLine(self):
         """ See input file for column structures
         """
-        print self.currentline
+        #print self.currentline
         values = self.currentline.split()
         deltaW=0.001
         W = self.fCurrentDataPoint.GetBinVariable('W')
@@ -159,7 +160,7 @@ if __name__ == "__main__":
     if not experiment :
         experiment = NucDBExperiment("CLAS-E91023","CLAS E91-023")
     
-    for i in range(1,2) : 
+    for i in range(1,3) : 
         line = in_file.readline()
         values = line.split()
         nlines = 0

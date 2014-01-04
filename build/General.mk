@@ -27,11 +27,11 @@ $(GeneralLibObjs) : $(builddir)/%.o : %.h
 
 $(srcdir)/$(GeneralLibName)Dict.cxx $(srcdir)/$(GeneralLibName)Dict.h : $(GeneralLibHead)\
        $(incdir)/$(GeneralLibName)_LinkDef.h 
-	rootcint -f $(srcdir)/$(GeneralLibName)Dict.cxx $(RCINTFLAGS)  \
+	rootcint -f $(srcdir)/$(GeneralLibName)Dict.cxx $(ROOTCINTFLAGS)  \
 	$(GeneralLibHead)   $(incdir)/$(GeneralLibName)_LinkDef.h 
 	mv $(srcdir)/$(GeneralLibName)Dict.h $(incdir)/.
 #_____________________________________________________________________________/
-$(builddir)/$(GeneralLibName)Dict.o : $(GeneralLibName)Dict.cxx $(incdir)/$(GeneralLibName)Dict.h
+$(builddir)/$(GeneralLibName)Dict.o : $(GeneralLibName)Dict.cxx 
 	$(CXX) $(CXXFLAGS) -c -fPIC -o $@  $(srcdir)/$(GeneralLibName)Dict.cxx 
 #_____________________________________________________________________________/
 $(GeneralLibName) : $(GeneralLibObjs) $(builddir)/$(GeneralLibName)Dict.o $(FortranLibObjs)

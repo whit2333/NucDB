@@ -17,11 +17,11 @@ $(FunctionsLibObjs) : $(builddir)/%.o : %.h
 
 $(srcdir)/$(FunctionsLibName)Dict.cxx $(srcdir)/$(FunctionsLibName)Dict.h : $(FunctionsLibHead)\
        $(incdir)/$(FunctionsLibName)_LinkDef.h 
-	rootcint -f $(srcdir)/$(FunctionsLibName)Dict.cxx $(RCINTFLAGS)  \
+	rootcint -f $(srcdir)/$(FunctionsLibName)Dict.cxx $(ROOTCINTFLAGS)  \
 	$(FunctionsLibHead)   $(incdir)/$(FunctionsLibName)_LinkDef.h 
 	mv $(srcdir)/$(FunctionsLibName)Dict.h $(incdir)/.
 #_____________________________________________________________________________/
-$(builddir)/$(FunctionsLibName)Dict.o : $(FunctionsLibName)Dict.cxx $(incdir)/$(FunctionsLibName)Dict.h
+$(builddir)/$(FunctionsLibName)Dict.o : $(FunctionsLibName)Dict.cxx 
 	$(CXX) $(CXXFLAGS) -c -fPIC -o $@  $(srcdir)/$(FunctionsLibName)Dict.cxx 
 #_____________________________________________________________________________/
 $(FunctionsLibName) : $(FunctionsLibObjs) $(builddir)/$(FunctionsLibName)Dict.o 
