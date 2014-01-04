@@ -21,7 +21,7 @@ $(srcdir)/$(FunctionsLibName)Dict.cxx $(srcdir)/$(FunctionsLibName)Dict.h : $(Fu
 	$(FunctionsLibHead)   $(incdir)/$(FunctionsLibName)_LinkDef.h 
 	mv $(srcdir)/$(FunctionsLibName)Dict.h $(incdir)/.
 #_____________________________________________________________________________/
-$(builddir)/$(FunctionsLibName)Dict.o : $(FunctionsLibName)Dict.cxx 
+$(builddir)/$(FunctionsLibName)Dict.o : $(FunctionsLibName)Dict.cxx $(FunctionsLibName)Dict.h 
 	$(CXX) $(CXXFLAGS) -c -fPIC -o $@  $(srcdir)/$(FunctionsLibName)Dict.cxx 
 #_____________________________________________________________________________/
 $(FunctionsLibName) : $(FunctionsLibObjs) $(builddir)/$(FunctionsLibName)Dict.o 
