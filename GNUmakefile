@@ -20,7 +20,6 @@ SOLIBS := $(SOLIBNAMES:%=lib/lib%.so.$(LIBMAJOR).$(LIBMINOR) )
 SOLINKLIBS := $(SOLIBNAMES:%=-Llib/lib%.so.$(LIBMAJOR).$(LIBMINOR) )
 
 
-
 CPPFLAGS += $(shell root-config --cflags )
 CPPFLAGS += -Iinclude -I.
 CPPFLAGS +=  -g -pipe  
@@ -29,7 +28,7 @@ CPPFLAGS +=  -g -pipe
 CPPFLAGS += -D"NUCDB_DATA_DIR=\"$(shell echo ${NucDB_DATA_DIR})\"" 
 
 ROOTCINTFLAGS += -c -p
-ROOTCINTFLAGS += -D'NUCDB_DATA_DIR=$(shell echo ${NucDB_DATA_DIR})' 
+#ROOTCINTFLAGS += -D'NUCDB_DATA_DIR=$(shell echo ${NucDB_DATA_DIR})' 
 
 LDLIBS += $(shell root-config --ldflags)
 LDLIBS += $(shell root-config --glibs --libs )
