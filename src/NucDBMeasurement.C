@@ -37,6 +37,7 @@ void NucDBMeasurement::ClearDataPoints(){
 
 void NucDBMeasurement::AddDataPoint(NucDBDataPoint *point) {
       if(point) {
+         point->SetNameTitle(Form("p%d",fNumberOfDataPoints),Form("p%d",fNumberOfDataPoints));
          fDataPoints.Add(point);
          fNumberOfDataPoints++;
       } else {
@@ -125,6 +126,7 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
          point = (NucDBDataPoint *) fDataPoints.At(i);
          var = point->FindVariable(varName);
          if( var ) {
+            point->CalculateTotalError();
             fGraph->SetPoint(i,var->GetMean(),point->GetValue());
             fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
          } else {

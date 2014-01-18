@@ -32,8 +32,7 @@ NucDBDiscreteVariable::~NucDBDiscreteVariable(){
 
 void NucDBDiscreteVariable::Print() {
       std::cout << " " << GetName() << " = " << fValue << "\n";
-   }
-//_____________________________________________________________________________
+}
 //_____________________________________________________________________________
 
 
@@ -53,24 +52,24 @@ NucDBBinnedVariable::~NucDBBinnedVariable(){}
 //_____________________________________________________________________________
 
 NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v) {
-      SetNameTitle(v.GetName(),v.GetTitle());
-      fMinimum  = v.fMinimum;
-      fMaximum  = v.fMaximum;
-      fMean     = v.fMean;
-      fAverage  = v.fAverage;
-   }
+   SetNameTitle(v.GetName(),v.GetTitle());
+   fMinimum  = v.GetMinimum();
+   fMaximum  = v.GetMaximum();
+   fMean     = v.GetMean();
+   fAverage  = v.GetAverage();
+}
 //_____________________________________________________________________________
 
 NucDBBinnedVariable& NucDBBinnedVariable::operator=(const NucDBBinnedVariable& v) {
-      if ( this != &v) {  
-         SetNameTitle(v.GetName(),v.GetTitle());
-         fMinimum  = v.fMinimum;
-         fMaximum  = v.fMaximum;
-         fMean     = v.fMean;
-         fAverage  = v.fAverage;
-      }
-      return *this;    // Return ref for multiple assignment
+   if ( this != &v) {  
+      SetNameTitle(v.GetName(),v.GetTitle());
+      fMinimum  = v.GetMinimum();
+      fMaximum  = v.GetMaximum();
+      fMean     = v.GetMean();
+      fAverage  = v.GetAverage();
    }
+   return *this;    // Return ref for multiple assignment
+}
 //_____________________________________________________________________________
 
 bool NucDBBinnedVariable::BinsOverlap(const NucDBBinnedVariable &var) const {

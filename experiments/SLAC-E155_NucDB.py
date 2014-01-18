@@ -541,7 +541,7 @@ if __name__ == "__main__":
         A1p = NucDBMeasurement("A1p","A_{1}^{p}")
         experiment.AddMeasurement(A1p)
     A1p.ClearDataPoints()
-    A1p.SetColor(2)
+    A1p.SetColor(4)
 
     A1pExtractor = SLACE155ExtractorxA1p()
     A1pExtractor.SetMeasurement(A1p)

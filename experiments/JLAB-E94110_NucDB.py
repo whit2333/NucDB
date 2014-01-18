@@ -1,6 +1,7 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
 from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV
+from ROOT import NucDBReference
 from NucDBExtractors import *
 import os
 
@@ -195,12 +196,18 @@ if __name__ == "__main__":
     if not experiment :
         experiment = NucDBExperiment("JLAB-E94110","JLAB-E94110")
 
+    ref = NucDBReference("ResData","Jlab resonance database")
+    ref.SetURL("https://hallcweb.jlab.org/resdata")
+    ref.SetRefType(NucDBReference.kWebsite)
+    ref.SetDescription("Email from Peter Monaghan")
+
     # sigma full 
     sigma = experiment.GetMeasurement("sigma")
     if not sigma :
         sigma = NucDBMeasurement("sigma","#sigma^{p}")
         experiment.AddMeasurement(sigma)
     sigma.ClearDataPoints()
+    sigma.AddRef(ref)
     sigma.SetColor(4019)
     sigmaExtractor = E94110FullSigmaExtractor()
     sigmaExtractor.SetMeasurement(sigma)
@@ -236,6 +243,7 @@ if __name__ == "__main__":
         sigmaL = NucDBMeasurement("sigma_L","#sigma_{L}^{p}")
         experiment.AddMeasurement(sigmaL)
     sigmaL.ClearDataPoints()
+    sigmaL.AddRef(ref)
     sigmaL.SetColor(4019)
     sigmaLExtractor = E94110SigmaExtractor2()
     sigmaLExtractor.SetMeasurement(sigmaL)
@@ -259,6 +267,7 @@ if __name__ == "__main__":
         experiment.AddMeasurement(sigmaT)
     sigmaT.ClearDataPoints()
     sigmaT.SetColor(4019)
+    sigmaT.AddRef(ref)
     sigmaTExtractor = E94110SigmaExtractor()
     sigmaTExtractor.SetMeasurement(sigmaT)
     sigmaTExtractor.SetInputFile("experiments/JLAB-E94110/e94110_final.dat",2)
@@ -280,6 +289,7 @@ if __name__ == "__main__":
         experiment.AddMeasurement(F2p)
     F2p.ClearDataPoints()
     F2p.SetColor(4019)
+    F2p.AddRef(ref)
     F2pExtractor = E94110Extractor()
     F2pExtractor.SetMeasurement(F2p)
     F2pExtractor.SetInputFile("experiments/JLAB-E94110/e94110_sfcalc.dat",1)
@@ -300,6 +310,7 @@ if __name__ == "__main__":
         experiment.AddMeasurement(F1p)
     F1p.ClearDataPoints()
     F1p.SetColor(4019)
+    F1p.AddRef(ref)
     F1pExtractor = E94110Extractor2()
     F1pExtractor.SetMeasurement(F1p)
     F1pExtractor.SetInputFile("experiments/JLAB-E94110/e94110_sfcalc.dat",1)
@@ -320,6 +331,7 @@ if __name__ == "__main__":
         experiment.AddMeasurement(FLp)
     FLp.ClearDataPoints()
     FLp.SetColor(4019)
+    FLp.AddRef(ref)
     FLpExtractor = E94110Extractor3()
     FLpExtractor.SetMeasurement(FLp)
     FLpExtractor.SetInputFile("experiments/JLAB-E94110/e94110_sfcalc.dat",1)

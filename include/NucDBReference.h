@@ -34,7 +34,7 @@ class NucDBReference : public TNamed {
       const char * GetURL() const { return fURL.Data() ; }
       const char * GetDOI() const { return fDOI.Data() ; }
       const char * GetDescription() const { return fDescription.Data() ; }
-      RefType     GetRefType() const { return fRefType; }  
+      RefType      GetRefType() const { return fRefType; }  
       TList      * GetPapers() { return &fPapers ; }
 
       void         SetURL(const char * s) { fURL = s; }
