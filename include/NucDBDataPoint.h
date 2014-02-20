@@ -121,12 +121,7 @@ class NucDBDataPoint : public TNamed {
 
       void                     ListVariables(); // *MENU*
       NucDBBinnedVariable *    FindVariable(const char * name);
-
-      NucDBBinnedVariable *    GetBinVariable(const char * name);
-      void                     AddBinVariable(NucDBBinnedVariable * var);
-
       TList *                  GetBinnedVariables() { return(&fBinnedVariables);}
-
       Int_t                    GetDimension() const { return(fDimension);}
 
       void                     SetUnit(NucDBUnit * u) { fUnit = *u; }
@@ -134,7 +129,12 @@ class NucDBDataPoint : public TNamed {
 
       void                     AddDependentVariable(NucDBDependentVariable * var);
       NucDBDependentVariable * GetDependentVariable(const char * name);
+      void                     AddDiscreteVariable(NucDBDiscreteVariable * var);
       NucDBDiscreteVariable *  GetDiscreteVariable(const char * name);
+      void                     AddBinVariable(NucDBBinnedVariable * var);
+      NucDBBinnedVariable *    GetBinVariable(const char * name);
+      void                     AddVariable(NucDBVariable * var);
+      NucDBVariable *          GetVariable(const char * name);
 
       ClassDef(NucDBDataPoint,2)
 };

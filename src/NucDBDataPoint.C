@@ -106,7 +106,12 @@ void NucDBDataPoint::Print(){
    std::cout << GetName() << " = " << GetValue() << " +- " << GetTotalError()->GetError() << "\n";
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
       ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print(); 
-
+   }
+   for(int i=0; i<fDiscreteVariables.GetEntries();i++) {
+      ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->Print(); 
+   }
+   for(int i=0; i<fVariables.GetEntries();i++) {
+      ((NucDBVariable*)fVariables.At(i))->Print(); 
    }
 }
 //_____________________________________________________________________________
@@ -115,27 +120,61 @@ NucDBBinnedVariable* NucDBDataPoint::FindVariable(const char * name) {
    NucDBBinnedVariable * avar = 0;
    if( !avar ) avar = GetBinVariable(name);
    if( !avar ) avar = GetDependentVariable(name);
-/*   if( !avar ) avar = GetDiscreteVariable(name);*/
+   /*   if( !avar ) avar = GetDiscreteVariable(name);*/
    return(avar);
 }
 //_____________________________________________________________________________
 
 NucDBBinnedVariable* NucDBDataPoint::GetBinVariable(const char * name) {
-      for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
-          if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
-             return((NucDBBinnedVariable*)fBinnedVariables.At(i));
+   for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
+      if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
+         return((NucDBBinnedVariable*)fBinnedVariables.At(i));
+   }
+   return(0);
+}
+//_____________________________________________________________________________
+void NucDBDataPoint::AddBinVariable(NucDBBinnedVariable * var) { 
+   if( ! GetBinVariable(var->GetName()) ) {
+      fBinnedVariables.Add(var);
+      fDimension++;
+   } else {
+      printf(" variable, %s, already exists",var->GetName());
+   }
+}
+//_____________________________________________________________________________
+NucDBDiscreteVariable* NucDBDataPoint::GetDiscreteVariable(const char * name) {
+      for(int i = 0;i<fDiscreteVariables.GetEntries();i++) {
+          if( !strcmp( ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->GetName(),name) ) 
+             return((NucDBDiscreteVariable*)fDiscreteVariables.At(i));
       }
       return(0);
-   }//_____________________________________________________________________________
-
-void NucDBDataPoint::AddBinVariable(NucDBBinnedVariable * var) { 
-      if( ! GetBinVariable(var->GetName()) ) {
-         fBinnedVariables.Add(var);
-         fDimension++;
-      } else {
-         printf(" variable, %s, already exists",var->GetName());
-      }
    }
+//_____________________________________________________________________________
+void NucDBDataPoint::AddDiscreteVariable(NucDBDiscreteVariable * var) { 
+   if( ! GetDiscreteVariable(var->GetName()) ) {
+      fDiscreteVariables.Add(var);
+      //fDimension++;
+   } else {
+      printf(" variable, %s, already exists",var->GetName());
+   }
+}
+//_____________________________________________________________________________
+NucDBVariable* NucDBDataPoint::GetVariable(const char * name) {
+      for(int i = 0;i<fVariables.GetEntries();i++) {
+          if( !strcmp( ((NucDBVariable*)fVariables.At(i))->GetName(),name) ) 
+             return((NucDBVariable*)fVariables.At(i));
+      }
+      return(0);
+   }
+//_____________________________________________________________________________
+void NucDBDataPoint::AddVariable(NucDBVariable * var) { 
+   if( ! GetVariable(var->GetName()) ) {
+      fVariables.Add(var);
+      //fDimension++;
+   } else {
+      printf(" variable, %s, already exists",var->GetName());
+   }
+}
 //_____________________________________________________________________________
 
 NucDBDependentVariable* NucDBDataPoint::GetDependentVariable(const char * name) {
@@ -155,7 +194,6 @@ void NucDBDataPoint::AddDependentVariable(NucDBDependentVariable * var) {
       }
    }
 //_____________________________________________________________________________
-
 void NucDBDataPoint::CalculateDependentVariables(){
    NucDBDependentVariable * var = 0;
    for(int i = 0;i<fVariables.GetEntries(); i++ ){
@@ -163,15 +201,6 @@ void NucDBDataPoint::CalculateDependentVariables(){
       var->Calculate();
    }
 }
-//_____________________________________________________________________________
-
-NucDBDiscreteVariable* NucDBDataPoint::GetDiscreteVariable(const char * name) {
-      for(int i = 0;i<fDiscreteVariables.GetEntries();i++) {
-          if( !strcmp( ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->GetName(),name) ) 
-             return((NucDBDiscreteVariable*)fDiscreteVariables.At(i));
-      }
-      return(0);
-   }
 //_____________________________________________________________________________
 
 void  NucDBDataPoint::ListVariables(){
@@ -184,3 +213,4 @@ void  NucDBDataPoint::ListVariables(){
       }
 }
 //_____________________________________________________________________________
+

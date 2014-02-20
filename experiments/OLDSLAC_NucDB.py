@@ -101,6 +101,24 @@ if __name__ == "__main__":
     F2dExtractor.Initialize()
     F2dExtractor.ExtractAllValues()
     F2d.BuildGraph()
+
+    R = experiment.GetMeasurement("R")
+    if not R :
+        R = NucDBMeasurement("R","R^{p}")
+        experiment.AddMeasurement(R)
+    R.ClearDataPoints()
+    R.SetColor(1)
+    RExtractor = OLDSLACExtractor()
+    RExtractor.SetMeasurement(R)
+    RExtractor.SetInputFile("experiments/OLDSLAC/R_prot_deut.dat")
+    #RExtractor.linestoskip=0
+    #RExtractor.fCurrentDataPoint.GetBinnedVariables().Add(Xbjorken)
+    #RExtractor.fCurrentDataPoint.GetBinnedVariables().Add(Qsq)
+    RExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    RExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    RExtractor.Initialize()
+    RExtractor.ExtractAllValues()
+    R.BuildGraph()
     
     #datapoint = NucDBDataPoint(1.0,0.2)
     #Aperp.AddDataPoint(datapoint)

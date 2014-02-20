@@ -28,32 +28,38 @@ NucDBMeasurement::NucDBMeasurement(const NucDBMeasurement& v){
    fGraphs.AddAll(v.GetGraphs());
 }
 //_____________________________________________________________________________
-
+void  NucDBMeasurement::Browse(TBrowser* b) {
+   b->Add(&fDataPoints     , "Data Points");
+   b->Add(&fGraphs         , "Graphs");
+   b->Add(&fReferences     , "Refs");
+   if(fGraph)b->Add(fGraph , "vs x");
+}
+//______________________________________________________________________________
 void NucDBMeasurement::ClearDataPoints(){
-      fDataPoints.Clear();
+   fDataPoints.Clear();
       fNumberOfDataPoints=0;
 }
 //_____________________________________________________________________________
 
 void NucDBMeasurement::AddDataPoint(NucDBDataPoint *point) {
-      if(point) {
-         point->SetNameTitle(Form("p%d",fNumberOfDataPoints),Form("p%d",fNumberOfDataPoints));
-         fDataPoints.Add(point);
-         fNumberOfDataPoints++;
-      } else {
-         printf(" NULL NucDBDataPoint pointer \n");
-      } 
-   }
+   if(point) {
+      point->SetNameTitle(Form("p%d",fNumberOfDataPoints),Form("p%d",fNumberOfDataPoints));
+      fDataPoints.Add(point);
+      fNumberOfDataPoints++;
+   } else {
+      printf(" NULL NucDBDataPoint pointer \n");
+   } 
+}
 //_____________________________________________________________________________
 
 void NucDBMeasurement::AddDataPoints(TList * listOfPoints, bool clear) {
-      if(listOfPoints) {
-         if(clear) ClearDataPoints();
-         for(int i = 0; i < listOfPoints->GetEntries();i++) 
-            AddDataPoint((NucDBDataPoint*)listOfPoints->At(i));
-      } else {
-         printf(" NULL TList pointer \n");
-      } 
+   if(listOfPoints) {
+      if(clear) ClearDataPoints();
+      for(int i = 0; i < listOfPoints->GetEntries();i++) 
+         AddDataPoint((NucDBDataPoint*)listOfPoints->At(i));
+   } else {
+      printf(" NULL TList pointer \n");
+   } 
 }
 //_____________________________________________________________________________
 NucDBMeasurement * NucDBMeasurement::CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) {
@@ -63,23 +69,56 @@ NucDBMeasurement * NucDBMeasurement::CreateMeasurementFilteredWithBin(NucDBBinne
    return m;
 }  
 //_____________________________________________________________________________
-
-TList *  NucDBMeasurement::FilterWithBin(NucDBBinnedVariable const *bin) {
-      TList * list = new TList();
-      list->Clear();
-      if(!bin) {
-         printf(" NULL NucDBBinnedVariable pointer. Returning list with no entries. \n");
-         return list;
-      }
-      for(int i = 0; i < fDataPoints.GetEntries();i++) {
-         NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
-         NucDBBinnedVariable * var = point->GetBinVariable(bin->GetName());
-         if(var){
-            if ( (*var) == (*bin) ) list->Add(point);
-         }
-      }
+TList *  NucDBMeasurement::FilterWith(NucDBVariable const *v) {
+   TList * list = new TList();
+   list->Clear();
+   if(!v) {
+      printf(" NULL NucDBVariable pointer. Returning list with no entries. \n");
       return list;
    }
+   for(int i = 0; i < fDataPoints.GetEntries();i++) {
+      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
+      NucDBVariable * var    = point->GetVariable(v->GetName());
+      if(var){
+         if ( (*v) == (*var) ) list->Add(point);
+      }
+   }
+   return list;
+}
+//_____________________________________________________________________________
+TList *  NucDBMeasurement::FilterWith(NucDBDiscreteVariable const *v) {
+   TList * list = new TList();
+   list->Clear();
+   if(!v) {
+      printf(" NULL NucDBDiscreteVariable pointer. Returning list with no entries. \n");
+      return list;
+   }
+   for(int i = 0; i < fDataPoints.GetEntries();i++) {
+      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
+      NucDBDiscreteVariable * var = point->GetDiscreteVariable(v->GetName());
+      if(var){
+         if ( (*v) == (*var) ) list->Add(point);
+      }
+   }
+   return list;
+}
+//_____________________________________________________________________________
+TList *  NucDBMeasurement::FilterWithBin(NucDBBinnedVariable const *bin) {
+   TList * list = new TList();
+   list->Clear();
+   if(!bin) {
+      printf(" NULL NucDBBinnedVariable pointer. Returning list with no entries. \n");
+      return list;
+   }
+   for(int i = 0; i < fDataPoints.GetEntries();i++) {
+      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
+      NucDBBinnedVariable * var = point->GetBinVariable(bin->GetName());
+      if(var){
+         if ( (*var) == (*bin) ) list->Add(point);
+      }
+   }
+   return list;
+}
 //_____________________________________________________________________________
 TList *  NucDBMeasurement::ApplyFilterWithBin(NucDBBinnedVariable const *bin) {
    TList * list = FilterWithBin(bin); 
@@ -87,24 +126,35 @@ TList *  NucDBMeasurement::ApplyFilterWithBin(NucDBBinnedVariable const *bin) {
    return list;
 }
 //_____________________________________________________________________________
-
+TList *  NucDBMeasurement::ApplyFilterWith(NucDBDiscreteVariable const *v) {
+   TList * list = FilterWith(v); 
+   AddDataPoints(list,true);
+   return list;
+}
+//_____________________________________________________________________________
+TList *  NucDBMeasurement::ApplyFilterWith(NucDBVariable const *v) {
+   TList * list = FilterWith(v); 
+   AddDataPoints(list,true);
+   return list;
+}
+//______________________________________________________________________________
 void NucDBMeasurement::Print() const {
-      std::cout << "   --------------------------\n";
-      std::cout << "   " << GetName() << "\n";
-      std::cout << "   --------------------------\n";
-      std::cout << "  title = " << GetTitle() << "\n";
-      std::cout << "  fNumberOfDataPoints = " << fNumberOfDataPoints <<  "\n";
-   }
+   std::cout << "   --------------------------\n";
+   std::cout << "   " << GetName() << "\n";
+   std::cout << "   --------------------------\n";
+   std::cout << "  title = " << GetTitle() << "\n";
+   std::cout << "  fNumberOfDataPoints = " << fNumberOfDataPoints <<  "\n";
+}
 //_____________________________________________________________________________
 
 void NucDBMeasurement::PrintData() const {
-      Print();
-      for(int i=0; i<fDataPoints.GetEntries(); i++){
-         NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(i);
-	 std::cout << "[" << i << "] " << GetName();
-	 aPoint->Print();
-      }
+   Print();
+   for(int i=0; i<fDataPoints.GetEntries(); i++){
+      NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(i);
+      std::cout << "[" << i << "] " << GetName();
+      aPoint->Print();
    }
+}
 //_____________________________________________________________________________
 
 void  NucDBMeasurement::ListVariables(){
@@ -114,39 +164,132 @@ void  NucDBMeasurement::ListVariables(){
    }
 }
 //_____________________________________________________________________________
-
-TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
-      //if(fGraph) delete fGraph;
-      fGraph=0;
-      NucDBDataPoint * point = 0;
-      NucDBBinnedVariable * var = 0;
-      fGraph = new TGraphErrors(fNumberOfDataPoints);
-      fGraph->SetName(Form("%sVS%s",GetName(),varName));
-      for(int i = 0; i < fNumberOfDataPoints;i++) {
-         point = (NucDBDataPoint *) fDataPoints.At(i);
-         var = point->FindVariable(varName);
-         if( var ) {
-            point->CalculateTotalError();
-            fGraph->SetPoint(i,var->GetMean(),point->GetValue());
-            fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
-         } else {
-            Error("BuildGraph",Form("Variable, %s, not found!",varName));
-            fGraph->SetPoint(i,0,0);
-            fGraph->SetPointError(i,0,1);
-            break;
+NucDBBinnedVariable* NucDBMeasurement::GetBinnedVariable(const char * name) {
+   for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
+      if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
+         return((NucDBBinnedVariable*)fBinnedVariables.At(i));
+   }
+   return(0);
+}
+//______________________________________________________________________________
+NucDBBinnedVariable* NucDBMeasurement::GetDependentVariable(const char * name) {
+   for(int i = 0;i<fDependentVariables.GetEntries();i++) {
+      if( !strcmp( ((NucDBBinnedVariable*)fDependentVariables.At(i))->GetName(),name) ) 
+         return((NucDBBinnedVariable*)fDependentVariables.At(i));
+   }
+   return(0);
+}
+//______________________________________________________________________________
+NucDBDiscreteVariable* NucDBMeasurement::GetDiscreteVariable(const char * name) {
+   for(int i = 0;i<fDiscreteVariables.GetEntries();i++) {
+      if( !strcmp( ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->GetName(),name) ) 
+         return((NucDBDiscreteVariable*)fDiscreteVariables.At(i));
+   }
+   return(0);
+}
+//______________________________________________________________________________
+Double_t NucDBMeasurement::GetBinnedVariableMean(const char * name) {
+   Double_t tot = 0;
+   Int_t N = 0;
+   const TList * datapoints = GetDataPoints();
+   NucDBDataPoint * p = 0;
+   NucDBBinnedVariable * v = 0;
+   for(int i = 0;i<datapoints->GetEntries();i++) {
+      p = (NucDBDataPoint*)datapoints->At(i);
+      if(p) {
+         v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+         if(v){
+            tot += v->GetMean();
+            N++;
          }
       }
-      if(var){
-         fGraph->GetXaxis()->SetTitle(var->GetTitle());
-         fGraph->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
+   }
+   if(N>0) return( tot/double(N) );
+   return(0);
+}
+//______________________________________________________________________________
+Double_t NucDBMeasurement::GetBinnedVariableVariance(const char * name) {
+   Double_t mean = GetBinnedVariableMean(name);
+   Double_t tot = 0;
+   Int_t N = 0;
+   const TList * datapoints = GetDataPoints();
+   NucDBDataPoint * p = 0;
+   NucDBBinnedVariable * v = 0;
+   for(int i = 0;i<datapoints->GetEntries();i++) {
+      p = (NucDBDataPoint*)datapoints->At(i);
+      if(p) {
+         v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+         if(v){
+            Double_t vmean = v->GetMean();
+            tot += (vmean*vmean);
+            N++;
+         }
       }
-      fGraph->SetMarkerColor(GetColor());
-      fGraph->SetLineColor(GetColor());
-      fGraph->SetMarkerStyle(20);
-      //fGraph->SetLineStyle(1);
-      //fGraph->SetLineWidth(0);
-      fGraph->SetDrawOption("aep");
-      fGraphs.Add(fGraph);
+   }
+   if(N>0) return( tot/double(N) - mean*mean );
+   return(0);
+}
+//______________________________________________________________________________
+void NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name,std::vector<double> * vect){
+   if(!vect) return;
+   Int_t N = 0;
+   const TList * datapoints = GetDataPoints();
+   NucDBDataPoint * p = 0;
+   NucDBBinnedVariable * v = 0;
+   for(int i = 0;i<datapoints->GetEntries();i++) {
+      p = (NucDBDataPoint*)datapoints->At(i);
+      if(p) {
+         v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+         if(v){
+            Double_t vmean = v->GetMean();
+            vect->push_back(vmean);
+            N++;
+         }
+      }
+   }
+   std::sort(vect->begin(),vect->end());
+   Int_t n1 = vect->size();
+   vect->erase(std::unique(vect->begin(),vect->end()),vect->end());
+   Int_t n2 = vect->size();
+   //std::cout << " out of " << n1 << " values, " << n2 << " are unique\n";
+   //for(int i = 0; i< vect->size() ; i++) {
+   //   std::cout << name << "[" << i << "] = " << vect->at(i) << "\n";
+   //}
+}
+
+//______________________________________________________________________________
+TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
+   //if(fGraph) delete fGraph;
+   fGraph=0;
+   NucDBDataPoint * point = 0;
+   NucDBBinnedVariable * var = 0;
+   fGraph = new TGraphErrors(fNumberOfDataPoints);
+   fGraph->SetName(Form("%sVS%s",GetName(),varName));
+   for(int i = 0; i < fNumberOfDataPoints;i++) {
+      point = (NucDBDataPoint *) fDataPoints.At(i);
+      var = point->FindVariable(varName);
+      if( var ) {
+         point->CalculateTotalError();
+         fGraph->SetPoint(i,var->GetMean(),point->GetValue());
+         fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
+      } else {
+         Error("BuildGraph",Form("Variable, %s, not found!",varName));
+         fGraph->SetPoint(i,0,0);
+         fGraph->SetPointError(i,0,1);
+         break;
+      }
+   }
+   if(var){
+      fGraph->GetXaxis()->SetTitle(var->GetTitle());
+      fGraph->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
+   }
+   fGraph->SetMarkerColor(GetColor());
+   fGraph->SetLineColor(GetColor());
+   fGraph->SetMarkerStyle(20);
+   //fGraph->SetLineStyle(1);
+   //fGraph->SetLineWidth(0);
+   fGraph->SetDrawOption("aep");
+   fGraphs.Add(fGraph);
       return(fGraph);
    }
 //_____________________________________________________________________________

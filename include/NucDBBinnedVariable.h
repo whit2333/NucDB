@@ -23,15 +23,25 @@ class NucDBVariable : public TNamed {
    public:
       NucDBVariable(const char* n = "aVariable", const char* t = "A Variable");
       virtual ~NucDBVariable();
-      NucDBVariable(const NucDBVariable& v){
+      NucDBVariable(const NucDBVariable& v):TNamed(v){
          fUnit  = v.GetUnit();
          fValue = v.GetValue();
       }
+      NucDBVariable& operator=(const NucDBVariable& v){
+         TNamed::operator=(v);
+         if (this != &v) {
+            fUnit  = v.GetUnit();
+            fValue = v.GetValue();
+         }
+         return *this;
+      }
+      bool operator==(const NucDBVariable &other) const {return(other.fValue == fValue );}
+      bool operator!=(const NucDBVariable &other) const { return !(*this == other);}
 
       virtual void         Print(); // *MENU*
 
       virtual Double_t     GetValue() const {return(fValue);}
-      virtual void         Setvalue(Int_t v){fValue = v;} // *MENU*
+      virtual void         SetValue(Int_t v){fValue = v;} // *MENU*
 
       void                 SetUnit(const NucDBUnit& u) { fUnit = u; }
       const NucDBUnit&     GetUnit() const {return fUnit;}
@@ -51,19 +61,26 @@ class NucDBDiscreteVariable : public TNamed {
       NucDBDiscreteVariable(const char* name = "DiscreteVariable", const char* title = "A Discrete Variable") ;
       virtual ~NucDBDiscreteVariable();
 
-      NucDBDiscreteVariable(const NucDBDiscreteVariable& v){
-         SetNameTitle(v.GetName(),v.GetTitle());
+      bool operator==(const NucDBDiscreteVariable &other) const {return(other.fValue == fValue );}
+      bool operator!=(const NucDBDiscreteVariable &other) const { return !(*this == other);}
+
+      NucDBDiscreteVariable(const NucDBDiscreteVariable& v):TNamed(v){
          fUnit  = v.GetUnit();
          fValue = v.GetValue();
       }
 
       NucDBDiscreteVariable& operator=(const NucDBDiscreteVariable& v){
+         if (this != &v) {
+            fUnit  = v.GetUnit();
+            fValue = v.GetValue();
+         }
+         return *this;
       }
 
       void         Print(); // *MENU*
 
       Int_t             GetValue() const {return(fValue);}
-      void              Setvalue(Int_t v){fValue = v;} // *MENU* 
+      void              SetValue(Int_t v){fValue = v;} // *MENU* 
 
       void              SetUnit(const NucDBUnit& u) { fUnit = u; }
       const NucDBUnit&  GetUnit() const {return fUnit;}
@@ -96,19 +113,19 @@ class NucDBBinnedVariable : public TNamed {
       bool operator!=(const NucDBBinnedVariable &other) const { return !(*this == other);}
 
       Double_t    GetBinMinimum() const {return(fMinimum);}
-      void        SetBinMinimum(Double_t val)  {fMinimum =val;}
       Double_t    GetBinMaximum() const {return(fMaximum);}
-      void        SetBinMaximum(Double_t val) {fMaximum =val;}
-      Double_t    GetMinimum() const {return(fMinimum);}
-      Double_t    GetMaximum() const {return(fMaximum);}
-      Double_t    GetMean() const {return(fMean);}
-      void        SetMean(Double_t val) {fMean =val;}
-      Double_t    GetAverage() const {return(fAverage);}
-      void        SetAverage(Double_t val) {fAverage =val;}
-      void        SetBinValueSize(Double_t val, Double_t size);
-      void        SetValueSize(Double_t val, Double_t size){ SetBinValueSize(val,size);}
+      Double_t    GetMinimum()    const {return(fMinimum);}
+      Double_t    GetMaximum()    const {return(fMaximum);}
+      Double_t    GetMean()       const {return(fMean);}
+      Double_t    GetAverage()    const {return(fAverage);}
+      void        SetBinMinimum(   Double_t val) {fMinimum =val;}
+      void        SetBinMaximum(   Double_t val) {fMaximum =val;}
+      void        SetMean(         Double_t val) {fMean =val;}
+      void        SetAverage(      Double_t val) {fAverage =val;}
+      void        SetBinValueSize( Double_t val, Double_t size);
+      void        SetValueSize(    Double_t val, Double_t size){ SetBinValueSize(val,size);}
+      void        SetUnit(   const NucDBUnit& u) { fUnit = u; }
       void        Print() ; // *MENU*
-      void        SetUnit(const NucDBUnit& u) { fUnit = u; }
       const NucDBUnit&   GetUnit(){return fUnit;}
 
       ClassDef(NucDBBinnedVariable,3)

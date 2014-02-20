@@ -107,6 +107,8 @@ def ExtractFromClasDat(lines,fname) :
     values = line.split()
     invmass = float(values[2]) 
     print invmass 
+    W = NucDBBinnedVariable("W","W")
+    W.SetBinValueSize(invmass,0.001)
 
     line = datfile.readline()
 
@@ -127,6 +129,7 @@ def ExtractFromClasDat(lines,fname) :
         extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
         extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
         extractor1.fCurrentDataPoint.AddBinVariable(Ebeam)
+        extractor1.fCurrentDataPoint.AddBinVariable(W)
         extractor1.Initialize()
         extractor1.ExtractAllValues()
         A1p.BuildGraph()
@@ -147,6 +150,7 @@ def ExtractFromClasDat(lines,fname) :
         extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
         extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
         extractor2.fCurrentDataPoint.AddBinVariable(Ebeam)
+        extractor2.fCurrentDataPoint.AddBinVariable(W)
         extractor2.Initialize()
         extractor2.ExtractAllValues()
         g1pOverF1p.BuildGraph()
@@ -168,6 +172,7 @@ def ExtractFromClasDat(lines,fname) :
         extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
         extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
         extractor1.fCurrentDataPoint.AddBinVariable(Ebeam)
+        extractor1.fCurrentDataPoint.AddBinVariable(W)
         extractor1.Initialize()
         extractor1.ExtractAllValues()
         A1d.BuildGraph()
@@ -188,6 +193,7 @@ def ExtractFromClasDat(lines,fname) :
         extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
         extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
         extractor2.fCurrentDataPoint.AddBinVariable(Ebeam)
+        extractor2.fCurrentDataPoint.AddBinVariable(W)
         extractor2.Initialize()
         extractor2.ExtractAllValues()
         g1dOverF1d.BuildGraph()
