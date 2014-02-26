@@ -226,6 +226,7 @@ NucDBDependentVariable* NucDBDataPoint::GetDependentVariable(const char * name) 
 void NucDBDataPoint::AddDependentVariable(NucDBDependentVariable * var) { 
       if( ! GetDependentVariable(var->GetName()) ) {
          fVariables.Add(var);
+         AddBinVariable(var);
       } else {
          Error("AddDependentVariable",Form(" variable, %s, already exists",var->GetName()));
       }

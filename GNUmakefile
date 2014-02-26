@@ -45,7 +45,17 @@ F77FLAGS += -g -O2 -Wall -fPIC -Iinclude
 
 ##############################################################################/
 
-default : nucdb link
+default : newbuild
+
+newbuild :  
+	@echo "*** In-source build no longer supported ***"
+	@echo "Use cmake with out-of-source build. For example, "
+	@echo "cd .."
+	@echo "mkdir nucdb_build "
+	@echo "cd nucdb_build"
+	@echo "cmake ../NucDB/. -DCMAKE_INSTALL_PREFIX=/usr/local"
+	@echo "make "
+	@echo "make install"
 
 nucdb : shared_libs
 	@echo 
