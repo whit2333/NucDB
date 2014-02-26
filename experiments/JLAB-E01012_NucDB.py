@@ -80,6 +80,7 @@ if __name__ == "__main__":
 
     extractor1 = JLABE01012Extractor()
     extractor1.SetMeasurement(A1n)
+    #extractor1.SetInputFile("experiments/JLAB-E01012/plain.txt",11)
     extractor1.SetInputFile("experiments/JLAB-E01012/E01012.dat",0)
     #extractor1.linestoskip=2
     Xbjorken = NucDBBinnedVariable("x","x")

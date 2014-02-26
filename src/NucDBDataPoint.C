@@ -4,21 +4,21 @@ ClassImp(NucDBErrorBar)
 //_____________________________________________________________________________
 
 NucDBErrorBar::NucDBErrorBar(){
-      fTotalError=0.0;
-      fErrorPlus=0.0;
-      fErrorMinus=0.0;
+   fTotalError=0.0;
+   fErrorPlus=0.0;
+   fErrorMinus=0.0;
 }
 //_____________________________________________________________________________
 NucDBErrorBar::~NucDBErrorBar(){
 }
 //_____________________________________________________________________________
 NucDBErrorBar::NucDBErrorBar(const NucDBErrorBar& v) {
-      fTotalError = v.fTotalError;
-      fErrorPlus  = v.fErrorPlus;
-      fErrorMinus = v.fErrorMinus;
+   fTotalError = v.fTotalError;
+   fErrorPlus  = v.fErrorPlus;
+   fErrorMinus = v.fErrorMinus;
 }
 //_____________________________________________________________________________
-NucDBErrorBar& NucDBErrorBar::operator=(const NucDBErrorBar &v){
+const NucDBErrorBar& NucDBErrorBar::operator=(const NucDBErrorBar &v){
    if (this != &v) {
       fTotalError = v.fTotalError;
       fErrorPlus  = v.fErrorPlus;
@@ -27,14 +27,14 @@ NucDBErrorBar& NucDBErrorBar::operator=(const NucDBErrorBar &v){
    return *this;
 }
 //_____________________________________________________________________________
-NucDBErrorBar& NucDBErrorBar::operator+=(const NucDBErrorBar &v){
+const NucDBErrorBar& NucDBErrorBar::operator+=(const NucDBErrorBar &v){
    fErrorPlus  = TMath::Sqrt(TMath::Power(fErrorPlus ,2.0) + TMath::Power(v.fErrorPlus ,2.0) );
    fErrorMinus = TMath::Sqrt(TMath::Power(fErrorMinus,2.0) + TMath::Power(v.fErrorMinus,2.0) );
    fTotalError = TMath::Sqrt(TMath::Power(fTotalError,2.0) + TMath::Power(v.fTotalError,2.0) );
    return *this;
 }
 //_____________________________________________________________________________
-NucDBErrorBar& NucDBErrorBar::operator+(const NucDBErrorBar &v) const {
+const NucDBErrorBar& NucDBErrorBar::operator+(const NucDBErrorBar &v) const {
    return( NucDBErrorBar(*this) += v );
 }
 //_____________________________________________________________________________
@@ -74,7 +74,7 @@ NucDBDataPoint::NucDBDataPoint(Double_t val, Double_t err) {
 NucDBDataPoint::~NucDBDataPoint(){
 }
 //_____________________________________________________________________________
-NucDBDataPoint::NucDBDataPoint(const NucDBDataPoint& v) {
+NucDBDataPoint::NucDBDataPoint(const NucDBDataPoint& v) : TNamed(v) {
    fUnit      = v.fUnit;
    fValue     = v.fValue;
    fDimension = v.fDimension;
@@ -91,8 +91,44 @@ NucDBDataPoint::NucDBDataPoint(const NucDBDataPoint& v) {
    fSystematicError   = v.fSystematicError;
    fStatisticalError  = v.fStatisticalError;
    fTotalError        = v.fTotalError;
+   //CalculateTotalError();
 
 }
+//_____________________________________________________________________________
+const NucDBDataPoint& NucDBDataPoint::operator=(const NucDBDataPoint &v){
+   if (this == &v) return *this; 
+
+   fUnit      = v.fUnit;
+   fValue     = v.fValue;
+   fDimension = v.fDimension;
+
+   // not sure if this is the best way to make a deep copy. 
+   TList * alist      = 0;
+   alist              = (TList*)v.fDiscreteVariables.Clone();
+   fDiscreteVariables.AddAll(alist);
+   alist              = (TList*)v.fVariables.Clone();
+   fVariables.AddAll(alist);
+   alist              = (TList*)v.fBinnedVariables.Clone();
+   fBinnedVariables.AddAll(alist);
+
+   fSystematicError   = v.fSystematicError;
+   fStatisticalError  = v.fStatisticalError;
+   fTotalError        = v.fTotalError;
+   //CalculateTotalError();
+
+   return *this;
+}
+//_____________________________________________________________________________
+//const NucDBDataPoint& NucDBDataPoint::operator+=(const NucDBDataPoint &v){
+//   fErrorPlus  = TMath::Sqrt(TMath::Power(fErrorPlus ,2.0) + TMath::Power(v.fErrorPlus ,2.0) );
+//   fErrorMinus = TMath::Sqrt(TMath::Power(fErrorMinus,2.0) + TMath::Power(v.fErrorMinus,2.0) );
+//   fTotalError = TMath::Sqrt(TMath::Power(fTotalError,2.0) + TMath::Power(v.fTotalError,2.0) );
+//   return *this;
+//}
+////_____________________________________________________________________________
+//const NucDBDataPoint& NucDBDataPoint::operator+(const NucDBDataPoint &v) const {
+//   return( NucDBDataPoint(*this) += v );
+//}
 //_____________________________________________________________________________
 void NucDBDataPoint::CalculateTotalError(){
    //Double_t sys = fSystematicError.GetError();
@@ -103,7 +139,8 @@ void NucDBDataPoint::CalculateTotalError(){
 //_____________________________________________________________________________
 
 void NucDBDataPoint::Print(){
-   std::cout << GetName() << " = " << GetValue() << " +- " << GetTotalError()->GetError() << "\n";
+   //CalculateTotalError(); 
+   std::cout << GetName() << " = " << GetValue() << " +- " << GetTotalError().GetError() << "\n";
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
       ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print(); 
    }
@@ -111,7 +148,7 @@ void NucDBDataPoint::Print(){
       ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->Print(); 
    }
    for(int i=0; i<fVariables.GetEntries();i++) {
-      ((NucDBVariable*)fVariables.At(i))->Print(); 
+      //((NucDBVariable*)fVariables.At(i))->Print(); 
    }
 }
 //_____________________________________________________________________________

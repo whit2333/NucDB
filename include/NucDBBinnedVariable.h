@@ -41,7 +41,7 @@ class NucDBVariable : public TNamed {
       virtual void         Print(); // *MENU*
 
       virtual Double_t     GetValue() const {return(fValue);}
-      virtual void         SetValue(Int_t v){fValue = v;} // *MENU*
+      void                 SetValue(Double_t v){fValue = v;} // *MENU*
 
       void                 SetUnit(const NucDBUnit& u) { fUnit = u; }
       const NucDBUnit&     GetUnit() const {return fUnit;}

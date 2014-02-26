@@ -37,6 +37,8 @@ protected:
 public :
    NucDBDependentVariable(const char * n ="depVar",const char * t = "dep var");
    ~NucDBDependentVariable();
+      NucDBDependentVariable& operator=(const NucDBDependentVariable& v) ;
+      NucDBDependentVariable(const NucDBDependentVariable& v) ;
 
    void                  SetVariable(Int_t n, NucDBBinnedVariable * avar );
    NucDBBinnedVariable * GetVariable(Int_t n );

@@ -24,8 +24,8 @@ NucDBManager::NucDBManager(Int_t opt) {
    fStandardUnits.Add(new NucDBXSectionUnit());
 
    fFile = 0;
-   if(!opt) fFile = new TFile(Form("%s/NucDB.root",NUCDB_DATA_DIR),"READ");
-   else fFile = new TFile(Form("%s/NucDB.root",NUCDB_DATA_DIR),"UPDATE");
+   if(!opt) fFile = new TFile(Form("%s/NucDB.root",NucDB_DATA_DIR),"READ");
+   else fFile = new TFile(Form("%s/NucDB.root",NucDB_DATA_DIR),"UPDATE");
 
    fFile->cd();
 

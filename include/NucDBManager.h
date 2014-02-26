@@ -1,6 +1,6 @@
 #ifndef NucDBManager_HH
 #define NucDBManager_HH 1
-
+#include "NucDBConfig.h"
 
 #include "TNamed.h"
 #include "TObject.h"

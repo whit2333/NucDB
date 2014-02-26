@@ -73,14 +73,14 @@ class NucDBMeasurement : public TNamed {
 
       NucDBMeasurement * CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) ;
 
-      const TList * GetDataPoints() const {return(&fDataPoints);}
+      TList * GetDataPoints() {return(&fDataPoints);}
 
       void    Print() const ; // *MENU*
       void    PrintData() const ; // *MENU*
       void    ListVariables() ; // *MENU*
       TString GetExperimentName() const {return(fExperimentName);}
       void    SetExperimentName(TString s){fExperimentName = s;}
-      Int_t   GetNDataPoints(){ return(fNumberOfDataPoints);}
+      Int_t   GetNDataPoints() const {return(fNumberOfDataPoints);}
       void    SetColor(Int_t col){fColor = col;}
       Int_t   GetColor() const {return(fColor);}
 

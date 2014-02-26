@@ -23,9 +23,9 @@ class NucDBErrorBar : public TObject {
       NucDBErrorBar();
       virtual ~NucDBErrorBar();
       NucDBErrorBar(const NucDBErrorBar& v) ;
-      NucDBErrorBar& operator=(const NucDBErrorBar& v) ;
-      NucDBErrorBar& operator+=(const NucDBErrorBar& v) ;
-      NucDBErrorBar& operator+(const NucDBErrorBar& v) const ;
+      const NucDBErrorBar& operator=(const NucDBErrorBar& v) ;
+      const NucDBErrorBar& operator+=(const NucDBErrorBar& v) ;
+      const NucDBErrorBar& operator+(const NucDBErrorBar& v) const ;
 
       /** sets the error where value = number +- error
        */
@@ -52,7 +52,7 @@ class NucDBErrorBar : public TObject {
       }
 
       /** returns error  where value = number +- error */
-      Double_t GetError() { return(fTotalError/2.0); }
+      Double_t GetError() const { return(fTotalError/2.0); }
 
       /** returns errorPlus + errorMinus */
       Double_t GetTotalError() const { return(fTotalError);}
@@ -86,6 +86,9 @@ class NucDBDataPoint : public TNamed {
    public :
       NucDBDataPoint(Double_t val=0.0, Double_t err=0.0);
       virtual ~NucDBDataPoint();
+      const NucDBDataPoint& operator=(const NucDBDataPoint& v) ;
+      //const NucDBDataPoint& operator+=(const NucDBDataPoint& v) ;
+      //const NucDBDataPoint& operator+(const NucDBDataPoint& v) const ;
 
       /** Performs deep copy. */
       NucDBDataPoint(const NucDBDataPoint& v) ;
@@ -106,11 +109,11 @@ class NucDBDataPoint : public TNamed {
       Double_t  GetValue() const { return fValue ; }
       void      SetValue(Double_t v) { fValue = v; }
 
-      NucDBErrorBar * GetStatError(){ return(&fStatisticalError); }
-      NucDBErrorBar * GetSystError(){ return(&fSystematicError); }
-      NucDBErrorBar * GetTotalError(){
-         fTotalError = fSystematicError+fStatisticalError; 
-         return(&fTotalError);
+      const NucDBErrorBar& GetStatError() const { return(fStatisticalError); }
+      const NucDBErrorBar& GetSystError() const { return(fSystematicError); }
+      const NucDBErrorBar& GetTotalError() const {
+         //fTotalError = fSystematicError+fStatisticalError; 
+         return(fTotalError);
       }
 
       /** Set the values of the total using the current

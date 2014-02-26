@@ -15,8 +15,33 @@ NucDBDependentVariable::NucDBDependentVariable(const char * n ,const char * t)
       fFunc3 = 0;
    }
 //_____________________________________________________________________________
+NucDBDependentVariable::~NucDBDependentVariable(){
+}
+//_____________________________________________________________________________
+NucDBDependentVariable::NucDBDependentVariable(const NucDBDependentVariable& v) : NucDBBinnedVariable(v){
+   (*this) = v;
+}
+//_____________________________________________________________________________
+NucDBDependentVariable& NucDBDependentVariable::operator=(const NucDBDependentVariable& v) {
+   if ( this != &v) {  
+      NucDBBinnedVariable::operator=(v);
+      fNDepVars = v.fNDepVars;
+      for(int i =0;i<4;i++){
+         x[i]      = v.x[i]     ;
+         p[i]      = v.p[i]     ;
+         fVars[i]  = v.fVars[i] ;
+         x_low[i]  = v.x_low[i] ;
+         x_high[i] = v.x_high[i];
+      }
+      TList * alist      = 0;
+      alist              = (TList*)v.fDependentVariables.Clone();
+      fDependentVariables.AddAll(alist);
+      alist              = (TList*)v.fDependentVariableNames.Clone();
+      fDependentVariableNames.AddAll(alist);
 
-NucDBDependentVariable::~NucDBDependentVariable(){}
+   }
+   return *this;    // Return ref for multiple assignment
+}
 //_____________________________________________________________________________
 
 void NucDBDependentVariable::SetVariable(Int_t n, NucDBBinnedVariable * avar ){

@@ -189,10 +189,85 @@ if __name__ == "__main__":
     g2p.BuildGraph()
 
     #DEUTERON
+    # A1d
+    A1d = experiment.GetMeasurement("A1d")
+    if not A1d :
+        A1d = NucDBMeasurement("A1d","A_{1}^{d}")
+        experiment.AddMeasurement(A1d)
+    A1d.ClearDataPoints()
+    A1d.SetColor(4015)
+    extractor1 = SMCExtractorAXN()
+    extractor1.SetMeasurement(A1d)
+    extractor1.SetInputFile("experiments/SMC/a1dg1d.dat",4)
+    #extractor1.linestoskip=4
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor1.Initialize()
+    extractor1.ExtractAllValues()
+    A1d.BuildGraph()
+    # g1d
+    g1d = experiment.GetMeasurement("g1d")
+    if not g1d :
+        g1d = NucDBMeasurement("g1d","g_{1}^{d}")
+        experiment.AddMeasurement(g1d)
+    g1d.ClearDataPoints()
+    g1d.SetColor(4015)
+    extractor2 = SMCExtractorgXN()
+    extractor2.SetMeasurement(g1d)
+    extractor2.SetInputFile("experiments/SMC/a1dg1d.dat",4)
+    #extractor2.linestoskip=4
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor2.Initialize()
+    extractor2.ExtractAllValues()
+    g1d.BuildGraph()
+
+    # A2d
+    A2d = experiment.GetMeasurement("A2d")
+    if not A2d :
+        A2d = NucDBMeasurement("A2d","A_{2}^{d}")
+        experiment.AddMeasurement(A2d)
+    A2d.ClearDataPoints()
+    A2d.SetColor(4015)
+    extractor3 = SMCExtractorA2p()
+    extractor3.SetMeasurement(A2d)
+    extractor3.SetInputFile("experiments/SMC/a2d.dat",3)
+    #extractor3.linestoskip=4
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor3.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor3.Initialize()
+    extractor3.ExtractAllValues()
+    A2d.BuildGraph()
+    # g2d
+    # Does this data exist?
+    #g2d = experiment.GetMeasurement("g2d")
+    #if not g2d :
+    #    g2d = NucDBMeasurement("g2d","g_{2}^{d}")
+    #    experiment.AddMeasurement(g2d)
+    #g2d.ClearDataPoints()
+    #g2d.SetColor(4015)
+    #extractor4 = SMCExtractorg2p()
+    #extractor4.SetMeasurement(g2d)
+    #extractor4.SetInputFile("experiments/SMC/g2d.dat",3)
+    ##extractor4.linestoskip=4
+    #Xbjorken = NucDBBinnedVariable("x","x")
+    #Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    #extractor4.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    #extractor4.fCurrentDataPoint.AddBinVariable(Qsq)
+    #extractor4.Initialize()
+    #extractor4.ExtractAllValues()
+    #g2d.BuildGraph()
     # TODO 
    
    
     #NEUTRON
+    # A1n
     g1n = experiment.GetMeasurement("g1n")
     if not g1n :
         g1n = NucDBMeasurement("g1n","g_{1}^{n}")

@@ -22,7 +22,8 @@ NucDBMeasurement::NucDBMeasurement(const NucDBMeasurement& v){
    SetExperimentName(v.GetExperimentName());
    fNumberOfDataPoints = v.fNumberOfDataPoints;
 
-   fDataPoints.AddAll(v.GetDataPoints());
+   TList * datapoints = (TList *)(v.fDataPoints.Clone());
+   fDataPoints.AddAll( datapoints );
    fBinnedVariables.AddAll(v.GetBinnedVariables());
    fDependentVariables.AddAll(v.GetDependentVariables());
    fGraphs.AddAll(v.GetGraphs());
@@ -271,7 +272,7 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
       if( var ) {
          point->CalculateTotalError();
          fGraph->SetPoint(i,var->GetMean(),point->GetValue());
-         fGraph->SetPointError(i,0.0,point->GetTotalError()->GetError());
+         fGraph->SetPointError(i,0.0,point->GetTotalError().GetError());
       } else {
          Error("BuildGraph",Form("Variable, %s, not found!",varName));
          fGraph->SetPoint(i,0,0);

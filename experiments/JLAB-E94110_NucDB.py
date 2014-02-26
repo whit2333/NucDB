@@ -283,6 +283,31 @@ if __name__ == "__main__":
     sigmaTExtractor.ExtractAllValues()
     sigmaT.BuildGraph()
 
+    # R 
+    R = experiment.GetMeasurement("R")
+    if not R :
+        R = NucDBMeasurement("R","R")
+        experiment.AddMeasurement(R)
+    R.ClearDataPoints()
+    R.SetColor(4019)
+    R.AddRef(ref)
+    RExtractor = E94110SigmaExtractor()
+    RExtractor.iValueRow=7
+    RExtractor.istatErr=8
+    RExtractor.SetMeasurement(R)
+    RExtractor.SetInputFile("experiments/JLAB-E94110/e94110_final.dat",2)
+    #RExtractor.linestoskip=3
+    #RExtractor.NumberOfLines=169-3
+    Xbjorken = NucDBBinnedVariable("x","x")
+    W2 = NucDBBinnedVariable("W2","W2")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    RExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    RExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    RExtractor.fCurrentDataPoint.AddBinVariable(W2)
+    RExtractor.Initialize()
+    RExtractor.ExtractAllValues()
+    R.BuildGraph()
+
     F2p = experiment.GetMeasurement("F2p")
     if not F2p :
         F2p = NucDBMeasurement("F2p","F_{2}^{p}")

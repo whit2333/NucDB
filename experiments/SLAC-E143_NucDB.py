@@ -283,7 +283,7 @@ if __name__ == "__main__":
     g2n.ClearDataPoints()
     g2n.SetColor(4012)# default color used for plotting
     Extractor6 = SLACE143Extractor()
-    Extractor6.SetMeasurement(g2p)
+    Extractor6.SetMeasurement(g2n)
     Extractor6.fCurrentDataPoint.fName = "g2n"
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
@@ -333,6 +333,83 @@ if __name__ == "__main__":
     Extractor8.ExtractAllValues()
     A2n.BuildGraph()
 
+    # DEUTERON DATA 
+    g1d = experiment.GetMeasurement("g1d")
+    if not g1d :
+        g1d = NucDBMeasurement("g1d","g_{1}^{d}")
+        experiment.AddMeasurement(g1d)
+    g1d.ClearDataPoints()
+    g1d.SetColor(4012)# default color used for plotting
+    Extractor5 = SLACE143Extractor()
+    Extractor5.SetMeasurement(g1d)
+    Extractor5.fCurrentDataPoint.fName = "g1d"
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    Extractor5.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    Extractor5.fCurrentDataPoint.AddBinVariable(Qsq)
+    Extractor5.SetInputFile("experiments/SLAC-E143/g1d.dat",27)
+    #Extractor5.linestoskip=28
+    Extractor5.Initialize()
+    Extractor5.ExtractAllValues()
+    g1d.BuildGraph()
+
+
+    g2d = experiment.GetMeasurement("g2d")
+    if not g2d :
+        g2d = NucDBMeasurement("g2d","g_{2}^{d}")
+        experiment.AddMeasurement(g2d)
+    g2d.ClearDataPoints()
+    g2d.SetColor(4012)# default color used for plotting
+    Extractor6 = SLACE143Extractor()
+    Extractor6.SetMeasurement(g2d)
+    Extractor6.fCurrentDataPoint.fName = "g2d"
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    Extractor6.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    Extractor6.fCurrentDataPoint.AddBinVariable(Qsq)
+    Extractor6.SetInputFile("experiments/SLAC-E143/g2d.dat",28)
+    #Extractor6.linestoskip=29
+    Extractor6.Initialize()
+    Extractor6.ExtractAllValues()
+    g2d.BuildGraph()
+
+    A1d = experiment.GetMeasurement("A1d")
+    if not A1d :
+        A1d = NucDBMeasurement("A1d","A_{1}^{d}")
+        experiment.AddMeasurement(A1d)
+    A1d.ClearDataPoints()
+    A1d.SetColor(4012)# default color used for plotting
+    Extractor7 = SLACE143ExtractorA1p()
+    Extractor7.SetMeasurement(A1d)
+    Extractor7.fCurrentDataPoint.fName = "A1d"
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    Extractor7.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    Extractor7.fCurrentDataPoint.AddBinVariable(Qsq)
+    Extractor7.SetInputFile("experiments/SLAC-E143/a1d.dat",28)
+    #Extractor7.linestoskip=9
+    Extractor7.Initialize()
+    Extractor7.ExtractAllValues()
+    A1d.BuildGraph()
+
+    A2d = experiment.GetMeasurement("A2d")
+    if not A2d :
+        A2d = NucDBMeasurement("A2d","A_{2}^{d}")
+        experiment.AddMeasurement(A2d)
+    A2d.ClearDataPoints()
+    A2d.SetColor(4012)# default color used for plotting
+    Extractor8 = SLACE143Extractor()
+    Extractor8.SetMeasurement(A2d)
+    Extractor8.fCurrentDataPoint.fName = "A2d"
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    Extractor8.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    Extractor8.fCurrentDataPoint.AddBinVariable(Qsq)
+    Extractor8.SetInputFile("experiments/SLAC-E143/a2d.dat",28)
+    #Extractor8.linestoskip=29
+    Extractor8.Initialize()
+    Extractor8.ExtractAllValues()
+    A2d.BuildGraph()
 
     experiment.Print()
 
