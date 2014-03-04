@@ -1,0 +1,11 @@
+// the configured options and settings for Tutorial
+#define NucDB_VERSION_MAJOR @NucDB_VERSION_MAJOR@
+#define NucDB_VERSION_MINOR @NucDB_VERSION_MINOR@
+
+#define NucDB_DATA_DIR      "@NucDB_DATA_DIR@"
+#define NucDB_CXX_CFLAGS    "@NucDB_CXX_CFLAGS@"
+#define NucDB_CXX_LDFLAGS   "@NucDB_CXX_LDFLAGS@"
+#define NucDB_CXX_LIBS      "@NucDB_CXX_LIBS@"
+#define NucDB_CXX_INC_DIR   "@NucDB_CXX_INC_DIR@"
+#define NucDB_PREFIX        "@CMAKE_INSTALL_PREFIX@"
+
