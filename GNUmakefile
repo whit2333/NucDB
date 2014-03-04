@@ -127,6 +127,7 @@ database:
 	python experiments/QES_archive_NucDB.py
 	#./analyses/maid_all
 	python analyses/LATTICE_NucDB.py
+	root -b -q experiments/CCFR/CCFR_NucDB.cxx
 
 databaseclean:
 	rm data/NucDB.root

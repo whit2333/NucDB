@@ -71,7 +71,8 @@ void NucDBMeasurement::SortBy(const char * n){
    fDataPoints.Sort();
 }
 //_____________________________________________________________________________
-TList *  NucDBMeasurement::MergeDataPoints(unsigned int n){
+TList *  NucDBMeasurement::MergeDataPoints(unsigned int n, const char * var){
+   SortBy(var);
    TList * list = new TList();
    list->Clear();
    if(n<2) {

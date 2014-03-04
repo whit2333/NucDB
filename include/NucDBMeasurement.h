@@ -65,12 +65,20 @@ class NucDBMeasurement : public TNamed {
       TList *  FilterWith(NucDBDiscreteVariable const *v);
       TList *  FilterWith(NucDBVariable const *v);
 
+      /** Sort the data points by the binned variable. */
       void     SortBy(const char * n = "x");
+
       /** Returns list of data points which have be merged. 
        *  The number of datapoints merged for each new data point is provided in the argument.
        *  This is similar to rebinning.
+       *  The second argument is the name of the variable which by which the data points are first sorted
+       *  before merging. This prevents far away bins from being merged.
+       *  It is worth noting here that the FilterWithBin is very handy to apply before hand
+       *  so that only a certain range of the data is left to merge.
+       *  For example, you might only want a certin range of Q2 bins so you would filter the measurment
+       *  first then merge the bins in x. 
        */ 
-      TList *  MergeDataPoints(unsigned int n = 2);
+      TList *  MergeDataPoints(unsigned int n = 2,const char * var = "x");
 
 
       /** Same as FilterWithBin(bin) but it modifies the measurement */
