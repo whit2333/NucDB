@@ -107,6 +107,9 @@ class NucDBBinnedVariable : public TNamed {
       virtual ~NucDBBinnedVariable();
       NucDBBinnedVariable& operator=(const NucDBBinnedVariable& v) ;
 
+      const NucDBBinnedVariable& operator+=(const NucDBBinnedVariable& v) ;
+      const NucDBBinnedVariable& operator+( const NucDBBinnedVariable& v) const ;
+
       /** returns true if the bin values overlap */
       bool BinsOverlap(const NucDBBinnedVariable &var) const ;
       bool operator==(const NucDBBinnedVariable &other) const {return(BinsOverlap(other));}

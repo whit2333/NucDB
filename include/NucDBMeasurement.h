@@ -65,6 +65,13 @@ class NucDBMeasurement : public TNamed {
       TList *  FilterWith(NucDBDiscreteVariable const *v);
       TList *  FilterWith(NucDBVariable const *v);
 
+      void     SortBy(const char * n = "x");
+      /** Returns list of data points which have be merged. 
+       *  The number of datapoints merged for each new data point is provided in the argument.
+       *  This is similar to rebinning.
+       */ 
+      TList *  MergeDataPoints(unsigned int n = 2);
+
 
       /** Same as FilterWithBin(bin) but it modifies the measurement */
       TList *  ApplyFilterWithBin(NucDBBinnedVariable const *bin);

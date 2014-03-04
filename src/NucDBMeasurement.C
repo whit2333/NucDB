@@ -63,6 +63,37 @@ void NucDBMeasurement::AddDataPoints(TList * listOfPoints, bool clear) {
    } 
 }
 //_____________________________________________________________________________
+void NucDBMeasurement::SortBy(const char * n){
+   for(int i = 0; i < fDataPoints.GetEntries();i++) {
+      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
+      point->SetSortingVariable(n);
+   }
+   fDataPoints.Sort();
+}
+//_____________________________________________________________________________
+TList *  NucDBMeasurement::MergeDataPoints(unsigned int n){
+   TList * list = new TList();
+   list->Clear();
+   if(n<2) {
+      Error("MergeDataPoints","Wrong number of bins to merge. ");
+      return list;
+   }
+
+   NucDBDataPoint * mergedPoint = 0;
+   unsigned int i = 0;
+   while(i < fDataPoints.GetEntries()) {
+      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
+      if(i%n == 0){
+         mergedPoint = new NucDBDataPoint(*point);
+         list->Add(mergedPoint);
+      } else {
+         (*mergedPoint) += (*point);
+      }
+      i++;
+   }
+   return list;
+}
+//_____________________________________________________________________________
 NucDBMeasurement * NucDBMeasurement::CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) {
    NucDBMeasurement * m = new NucDBMeasurement(Form("%s_%s",this->GetName(),bin->GetName()),
          Form("%s %s",this->GetTitle(),bin->GetTitle()) );

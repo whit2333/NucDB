@@ -54,7 +54,18 @@ NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v) {
    fAverage  = v.GetAverage();
 }
 //_____________________________________________________________________________
-
+const NucDBBinnedVariable& NucDBBinnedVariable::operator+=(const NucDBBinnedVariable& v) {
+   if(fMinimum > v.GetMinimum() ) fMinimum = v.GetMinimum();
+   if(fMaximum < v.GetMaximum() ) fMaximum = v.GetMaximum();
+   fMean = (fMaximum + fMinimum)/2.0;
+   fAverage = fMean;
+   return *this;
+}
+//______________________________________________________________________________
+const NucDBBinnedVariable& NucDBBinnedVariable::operator+( const NucDBBinnedVariable& v) const {
+   return( NucDBBinnedVariable(*this) += v );
+}
+//______________________________________________________________________________
 NucDBBinnedVariable& NucDBBinnedVariable::operator=(const NucDBBinnedVariable& v) {
    if ( this != &v) {  
       SetNameTitle(v.GetName(),v.GetTitle());
