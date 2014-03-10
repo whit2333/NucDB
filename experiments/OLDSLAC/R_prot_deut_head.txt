@@ -1,0 +1,17 @@
+
+EXPeriment      = SLAC E49, E61, E87, E89, E137, E140         
+REACtion        = E- P --> E- X 
+                  E- N --> E- X
+                  E- DEUT --> E- X                             
+Author          = Whitlow et al 
+REFerence       = Phys. Lett. 250B (1990) 193
+Additional info : Re-analysed data
+                  The ratio R=sig(L)/sig(T) as a function of x and Q**2 
+                  as determined by the re-analysis of the SLAC combined proton 
+                  and deuterium data for deep inelastic electron scattering.
+                  Numerical values from thesis of L Whitlow (SLAC-357).
+
+    
+    mean          mean             R             errors
+      x           Q**2                       stat.      sys.
+
