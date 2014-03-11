@@ -34,8 +34,24 @@ const NucDBErrorBar& NucDBErrorBar::operator=(const NucDBErrorBar &v){
 }
 //_____________________________________________________________________________
 const NucDBErrorBar& NucDBErrorBar::operator+=(const NucDBErrorBar &v){
-   fErrorPlus  = TMath::Sqrt(TMath::Power(fErrorPlus ,2.0) + TMath::Power(v.fErrorPlus ,2.0) );
-   fErrorMinus = TMath::Sqrt(TMath::Power(fErrorMinus,2.0) + TMath::Power(v.fErrorMinus,2.0) );
+   // Not sure what the best way is to add asymmetric error bars, but here is a way
+   // which keeps the errors asymmetric once an asymmetry is introduced.
+   // - Calculate the asymmetry for each errorbar
+   // - Calculate the weighted mean Asymmetry.
+   // - Add the total errorin quaderature. 
+   // - Use the mean asymmetry to get the plus and minus errors  
+
+   double etot1 = fErrorPlus   + fErrorMinus;
+   double etot2 = v.fErrorPlus + v.fErrorMinus;
+   double eA1 = (fErrorPlus-fErrorMinus)/(etot1);
+   double eA2 = (v.fErrorPlus-v.fErrorMinus)/(etot2);
+   double eAavg = (eA1/TMath::Power(etot1/2.0,2.0) + eA2/TMath::Power(etot2/2.0,2.0))/
+                  (1.0/TMath::Power(etot1/2.0,2.0) + 1.0/TMath::Power(etot2/2.0,2.0));
+   double etotQuad = TMath::Sqrt(etot1*etot1 + etot2*etot2)/2.0;
+   fErrorPlus  = etotQuad*(1.0 + eAavg);
+   fErrorMinus = etotQuad*(1.0 - eAavg);
+   //fErrorPlus  = TMath::Sqrt(TMath::Power(fErrorPlus ,2.0) + TMath::Power(v.fErrorPlus ,2.0) );
+   //fErrorMinus = TMath::Sqrt(TMath::Power(fErrorMinus,2.0) + TMath::Power(v.fErrorMinus,2.0) );
    fTotalError = TMath::Sqrt(TMath::Power(fTotalError,2.0) + TMath::Power(v.fTotalError,2.0) );
    return *this;
 }
