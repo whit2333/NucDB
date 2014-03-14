@@ -124,7 +124,7 @@ database:
 	python experiments/JLAB-E01012/JLAB-E01012_NucDB.py
 	python experiments/JLAB-E00108/JLAB-E00108_NucDB.py
 	python experiments/JLAB-E97103/JLAB-E97103_NucDB.py
-	python experiments/RESData_SLAC/RESData_SLAC_NucDB.py
+	python experiments/RESData/RESData_SLAC_NucDB.py
 	python experiments/QES_archive/QES_archive_NucDB.py
 	#./analyses/maid_all
 	root -b -q experiments/CCFR/CCFR_NucDB.cxx
