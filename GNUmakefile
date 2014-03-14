@@ -99,36 +99,36 @@ doc:
 .PHONY : clean printstuff doc snapshot database databaseclean
 
 database:
-	python experiments/OLDSLAC_NucDB.py
-	python experiments/SLAC-E142_NucDB.py
-	python experiments/SLAC-E143_NucDB.py
-	python experiments/SLAC-E155_NucDB.py
-	python experiments/SLAC-E154_NucDB.py
-	python experiments/EMC_NucDB.py
-	python experiments/SMC_NucDB.py
-	python experiments/CERN-NA-2_NucDB.py
-	python experiments/HERMES_NucDB.py
-	python experiments/ZEUS_NucDB.py
-	python experiments/BCDMS_NucDB.py
-	python experiments/NMC_NucDB.py
-	python experiments/CLAS_NucDB.py
+	python experiments/OLDSLAC/OLDSLAC_NucDB.py
+	python experiments/SLAC-E142/SLAC-E142_NucDB.py
+	python experiments/SLAC-E143/SLAC-E143_NucDB.py
+	python experiments/SLAC-E155/SLAC-E155_NucDB.py
+	python experiments/SLAC-E154/SLAC-E154_NucDB.py
+	python experiments/EMC/EMC_NucDB.py
+	python experiments/SMC/SMC_NucDB.py
+	python experiments/CERN-NA-2/CERN-NA-2_NucDB.py
+	python experiments/HERMES/HERMES_NucDB.py
+	python experiments/ZEUS/ZEUS_NucDB.py
+	python experiments/BCDMS/BCDMS_NucDB.py
+	python experiments/NMC/NMC_NucDB.py
+	python experiments/CLAS/CLAS_NucDB.py
 	python experiments/CLAS/E93009_NucDB.py
 	#python experiments/CLAS/E93031_NucDB.py
 	python experiments/CLAS/E91023_NucDB.py
-	python experiments/RSS_NucDB.py
-	python experiments/JLAB-E94010_NucDB.py
-	python experiments/JLAB-E94110_NucDB.py
-	python experiments/JLAB-E99117_NucDB.py
-	python experiments/JLAB-E99118_NucDB.py
-	python experiments/JLAB-E00002_NucDB.py
-	python experiments/JLAB-E01012_NucDB.py
-	python experiments/JLAB-E00108_NucDB.py
-	python experiments/JLAB-E97103_NucDB.py
-	python experiments/RESData_SLAC_NucDB.py
-	python experiments/QES_archive_NucDB.py
+	python experiments/RSS/RSS_NucDB.py
+	python experiments/JLAB-E94010/JLAB-E94010_NucDB.py
+	python experiments/JLAB-E94110/JLAB-E94110_NucDB.py
+	python experiments/JLAB-E99117/JLAB-E99117_NucDB.py
+	python experiments/JLAB-E99118/JLAB-E99118_NucDB.py
+	python experiments/JLAB-E00002/JLAB-E00002_NucDB.py
+	python experiments/JLAB-E01012/JLAB-E01012_NucDB.py
+	python experiments/JLAB-E00108/JLAB-E00108_NucDB.py
+	python experiments/JLAB-E97103/JLAB-E97103_NucDB.py
+	python experiments/RESData_SLAC/RESData_SLAC_NucDB.py
+	python experiments/QES_archive/QES_archive_NucDB.py
 	#./analyses/maid_all
-	python analyses/LATTICE_NucDB.py
 	root -b -q experiments/CCFR/CCFR_NucDB.cxx
+	python analyses/LATTICE/LATTICE_NucDB.py
 
 databaseclean:
 	rm data/NucDB.root

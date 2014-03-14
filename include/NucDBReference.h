@@ -2,10 +2,14 @@
 #define NucDBReference_HH 1
 
 #include <iostream>
+#include <string>
 #include "TString.h"
+#include "TObjString.h"
 #include "TList.h"
 #include "TNamed.h"
 #include "TBrowser.h"
+
+TString wordWrap( TString s, size_t width = 55 );
 
 /** Reference for a data set.
  *   
@@ -20,6 +24,7 @@ class NucDBReference : public TNamed {
       TString   fDescription; 
       RefType   fRefType;
       TList     fPapers;
+      TList     fComments;
 
    public:
       NucDBReference(const char * n = "", const char * t = "");
@@ -41,6 +46,22 @@ class NucDBReference : public TNamed {
       void         SetDOI(const char * s) { fDOI = s; }
       void         SetDescription(const char * s) { fDescription = s; }
       void         SetRefType(RefType t) { fRefType = t; }
+
+      void PrintComments() const {
+         TString prefix = " o ";
+         for(int i = 0; i< fComments.GetEntries();i++){
+            TObjString * comment = (TObjString*)fComments.At(i);
+            TString wrapped = prefix;
+            wrapped += comment->String();
+            wrapped = wordWrap(wrapped,50);
+            std::cout << wrapped << std::endl;
+         }
+      }
+      void AddComment(const char * c){
+         TObjString * comment = new TObjString(c);
+         fComments.Add(comment);
+      }
+      TList * GetComments(){ return &fComments; }
 
 ClassDef(NucDBReference,1)
 };

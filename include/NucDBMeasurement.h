@@ -7,6 +7,7 @@
 #include "NucDBDataPoint.h"
 #include "TGraphErrors.h"
 #include "TString.h"
+#include "TObjString.h"
 #include "TAxis.h"
 #include "TBrowser.h"
 //#include "NucDBPaper.h"
@@ -40,6 +41,7 @@ class NucDBMeasurement : public TNamed {
       TString  fExperimentName;       // experiment name
       Int_t    fNumberOfDataPoints;   //
       TList    fReferences;           // List of references
+      TList    fComments;             // List of TObjString comments
 
    public:
       NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
@@ -47,8 +49,34 @@ class NucDBMeasurement : public TNamed {
 
       NucDBMeasurement(const NucDBMeasurement& v);
 
+      void PrintComments() const {
+         TString prefix = " o ";
+         for(int i = 0; i< fComments.GetEntries();i++){
+            TObjString * comment = (TObjString*)fComments.At(i);
+            TString wrapped = prefix;
+            wrapped += comment->String();
+            wrapped = wordWrap(wrapped,50);
+            std::cout << wrapped << std::endl;
+         }
+      }
+      void AddComment(const char * c){
+         TObjString * comment = new TObjString(c);
+         fComments.Add(comment);
+      }
+      TList * GetComments(){ return &fComments; }
+
       Bool_t  IsFolder() const { return kTRUE; }
       void    Browse(TBrowser* b);
+
+      void    Clear(Option_t * opt = ""){
+         ClearDataPoints();
+         fReferences.Clear();
+         fComments.Clear();
+         fDiscreteVariables.Clear();
+         fBinnedVariables.Clear();
+         fDependentVariables.Clear();
+         fGraphs.Clear(); 
+      }
 
       void    ClearDataPoints();
 

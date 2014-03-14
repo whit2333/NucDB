@@ -48,7 +48,7 @@ class NucDBExperiment : public TNamed {
 
 
       void AddMeasurement(NucDBMeasurement* meas);
-      void Print(); // *MENU*
+      void Print(Option_t * opt = "") const ; // *MENU*
       void PlotMeasurements(const char * var = "x"); // *MENU*
 
       ClassDef(NucDBExperiment,1)

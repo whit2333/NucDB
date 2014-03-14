@@ -127,6 +127,7 @@ class NucDBBinnedVariable : public TNamed {
       void        SetAverage(      Double_t val) {fAverage =val;}
       void        SetBinValueSize( Double_t val, Double_t size);
       void        SetValueSize(    Double_t val, Double_t size){ SetBinValueSize(val,size);}
+      void        SetMeanLimits(   Double_t val, Double_t min, Double_t max){ SetMean(val);SetAverage(val);SetBinMinimum(min);SetBinMaximum(max);}
       void        SetUnit(   const NucDBUnit& u) { fUnit = u; }
       void        Print() ; // *MENU*
       const NucDBUnit&   GetUnit(){return fUnit;}
