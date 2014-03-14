@@ -47,13 +47,13 @@ class NucDBCalculation : public TNamed {
          if(meas) fMeasurements.Add(meas);
       }
 
-      void Print(){
+      void Print(Option_t * opt = "") const {
          std::cout << "===================================\n";
          std::cout << "   " << GetName() << "\n";
          std::cout << "===================================\n";
          std::cout << "  title = " << GetTitle() << "\n";
          std::cout << "+++++ Calculations +++++\n";
-         fMeasurements.Print();
+         fMeasurements.Print(opt);
       }
 
       //void PlotMeasurements(const char * var = "x") {

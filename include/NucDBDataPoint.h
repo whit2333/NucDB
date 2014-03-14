@@ -61,8 +61,8 @@ class NucDBErrorBar : public TObject {
       Double_t GetTotalError() const { return(fTotalError);}
       Double_t GetMinusError() const { return(fErrorMinus);}
       Double_t GetPlusError() const { return(fErrorPlus);}
-      void     Clear();
-      void     Print() const ; // *MENU*
+      void     Clear(Option_t * opt = "");
+      void     Print(Option_t * opt = "") const ; // *MENU*
 
       ClassDef(NucDBErrorBar,1)
 };
@@ -116,7 +116,7 @@ class NucDBDataPoint : public TNamed {
          b->Add(&fUnit,"Unit");
       }
 
-      virtual void Print() const ; // *MENU*
+      virtual void Print(Option_t * opt = "") const ; // *MENU*
 
       Double_t  GetValue() const { return fValue ; }
       void      SetValue(Double_t v) { fValue = v; }

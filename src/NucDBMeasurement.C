@@ -171,16 +171,18 @@ TList *  NucDBMeasurement::ApplyFilterWith(NucDBVariable const *v) {
    return list;
 }
 //______________________________________________________________________________
-void NucDBMeasurement::Print() const {
-   std::cout << "   --------------------------\n";
-   std::cout << "   " << GetName() << "\n";
-   std::cout << "   --------------------------\n";
-   std::cout << "  title = " << GetTitle() << "\n";
-   std::cout << "  fNumberOfDataPoints = " << fNumberOfDataPoints <<  "\n";
+void NucDBMeasurement::Print(Option_t * opt ) const {
+   Bool_t printData = opt ? (!strcmp(opt, "data") ? kTRUE : kFALSE) : kFALSE;
+   std::cout << "  --------------------------\n";
+   std::cout << "  " << GetName() << "\n";
+   std::cout << "  --------------------------\n";
+   std::cout << "   title       : " << GetTitle() << "\n";
+   std::cout << "   NDataPoints : " << fNumberOfDataPoints <<  "\n";
+   if(printData) fDataPoints.Print(opt);
 }
 //_____________________________________________________________________________
 
-void NucDBMeasurement::PrintData() const {
+void NucDBMeasurement::PrintData(Option_t * opt) const {
    Print();
    for(int i=0; i<fDataPoints.GetEntries(); i++){
       NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(i);

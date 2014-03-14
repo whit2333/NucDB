@@ -60,14 +60,14 @@ const NucDBErrorBar& NucDBErrorBar::operator+(const NucDBErrorBar &v) const {
    return( NucDBErrorBar(*this) += v );
 }
 //_____________________________________________________________________________
-void NucDBErrorBar::Print() const {
+void NucDBErrorBar::Print(Option_t * opt) const {
    std::cout << "Error Bar : " << GetName() << "\n";
    std::cout << "\t TotalError  = " << fTotalError << "\n";
    std::cout << "\t Error plus  = " << fErrorPlus << "\n";
    std::cout << "\t Error minus = " << fErrorMinus << "\n";
 }
 //_____________________________________________________________________________
-void NucDBErrorBar::Clear(){
+void NucDBErrorBar::Clear(Option_t * opt){
    fTotalError = 0.0;
    fErrorPlus  = 0.0;
    fErrorMinus = 0.0;
@@ -185,7 +185,7 @@ void NucDBDataPoint::CalculateTotalError(){
 }
 //_____________________________________________________________________________
 
-void NucDBDataPoint::Print() const {
+void NucDBDataPoint::Print(Option_t * opt) const {
    std::cout << GetName() << " = " << GetValue() << " +- " << GetTotalError().GetError() << "\n";
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
       ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print(); 

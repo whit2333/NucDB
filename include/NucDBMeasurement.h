@@ -90,8 +90,8 @@ class NucDBMeasurement : public TNamed {
 
       TList * GetDataPoints() {return(&fDataPoints);}
 
-      void    Print() const ; // *MENU*
-      void    PrintData() const ; // *MENU*
+      void    Print(Option_t * opt ="") const ; // *MENU*
+      void    PrintData(Option_t * opt = "") const ; // *MENU*
       void    ListVariables() ; // *MENU*
       TString GetExperimentName() const {return(fExperimentName);}
       void    SetExperimentName(TString s){fExperimentName = s;}

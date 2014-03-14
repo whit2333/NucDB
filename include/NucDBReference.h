@@ -23,13 +23,13 @@ class NucDBReference : public TNamed {
 
    public:
       NucDBReference(const char * n = "", const char * t = "");
-      ~NucDBReference();
+      virtual ~NucDBReference();
       /** Necessary for Browsing */
       Bool_t  IsFolder() const { return kTRUE; }
       void    Browse(TBrowser* b) {
          b->Add(&fPapers,"Papers");
       }
-      void Print() const ; // *MENU*
+      void Print(Option_t * opt = "") const ; // *MENU*
 
       const char * GetURL() const { return fURL.Data() ; }
       const char * GetDOI() const { return fDOI.Data() ; }

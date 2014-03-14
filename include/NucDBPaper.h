@@ -14,44 +14,48 @@
  *  
  */
 class NucDBPaper : public TNamed {
-   public:
-      NucDBPaper(const char * name ="apaper",const char * title="unknown"):TNamed(name,title) {
-         fCalculations.Clear();
-      }
-      ~NucDBPaper(){}
 
-      /** Necessary for Browsing */
-      Bool_t IsFolder() const {
-         return kTRUE;
-      }
-      /** Needed to make object browsable. */
-      void Browse(TBrowser* b) {
-         b->Add(&fCalculations, "Calculations");
-      }
-
-      NucDBCalculation * GetCalculation(const char * name) {
-         NucDBCalculation * meas = 0;
-         for(int i = 0;i<fCalculations.GetEntries();i++) {
-            if( !strcmp(((NucDBCalculation *)fCalculations.At(i))->GetName(),name) ) {
-               meas = (NucDBCalculation *)fCalculations.At(i) ;
-               break;
-            }
-         }
-         if(!meas) std::cout << " Calculation named " << name << " NOT FOUND!\n";
-         return(meas);
-      }
-      const char * GetReference(){ return( fReference.Data() ); }
-
-      TString   fJoural;
+   protected:
+      TString   fJournal;
+      TString   fDOI;
       TString   fAuthor;
       TString   fTitle;
       TString   fShortRef;
       TString   fBibtex;
-
-   protected: 
+      TString   fInSpire;
       TList     fCalculations;
       TString   fReference;
-      TString   fijef;
+      TString   fComments;
+
+   public:
+      NucDBPaper(const char * name ="apaper",const char * title="unknown");
+      virtual ~NucDBPaper();
+
+      Bool_t IsFolder() const { return kTRUE; }
+      void Browse(TBrowser* b) {
+         b->Add(&fCalculations, "Calculations");
+      }
+
+      NucDBCalculation * GetCalculation(const char * name);
+      const char * GetReference(){ return( fReference.Data() ); }
+
+
+      void SetInSpire(const char * v)  { fInSpire = v;  }
+      void SetAuthor(const char * v)   { fAuthor = v;   }
+      void SetShortRef(const char * v) { fShortRef = v; }
+      void SetBibtex(const char * v)   { fBibtex = v;   }
+      void SetJournal(const char * v)  { fJournal = v;  }
+      void SetDOI(const char * v)      { fDOI = v;      }
+      void SetComments(const char * v) { fComments = v;      }
+
+      const char * GetInSpire() const { return fInSpire.Data();  }
+      const char * GetAuthor()  const { return fAuthor.Data();   }
+      const char * GetShortRef()const { return fShortRef.Data(); }
+      const char * GetBibtex()  const { return fBibtex.Data();   }
+      const char * GetJournal() const { return fJournal.Data();  }
+      const char * GetDOI()     const { return fDOI.Data();      }
+      const char * GetComments()     const { return fComments.Data();      }
+
 
    public:
       void AddCalculation(NucDBCalculation* c){
@@ -61,14 +65,11 @@ class NucDBPaper : public TNamed {
             fCalculations.Add(c);
          }
       }
-      void Print(){
-         std::cout << "===================================\n";
-         std::cout << "   " << GetName() << "\n";
-         std::cout << "===================================\n";
-         std::cout << "  title = " << GetTitle() << "\n";
-         std::cout << "+++++ Calculations +++++\n";
+      void Print(Option_t * opt = "") const {
+         std::cout << " Paper : " << GetName()  << std::endl;
+         std::cout << "         " << GetTitle() << std::endl;
          for(int i =0; i<fCalculations.GetEntries();i++)
-            ((NucDBCalculation*)fCalculations.At(i))->Print();
+            ((NucDBCalculation*)fCalculations.At(i))->Print(opt);
       }
 
 
@@ -82,7 +83,7 @@ class NucDBPaper : public TNamed {
       //       }
       //    }
 
-      ClassDef(NucDBPaper,1)
+      ClassDef(NucDBPaper,2)
 };
 
 
