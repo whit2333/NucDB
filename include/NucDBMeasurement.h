@@ -121,8 +121,8 @@ class NucDBMeasurement : public TNamed {
       void    Print(Option_t * opt ="") const ; // *MENU*
       void    PrintData(Option_t * opt = "") const ; // *MENU*
       void    ListVariables() ; // *MENU*
-      TString GetExperimentName() const {return(fExperimentName);}
-      void    SetExperimentName(TString s){fExperimentName = s;}
+      const char * GetExperimentName() const {return(fExperimentName.Data());}
+      void    SetExperimentName(const char * s){fExperimentName = s;}
       Int_t   GetNDataPoints() const {return(fNumberOfDataPoints);}
       void    SetColor(Int_t col){fColor = col;}
       Int_t   GetColor() const {return(fColor);}

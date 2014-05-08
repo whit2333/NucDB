@@ -70,15 +70,15 @@ class SLACE143ExtractorR(NucDBRawDataExtractor):
         x = self.fCurrentDataPoint.GetBinVariable('x')
         if x :
             x.SetBinValueSize(float(values[ixbjorken]),0.005)
-            x.Print()
+            #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         if Qsq :
             Qsq.SetBinValueSize(float(values[iQsq]),0.1)
-            Qsq.Print()
+            #Qsq.Print()
         epsilon = self.fCurrentDataPoint.GetBinVariable("epsilon")
         if epsilon :
             epsilon.SetBinValueSize(float(values[iEpsilon]),0.001)
-            epsilon.Print()
+            #epsilon.Print()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr]))

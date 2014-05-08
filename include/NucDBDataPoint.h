@@ -13,6 +13,7 @@
 /** Base class for an error bar.
  */
 class NucDBErrorBar : public TObject {
+
    protected:
       /// total = plus + minus
       Double_t fTotalError;
@@ -23,6 +24,7 @@ class NucDBErrorBar : public TObject {
       NucDBErrorBar(Double_t err = 0.0);
       NucDBErrorBar(Double_t errp, Double_t errm);
       virtual ~NucDBErrorBar();
+
       NucDBErrorBar(const NucDBErrorBar& v) ;
       const NucDBErrorBar& operator=(const NucDBErrorBar& v) ;
       /** Adds in quadrature. */
@@ -40,7 +42,7 @@ class NucDBErrorBar : public TObject {
 
       /** Total Error = plus + minus; 
        */
-      void SetErrorSize(Double_t plus, Double_t minus){fErrorPlus=plus; fErrorMinus=minus; fTotalError=plus+minus; }
+      void SetErrorSize(Double_t plus, Double_t minus){fErrorPlus=plus; fErrorMinus=TMath::Abs(minus); fTotalError=fErrorPlus+fErrorMinus; }
 
       /** Set the error range. 
        */

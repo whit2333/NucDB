@@ -68,7 +68,7 @@ NucDBExperiment * NucDBManager::GetExperiment(const char * expName) {
       NucDBExperiment * exp = 0;
       exp =  dynamic_cast<NucDBExperiment*>(fExperiments->FindObject(Form("%s",expName)));
       if(!exp){
-         printf(" Experiment Not found\n");
+         //printf(" Experiment Not found\n");
          exp = 0;
       }
       return(exp);

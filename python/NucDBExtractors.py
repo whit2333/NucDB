@@ -139,7 +139,7 @@ class NucDBRawDataExtractor:
         for i in range(self.NInputLines):
             self.GetNextLine()
             self.GetNextValue()
-        print "Extraction Complete"
+        #print "Extraction Complete"
 
 
 

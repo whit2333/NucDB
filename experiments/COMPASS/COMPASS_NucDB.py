@@ -95,7 +95,7 @@ if __name__ == "__main__":
     ref2.AddComment("g1d values evaluated from A1d using SMC parametrization of F2d [B. Adeva et al., Phys. Rev. D58, 112001 (1998)], and R1998 value for sigmaL/sigmaT ratio.")
     ref2.GetPapers().Add(paper2)
 
-    # A1
+    # A1p
     A1p = experiment.GetMeasurement("A1p")
     if not A1p :
         A1p = NucDBMeasurement("A1p","A_{1}^{p}")
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     A1p.BuildGraph()
     
 
-    # g1;
+    # g1p
     g1p = experiment.GetMeasurement("g1p")
     if not g1p :
         g1p = NucDBMeasurement("g1p","g_{1}^{p}")
@@ -136,6 +136,48 @@ if __name__ == "__main__":
     extractor.Initialize()
     extractor.ExtractAllValues()
     g1p.BuildGraph()
+
+    # A1d
+    A1d = experiment.GetMeasurement("A1d")
+    if not A1d :
+        A1d = NucDBMeasurement("A1d","A_{1}^{d}")
+        experiment.AddMeasurement(A1d)
+    A1d.Clear()
+    A1d.AddRef(ref2)
+    A1d.AddComment("Muon energy between 140 and 180 GeV.")
+
+    extractor = COMPASSExtractor()
+    extractor.SetMeasurement(A1d)
+    extractor.SetInputFile("experiments/COMPASS/jam_dataset_deuteron.csv",1)
+    extractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    extractor.Initialize()
+    extractor.ExtractAllValues()
+    A1d.BuildGraph()
+    
+
+    # g1d
+    g1d = experiment.GetMeasurement("g1d")
+    if not g1d :
+        g1d = NucDBMeasurement("g1d","g_{1}^{d}")
+        experiment.AddMeasurement(g1d)
+    g1d.Clear()
+    g1d.AddRef(ref2)
+    g1d.AddComment("Muon energy between 140 and 180 GeV.")
+
+    extractor = COMPASSExtractor()
+    extractor.SetMeasurement(g1d)
+    extractor.iValueRow     = 8
+    extractor.istatErr      = 9
+    extractor.isysErr       = 10
+    extractor.SetInputFile("experiments/COMPASS/jam_dataset_deuteron.csv",1)
+    extractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    extractor.Initialize()
+    extractor.ExtractAllValues()
+    g1d.BuildGraph()
 
     experiment.Print("comm")
     if not experiment.GetRefs().GetEntries() : 

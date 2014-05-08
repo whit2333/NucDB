@@ -26,36 +26,36 @@ class E94110FullSigmaExtractor(NucDBRawDataExtractor) :
         iEpsilon=6
         iGamma=7
         ixbjorken=8
-        print self.currentline
+        #print self.currentline
         values = self.currentline.split()
         self.rowcut.currentValue=int(0) # does nothign
         Eb = self.fCurrentDataPoint.GetBinVariable('E')
         Eb.SetBinValueSize(float(values[iEbeam]),0.001)
-        Eb.Print()
+        #Eb.Print()
         Ep = self.fCurrentDataPoint.GetBinVariable('Eprime')
         Ep.SetBinValueSize(float(values[iEprime]),0.001)
-        Ep.Print()
+        #Ep.Print()
         th = self.fCurrentDataPoint.GetBinVariable('theta')
         th.SetBinValueSize(float(values[iTheta]),0.001)
-        th.Print()
+        #th.Print()
         nu = self.fCurrentDataPoint.GetBinVariable('nu')
         nu.SetBinValueSize(float(values[iNu]),0.001)
-        nu.Print()
+        #nu.Print()
         eps = self.fCurrentDataPoint.GetBinVariable('epsilon')
         eps.SetBinValueSize(float(values[iEpsilon]),0.001)
-        eps.Print()
+        #eps.Print()
         ga = self.fCurrentDataPoint.GetBinVariable('Gamma')
         ga.SetBinValueSize(float(values[iGamma]),0.001)
-        ga.Print()
+        #ga.Print()
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[ixbjorken]),0.001)
-        x.Print()
+        #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[iQsq]),0.001)
-        Qsq.Print()
+        #Qsq.Print()
         W2 = self.fCurrentDataPoint.GetBinVariable("W2")
         W2.SetBinValueSize(float(values[iW2]),0.001)
-        W2.Print()
+        #W2.Print()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(0)
@@ -90,18 +90,18 @@ class E94110SigmaExtractor(NucDBRawDataExtractor) :
         ixbjorken=2
         iQsq=0
         iW2=1
-        print self.currentline
+        #print self.currentline
         values = self.currentline.split()
         self.rowcut.currentValue=int(0) # does nothign
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[ixbjorken]),0.001)
-        x.Print()
+        #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[iQsq]),0.001)
-        Qsq.Print()
+        #Qsq.Print()
         W2 = self.fCurrentDataPoint.GetBinVariable("W2")
         W2.SetBinValueSize(float(values[iW2]),0.001)
-        W2.Print()
+        #W2.Print()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(0)
@@ -135,7 +135,7 @@ class E94110Extractor(NucDBRawDataExtractor) :
         """
         ixbjorken=1
         iQsq=0
-        print self.currentline
+        #print self.currentline
         values = self.currentline.split()
         self.rowcut.currentValue=int(0) # does nothign
         x = self.fCurrentDataPoint.GetBinVariable('x')

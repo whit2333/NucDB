@@ -111,6 +111,7 @@ database:
 	python experiments/ZEUS/ZEUS_NucDB.py
 	python experiments/BCDMS/BCDMS_NucDB.py
 	python experiments/NMC/NMC_NucDB.py
+	python experiments/COMPASS/COMPASS_NucDB.py
 	python experiments/CLAS/CLAS_NucDB.py
 	python experiments/CLAS/E93009_NucDB.py
 	#python experiments/CLAS/E93031_NucDB.py
@@ -126,9 +127,10 @@ database:
 	python experiments/JLAB-E97103/JLAB-E97103_NucDB.py
 	python experiments/RESData/RESData_SLAC_NucDB.py
 	python experiments/QES_archive/QES_archive_NucDB.py
+	root -b -q -l experiments/inclusive/inclusive_NucDB.cxx
+	root -b -q -l experiments/CCFR/CCFR_NucDB.cxx
 	#./analyses/maid_all
-	root -b -q experiments/CCFR/CCFR_NucDB.cxx
-	python analyses/LATTICE/LATTICE_NucDB.py
+	python analyses/LATTICE_NucDB.py
 
 databaseclean:
 	rm data/NucDB.root

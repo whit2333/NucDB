@@ -76,15 +76,15 @@ class SMCExtractorg2p(NucDBRawDataExtractor) :
         self.rowcut.currentValue=int(0) # data will be used
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[ixbjorken]),deltax)
-        x.Print()
+        #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[iQsq]),0.1)
-        Qsq.Print()
+        #Qsq.Print()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(0))
         self.fCurrentDataPoint.CalculateTotalError()
-        self.fCurrentDataPoint.Print()
+        #self.fCurrentDataPoint.Print()
 
 class SMCExtractorA2p(NucDBRawDataExtractor) :
     def __init__(self):

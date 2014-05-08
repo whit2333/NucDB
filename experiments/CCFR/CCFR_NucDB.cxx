@@ -73,7 +73,7 @@ Int_t CCFR_NucDB(){
    point.CalculateTotalError();
    meas->AddDataPoint(new NucDBDataPoint(point));
    //--------------------------
-   meas->PrintData();
+   //meas->PrintData();
 
    dbman->SaveExperiment(exp);
 

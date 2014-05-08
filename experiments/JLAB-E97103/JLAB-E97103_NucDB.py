@@ -21,18 +21,18 @@ class JLABE97103DataExtractor(NucDBRawDataExtractor) :
         iTheta    = 2
         ixbjorken = 3
         iQsq      = 4
-        print self.currentline
+        #print self.currentline
         values = self.currentline.split(',')
         self.rowcut.currentValue=int(0) # does nothign
         Eb = self.fCurrentDataPoint.GetBinVariable('E')
         Eb.SetBinValueSize(float(values[iEbeam]),0.001)
-        Eb.Print()
+        #Eb.Print()
         Ep = self.fCurrentDataPoint.GetBinVariable('Eprime')
         Ep.SetBinValueSize(float(values[iEprime]),0.001)
-        Ep.Print()
+        #Ep.Print()
         th = self.fCurrentDataPoint.GetBinVariable('theta')
         th.SetBinValueSize(float(values[iTheta]),0.001)
-        th.Print()
+        #th.Print()
         #nu = self.fCurrentDataPoint.GetBinVariable('nu')
         #nu.SetBinValueSize(float(values[iNu]),0.001)
         #nu.Print()
@@ -44,10 +44,10 @@ class JLABE97103DataExtractor(NucDBRawDataExtractor) :
         #ga.Print()
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[ixbjorken]),0.001)
-        x.Print()
+        #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[iQsq]),0.001)
-        Qsq.Print()
+        #Qsq.Print()
         #Pt = self.fCurrentDataPoint.GetBinVariable("Pt")
         #Pt.SetBinValueSize(float(values[iPt]),0.001)
         #Pt.Print()

@@ -2,7 +2,7 @@
 
 ClassImp(NucDBErrorBar)
 //_____________________________________________________________________________
-
+//
 NucDBErrorBar::NucDBErrorBar(Double_t err){
    fTotalError = 2.0*err;
    fErrorPlus  = err;
@@ -10,9 +10,9 @@ NucDBErrorBar::NucDBErrorBar(Double_t err){
 }
 //_____________________________________________________________________________
 NucDBErrorBar::NucDBErrorBar(Double_t errp, Double_t errm){
-   fTotalError = errp+errm;
    fErrorPlus  = errp;
-   fErrorMinus = errm;
+   fErrorMinus = TMath::Abs(errm);
+   fTotalError = fErrorPlus + fErrorMinus;
 }
 //_____________________________________________________________________________
 NucDBErrorBar::~NucDBErrorBar(){
@@ -42,7 +42,9 @@ const NucDBErrorBar& NucDBErrorBar::operator+=(const NucDBErrorBar &v){
    // - Use the mean asymmetry to get the plus and minus errors  
 
    double etot1 = fErrorPlus   + fErrorMinus;
+   if(etot1==0) etot1 = 1.0e-20;
    double etot2 = v.fErrorPlus + v.fErrorMinus;
+   if(etot2==0) etot2 = 1.0e-20;
    double eA1 = (fErrorPlus-fErrorMinus)/(etot1);
    double eA2 = (v.fErrorPlus-v.fErrorMinus)/(etot2);
    double eAavg = (eA1/TMath::Power(etot1/2.0,2.0) + eA2/TMath::Power(etot2/2.0,2.0))/
@@ -52,7 +54,8 @@ const NucDBErrorBar& NucDBErrorBar::operator+=(const NucDBErrorBar &v){
    fErrorMinus = etotQuad*(1.0 - eAavg);
    //fErrorPlus  = TMath::Sqrt(TMath::Power(fErrorPlus ,2.0) + TMath::Power(v.fErrorPlus ,2.0) );
    //fErrorMinus = TMath::Sqrt(TMath::Power(fErrorMinus,2.0) + TMath::Power(v.fErrorMinus,2.0) );
-   fTotalError = TMath::Sqrt(TMath::Power(fTotalError,2.0) + TMath::Power(v.fTotalError,2.0) );
+   //std::cout << fTotalError << " and " << v.fTotalError << std::endl;
+   fTotalError = TMath::Sqrt(TMath::Power(etot1,2.0) + TMath::Power(etot2,2.0) );
    return *this;
 }
 //_____________________________________________________________________________

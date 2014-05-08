@@ -176,11 +176,10 @@ void NucDBMeasurement::Print(Option_t * opt ) const {
    Bool_t printData     = opt1.Contains("data") ? kTRUE  : kFALSE;
    Bool_t printComments = opt1.Contains("comm") ? kTRUE  : kFALSE;
    Bool_t printRefs     = opt1.Contains("ref")  ? kTRUE  : kFALSE;
-   std::cout << "  --------------------------\n";
-   std::cout << "  " << GetName() << "\n";
-   std::cout << "  --------------------------\n";
-   std::cout << "   title       : " << GetTitle() << "\n";
-   std::cout << "   NDataPoints : " << fNumberOfDataPoints <<  "\n";
+   std::cout << " --------------------------\n";
+   std::cout << " " << GetName() << "\n";
+   std::cout << "     title       : " << GetTitle() << "\n";
+   std::cout << "     NDataPoints : " << fNumberOfDataPoints <<  "\n";
    if(printRefs) fReferences.Print(opt);
    if(printComments) PrintComments();
    if(printData) fDataPoints.Print(opt);

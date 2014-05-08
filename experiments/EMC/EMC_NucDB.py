@@ -25,7 +25,7 @@ class EMCExtractor(NucDBRawDataExtractor):
         deltax=0.01
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[ixbjorken]),deltax)
-        x.Print()
+        #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[self.iQsq]),0.1)
         #Qsq.Print()
