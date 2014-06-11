@@ -38,10 +38,9 @@ void  NucDBMeasurement::Browse(TBrowser* b) {
 //______________________________________________________________________________
 void NucDBMeasurement::ClearDataPoints(){
    fDataPoints.Clear();
-      fNumberOfDataPoints=0;
+   fNumberOfDataPoints=0;
 }
 //_____________________________________________________________________________
-
 void NucDBMeasurement::AddDataPoint(NucDBDataPoint *point) {
    if(point) {
       point->SetNameTitle(Form("p%d",fNumberOfDataPoints),Form("p%d",fNumberOfDataPoints));
@@ -52,7 +51,6 @@ void NucDBMeasurement::AddDataPoint(NucDBDataPoint *point) {
    } 
 }
 //_____________________________________________________________________________
-
 void NucDBMeasurement::AddDataPoints(TList * listOfPoints, bool clear) {
    if(listOfPoints) {
       if(clear) ClearDataPoints();
@@ -71,7 +69,7 @@ void NucDBMeasurement::SortBy(const char * n){
    fDataPoints.Sort();
 }
 //_____________________________________________________________________________
-TList *  NucDBMeasurement::MergeDataPoints(unsigned int n, const char * var){
+TList *  NucDBMeasurement::MergeDataPoints(unsigned int n, const char * var, bool modify){
    SortBy(var);
    TList * list = new TList();
    list->Clear();
@@ -91,6 +89,9 @@ TList *  NucDBMeasurement::MergeDataPoints(unsigned int n, const char * var){
          (*mergedPoint) += (*point);
       }
       i++;
+   }
+   if(modify) {
+      AddDataPoints(list,true);
    }
    return list;
 }
