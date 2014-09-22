@@ -24,6 +24,12 @@ class NucDBErrorBar : public TObject {
       NucDBErrorBar(Double_t err = 0.0);
       NucDBErrorBar(Double_t errp, Double_t errm);
       virtual ~NucDBErrorBar();
+      
+      void Multipley(Double_t v){
+         fTotalError *= v;
+         fErrorPlus  *= v;
+         fErrorMinus *= v;
+      }
 
       NucDBErrorBar(const NucDBErrorBar& v) ;
       const NucDBErrorBar& operator=(const NucDBErrorBar& v) ;
