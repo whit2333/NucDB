@@ -110,7 +110,7 @@ void  NucDBMeasurement::Multiply(const char * v){
       NucDBBinnedVariable * var    = point->GetBinVariable(v);
       if(!var) continue; 
       if(var){
-         point->SetValue(value*var->GetMean());
+         point->Multiply(value);
       }
    }
 }

@@ -25,7 +25,7 @@ class NucDBErrorBar : public TObject {
       NucDBErrorBar(Double_t errp, Double_t errm);
       virtual ~NucDBErrorBar();
       
-      void Multipley(Double_t v){
+      void Multiply(Double_t v){
          fTotalError *= v;
          fErrorPlus  *= v;
          fErrorMinus *= v;
@@ -103,6 +103,14 @@ class NucDBDataPoint : public TNamed {
       /** Calculates the weighted mean and sets the error to the variance of the mean. */
       const NucDBDataPoint& operator+=(const NucDBDataPoint& v) ;
       const NucDBDataPoint& operator+(const NucDBDataPoint& v) const ;
+
+      void  Multiply(Double_t v){
+         fStatisticalError.Multiply(v);
+         fSystematicError.Multiply(v);
+         fTotalError.Multiply(v);
+         fValue *= v;
+         // todo unit?
+      }
 
       void          SetSortingVariable(const char * v  = "x"){fSortingVariable = v;}
       const char *  GetSortingVariable() const {return fSortingVariable.Data();}
