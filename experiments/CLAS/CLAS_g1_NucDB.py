@@ -56,9 +56,9 @@ class CLASg1Extractor(NucDBRawDataExtractor):
 class CLASg1Extractor2(CLASg1Extractor):
     def __init__(self):
         CLASg1Extractor.__init__(self)
-        self.iValueRow=11
-        self.istatErr=12
-        self.isysErr=14
+        self.iValueRow=5
+        self.istatErr=6
+        self.isysErr=7
 
 
 if __name__ == "__main__":
@@ -91,6 +91,23 @@ if __name__ == "__main__":
     extractor1.Initialize()
     extractor1.ExtractAllValues()
     A1p.BuildGraph()
+
+    g1pOverF1p = experiment.GetMeasurement("g1pOverF1p")
+    if not g1pOverF1p :
+        g1pOverF1p = NucDBMeasurement("g1pOverF1p","g_{1}^{p}/F_{1}^{p}")
+        experiment.AddMeasurement(g1pOverF1p)
+    g1pOverF1p.ClearDataPoints()
+    #g1pOverF1p.SetColor(4018)
+    extractor1 = CLASg1Extractor2()
+    extractor1.SetMeasurement(g1pOverF1p)
+    extractor1.SetInputFile("experiments/CLAS/g1/incltblwp.txt",1)
+    extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor1.fCurrentDataPoint.AddBinVariable(Ebeam)
+    extractor1.fCurrentDataPoint.AddBinVariable(W)
+    extractor1.Initialize()
+    extractor1.ExtractAllValues()
+    g1pOverF1p.BuildGraph()
     experiment.Print()
     manager.SaveExperiment(experiment)
 
