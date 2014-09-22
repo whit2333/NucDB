@@ -116,6 +116,7 @@ database:
 	python experiments/CLAS/E93009_NucDB.py
 	#python experiments/CLAS/E93031_NucDB.py
 	python experiments/CLAS/E91023_NucDB.py
+	python experiments/CLAS/CLAS_g1_NucDB.py
 	python experiments/RSS/RSS_NucDB.py
 	python experiments/JLAB-E94010/JLAB-E94010_NucDB.py
 	python experiments/JLAB-E94110/JLAB-E94110_NucDB.py
