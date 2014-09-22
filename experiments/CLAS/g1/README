@@ -1,0 +1,23 @@
+Data from 
+http://inspirehep.net/record/1292133
+
+final.txt is from http://hepdata.cedar.ac.uk/view/ins1292133/plain.txt
+(http://hepdata.cedar.ac.uk/view/ins1292133)
+
+@article{Prok:2014ltt,
+      author         = "Prok, Y. and others",
+      title          = "{Precision measurements of $g_1$ of the proton and the
+                        deuteron with 6 GeV electrons}",
+      collaboration  = "CLAS Collaboration",
+      journal        = "Phys.Rev.",
+      volume         = "C90",
+      pages          = "025212",
+      doi            = "10.1103/PhysRevC.90.025212",
+      year           = "2014",
+      eprint         = "1404.6231",
+      archivePrefix  = "arXiv",
+      primaryClass   = "nucl-ex",
+      reportNumber   = "JLAB-PHY-14-1879",
+      SLACcitation   = "%%CITATION = ARXIV:1404.6231;%%",
+}
+
