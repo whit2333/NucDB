@@ -103,6 +103,18 @@ NucDBMeasurement * NucDBMeasurement::CreateMeasurementFilteredWithBin(NucDBBinne
    return m;
 }  
 //_____________________________________________________________________________
+void  NucDBMeasurement::Multiply(const char * v){
+   for(int i = 0; i < fDataPoints.GetEntries();i++) {
+      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
+      Double_t value = point->GetValue();
+      NucDBBinnedVariable * var    = point->GetBinVariable(v);
+      if(!var) continue; 
+      if(var){
+         point->SetValue(value*var->GetMean());
+      }
+   }
+}
+//_____________________________________________________________________________
 TList *  NucDBMeasurement::FilterWith(NucDBVariable const *v) {
    TList * list = new TList();
    list->Clear();

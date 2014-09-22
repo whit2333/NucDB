@@ -116,6 +116,8 @@ class NucDBMeasurement : public TNamed {
       TList *  ApplyFilterWith(NucDBDiscreteVariable const *v);
       TList *  ApplyFilterWith(NucDBVariable const *v);
 
+      void     Multiply(const char * v );
+
       NucDBMeasurement * CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) ;
 
       TList * GetDataPoints() {return(&fDataPoints);}
