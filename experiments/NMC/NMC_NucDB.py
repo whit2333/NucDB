@@ -22,8 +22,9 @@ class NMCExtractor(NucDBRawDataExtractor):
         if self.linesRead > self.NumberOfLines :
              self.rowcut.currentValue=1
              return
-        deltax=0.01
+        deltax=0.001
         x = self.fCurrentDataPoint.GetBinVariable('x')
+        print values[ixbjorken]
         x.SetBinValueSize(float(values[ixbjorken]),deltax)
         #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
@@ -79,7 +80,36 @@ if __name__ == "__main__":
     extractor1.Initialize()
     extractor1.ExtractAllValues()
     F2p.BuildGraph()
+
+    # F2C/F2D
+    F2COverF2D = experiment.GetMeasurement("F2COverF2D")
+    if not F2COverF2D :
+        F2COverF2D = NucDBMeasurement("F2COverF2D","F_{2}^{C}/F_{2}^{D}")
+        experiment.AddMeasurement(F2COverF2D)
+    F2COverF2D.ClearDataPoints()
+    extractor1 = NMCExtractor()
+    extractor1.SetMeasurement(F2COverF2D)
+    extractor1.SetInputFile("experiments/NMC/f2cf2deut200.txt",3)
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor1.Initialize()
+    extractor1.ExtractAllValues()
     
+    extractor1 = NMCExtractor()
+    extractor1.SetMeasurement(F2COverF2D)
+    extractor1.iValueRow=2
+    extractor1.istatErr=3
+    extractor1.isysErr=4
+    extractor1.SetInputFile("experiments/NMC/f2cf2deut.txt",3)
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor1.Initialize()
+    extractor1.ExtractAllValues()
+    F2COverF2D.BuildGraph()
 
     experiment.Print()
     manager.SaveExperiment(experiment)

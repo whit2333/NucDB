@@ -5,6 +5,7 @@ from NucDBExtractors import *
 import os
 
 class EMCExtractor(NucDBRawDataExtractor):
+
     def __init__(self):
         NucDBRawDataExtractor.__init__(self)
         self.iValueRow=5
@@ -70,8 +71,6 @@ if __name__ == "__main__":
     extractor1 = EMCExtractor()
     extractor1.SetMeasurement(g1p)
     extractor1.SetInputFile("experiments/EMC/a1pg1p.txt",0,10)
-    #extractor1.linestoskip=0
-    #extractor1.NumberOfLines=10
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -89,8 +88,6 @@ if __name__ == "__main__":
     extractor2 = EMCExtractor()
     extractor2.SetMeasurement(F2p)
     extractor2.SetInputFile("experiments/EMC/f2protcomb.txt",0,95)
-    #extractor2.linestoskip=0
-    #extractor2.NumberOfLines=95
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -98,6 +95,27 @@ if __name__ == "__main__":
     extractor2.Initialize()
     extractor2.ExtractAllValues()
     F2p.BuildGraph()
+
+    # F2p/F2n
+    F2pOverF2n = experiment.GetMeasurement("F2pOverF2n")
+    if not F2pOverF2n :
+        F2pOverF2n = NucDBMeasurement("F2pOverF2n","F_{2}^{p}/F_{2}^{n}")
+        experiment.AddMeasurement(F2pOverF2n)
+    F2pOverF2n.ClearDataPoints()
+    extractor2 = EMCExtractor()
+    extractor2.iValueRow=2
+    extractor2.istatErr=3
+    extractor2.isysErr=4
+    extractor2.SetMeasurement(F2pOverF2n)
+    extractor2.SetInputFile("experiments/EMC/f2nf2pdeut280.txt",25)
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor2.Initialize()
+    extractor2.ExtractAllValues()
+    F2pOverF2n.BuildGraph()
+
     #g1nOverF1n = experiment.GetMeasurement("g1n/F1n")
     #if not g1nOverF1n :
         #g1nOverF1n = NucDBMeasurement("g1n/F1n","g_{1}^{n}/F_{1}^{n}")

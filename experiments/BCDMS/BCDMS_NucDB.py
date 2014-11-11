@@ -61,6 +61,7 @@ if __name__ == "__main__":
     if not experiment :
         experiment = NucDBExperiment("BCDMS","BCDMS")
 
+    # F2p
     F2p = experiment.GetMeasurement("F2p")
     if not F2p :
         F2p = NucDBMeasurement("F2p","F_{2}^{p}")
@@ -70,8 +71,6 @@ if __name__ == "__main__":
     extractor1 = BCDMSExtractor()
     extractor1.SetMeasurement(F2p)
     extractor1.SetInputFile("experiments/BCDMS/f2protcomb.dat",0,178)
-    #extractor1.linestoskip=0
-    #extractor1.NumberOfLines=178
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
     extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
@@ -80,6 +79,41 @@ if __name__ == "__main__":
     extractor1.ExtractAllValues()
     F2p.BuildGraph()
     
+    # F2p/F2n
+    F2pOverF2n = experiment.GetMeasurement("F2pOverF2n")
+    if not F2pOverF2n :
+        F2pOverF2n = NucDBMeasurement("F2pOverF2n","F_{2}^{p}/F_{2}^{n}")
+        experiment.AddMeasurement(F2pOverF2n)
+    F2pOverF2n.ClearDataPoints()
+    #F2pOverF2n.SetColor(4000)
+    extractor1 = BCDMSExtractor()
+    extractor1.SetMeasurement(F2pOverF2n)
+    extractor1.SetInputFile("experiments/BCDMS/f2nf2pdeut.txt",3)
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor1.Initialize()
+    extractor1.ExtractAllValues()
+    F2pOverF2n.BuildGraph()
+
+    # F2p-F2n
+    F2pMinusF2n = experiment.GetMeasurement("F2pMinusF2n")
+    if not F2pMinusF2n :
+        F2pMinusF2n = NucDBMeasurement("F2pMinusF2n","F_{2}^{p}-F_{2}^{n}")
+        experiment.AddMeasurement(F2pMinusF2n)
+    F2pMinusF2n.ClearDataPoints()
+    #F2pMinusF2n.SetColor(4000)
+    extractor1 = BCDMSExtractor()
+    extractor1.SetMeasurement(F2pMinusF2n)
+    extractor1.SetInputFile("experiments/BCDMS/f2nf2pdeut.txt",3)
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor1.Initialize()
+    extractor1.ExtractAllValues()
+    F2pMinusF2n.BuildGraph()
 
     experiment.Print()
     manager.SaveExperiment(experiment)
