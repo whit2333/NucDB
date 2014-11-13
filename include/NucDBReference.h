@@ -15,6 +15,7 @@ TString wordWrap( TString s, size_t width = 55 );
  *   
  */
 class NucDBReference : public TNamed {
+
    public:
       enum RefType { kUnknown, kWebsite, kPublished, kPreprint, kPreliminary, kPrivateComm};
 
@@ -29,6 +30,7 @@ class NucDBReference : public TNamed {
    public:
       NucDBReference(const char * n = "", const char * t = "");
       virtual ~NucDBReference();
+
       /** Necessary for Browsing */
       Bool_t  IsFolder() const { return kTRUE; }
       void    Browse(TBrowser* b) {
@@ -67,3 +69,4 @@ ClassDef(NucDBReference,1)
 };
 
 #endif
+

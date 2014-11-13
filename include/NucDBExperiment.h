@@ -46,6 +46,8 @@ class NucDBExperiment : public TNamed {
          return(refs);
       }
 
+      void PrintRefs(Option_t * opt = ""); // *MENU*
+
 
       void AddMeasurement(NucDBMeasurement* meas);
       void Print(Option_t * opt = "") const ; // *MENU*

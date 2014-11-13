@@ -1,6 +1,6 @@
 from ROOT import gROOT,gSystem
 gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV
+from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV,NucDBReference
 from NucDBExtractors import *
 #from NucDB.Kine import *
 import os
@@ -75,11 +75,17 @@ if __name__ == "__main__":
     Ebeam    = NucDBBinnedVariable("E","E")
     Ebeam.SetValueSize(5.9,0.01)
 
+    ref = NucDBReference("CLAS_g1","Precision measurements of g1 of the proton and the deuteron with 6 GeV electrons")
+    ref.SetURL("http://inspirehep.net/record/1292133")
+    ref.SetDOI("http://dx.doi.org/10.1103/PhysRevC.90.025212")
+
+
     A1p = experiment.GetMeasurement("Aparap")
     if not A1p :
         A1p = NucDBMeasurement("Aparap","A_{#parallel}^{p}")
         experiment.AddMeasurement(A1p)
     A1p.ClearDataPoints()
+    A1p.AddRef(ref)
     #A1p.SetColor(4018)
     extractor1 = CLASg1Extractor()
     extractor1.SetMeasurement(A1p)
@@ -97,6 +103,7 @@ if __name__ == "__main__":
         g1pOverF1p = NucDBMeasurement("g1pOverF1p","g_{1}^{p}/F_{1}^{p}")
         experiment.AddMeasurement(g1pOverF1p)
     g1pOverF1p.ClearDataPoints()
+    g1pOverF1p.AddRef(ref)
     #g1pOverF1p.SetColor(4018)
     extractor1 = CLASg1Extractor2()
     extractor1.SetMeasurement(g1pOverF1p)

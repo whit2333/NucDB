@@ -49,6 +49,11 @@ void NucDBExperiment::Print(Option_t * opt) const {
    for(int i =0; i<fMeasurements.GetEntries();i++)
       ((NucDBMeasurement*)fMeasurements.At(i))->Print(opt);
 }
+//______________________________________________________________________________
+void NucDBExperiment::PrintRefs(Option_t * opt ) {
+   TList * ref = GetRefs();
+   ref->Print();
+}
 
 
 //_____________________________________________________________________________

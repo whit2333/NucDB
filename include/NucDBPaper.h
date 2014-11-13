@@ -4,7 +4,6 @@
 #include "TList.h"
 #include <iostream>
 #include "NucDBCalculation.h"
-//#include "NucDBDataPoint.h"
 #include "TGraphErrors.h"
 #include "TCanvas.h"
 #include "TBrowser.h"
