@@ -122,6 +122,8 @@ class NucDBMeasurement : public TNamed {
 
       TList * GetDataPoints() {return(&fDataPoints);}
 
+      const TList& GetDataRef() const { return(fDataPoints);}
+
       void    Print(Option_t * opt ="") const ; // *MENU*
       void    PrintData(Option_t * opt = "") const ; // *MENU*
       void    ListVariables() ; // *MENU*
@@ -154,7 +156,7 @@ class NucDBMeasurement : public TNamed {
       Double_t GetBinnedVariableVariance(const char * name);
 
       /** fills the vector with unique values of the binned variable. */ 
-      void GetUniqueBinnedVariableValues(const char * name,std::vector<double> * vect);
+      void GetUniqueBinnedVariableValues(const char * name,std::vector<double> * vect) const;
 
       const TList *        GetDependentVariables() const { return(&fDependentVariables);}
       void                 AddDependentVariables(NucDBBinnedVariable * var){fDependentVariables.Add(var);}

@@ -120,10 +120,8 @@ if __name__ == "__main__":
     RExtractor.ExtractAllValues()
     R.BuildGraph()
     
-    #datapoint = NucDBDataPoint(1.0,0.2)
-    #Aperp.AddDataPoint(datapoint)
-    experiment.Print()
     
+    experiment.Print()
     manager.SaveExperiment(experiment)
     
     

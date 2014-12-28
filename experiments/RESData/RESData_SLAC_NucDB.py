@@ -3,6 +3,7 @@ gSystem.Load( 'libNucDB' )
 from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV,NucDBReference
 from NucDBExtractors import *
 import os
+import math
 
 class JLABResDataExtractor(NucDBRawDataExtractor) :
     #Full data extractor.Format :
@@ -55,19 +56,22 @@ class JLABResDataExtractor(NucDBRawDataExtractor) :
         #Qsq.Print()
         W2 = self.fCurrentDataPoint.GetBinVariable("W2")
         W2.SetBinValueSize(float(values[iW2]),0.001)
+        ##
+        W = self.fCurrentDataPoint.GetBinVariable("W")
+        W.SetBinValueSize(math.sqrt(float(values[iW2])),0.001)
         #W2.Print()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow])*self.scale)
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr])*self.scale)
         #self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isystErr])*self.scale)
         # TODO add rad cor errors
         #
-        W = self.fCurrentDataPoint.GetDependentVariable("W")
-        if not W :
-            W   = NucDBInvariantMassDV()
-            self.fCurrentDataPoint.AddDependentVariable(W)
-        if W :
-            W.SetVariable(0,x)
-            W.SetVariable(1,Qsq)
+        #W = self.fCurrentDataPoint.GetDependentVariable("W")
+        #if not W :
+        #    W   = NucDBInvariantMassDV()
+        #    self.fCurrentDataPoint.AddDependentVariable(W)
+        #if W :
+        #    W.SetVariable(0,x)
+        #    W.SetVariable(1,Qsq)
         #nu = self.fCurrentDataPoint.GetDependentVariable("nu")
         #if not nu :
         #    nu   = NucDBPhotonEnergyDV()
@@ -97,6 +101,8 @@ class JLABResDataExtractor(NucDBRawDataExtractor) :
         self.fCurrentDataPoint.AddBinVariable(Xbjorken)
         self.fCurrentDataPoint.AddBinVariable(Qsq)
         self.fCurrentDataPoint.AddBinVariable(W2)
+        W        = NucDBBinnedVariable("W","W")
+        self.fCurrentDataPoint.AddBinVariable(W)
 
 
 

@@ -159,6 +159,8 @@ class NucDBDataPoint : public TNamed {
       TList *                  GetBinnedVariables() { return(&fBinnedVariables);}
       Int_t                    GetDimension() const { return(fDimension);}
 
+      const TList&             GetBinnedVariablesRef() const { return(fBinnedVariables);}
+
       void                     SetUnit(NucDBUnit * u) { fUnit = *u; }
       NucDBUnit *              GetUnit(){return &fUnit;}
 

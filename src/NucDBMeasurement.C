@@ -161,6 +161,11 @@ TList *  NucDBMeasurement::FilterWithBin(NucDBBinnedVariable const *bin) {
       NucDBBinnedVariable * var = point->GetBinVariable(bin->GetName());
       if(var){
          if ( (*var) == (*bin) ) list->Add(point);
+         continue;
+      }
+      NucDBDependentVariable * dvar = point->GetDependentVariable(bin->GetName());
+      if(dvar){
+         if ( (*dvar) == (*bin) ) list->Add(point);
       }
    }
    return list;
@@ -189,10 +194,29 @@ void NucDBMeasurement::Print(Option_t * opt ) const {
    Bool_t printData     = opt1.Contains("data") ? kTRUE  : kFALSE;
    Bool_t printComments = opt1.Contains("comm") ? kTRUE  : kFALSE;
    Bool_t printRefs     = opt1.Contains("ref")  ? kTRUE  : kFALSE;
+   Bool_t printvars     = opt1.Contains("v")  ? kTRUE  : kFALSE;
    std::cout << " --------------------------\n";
    std::cout << " " << GetName() << "\n";
    std::cout << "     title       : " << GetTitle() << "\n";
+   std::cout << "     Experiment  : " << GetExperimentName() << std::endl;
    std::cout << "     NDataPoints : " << fNumberOfDataPoints <<  "\n";
+   if(printvars && fNumberOfDataPoints>0){
+      const NucDBDataPoint * p0 = (const NucDBDataPoint*)fDataPoints.At(0);
+      const TList& vars = p0->GetBinnedVariablesRef(); 
+      NucDBBinnedVariable * var = 0;
+      for(int j=0;j<vars.GetEntries();j++) {
+         var = (NucDBBinnedVariable*)vars.At(j);
+         std::vector<double> vals;
+         GetUniqueBinnedVariableValues(var->GetName(),&vals);
+         std::cout << var->GetName() << " : " ;
+         for(int k=0;k<vals.size();k++){
+            if(k!=0) std::cout << ", ";
+            std::cout << vals[k]; 
+         }
+         std::cout << std::endl;
+      }
+
+   }
    if(printRefs) fReferences.Print(opt);
    if(printComments) PrintComments();
    if(printData) fDataPoints.Print(opt);
@@ -282,16 +306,16 @@ Double_t NucDBMeasurement::GetBinnedVariableVariance(const char * name) {
    return(0);
 }
 //______________________________________________________________________________
-void NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name,std::vector<double> * vect){
+void NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name,std::vector<double> * vect) const {
    if(!vect) return;
    Int_t N = 0;
-   const TList * datapoints = GetDataPoints();
-   NucDBDataPoint * p = 0;
-   NucDBBinnedVariable * v = 0;
-   for(int i = 0;i<datapoints->GetEntries();i++) {
-      p = (NucDBDataPoint*)datapoints->At(i);
+   const TList &datapoints = GetDataRef();
+   const NucDBDataPoint * p = 0;
+   const NucDBBinnedVariable * v = 0;
+   for(int i = 0;i<datapoints.GetEntries();i++) {
+      p = (const NucDBDataPoint*)datapoints.At(i);
       if(p) {
-         v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+         v = (const NucDBBinnedVariable*)p->GetBinVariable(name);
          if(v){
             Double_t vmean = v->GetMean();
             vect->push_back(vmean);

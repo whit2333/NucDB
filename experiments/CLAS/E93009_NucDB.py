@@ -113,7 +113,7 @@ def ExtractFromClasDat(lines,fname) :
                 A1p = NucDBMeasurement("A1p","A_{1}^{p}")
                 experiment.AddMeasurement(A1p)
             #A1p.ClearDataPoints()
-        #A1p.SetColor(4018)
+        A1p.SetColor(8)
         extractor1 = E93009Extractor()
         extractor1.SetMeasurement(A1p)
         extractor1.SetInputFile(datafilename,11,int(lines)-12)
@@ -132,7 +132,7 @@ def ExtractFromClasDat(lines,fname) :
                 g1pOverF1p = NucDBMeasurement("g1p/F1p","g_{1}^{p}/F_{1}^{p}")
                 experiment.AddMeasurement(g1pOverF1p)
             #A1p.ClearDataPoints()
-        #g1pOverF1p.SetColor(4018)
+        g1pOverF1p.SetColor(8)
         extractor2 = E93009Extractor2()
         extractor2.SetMeasurement(g1pOverF1p)
         extractor2.SetInputFile(datafilename,11,int(lines)-12)
@@ -154,7 +154,7 @@ def ExtractFromClasDat(lines,fname) :
                 A1d = NucDBMeasurement("A1d","A_{1}^{d}")
                 experiment.AddMeasurement(A1d)
         #A1d.ClearDataPoints()
-        A1d.SetColor(4018)
+        A1d.SetColor(8)
         extractor1 = E93009Extractor()
         extractor1.SetMeasurement(A1d)
         extractor1.SetInputFile(datafilename,10,int(lines)-11)
@@ -175,7 +175,7 @@ def ExtractFromClasDat(lines,fname) :
                 g1dOverF1d = NucDBMeasurement("g1d/F1d","g_{1}^{d}/F_{1}^{d}")
                 experiment.AddMeasurement(g1dOverF1d)
         #g1dOverF1d.ClearDataPoints()
-        g1dOverF1d.SetColor(4018)
+        g1dOverF1d.SetColor(8)
         extractor2 = E93009Extractor2()
         extractor2.SetMeasurement(g1dOverF1d)
         extractor2.SetInputFile(datafilename,10,int(lines)-11)
@@ -209,6 +209,22 @@ if __name__ == "__main__":
         experiment.GetMeasurements().Clear();
     if not experiment :
         experiment = NucDBExperiment("CLAS-E93009","CLAS E93-009")
+
+    A1p = experiment.GetMeasurement("A1p")
+    if A1p :
+        A1p.ClearDataPoints()
+
+    A1d = experiment.GetMeasurement("A1d")
+    if A1d :
+        A1d.ClearDataPoints()
+
+    g1pOverF1p = experiment.GetMeasurement("g1pOverF1p")
+    if g1pOverF1p :
+        g1pOverF1p.ClearDataPoints()
+
+    g1dOverF1d = experiment.GetMeasurement("g1dOverF1d")
+    if g1dOverF1d :
+        g1dOverF1d.ClearDataPoints()
 
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq      = NucDBBinnedVariable("Qsquared","Q^{2}")
@@ -269,7 +285,7 @@ if __name__ == "__main__":
                     A1p = NucDBMeasurement("A1p","A_{1}^{p}")
                     experiment.AddMeasurement(A1p)
                 #A1p.ClearDataPoints()
-            #A1p.SetColor(4018)
+            A1p.SetColor(8)
             extractor1 = E93009Extractor()
             extractor1.SetMeasurement(A1p)
             extractor1.SetInputFile(datafilename,11,int(lines)-12)
@@ -288,7 +304,7 @@ if __name__ == "__main__":
                     g1pOverF1p = NucDBMeasurement("g1p/F1p","g_{1}^{p}/F_{1}^{p}")
                     experiment.AddMeasurement(g1pOverF1p)
                 #A1p.ClearDataPoints()
-            #g1pOverF1p.SetColor(4018)
+            g1pOverF1p.SetColor(8)
             extractor2 = E93009Extractor2()
             extractor2.SetMeasurement(g1pOverF1p)
             extractor2.SetInputFile(datafilename,11,int(lines)-12)
@@ -310,7 +326,7 @@ if __name__ == "__main__":
                     A1d = NucDBMeasurement("A1d","A_{1}^{d}")
                     experiment.AddMeasurement(A1d)
             #A1d.ClearDataPoints()
-            A1d.SetColor(4018)
+            A1d.SetColor(8)
             extractor1 = E93009Extractor()
             extractor1.SetMeasurement(A1d)
             extractor1.SetInputFile(datafilename,10,int(lines)-11)
