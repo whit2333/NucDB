@@ -1,0 +1,32 @@
+CLAS physics database search results
+Measurement E128M6
+E1b(E-91-023)
+V. Burkert, D. Crabb, R. Minehart
+2001
+
+Q^2	Gamma_1^d_tot	Data errors	Systematic errors
+GeV2	dimensionless	dimensionless	dimensionless
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	-0.0006	0	0
+0	0	0	0
+0	0	0	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+2	0	0	0
+2	0	0	0
+2	0	0	0
