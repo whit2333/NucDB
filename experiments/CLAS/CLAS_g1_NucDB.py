@@ -70,6 +70,7 @@ if __name__ == "__main__":
         experiment = NucDBExperiment("CLAS-g1","CLAS g1")
 
     Xbjorken = NucDBBinnedVariable("x","x")
+    Dprime   = NucDBBinnedVariable("Dprime","D^{'}")
     Qsq      = NucDBBinnedVariable("Qsquared","Q^{2}")
     W        = NucDBBinnedVariable("W","W")
     Ebeam    = NucDBBinnedVariable("E","E")
