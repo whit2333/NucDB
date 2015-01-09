@@ -1,0 +1,12 @@
+The columns for the data files in this directory are as follows:
+target Z
+target A
+Ebeam
+x
+Q2
+Pt
+R
+error (crude)
+
+
+If there is some other target, Z and A are fixed to 0

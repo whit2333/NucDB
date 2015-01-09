@@ -1,0 +1,34 @@
+EXPeriment     = CERN-NA-037                      
+REACtion       = muon C --> muon X 
+Plab           = 200 GeV                      
+Collaboration  = NMC                     
+Author         = Amaudruz et al
+REFerence      = Nucl. Phys. B441 (1995) 3                            
+Additional info: Re-evaluation of the structure function ratio in deep inelastic 
+                 muon scattering for Carbon to Deuterium at incident momentum of
+                 200 GeV. Additional normalization uncertainty of 0.4% not 
+                 included.
+
+     
+      x           Q**2            y       F2(C)/F2(D)       errors
+                (GeV**2)                               stat.      sys.
+
+   0.0035         0.74           0.62       0.902      0.018      0.016  
+   0.0055         1.2            0.57       0.912      0.011      0.010  
+   0.0085         1.7            0.54       0.920      0.011      0.008  
+   0.0125         2.3            0.51       0.926      0.009      0.007  
+   0.0175         3.0            0.47       0.953      0.010      0.006  
+   0.025          3.8            0.42       0.957      0.008      0.006  
+   0.035          4.9            0.38       0.983      0.009      0.005  
+   0.045          6.0            0.37       0.975      0.010      0.005  
+   0.055          7.2            0.36       1.004      0.012      0.005  
+   0.070          8.8            0.34       1.025      0.010      0.005  
+   0.090         11.0            0.33       1.039      0.012      0.005  
+   0.125         14.0            0.31       1.027      0.009      0.005  
+   0.175         17.0            0.27       1.024      0.012      0.005  
+   0.25          21.0            0.23       1.010      0.012      0.005  
+   0.35          26.0            0.21       0.974      0.018      0.005  
+   0.45          31.0            0.19       1.021      0.030      0.006  
+   0.55          37.0            0.19       0.970      0.046      0.006  
+   0.65          42.0            0.17       0.846      0.062      0.007  
+

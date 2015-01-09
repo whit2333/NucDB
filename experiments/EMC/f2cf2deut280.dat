@@ -1,0 +1,43 @@
+EXPeriment     = CERN-NA-28                          
+REACtion       = muon C --> muon X 
+Plab           = 280 GeV                   
+Collaboration  = EMC                    
+Author         = Arneodo et al.  
+REFerence      = Nucl. Phys. B333 (1990) 1                           
+Additional info: The ratio of the structure function for carbon to deuterium
+                 as measured by the EMC collaboration using a 280 GeV muon beam
+                 in the Q**2 range 0.3 to 3.2.
+     
+     
+      x          Q**2         F2(C)/F2(D)        errors
+               (GeV**2)                      stat.      sys.
+
+    0.0035        0.51           0.86        0.06       0.05  
+    0.0050        0.66           0.87        0.04       0.04  
+    0.0075        0.75           0.90        0.04       0.04  
+    0.0105        0.97           0.92        0.04       0.04  
+    0.015         1.08           0.90        0.03       0.04  
+    0.024         1.10           0.90        0.03       0.04  
+    0.04          1.46           0.92        0.03       0.05  
+    0.06          1.73           1.02        0.04       0.05  
+    0.09          2.29           1.03        0.05       0.05  
+
+
+     
+     
+      x          Q**2         F2(C)/F2(D)        errors
+               (GeV**2)                      stat.      sys.
+
+    0.0035        0.51           0.86        0.06       0.05  
+    0.011         0.35           0.94        0.06       0.05  
+    0.017         0.50           0.90        0.03       0.05  
+    0.016         0.70           0.93        0.03       0.05  
+    0.026         0.90           0.90        0.03       0.05  
+    0.031         1.10           0.97        0.04       0.04  
+    0.038         1.40           0.97        0.03       0.05  
+    0.052         2.00           0.99        0.03       0.04  
+    0.055         2.80           0.87        0.04       0.04  
+    0.056         3.60           0.89        0.05       0.04  
+    0.058         4.40           0.83        0.07       0.04  
+    0.064         5.60           0.79        0.07       0.04  
+

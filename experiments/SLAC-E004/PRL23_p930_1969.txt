@@ -1,0 +1,155 @@
+Path: /HepData/5252/d1-x1-y1
+Location: T 1
+Axis error includes +- 0.0/0.0 contribution (?////FROM UNCERTAINTY IN ELECTRON-DETECTION EFFICIENCY)
+E : 7.0 GeV
+RE : E- P --> E- X
+THETA : 6.0 deg
+sqrts : 3.743 GeV
+x : E(P=3) IN GEV
+y : D2(SIG)/D(OMEGA)/D(E(P=3)) IN MUB/GEV/SR
+xdesc	x	xlow	xhigh	y	dy+	dy-	
+	5.13	5.13	5.13	2.15	+0.049	-0.049
+	4.586	4.586	4.586	1.56	+0.04	-0.04
+	3.75	3.75	3.75	0.933	+0.064	-0.064
+	3.25	3.25	3.25	0.796	+0.073	-0.073
+
+Path: /HepData/5252/d2-x1-y1
+Location: T 1
+Axis error includes +- 0.0/0.0 contribution (?////FROM UNCERTAINTY IN ELECTRON-DETECTION EFFICIENCY)
+E : 10.005 GeV
+RE : E- P --> E- X
+THETA : 6.0 deg
+sqrts : 4.433 GeV
+x : E(P=3) IN GEV
+y : D2(SIG)/D(OMEGA)/D(E(P=3)) IN MUB/GEV/SR
+xdesc	x	xlow	xhigh	y	dy+	dy-	
+	7.886	7.886	7.886	1.07	+0.023	-0.023
+	7.349	7.349	7.349	0.924	+0.02	-0.02
+	6.745	6.745	6.745	0.701	+0.027	-0.027
+	5.361	5.361	5.361	0.497	+0.024	-0.024
+	3.724	3.724	3.724	0.354	+0.03	-0.03
+
+Path: /HepData/5252/d3-x1-y1
+Location: T 1
+Axis error includes +- 0.0/0.0 contribution (?////FROM UNCERTAINTY IN ELECTRON-DETECTION EFFICIENCY)
+E : 13.529 GeV
+RE : E- P --> E- X
+THETA : 6.0 deg
+sqrts : 5.124 GeV
+x : E(P=3) IN GEV
+y : D2(SIG)/D(OMEGA)/D(E(P=3)) IN MUB/GEV/SR
+xdesc	x	xlow	xhigh	y	dy+	dy-	
+	11.0	11.0	11.0	0.426	+0.0087	-0.0087
+	10.48	10.48	10.48	0.41	+0.0093	-0.0093
+	9.936	9.936	9.936	0.385	+0.0056	-0.0056
+	8.512	8.512	8.512	0.279	+0.0085	-0.0085
+	6.906	6.906	6.906	0.209	+0.011	-0.011
+	5.054	5.054	5.054	0.185	+0.011	-0.011
+	3.394	3.394	3.394	0.159	+0.027	-0.027
+
+Path: /HepData/5252/d4-x1-y1
+Location: T 1
+Axis error includes +- 0.0/0.0 contribution (?////FROM UNCERTAINTY IN ELECTRON-DETECTION EFFICIENCY)
+E : 16.049 GeV
+RE : E- P --> E- X
+THETA : 6.0 deg
+sqrts : 5.567 GeV
+x : E(P=3) IN GEV
+y : D2(SIG)/D(OMEGA)/D(E(P=3)) IN MUB/GEV/SR
+xdesc	x	xlow	xhigh	y	dy+	dy-	
+	13.16	13.16	13.16	0.219	+0.0042	-0.0042
+	12.64	12.64	12.64	0.221	+0.0043	-0.0043
+	12.03	12.03	12.03	0.216	+0.0042	-0.0042
+	10.69	10.69	10.69	0.184	+0.0042	-0.0042
+	9.109	9.109	9.109	0.159	+0.0056	-0.0056
+	7.282	7.282	7.282	0.124	+0.0066	-0.0066
+	5.644	5.644	5.644	0.111	+0.0074	-0.0074
+	3.851	3.851	3.851	0.113	+0.017	-0.017
+
+Path: /HepData/5252/d5-x1-y1
+Location: T 1
+Axis error includes +- 0.0/0.0 contribution (?////FROM UNCERTAINTY IN ELECTRON-DETECTION EFFICIENCY)
+E : 7.01 GeV
+RE : E- P --> E- X
+THETA : 10.0 deg
+sqrts : 3.746 GeV
+x : E(P=3) IN GEV
+y : D2(SIG)/D(OMEGA)/D(E(P=3)) IN MUB/GEV/SR
+xdesc	x	xlow	xhigh	y	dy+	dy-	
+	4.802	4.802	4.802	0.282	+0.009	-0.009
+	4.294	4.294	4.294	0.234	+0.0099	-0.0099
+	3.717	3.717	3.717	0.205	+0.012	-0.012
+
+Path: /HepData/5252/d6-x1-y1
+Location: T 1
+Axis error includes +- 0.0/0.0 contribution (?////FROM UNCERTAINTY IN ELECTRON-DETECTION EFFICIENCY)
+E : 10.988 GeV
+RE : E- P --> E- X
+THETA : 10.0 deg
+sqrts : 4.636 GeV
+x : E(P=3) IN GEV
+y : D2(SIG)/D(OMEGA)/D(E(P=3)) IN MUB/GEV/SR
+xdesc	x	xlow	xhigh	y	dy+	dy-	
+	7.915	7.915	7.915	0.0566	+0.0038	-0.0038
+	6.879	6.879	6.879	0.0617	+0.0027	-0.0027
+	5.634	5.634	5.634	0.0559	+0.003	-0.003
+	4.163	4.163	4.163	0.0519	+0.0043	-0.0043
+	3.0	3.0	3.0	0.0538	+0.0077	-0.0077
+
+Path: /HepData/5252/d7-x1-y1
+Location: T 1
+Axis error includes +- 0.0/0.0 contribution (?////FROM UNCERTAINTY IN ELECTRON-DETECTION EFFICIENCY)
+E : 13.534 GeV
+RE : E- P --> E- X
+THETA : 10.0 deg
+sqrts : 5.125 GeV
+x : E(P=3) IN GEV
+y : D2(SIG)/D(OMEGA)/D(E(P=3)) IN MUB/GEV/SR
+xdesc	x	xlow	xhigh	y	dy+	dy-	
+	9.737	9.737	9.737	0.018	+7.2E-4	-7.2E-4
+	9.27	9.27	9.27	0.022	+8.3E-4	-8.3E-4
+	8.737	8.737	8.737	0.0262	+0.001	-0.001
+	7.534	7.534	7.534	0.0303	+0.0015	-0.0015
+	6.113	6.113	6.113	0.0293	+0.0015	-0.0015
+	4.473	4.473	4.473	0.0298	+0.0025	-0.0025
+	3.0	3.0	3.0	0.0375	+0.0054	-0.0054
+
+Path: /HepData/5252/d8-x1-y1
+Location: T 1
+Axis error includes +- 0.0/0.0 contribution (?////FROM UNCERTAINTY IN ELECTRON-DETECTION EFFICIENCY)
+E : 15.201 GeV
+RE : E- P --> E- X
+THETA : 10.0 deg
+sqrts : 5.422 GeV
+x : E(P=3) IN GEV
+y : D2(SIG)/D(OMEGA)/D(E(P=3)) IN MUB/GEV/SR
+xdesc	x	xlow	xhigh	y	dy+	dy-	
+	10.86	10.86	10.86	0.00876	+5.8E-4	-5.8E-4
+	9.868	9.868	9.868	0.0157	+6.0E-4	-6.0E-4
+	8.691	8.691	8.691	0.0194	+8.9E-4	-8.9E-4
+	7.3	7.3	7.3	0.0208	+8.3E-4	-8.3E-4
+	5.696	5.696	5.696	0.0198	+9.4E-4	-9.4E-4
+	4.258	4.258	4.258	0.0226	+0.0015	-0.0015
+	3.7	3.7	3.7	0.0217	+0.0022	-0.0022
+	3.0	3.0	3.0	0.0246	+0.0028	-0.0028
+
+Path: /HepData/5252/d9-x1-y1
+Location: T 1
+Axis error includes +- 0.0/0.0 contribution (?////FROM UNCERTAINTY IN ELECTRON-DETECTION EFFICIENCY)
+E : 17.696 GeV
+RE : E- P --> E- X
+THETA : 10.0 deg
+sqrts : 5.838 GeV
+x : E(P=3) IN GEV
+y : D2(SIG)/D(OMEGA)/D(E(P=3)) IN MUB/GEV/SR
+xdesc	x	xlow	xhigh	y	dy+	dy-	
+	12.46	12.46	12.46	0.00336	+2.0E-4	-2.0E-4
+	11.5	11.5	11.5	0.00617	+2.7E-4	-2.7E-4
+	10.36	10.36	10.36	0.00957	+4.2E-4	-4.2E-4
+	9.015	9.015	9.015	0.0119	+5.7E-4	-5.7E-4
+	7.461	7.461	7.461	0.0133	+7.3E-4	-7.3E-4
+	6.069	6.069	6.069	0.0132	+9.1E-4	-9.1E-4
+	4.544	4.544	4.544	0.015	+0.0015	-0.0015
+	3.8	3.8	3.8	0.017	+0.0021	-0.0021
+	3.0	3.0	3.0	0.0179	+0.0037	-0.0037
+
