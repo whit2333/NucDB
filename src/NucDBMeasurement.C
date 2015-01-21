@@ -1,4 +1,8 @@
 #include "NucDBMeasurement.h"
+#include <assert.h>
+#include <iostream>
+#include <iomanip>
+#include <map>
 
 ClassImp(NucDBMeasurement)
 //_____________________________________________________________________________
@@ -207,7 +211,7 @@ void NucDBMeasurement::Print(Option_t * opt ) const {
       for(int j=0;j<vars.GetEntries();j++) {
          var = (NucDBBinnedVariable*)vars.At(j);
          std::vector<double> vals;
-         GetUniqueBinnedVariableValues(var->GetName(),&vals);
+         GetUniqueBinnedVariableValues(var->GetName(),vals);
          std::cout << var->GetName() << " : " ;
          for(int k=0;k<vals.size();k++){
             if(k!=0) std::cout << ", ";
@@ -306,31 +310,120 @@ Double_t NucDBMeasurement::GetBinnedVariableVariance(const char * name) {
    return(0);
 }
 //______________________________________________________________________________
-void NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name,std::vector<double> * vect) const {
-   if(!vect) return;
-   Int_t N = 0;
-   const TList &datapoints = GetDataRef();
-   const NucDBDataPoint * p = 0;
+Int_t NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name, std::vector<double>& vect) const {
+   // Note that the unique values are appended to the supplied vector
+   // Returns the number of points.
+   Int_t N                       = 0;
+   const TList &datapoints       = GetDataRef();
+   const NucDBDataPoint * p      = 0;
    const NucDBBinnedVariable * v = 0;
+
+   std::vector<double> values;
+
    for(int i = 0;i<datapoints.GetEntries();i++) {
       p = (const NucDBDataPoint*)datapoints.At(i);
       if(p) {
          v = (const NucDBBinnedVariable*)p->GetBinVariable(name);
          if(v){
             Double_t vmean = v->GetMean();
-            vect->push_back(vmean);
+            values.push_back(vmean);
+            //vect.push_back(vmean);
             N++;
          }
       }
    }
-   std::sort(vect->begin(),vect->end());
-   Int_t n1 = vect->size();
-   vect->erase(std::unique(vect->begin(),vect->end()),vect->end());
-   Int_t n2 = vect->size();
+
+   // sort beques unique_copy only considers consecutive duplicates only.
+   std::sort(values.begin(),values.end());
+   //std::sort(vect.begin(),vect.end());
+   //Int_t n1 = values.size();
+   //Int_t n2 = vect.size();
+   //vect.resize(n2+n1,0);
    //std::cout << " out of " << n1 << " values, " << n2 << " are unique\n";
+   // copy uniqes to vector provided
+   std::unique_copy(values.begin(),values.end(),std::back_inserter(vect));
+   //vect.erase(std::unique(vect.begin(),vect.end()),vect.end());
+   //n2 = vect.size();
+   //std::cout << " out of " << n1 << " values, " << n2 << " are unique\n";
+
+   return N;
    //for(int i = 0; i< vect->size() ; i++) {
    //   std::cout << name << "[" << i << "] = " << vect->at(i) << "\n";
    //}
+}
+//______________________________________________________________________________
+Int_t NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name,std::vector<double> & vect, std::vector<int> & counts) const {
+   // Note that the unique values are appended to the supplied vector
+   // Returns the number of points.
+   Int_t N                       = 0;
+   const TList &datapoints       = GetDataRef();
+   const NucDBDataPoint * p      = 0;
+   const NucDBBinnedVariable * v = 0;
+
+   std::vector<double> values;
+
+   for(int i = 0;i<datapoints.GetEntries();i++) {
+      p = (const NucDBDataPoint*)datapoints.At(i);
+      if(p) {
+         v = (const NucDBBinnedVariable*)p->GetBinVariable(name);
+         if(v){
+            Double_t vmean = v->GetMean();
+            values.push_back(vmean);
+            N++;
+         }
+      }
+   }
+   // sort beques unique_copy only considers consecutive duplicates only.
+   std::sort(values.begin(),values.end());
+
+   // copy uniqes to vector provided
+   std::unique_copy(values.begin(),values.end(),std::back_inserter(vect));
+   //vect->erase(std::unique(vect->begin(),vect->end()),vect->end());
+
+   for(int i = 0; i < vect.size(); i++ ) {
+      double aval = vect[i];
+      int nsame = std::count(values.begin(),values.end(), aval);
+      counts.push_back(nsame); 
+   }
+
+   //std::cout << " counts " << counts.size() << " vect " << vect.size() << std::endl;
+   //for(int i = 0; i< vect->size() ; i++) {
+   //   std::cout << name << "[" << i << "] = " << vect->at(i) << "\n";
+   //}
+   return N;
+}
+//______________________________________________________________________________
+
+void NucDBMeasurement::PrintBreakDown(const char * var, int nmax) const {
+   // prints meta data about the distribution of data points
+   // A table is created for the uniq values of the supplied variable :
+   // The table is limited to N values (incase the supplied variable is never uniqe)
+   //
+   // var  #_points <var1> <var2> <var3> ...
+   std::vector<double> var_values ;
+   std::vector<int> var_counts ;
+   GetUniqueBinnedVariableValues(var,var_values,var_counts);
+
+   unsigned int n1 = var_values.size();
+   unsigned int n2 = var_counts.size();
+   //assert( n1 == n2 ) ;
+
+   std::cout << std::setw(10) ;
+   std::cout << var; 
+   std::cout << std::setw(4) << " "; 
+   std::cout << std::setw(11) ;
+   std::cout << std::left ;
+   std::cout << "N_points" << std::endl; 
+
+   for(int i = 0; i < n1 && i<=nmax; i++) {
+      std::cout << std::setw(10);
+      std::cout << var_values[i];
+      std::cout << std::setw(4) << " "; 
+      std::cout << std::setw(11) << std::left;
+      std::cout << var_counts[i] << std::endl;
+   }
+
+
 }
 
 //______________________________________________________________________________

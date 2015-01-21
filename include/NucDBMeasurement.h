@@ -156,7 +156,9 @@ class NucDBMeasurement : public TNamed {
       Double_t GetBinnedVariableVariance(const char * name);
 
       /** fills the vector with unique values of the binned variable. */ 
-      void GetUniqueBinnedVariableValues(const char * name,std::vector<double> * vect) const;
+      Int_t GetUniqueBinnedVariableValues(const char * name, std::vector<double> & vect) const;
+      Int_t GetUniqueBinnedVariableValues(const char * name, std::vector<double> & vect, std::vector<int> & counts) const;
+      void  PrintBreakDown(const char * var = "theta", int nmax = 20) const ;
 
       const TList *        GetDependentVariables() const { return(&fDependentVariables);}
       void                 AddDependentVariables(NucDBBinnedVariable * var){fDependentVariables.Add(var);}

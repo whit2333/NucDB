@@ -154,8 +154,8 @@ printstuff :
 #	@ls lib/*.o
 
 makefiledir := build
-include  $(makefiledir)/General.mk
-include  $(makefiledir)/Functions.mk
+#include  $(makefiledir)/General.mk
+#include  $(makefiledir)/Functions.mk
 
 link:
 	cd lib/ ; ln -sf libNucDBGeneral.so.$(LIBMAJOR).$(LIBMINOR) libNucDBGeneral.so
