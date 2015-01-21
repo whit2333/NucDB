@@ -102,7 +102,7 @@ class NucDBBinnedVariable : public TNamed {
       NucDBUnit fUnit;
 
    public :
-      NucDBBinnedVariable(const char* name = "BinnedVariable", const char* title = "A Binned Variable");
+      NucDBBinnedVariable(const char* name = "BinnedVariable", const char* title = "A Binned Variable", Double_t y = 1.0, Double_t dy = 0.001);
       NucDBBinnedVariable(const NucDBBinnedVariable& v) ;
       virtual ~NucDBBinnedVariable();
       NucDBBinnedVariable& operator=(const NucDBBinnedVariable& v) ;

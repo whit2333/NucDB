@@ -35,12 +35,10 @@ void NucDBDiscreteVariable::Print() {
 
 ClassImp(NucDBBinnedVariable)
 //_____________________________________________________________________________
-NucDBBinnedVariable::NucDBBinnedVariable(const char* name, const char* title): TNamed(name, title) {
-   fMinimum  = 0.0;
-   fMaximum  = 0.0;
-   fMean     = 0.0;
-   fAverage  = 0.0;
-}
+NucDBBinnedVariable::NucDBBinnedVariable(const char* name, const char* title, 
+      Double_t y, Double_t dy): TNamed(name, title), 
+   fMinimum(y-dy),fMaximum(y+dy),fMean(y),fAverage(y)
+{ }
 //_____________________________________________________________________________
 
 NucDBBinnedVariable::~NucDBBinnedVariable(){}
