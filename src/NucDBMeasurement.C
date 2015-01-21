@@ -310,6 +310,60 @@ Double_t NucDBMeasurement::GetBinnedVariableVariance(const char * name) {
    return(0);
 }
 //______________________________________________________________________________
+Double_t NucDBMeasurement::GetBinnedVariableMax(const char * name) {
+
+   const TList * datapoints = GetDataPoints();
+   NucDBDataPoint * p       = 0;
+   NucDBBinnedVariable * v  = 0;
+   double max               = 0;
+
+   for(int i = 0;i<datapoints->GetEntries();i++) {
+      p = (NucDBDataPoint*)datapoints->At(i);
+      if(p) {
+         v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+         if(v){
+            double aval = v->GetBinMaximum();
+            if( i == 0 ) {
+               max = aval;
+            }
+            if( max < aval ) {
+               max = aval;
+            }
+         } else {
+            Warning("GetBinnedVariableMax","Binned Variable, %s, does not exist.",name );
+         }
+      }
+   }
+   return(max);
+}
+//______________________________________________________________________________
+Double_t NucDBMeasurement::GetBinnedVariableMin(const char * name) {
+
+   const TList * datapoints = GetDataPoints();
+   NucDBDataPoint * p       = 0;
+   NucDBBinnedVariable * v  = 0;
+   double min               = 0;
+
+   for(int i = 0;i<datapoints->GetEntries();i++) {
+      p = (NucDBDataPoint*)datapoints->At(i);
+      if(p) {
+         v = (NucDBBinnedVariable*)p->GetBinVariable(name);
+         if(v){
+            double aval = v->GetBinMinimum();
+            if( i == 0 ) {
+               min = aval;
+            }
+            if( min > aval ) {
+               min = aval;
+            }
+         } else {
+            Warning("GetBinnedVariableMin","Binned Variable, %s, does not exist.",name );
+         }
+      }
+   }
+   return(min);
+}
+//______________________________________________________________________________
 Int_t NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name, std::vector<double>& vect) const {
    // Note that the unique values are appended to the supplied vector
    // Returns the number of points.

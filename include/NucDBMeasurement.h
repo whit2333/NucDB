@@ -149,11 +149,10 @@ class NucDBMeasurement : public TNamed {
       void                   AddDiscreteVariable(NucDBDiscreteVariable * var){fDiscreteVariables.Add(var);}
       NucDBDiscreteVariable* GetDiscreteVariable(const char * name);
 
-      /** Returns the mean value of the variable. */
       Double_t GetBinnedVariableMean(const char * name);
-
-      /** Returns the mean value of the variable. */
       Double_t GetBinnedVariableVariance(const char * name);
+      Double_t  GetBinnedVariableMax(const char * name);
+      Double_t  GetBinnedVariableMin(const char * name);
 
       /** fills the vector with unique values of the binned variable. */ 
       Int_t GetUniqueBinnedVariableValues(const char * name, std::vector<double> & vect) const;
