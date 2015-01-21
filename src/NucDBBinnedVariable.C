@@ -80,8 +80,8 @@ bool NucDBBinnedVariable::BinsOverlap(const NucDBBinnedVariable &var) const {
    //       std::cout << " Min " <<  var.GetMinimum() 
    //                 << " <" << fMinimum 
    //                 << " < " << var.GetMaximum() << "\n";
-   if(fMinimum > var.GetMinimum()  && fMinimum < var.GetMaximum()) return true;
-   else if(fMaximum > var.GetMinimum()  && fMaximum < var.GetMaximum()) return true;
+   if( fMinimum >= var.GetMinimum()  && fMinimum <= var.GetMaximum()) return true;
+   else if(fMaximum >= var.GetMinimum()  && fMaximum <= var.GetMaximum()) return true;
    else return false;
 }
 //_____________________________________________________________________________

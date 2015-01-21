@@ -104,10 +104,10 @@ Double_t NucDBDependentVariable::GetValue(){
       res =  (*fFunc2)(x[0],x[1]) ;
    }
    if(fNDepVars ==3 && fFunc3 != 0 ) {
-      std::cout << "x[] = " << x[0] << "," << x[1]<< "," << x[2] << std::endl;
+      //std::cout << "x[] = " << x[0] << "," << x[1]<< "," << x[2] << std::endl;
       res = (*fFunc3)(x[0],x[1],x[2]);
    }
-   std::cout << res << std::endl;
+   //std::cout << res << std::endl;
    fAverage = res;
    fMean = res;
 //       if(!fFunction) {
@@ -133,7 +133,7 @@ void NucDBDependentVariable::Calculate(){
       Warning("Calculate","Failed to calculate variable %s",GetName());
       SetBinValueSize(0.0,0.1);
    }
-   Print();
+   //Print();
 }
 //_____________________________________________________________________________
 Double_t   NucDBDependentVariable::FindMaximum(){

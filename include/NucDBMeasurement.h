@@ -14,6 +14,8 @@
 #include <vector>
 #include <algorithm>
 #include "NucDBReference.h"
+#include "TMultiGraph.h"
+#include "TLegend.h"
 
 /** A measured quantitiy.
  * 
@@ -138,8 +140,10 @@ class NucDBMeasurement : public TNamed {
       void           AddRef(NucDBReference * r) { fReferences.Add(r); }
 
       /** Build a graph with errors */
-      TGraphErrors * BuildGraph(const char * varName = "x"); // *MENU*
+      TGraphErrors * BuildGraph(const char * var = "x"); // *MENU*
       TGraphErrors * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
+
+      TMultiGraph * BuildGraphUnique(const char * var = "x", const char * uniqueVar = "Qsquared", TLegend * leg = 0 ); // *MENU*
       TGraphErrors * fGraph; //->
 
       // Uses only the first datapoint

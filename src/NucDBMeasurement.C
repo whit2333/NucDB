@@ -572,77 +572,141 @@ void NucDBMeasurement::PrintBreakDown(const char * var, int nmax) const {
 //______________________________________________________________________________
 TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
    //if(fGraph) delete fGraph;
-   fGraph=0;
-   NucDBDataPoint * point = 0;
-   NucDBBinnedVariable * var = 0;
-   fGraph = new TGraphErrors(fNumberOfDataPoints);
-   fGraph->SetName(Form("%sVS%s",GetName(),varName));
+   TGraphErrors        * gr    = 0;
+   NucDBDataPoint      * point = 0;
+   NucDBBinnedVariable * var   = 0;
+   gr = new TGraphErrors(fNumberOfDataPoints);
+   gr->SetName(Form("%sVS%s",GetName(),varName));
    for(int i = 0; i < fNumberOfDataPoints;i++) {
       point = (NucDBDataPoint *) fDataPoints.At(i);
       var = point->FindVariable(varName);
       if( var ) {
          point->CalculateTotalError();
-         fGraph->SetPoint(i,var->GetMean(),point->GetValue());
-         fGraph->SetPointError(i,0.0,point->GetTotalError().GetError());
+         gr->SetPoint(i,var->GetMean(),point->GetValue());
+         gr->SetPointError(i,0.0,point->GetTotalError().GetError());
       } else {
          Error("BuildGraph",Form("Variable, %s, not found!",varName));
-         fGraph->SetPoint(i,0,0);
-         fGraph->SetPointError(i,0,1);
+         gr->SetPoint(i,0,0);
+         gr->SetPointError(i,0,1);
          break;
       }
    }
-   if(var){
-      fGraph->GetXaxis()->SetTitle(var->GetTitle());
-      fGraph->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
+   if(var && gr){
+      gr->GetXaxis()->SetTitle(var->GetTitle());
+      gr->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
    }
-   fGraph->SetMarkerColor(GetColor());
-   fGraph->SetLineColor(GetColor());
-   fGraph->SetMarkerStyle(20);
-   //fGraph->SetLineStyle(1);
-   //fGraph->SetLineWidth(0);
-   fGraph->SetDrawOption("aep");
-   fGraphs.Add(fGraph);
-      return(fGraph);
-   }
-//_____________________________________________________________________________
-
-TGraphErrors * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , const char * var2Name ) {
-      //if(fGraph) delete fGraph;
-      fGraph=0;
-      NucDBDataPoint * point = 0;
-      NucDBBinnedVariable * var1 = 0;
-      NucDBBinnedVariable * var2 = 0;
-      fGraph = new TGraphErrors(fNumberOfDataPoints);
-      fGraph->SetName(Form("%sVS%s",var1Name,var2Name));
-      for(int i = 0; i < fNumberOfDataPoints;i++) {
-         point = (NucDBDataPoint *) fDataPoints.At(i);
-         var1 = point->FindVariable(var1Name);
-         var2 = point->FindVariable(var2Name);
-         if( var1 && var2 ) {
-            fGraph->SetPoint(i,var1->GetMean(),var2->GetMean());
-            fGraph->SetPointError(i,0.0,0.0);
-         } else {
-            Error("BuildGraph",Form("Variable, %s or %s, not found!",var1Name,var2Name));
-            fGraph->SetPoint(i,0,0);
-            fGraph->SetPointError(i,0,1);
-            break;
-         }
-      }
-      if(var1 && var2){
-         fGraph->GetXaxis()->SetTitle(var1->GetTitle());
-         fGraph->GetYaxis()->SetTitle(var2->GetTitle());
-         fGraph->SetTitle(Form("%s Vs %s",var1->GetTitle(),var2->GetTitle()));
-      }
-      fGraph->SetMarkerColor(GetColor());
-      fGraph->SetLineColor(GetColor());
-      fGraph->SetMarkerStyle(20);
-      //fGraph->SetLineStyle(1);
-      //fGraph->SetLineWidth(0);
-      fGraph->SetDrawOption("aep");
-      fGraphs.Add(fGraph);
-      return(fGraph);
-
-
+   gr->SetMarkerColor(GetColor());
+   gr->SetLineColor(GetColor());
+   gr->SetMarkerStyle(20);
+   gr->SetDrawOption("aep");
+   fGraphs.Add(gr);
+   return(gr);
 }
 //_____________________________________________________________________________
 
+TGraphErrors * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , const char * var2Name ) {
+   TGraphErrors        * gr    = 0;
+   NucDBDataPoint      * point = 0;
+   NucDBBinnedVariable * var1  = 0;
+   NucDBBinnedVariable * var2  = 0;
+   gr = new TGraphErrors(fNumberOfDataPoints);
+   gr->SetName(Form("%sVS%s",var1Name,var2Name));
+   for(int i = 0; i < fNumberOfDataPoints;i++) {
+      point = (NucDBDataPoint *) fDataPoints.At(i);
+      var1 = point->FindVariable(var1Name);
+      var2 = point->FindVariable(var2Name);
+      if( var1 && var2 ) {
+         gr->SetPoint(i,var1->GetMean(),var2->GetMean());
+         gr->SetPointError(i,0.0,0.0);
+      } else {
+         Error("BuildGraph",Form("Variable, %s or %s, not found!",var1Name,var2Name));
+         gr->SetPoint(i,0,0);
+         gr->SetPointError(i,0,1);
+         break;
+      }
+   }
+   if(var1 && var2){
+      gr->GetXaxis()->SetTitle(var1->GetTitle());
+      gr->GetYaxis()->SetTitle(var2->GetTitle());
+      gr->SetTitle(Form("%s Vs %s",var1->GetTitle(),var2->GetTitle()));
+   }
+   gr->SetMarkerColor(GetColor());
+   gr->SetLineColor(GetColor());
+   gr->SetMarkerStyle(20);
+   //gr->SetLineStyle(1);
+   //gr->SetLineWidth(0);
+   gr->SetDrawOption("aep");
+   fGraphs.Add(gr);
+   return(gr);
+}
+//_____________________________________________________________________________
+TMultiGraph * NucDBMeasurement::BuildGraphUnique(const char * var, const char * uniqueVar, TLegend * leg ){
+   // returns a multi graph for unique values plotted vs var
+   TMultiGraph * mg = new TMultiGraph();
+
+   std::vector<double> unique_var;
+   std::vector<int> unique_var_counts;
+   GetUniqueBinnedVariableValues(uniqueVar,unique_var,unique_var_counts);
+   if( unique_var.size() == 0 ){
+      Warning("BuildGraphUnique","No unique variable values for %s",uniqueVar);
+      return mg;
+   }
+   //if(fGraph) delete fGraph;
+   TGraphErrors        * gr    = 0;
+   NucDBDataPoint      * point = 0;
+   NucDBBinnedVariable * var1   = 0;
+   NucDBBinnedVariable * var2   = 0;
+
+   for(int j =0; j< unique_var.size();j++) {
+
+      NucDBBinnedVariable var0(uniqueVar,uniqueVar,unique_var[j],0.01);
+
+      gr = new TGraphErrors(unique_var_counts[j]);
+      gr->SetName(Form("%sVS%s_%d",GetName(),var,j));
+
+      std::cout << " unique var " << unique_var_counts[j] << std::endl;
+
+      int nPoints = 0;
+
+      for(int i = 0; i < fNumberOfDataPoints;i++) {
+
+         point = (NucDBDataPoint *) fDataPoints.At(i);
+         var1  = point->FindVariable(var);
+         var2  = point->FindVariable(uniqueVar);
+
+         if( !var ) {
+            Error("BuildGraph",Form("Variable, %s, not found!",var));
+            gr->SetPoint(i,0,0);
+            gr->SetPointError(i,0,1);
+            continue;
+         }
+         if( !var2 ) {
+            Error("BuildGraph",Form("Variable, %s, not found!",uniqueVar));
+            gr->SetPoint(i,0,0);
+            gr->SetPointError(i,0,1);
+            continue;
+         }
+
+         if( (*var2) == var0 ) {
+      std::cout << " equal bins" << std::endl;
+            // variable is in bin
+            if(nPoints >= unique_var_counts[j]) {
+               Error("BuildGraphUnique","Too many points for unique value");
+               continue;
+            }
+            point->CalculateTotalError();
+            gr->SetPoint(nPoints,var1->GetMean(),point->GetValue());
+            gr->SetPointError(nPoints,0.0,point->GetTotalError().GetError());
+            nPoints++;
+         }
+      } // loop on points
+
+      gr->SetMarkerColor(GetColor()+j);
+      gr->SetLineColor(  GetColor()+j);
+      gr->SetMarkerStyle(20+j);
+      mg->Add(gr,"p");
+
+   } // unique variable
+   return mg;
+}
+//______________________________________________________________________________
