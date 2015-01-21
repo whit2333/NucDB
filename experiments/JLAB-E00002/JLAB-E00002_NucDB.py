@@ -64,13 +64,13 @@ class JLABResDataExtractor(NucDBRawDataExtractor) :
         #self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isystErr])*self.scale)
         # TODO add rad cor errors
         #
-        W = self.fCurrentDataPoint.GetDependentVariable("W")
-        if not W :
-            W   = NucDBInvariantMassDV()
-            self.fCurrentDataPoint.AddDependentVariable(W)
-        if W :
-            W.SetVariable(0,x)
-            W.SetVariable(1,Qsq)
+        #W = self.fCurrentDataPoint.GetDependentVariable("W")
+        #if not W :
+        #    W   = NucDBInvariantMassDV()
+        #    self.fCurrentDataPoint.AddDependentVariable(W)
+        #if W :
+        #    W.SetVariable(0,x)
+        #    W.SetVariable(1,Qsq)
         #nu = self.fCurrentDataPoint.GetDependentVariable("nu")
         #if not nu :
         #    nu   = NucDBPhotonEnergyDV()

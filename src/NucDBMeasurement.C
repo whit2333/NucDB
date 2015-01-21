@@ -28,8 +28,10 @@ NucDBMeasurement::NucDBMeasurement(const NucDBMeasurement& v){
 
    TList * datapoints = (TList *)(v.fDataPoints.Clone());
    fDataPoints.AddAll( datapoints );
-   fBinnedVariables.AddAll(v.GetBinnedVariables());
-   fDependentVariables.AddAll(v.GetDependentVariables());
+
+   fFilterBins.AddAll((TList*)v.fFilterBins.Clone());
+   //fBinnedVariables.AddAll(v.GetBinnedVariables());
+   //fDependentVariables.AddAll(v.GetDependentVariables());
    fGraphs.AddAll(v.GetGraphs());
 }
 //_____________________________________________________________________________
@@ -185,21 +187,24 @@ TList *  NucDBMeasurement::FilterWithBin(NucDBBinnedVariable const *bin) {
    return list;
 }
 //_____________________________________________________________________________
-TList *  NucDBMeasurement::ApplyFilterWithBin(NucDBBinnedVariable const *bin) {
+TList *  NucDBMeasurement::ApplyFilterWithBin(NucDBBinnedVariable *bin) {
    TList * list = FilterWithBin(bin); 
    AddDataPoints(list,true);
+   fFilterBins.Add(bin);
    return list;
 }
 //_____________________________________________________________________________
-TList *  NucDBMeasurement::ApplyFilterWith(NucDBDiscreteVariable const *v) {
+TList *  NucDBMeasurement::ApplyFilterWith(NucDBDiscreteVariable *v) {
    TList * list = FilterWith(v); 
    AddDataPoints(list,true);
+   fFilterBins.Add(v);
    return list;
 }
 //_____________________________________________________________________________
-TList *  NucDBMeasurement::ApplyFilterWith(NucDBVariable const *v) {
+TList *  NucDBMeasurement::ApplyFilterWith(NucDBVariable *v) {
    TList * list = FilterWith(v); 
    AddDataPoints(list,true);
+   fFilterBins.Add(v);
    return list;
 }
 //______________________________________________________________________________
@@ -255,63 +260,100 @@ void  NucDBMeasurement::ListVariables(){
 }
 //_____________________________________________________________________________
 NucDBBinnedVariable* NucDBMeasurement::GetBinnedVariable(const char * name) {
-   for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
-      if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
-         return((NucDBBinnedVariable*)fBinnedVariables.At(i));
+   if(fDataPoints.GetEntries()>0) {
+      NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(0);
+      return(dynamic_cast<NucDBBinnedVariable*>(aPoint->GetBinVariable(name)));
    }
+   //for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
+   //   if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
+   //      return((NucDBBinnedVariable*)fBinnedVariables.At(i));
+   //}
    return(0);
 }
 //______________________________________________________________________________
-void NucDBMeasurement::AddDependentVariables(NucDBBinnedVariable * var){
+Int_t NucDBMeasurement::AddDependentVariable(NucDBDependentVariable * var){
    // Adding variables to already measurment with existing data.
-   fDependentVariables.Add(var);
-}
-//______________________________________________________________________________
-NucDBBinnedVariable* NucDBMeasurement::GetDependentVariable(const char * name) {
-   for(int i = 0;i<fDependentVariables.GetEntries();i++) {
-      if( !strcmp( ((NucDBBinnedVariable*)fDependentVariables.At(i))->GetName(),name) ) 
-         return((NucDBBinnedVariable*)fDependentVariables.At(i));
-   }
-   return(0);
-}
-//______________________________________________________________________________
-Int_t NucDBMeasurement::CalculateVariable(NucDBDependentVariable * var){
    if(!var) return -1;
-
-   // Perhaps this should be in the datapoint class?
-
    const TList * datapoints = GetDataPoints();
    NucDBDataPoint      * p    = 0;
-   NucDBBinnedVariable * v   = 0;
-   NucDBBinnedVariable * vdat = 0;
+   NucDBDependentVariable * vcopy = 0;
    for(int i = 0;i<datapoints->GetEntries();i++) {
       p = (NucDBDataPoint*)datapoints->At(i);
       if(p) {
-         for(int j = 0; j<var->GetNDependentVariables(); j++) {
-            v    = var->GetVariable(j);
-            if(v) {
-               vdat = (NucDBBinnedVariable*)p->GetBinVariable(v->GetName());
-               if(vdat){
-                  var->SetVariable(j,vdat);
-               } else {
-                  Error("CalculateVariable","Could not datapoint variable with name %s", v->GetName());
-               }
-            } else {
-              Error("CalculateVariable","Could not find concrete DV class variable");
-              return -2;
-            }
-         }
-         var->Calculate();
+         vcopy = new NucDBDependentVariable(*var);
+         p->AddDependentVariable(vcopy);
+         vcopy->Calculate();
+         //p->CalculateDependentVariables();
+         //p->Print();
+         //var->Print();
       }
    }
    return 0;
+   //if(CalculateVariable(var)) {
+   //   Error("AddDependentVariable","Could not add variable");
+
+   //   //fDependentVariables.Add(var);
+   //}
 }
 //______________________________________________________________________________
-NucDBDiscreteVariable* NucDBMeasurement::GetDiscreteVariable(const char * name) {
-   for(int i = 0;i<fDiscreteVariables.GetEntries();i++) {
-      if( !strcmp( ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->GetName(),name) ) 
-         return((NucDBDiscreteVariable*)fDiscreteVariables.At(i));
+NucDBDependentVariable* NucDBMeasurement::GetDependentVariable(const char * name) {
+   if(fDataPoints.GetEntries()>0) {
+      NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(0);
+      return(dynamic_cast<NucDBDependentVariable*>(aPoint->GetBinVariable(name)));
    }
+   //for(int i = 0;i<fDependentVariables.GetEntries();i++) {
+   //   if( !strcmp( ((NucDBBinnedVariable*)fDependentVariables.At(i))->GetName(),name) ) 
+   //      return((NucDBBinnedVariable*)fDependentVariables.At(i));
+   //}
+   return(0);
+}
+//______________________________________________________________________________
+//Int_t NucDBMeasurement::CalculateVariable(NucDBDependentVariable * var){
+//   if(!var) return -1;
+//
+//   // Perhaps this should be in the datapoint class?
+//
+//   const TList * datapoints = GetDataPoints();
+//   NucDBDataPoint      * p    = 0;
+//   NucDBBinnedVariable * v   = 0;
+//   NucDBBinnedVariable * vdat = 0;
+//   for(int i = 0;i<datapoints->GetEntries();i++) {
+//      p = (NucDBDataPoint*)datapoints->At(i);
+//      if(p) {
+//         for(int j = 0; j<var->GetNDependentVariables(); j++) {
+//            v    = var->GetVariable(j);
+//            if(v) {
+//               vdat = (NucDBBinnedVariable*)p->GetBinVariable(v->GetName());
+//               if(!vdat) vdat = (NucDBBinnedVariable*)p->GetDependentVariable(v->GetName());
+//               if(vdat){
+//                  var->SetVariable(j,vdat);
+//               } else {
+//                  Error("CalculateVariable","Datapoint has no variable %s for calculating %s", v->GetName(), var->GetName());
+//                  return -3;
+//               }
+//            } else {
+//              Error("CalculateVariable","Could not find concrete DV class variable");
+//              return -2;
+//            }
+//         }
+//         var->Calculate();
+//         p->AddDependentVariable(var);
+//         //p->Print();
+//         //var->Print();
+//      }
+//   }
+//   return 0;
+//}
+//______________________________________________________________________________
+NucDBDiscreteVariable* NucDBMeasurement::GetDiscreteVariable(const char * name) {
+   if(fDataPoints.GetEntries()>0) {
+      NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(0);
+      return(dynamic_cast<NucDBDiscreteVariable*>(aPoint->GetDiscreteVariable(name)));
+   }
+   //for(int i = 0;i<fDiscreteVariables.GetEntries();i++) {
+   //   if( !strcmp( ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->GetName(),name) ) 
+   //      return((NucDBDiscreteVariable*)fDiscreteVariables.At(i));
+   //}
    return(0);
 }
 //______________________________________________________________________________

@@ -17,9 +17,14 @@
 #pragma link C++ class NucDBDataPoint+;
 #pragma link C++ class NucDBDependentVariable+;
 
+#pragma link C++ class NucDBThetaDV_rad+;
+#pragma link C++ class NucDBThetaDV_deg+;
 #pragma link C++ class NucDBInvariantMassDV+;
+#pragma link C++ class NucDBInvariantMassDV_Q2nu+;
+#pragma link C++ class NucDBW2DV_Q2nu+;
 #pragma link C++ class NucDBPhotonEnergyDV+;
 #pragma link C++ class NucDBxBjorkenDV+;
+#pragma link C++ class NucDBQ2DV_EEpTheta+;
 
 #pragma link C++ class NucDBMeasurement+;
 #pragma link C++ class NucDBExperiment+;

@@ -34,9 +34,10 @@ class NucDBMeasurement : public TNamed {
 
    protected:
       TList    fDataPoints;           // data points
-      TList    fDiscreteVariables;    // discrete variables
-      TList    fBinnedVariables;      // binned variables
-      TList    fDependentVariables;   // dependent (calculated) binned variables
+      //TList    fDiscreteVariables;    // discrete variables
+      //TList    fBinnedVariables;    // binned variables
+      //TList    fDependentVariables; // dependent (calculated) binned variables
+      TList    fFilterBins;           //
       TList    fGraphs;               // graphs generated 
       TString  fExperimentName;       // experiment name
       Int_t    fNumberOfDataPoints;   //
@@ -72,9 +73,9 @@ class NucDBMeasurement : public TNamed {
          ClearDataPoints();
          fReferences.Clear();
          fComments.Clear();
-         fDiscreteVariables.Clear();
-         fBinnedVariables.Clear();
-         fDependentVariables.Clear();
+         fFilterBins.Clear();
+         //fBinnedVariables.Clear();
+         //fDependentVariables.Clear();
          fGraphs.Clear(); 
       }
 
@@ -115,9 +116,9 @@ class NucDBMeasurement : public TNamed {
       NucDBMeasurement * NewMeasurementWithFilter(const NucDBBinnedVariable * bin) ;
 
       /** Same as FilterWithBin(bin) but it modifies the measurement */
-      TList *  ApplyFilterWithBin(NucDBBinnedVariable const *bin);
-      TList *  ApplyFilterWith(NucDBDiscreteVariable const *v);
-      TList *  ApplyFilterWith(NucDBVariable const *v);
+      TList *  ApplyFilterWithBin(NucDBBinnedVariable *bin);
+      TList *  ApplyFilterWith(NucDBDiscreteVariable *v);
+      TList *  ApplyFilterWith(NucDBVariable *v);
 
 
       TList * GetDataPoints() {return(&fDataPoints);}
@@ -141,13 +142,19 @@ class NucDBMeasurement : public TNamed {
       TGraphErrors * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
       TGraphErrors * fGraph; //->
 
-      const TList *        GetBinnedVariables() const { return(&fBinnedVariables);}
-      void                 AddBinnedVariable(NucDBBinnedVariable * var){fBinnedVariables.Add(var);}
+      // Uses only the first datapoint
+      //const TList *        GetBinnedVariables() const { return(&fBinnedVariables);}
+      //void                 AddBinnedVariable(NucDBBinnedVariable * var){fBinnedVariables.Add(var);}
       NucDBBinnedVariable* GetBinnedVariable(const char * name);
 
-      const TList *          GetDiscreteVariables() const { return(&fDiscreteVariables);}
-      void                   AddDiscreteVariable(NucDBDiscreteVariable * var){fDiscreteVariables.Add(var);}
+      // Uses only the first datapoint
+      //const TList *          GetDiscreteVariables() const { return(&fDiscreteVariables);}
+      //void                   AddDiscreteVariable(NucDBDiscreteVariable * var){fDiscreteVariables.Add(var);}
       NucDBDiscreteVariable* GetDiscreteVariable(const char * name);
+
+      //const TList *        GetDependentVariables() const { return(&fDependentVariables);}
+      Int_t                 AddDependentVariable(NucDBDependentVariable * var);
+      NucDBDependentVariable* GetDependentVariable(const char * name);
 
       Double_t  GetBinnedVariableMean(const char * name);
       Double_t  GetBinnedVariableVariance(const char * name);
@@ -159,13 +166,10 @@ class NucDBMeasurement : public TNamed {
       Int_t GetUniqueBinnedVariableValues(const char * name, std::vector<double> & vect, std::vector<int> & counts) const;
       void  PrintBreakDown(const char * var = "theta", int nmax = 20) const ;
 
-      const TList *        GetDependentVariables() const { return(&fDependentVariables);}
-      void                 AddDependentVariables(NucDBBinnedVariable * var);
-      NucDBBinnedVariable* GetDependentVariable(const char * name);
 
    protected:
 
-      Int_t     CalculateVariable(NucDBDependentVariable * var);
+      //Int_t     CalculateVariable(NucDBDependentVariable * var);
       
    public:
 

@@ -5,6 +5,7 @@
 #include "NucDBFuncs.h"
 #include "NucDBBinnedVariable.h"
 #include "NucDBUnits.h"
+#include <vector>
 
 /** A binned variable which is dependent upon other variable.
  *  For example \f$ W^2(x,Q^2) \f$ would require two binned variables, \f$ x \f$ and \f$ Q^2 \f$.
@@ -21,16 +22,15 @@
 class NucDBDependentVariable : public NucDBBinnedVariable {
    private:
       /// This might be a bit redundant because it will stream these binnedvariables again..
-      TList                 fDependentVariables;
+      TList                 fVariables;
       TList                 fDependentVariableNames;
 
    protected:
       Int_t                 fNDepVars;
-      Double_t              x[4];      //->
-      Double_t              x_low[4];  //->
-      Double_t              x_high[4]; //->
-      NucDBBinnedVariable * fVars[4];  //->
-      Double_t              p[4];      //->
+      Double_t              x[4];      //
+      Double_t              fVar_limits[4][2];
+      //NucDBBinnedVariable * fVars[4];  //->
+      Double_t              p[4];      //
       TF1 *                 fFunction; //!
 
 
@@ -62,6 +62,31 @@ class NucDBDependentVariable : public NucDBBinnedVariable {
       ClassDef(NucDBDependentVariable,1)
 };
 
+class NucDBThetaDV_rad  : public NucDBDependentVariable {
+   public:
+      NucDBThetaDV_rad(const char * n = "theta_rad",const char * t = "#theta (rad)") : NucDBDependentVariable(n,t) {
+         NucDBBinnedVariable    * th = new NucDBBinnedVariable("theta","#theta (deg)");
+         SetNDependentVariables(1);
+         SetVariable(0,th);
+         SetFunc1( &NucDB::Kine::to_radians );
+      }
+      virtual ~NucDBThetaDV_rad(){}
+
+      ClassDef(NucDBThetaDV_rad,1);
+};
+
+class NucDBThetaDV_deg  : public NucDBDependentVariable {
+   public:
+      NucDBThetaDV_deg(const char * n = "theta",const char * t = "#theta (deg)") : NucDBDependentVariable(n,t) {
+         NucDBBinnedVariable    * th = new NucDBBinnedVariable("theta_rad","#theta (rad)");
+         SetNDependentVariables(1);
+         SetVariable(0,th);
+         SetFunc1( &NucDB::Kine::to_radians );
+      }
+      virtual ~NucDBThetaDV_deg(){}
+
+      ClassDef(NucDBThetaDV_deg,1);
+};
 
 /**  Concrete imp of NucDBDependentVariable for invariant mass.
  *   This is a Work around until I figure out how to handle the function pointer stream...?
@@ -78,9 +103,39 @@ class NucDBInvariantMassDV  : public NucDBDependentVariable {
          SetVariable(1,Q2);
          SetFunc2( &NucDB::Kine::W_xQ2_proton );
       }
-      ~NucDBInvariantMassDV(){}
+      virtual ~NucDBInvariantMassDV(){}
 
       ClassDef(NucDBInvariantMassDV,1);
+};
+
+class NucDBInvariantMassDV_Q2nu  : public NucDBDependentVariable {
+   public:
+      NucDBInvariantMassDV_Q2nu(const char * n = "W",const char * t = "W") : NucDBDependentVariable(n,t) {
+         NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+         NucDBBinnedVariable    * nu = new NucDBBinnedVariable("nu","nu");
+         SetNDependentVariables(2);
+         SetVariable(0,Q2);
+         SetVariable(1,nu);
+         SetFunc2( &NucDB::Kine::W_Q2nu_proton );
+      }
+      virtual ~NucDBInvariantMassDV_Q2nu(){}
+
+      ClassDef(NucDBInvariantMassDV_Q2nu,1);
+};
+
+class NucDBW2DV_Q2nu  : public NucDBDependentVariable {
+   public:
+      NucDBW2DV_Q2nu(const char * n = "W2",const char * t = "W^{2}") : NucDBDependentVariable(n,t) {
+         NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+         NucDBBinnedVariable    * nu = new NucDBBinnedVariable("nu","nu");
+         SetNDependentVariables(2);
+         SetVariable(0,Q2);
+         SetVariable(1,nu);
+         SetFunc2( &NucDB::Kine::W2_Q2nu_proton );
+      }
+      virtual ~NucDBW2DV_Q2nu(){}
+
+      ClassDef(NucDBW2DV_Q2nu,1);
 };
 
 /**  Concrete imp of NucDBDependentVariable for invariant mass.
@@ -98,7 +153,7 @@ class NucDBPhotonEnergyDV  : public NucDBDependentVariable {
          SetVariable(1,Q2);
          SetFunc2( &NucDB::Kine::nu_xQ2_proton);
       }
-      ~NucDBPhotonEnergyDV(){}
+      virtual ~NucDBPhotonEnergyDV(){}
 
       ClassDef(NucDBPhotonEnergyDV,1);
 };
@@ -118,10 +173,30 @@ class NucDBxBjorkenDV  : public NucDBDependentVariable {
          SetVariable(1,Q2);
          SetFunc2( &NucDB::Kine::xBjorken_WQsq_proton );
       }
-      ~NucDBxBjorkenDV(){}
+      virtual ~NucDBxBjorkenDV(){}
 
       ClassDef(NucDBxBjorkenDV,2);
 };
+
+/**  Q2 as a function of E,E', and theta.
+ */
+class NucDBQ2DV_EEpTheta  : public NucDBDependentVariable {
+   public:
+      NucDBQ2DV_EEpTheta(const char * n = "Qsquared",const char * t = "Q^{2}") : NucDBDependentVariable(n,t) {
+         NucDBBinnedVariable    * Ebeam  = new NucDBBinnedVariable("E","E",1.0);
+         NucDBBinnedVariable    * Eprime = new NucDBBinnedVariable("Eprime","E'",0.0);
+         NucDBBinnedVariable    * theta  = new NucDBBinnedVariable("theta_rad","#theta",0.1);
+         SetNDependentVariables(3);
+         SetVariable(0,Ebeam);
+         SetVariable(1,Eprime);
+         SetVariable(2,theta);
+         SetFunc3( &NucDB::Kine::Qsquared_Etheta );
+      }
+      virtual ~NucDBQ2DV_EEpTheta(){}
+
+      ClassDef(NucDBQ2DV_EEpTheta,2);
+};
+
 
 #endif
 

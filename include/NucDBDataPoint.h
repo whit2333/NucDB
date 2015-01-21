@@ -87,9 +87,9 @@ class NucDBDataPoint : public TNamed {
 
    protected:
       Double_t       fValue;
-      TList          fVariables;
-      TList          fDiscreteVariables;
-      TList          fBinnedVariables;
+      TList          fVariables;    // Variables calculated from other variables. These are also added to the binned variables list.
+      TList          fDiscreteVariables;     // Discrete variables
+      TList          fBinnedVariables;       // Binned variables (including dependent variables);
       NucDBErrorBar  fStatisticalError;
       NucDBErrorBar  fSystematicError;
       NucDBUnit      fUnit;
@@ -123,12 +123,12 @@ class NucDBDataPoint : public TNamed {
 
       Bool_t  IsFolder() const { return kTRUE; }
       void    Browse(TBrowser* b) {
-         b->Add(&fVariables,"fVariables");
-         b->Add(&fDiscreteVariables,"fDiscreteVariables");
-         b->Add(&fBinnedVariables,"fBinnedVariables");
-         b->Add(&fStatisticalError,"StatisticalError");
-         b->Add(&fSystematicError,"SystematicError");
-         b->Add(&fTotalError,"TotalError");
+         b->Add(&fVariables,            "fVariables");
+         b->Add(&fDiscreteVariables,    "fDiscreteVariables");
+         b->Add(&fBinnedVariables,      "fBinnedVariables");
+         b->Add(&fStatisticalError,     "StatisticalError");
+         b->Add(&fSystematicError,      "SystematicError");
+         b->Add(&fTotalError,           "TotalError");
          b->Add(&fUnit,"Unit");
       }
 
@@ -164,7 +164,7 @@ class NucDBDataPoint : public TNamed {
       void                     SetUnit(NucDBUnit * u) { fUnit = *u; }
       NucDBUnit *              GetUnit(){return &fUnit;}
 
-      void                     AddDependentVariable(NucDBDependentVariable * var);
+      Int_t                    AddDependentVariable(NucDBDependentVariable * var);
       NucDBDependentVariable * GetDependentVariable(const char * name);
       void                     AddDiscreteVariable(NucDBDiscreteVariable * var);
       NucDBDiscreteVariable *  GetDiscreteVariable(const char * name);
