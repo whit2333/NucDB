@@ -93,8 +93,6 @@ class NucDBMeasurement : public TNamed {
       TList *  FilterWith(NucDBDiscreteVariable const *v);
       TList *  FilterWith(NucDBVariable const *v);
 
-      /** Sort the data points by the binned variable. */
-      void     SortBy(const char * n = "x");
 
       /** Returns list of data points which have be merged. 
        *  The list is created on the heap and it is up to the user to free the memory.
@@ -109,16 +107,18 @@ class NucDBMeasurement : public TNamed {
        *  If modify is called, the measurement's data points are replaced with the merged datapoints.
        */ 
       TList *  MergeDataPoints(unsigned int n = 2, const char * var = "x", bool modify=false);
+      void     SortBy(const char * n = "x");
+      void     Multiply(const char * v );
 
+      // The function names here kind of suck...
+      NucDBMeasurement * CreateMeasurementFilteredWithBin(const NucDBBinnedVariable * bin) ;
+      NucDBMeasurement * NewMeasurementWithFilter(const NucDBBinnedVariable * bin) ;
 
       /** Same as FilterWithBin(bin) but it modifies the measurement */
       TList *  ApplyFilterWithBin(NucDBBinnedVariable const *bin);
       TList *  ApplyFilterWith(NucDBDiscreteVariable const *v);
       TList *  ApplyFilterWith(NucDBVariable const *v);
 
-      void     Multiply(const char * v );
-
-      NucDBMeasurement * CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) ;
 
       TList * GetDataPoints() {return(&fDataPoints);}
 
@@ -149,8 +149,8 @@ class NucDBMeasurement : public TNamed {
       void                   AddDiscreteVariable(NucDBDiscreteVariable * var){fDiscreteVariables.Add(var);}
       NucDBDiscreteVariable* GetDiscreteVariable(const char * name);
 
-      Double_t GetBinnedVariableMean(const char * name);
-      Double_t GetBinnedVariableVariance(const char * name);
+      Double_t  GetBinnedVariableMean(const char * name);
+      Double_t  GetBinnedVariableVariance(const char * name);
       Double_t  GetBinnedVariableMax(const char * name);
       Double_t  GetBinnedVariableMin(const char * name);
 
@@ -160,8 +160,15 @@ class NucDBMeasurement : public TNamed {
       void  PrintBreakDown(const char * var = "theta", int nmax = 20) const ;
 
       const TList *        GetDependentVariables() const { return(&fDependentVariables);}
-      void                 AddDependentVariables(NucDBBinnedVariable * var){fDependentVariables.Add(var);}
+      void                 AddDependentVariables(NucDBBinnedVariable * var);
       NucDBBinnedVariable* GetDependentVariable(const char * name);
+
+   protected:
+
+      Int_t     CalculateVariable(NucDBDependentVariable * var);
+      
+   public:
+
 
       const TList *              GetGraphs() const { return(&fGraphs);}
 

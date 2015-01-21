@@ -65,14 +65,6 @@ void NucDBMeasurement::AddDataPoints(TList * listOfPoints, bool clear) {
    } 
 }
 //_____________________________________________________________________________
-void NucDBMeasurement::SortBy(const char * n){
-   for(int i = 0; i < fDataPoints.GetEntries();i++) {
-      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
-      point->SetSortingVariable(n);
-   }
-   fDataPoints.Sort();
-}
-//_____________________________________________________________________________
 TList *  NucDBMeasurement::MergeDataPoints(unsigned int n, const char * var, bool modify){
    SortBy(var);
    TList * list = new TList();
@@ -100,23 +92,41 @@ TList *  NucDBMeasurement::MergeDataPoints(unsigned int n, const char * var, boo
    return list;
 }
 //_____________________________________________________________________________
+void NucDBMeasurement::SortBy(const char * n){
+   // Sort data according the value of the binned variable
+   for(int i = 0; i < fDataPoints.GetEntries();i++) {
+      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
+      point->SetSortingVariable(n);
+   }
+   fDataPoints.Sort();
+}
+//_____________________________________________________________________________
+void  NucDBMeasurement::Multiply(const char * v){
+   // Multiplies the datapoint  by the value of the supplied variable
+   for(int i = 0; i < fDataPoints.GetEntries();i++) {
+      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
+      Double_t value = point->GetValue();
+      NucDBBinnedVariable * var    = point->GetBinVariable(v);
+      if(!var) {
+         Warning("Multiply","Could not find variable, %s, for point %d.",v,i);
+         continue; 
+      }
+      if(var){
+         point->Multiply(value);
+      }
+   }
+}
+//_____________________________________________________________________________
 NucDBMeasurement * NucDBMeasurement::CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) {
    NucDBMeasurement * m = new NucDBMeasurement(Form("%s_%s",this->GetName(),bin->GetName()),
          Form("%s %s",this->GetTitle(),bin->GetTitle()) );
    m->AddDataPoints(this->FilterWithBin(bin));
    return m;
 }  
-//_____________________________________________________________________________
-void  NucDBMeasurement::Multiply(const char * v){
-   for(int i = 0; i < fDataPoints.GetEntries();i++) {
-      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
-      Double_t value = point->GetValue();
-      NucDBBinnedVariable * var    = point->GetBinVariable(v);
-      if(!var) continue; 
-      if(var){
-         point->Multiply(value);
-      }
-   }
+//______________________________________________________________________________
+NucDBMeasurement * NucDBMeasurement::NewMeasurementWithFilter(NucDBBinnedVariable const * bin) {
+   // same as CreateMeasurementFilteredWithBin above
+   return( CreateMeasurementFilteredWithBin(bin) ); 
 }
 //_____________________________________________________________________________
 TList *  NucDBMeasurement::FilterWith(NucDBVariable const *v) {
@@ -252,12 +262,49 @@ NucDBBinnedVariable* NucDBMeasurement::GetBinnedVariable(const char * name) {
    return(0);
 }
 //______________________________________________________________________________
+void NucDBMeasurement::AddDependentVariables(NucDBBinnedVariable * var){
+   // Adding variables to already measurment with existing data.
+   fDependentVariables.Add(var);
+}
+//______________________________________________________________________________
 NucDBBinnedVariable* NucDBMeasurement::GetDependentVariable(const char * name) {
    for(int i = 0;i<fDependentVariables.GetEntries();i++) {
       if( !strcmp( ((NucDBBinnedVariable*)fDependentVariables.At(i))->GetName(),name) ) 
          return((NucDBBinnedVariable*)fDependentVariables.At(i));
    }
    return(0);
+}
+//______________________________________________________________________________
+Int_t NucDBMeasurement::CalculateVariable(NucDBDependentVariable * var){
+   if(!var) return -1;
+
+   // Perhaps this should be in the datapoint class?
+
+   const TList * datapoints = GetDataPoints();
+   NucDBDataPoint      * p    = 0;
+   NucDBBinnedVariable * v   = 0;
+   NucDBBinnedVariable * vdat = 0;
+   for(int i = 0;i<datapoints->GetEntries();i++) {
+      p = (NucDBDataPoint*)datapoints->At(i);
+      if(p) {
+         for(int j = 0; j<var->GetNDependentVariables(); j++) {
+            v    = var->GetVariable(j);
+            if(v) {
+               vdat = (NucDBBinnedVariable*)p->GetBinVariable(v->GetName());
+               if(vdat){
+                  var->SetVariable(j,vdat);
+               } else {
+                  Error("CalculateVariable","Could not datapoint variable with name %s", v->GetName());
+               }
+            } else {
+              Error("CalculateVariable","Could not find concrete DV class variable");
+              return -2;
+            }
+         }
+         var->Calculate();
+      }
+   }
+   return 0;
 }
 //______________________________________________________________________________
 NucDBDiscreteVariable* NucDBMeasurement::GetDiscreteVariable(const char * name) {

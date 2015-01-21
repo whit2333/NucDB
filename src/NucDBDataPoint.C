@@ -289,7 +289,7 @@ void NucDBDataPoint::AddDependentVariable(NucDBDependentVariable * var) {
          fVariables.Add(var);
          AddBinVariable(var);
       } else {
-         Error("AddDependentVariable",Form(" variable, %s, already exists",var->GetName()));
+         Error("AddDependentVariable","variable, %s, already exists",var->GetName());
       }
    }
 //_____________________________________________________________________________

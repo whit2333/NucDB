@@ -19,47 +19,47 @@
  *  See examples/depend_variable.cxx   
  */
 class NucDBDependentVariable : public NucDBBinnedVariable {
-private:
-   /// This might be a bit redundant because it will stream these binnedvariables again..
-   TList                 fDependentVariables;
-   TList                 fDependentVariableNames;
+   private:
+      /// This might be a bit redundant because it will stream these binnedvariables again..
+      TList                 fDependentVariables;
+      TList                 fDependentVariableNames;
 
-protected:
-   Int_t                 fNDepVars;
-   Double_t              x[4];      //->
-   Double_t              x_low[4];  //->
-   Double_t              x_high[4]; //->
-   NucDBBinnedVariable * fVars[4];  //->
-   Double_t              p[4];      //->
-   TF1 *                 fFunction; //!
+   protected:
+      Int_t                 fNDepVars;
+      Double_t              x[4];      //->
+      Double_t              x_low[4];  //->
+      Double_t              x_high[4]; //->
+      NucDBBinnedVariable * fVars[4];  //->
+      Double_t              p[4];      //->
+      TF1 *                 fFunction; //!
 
 
-public :
-   NucDBDependentVariable(const char * n ="depVar",const char * t = "dep var");
-   ~NucDBDependentVariable();
+   public :
+      NucDBDependentVariable(const char * n ="depVar",const char * t = "dep var");
+      virtual ~NucDBDependentVariable();
       NucDBDependentVariable& operator=(const NucDBDependentVariable& v) ;
       NucDBDependentVariable(const NucDBDependentVariable& v) ;
 
-   void                  SetVariable(Int_t n, NucDBBinnedVariable * avar );
-   NucDBBinnedVariable * GetVariable(Int_t n );
-   Double_t              GetValue();
-   Double_t              FindMaximum();
-   Double_t              FindMinimum();
-   void                  Calculate(); // *MENU* 
-   void                  SetNDependentVariables(Int_t n){ fNDepVars = n;}
-   Int_t                 GetNDependentVariables(){ return(fNDepVars);}
-   void                  SetFunction(TF1 * f) { fFunction = f;}
-   TF1 *                 GetFunction(){ return fFunction; }
+      void                  SetVariable(Int_t n, NucDBBinnedVariable * avar );
+      NucDBBinnedVariable * GetVariable(Int_t n );
+      Double_t              GetValue();
+      Double_t              FindMaximum();
+      Double_t              FindMinimum();
+      void                  Calculate(); // *MENU* 
+      void                  SetNDependentVariables(Int_t n){ fNDepVars = n;}
+      Int_t                 GetNDependentVariables() const { return(fNDepVars);}
+      void                  SetFunction(TF1 * f) { fFunction = f;}
+      TF1 *                 GetFunction() const { return fFunction; }
 
-   void                  SetFunc1(double (*pt2func)(double)){ fFunc1 = pt2func;}
-   void                  SetFunc2(double (*pt2func)(double,double)){ fFunc2 = pt2func;}
-   void                  SetFunc3(double (*pt2func)(double,double,double)){ fFunc3 = pt2func;}
+      void                  SetFunc1(double (*pt2func)(double)){ fFunc1 = pt2func;}
+      void                  SetFunc2(double (*pt2func)(double,double)){ fFunc2 = pt2func;}
+      void                  SetFunc3(double (*pt2func)(double,double,double)){ fFunc3 = pt2func;}
 
-   double              (*fFunc1) (double);  //->
-   double              (*fFunc2) (double,double); //->
-   double              (*fFunc3) (double,double,double); //->
+      double              (*fFunc1) (double);  //->
+      double              (*fFunc2) (double,double); //->
+      double              (*fFunc3) (double,double,double); //->
 
-ClassDef(NucDBDependentVariable,1)
+      ClassDef(NucDBDependentVariable,1)
 };
 
 
@@ -67,60 +67,60 @@ ClassDef(NucDBDependentVariable,1)
  *   This is a Work around until I figure out how to handle the function pointer stream...?
  */
 class NucDBInvariantMassDV  : public NucDBDependentVariable {
-public:
-   NucDBInvariantMassDV(const char * n = "W",const char * t = "W") : NucDBDependentVariable(n,t) {
-      NucDBBinnedVariable    * x  = new NucDBBinnedVariable("x","x");
-      x->SetBinValueSize(0.6,0.1);
-      NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
-      Q2->SetBinValueSize(3.0,0.5);
-      SetNDependentVariables(2);
-      SetVariable(0,x);
-      SetVariable(1,Q2);
-      SetFunc2( &NucDB::Kine::W_xQ2_proton );
-   }
-   ~NucDBInvariantMassDV(){}
+   public:
+      NucDBInvariantMassDV(const char * n = "W",const char * t = "W") : NucDBDependentVariable(n,t) {
+         NucDBBinnedVariable    * x  = new NucDBBinnedVariable("x","x");
+         x->SetBinValueSize(0.6,0.1);
+         NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+         Q2->SetBinValueSize(3.0,0.5);
+         SetNDependentVariables(2);
+         SetVariable(0,x);
+         SetVariable(1,Q2);
+         SetFunc2( &NucDB::Kine::W_xQ2_proton );
+      }
+      ~NucDBInvariantMassDV(){}
 
-ClassDef(NucDBInvariantMassDV,1);
+      ClassDef(NucDBInvariantMassDV,1);
 };
 
 /**  Concrete imp of NucDBDependentVariable for invariant mass.
  *   This is a Work around until I figure out how to handle the function pointer stream...?
  */
 class NucDBPhotonEnergyDV  : public NucDBDependentVariable {
-public:
-   NucDBPhotonEnergyDV(const char * n = "nu",const char * t = "#nu") : NucDBDependentVariable(n,t) {
-      NucDBBinnedVariable    * x  = new NucDBBinnedVariable("x","x");
-      x->SetBinValueSize(0.6,0.1);
-      NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
-      Q2->SetBinValueSize(3.0,0.5);
-      SetNDependentVariables(2);
-      SetVariable(0,x);
-      SetVariable(1,Q2);
-      SetFunc2( &NucDB::Kine::nu_xQ2_proton);
-   }
-   ~NucDBPhotonEnergyDV(){}
+   public:
+      NucDBPhotonEnergyDV(const char * n = "nu",const char * t = "#nu") : NucDBDependentVariable(n,t) {
+         NucDBBinnedVariable    * x  = new NucDBBinnedVariable("x","x");
+         x->SetBinValueSize(0.6,0.1);
+         NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+         Q2->SetBinValueSize(3.0,0.5);
+         SetNDependentVariables(2);
+         SetVariable(0,x);
+         SetVariable(1,Q2);
+         SetFunc2( &NucDB::Kine::nu_xQ2_proton);
+      }
+      ~NucDBPhotonEnergyDV(){}
 
-ClassDef(NucDBPhotonEnergyDV,1);
+      ClassDef(NucDBPhotonEnergyDV,1);
 };
 
 /**  Concrete imp of NucDBDependentVariable for invariant mass.
  *   This is a Work around until I figure out how to handle the function pointer stream...?
  */
 class NucDBxBjorkenDV  : public NucDBDependentVariable {
-public:
-   NucDBxBjorkenDV(const char * n = "x",const char * t = "x") : NucDBDependentVariable(n,t) {
-      NucDBBinnedVariable    * W  = new NucDBBinnedVariable("W","W");
-      W->SetBinValueSize(1.6,0.1);
-      NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
-      Q2->SetBinValueSize(3.0,0.5);
-      SetNDependentVariables(2);
-      SetVariable(0,W);
-      SetVariable(1,Q2);
-      SetFunc2( &NucDB::Kine::xBjorken_WQsq_proton );
-   }
-   ~NucDBxBjorkenDV(){}
+   public:
+      NucDBxBjorkenDV(const char * n = "x",const char * t = "x") : NucDBDependentVariable(n,t) {
+         NucDBBinnedVariable    * W  = new NucDBBinnedVariable("W","W");
+         W->SetBinValueSize(1.6,0.1);
+         NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+         Q2->SetBinValueSize(3.0,0.5);
+         SetNDependentVariables(2);
+         SetVariable(0,W);
+         SetVariable(1,Q2);
+         SetFunc2( &NucDB::Kine::xBjorken_WQsq_proton );
+      }
+      ~NucDBxBjorkenDV(){}
 
-ClassDef(NucDBxBjorkenDV,2);
+      ClassDef(NucDBxBjorkenDV,2);
 };
 
 #endif
