@@ -113,19 +113,21 @@ database:
 	python experiments/NMC/NMC_NucDB.py
 	python experiments/COMPASS/COMPASS_NucDB.py
 	python experiments/CLAS/CLAS_NucDB.py
-	python experiments/CLAS/E93009_NucDB.py
-	#python experiments/CLAS/E93031_NucDB.py
-	python experiments/CLAS/E91023_NucDB.py
 	python experiments/CLAS/CLAS_g1_NucDB.py
-	python experiments/RSS/RSS_NucDB.py
+	python experiments/CLAS/E1b_NucDB.py 
+	python experiments/CLAS/E93009_NucDB.py
+	#python experiments/CLAS/E93031_NucDB.py  # problematic?
+	python experiments/CLAS/E91023_NucDB.py
 	python experiments/JLAB-E94010/JLAB-E94010_NucDB.py
 	python experiments/JLAB-E94110/JLAB-E94110_NucDB.py
+	python experiments/JLAB-E97103/JLAB-E97103_NucDB.py
 	python experiments/JLAB-E99117/JLAB-E99117_NucDB.py
 	python experiments/JLAB-E99118/JLAB-E99118_NucDB.py
 	python experiments/JLAB-E00002/JLAB-E00002_NucDB.py
-	python experiments/JLAB-E01012/JLAB-E01012_NucDB.py
 	python experiments/JLAB-E00108/JLAB-E00108_NucDB.py
-	python experiments/JLAB-E97103/JLAB-E97103_NucDB.py
+	python experiments/JLAB-E01012/JLAB-E01012_NucDB.py
+	python experiments/JLAB-E03103/JLAB-E03103_NucDB.py
+	python experiments/RSS/RSS_NucDB.py
 	python experiments/RESData/RESData_SLAC_NucDB.py
 	python experiments/QES_archive/QES_archive_NucDB.py
 	root -b -q -l experiments/inclusive/inclusive_NucDB.cxx

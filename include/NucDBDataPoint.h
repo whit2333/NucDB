@@ -141,6 +141,9 @@ class NucDBDataPoint : public TNamed {
       void  SetStatError(const NucDBErrorBar& er){fStatisticalError = er; }
       void  SetSystError(const NucDBErrorBar& er){fSystematicError = er; }
 
+      void  SetStatError(double v){fStatisticalError.SetError(v); }
+      void  SetSystError(double v){ fSystematicError.SetError(v); }
+
       const NucDBErrorBar& GetStatError() const { return(fStatisticalError); }
       const NucDBErrorBar& GetSystError() const { return(fSystematicError); }
       const NucDBErrorBar& GetTotalError() const {

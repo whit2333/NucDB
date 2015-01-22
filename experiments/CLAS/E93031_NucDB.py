@@ -211,6 +211,7 @@ if __name__ == "__main__":
         #print nlines
         print datfile 
 
+    experiment = manager.GetExperiment("CLAS-E93031")
     experiment.Print()
     manager.SaveExperiment(experiment)
 

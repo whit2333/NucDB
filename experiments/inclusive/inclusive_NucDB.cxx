@@ -46,7 +46,7 @@ Int_t inclusive_NucDB(){
       // E/p is the jacobian dp/dE
       point.SetValue((p_pi)*y); 
       // Set the errors
-      point.GetStatError().SetError((p_pi)*y*0.05); 
+      point.SetStatError((p_pi)*y*0.05); 
       point.CalculateTotalError();
       //point.Print();
       // copy the point and add it to the measurement

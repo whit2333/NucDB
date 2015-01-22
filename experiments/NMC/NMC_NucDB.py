@@ -24,7 +24,7 @@ class NMCExtractor(NucDBRawDataExtractor):
              return
         deltax=0.001
         x = self.fCurrentDataPoint.GetBinVariable('x')
-        print values[ixbjorken]
+        #print values[ixbjorken]
         x.SetBinValueSize(float(values[ixbjorken]),deltax)
         #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
