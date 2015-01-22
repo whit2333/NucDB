@@ -82,13 +82,11 @@ def ExtractFromClasDat(lines,fname) :
     line = datfile.readline()
     line = datfile.readline()
 
-    # line 4: beam energy
-    #print line
+    # line 4: Q2
+    print line
     values = line.split()
-    beamenergy = float(values[2])
-    #print values[2]
-    Ebeam = NucDBBinnedVariable("E","E")
-    Ebeam.SetBinValueSize(beamenergy,0.00001)
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    Qsq.SetLimits(float(values[5],values[7])
     #get target
     line = datfile.readline()
     values = line.split()
@@ -105,6 +103,7 @@ def ExtractFromClasDat(lines,fname) :
 
     line = datfile.readline()
 
+    W = NucDBBinnedVariable("W","W")
     if targ == "p" :
         A1p = experiment.GetMeasurement("A1p")
         if not A1p :
@@ -117,11 +116,8 @@ def ExtractFromClasDat(lines,fname) :
         extractor1.SetInputFile(datafilename,11,int(lines)-12)
         #extractor1.linestoskip=0
         #extractor1.NumberOfLines=float(lines)-13
-        Xbjorken = NucDBBinnedVariable("x","x")
-        Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-        extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+        extractor1.fCurrentDataPoint.AddBinVariable(W)
         extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
-        extractor1.fCurrentDataPoint.AddBinVariable(Ebeam)
         extractor1.Initialize()
         extractor1.ExtractAllValues()
         A1p.BuildGraph()
@@ -159,7 +155,6 @@ def ExtractFromClasDat(lines,fname) :
         #extractor1.linestoskip=0
         #extractor1.NumberOfLines=float(lines)-13
         Xbjorken = NucDBBinnedVariable("x","x")
-        Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
         extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
         extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
         extractor1.fCurrentDataPoint.AddBinVariable(Ebeam)
@@ -195,6 +190,7 @@ if __name__ == "__main__":
     # wc -l E93031/clasdata* > E93031_summary.txt 
     in_file = open("experiments/CLAS/E93031_summary.txt", "r")
 
+#This is not the ideal way to do this. Need to just do this manually. in this scope.
     manager = NucDBManager.GetManager(1)
     experiment = manager.GetExperiment("CLAS-E93031")
     if experiment :
@@ -208,13 +204,12 @@ if __name__ == "__main__":
         if values[0] :
                 nlines = values[0]
                 datfile = str(values[1])
-        #print nlines
+                ExtractFromClasDat(nlines,datfile)
+        print nlines
         print datfile 
 
     experiment = manager.GetExperiment("CLAS-E93031")
     experiment.Print()
     manager.SaveExperiment(experiment)
-
-
 
 
