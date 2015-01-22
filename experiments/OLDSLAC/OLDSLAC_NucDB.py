@@ -1,8 +1,12 @@
 from ROOT import gROOT,gSystem
-gSystem.Load( 'libNucDB' )
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV
-from NucDBExtractors import *
+from NucDBExtractors import NucDBRawDataExtractor
+#gSystem.Load( 'libNucDB' )
+from ROOT import NucDBManager
+from ROOT import NucDBExperiment
+from ROOT import NucDBMeasurement,NucDBDiscreteVariable,NucDBInvariantMassDV,NucDBPhotonEnergyDV
+from ROOT import NucDBBinnedVariable
 import os
+import ROOT
 
 class OLDSLACExtractor(NucDBRawDataExtractor) :
     def __init__(self):
@@ -48,6 +52,7 @@ class OLDSLACExtractor(NucDBRawDataExtractor) :
         #self.fCurrentDataPoint.Print()
 
 if __name__ == "__main__":
+
     manager = NucDBManager.GetManager(1)
     
     experiment = manager.GetExperiment("OLDSLAC")

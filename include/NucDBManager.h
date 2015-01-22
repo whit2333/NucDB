@@ -53,7 +53,7 @@ class NucDBManager : public TObject {
       void   AddNewMeasurements(NucDBExperiment * exp);
 
    public :
-      static NucDBManager * GetManager(Int_t opt = 0){
+      static NucDBManager * GetManager(int opt = 0){
          if(!fgDBManager) fgDBManager = new NucDBManager(opt);
          return(fgDBManager);
       }

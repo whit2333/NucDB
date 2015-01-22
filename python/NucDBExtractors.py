@@ -1,6 +1,6 @@
 from ROOT import gROOT,gSystem
-gSystem.Load( 'libTreeViewer' )
-gSystem.Load( 'libNucDB' )
+#gSystem.Load( 'libTreeViewer' )
+#gSystem.Load( 'libNucDB' )
 
 #import numpy as np
 import sys
@@ -9,7 +9,11 @@ import datetime
 #import MySQLdb
 import math
 import os
-from ROOT import NucDBManager,NucDBExperiment,NucDBMeasurement,NucDBDataPoint,NucDBBinnedVariable,NucDBDiscreteVariable
+from ROOT import NucDBManager
+from ROOT import NucDBDataPoint
+from ROOT import NucDBExperiment,NucDBMeasurement
+from ROOT import NucDBBinnedVariable,NucDBDiscreteVariable
+from ROOT import NucDBInvariantMassDV,NucDBPhotonEnergyDV
 import copy
 
 """ @package NucDBRawDataExtractor

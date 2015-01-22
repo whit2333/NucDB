@@ -14,6 +14,9 @@ set (NucDB_CXX_LIBS)
 set (NucDB_CXX_INC_DIR)
 set (NucDB_FC_CFLAGS)
 set (NucDB_GRID_DATA_DIR)
+set (NucDB_PCM_FILES)
+
+set (PROJECT_USE_ROOT6 ${NUCDB_USE_ROOT6})
 
 #-------------------------------------------------------
 set(CMAKE_MODULE_PATH
@@ -167,15 +170,20 @@ set(NucDB_LIB_NAMES
 
 set(NucDB_SHARED_LIBS)
 set(NucDB_ROOT_DICTS)
+set(NucDB_ROOT_DICT_HEADERS)
+
 
 # ---------------------------------------
 foreach(aSharedLib ${NucDB_LIB_NAMES})
    set(NucDB_SHARED_LIBS ${NucDB_SHARED_LIBS} "${CMAKE_BINARY_DIR}/lib/NucDB${aSharedLib}.so")
-   set(NucDB_ROOT_DICTS ${NucDB_ROOT_DICTS} "NucDB${aSharedLib}Dict.h")
    set(NucDB_ROOT_DICT_SRCS ${NucDB_ROOT_DICT_SRCS} "NucDB${aSharedLib}Dict.cxx")
-   if(NOT NucDB_USE_ROOT6)
-       set(NucDB_ROOT_DICT_HEADERS ${NucDB_ROOT_DICT_HEADERS} "NucDB${aSharedLib}Dict.h")
-   endif(NOT NucDB_USE_ROOT6)
+   if(NUCDB_USE_ROOT6)
+      set(NucDB_PCM_FILES ${NucDB_PCM_FILES} "NucDB${aSharedLib}Dict_rdict.pcm")
+   endif(NUCDB_USE_ROOT6)
+   if(NOT NUCDB_USE_ROOT6)
+      set(NucDB_ROOT_DICTS ${NucDB_ROOT_DICTS} "NucDB${aSharedLib}Dict.h")
+      set(NucDB_ROOT_DICT_HEADERS ${NucDB_ROOT_DICT_HEADERS} "NucDB${aSharedLib}Dict.h")
+   endif(NOT NUCDB_USE_ROOT6)
 endforeach(aSharedLib)
 
 ADD_CUSTOM_TARGET(ROOTDICTS DEPENDS ${NucDB_ROOT_DICT_SRCS} ${NucDB_ROOT_DICT_HEADERS} )
@@ -187,6 +195,7 @@ endforeach(aSharedLib)
 
 
 FILE(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.h" "${PROJECT_SOURCE_DIR}/include/*.h" "${PROJECT_BINARY_DIR}/*.h")
+FILE(GLOB PCM_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.pcm" "${PROJECT_SOURCE_DIR}/*.pcm" "${PROJECT_BINARY_DIR}/*.pcm")
 
 # -----------------------------------------------------------
 # Set the library version in the main CMakeLists.txt
@@ -229,6 +238,7 @@ endforeach(aLib)
 #install(TARGETS NucDB DESTINATION ${CMAKE_BINARY_DIR}/lib)
 install(TARGETS NucDB DESTINATION lib)
 INSTALL(FILES ${files} DESTINATION include/NucDB)
+install(FILES ${PCM_FILES} DESTINATION lib)
 
 install(TARGETS nucdb-config DESTINATION bin)
 
@@ -241,5 +251,7 @@ MESSAGE("      CMAKE_Fortran_FLAGS: ${CMAKE_Fortran_FLAGS}")
 MESSAGE("                CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 MESSAGE("         CMAKE_LINK_FLAGS: ${CMAKE_LINK_FLAGS}")
 MESSAGE("CMAKE_SHARED_LINKER_FLAGS: ${CMAKE_SHARED_LINKER_FLAGS}")
+MESSAGE(" PROJECT_BINARY_DIR: ${PROJECT_BINARY_DIR}")
+MESSAGE("       PROJECT_SOURCE_DIR: ${PROJECT_SOURCE_DIR}")
 
 

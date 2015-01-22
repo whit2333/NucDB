@@ -6,8 +6,8 @@
 //#pragma link C++ all typedef;
 
 
-#pragma link C++ global fgDBManager+;
 #pragma link C++ class NucDBManager+;
+#pragma link C++ global fgDBManager;
 #pragma link C++ class NucDBDatabase+;
 
 #pragma link C++ class NucDBVariable+;
