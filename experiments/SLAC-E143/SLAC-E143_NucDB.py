@@ -258,6 +258,7 @@ if __name__ == "__main__":
     Extractor3.Initialize()
     Extractor3.ExtractAllValues()
     A1p.BuildGraph()
+    #A1p.Print("data");
 
     A2p = experiment.GetMeasurement("A2p")
     if not A2p :

@@ -44,6 +44,7 @@ class SLACE155Extractor(NucDBRawDataExtractor):
         if nu :
             nu.SetVariable(0,x)
             nu.SetVariable(1,Qsq)
+
         self.fCurrentDataPoint.CalculateDependentVariables()
         #
         #self.fCurrentDataPoint.Print()

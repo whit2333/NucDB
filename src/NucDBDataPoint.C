@@ -316,9 +316,12 @@ Int_t NucDBDataPoint::AddDependentVariable(NucDBDependentVariable * var) {
 //_____________________________________________________________________________
 void NucDBDataPoint::CalculateDependentVariables(){
    NucDBDependentVariable * var = 0;
-   for(int i = 0;i<fVariables.GetEntries(); i++ ){
+   for(int i = 0;i<fBinnedVariables.GetEntries(); i++ ){
       var = dynamic_cast<NucDBDependentVariable*>(fBinnedVariables.At(i));
-      if(var) var->Calculate();
+      if(var) {
+         //std::cout << "calculating" << std::endl;
+         var->Calculate();
+      }
    }
 }
 //_____________________________________________________________________________
