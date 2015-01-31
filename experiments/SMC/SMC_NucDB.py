@@ -84,9 +84,25 @@ class SMCExtractorg2p(NucDBRawDataExtractor) :
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(0))
         self.fCurrentDataPoint.CalculateTotalError()
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
         #self.fCurrentDataPoint.Print()
 
-class SMCExtractorA2p(NucDBRawDataExtractor) :
+class SMCExtractorA2p(SMCExtractorg2p) :
     def __init__(self):
         NucDBRawDataExtractor.__init__(self)
         self.iValueRow=4
@@ -132,7 +148,7 @@ if __name__ == "__main__":
     extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor1.Initialize()
     extractor1.ExtractAllValues()
-    A1p.BuildGraph()
+    #A1p.BuildGraph()
     # g1p
     g1p = experiment.GetMeasurement("g1p")
     if not g1p :
@@ -150,7 +166,8 @@ if __name__ == "__main__":
     extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor2.Initialize()
     extractor2.ExtractAllValues()
-    g1p.BuildGraph()
+    #g1p.BuildGraph()
+
     # A2p
     A2p = experiment.GetMeasurement("A2p")
     if not A2p :
@@ -168,7 +185,8 @@ if __name__ == "__main__":
     extractor3.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor3.Initialize()
     extractor3.ExtractAllValues()
-    A2p.BuildGraph()
+    #A2p.BuildGraph()
+
     # g2p
     g2p = experiment.GetMeasurement("g2p")
     if not g2p :

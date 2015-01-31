@@ -687,6 +687,9 @@ TMultiGraph * NucDBMeasurement::BuildGraphUnique(const char * var, const char * 
             continue;
          }
 
+         var0.Dump();
+         var2->Dump();
+
          if( (*var2) == var0 ) {
       std::cout << " equal bins" << std::endl;
             // variable is in bin

@@ -47,7 +47,7 @@ class SLACE155Extractor(NucDBRawDataExtractor):
 
         self.fCurrentDataPoint.CalculateDependentVariables()
         #
-        #self.fCurrentDataPoint.Print()
+        self.fCurrentDataPoint.Print()
 
 class SLACE155ExtractorxA1p(SLACE155Extractor):
     def __init__(self):

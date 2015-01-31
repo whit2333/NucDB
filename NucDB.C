@@ -9,15 +9,25 @@
 
 /*! \mainpage Nucleon Database NucDB
 
-
     \subpage install
-
-    \subpage intro
-
+    \subpage intro 
     \subpage tutorial
-    (incomplete)
-    
     \subpage addingdata
+
+    \section standardVariables Standard Variables
+
+    Since kinematic variables are named in NucDB, consistency is required in order to avoid
+    instances of a variable having different names. The follow variable names are used and
+    should be consistently used through out.
+    <table>
+    <tr> <th>name</td><td>title</td><td>definition</td> </tr>
+    <tr> <td>x</td><td>x</td><td>Bjorken scaling variable</td></tr>
+    <tr> <td>Qsquared</td><td>Q^2</td><td>virtual photon momentum transfer squared</td></tr>
+    <tr> <td>W</td><td>W</td><td>Invariant mass</td></tr>
+    <tr> <td>nu</td><td>nu</td><td>photon energy</td></tr>
+    <tr> <td>Eprime</td><td>E'</td><td>scattered (electron) energy</td></tr>
+    <tr> <td>Ebeam</td><td>E</td><td>beam energy</td></tr>
+    </table>
 
  */ 
 /*! \page install Installation
