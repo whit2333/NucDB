@@ -659,7 +659,7 @@ TMultiGraph * NucDBMeasurement::BuildGraphUnique(const char * var, const char * 
 
    for(int j =0; j< unique_var.size();j++) {
 
-      NucDBBinnedVariable var0(uniqueVar,uniqueVar,unique_var[j],0.01);
+      NucDBBinnedVariable var0( uniqueVar, uniqueVar, unique_var[j],0.01);
 
       gr = new TGraphErrors(unique_var_counts[j]);
       gr->SetName(Form("%sVS%s_%d",GetName(),var,j));
@@ -687,25 +687,25 @@ TMultiGraph * NucDBMeasurement::BuildGraphUnique(const char * var, const char * 
             continue;
          }
 
-         var0.Dump();
-         var2->Dump();
+         //var0.Dump();
+         //var2->Dump();
 
-         if( (*var2) == var0 ) {
-      std::cout << " equal bins" << std::endl;
+         if( var2->GetMean() == unique_var[j] ) {
+            //std::cout << " equal bins" << std::endl;
             // variable is in bin
             if(nPoints >= unique_var_counts[j]) {
                Error("BuildGraphUnique","Too many points for unique value");
                continue;
             }
             point->CalculateTotalError();
-            gr->SetPoint(nPoints,var1->GetMean(),point->GetValue());
+            gr->SetPoint( nPoints,var1->GetMean(),point->GetValue());
             gr->SetPointError(nPoints,0.0,point->GetTotalError().GetError());
             nPoints++;
          }
       } // loop on points
 
-      gr->SetMarkerColor(GetColor()+j);
-      gr->SetLineColor(  GetColor()+j);
+      gr->SetMarkerColor(kRed+j);
+      gr->SetLineColor(  kRed+j);
       gr->SetMarkerStyle(20+j);
       mg->Add(gr,"p");
 
