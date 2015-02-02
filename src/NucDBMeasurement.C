@@ -706,7 +706,7 @@ TMultiGraph * NucDBMeasurement::BuildGraphUnique(const char * var, const char * 
 
       gr->SetMarkerColor(kRed+j);
       gr->SetLineColor(  kRed+j);
-      gr->SetMarkerStyle(20+j);
+      gr->SetMarkerStyle(20);
       mg->Add(gr,"p");
 
    } // unique variable

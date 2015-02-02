@@ -151,6 +151,8 @@ class NucDBDataPoint : public TNamed {
          return(fTotalError);
       }
 
+      double GetError() const { return( GetTotalError().GetError() ); }
+
       /** Set the values of the total using the current
        *  systematic and statistical errors
        */
