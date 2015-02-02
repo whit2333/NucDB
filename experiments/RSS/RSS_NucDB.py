@@ -203,7 +203,7 @@ if __name__ == "__main__":
     A2Extractor.ExtractAllValues()
     A2p.BuildGraph()
 
-    A2p.PrintBreakDown("x");
+    #A2p.PrintBreakDown("x");
     
     A1Extractor = RSSExtractorA1p()
     A1Extractor.SetMeasurement(A1p)
