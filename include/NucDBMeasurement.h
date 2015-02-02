@@ -141,7 +141,7 @@ class NucDBMeasurement : public TNamed {
 
       /** Build a graph with errors */
       TGraphErrors * BuildGraph(const char * var = "x"); // *MENU*
-      TGraphErrors * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
+      TGraph * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
 
       TMultiGraph * BuildGraphUnique(const char * var = "x", const char * uniqueVar = "Qsquared", TLegend * leg = 0 ); // *MENU*
       TGraphErrors * fGraph; //->

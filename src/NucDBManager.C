@@ -5,6 +5,7 @@
 #include <sstream>      // std::stringstream
 #include "TColor.h"
 #include "TROOT.h"
+#include "TGraphAsymmErrors.h"
 
 ClassImp(NucDBManager)
 //_____________________________________________________________
@@ -117,9 +118,10 @@ TMultiGraph *      NucDBManager::GetKinematicMultiGraph(const char * measurement
    TList       * meas = GetMeasurements(measurement);
    for(int i = 0 ; i < meas->GetEntries(); i++) {
       NucDBMeasurement * am = (NucDBMeasurement*)meas->At(i);
-      TGraphErrors * gr = am->BuildKinematicGraph(var1,var2);
-      gROOT->GetColor(40+i)->SetAlpha(1.0);
-      gr->SetFillColor(40+i);
+      TGraph * gr = am->BuildKinematicGraph(var1,var2);
+      gr->SetFillColorAlpha(kRed,0.3);
+      //gROOT->GetColor(40+i)->SetAlpha(1.0);
+      //gr->SetFillColor(40+i);
       mg->Add(gr,"pe2");
    }
    return(mg);

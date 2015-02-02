@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <map>
+#include "TGraphAsymmErrors.h"
 
 ClassImp(NucDBMeasurement)
 //_____________________________________________________________________________
@@ -604,12 +605,12 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
 }
 //_____________________________________________________________________________
 
-TGraphErrors * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , const char * var2Name ) {
-   TGraphErrors        * gr    = 0;
+TGraph * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , const char * var2Name ) {
+   TGraphAsymmErrors        * gr    = 0;
    NucDBDataPoint      * point = 0;
    NucDBBinnedVariable * var1  = 0;
    NucDBBinnedVariable * var2  = 0;
-   gr = new TGraphErrors(fNumberOfDataPoints);
+   gr = new TGraphAsymmErrors(fNumberOfDataPoints);
    gr->SetName(Form("%sVS%s",var1Name,var2Name));
    for(int i = 0; i < fNumberOfDataPoints;i++) {
       point = (NucDBDataPoint *) fDataPoints.At(i);
@@ -617,11 +618,11 @@ TGraphErrors * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , con
       var2 = point->FindVariable(var2Name);
       if( var1 && var2 ) {
          gr->SetPoint(i,var1->GetMean(),var2->GetMean());
-         gr->SetPointError(i,var1->GetBinSize()/2.0,var2->GetBinSize()/2.0);
+         gr->SetPointError(i,var1->GetBinSize()/2.0,var1->GetBinSize()/2.0,var2->GetBinSize()/2.0,var2->GetBinSize()/2.0);
       } else {
          Error("BuildGraph",Form("Variable, %s or %s, not found!",var1Name,var2Name));
          gr->SetPoint(i,0,0);
-         gr->SetPointError(i,0,1);
+         gr->SetPointError(i,0,0,0,0);
          break;
       }
    }
