@@ -3,6 +3,8 @@
 #include <string>       // std::string
 #include <iostream>     // std::cout
 #include <sstream>      // std::stringstream
+#include "TColor.h"
+#include "TROOT.h"
 
 ClassImp(NucDBManager)
 //_____________________________________________________________
@@ -111,12 +113,14 @@ TMultiGraph *      NucDBManager::GetMultiGraph(const char * measurement, const c
 }
 //_____________________________________________________________________________
 TMultiGraph *      NucDBManager::GetKinematicMultiGraph(const char * measurement, const char * var1 ,const char * var2 ){
-   TMultiGraph * mg = new TMultiGraph();
-   TList * meas = GetMeasurements(measurement);
+   TMultiGraph * mg   = new TMultiGraph();
+   TList       * meas = GetMeasurements(measurement);
    for(int i = 0 ; i < meas->GetEntries(); i++) {
       NucDBMeasurement * am = (NucDBMeasurement*)meas->At(i);
       TGraphErrors * gr = am->BuildKinematicGraph(var1,var2);
-      mg->Add(gr,"p");
+      gROOT->GetColor(40+i)->SetAlpha(1.0);
+      gr->SetFillColor(40+i);
+      mg->Add(gr,"pe2");
    }
    return(mg);
 }

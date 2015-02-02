@@ -121,6 +121,7 @@ class NucDBBinnedVariable : public TNamed {
       Double_t    GetMaximum()    const {return(fMaximum);}
       Double_t    GetMean()       const {return(fMean);}
       Double_t    GetAverage()    const {return(fAverage);}
+      Double_t    GetBinSize()    const {return(fMaximum-fMinimum);}
       void        SetBinMinimum(   Double_t val) {fMinimum =val;}
       void        SetBinMaximum(   Double_t val) {fMaximum =val;}
       void        SetMean(         Double_t val) {fMean =val;}

@@ -22,11 +22,14 @@ Int_t g1p_kinematic_coverage(){
    for (int i = 0; i < measurementsList->GetEntries(); i++) {
       NucDBMeasurement * ameas = (NucDBMeasurement*)measurementsList->At(i);
       TGraphErrors * agraph = (TGraphErrors*)graphList->At(i);
-      leg->AddEntry(agraph, Form("%s g1p", ameas->GetExperimentName().Data()), "ep");
+      //agraph->SetFillColorAlpha(kRed,0.5);
+      //agraph->SetFillStyle(4050);
+      leg->AddEntry(agraph, Form("%s g1p", ameas->GetExperimentName()), "ep");
    }
 
    leg->Draw();
 
    c->SaveAs("examples/g1p_kinematic_coverage.png");
-
+   c->SaveAs("examples/g1p_kinematic_coverage.pdf");
+   return 0;
 }

@@ -19,7 +19,7 @@ Int_t F2p_kinematic_coverage(){
       NucDBMeasurement * ameas = (NucDBMeasurement*)measurementsList->At(i);
       TGraphErrors * agraph = (TGraphErrors*)graphList->At(i);
       //agraph->SetMarkerColor(1);
-      leg->AddEntry(agraph, Form("%s F2p", ameas->GetExperimentName().Data()), "ep");
+      leg->AddEntry(agraph, Form("%s F2p", ameas->GetExperimentName()), "ep");
    }
 
    mg->Draw("a");
@@ -27,6 +27,19 @@ Int_t F2p_kinematic_coverage(){
    mg->GetYaxis()->SetTitle("Q^{2}");
    mg->Draw("a");
    leg->Draw();
+
+   std::vector<double>  pm_x,pm_y;
+   pm_x.push_back(0.1);
+   pm_x.push_back(0.2);
+   pm_x.push_back(0.2);
+   pm_x.push_back(0.1);
+
+   pm_y.push_back(10);
+   pm_y.push_back(10);
+   pm_y.push_back(100);
+   pm_y.push_back(100);
+   TPolyMarker * pm = new TPolyMarker(4,&pm_x[0],&pm_y[0]);
+   pm->Draw();
 
    c->SaveAs("examples/F2p_kinematic_coverage.png");
 

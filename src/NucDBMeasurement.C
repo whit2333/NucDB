@@ -617,7 +617,7 @@ TGraphErrors * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , con
       var2 = point->FindVariable(var2Name);
       if( var1 && var2 ) {
          gr->SetPoint(i,var1->GetMean(),var2->GetMean());
-         gr->SetPointError(i,0.0,0.0);
+         gr->SetPointError(i,var1->GetBinSize()/2.0,var2->GetBinSize()/2.0);
       } else {
          Error("BuildGraph",Form("Variable, %s or %s, not found!",var1Name,var2Name));
          gr->SetPoint(i,0,0);
