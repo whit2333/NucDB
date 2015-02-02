@@ -12,7 +12,7 @@ NucDBMeasurement::NucDBMeasurement(const char * name,const char * title)
      :TNamed(name,title) {
       fNumberOfDataPoints=0;
       fDataPoints.Clear();
-      fGraph=0;
+      //fGraph=0;
       fColor=1;
       fExperimentName="";
    }
@@ -40,7 +40,7 @@ void  NucDBMeasurement::Browse(TBrowser* b) {
    b->Add(&fDataPoints     , "Data Points");
    b->Add(&fGraphs         , "Graphs");
    b->Add(&fReferences     , "Refs");
-   if(fGraph)b->Add(fGraph , "vs x");
+   //if(fGraph)b->Add(fGraph , "vs x");
 }
 //______________________________________________________________________________
 void NucDBMeasurement::ClearDataPoints(){

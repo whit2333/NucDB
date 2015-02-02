@@ -144,7 +144,7 @@ class NucDBMeasurement : public TNamed {
       TGraph * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
 
       TMultiGraph * BuildGraphUnique(const char * var = "x", const char * uniqueVar = "Qsquared", TLegend * leg = 0 ); // *MENU*
-      TGraphErrors * fGraph; //->
+      //TGraphErrors * fGraph; //->
 
       // Uses only the first datapoint
       //const TList *        GetBinnedVariables() const { return(&fBinnedVariables);}

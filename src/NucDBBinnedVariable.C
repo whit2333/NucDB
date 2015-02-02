@@ -88,11 +88,24 @@ bool NucDBBinnedVariable::BinsOverlap(const NucDBBinnedVariable &var) const {
 }
 //_____________________________________________________________________________
 
-void      NucDBBinnedVariable::SetBinValueSize(Double_t val, Double_t size) {
+void NucDBBinnedVariable::SetBinValueSize(Double_t val, Double_t size) {
    fMean = val;
-   fAverage = val;
    SetBinMinimum(val-size/2.0);
    SetBinMaximum(val+size/2.0);
+}
+void NucDBBinnedVariable::SetAverage(      Double_t val) {
+   // keep the bin size but shift the center
+   // Note the mean stays the same.
+   double size = GetBinSize();
+   fAverage = val; 
+   fMinimum=val-size/2.0;
+   fMaximum=val+size/2.0;
+   if(fMean<fMinimum ) {
+      Error("SetAverage","Mean less than bin min");
+   }
+   if(fMean>fMaximum ) {
+      Error("SetAverage","Mean greater than bin max");
+   }
 }
 //_____________________________________________________________________________
 

@@ -94,11 +94,13 @@ class NucDBDiscreteVariable : public TNamed {
  *
  */
 class NucDBBinnedVariable : public TNamed {
+
    protected:
-      Double_t  fMinimum;
-      Double_t  fMaximum;
-      Double_t  fMean;
-      Double_t  fAverage;
+      Double_t  fMinimum; // bin's minimum edge
+      Double_t  fMaximum; // bin's maximum edge
+      Double_t  fMean;    // Mean value (not always the center);
+      Double_t  fAverage; // Bin center TODO: change name 
+
       NucDBUnit fUnit;
 
    public :
@@ -121,15 +123,17 @@ class NucDBBinnedVariable : public TNamed {
       Double_t    GetMaximum()    const {return(fMaximum);}
       Double_t    GetMean()       const {return(fMean);}
       Double_t    GetAverage()    const {return(fAverage);}
+      Double_t    GetBinCenter()  const {return(fAverage);}
+      Double_t    GetCenter()     const {return(fAverage);}
       Double_t    GetBinSize()    const {return(fMaximum-fMinimum);}
-      void        SetBinMinimum(   Double_t val) {fMinimum =val;}
-      void        SetBinMaximum(   Double_t val) {fMaximum =val;}
-      void        SetMean(         Double_t val) {fMean =val;}
-      void        SetAverage(      Double_t val) {fAverage =val;}
-      void        SetLimtits(Double_t min, Double_t max) { fMinimum = min; fMaximum = max; fMean=(fMaximum-fMinimum)/2.0;fAverage = fMean;}
+      void        SetBinMinimum(   Double_t val) {fMinimum =val;fAverage=(fMaximum-fMinimum)/2.0;}
+      void        SetBinMaximum(   Double_t val) {fMaximum =val;fAverage=(fMaximum-fMinimum)/2.0;}
+      void        SetMean(         Double_t val) {fMean = val;}
+      void        SetAverage(      Double_t val) ;
+      void        SetLimits(Double_t min, Double_t max) { fMinimum = min; fMaximum = max; fAverage=(fMaximum-fMinimum)/2.0;}
       void        SetBinValueSize( Double_t val, Double_t size);
       void        SetValueSize(    Double_t val, Double_t size){ SetBinValueSize(val,size);}
-      void        SetMeanLimits(   Double_t val, Double_t min, Double_t max){ SetMean(val);SetAverage(val);SetBinMinimum(min);SetBinMaximum(max);}
+      void        SetMeanLimits(   Double_t val, Double_t min, Double_t max){ SetMean(val);SetBinMinimum(min);SetBinMaximum(max);}
       void        SetUnit(   const NucDBUnit& u) { fUnit = u; }
       void        Print() ; // *MENU*
       const NucDBUnit&   GetUnit(){return fUnit;}

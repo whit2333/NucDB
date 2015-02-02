@@ -34,8 +34,8 @@ void NucDBExperiment::PlotMeasurements(const char * var ){
    c1->Divide(2,fMeasurements.GetEntries()/2);
    for(int i =0; i<fMeasurements.GetEntries();i++) {
       c1->cd(i+1);
-      ((NucDBMeasurement*)fMeasurements.At(i))->BuildGraph(var);
-      ((NucDBMeasurement*)fMeasurements.At(i))->fGraph->Draw("ap");
+      TGraph * gr = ((NucDBMeasurement*)fMeasurements.At(i))->BuildGraph(var);
+      gr->Draw("ap");
    }
 }
 //_____________________________________________________________________________
