@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <map>
+#include <string>
 #include "TGraphAsymmErrors.h"
 
 ClassImp(NucDBMeasurement)
@@ -242,13 +243,52 @@ void NucDBMeasurement::Print(Option_t * opt ) const {
    if(printData) fDataPoints.Print(opt);
 }
 //_____________________________________________________________________________
-
 void NucDBMeasurement::PrintData(Option_t * opt) const {
    Print();
    for(int i=0; i<fDataPoints.GetEntries(); i++){
       NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(i);
       std::cout << "[" << i << "] " << GetName();
       aPoint->Print();
+   }
+}
+//______________________________________________________________________________
+void NucDBMeasurement::PrintTable(std::ostream& stream) const {
+   // Print a data table
+
+   if(fNumberOfDataPoints>0){
+      const NucDBDataPoint * p0 = (const NucDBDataPoint*)fDataPoints.At(0);
+      const TList& vars = p0->GetBinnedVariablesRef(); 
+      for(int j=0;j<vars.GetEntries();j++) {
+         NucDBBinnedVariable * var = (NucDBBinnedVariable*)vars.At(j);
+         std::string column = var->GetName();
+         column += "_min";
+         stream << std::setw(14) << column << " " ;
+         column = var->GetName();
+         stream << std::setw(14) << column << " " ;
+         column += "_max";
+         stream << std::setw(14) << column << " " ;
+      }
+      std::string column =  GetName();
+      stream <<  std::setw(14) << column << " " ;
+      column += "_err";
+      stream << std::setw(14) << column ;
+      stream << std::endl;
+   }
+
+   for(int i=0; i<fDataPoints.GetEntries(); i++){
+
+      NucDBDataPoint * aPoint = (NucDBDataPoint*)fDataPoints.At(i);
+
+      const TList& vars = aPoint->GetBinnedVariablesRef(); 
+
+      for(int j=0;j<vars.GetEntries();j++) {
+         NucDBBinnedVariable * var = (NucDBBinnedVariable*)vars.At(j);
+         stream << std::setw(14) << var->GetMinimum() << " " ;
+         stream << std::setw(14) << var->GetMean() << " " ;
+         stream << std::setw(14) << var->GetMaximum() << " " ;
+      }
+      stream <<  std::setw(14) << aPoint->GetValue() << " " << std::setw(14) << aPoint->GetError() ;
+      stream << std::endl;
    }
 }
 //_____________________________________________________________________________
@@ -469,7 +509,7 @@ Int_t NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name, std::ve
       if(p) {
          v = (const NucDBBinnedVariable*)p->GetBinVariable(name);
          if(v){
-            Double_t vmean = v->GetMean();
+            Double_t vmean = v->GetAverage();
             values.push_back(vmean);
             //vect.push_back(vmean);
             N++;
@@ -511,7 +551,7 @@ Int_t NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name,std::vec
       if(p) {
          v = (const NucDBBinnedVariable*)p->GetBinVariable(name);
          if(v){
-            Double_t vmean = v->GetMean();
+            Double_t vmean = v->GetAverage();
             values.push_back(vmean);
             N++;
          }
@@ -618,7 +658,7 @@ TGraph * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , const cha
       var2 = point->FindVariable(var2Name);
       if( var1 && var2 ) {
          gr->SetPoint(i,var1->GetMean(),var2->GetMean());
-         gr->SetPointError(i,var1->GetBinSize()/2.0,var1->GetBinSize()/2.0,var2->GetBinSize()/2.0,var2->GetBinSize()/2.0);
+         gr->SetPointError(i,var1->GetBinSizeLow(),var1->GetBinSizeHigh(),var2->GetBinSizeLow(),var2->GetBinSizeHigh());
       } else {
          Error("BuildGraph",Form("Variable, %s or %s, not found!",var1Name,var2Name));
          gr->SetPoint(i,0,0);

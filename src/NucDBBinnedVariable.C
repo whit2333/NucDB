@@ -55,8 +55,9 @@ NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v) {
 const NucDBBinnedVariable& NucDBBinnedVariable::operator+=(const NucDBBinnedVariable& v) {
    if(fMinimum > v.GetMinimum() ) fMinimum = v.GetMinimum();
    if(fMaximum < v.GetMaximum() ) fMaximum = v.GetMaximum();
-   fMean = (fMaximum + fMinimum)/2.0;
-   fAverage = fMean;
+   fAverage = (fMaximum + fMinimum)/2.0;
+   fMean = (fMean + v.fMean)/2.0;
+
    return *this;
 }
 //______________________________________________________________________________
@@ -87,17 +88,18 @@ bool NucDBBinnedVariable::BinsOverlap(const NucDBBinnedVariable &var) const {
    else return false;
 }
 //_____________________________________________________________________________
-
 void NucDBBinnedVariable::SetBinValueSize(Double_t val, Double_t size) {
    fMean = val;
    SetBinMinimum(val-size/2.0);
    SetBinMaximum(val+size/2.0);
 }
+//______________________________________________________________________________
 void NucDBBinnedVariable::SetAverage(      Double_t val) {
    // keep the bin size but shift the center
    // Note the mean stays the same.
    double size = GetBinSize();
    fAverage = val; 
+   fCenter = val; 
    fMinimum=val-size/2.0;
    fMaximum=val+size/2.0;
    if(fMean<fMinimum ) {

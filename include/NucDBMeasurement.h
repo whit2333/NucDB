@@ -129,6 +129,9 @@ class NucDBMeasurement : public TNamed {
 
       void    Print(Option_t * opt ="") const ; // *MENU*
       void    PrintData(Option_t * opt = "") const ; // *MENU*
+
+      void    PrintTable(std::ostream& stream) const ;
+
       void    ListVariables() ; // *MENU*
       const char * GetExperimentName() const {return(fExperimentName.Data());}
       void    SetExperimentName(const char * s){fExperimentName = s;}
