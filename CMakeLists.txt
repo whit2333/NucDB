@@ -53,7 +53,7 @@ set(NucDB_FC_CFLAGS "${NucDB_FC_CFLAGS} ${CMAKE_Fortran_FLAGS}")
 #set(CMAKE_Fortran_FLAGS " -D\"NucDB_PDF_GRID_DIR='${NucDB_PDF_GRID_DIR}'\" -g -O2 -Wall -fPIC -Iinclude -ffixed-line-length-none -x f77-cpp-input ")
 set(CMAKE_Fortran_FLAGS " -D\"NucDB_PDF_GRID_DIR='${NucDB_PDF_GRID_DIR}'\" -g -O2 -Wall  -ffixed-line-length-none -x f77-cpp-input ")
 
-#set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} ")
+set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} ")
 
 #----------------------------------------------------------------------------
 # Find ROOT (required package)

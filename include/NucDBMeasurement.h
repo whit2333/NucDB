@@ -93,7 +93,11 @@ class NucDBMeasurement : public TNamed {
 
       /** Returns a list of datapoints falling in the bin.  */
       TList *  FilterWithBin(NucDBBinnedVariable const *bin);
+
+      /** Returns a list of datapoints equal to variable.  */
       TList *  FilterWith(NucDBDiscreteVariable const *v);
+
+      /** Returns a list of datapoints equal to variable.  */
       TList *  FilterWith(NucDBVariable const *v);
 
 
@@ -110,25 +114,51 @@ class NucDBMeasurement : public TNamed {
        *  If modify is called, the measurement's data points are replaced with the merged datapoints.
        */ 
       TList *  MergeDataPoints(unsigned int n = 2, const char * var = "x", bool modify=false);
+
+      /** Similar to MergeDataPoints(unsigned int n, const char * var, bool modify). However, 
+       *  only merges bins if the mean of two adjacent bins are within dx of each other.
+       */
+      TList *  MergeNeighboringDataPoints(unsigned int n = 2, const char * var = "x", double dx=0.0001, bool modify=false);
+
+      /** Sort the datapoints by the supplied variable.
+       *  TODO: Fix to be a stable sort such that the order is preserved.
+       */ 
       void     SortBy(const char * n = "x");
+
+      /** Multiply the datapoint by the value of the variable supplied.  */
       void     Multiply(const char * v );
 
-      // The function names here kind of suck...
+      /** Use the binned variable supplied to select data for a a new measurement.
+       *  The bins are compared using NucDBBinnedVariable::operator==(). See FilterWithBin() for more details.
+       *  TODO fix the name of this method.
+       */ 
       NucDBMeasurement * CreateMeasurementFilteredWithBin(const NucDBBinnedVariable * bin) ;
+
+      /** Use the binned variable supplied to select data for a a new measurement.
+       *  The bins are compared using NucDBBinnedVariable::operator==(). See FilterWithBin() for more details.
+       *  TODO fix the name of this method.
+       */ 
       NucDBMeasurement * NewMeasurementWithFilter(const NucDBBinnedVariable * bin) ;
 
-      /** Same as FilterWithBin(bin) but it modifies the measurement */
+      /** Uses the vector of values to filter the data, creating a new measurment for each value.
+       *  This can be used with GetUniqueBinnedVariableValues(), as is done in the method wich only takes a variable name.
+       */
+      TList *  CreateMeasurementsWithUniqueBins(const std::vector<double> & vect,const char * var = "x");
+
+      TList *  CreateMeasurementsWithUniqueBins(const char * var = "x");
+
+
+      /** Same as FilterWithBin(bin) but it modifies the measurement.  */
       TList *  ApplyFilterWithBin(NucDBBinnedVariable *bin);
       TList *  ApplyFilterWith(NucDBDiscreteVariable *v);
       TList *  ApplyFilterWith(NucDBVariable *v);
-
 
       TList * GetDataPoints() {return(&fDataPoints);}
 
       const TList& GetDataRef() const { return(fDataPoints);}
 
-      void    Print(Option_t * opt ="") const ; // *MENU*
-      void    PrintData(Option_t * opt = "") const ; // *MENU*
+      void    Print(     Option_t * opt = "") const ; // *MENU*
+      void    PrintData( Option_t * opt = "") const ; // *MENU*
 
       void    PrintTable(std::ostream& stream) const ;
 
@@ -168,11 +198,20 @@ class NucDBMeasurement : public TNamed {
       Double_t  GetBinnedVariableMax(const char * name);
       Double_t  GetBinnedVariableMin(const char * name);
 
-      /** fills the vector with unique values of the binned variable. */ 
+      /** Fills the vector with unique values of the binned variable. 
+       *  TODO: Better name.
+       */ 
       Int_t GetUniqueBinnedVariableValues(const char * name, std::vector<double> & vect) const;
-      Int_t GetUniqueBinnedVariableValues(const char * name, std::vector<double> & vect, std::vector<int> & counts) const;
-      void  PrintBreakDown(const char * var = "theta", int nmax = 20) const ;
 
+      /** Fills the vector with unique values of the binned variable. 
+       *  TODO: Better name.
+       */ 
+      Int_t GetUniqueBinnedVariableValues(const char * name, std::vector<double> & vect, std::vector<int> & counts) const;
+
+      /** Prints a simple breakdown of the data interms of unique values of var.
+       *  The number of rows printed is limited to nmax.
+       */
+      void  PrintBreakDown(const char * var = "theta", int nmax = 20) const ;
 
    protected:
 
