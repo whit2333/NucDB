@@ -79,15 +79,15 @@ if __name__ == "__main__":
     extractor1.ExtractAllValues()
     F2p.BuildGraph()
     
-    # F2p/F2n
-    F2pOverF2n = experiment.GetMeasurement("F2pOverF2n")
-    if not F2pOverF2n :
-        F2pOverF2n = NucDBMeasurement("F2pOverF2n","F_{2}^{p}/F_{2}^{n}")
-        experiment.AddMeasurement(F2pOverF2n)
-    F2pOverF2n.ClearDataPoints()
-    #F2pOverF2n.SetColor(4000)
+    # F2n/F2p
+    F2nOverF2p = experiment.GetMeasurement("F2n/F2p")
+    if not F2nOverF2p :
+        F2nOverF2p = NucDBMeasurement("F2n/F2p","F_{2}^{n}/F_{2}^{p}")
+        experiment.AddMeasurement(F2nOverF2p)
+    F2nOverF2p.ClearDataPoints()
+    #F2nOverF2p.SetColor(4000)
     extractor1 = BCDMSExtractor()
-    extractor1.SetMeasurement(F2pOverF2n)
+    extractor1.SetMeasurement(F2nOverF2p)
     extractor1.SetInputFile("experiments/BCDMS/f2nf2pdeut.txt",3)
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
@@ -95,12 +95,12 @@ if __name__ == "__main__":
     extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor1.Initialize()
     extractor1.ExtractAllValues()
-    F2pOverF2n.BuildGraph()
+    F2nOverF2p.BuildGraph()
 
     # F2p-F2n
-    F2pMinusF2n = experiment.GetMeasurement("F2pMinusF2n")
+    F2pMinusF2n = experiment.GetMeasurement("F2p-F2n")
     if not F2pMinusF2n :
-        F2pMinusF2n = NucDBMeasurement("F2pMinusF2n","F_{2}^{p}-F_{2}^{n}")
+        F2pMinusF2n = NucDBMeasurement("F2p-F2n","F_{2}^{p}-F_{2}^{n}")
         experiment.AddMeasurement(F2pMinusF2n)
     F2pMinusF2n.ClearDataPoints()
     #F2pMinusF2n.SetColor(4000)

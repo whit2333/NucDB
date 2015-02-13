@@ -97,16 +97,16 @@ if __name__ == "__main__":
     F2p.BuildGraph()
 
     # F2p/F2n
-    F2pOverF2n = experiment.GetMeasurement("F2pOverF2n")
-    if not F2pOverF2n :
-        F2pOverF2n = NucDBMeasurement("F2pOverF2n","F_{2}^{p}/F_{2}^{n}")
-        experiment.AddMeasurement(F2pOverF2n)
-    F2pOverF2n.ClearDataPoints()
+    F2nOverF2p = experiment.GetMeasurement("F2n/F2p")
+    if not F2nOverF2p :
+        F2nOverF2p = NucDBMeasurement("F2n/F2p","F_{2}^{n}/F_{2}^{p}")
+        experiment.AddMeasurement(F2nOverF2p)
+    F2nOverF2p.ClearDataPoints()
     extractor2 = EMCExtractor()
     extractor2.iValueRow=2
     extractor2.istatErr=3
     extractor2.isysErr=4
-    extractor2.SetMeasurement(F2pOverF2n)
+    extractor2.SetMeasurement(F2nOverF2p)
     extractor2.SetInputFile("experiments/EMC/f2nf2pdeut280.txt",25)
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     extractor2.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor2.Initialize()
     extractor2.ExtractAllValues()
-    F2pOverF2n.BuildGraph()
+    F2nOverF2p.BuildGraph()
 
     #g1nOverF1n = experiment.GetMeasurement("g1n/F1n")
     #if not g1nOverF1n :
