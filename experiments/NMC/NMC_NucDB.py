@@ -79,12 +79,11 @@ if __name__ == "__main__":
     extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor1.Initialize()
     extractor1.ExtractAllValues()
-    F2p.BuildGraph()
 
     # F2C/F2D
-    F2COverF2D = experiment.GetMeasurement("F2COverF2D")
+    F2COverF2D = experiment.GetMeasurement("F2C/F2D")
     if not F2COverF2D :
-        F2COverF2D = NucDBMeasurement("F2COverF2D","F_{2}^{C}/F_{2}^{D}")
+        F2COverF2D = NucDBMeasurement("F2C/F2D","F_{2}^{C}/F_{2}^{D}")
         experiment.AddMeasurement(F2COverF2D)
     F2COverF2D.ClearDataPoints()
     extractor1 = NMCExtractor()
@@ -110,6 +109,24 @@ if __name__ == "__main__":
     extractor1.Initialize()
     extractor1.ExtractAllValues()
     F2COverF2D.BuildGraph()
+
+    F2nOverF2p = experiment.GetMeasurement("F2n/F2p")
+    if not F2nOverF2p :
+        F2nOverF2p = NucDBMeasurement("F2n/F2p","F_{2}^{n}/F_{2}^{p}")
+        experiment.AddMeasurement(F2nOverF2p)
+    F2nOverF2p.ClearDataPoints()
+    extractor1 = NMCExtractor()
+    extractor1.iValueRow=2
+    extractor1.istatErr=3
+    extractor1.isysErr=4
+    extractor1.SetMeasurement(F2nOverF2p)
+    extractor1.SetInputFile("experiments/NMC/f2nOverf2pdeut_final.txt",28)
+    Xbjorken = NucDBBinnedVariable("x","x")
+    Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
+    extractor1.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor1.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor1.Initialize()
+    extractor1.ExtractAllValues()
 
     experiment.Print()
     manager.SaveExperiment(experiment)
