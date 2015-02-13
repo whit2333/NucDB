@@ -34,6 +34,9 @@
 #pragma link C++ function NucDB::Kine::nu_xQ2(double,double,double);
 #pragma link C++ function NucDB::Kine::nu_xQ2_proton(double,double);
 
+#pragma link C++ function NucDB::ApplyFilterOnList(NucDBBinnedVariable*,TList*);
+#pragma link C++ function NucDB::CreateMultiGraph(TList*,const char *);
+#pragma link C++ function NucDB::FillLegend(TLegend *,TList*,TMultiGraph *);
 
 #pragma link C++ nestedclass;
 #pragma link C++ nestedtypedef;

@@ -1,0 +1,816 @@
+File E.1. HELP.DOCUMENT.                                                        
+                                                                                
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>        
+                                                                                
+                         APPENDIX E OF                                          
+                                                                                
+               DEEP INELASTIC STRUCTURE FUNCTIONS                               
+                    FROM ELECTRON SCATTERING                                    
+                ON HYDROGEN, DEUTERIUM, AND IRON                                
+                     AT .56<Q¢2<30.0 GeV¢2                                      
+                                                                                
+                                                                                
+                         L.W. WHITLOW                                           
+                         PH.D. THESIS                                           
+                      STANFORD UNIVERSITY                                       
+                                                                                
+                        SLAC-REPORT-357                                         
+                          MARCH 1990                                            
+                                                                                
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>        
+                                                                                
+File contains 816 total lines of 72 characters each.                            
+File contains documentation for Files E.1 through E.19.                         
+                                                                                
+                                                                                
+Appendix E consists of a set of 19 files, of which, this file is the            
+first.  These files are:                                                        
+                                                                                
+        E. 1:  HELP.DOCUMENT        E.11:  SPECTRA.FORTRN                       
+        E. 2:  SIGMA.HYDROGEN       E.12:  R1990.FORTRN                         
+        E. 3:  SIGMA.DEUTRIUM       E.13:  F1990.FORTRN                         
+        E. 4:  F2.HYDROGEN          E.14:  F1990.MATRICES                       
+        E. 5:  F2.DEUTRIUM          E.15:  R.HYDROGEN                           
+        E. 6:  F2.DPRATIO           E.16:  R.DEUTRIUM                           
+        E. 7:  SPECTRA.BCDMS        E.17:  R.WORLD                              
+        E. 8:  SPECTRA.BCDMSZ       E.18:  SPECTRA.F2NF2P                       
+        E. 9:  SPECTRA.EMC          E.19:  SPECTRA.F2NF2PZ                      
+        E.10:  SPECTRA.EMCZ                                                     
+                                                                                
+These files are archived on Apple Macintosh, IBM PC/AT, and IBM PS/2            
+formatted diskettes and also exist online at SLACVM.  A copy of the             
+thesis, SLAC-REPORT-357 and/or these diskettes can be obtained from:            
+                                                                                
+        SLAC Publications,                                                      
+        Mail Bin 68,                                                            
+        P.O. Box 4349,                                                          
+        Stanford, CA 94309-4349,                                                
+           (415)926-2677.                                                       
+                                                                                
+This set of files can also be obtained via bitnet (during the                   
+foreseeable future) from LWW@SLACVM, SER@SLACVM, or EMR@SLACVM.                 
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Important Preliminary Remarks:                                                  
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                  
+                                                                                
+This set of 19 files may be copied and distributed freely.  It is               
+suggested that for clarity these files be distributed as a complete set.        
+Any use of the data contained herein should contain a reference to:             
+                                                                                
+     L.W. Whitlow, Ph.D. Thesis, Stanford University, 1990,                     
+          SLAC-REPORT-357 (1990),                                               
+                                                                                
+as our forthcoming publications will not contain data tables of any             
+form.                                                                           
+                                                                                
+Throughout this appendix, all uses of the word "Reference" (with a              
+capital "R") are in reference to SLAC-REPORT-357.                               
+                                                                                
+In general, these files span the full linewidth from character 1 through        
+character 80.  BEWARE, if you have one of those archaic printers which          
+interprets character 1 as being somehow meaningful.  As the SLAC laser-         
+printers do not print character 80, we try to avoid using that charac-          
+ter position.                                                                   
+                                                                                
+We adopt the notation  "A¢N" to denote "A superscript N," which in              
+some contexts is to be interpreted as  "A raised to the power of N."            
+Similarly, we use the notation "A_N" to denote "A subscript N."                 
+                                                                                
+Errors are given either as "fractional" or "absolute."  In general,             
+errors in R are absolute and errors in cross sections and F_2 are               
+fractional.  The only exception to this rule are errors in the F_2 data         
+from EMC and BCDMS which are given (as received from them) absolutely.          
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.2 and E.3:  SIGMA.HYDROGEN  and  SIGMA.DEUTRIUM                         
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                         
+                                                                                
+Files contain final cross sections from our global reanalysis of the            
+SLAC deep inelastic data.  Cross sections have been re-radiatively              
+corrected using our new Bardin/Tsai radiative corrections prescription          
+(see Reference).  Cross sections have been mutually cross-normalized            
+with statistical and systematic errors well below the 1% level (see             
+Reference).  The anchor for overall normalization is the recent high            
+precision experiment E140.                                                      
+                                                                                
+In total, roughly 3000 deep inelastic cross section measurements have           
+been included in our study.  Since most of these measurements are at            
+very nearly identical kinematics (see Reference), we present here a             
+``condensed'' table of measurements.  This is exactly the condensing            
+procedure discussed in detail in Section 5.2.1 of Reference.  Intui-            
+tively, this fairly obvious technique can be briefly summarized as              
+follows:                                                                        
+     cross sections at the same scattering angle and beam energy (from          
+     the same experiment) are combined together over maximum kinematic          
+     spans of                                                                   
+         delta_x=.03 ,  delta_{Q¢2}/Q¢2=6% ,  delta_{epsilon}=.05 ,             
+     and the new condensed cross section is assigned the weighted mean          
+     scattering kinematic of the condensed group.                               
+                                                                                
+In general, the tables presented here are vastly more useful than the           
+original set.  Systematic effects introduced by this condensing process         
+are estimated to be below the .1\% level, and so, are ignored.                  
+                                                                                
+                                                                                
+I       = running counting index provided for convenience and                   
+          correspondence.                                                       
+J       = experiment number, as ordered in Table 1.1 of Reference:              
+          (1=E49a,2=E49b,3=E61,4=E87,5=E89a,6=E89b,7=E139,8=E140).              
+          Note that there are no hydrogen data from E139 and E140.              
+Eo      = incident beam energy (GeV).                                           
+E'      = scattered electron energy (GeV).                                      
+theta   = scattering angle (degrees).                                           
+x       = Bjorken scaling variable.                                             
+Q¢2     = 4-momentum transfer squared (GeV¢2).                                  
+epsilon = polarization of virtual photon, epsilon-element-of-[0,1].             
+W¢2     = mass squared of final (unmeasured) hadronic state (GeV¢2).            
+C¢{RC}  = radiative correction factor applied to raw cross section,             
+          calculated according to our new Bardin/Tsai prescription.             
+sigma   = final measured cross section, corrected for all known                 
+          systematic effects.  Units are [pb/srGeV] and [per nucleon]           
+          for deuterium.                                                        
+stat    = total fractional random error, uncorrelated point to point.           
+          stat=sqrt(dST¢2+dSR¢2), where dST and dSR are defined in              
+          Chapter 4 of Reference and to a lesser degree in the documen-         
+          tation to Files E.4 and E.5.  Values for dST and dSR are              
+          presented in Files E.4 and E.5.                                       
+syst    = total fractional experimental systematic error, correlated            
+          between neighboring points.  syst=sqrt(dSY¢2+dSE¢2+dN1¢2              
+          +dN2¢2), where dSY, dSE, dN1, and dN2 are defined in Chapters         
+          4 and 5 of Reference and to a lesser degree in the documenta-         
+          tion to Files E.4 and E.5.  Values for dSY, dSE, dN1, and dN2         
+          are presented in Files E.4 and E.5.                                   
+                                                                                
+General remarks:                                                                
+^^^^^^^^^^^^^^^^                                                                
+stat and syst should be used primarily for making plots of the data.            
+For very sensitive analyses, the user should use the specific                   
+(dST,dSR,dSY,dSE,dRC,dN1,dN2,dNM) error vector presented in Files E.4           
+and E.5 for the corresponding dataline (as labeled by the counting index        
+I).  An example of the correct propogation of these components of the           
+error vector is given by program SPECTRA in File E.11.                          
+                                                                                
+The uncertainty dRC in the measured cross sections due to radiative             
+corrections is given by Equation 3.12 of Reference:                             
+                                                                                
+     dRC = abs[-.014+.017*epsilon] ,                                            
+                                                                                
+also defined fractionally.  Additionally, there are overall normaliza-          
+tion uncertainties, denoted by dNM, of size                                     
+                                                                                
+     dNM¢{hydrogen} = .021 ,     dNM¢{deuterium} = .017 ,                       
+                                                                                
+also defined fractionally.                                                      
+                                                                                
+Note that the datalines from Files E.2 and E.3 do not match kinematic-          
+ally.  This is because both hydrogen and deuterium were not measured at         
+all kinematics in all experiments.  Deuterium/hydrogen cross section            
+ratios are presented in File E.6 wherever cross sections have been              
+measured on both targets at identical or nearly identical kinematics.           
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.4 and E.5:  F2.HYDROGEN  and  F2.DEUTRIUM                               
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                               
+                                                                                
+Files contain F_2 values extracted from each cross section of Files E.2         
+and E.3.  Note that the counting index I is used to tie each cross              
+section measurement to its corresponding F_2 extraction.   The F_2              
+extractions are performed assuming R=R¢{1990}, where R¢{1990} is a best         
+fit model to the world R data (supplied in File E.17), including our new        
+extractions of Chapter 5 of Reference.  A Fortran implementation of             
+R¢{1990} is presented in File E.12.                                             
+                                                                                
+                                                                                
+I       = running counting index provided for convenience and                   
+          correspondence.                                                       
+J       = experiment number, as ordered in Table 1.1 of Reference:              
+          (1=E49a,2=E49b,3=E61,4=E87,5=E89a,6=E89b,7=E139,8=E140).              
+          Note that there are no hydrogen data from E139 and E140.              
+x       = Bjorken scaling variable.                                             
+Q¢2     = 4-momentum transfer squared (GeV¢2).                                  
+F_2     = final extracted structure function.  Units are [per nucleon]          
+          for deuterium.                                                        
+dFST    = fractional statistical COUNTING uncertainty in F_2.  This is          
+          the same as the dST uncertainty in the measured cross sections        
+          of Files E.2 and E.3, and so, the columns are labeled with            
+          both.                                                                 
+dFSR    = fractional random systematic uncertainty in F_2.  This is the         
+          same as the dSR uncertainty in the measured cross sections of         
+          Files E.2 and E.3, and so, the columns are labeled with both.         
+          [This uncertainty is due to FLUCTUATIONS in beam charge, in           
+          scattering kinematics, in target density, and in detector             
+          efficiencies -- and so, is random in nature.]                         
+dFSY    = fractional systematic uncertainty in F_2 due to background            
+          contamination.  This is the same as the dSY uncertainty in the        
+          measured cross sections of Files E.2 and E.3, and so, the             
+          columns are labeled with both.  When propagated within an             
+          experiment, assume perfectly correlated.  When propagated             
+          between experiments, assume uncorrelated.  [This uncertainty          
+          is due to uncertainties in calibrations of scattering kine-           
+          matics and uncertainties due to background contamination.]            
+dFSE    = fractional systematic uncertainty in F_2 due to the E' depen-         
+          dence of the spectrometer acceptance.  This is the same as the        
+          dSE uncertainty in the measured cross sections of Files E.2           
+          and E.3, and so, the columns are labeled with both.  Because          
+          these errors are perfectly correlated with E', they carry a           
+          (+/-) sign to keep track of (+/anti) correlations.  When              
+          propagated within an experiment, assume correlated and respect        
+          the sign.  When propagated between experiments, assume uncor-         
+          related and ignore the sign.  [This uncertainty is due to the         
+          possibility that the spectrometer acceptance is dependent upon        
+          the E' setting of the central momentum.]                              
+dFRC    = fractional systematic uncertainty in F_2 due to the radiative         
+          corrections.  This is NOT the same as dRC because the epsilon-        
+          correlation of dRC effects the extraction of F_2.  The general        
+          formula for dFRC is given by Equation 5.39 of Reference:              
+                   dFRC = .023(epsilon-.85+(1+.5R)(Rfac-1)/(Rfac(1+R)),         
+          where    Rfac = 1+(1-epsilon)/(epsilon(1+R)).                         
+          For x<.1 or Q¢2<1GeV, we increase this uncertainty by a factor        
+          of 1.5.  When propagated within or between experiments, assume        
+          perfectly correlated.                                                 
+dFN1    = fractional statistical uncertainty in F_2 due to the relative         
+          normalization uncertainties of the experiments.  This is the          
+          same as the dN1 uncertainty in the measured cross sections of         
+          Files E.2 and E.3, and so, the columns are labeled with both.         
+          When propagated within an experiment, assume perfectly                
+          correlated.  When propagated between experiments, assume              
+          uncorrelated (as in the sample Fortran program of File E.11)          
+          although they are distinctly, positively correlated as indi-          
+          cated in Table 5.4 of Reference.  [This uncertainty reflects          
+          possible statistical errors in our global normalization               
+          procedure.]                                                           
+dFN2    = fractional systematic uncertainty in F_2 due to the relative          
+          normalizations of the experiments.  This is the same as the           
+          dN2 uncertainty in the measured cross sections of Files E.2           
+          and E.3, and so, the columns are labeled with both.  When             
+          propagated within an experiment, assume perfectly correlated.         
+          When propagated between experiments, assume uncorrelated.             
+          [This uncertainty reflects possible systematic errors in our          
+          global normalization procedure.]                                      
+dFSZ    = fractional systematic uncertainty in F_2 due to the experi-           
+          mental uncertainty in R=R¢{1990}, and so, does not correlate          
+          to an uncertainty in the measured cross sections.  This error         
+          does not include the uncertainty in F_2 due to [the uncer-            
+          tainty in R¢{1990} due to (the uncertainty in radiative               
+          corrections)], which is explicitly included in dFRC above.            
+          When propagated within or between experiments assume perfectly        
+          correlated.                                                           
+stat    = total fractional random error, uncorrelated point to point.           
+          stat=sqrt(dFST¢2+dFSR¢2).  Note that this is the same quantity        
+          defined as "stat" in the documentation to Files E.2 and E.3.          
+syst    = total fractional experimental systematic error, correlated            
+          between neighboring points.  syst=sqrt(dFSY¢2+dFSE¢2+dFRC¢2           
+          +dFN1¢2+dFN2¢2+dFSZ¢2).  Note that this is NOT the same               
+          quantity defined as "syst" in the documentation to Files E.2          
+          and E.3.                                                              
+                                                                                
+General remarks:                                                                
+^^^^^^^^^^^^^^^^                                                                
+stat and syst should be used primarily for making plots of the data.            
+For sensitive analyses, the user should use the specific (dFST,dFSR,            
+dFSY,dFSE,dFRC,dFN1,dFN2,dFSZ) error vector.  An example of the correct         
+propogation of these components of the error vector is given by program         
+SPECTRA in File E.11.                                                           
+                                                                                
+Additionally, there are overall normalization uncertainties, denoted by         
+dFNM, of size                                                                   
+                                                                                
+     dFNM¢{hydrogen} = .021 ,     dFNM¢{deuterium} = .017 ,                     
+                                                                                
+also defined fractionally, which are the same, of course, as the dNM of         
+the measured cross sections of Files E.2 and E.3.                               
+                                                                                
+Note that the datalines from File E.4 and E.5 do not match kinematic-           
+ally.  This is because both hydrogen and deuterium were not measured            
+at all kinematics in all experiments.  Deuterium/hydrogen structure             
+function ratios are presented in File E.6 wherever cross sections have          
+been measured on both targets at identical or nearly identical                  
+kinematics.                                                                     
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+File E.6:   F2.DPRATIO                                                          
+^^^^^^^^^^^^^^^^^^^^^^                                                          
+                                                                                
+File contains deuterium/hydrogen F_2 ratios extracted from the cross            
+sections of Files E.2 and E.3, assuming that R¢d=R¢p (see Reference).           
+Note, given this assumption, this file also presents deuterium/hydrogen         
+cross section ratios.  Deuterium/hydrogen structure function ratios are         
+presented wherever cross sections have been measured on both targets at         
+identical or nearly identical kinematics.  Thus, the counting index, I,         
+used here is NOT related the counting index used previously.                    
+                                                                                
+See documentation to Files E.4 and E.5 for a full description of the            
+propagational properties of the errors dFSR, dFNM1, and dFNM2.                  
+                                                                                
+                                                                                
+I       = running counting index provided for convenience and                   
+          correspondence.                                                       
+J       = experiment number, as ordered in Table 1.1 of Reference:              
+          (1=E49a,2=E49b,3=E61,4=E87,5=E89a,6=E89b)                             
+          Note that there are no hydrogen data from E139 and E140.              
+x       = Bjorken scaling variable.                                             
+Q¢2     = 4-momentum transfer squared (GeV¢2).                                  
+F2d/F2p = final extracted structure function ratio.  Units are [per             
+          nucleon] for deuterium, and so, ratios are typically < 1.             
+dST     = fractional statistical counting uncertainty in F_2 ratios.            
+dSR     = fractional random systematic uncertainty in F_2 ratios.               
+dN1     = fractional statistical uncertainty in F_2 ratios due to the           
+          relative normalizations of the experiments.                           
+dN2     = fractional systematic uncertainty in F_2 due to the relative          
+          normalizations of the experiments.                                    
+stat    = total fractional random error, uncorrelated point to point.           
+          stat=sqrt(dST¢2+dSR¢2).                                               
+syst    = total fractional experimental systematic error, correlated            
+          between neighboring points.  syst=sqrt(dN1¢2+dN2¢2).                  
+                                                                                
+General remarks:                                                                
+^^^^^^^^^^^^^^^^                                                                
+stat and syst should be used primarily for making plots of the data.            
+For sensitive analyses, the user should use the specific                        
+(dST,dSR,dN1,dN2,dNM) error vector.  Note that errors of type dSY,              
+dRC, dSZ become negligible in the structure function (or cross section)         
+ratio, and are thus ignored.  Similarly, errors of type dSE are                 
+identically zero in the ratio.  Additionally, there is an overall               
+normalization uncertainty, denoted by dNM, of size                              
+                                                                                
+     dNM = .010 ,                                                               
+                                                                                
+also defined fractionally.                                                      
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.7 and E.9:  SPECTRA.BCDMS  and  SPECTRA.EMC                             
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                             
+                                                                                
+Files contain the hydrogen and deuterium F_2 values plotted in Figures          
+5.14 through 5.17 of Reference.  These F_2 values have been binned into         
+"x-spectra" so that scaling violation studies can be made.  The most            
+famous earlier versions of these plots are included in:                         
+                                                                                
+     A.C.Benvenuti, et al., Phys. Lett. B223, 485 (1989).                       
+     A.C.Benvenuti, et al., CERN-EP/89-170 (1989), submitted to Phys.           
+         Lett. B.                                                               
+     T.Sloan, CERN-EP/87-188 (1987), presented at Int'l Europhysics             
+         Conf. on High Energy Physics, Uppsala, 1987, Figure 4.                 
+                                                                                
+File E.7 contains our new SLAC data binned in bins of x=[.07,.1,.14,.18,        
+.225,.275,.35,.45,.55,.65,.75,.85] which matches the published binning          
+of the BCDMS collaboration.   File E.8 contains the corresponding BCDMS         
+data suitably corrected for our new knowledge of R given by R¢{1990}            
+(see below).                                                                    
+                                                                                
+File E.9 contains our new SLAC data binned in bins of x=[.08,.125,.175,         
+.25,.35,.45,.55,.65,.75,.85] which matches the published binning of the         
+EMC collaboration.  File E.10 contains the corresponding EMC data               
+suitably corrected for our new knowledge of R given by R¢{1990} (see            
+below).                                                                         
+                                                                                
+The program that creates these x-spectra from the data of Files E.4 and         
+E.5 is program SPECTRA, and it is given in File E.11 as an example of a         
+(very nearly) exact propagation of the full F_2 error vector.                   
+                                                                                
+                                                                                
+x       = Bjorken scaling variable.                                             
+counts  = number of elements in each x-spectra.                                 
+Q¢2     = 4-momentum transfer squared (GeV¢2).                                  
+F_2     = combined extracted structure function.  Units are [per                
+          nucleon] for deuterium.                                               
+stat    = total fractional random error, uncorrelated point to point.           
+syst    = total fractional experimental systematic error, correlated            
+          between neighboring points.                                           
+Exp'ts  = delineates the experiment numbers (J's from files E.4 and E.5)        
+          of those experiments which contribute to the F_2 value given.         
+          This is presented primarily as a convenience so that you can          
+          work backward from the F_2 values given in this table.  For           
+          example, the first dataline in File E.7 originates from a             
+          single cross section measurement from experiment 1 (=E49a).           
+          For example, the fourth dataline in File E.7 originates from          
+          two cross section measurements from experiment 1 (=E49a) and          
+          one cross section measurement from experiment 6 (=E89b).  This        
+          data is stored in an 8-digit Fortran integer.  However,               
+          because as many as 12 different cross sections are combined           
+          together, it is (in general) required to use two such Fortran         
+          integers.  Thus, both integers are printed out (in a 2i9              
+          format).  The second integer is most frequently zero and if           
+          zero, should be ignored.                                              
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.8 and E.10:  SPECTRA.BCDMSZ  and  SPECTRA.EMCZ                          
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                          
+                                                                                
+Files contain, respectively, BCDMS and EMC F_2 values ready for plots of        
+"x-spectra."  These files supply the BCDMS and EMC data corresponding to        
+the SLAC x-spectra of Files E.7 and E.9, respectively.  Sorry about the         
+abrupt change in format between E.7 and E.9 and these files.                    
+                                                                                
+Comparisons of SLAC-vs-BCDMS and SLAC-vs-EMC can be made by plotting            
+[File E.7 with File E.8] and [File E.9 with File E.10], respectively.           
+These plots will recreate Figures 5.14 through 5.17 of Reference,               
+updating the rather famous comparisons found in the three references            
+given above in the documentation to files E.7 and E.9.                          
+                                                                                
+BCDMS references:  A.C.Benvenuti, et al., Phys. Lett. B223, 485 (1989).         
+                   A.C.Benvenuti, et al., CERN-EP/89-170 (1989),                
+                       submitted to Phys. Lett. B.                              
+                                                                                
+EMC references:    J.J.Aubert, et al., Nucl. Phys. B259, 189 (1985);            
+                   J.J.Aubert, et al., Nucl. Phys. B293, 740 (1987);            
+                   M.Arneodo, et al., CERN-EP/89-121, submitted to Nucl.        
+                       Phys. B.                                                 
+                                                                                
+Note that the EMC and BCDMS F_2 values have been corrected for the new          
+model of R, namely R¢{1990} (supplied in File E.12).                            
+                                                                                
+                                                                                
+I       = convenient counting index for x-bins.                                 
+J       = convenient counting index for Q¢2-bins.  Note that the                
+          negative (and some small nonnegative) values of J encountered         
+          in File E.10 are from Arneodo, et al.                                 
+x       = Bjorken scaling variable.                                             
+Q¢2     = 4-momentum transfer squared (GeV¢2).                                  
+F_2     = final structure function corrected for R=R¢{1990}.  Units are         
+          [per nucleon] for deuterium.                                          
+stat    = total ABSOLUTE random error, uncorrelated point to point.             
+syst    = total ABSOLUTE experimental systematic error, correlated              
+          between neighboring points.  syst includes the contribution           
+          from dRfac, discussed below.                                          
+R1989c  = The value of R assumed in correcting the F_2 data from R=0.           
+          Note that an early version of model R¢{1990} was used for this        
+          correction.  This version, R¢{1989c}, differs negligibly from         
+          R¢{1990}.                                                             
+Rfac    = The correction factor applied to the F_2 data to correct for          
+          the difference in R between R¢{1990} and the value assumed in         
+          the extraction of F_2 (namely, R=0).  The correction is               
+          largest at low x and high Q¢2 because epsilon is small for            
+          these kinematics at CERN beam energies.                               
+dRfac   = The uncertainty in Rfac due to the total uncertainty in               
+          R¢{1990}, including all sources of uncertainty in R including         
+          radiative corrections.  This error is included in the total           
+          systematic uncertainty quoted in column syst (see above).             
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.11:  SPECTRA.FORTRN                                                     
+^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     
+                                                                                
+File contains a sample program which illustrates the correct propagation        
+of the systematic error vector (dFST,dFSR,dFSY,dFSE,dFRC,dFN1,dFN2,dFSZ)        
+through a binning and averaging process.                                        
+                                                                                
+Specifically, SPECTRA takes as input the F_2 data in Files E.4 and E.5,         
+shuffles the data together, bins the data in x, and then condenses the          
+data with respect to [logQ¢2] to achieve the x-spectra of Files E.7 and         
+E.9.                                                                            
+                                                                                
+For the users convenience, the I/O of program SPECTRA has been designed         
+to accept as input exactly Files E.4 and E.5; and yield as output               
+exactly Files E.7 and E.9 (without the text at the head of these files).        
+                                                                                
+Program SPECTRA is easily modified to match any x-binning.  Likewise, it        
+can be used to bin in Q¢2 or in x and Q¢2 simultaneously, with some             
+slight modifications.                                                           
+                                                                                
+Additional documentation for this program can be found as comment lines         
+within the Fortran text of the file.                                            
+                                                                                
+We do not, a priori, recommend such a detailed error propogation for all        
+applications of these data.  Because, in general, the non-random                
+systematic components of the error vector are smaller than the random           
+components (dFST and dFSR), it is often (though not always) possible to         
+make simplifying assumptions about the propogation of the non-random            
+components.  In sensitive analyses it may be necessary to propagate the         
+error vector exactly.  In those cases, program SPECTRA should serve as          
+an invaluable example.                                                          
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.12:  R1990.FORTRN                                                       
+^^^^^^^^^^^^^^^^^^^^^^^^^                                                       
+                                                                                
+File contains a Fortran implementation of the best fit model to the             
+world's R data (tabulated for convenience in File E.17) as a function of        
+(x,Q¢2).  This Fortran subroutine also returns an estimate of the total         
+error in R.  This total error is the quadrature sum of three                    
+uncertainties, namely:                                                          
+                                                                                
+        1) the statistical uncertainty, evaluated in SUBROUTINE DR1990,         
+           which is also supplied;                                              
+        2) an estimate of the bias introduced by our choice of models;          
+        3) possible errors in the radiative corrections, given by               
+           +/-.023(1+.5R)  (see Equation 4.5 of Reference).                     
+                                                                                
+NOTE:  In some applications, most notably the extraction of F_2 from the        
+measured cross sections, it is more correct not to use 3) in the                
+supplied program (as noted above in the discussion of dFRC in the               
+documentation to Files E.4 and E.5, this avoids the double propagation          
+of radiative correction errors).  See Section 5.4 of Reference for more         
+details.                                                                        
+                                                                                
+NOTE:  R¢{1990} is designed to return realistic values of R for all             
+       (x,Q¢2), with uncertainty estimates that reflect the actual              
+       measurement errors.  Outside the SLAC and EMC/BCDMS kinematic            
+       range, these uncertainty estimates are "realistic," but ad hoc.          
+NOTE:  This program should NOT be used at Q¢2<.3 GeV¢2.                         
+                                                                                
+Additional documentation for this program can be found as comment lines         
+within the Fortran text of the file.                                            
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.13:  F1990.FORTRN                                                       
+^^^^^^^^^^^^^^^^^^^^^^^^^                                                       
+                                                                                
+File contains a Fortran implementation of the two best fit models to the        
+SLAC structure function data for F_2.  See Section 5.4.1 of Reference           
+for details.                                                                    
+                                                                                
+Model choice is an input parameter, MODEL=[9,12]:                               
+   Model= 9  gets the best fit 9-parameter OMEGA9 model [Reference:             
+             Section 5.C of Bodek, et al., Phys. Rev. D20 1471 (1979)];         
+   Model=12  gets the best fit 12-parameter LAMBDA12 model [Reference:          
+             ad hoc, but inspired by Section 6.6 of J.J.Aubert, et al.,         
+             Nucl. Phys. B259 189 (1985)].                                      
+                                                                                
+Program output is [per nucleon] for deuterium.                                  
+                                                                                
+This Fortran subroutine also returns the total statistical error in F_2         
+and the systematic error in F_2 due to bias in the choice of models.            
+There is a significant difference between these models at x<.1 and at           
+x>.5 and very large Q¢2.  See Figures 5.9 and 5.10 of Reference for a           
+comparison of these models.  In general, the LAMBDA12 model fits the            
+data better at large \x, while the OMEGA9 model fits the data better at         
+\x\sl.1.  The LAMBDA12 model is the one preferred by the author for most        
+applications within the SLAC Q¢2 range.                                         
+                                                                                
+The systematic error returned by the Fortran subroutine does not include        
+the overall normalization uncertainty of the SLAC data, which is +/-2.1%        
+for hydrogen and +/-1.7% for deuterium.  Nor does it include errors due         
+to radiative corrections, which (as shown in the discussion of dFRC in          
+the documentation to Files E.4 and E.5) are everywhere less than +/-.5%.        
+                                                                                
+NOTE:  F¢{1990} is only guaranteed to be accurate in the SLAC deep              
+       inelastic neighborhood.  Program returns a warning message for           
+       calls which are outside this neighborhood.  See program for              
+       specific details.                                                        
+                                                                                
+This program requires as input the four large matrices stored in File           
+E.17.                                                                           
+                                                                                
+See Reference for more details.  Additional documentation for this              
+program can be found as comment lines within the Fortran text of the            
+file.                                                                           
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.14:  F1990.MATRICES                                                     
+^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     
+                                                                                
+File contains the covariance matrices for the two best fit models to            
+structure function data for F_2, for hydrogen and deuterium, and is             
+accessed by F1990 FORTRN.                                                       
+                                                                                
+This file was originally stored in 180 character lines, formatted as            
+(9F15.10) and (12F15.10), and when stored in this way is much more              
+accessible to the unaided mind.  We have folded the file up so as to            
+keep the record length below 80 and have altered the READ statement             
+within F1990 FORTRN to accept this folded version.                              
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.15 and E.16:  R.HYDROGEN  and  R.DEUTRIUM                               
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                               
+                                                                                
+Files contain the values of R extracted from the global reanalysis of           
+SLAC deep inelastic data.  For most purposes, the user is suggested to          
+utilize the average of the hydrogen and deuterium values as presented in        
+File E.17.  This exploits our conclusion that R¢p=R¢d (=R¢n) and reduces        
+the statistical scatter of the data.  Also, some parts of the systematic        
+error in R¢p are expected to be correlated to some parts of the syste-          
+matic error in R¢d.  The average results, given in File E.17, display           
+the correct propagation of all such errors.                                     
+                                                                                
+Note that there is one misalignment between these files.  While each            
+file contains 88 datalines, there was no hydrogen extraction at (x,Q¢2)         
+=(.7,5) and no deuterium extraction at (x,Q¢2)=(.625,4).                        
+                                                                                
+                                                                                
+x       = Bjorken scaling variable.                                             
+Q¢2     = 4-momentum transfer squared (GeV¢2).                                  
+R       = the extracted value of R¢p or R¢d.                                    
+stat    = total ABSOLUTE random error in R, uncorrelated point to point.        
+syst    = total ABSOLUTE experimental systematic error, complexly               
+          correlated between neighboring points. syst=sqrt(dRSY¢2+dRSE¢2        
+          +dRN1¢2+dRN2¢2), where dRSY, dRSE, dRN1, and dRN2 are defined         
+          below, and in more detail in Chapters 4 and 5 of Reference.           
+dRSY    = absolute systematic uncertainty in R due to background                
+          contamination and kinematic calibration uncertainties.                
+dRSE    = absolute systematic uncertainty in R due to the E' dependence         
+          of the spectrometer acceptances.                                      
+dRN1    = absolute statistical uncertainty in R due to the statistical          
+          uncertainties in the relative normalizations of the                   
+          experiments.                                                          
+dRN2    = absolute systematic uncertainty in R due to the systematic            
+          uncertainties in the relative normalizations of the                   
+          experiments.                                                          
+                                                                                
+General remarks:                                                                
+^^^^^^^^^^^^^^^^                                                                
+The errors dRSY, dRSE, dRN1, and dRN2 are VERY complexly correlated             
+between data points.  The correct propagation of these errors is                
+discussed in Section 5.3.1 of Reference, and is not reconstructible from        
+the information provided here.  When making fits to the data, simply            
+assume that syst is uncorrelated between points, and let the weights for        
+the fitting procedure be determined by 1/(stat¢2+syst¢2).  When averag-         
+ing these values together, on the other hand, make the conservative             
+assumption that each of these errors is perfectly correlated across all         
+measurements.                                                                   
+                                                                                
+NOTE:  When manipulating these data, beware that the uncertainty distri-        
+       butions are NOT gaussian.  See Appendix B.2 of Reference for the         
+       best way to deal with this fact.                                         
+                                                                                
+The uncertainty dRRC due to radiative corrections uncertainties is not          
+included in this table and is given by Equation 4.5 of Reference:               
+                                                                                
+     dRRC = .023(1+.5R) ,                                                       
+                                                                                
+also defined absolutely and perfectly correlated across all measurements        
+on both targets.                                                                
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+File E.17:  R.WORLD                                                             
+^^^^^^^^^^^^^^^^^^^                                                             
+                                                                                
+File contains the world measurements of R averaged over all targets             
+whenever those measurements are at the same (x,Q¢2).  In particular: the        
+E140 measurements are averaged over deuterium (D), iron (F), and gold           
+(A); the SLAC measurements from the combined global analysis are                
+averaged over hydrogen (H) and deuterium; and the EMC measurements are          
+averaged over hydrogen and iron.                                                
+                                                                                
+Note that the E140 data is independent of the SLAC data.  Even though we        
+used E140 as a normalization anchor, and we eventually combined E140            
+F_2 data with the other 7 SLAC experiments, we did not include the E140         
+data in the global extraction of R, and so these data represent                 
+independent measurements.                                                       
+                                                                                
+This file reproduces Tables 4.6 and 5.8 from Reference and also includes        
+R measurements from EMC, CDHSW, and BCDMS.  References for these R              
+measurements are as follows:                                                    
+                                                                                
+     SLAC:   the Reference; which supersedes all other reports prior to         
+                 March 1990.                                                    
+     E140:   the Reference, superceding S.Dasu et al., Phys. Rev. Lett.         
+                 61 1061 (1988) and all other reports prior to March            
+                 1990.                                                          
+     CDHSW:  P.Berge et al., CERN-EP/89-103 (1989), submitted to Z.             
+                 Phys. C.                                                       
+     BCDMS:  A.C.Benvenuti, et al., Phys. Lett. B223, 485 (1989);               
+             A.C.Benvenuti, et al., CERN-EP/89-170 (1989), submitted to         
+                 Phys. Lett. B.                                                 
+     EMC:    J.J.Aubert et al., Nucl. Phys. B259 189 (1985);                    
+             J.J.Aubert et al., Nucl. Phys. B272 158 (1986).                    
+                                                                                
+                                                                                
+x       = Bjorken scaling variable.                                             
+Q¢2     = 4-momentum transfer squared (GeV¢2).                                  
+<R>     = the extracted value of R averaged over all targets.                   
+stat    = total ABSOLUTE random error in R, uncorrelated point to point.        
+syst    = total ABSOLUTE experimental systematic error, complexly               
+          correlated between neighboring points for SLAC and E140 data          
+          (though independent between SLAC and E140).  syst=sqrt(dRSY¢2         
+          +dRSE¢2+dRN1¢2+dRN2¢2), where dRSY, dRSE, dRN1, and dRN2 are          
+          defined as below, and in more detail in Chapters 4 and 5 of           
+          Reference.                                                            
+dRSY    = absolute systematic uncertainty in R due to background                
+          contamination.                                                        
+dRSE    = absolute systematic uncertainty in R due to the E' dependence         
+          of the spectrometer acceptances.                                      
+dRN1    = absolute statistical uncertainty in R due to the relative             
+          normalization uncertainties of the experiments.                       
+dRN2    = absolute systematic uncertainty in R due to the relative              
+          normalization uncertainties of the experiments.                       
+Expt    = experimental effort responsible for measurement.                      
+Targets = targets averaged over, using notation defined above.                  
+                                                                                
+General remarks:                                                                
+^^^^^^^^^^^^^^^^                                                                
+The errors dRSY, dRSE, dRN1, and dRN2 in the SLAC and E140 data are VERY        
+complexely correlated between data points (though independent between           
+SLAC and E140).  The correct propagation of these errors is discussed in        
+Section 5.3.1 of Reference, and is not reconstructible from the informa-        
+tion provided here.   When making fits to the data, simply assume that          
+syst is uncorrelated between points, and let the weights for the fitting        
+procedure be determined by 1/(stat¢2+syst¢2).  When averaging these             
+values together, on the other hand, make the conservative assumption            
+that each of these errors is perfectly correlated across all measure-           
+ments.                                                                          
+                                                                                
+NOTE:  When manipulating these data, beware that the uncertainty distri-        
+       butions are NOT gaussian.  See Appendix B.2 of Reference for the         
+       best way to deal with this fact.                                         
+                                                                                
+The uncertainty dRRC in the SLAC and E140 data due to radiative                 
+corrections uncertainties is not included in this table and is given by         
+Equation 4.5 of Reference:                                                      
+                                                                                
+     dRRC = .023(1+.5R) ,                                                       
+                                                                                
+also defined absolutely and perfectly correlated across all measurements        
+on both experiments and all targets.                                            
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.18:  SPECTRA.F2NF2P                                                     
+^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     
+                                                                                
+File contains smeared neutron/proton F_2 ratios for the SLAC data.  The         
+smeared F_2 ratios are defined as                                               
+                                                                                
+     [F_2¢n/F_2¢p]_{smeared} = (2*F_2¢d/F_2¢p)-1 .                              
+                                                                                
+F_2 ratios from File E.6 have been shuffled together, and binned in             
+x-bins so that studies of this ratio as a function of Q¢2 can be made.          
+This file is the neutron/proton equivalent of Files E.7 and E.9.                
+Plots of these data are presented in Figures 5.20 and 5.21 of Reference.        
+                                                                                
+This file contains the SLAC ratios binned into 12 x-spectra matching the        
+x-binning of BCDMS and into 10 x-spectra matching the x-binning of EMC          
+(note that above x=.35 the binning is identical).  The corresponding            
+plot files for the BCDMS and EMC data are obtained directly from Files          
+E.8 and E.10, respectively, and are presented below in File E.19.  In           
+making plots 5.20 and 5.21 of Reference, we make the simplifying                
+assumption that all systematic errors for BCDMS and EMC cancel in the           
+deuterium/hydrogen structure function ratio.                                    
+                                                                                
+                                                                                
+x       = Bjorken scaling variable.                                             
+counts  = number of elements in each x-spectra.                                 
+Q¢2     = 4-momentum transfer squared (GeV¢2).                                  
+F2n/F2p = smeared neutron/proton F_2 structure function ratio.                  
+stat    = total fractional random error, uncorrelated point to point.           
+syst    = total fractional experimental systematic error, correlated            
+          between neighboring points.                                           
+Exp'ts  = delineates the experiment numbers (J's from files E.4 and E.5)        
+          of those experiments which contribute to the F_2 value given          
+          (see discussion in documentation to Files E.7 and E.9).               
+                                                                                
+                                                                                
+========================================================================        
+                                                                                
+Files E.19:  SPECTRA.F2NF2PZ                                                    
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                    
+                                                                                
+File contains smeared neutron/proton F_2 ratios for the BCDMS and EMC           
+data.    The smeared F_2 ratios are defined as above, namely,                   
+                                                                                
+     [F_2¢n/F_2¢p]_{smeared} = (2*F_2¢d/F_2¢p)-1 .                              
+                                                                                
+These F_2 ratios are calculated directly from Files E.8 and E.10,               
+thereby duplicating the method used to calculate the SLAC ratios of File        
+E.18.  Comparisons with the SLAC data are presented in Figures 5.20 and         
+5.21 and discussed in Section 5.4.4 of Reference.                               
+                                                                                
+File contains the plot files for the BCDMS and EMC smeared ratios.  For         
+references, see the documentation to Files E.8 and E.10.                        
+                                                                                
+                                                                                
+x       = Bjorken scaling variable.                                             
+Q¢2     = 4-momentum transfer squared (GeV¢2).                                  
+F2n/F2p = smeared neutron/proton F_2 structure function ratio.                  
+stat    = total ABSOLUTE random error, uncorrelated point to point.             
+syst    = total ABSOLUTE experimental systematic error, correlated              
+          between neighboring points, presented ONLY for EMC.                   
+                                                                                
+General Remarks:                                                                
+^^^^^^^^^^^^^^^^                                                                
+In Reference, we make the simplifying assumption that all BCDMS and EMC         
+systematic errors cancel in the deuterium/hydrogen structure function           
+ratio.  For completeness only, we present the EMC values of syst, which         
+are quoted in [J.J.Aubert et al., Nucl. Phys. B293 740 (1987)] as the           
+systematic errors on the neutron/hydrogen structure function ratios             
+including the calculated smearing corrections.                                  
+                                                                                
+                                                                                
+========================================================================        
+End of file HELP.DOCUMENT.  816 lines in total.                                 

@@ -1,6 +1,7 @@
 #---------------------------------------------------------------------------
 set(Functions_files 
    NucDBFuncs
+   NucDBUtil
    )
 
 set(Functions_SRCS)
