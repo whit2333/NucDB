@@ -28,6 +28,7 @@ class NucDBManager : public TObject {
       TList * fExperiments;
       TList * fPapers;
       TList * fMeasurements; /// List TObjString names
+      TList * fCalculations; /// List TObjString names
 
       TList   fStandardUnits;
       Int_t   fVerbosity;
@@ -74,14 +75,16 @@ class NucDBManager : public TObject {
       */
       NucDBPaper *       GetPaper(const char * name);
 
-      /** Returns the list of experiments.
-      */
+      /** Returns the list of experiments.  */
       TList *            GetExperiments();
+
+      TList *            GetPapers();
 
       /** Get a new list of measurments with that name, (eg, F2p,g1p ).
        *  It combs through all experiments looking for the measurment.
        */
       TList *            GetMeasurements(const char * measurement);
+      TList *            GetMeasurementCalculations(const char * measurement);
 
       /** Returns a TMultiGraph of the measurment for the given variable. */
       TMultiGraph *      GetMultiGraph(const char * measurement, const char * var = "x");
@@ -99,6 +102,7 @@ class NucDBManager : public TObject {
        *  Returns the total number of experiments
        */
       Int_t              ListExperiments();
+      Int_t              ListPapers();
 
       TList * GetRefs(); 
 
@@ -108,6 +112,7 @@ class NucDBManager : public TObject {
        *  Returns the total number of measurements
        */
       Int_t              ListMeasurements(const char * n = "");
+      Int_t              ListCalculations(const char * n = "");
 
       /** Prints the measurements for each experiment.
        *  If a measurment name is provided, only experments with that measurement are listed.

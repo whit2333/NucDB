@@ -118,6 +118,10 @@ class NucDBBinnedVariable : public TNamed {
       bool operator==(const NucDBBinnedVariable &other) const {return(BinsOverlap(other));}
       bool operator!=(const NucDBBinnedVariable &other) const { return !(*this == other);}
 
+      bool Contains(double) const ;
+      bool IsAbove(double) const ;
+      bool IsBelow(double) const ;
+
       Double_t    GetBinMinimum() const {return(fMinimum);}
       Double_t    GetBinMaximum() const {return(fMaximum);}
       Double_t    GetMinimum()    const {return(fMinimum);}
@@ -126,6 +130,7 @@ class NucDBBinnedVariable : public TNamed {
       Double_t    GetAverage()    const {return(fAverage);}
       Double_t    GetBinCenter()  const {return(fCenter);}
       Double_t    GetCenter()     const {return(fCenter);}
+      Double_t    Center()        const {return(fCenter);}
       Double_t    GetBinSize()    const {return(fMaximum-fMinimum);}
       Double_t    GetBinSizeLow()    const {return(TMath::Abs(fMean-fMinimum));}
       Double_t    GetBinSizeHigh()    const {return(TMath::Abs(fMaximum-fMean));}
@@ -133,7 +138,7 @@ class NucDBBinnedVariable : public TNamed {
       void        SetBinMaximum(   Double_t val) {fMaximum =val;fCenter=fMinimum+(fMaximum-fMinimum)/2.0;fAverage=fCenter;}
       void        SetMean(         Double_t val) {fMean = val;}
       void        SetAverage(      Double_t val) ;
-      void        SetLimits(Double_t min, Double_t max) { fMinimum = min; fMaximum = max; fCenter=fMinimum+(fMaximum-fMinimum)/2.0;fAverage=fCenter;}
+      void        SetLimits(Double_t min, Double_t max) { fMinimum = min; fMaximum = max; fCenter=fMinimum+(fMaximum-fMinimum)/2.0;fAverage=fCenter;fMean=fCenter;}
       void        SetBinValueSize( Double_t val, Double_t size);
       void        SetValueSize(    Double_t val, Double_t size){ SetBinValueSize(val,size);}
       void        SetMeanLimits(   Double_t val, Double_t min, Double_t max){ SetMean(val);SetBinMinimum(min);SetBinMaximum(max);fAverage=fCenter;}
@@ -141,7 +146,7 @@ class NucDBBinnedVariable : public TNamed {
       void        Print() ; // *MENU*
       const NucDBUnit&   GetUnit(){return fUnit;}
 
-      ClassDef(NucDBBinnedVariable,3)
+      ClassDef(NucDBBinnedVariable,4)
 };
 
 #endif

@@ -130,7 +130,7 @@ class SLACE155Extractorxg1pAll(SLACE155Extractorxg2p):
         Qsq.SetBinValueSize(float(values[self.iQsq]),0.5)
         #
         Theta = self.fCurrentDataPoint.GetBinVariable("theta")
-        Theta.SetBinValueSize(float(values[self.iThetaSpec]),0.1)
+        Theta.SetBinValueSize(float(values[self.iThetaSpec]),0.01)
         #Qsq.Print()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.iStatErr]))
@@ -344,20 +344,22 @@ class SLACE155xExtractorA(NucDBRawDataExtractor):
 if __name__ == "__main__":
     manager = NucDBManager.GetManager(1)
     
-    experiment = manager.GetExperiment("SLAC_E155")
+    experiment = manager.GetExperiment("SLAC E155")
     if not experiment :
-        experiment = NucDBExperiment("SLAC_E155","SLAC_E155")
+        experiment = NucDBExperiment("SLAC E155","SLAC E155")
     
     g1pOverF1p = experiment.GetMeasurement("g1pOverF1p")
     if not g1pOverF1p :
         g1pOverF1p = NucDBMeasurement("g1pOverF1p","g_{1}^{p}/F_{1}^{p}")
     experiment.AddMeasurement(g1pOverF1p)
+    g1pOverF1p.ClearDataPoints()
     g1pOverF1p.SetColor(4)
     
     g1dOverF1d = experiment.GetMeasurement("g1dOverF1d")
     if not g1dOverF1d :
         g1dOverF1d = NucDBMeasurement("g1dOverF1d","g_{1}^{d}/F_{1}^{d}")
     experiment.AddMeasurement(g1dOverF1d)
+    g1dOverF1d.ClearDataPoints()
     g1dOverF1d.SetColor(4)
 
     g1p = experiment.GetMeasurement("g1p")
@@ -433,7 +435,7 @@ if __name__ == "__main__":
     Ebeam.SetBinValueSize(48.35,0.0001)
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    theta    = NucDBBinnedVariable("theta","#theta")
+    theta    = NucDBBinnedVariable("theta","#theta",0.001,0.001)
     g1pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
     g1pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
     g1pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
@@ -502,14 +504,14 @@ if __name__ == "__main__":
     if not g2p :
         g2p = NucDBMeasurement("g2p","g_{2}^{p}")
         experiment.AddMeasurement(g2p)
-    g2p.ClearDataPoints()
+    #g2p.ClearDataPoints()
     g2p.SetColor(4)
     
     g2d = experiment.GetMeasurement("g2d")
     if not g2d :
         g2d = NucDBMeasurement("g2d","g_{2}^{d}")
         experiment.AddMeasurement(g2d)
-    g2d.ClearDataPoints()
+    #g2d.ClearDataPoints()
     g2d.SetColor(4)
     
     g2pExtractor = SLACE155Extractorxg2p()
@@ -541,7 +543,7 @@ if __name__ == "__main__":
     if not A1p :
         A1p = NucDBMeasurement("A1p","A_{1}^{p}")
         experiment.AddMeasurement(A1p)
-    A1p.ClearDataPoints()
+    #A1p.ClearDataPoints()
     A1p.SetColor(4)
 
     A1pExtractor = SLACE155ExtractorxA1p()
@@ -550,7 +552,7 @@ if __name__ == "__main__":
     #A1pExtractor.linestoskip=18
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    theta.SetMean(2.75)
+    theta    = NucDBBinnedVariable("theta","#theta",2.75,0.001)
     A1pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
     A1pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
     A1pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
@@ -561,7 +563,7 @@ if __name__ == "__main__":
     A1pExtractor2 = SLACE155ExtractorxA1p()
     A1pExtractor2.SetMeasurement(A1p)
     A1pExtractor2.SetInputFile("experiments/SLAC-E155/a1_p_5.txt",24)
-    theta.SetMean(5.5)
+    theta    = NucDBBinnedVariable("theta","#theta",5.5,0.001)
     A1pExtractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
     A1pExtractor2.fCurrentDataPoint.AddBinVariable(Qsq)
     A1pExtractor2.fCurrentDataPoint.AddBinVariable(Ebeam)
@@ -572,7 +574,7 @@ if __name__ == "__main__":
     A1pExtractor3 = SLACE155ExtractorxA1p()
     A1pExtractor3.SetMeasurement(A1p)
     A1pExtractor3.SetInputFile("experiments/SLAC-E155/a1_p_10.txt",24)
-    theta.SetMean(10.5)
+    theta    = NucDBBinnedVariable("theta","#theta",10.5,0.001)
     A1pExtractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
     A1pExtractor3.fCurrentDataPoint.AddBinVariable(Qsq)
     A1pExtractor3.fCurrentDataPoint.AddBinVariable(Ebeam)
@@ -585,7 +587,7 @@ if __name__ == "__main__":
     if not A2p :
         A2p = NucDBMeasurement("A2p","A_{2}^{p}")
         experiment.AddMeasurement(A2p)
-    A2p.ClearDataPoints()
+    #A2p.ClearDataPoints()
     A2p.SetColor(4)
 
     A2pExtractor = SLACE155ExtractorxA1p()
@@ -593,7 +595,7 @@ if __name__ == "__main__":
     A2pExtractor.SetInputFile("experiments/SLAC-E155/a2_pd_2.txt",21)
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq = NucDBBinnedVariable("Qsquared","Q^{2}")
-    theta.SetMean(2.75)
+    theta    = NucDBBinnedVariable("theta","#theta",2.75,0.001)
     A2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
     A2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
     A2pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
@@ -604,7 +606,7 @@ if __name__ == "__main__":
     A2pExtractor2 = SLACE155ExtractorxA1p()
     A2pExtractor2.SetMeasurement(A2p)
     A2pExtractor2.SetInputFile("experiments/SLAC-E155/a2_pd_5.txt",21)
-    theta.SetMean(5.5)
+    theta    = NucDBBinnedVariable("theta","#theta",5.5,0.001)
     A2pExtractor2.fCurrentDataPoint.AddBinVariable(Xbjorken)
     A2pExtractor2.fCurrentDataPoint.AddBinVariable(Qsq)
     A2pExtractor2.fCurrentDataPoint.AddBinVariable(Ebeam)
@@ -615,7 +617,7 @@ if __name__ == "__main__":
     A2pExtractor3 = SLACE155ExtractorxA1p()
     A2pExtractor3.SetMeasurement(A2p)
     A2pExtractor3.SetInputFile("experiments/SLAC-E155/a2_pd_10.txt",21)
-    theta.SetMean(10.5)
+    theta    = NucDBBinnedVariable("theta","#theta",10.5,0.001)
     A2pExtractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
     A2pExtractor3.fCurrentDataPoint.AddBinVariable(Qsq)
     A2pExtractor3.fCurrentDataPoint.AddBinVariable(Ebeam)
@@ -628,11 +630,12 @@ if __name__ == "__main__":
   
     # -----------------------------------------------------------
     # SLAC E155x
+    # -----------------------------------------------------------
     #
 
-    experiment = manager.GetExperiment("SLAC_E155x")
+    experiment = manager.GetExperiment("SLAC E155x")
     if not experiment :
-        experiment = NucDBExperiment("SLAC_E155x","SLAC_E155x")
+        experiment = NucDBExperiment("SLAC E155x","SLAC E155x")
     
     Xbjorken = NucDBBinnedVariable("x","x")
     Qsq      = NucDBBinnedVariable("Qsquared","Q^{2}")
@@ -657,6 +660,7 @@ if __name__ == "__main__":
     if not A2p :
         A2p = NucDBMeasurement("A2p","A_{2}^{p}")
         experiment.AddMeasurement(A2p)
+    A2p.ClearDataPoints()
     A2p.SetColor(8)
     
     A2d = experiment.GetMeasurement("A2d")
@@ -664,20 +668,22 @@ if __name__ == "__main__":
         A2d = NucDBMeasurement("A2d","A_{2}^{d}")
         experiment.AddMeasurement(A2d)
     A2d.SetColor(8)
+    A2d.ClearDataPoints()
    
+    Ebeam    = NucDBBinnedVariable("Ebeam","E")
+    theta    = NucDBBinnedVariable("theta","#theta")
     Ebeam.SetBinValueSize(29.1,0.0001)
     theta.SetBinValueSize(2.75,0.01)
     g2pExtractor = SLACE155xExtractor()
+    g2pExtractor.SetMeasurement(g2p)
     g2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
     g2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
     g2pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
     g2pExtractor.fCurrentDataPoint.AddBinVariable(theta)
-    g2pExtractor.SetMeasurement(g2p)
 
     # E = 29.1 GeV
     Ebeam = g2pExtractor.fCurrentDataPoint.GetBinVariable("Ebeam")
     Ebeam.SetMean(29.1)
-
     theta = g2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
     theta.SetMean(2.75)
     g2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",10,8)
@@ -720,55 +726,91 @@ if __name__ == "__main__":
 
 
     # A2p
+    Ebeam    = NucDBBinnedVariable("Ebeam","E")
+    theta    = NucDBBinnedVariable("theta","#theta")
     Ebeam.SetBinValueSize(29.1,0.0001)
     theta.SetBinValueSize(2.75,0.01)
     A2pExtractor = SLACE155xExtractorA()
+    A2pExtractor.SetMeasurement(A2p)
     A2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
     A2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
     A2pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
     A2pExtractor.fCurrentDataPoint.AddBinVariable(theta)
-    A2pExtractor.SetMeasurement(A2p)
 
     # E = 29.1 GeV
     Ebeam = A2pExtractor.fCurrentDataPoint.GetBinVariable("Ebeam")
-    Ebeam.SetMean(29.1)
-
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
-    theta.SetMean(2.75)
+    #Ebeam    = NucDBBinnedVariable("Ebeam","E")
+    #theta    = NucDBBinnedVariable("theta","#theta")
+    Ebeam.SetBinValueSize(29.1,0.001)
+    theta.SetBinValueSize(2.75,0.001)
     A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",10,8)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
-    theta.SetMean(5.5)
+    #Ebeam    = NucDBBinnedVariable("Ebeam","E")
+    #theta    = NucDBBinnedVariable("theta","#theta")
+    Ebeam.SetBinValueSize(29.1,0.001)
+    theta.SetBinValueSize(5.5 ,0.001)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(theta)
     A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",29,36-29)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
-    theta.SetMean(10.5)
+    #Ebeam    = NucDBBinnedVariable("Ebeam","E")
+    #theta    = NucDBBinnedVariable("theta","#theta")
+    Ebeam.SetBinValueSize(29.1,0.001)
+    theta.SetBinValueSize(10.5,0.001)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(theta)
     A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",48,52-48)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
     # E = 32.3 GeV
     Ebeam = A2pExtractor.fCurrentDataPoint.GetBinVariable("Ebeam")
-    Ebeam.SetMean(32.3)
-
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
-    theta.SetMean(2.75)
+    #Ebeam    = NucDBBinnedVariable("Ebeam","E")
+    #theta    = NucDBBinnedVariable("theta","#theta")
+    Ebeam.SetBinValueSize(32.3,0.001)
+    theta.SetBinValueSize(2.75,0.001)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(theta)
     A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",63,71-63)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
-    theta.SetMean(5.5)
+    #Ebeam    = NucDBBinnedVariable("Ebeam","E")
+    #theta    = NucDBBinnedVariable("theta","#theta")
+    Ebeam.SetBinValueSize(32.3,0.001)
+    theta.SetBinValueSize(5.5 ,0.001)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(theta)
     A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",82,89-82)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
     theta = A2pExtractor.fCurrentDataPoint.GetBinVariable("theta")
-    theta.SetMean(10.5)
+    #Ebeam    = NucDBBinnedVariable("Ebeam","E")
+    #theta    = NucDBBinnedVariable("theta","#theta")
+    Ebeam.SetBinValueSize(32.3,0.001)
+    theta.SetBinValueSize(10.5,0.001)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    #A2pExtractor.fCurrentDataPoint.AddBinVariable(theta)
     A2pExtractor.SetInputFile("experiments/SLAC-E155/E155_g2p_and_g2d.txt",100,105-100)
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()

@@ -110,9 +110,9 @@ class SLACE140Extractor(NucDBRawDataExtractor):
 if __name__ == "__main__":
     manager = NucDBManager.GetManager(1)
 
-    experiment = manager.GetExperiment("SLACE140")
+    experiment = manager.GetExperiment("SLAC E140")
     if not experiment :
-        experiment = NucDBExperiment("SLACE140","SLACE140")
+        experiment = NucDBExperiment("SLAC E140","SLAC E140")
 
     F2p = experiment.GetMeasurement("F2p")
     if not F2p :

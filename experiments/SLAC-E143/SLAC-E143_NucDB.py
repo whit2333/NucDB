@@ -174,9 +174,9 @@ class SLACE143ExtractorA1p(NucDBRawDataExtractor):
 if __name__ == "__main__":
     manager = NucDBManager.GetManager(1)
 
-    experiment = manager.GetExperiment("SLAC_E143")
+    experiment = manager.GetExperiment("SLAC E143")
     if not experiment :
-        experiment = NucDBExperiment("SLAC_E143","SLAC_E143")
+        experiment = NucDBExperiment("SLAC E143","SLAC E143")
 
     R = experiment.GetMeasurement("R") # get measurement if it already exists
     if not R :

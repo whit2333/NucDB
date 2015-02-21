@@ -67,9 +67,9 @@ class SLACE155ExtractorgXn(SLACE154Extractor):
 
 manager = NucDBManager.GetManager(1)
 
-experiment = manager.GetExperiment("SLAC_E154")
+experiment = manager.GetExperiment("SLAC E154")
 if not experiment :
-    experiment = NucDBExperiment("SLAC_E154","SLAC_E154")
+    experiment = NucDBExperiment("SLAC E154","SLAC E154")
 
 g1n = experiment.GetMeasurement("g1n")
 if not g1n :

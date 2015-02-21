@@ -16,6 +16,7 @@
  * is used for display purposes.
  */
 class NucDBExperiment : public TNamed {
+
    protected: 
       TList fMeasurements;
       TList fPapers;
@@ -47,8 +48,6 @@ class NucDBExperiment : public TNamed {
       }
 
       void PrintRefs(Option_t * opt = ""); // *MENU*
-
-
       void AddMeasurement(NucDBMeasurement* meas);
       void Print(Option_t * opt = "") const ; // *MENU*
       void PlotMeasurements(const char * var = "x"); // *MENU*

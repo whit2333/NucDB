@@ -16,6 +16,7 @@
 #include "NucDBReference.h"
 #include "TMultiGraph.h"
 #include "TLegend.h"
+#include "NucDBUtil.h"
 
 /** A measured quantitiy.
  * 
@@ -86,10 +87,18 @@ class NucDBMeasurement : public TNamed {
       /** Add a data point to the list of datapoints */
       void    AddDataPoint(NucDBDataPoint *point);
 
+      /** Remove a datapoint from the list of points. 
+       */
+      void    RemoveDataPoint(NucDBDataPoint *point);
+
       /** Adds a list data point to the list of datapoints with the option to
        *  clear exisiting datapoints.
        */
       void    AddDataPoints(TList * listOfPoints, bool clear=false );
+
+      /** Remove a list of datapoints from the list of points. 
+       */
+      void    RemoveDataPoints(TList * listOfPoints);
 
       /** Returns a list of datapoints falling in the bin.  */
       TList *  FilterWithBin(NucDBBinnedVariable const *bin);
@@ -115,15 +124,40 @@ class NucDBMeasurement : public TNamed {
        */ 
       TList *  MergeDataPoints(unsigned int n = 2, const char * var = "x", bool modify=false);
 
+      /** Merge datapoints that fall in the bin.
+       *  Returns the datapoint of all the points merged. 
+       *  If modify is true, the merged data points are removed from the measurment
+       *  and the new data point is added.
+       */
+      NucDBDataPoint * MergeDataPoints(
+            NucDBBinnedVariable * var, 
+            NucDBBinnedVariable * var2 = 0, 
+            bool                  modify = false);
+
       /** Similar to MergeDataPoints(unsigned int n, const char * var, bool modify). However, 
        *  only merges bins if the mean of two adjacent bins are within dx of each other.
        */
-      TList *  MergeNeighboringDataPoints(unsigned int n = 2, const char * var = "x", double dx=0.0001, bool modify=false);
+      TList *  MergeNeighboringDataPoints(
+            unsigned int  n      = 2,
+            const char *  var    = "x",
+            double        dx     = 0.0001,
+            bool          modify = false);
+
+      /** Same as above but with the addtional requirement that 
+       *  the second variable is also in the range.
+       */
+      TList *  MergeNeighboringDataPoints(
+            unsigned int   n      ,
+            const char *   varname,
+            double         dx     ,
+            const char *   varname2,
+            double         dx2    ,
+            bool           modify = false);
 
       /** Sort the datapoints by the supplied variable.
        *  TODO: Fix to be a stable sort such that the order is preserved.
        */ 
-      void     SortBy(const char * n = "x");
+      void     SortBy(const char * n = "x", const char * n2 = "");
 
       /** Multiply the datapoint by the value of the variable supplied.  */
       void     Multiply(const char * v );
@@ -177,7 +211,6 @@ class NucDBMeasurement : public TNamed {
       TGraph * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
 
       TMultiGraph * BuildGraphUnique(const char * var = "x", const char * uniqueVar = "Qsquared", TLegend * leg = 0 ); // *MENU*
-      //TGraphErrors * fGraph; //->
 
       // Uses only the first datapoint
       //const TList *        GetBinnedVariables() const { return(&fBinnedVariables);}

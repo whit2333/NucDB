@@ -10,33 +10,32 @@
  *  This is the top container which is streamed to file. 
  */
 class NucDBDatabase : public TNamed {
-protected:
-   TList fExperiments;
-   TList fMeasurements;
-   TList fPapers;
+   protected:
+      TList fExperiments;
+      TList fMeasurements;
+      TList fPapers;
 
-public:
-   NucDBDatabase(const char * n ="NucDB-database",const char * t = "NucDB Database") : TNamed(n,t){}
-   virtual ~NucDBDatabase(){}
+   public:
+      NucDBDatabase(const char * n ="NucDB-database",const char * t = "NucDB Database") : TNamed(n,t){}
+      virtual ~NucDBDatabase(){}
 
-   /** Necessary for Browsing */
-   Bool_t IsFolder() const { return kTRUE; }
-   void   Browse(TBrowser* b) {
-      b->Add(&fExperiments, "Experiments");
-      b->Add(&fMeasurements, "Measurements");
-      b->Add(&fPapers, "Papers");
-   }
+      Bool_t IsFolder() const { return kTRUE; }
+      void   Browse(TBrowser* b) {
+         b->Add(&fExperiments, "Experiments");
+         b->Add(&fMeasurements, "Measurements");
+         b->Add(&fPapers, "Papers");
+      }
 
-   void ListExperiments() const ;   // *MENU*
-   void ListMeasurements() const ;  // *MENU*
-   void ListPapers() const ;        // *MENU*
-   void Print() const ;             // *MENU*
+      void ListExperiments() const ;   // *MENU*
+      void ListMeasurements() const ;  // *MENU*
+      void ListPapers() const ;        // *MENU*
+      void Print() const ;             // *MENU*
 
-   TList * GetExperiments(){return(&fExperiments);}
-   TList * GetMeasurements(){return(&fMeasurements);}
-   TList * GetPapers(){return(&fPapers);}
+      TList * GetExperiments(){return(&fExperiments);}
+      TList * GetMeasurements(){return(&fMeasurements);}
+      TList * GetPapers(){return(&fPapers);}
 
-   ClassDef(NucDBDatabase,1)
+      ClassDef(NucDBDatabase,1)
 };
 
 

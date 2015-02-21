@@ -85,7 +85,8 @@ NucDBDataPoint::NucDBDataPoint(Double_t val, Double_t err) {
    fUnit = 0;
    fValue = val;
    fDimension=1;
-   fSortingVariable = "x";
+   fSortingVariable  = "x";
+   fSortingVariable2 = "Qsquared";
 
    fDiscreteVariables.Clear();
    fVariables.Clear();
@@ -187,7 +188,6 @@ void NucDBDataPoint::CalculateTotalError(){
    fTotalError = fSystematicError+fStatisticalError; 
 }
 //_____________________________________________________________________________
-
 void NucDBDataPoint::Print(Option_t * opt) const {
    std::cout << GetName() << " = " << GetValue() << " +- " << GetTotalError().GetError() << "\n";
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
@@ -201,16 +201,75 @@ void NucDBDataPoint::Print(Option_t * opt) const {
    }
 }
 //_____________________________________________________________________________
-Int_t   NucDBDataPoint::Compare(const TObject *obj) const { 
-   NucDBDataPoint      * dbobj = (NucDBDataPoint*)obj; 
+bool   NucDBDataPoint::operator==(const NucDBDataPoint & rhs) const { 
    NucDBBinnedVariable * var1  = GetBinVariable(GetSortingVariable());
-   NucDBBinnedVariable * var2  = dbobj->GetBinVariable(GetSortingVariable());
+   NucDBBinnedVariable * var2  = rhs.GetBinVariable(GetSortingVariable());
    if(!var1 || !var2) {
       Error("Compare","Could not find both bin variables. Check sorting variable name.");
-      return 0;
+      return false;
    }
-   if(var1->GetMean() > var2->GetMean() ) return 1;
-   if(var1->GetMean() < var2->GetMean() ) return -1;
+   double a0 = var1->GetMean();
+   double a1 = var2->GetMean();
+   if( a0 != a1 ) return false; 
+
+   //NucDBBinnedVariable * var3  = GetBinVariable(GetSortingVariable2());
+   //NucDBBinnedVariable * var4  = rhs.GetBinVariable(GetSortingVariable2());
+   //if(!var3 || !var4) {
+   //   Error("Compare","Could not find both bin variables. Check sorting variable name.");
+   //   return false;
+   //}
+   //double b0 = var3->GetMean();
+   //double b1 = var4->GetMean();
+   //if( b0 != b1 ) return false; 
+   return true;
+}
+//_____________________________________________________________________________
+bool   NucDBDataPoint::operator!=(const NucDBDataPoint & rhs) const { 
+   return( !((*this) == rhs) );
+}
+//_____________________________________________________________________________
+bool   NucDBDataPoint::operator<(const NucDBDataPoint & rhs) const { 
+   NucDBBinnedVariable * var1  = GetBinVariable(GetSortingVariable());
+   NucDBBinnedVariable * var2  = rhs.GetBinVariable(GetSortingVariable());
+   if(!var1 || !var2) {
+      Error("Compare","Could not find both bin variables. Check sorting variable name.");
+      return false;
+   }
+   double a0 = var1->GetMean();
+   double a1 = var2->GetMean();
+   if( a0 < a1 ) return true; 
+
+   //NucDBBinnedVariable * var3  = GetBinVariable(GetSortingVariable2());
+   //NucDBBinnedVariable * var4  = rhs.GetBinVariable(GetSortingVariable2());
+   //if(!var3 || !var4) {
+   //   Error("Compare","Could not find both bin variables. Check sorting variable name.");
+   //   return false;
+   //}
+   //double b0 = var3->GetMean();
+   //double b1 = var4->GetMean();
+   //if( a0 == a1 ) if( b0 < b1 ) return true; 
+   //std::cout << GetSortingVariable() << " : "  << var1->GetMean() << " < " <<  var2->GetMean() << " = " << (var1->GetMean() < var2->GetMean()) << std::endl;
+   return false;
+}
+//_____________________________________________________________________________
+bool   NucDBDataPoint::operator>(const NucDBDataPoint & rhs) const { 
+   return( !((*this) <= rhs) );
+}
+//_____________________________________________________________________________
+bool   NucDBDataPoint::operator<=(const NucDBDataPoint & rhs) const { 
+   if( ((*this) == rhs) )  return true;
+   if( ((*this) <  rhs) )  return true;
+   return false;
+}
+//_____________________________________________________________________________
+bool   NucDBDataPoint::operator>=(const NucDBDataPoint & rhs) const { 
+   return( !((*this) < rhs) );
+}
+//_____________________________________________________________________________
+Int_t   NucDBDataPoint::Compare(const TObject *obj) const { 
+   NucDBDataPoint      * dbobj = (NucDBDataPoint*)obj; 
+   if( (*this) > (*dbobj) ) return 1;
+   if( (*this) < (*dbobj) ) return -1;
    return 0;
 }
 //______________________________________________________________________________

@@ -55,7 +55,16 @@ void NucDBMeasurement::AddDataPoint(NucDBDataPoint *point) {
       fDataPoints.Add(point);
       fNumberOfDataPoints++;
    } else {
-      printf(" NULL NucDBDataPoint pointer \n");
+      Error("AddDataPoint","NULL dat point");
+   } 
+}
+//_____________________________________________________________________________
+void NucDBMeasurement::RemoveDataPoint(NucDBDataPoint *point) {
+   if(!point) {
+      Error("RemoveDataPoint","NULL datapoint provided");
+   } else {
+      fDataPoints.Remove(point);
+      fNumberOfDataPoints--;
    } 
 }
 //_____________________________________________________________________________
@@ -65,7 +74,16 @@ void NucDBMeasurement::AddDataPoints(TList * listOfPoints, bool clear) {
       for(int i = 0; i < listOfPoints->GetEntries();i++) 
          AddDataPoint((NucDBDataPoint*)listOfPoints->At(i));
    } else {
-      printf(" NULL TList pointer \n");
+      Error("AddDataPoints","NULL list of points");
+   } 
+}
+//_____________________________________________________________________________
+void NucDBMeasurement::RemoveDataPoints(TList * listOfPoints) {
+   if(listOfPoints) {
+      for(int i = 0; i < listOfPoints->GetEntries();i++) 
+         RemoveDataPoint((NucDBDataPoint*)listOfPoints->At(i));
+   } else {
+      Error("RemoveDataPoints","NULL list of points");
    } 
 }
 //_____________________________________________________________________________
@@ -94,6 +112,35 @@ TList *  NucDBMeasurement::MergeDataPoints(unsigned int n, const char * var, boo
       AddDataPoints(list,true);
    }
    return list;
+}
+//______________________________________________________________________________
+NucDBDataPoint * NucDBMeasurement::MergeDataPoints(
+      NucDBBinnedVariable * var, 
+      NucDBBinnedVariable * var2, 
+      bool                  modify)
+{
+   if(!var) {
+      std::cout << "Null binned variable provided!" << std::endl;
+      return 0;
+   }
+   TList * plist = FilterWithBin(var);
+   if(!plist) {
+      std::cout << "Null list returned!" << std::endl;
+      return 0;
+   }
+   if(var2) {
+      plist = NucDB::FilterDataPoints(plist,var2);
+   }
+   if( plist->GetEntries() <= 0 ) {
+      std::cout << "Empty list of data points!" << std::endl;
+      return 0;
+   }
+   NucDBDataPoint * aPoint  = NucDB::MergeDataPoints(plist);
+   if(modify) {
+      RemoveDataPoints(plist);
+      AddDataPoint(aPoint);
+   }
+   return aPoint;
 }
 //______________________________________________________________________________
 TList * NucDBMeasurement::MergeNeighboringDataPoints(unsigned int n, const char * var, double dx, bool modify) {
@@ -145,14 +192,91 @@ TList * NucDBMeasurement::MergeNeighboringDataPoints(unsigned int n, const char 
    }
    return list;
 }
+//______________________________________________________________________________
+TList *  NucDBMeasurement::MergeNeighboringDataPoints(
+            unsigned int   n      ,
+            const char *   varname    ,
+            double         dx     ,
+            const char *   varname2   ,
+            double         dx2    ,
+            bool           modify ){
+   // Same as above but only adjacent merges bins if they are within dx of each other.
+   // note that the argument n provides the limit on the number of adjacent bins 
+   // that can be merged.
+   // TODO: stable sort of datapoints
+   SortBy(varname,varname2);
+   TList * list = new TList();
+   list->Clear();
+   if(n<1) {
+      Error("MergeDataPoints","Wrong number of bins to merge. ");
+      return list;
+   }
+
+   NucDBDataPoint *      mergedPoint   = 0;
+   unsigned int          i             = 0;
+   unsigned int          nMerged       = 0;
+   NucDBBinnedVariable * previous_var  = 0;
+   NucDBBinnedVariable * previous_var2 = 0;
+
+   while(i < fDataPoints.GetEntries()) {
+
+      NucDBDataPoint      * point = (NucDBDataPoint*)fDataPoints.At(i);
+      NucDBBinnedVariable * var1  = point->GetBinVariable(varname);
+      NucDBBinnedVariable * var2  = point->GetBinVariable(varname2);
+      if(!var1) {
+         Error("MergeDataPoints(unsigned int, const char*, double,bool)","Could not find variable %s",varname);
+         continue;
+      }
+      if(!var2) {
+         Error("MergeDataPoints(unsigned int, const char*, double,bool)","Could not find variable %s",varname2);
+         continue;
+      }
+      if(nMerged == 0 || i%n == 0){
+         mergedPoint = new NucDBDataPoint(*point);
+         list->Add(mergedPoint);
+         nMerged = 0;
+         nMerged++;
+      } else {
+         if( TMath::Abs(previous_var->GetMean() - var1->GetMean()) < dx ) 
+         if( TMath::Abs(previous_var2->GetMean() - var2->GetMean()) < dx2 ) {
+            // merge the neighboring point
+            (*mergedPoint) += (*point);
+            nMerged++;
+         } else {
+            // otherwise we reset the merged point counter to and create a new starting datapoint
+            mergedPoint = new NucDBDataPoint(*point);
+            list->Add(mergedPoint);
+            nMerged = 0;
+            nMerged++;
+         }
+
+      }
+      i++;
+      previous_var  = var1;
+      previous_var2 = var2;
+   }
+   if(modify) {
+      AddDataPoints(list,true);
+   }
+   return list;
+}
 //_____________________________________________________________________________
-void NucDBMeasurement::SortBy(const char * n){
+void NucDBMeasurement::SortBy(const char * n, const char * n2){
    // Sort data according the value of the binned variable
+   std::string name2 = n2;
+   fDataPoints.SetOwner(false);
    for(int i = 0; i < fDataPoints.GetEntries();i++) {
       NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
       point->SetSortingVariable(n);
+      point->SetSortingVariable2(n2);
+      //point->Print();
    }
-   fDataPoints.Sort();
+   if( !(name2.empty()) ) {
+      NucDB::StableSort(&fDataPoints);
+   } else {
+   //fDataPoints.Print();
+      fDataPoints.Sort();
+   }
 }
 //_____________________________________________________________________________
 void  NucDBMeasurement::Multiply(const char * v){
@@ -261,6 +385,10 @@ TList *  NucDBMeasurement::FilterWithBin(NucDBBinnedVariable const *bin) {
 //_____________________________________________________________________________
 TList *  NucDBMeasurement::ApplyFilterWithBin(NucDBBinnedVariable *bin) {
    TList * list = FilterWithBin(bin); 
+   if(list->GetEntries() <= 0 ) {
+      ClearDataPoints();
+      return list;
+   }
    AddDataPoints(list,true);
    fFilterBins.Add(bin);
    return list;
@@ -696,7 +824,7 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
          gr->SetPoint(i,var->GetMean(),point->GetValue());
          gr->SetPointError(i,0.0,point->GetTotalError().GetError());
       } else {
-         Error("BuildGraph",Form("Variable, %s, not found!",varName));
+         Error("BuildGraph","Variable, %s, not found!",varName);
          gr->SetPoint(i,0,0);
          gr->SetPointError(i,0,1);
          break;
@@ -730,7 +858,7 @@ TGraph * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , const cha
          gr->SetPoint(i,var1->GetMean(),var2->GetMean());
          gr->SetPointError(i,var1->GetBinSizeLow(),var1->GetBinSizeHigh(),var2->GetBinSizeLow(),var2->GetBinSizeHigh());
       } else {
-         Error("BuildGraph",Form("Variable, %s or %s, not found!",var1Name,var2Name));
+         Error("BuildGraph","Variable, %s or %s, not found!",var1Name,var2Name);
          gr->SetPoint(i,0,0);
          gr->SetPointError(i,0,0,0,0);
          break;
@@ -786,13 +914,13 @@ TMultiGraph * NucDBMeasurement::BuildGraphUnique(const char * var, const char * 
          var2  = point->FindVariable(uniqueVar);
 
          if( !var ) {
-            Error("BuildGraph",Form("Variable, %s, not found!",var));
+            Error("BuildGraph","Variable, %s, not found!",var);
             gr->SetPoint(i,0,0);
             gr->SetPointError(i,0,1);
             continue;
          }
          if( !var2 ) {
-            Error("BuildGraph",Form("Variable, %s, not found!",uniqueVar));
+            Error("BuildGraph","Variable, %s, not found!",uniqueVar);
             gr->SetPoint(i,0,0);
             gr->SetPointError(i,0,1);
             continue;

@@ -21,4 +21,5 @@ NucDBCalculation * NucDBPaper::GetCalculation(const char * name) {
    if(!meas) std::cout << " Calculation named " << name << " NOT FOUND!\n";
    return(meas);
 }
+//______________________________________________________________________________
 

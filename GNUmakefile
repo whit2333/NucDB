@@ -133,7 +133,7 @@ database:
 	root -b -q -l experiments/inclusive/inclusive_NucDB.cxx
 	root -b -q -l experiments/CCFR/CCFR_NucDB.cxx
 	#./analyses/maid_all
-	python analyses/LATTICE_NucDB.py
+	python analyses/LATTICE_Gockeler_et_al/LATTICE_NucDB.py
 
 databaseclean:
 	rm data/NucDB.root

@@ -58,9 +58,9 @@ class SLACE142Extractor(NucDBRawDataExtractor):
 if __name__ == "__main__":
     manager = NucDBManager.GetManager(1)
     
-    experiment = manager.GetExperiment("SLAC_E142")
+    experiment = manager.GetExperiment("SLAC E142")
     if not experiment :
-        experiment = NucDBExperiment("SLAC_E142","SLAC_E142")
+        experiment = NucDBExperiment("SLAC E142","SLAC E142")
 
     #HELIUM-3 
     g1He3 = experiment.GetMeasurement("g1He3")

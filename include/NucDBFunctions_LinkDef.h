@@ -37,6 +37,8 @@
 #pragma link C++ function NucDB::ApplyFilterOnList(NucDBBinnedVariable*,TList*);
 #pragma link C++ function NucDB::CreateMultiGraph(TList*,const char *);
 #pragma link C++ function NucDB::FillLegend(TLegend *,TList*,TMultiGraph *);
+#pragma link C++ function NucDB::GetExperiment(const char *,TList*);
+#pragma link C++ function NucDB::MergeDataPoints(TList*);
 
 #pragma link C++ nestedclass;
 #pragma link C++ nestedtypedef;

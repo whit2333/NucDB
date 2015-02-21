@@ -18,6 +18,7 @@ TString wordWrap( TString s, size_t width ) {
 
 ClassImp(NucDBReference)
 
+//______________________________________________________________________________
 NucDBReference::NucDBReference(const char * n , const char * t ): TNamed(n,t) {
    fRefType     = kUnknown;
    fURL         = "";

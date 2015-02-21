@@ -84,6 +84,7 @@ class NucDBDataPoint : public TNamed {
    private:
       Int_t          fDimension;
       TString        fSortingVariable;
+      TString        fSortingVariable2;
 
    protected:
       Double_t       fValue;
@@ -98,11 +99,19 @@ class NucDBDataPoint : public TNamed {
    public :
       NucDBDataPoint(Double_t val=0.0, Double_t err=0.0);
       virtual ~NucDBDataPoint();
+
       const NucDBDataPoint& operator=(const NucDBDataPoint& v) ;
 
       /** Calculates the weighted mean and sets the error to the variance of the mean. */
       const NucDBDataPoint& operator+=(const NucDBDataPoint& v) ;
       const NucDBDataPoint& operator+(const NucDBDataPoint& v) const ;
+
+      bool  operator==(const NucDBDataPoint & rhs) const ; 
+      bool  operator!=(const NucDBDataPoint & rhs) const ; 
+      bool  operator> (const NucDBDataPoint & rhs) const ; 
+      bool  operator< (const NucDBDataPoint & rhs) const ; 
+      bool  operator>=(const NucDBDataPoint & rhs) const ; 
+      bool  operator<=(const NucDBDataPoint & rhs) const ; 
 
       void  Multiply(Double_t v){
          fStatisticalError.Multiply(v);
@@ -114,6 +123,8 @@ class NucDBDataPoint : public TNamed {
 
       void          SetSortingVariable(const char * v  = "x"){fSortingVariable = v;}
       const char *  GetSortingVariable() const {return fSortingVariable.Data();}
+      void          SetSortingVariable2(const char * v  = "x"){fSortingVariable2 = v;}
+      const char *  GetSortingVariable2() const {return fSortingVariable2.Data();}
 
       Bool_t  IsSortable() const { return kTRUE; }
       Int_t   Compare(const TObject *obj) const ;
@@ -178,7 +189,7 @@ class NucDBDataPoint : public TNamed {
       void                     AddVariable(NucDBVariable * var);
       NucDBVariable *          GetVariable(const char * name) const ;
 
-      ClassDef(NucDBDataPoint,2)
+      ClassDef(NucDBDataPoint,3)
 };
 
 

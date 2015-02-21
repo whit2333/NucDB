@@ -17,7 +17,11 @@ NucDBManager * NucDBManager::fgDBManager = 0;
 //_____________________________________________________________________________
 
 NucDBManager::NucDBManager(Int_t opt) {
-   fDatabase = 0;
+   fDatabase  = 0;
+   fExperiments  = 0;
+   fPapers       = 0;
+   fMeasurements = 0;
+   fCalculations = 0;
    fVerbosity = 2;
 
    fStandardUnits.Clear();
@@ -50,9 +54,9 @@ Int_t NucDBManager::Load(const char * n){
          fDatabase = new NucDBDatabase();
          std::cout << " Created new Database \n";
       }
-      fExperiments = fDatabase->GetExperiments();
+      fExperiments  = fDatabase->GetExperiments();
       fMeasurements = fDatabase->GetMeasurements();
-      fPapers = fDatabase->GetPapers();
+      fPapers       = fDatabase->GetPapers();
       return(0);
    }
 //_____________________________________________________________________________
@@ -100,6 +104,22 @@ TList * NucDBManager::GetMeasurements(const char * measurement) {
       }
       return(measList);
    }
+//_____________________________________________________________________________
+TList * NucDBManager::GetMeasurementCalculations(const char * measurement) {
+   TList * papList = GetPapers(); 
+   TList * measList = new TList();
+   measList->Clear();
+   for(int i = 0; i<papList->GetEntries(); i++) {
+      NucDBPaper * aPaper = (NucDBPaper*)papList->At(i);
+      TList * calcs = aPaper->GetCalculations();
+      for(int j = 0; j<calcs->GetEntries(); j++) {
+         NucDBCalculation * aCalc = (NucDBCalculation*)calcs->At(j);
+         NucDBMeasurement * aMeas = aCalc->GetMeasurement(measurement);
+         if(aMeas) measList->Add(aMeas);
+      }
+   }
+   return(measList);
+}
 //_____________________________________________________________________________
 
 TMultiGraph *      NucDBManager::GetMultiGraph(const char * measurement, const char * var){
@@ -158,32 +178,52 @@ void   NucDBManager::AddNewMeasurements(NucDBExperiment * exp){
    }
 }
 //_____________________________________________________________________________
-
 TList * NucDBManager::GetExperiments() {
-      if(!fFile) {
-         Error("GetExperiments()"," File Not open!");
-	 return(0);
-      } else if( !fDatabase ){
-         Error("GetExperiments()"," no database ");
-	 return(0);
-      } else if( !fExperiments ){
-         fExperiments = fDatabase->GetExperiments();
-      }
-      return(fExperiments);
-
+   if(!fFile) {
+      Error("GetExperiments()"," File Not open!");
+      return(0);
+   } else if( !fDatabase ){
+      Error("GetExperiments()"," no database ");
+      return(0);
+   } else if( !fExperiments ){
+      fExperiments = fDatabase->GetExperiments();
    }
-//_____________________________________________________________________________
+   return(fExperiments);
 
+}
+//_____________________________________________________________________________
+TList * NucDBManager::GetPapers() {
+   if(!fFile) {
+      Error("GetPapers()"," File Not open!");
+      return(0);
+   } else if( !fDatabase ){
+      Error("GetPapers()"," no database ");
+      return(0);
+   } else if( !fPapers ){
+      fPapers = fDatabase->GetPapers();
+   }
+   return(fPapers);
+
+}
+//_____________________________________________________________________________
 Int_t NucDBManager::ListExperiments() {
-      TList * exps = GetExperiments();
-      exps->SetOwner(false);
-      exps->Print();
-      Int_t n = exps->GetEntries();
-      //delete exps;
-      return(n);
-   }
+   TList * exps = GetExperiments();
+   exps->SetOwner(false);
+   exps->Print();
+   Int_t n = exps->GetEntries();
+   //delete exps;
+   return(n);
+}
 //_____________________________________________________________________________
-
+Int_t NucDBManager::ListPapers() {
+   TList * papers = GetPapers();
+   papers->SetOwner(false);
+   papers->Print();
+   Int_t n = papers->GetEntries();
+   //delete exps;
+   return(n);
+}
+//_____________________________________________________________________________
 Int_t NucDBManager::ListMeasurementsByExperiment(const char * measurement)  {
    // No argument
    if( !strcmp("",measurement) ) {
@@ -214,7 +254,6 @@ Int_t NucDBManager::ListMeasurementsByExperiment(const char * measurement)  {
    return(0);
 }
 //_____________________________________________________________________________
-
 Int_t NucDBManager::ListMeasurements(const char * n ) {
    TList * exps = GetExperiments();
 
@@ -243,7 +282,6 @@ Int_t NucDBManager::ListMeasurements(const char * n ) {
    for (it=measurements.begin(); it!=measurements.end(); it++) {
       std::cout << " " << *it << std::endl;//"\t"  << *it_title << std::endl;
    }
-
    return(0);  
 }
 //_____________________________________________________________________________
@@ -257,6 +295,38 @@ TList * NucDBManager::GetRefs() {
       }
       refs->Print();
       return( refs );
+}
+//_____________________________________________________________________________
+Int_t NucDBManager::ListCalculations(const char * n ) {
+   TList * exps = GetPapers();
+   if(!exps) return -1;
+
+   std::set<std::string>                           Calculations;
+   std::set<std::string>::iterator                 it;
+   std::pair<std::set<std::string>::iterator,bool> ret;
+
+   for(int i=0;i<exps->GetEntries();i++) {
+      NucDBPaper * anExp = (NucDBPaper*)exps->At(i);
+      TList * expMeas = anExp->GetCalculations();
+      for(int j=0;j<expMeas->GetEntries();j++) {
+         NucDBCalculation * aCalc = (NucDBCalculation*)expMeas->At(j);
+         TString aName            = aCalc->GetName();
+         TString aTitle           = aCalc->GetTitle();
+         std::stringstream ss;
+         ss << " " << std::setw(15) << aName.Data() << "\t"  << aTitle.Data() ;
+         if(n) {
+            if(aName.BeginsWith(n)) {
+               ret = Calculations.insert(ss.str());
+            }
+         } else {
+            ret    = Calculations.insert(ss.str());
+         }
+      }
+   }
+   for (it=Calculations.begin(); it!=Calculations.end(); it++) {
+      std::cout << " " << *it << std::endl;//"\t"  << *it_title << std::endl;
+   }
+   return(0);  
 }
 //_____________________________________________________________________________
 

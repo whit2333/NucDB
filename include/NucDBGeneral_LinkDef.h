@@ -17,6 +17,8 @@
 #pragma link C++ class NucDBDataPoint+;
 #pragma link C++ class NucDBDependentVariable+;
 
+#pragma link C++ class std::vector<NucDBDataPoint*>+;
+
 #pragma link C++ class NucDBThetaDV_rad+;
 #pragma link C++ class NucDBThetaDV_deg+;
 #pragma link C++ class NucDBInvariantMassDV+;

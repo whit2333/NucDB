@@ -8,8 +8,14 @@
 #include "TGraphErrors.h"
 #include "TCanvas.h"
 
-/** Base class for a calculation object.
- * 
+/** Base class for a Calculation.
+ *  Calculations are associated with papers and should be used for 
+ *  theoretical results, predictions, models, etc.
+ *
+ * Paper
+ *  -> Calculations
+ *   -> Measurements
+ *  
  * A calculation then includes all measured quantities as measurements.
  * The name should be the name used to query the database and the title
  * is used for display purposes.
@@ -19,7 +25,7 @@ class NucDBCalculation : public TNamed {
       NucDBCalculation(const char * name ="unknowncalc",const char * title="unknown") : TNamed(name,title) {
          fMeasurements.Clear();
       }
-      ~NucDBCalculation() { }
+      virtual ~NucDBCalculation() { }
 
       NucDBMeasurement * GetMeasurement(const char * name) {
          NucDBMeasurement * meas = 0;

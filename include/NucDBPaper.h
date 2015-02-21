@@ -59,7 +59,7 @@ class NucDBPaper : public TNamed {
    public:
       void AddCalculation(NucDBCalculation* c){
          if(c){
-            c->fPaper = GetName();
+            c->fPaper     = GetName();
             c->fReference = GetReference();
             fCalculations.Add(c);
          }
@@ -71,6 +71,7 @@ class NucDBPaper : public TNamed {
             ((NucDBCalculation*)fCalculations.At(i))->Print(opt);
       }
 
+      TList * GetCalculations(){ return(&fCalculations); }
 
       //    void PlotCl(const char * var = "x"){
       //       TCanvas * c1 = new TCanvas( Form("%splots",GetName()),Form("%s plots",GetTitle() ) );

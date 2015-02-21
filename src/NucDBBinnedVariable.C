@@ -35,13 +35,19 @@ void NucDBDiscreteVariable::Print() {
 
 ClassImp(NucDBBinnedVariable)
 //_____________________________________________________________________________
-NucDBBinnedVariable::NucDBBinnedVariable(const char* name, const char* title, 
-      Double_t y, Double_t dy): TNamed(name, title), 
-   fMinimum(y-dy),fMaximum(y+dy),fMean(y),fAverage(y)
+NucDBBinnedVariable::NucDBBinnedVariable(
+      const char * name, 
+      const char * title, 
+      Double_t     y, 
+      Double_t     dy) :
+   TNamed(name,title), 
+   fMinimum(y-dy),
+   fMaximum(y+dy),
+   fMean(y),
+   fAverage(y)
 { }
 //_____________________________________________________________________________
-
-NucDBBinnedVariable::~NucDBBinnedVariable(){}
+NucDBBinnedVariable::~NucDBBinnedVariable(){ }
 //_____________________________________________________________________________
 
 NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v) {
@@ -50,13 +56,17 @@ NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v) {
    fMaximum  = v.GetMaximum();
    fMean     = v.GetMean();
    fAverage  = v.GetAverage();
+   fCenter   = v.GetCenter();
 }
 //_____________________________________________________________________________
 const NucDBBinnedVariable& NucDBBinnedVariable::operator+=(const NucDBBinnedVariable& v) {
+   // a weight for finding where the mean should be.
+   double weight = GetBinSize()/v.GetBinSize(); 
    if(fMinimum > v.GetMinimum() ) fMinimum = v.GetMinimum();
    if(fMaximum < v.GetMaximum() ) fMaximum = v.GetMaximum();
-   fAverage = (fMaximum + fMinimum)/2.0;
-   fMean = (fMean + v.fMean)/2.0;
+   SetBinMaximum(fMaximum);
+   SetBinMinimum(fMinimum);
+   fMean    = (weight*fMean + v.fMean)/(weight+1);
 
    return *this;
 }
@@ -86,6 +96,19 @@ bool NucDBBinnedVariable::BinsOverlap(const NucDBBinnedVariable &var) const {
    else if( var.GetMinimum() >= GetMinimum()  && var.GetMinimum() <= GetMaximum()) return true;
    else if( var.GetMaximum() >= GetMinimum()  && var.GetMaximum() <= GetMaximum()) return true;
    else return false;
+}
+//_____________________________________________________________________________
+bool NucDBBinnedVariable::Contains(double v) const {
+   if( ( v >= GetMinimum() ) && ( v < GetMaximum() ) ) return true;
+   return false;
+}
+bool NucDBBinnedVariable::IsBelow(double v) const {
+   if( GetMaximum() < v ) return true;
+   return false;
+}
+bool NucDBBinnedVariable::IsAbove(double v) const {
+   if( GetMinimum() > v ) return true;
+   return false;
 }
 //_____________________________________________________________________________
 void NucDBBinnedVariable::SetBinValueSize(Double_t val, Double_t size) {

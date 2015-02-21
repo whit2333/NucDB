@@ -3,17 +3,20 @@
 ClassImp(NucDBExperiment)
 //_____________________________________________________________________________
 NucDBExperiment::NucDBExperiment(const char * name ,const char * title) : TNamed(name,title) {
-      fMeasurements.Clear();
-   }
+   fMeasurements.Clear();
+}
 //_____________________________________________________________________________
 
 NucDBExperiment::~NucDBExperiment(){}
 //_____________________________________________________________________________
 
 void NucDBExperiment::AddMeasurement(NucDBMeasurement* meas){
-      if(meas) meas->SetExperimentName( GetName() );
-      if(meas) fMeasurements.Add(meas);
+   if(meas)
+   {
+      meas->SetExperimentName( GetName() );
+      fMeasurements.Add(meas);
    }
+}
 //_____________________________________________________________________________
 
 NucDBMeasurement * NucDBExperiment::GetMeasurement(const char * name) {
