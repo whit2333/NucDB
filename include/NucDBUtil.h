@@ -15,7 +15,7 @@ namespace NucDB {
 
    TList * FilterMeasurements( TList * list, NucDBBinnedVariable * var );
 
-   TMultiGraph * CreateMultiGraph(TList * list, const char * var, int color = 0);
+   TMultiGraph * CreateMultiGraph(TList * list, const char * var);
 
    void FillLegend(TLegend * leg, TList * list, TMultiGraph * mg );
 

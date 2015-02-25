@@ -6,6 +6,7 @@
 #include "NucDBMeasurement.h"
 #include "NucDBDataPoint.h"
 #include "NucDBBinnedVariable.h"
+#include "NucDBManager.h"
 
 #include <iostream>
 #include <string>
@@ -47,22 +48,23 @@ namespace NucDB {
       return filtered_list;
    }
 
-   TMultiGraph * CreateMultiGraph(TList * list, const char * var,int color ) {
+   TMultiGraph * CreateMultiGraph(TList * list, const char * var) {
       // creates a multi graph from a list of measurments
       if(!list) {
          std::cout << "Error null list" << std::endl;
          return 0;
       }
+      NucDBManager * dbman = NucDBManager::GetManager();
       TMultiGraph * mg = new TMultiGraph();
       for(unsigned int i = 0; i<list->GetEntries();i++) {
          NucDBMeasurement * mes = (NucDBMeasurement*)list->At(i);
          TGraph * gr = mes->BuildGraph(var);
          if(gr) {
-            if(color) {
-               gr->SetMarkerColor(color);
-               gr->SetLineColor(  color);
-            }
-            gr->SetMarkerStyle(20+i);
+            Int_t color = dbman->NextColor();
+            Int_t mark  = dbman->NextMarker();
+            gr->SetMarkerColor(color);
+            gr->SetLineColor(  color);
+            gr->SetMarkerStyle(mark);
             mg->Add(gr,"p");
          }
       }

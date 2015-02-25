@@ -132,6 +132,7 @@ database:
 	python experiments/QES_archive/QES_archive_NucDB.py
 	root -b -q -l experiments/inclusive/inclusive_NucDB.cxx
 	root -b -q -l experiments/CCFR/CCFR_NucDB.cxx
+	root -b -q -l analyses/Osipenko_et_al/Osipenko_et_al_NucDB.cxx
 	#./analyses/maid_all
 	python analyses/LATTICE_Gockeler_et_al/LATTICE_NucDB.py
 

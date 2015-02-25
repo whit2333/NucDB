@@ -33,6 +33,13 @@ class NucDBManager : public TObject {
       TList   fStandardUnits;
       Int_t   fVerbosity;
 
+      std::vector<int> fColors;
+      std::vector<int> fMarkers;
+      std::vector<int> fFillStyles;
+
+      Int_t fi_color;
+      Int_t fi_marker;
+
    protected:
 
       /** If opt is not zero it is opened in UPDATE mode, otherwise it is readonly.
@@ -106,6 +113,24 @@ class NucDBManager : public TObject {
 
       TList * GetRefs(); 
 
+      Int_t  NextColor() {
+         if( fColors.size() == 0 ) return 1; // black
+         // returns next color in list
+         Int_t col = fColors[fi_color];
+         fi_color++;
+         if( fi_color == fColors.size() ) fi_color = 0;
+         return col;
+      }
+      Int_t  NextMarker() {
+         if( fMarkers.size() == 0 ) return 20; // filled circle
+         // returns next color in list
+         Int_t mark = fMarkers[fi_marker];
+         fi_marker++;
+         if( fi_marker == fMarkers.size() ) fi_marker = 0;
+         return mark;
+      }
+      void SetMarkers(const std::vector<int> & m) { fMarkers =  m; }
+      void SetColors(const std::vector<int> & m) { fColors =  m; }
 
       /** Prints the measurements which are stored in the database. 
        *  A measurement would be, for example, F1p, g2P, F2C/F2D,...
