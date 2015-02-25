@@ -149,6 +149,7 @@ TMultiGraph *      NucDBManager::GetKinematicMultiGraph(const char * measurement
 //_____________________________________________________________________________
 void NucDBManager::SavePaper(NucDBPaper * p) {
    if(!fFile){ Error("SavePaper"," NO FILE OPENED!!! "); }
+      fPapers->Remove(p);
       fPapers->Add(p);
       SaveDatabase();
 }

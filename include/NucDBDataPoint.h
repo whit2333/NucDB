@@ -83,6 +83,7 @@ class NucDBErrorBar : public TObject {
 class NucDBDataPoint : public TNamed {
    private:
       Int_t          fDimension;
+      Int_t          fNSortVariables;
       TString        fSortingVariable;
       TString        fSortingVariable2;
 
@@ -126,8 +127,13 @@ class NucDBDataPoint : public TNamed {
       void          SetSortingVariable2(const char * v  = "x"){fSortingVariable2 = v;}
       const char *  GetSortingVariable2() const {return fSortingVariable2.Data();}
 
+      void  SetSortPriorities(const std::vector<std::string> & names);
+      Int_t GetNSortVariables() const { return fNSortVariables; }
+      NucDBBinnedVariable * GetSortPriority(Int_t p) const;
+
       Bool_t  IsSortable() const { return kTRUE; }
       Int_t   Compare(const TObject *obj) const ;
+
 
       /** Performs deep copy. */
       NucDBDataPoint(const NucDBDataPoint& v) ;

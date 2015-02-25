@@ -27,7 +27,27 @@ namespace NucDB {
       }
    }
 
-   TMultiGraph * CreateMultiGraph(TList * list, const char * var) {
+   TList * FilterMeasurements(TList * list, NucDBBinnedVariable * var) {
+      if(!var) {
+         std::cout << "Error null bin variable" << std::endl;
+         return 0;
+      }
+      if(!list) {
+         std::cout << "Error null list" << std::endl;
+         return 0;
+      }
+      TList * filtered_list = new TList();
+      for(unsigned int i = 0; i<list->GetEntries();i++) {
+         NucDBMeasurement * mes    = (NucDBMeasurement*)list->At(i);
+         NucDBMeasurement * meas2  = mes->NewMeasurementWithFilter(var);
+         if( meas2->GetNDataPoints() > 0 ) {
+            filtered_list->Add(meas2);
+         }
+      }
+      return filtered_list;
+   }
+
+   TMultiGraph * CreateMultiGraph(TList * list, const char * var,int color ) {
       // creates a multi graph from a list of measurments
       if(!list) {
          std::cout << "Error null list" << std::endl;
@@ -38,8 +58,10 @@ namespace NucDB {
          NucDBMeasurement * mes = (NucDBMeasurement*)list->At(i);
          TGraph * gr = mes->BuildGraph(var);
          if(gr) {
-            //gr->SetMarkerColor(1+i);
-            //gr->SetLineColor(  1+i);
+            if(color) {
+               gr->SetMarkerColor(color);
+               gr->SetLineColor(  color);
+            }
             gr->SetMarkerStyle(20+i);
             mg->Add(gr,"p");
          }
@@ -89,6 +111,27 @@ namespace NucDB {
       }
       return 0;
    }
+//______________________________________________________________________________
+
+   NucDBMeasurement * Merge(TList * meas_list, const char * name )
+   {
+      if(!meas_list) {
+         std::cout << "cannot merge: measurement list is Null" << std::endl;
+         return 0;
+      }
+      if(meas_list->GetEntries() <= 0) {
+         std::cout << "cannot merge: measurement list is empty" << std::endl;
+         return 0;
+      }
+
+      NucDBMeasurement * merged_meas = new NucDBMeasurement(name,name);
+      for(int i = 0; i<meas_list->GetEntries();i++) {
+         NucDBMeasurement * aMeas = (NucDBMeasurement*)meas_list->At(i);
+         merged_meas->AddDataPoints(aMeas->GetDataPoints());
+      }
+      return merged_meas;
+   }
+//______________________________________________________________________________
 
    NucDBDataPoint *  MergeDataPoints(TList * points){
       if(!points) {
@@ -120,7 +163,11 @@ namespace NucDB {
          return list;
       }
       for(int i = 0; i < list->GetEntries();i++) {
-         NucDBDataPoint * point = (NucDBDataPoint*)list->At(i);
+         NucDBDataPoint * point = dynamic_cast<NucDBDataPoint*>(list->At(i));
+         if(!point) {
+            std::cout << "list does not contain data points." <<std::endl;
+            continue;
+         }
          NucDBBinnedVariable * var2    = point->GetBinVariable(var->GetName());
          if(var2){
             if ( (*var) == (*var2) ) plist->Add(point);
@@ -130,48 +177,59 @@ namespace NucDB {
    }
 //_____________________________________________________________________________
    bool CompareDataPoint(const NucDBDataPoint *lhs, const NucDBDataPoint *rhs) {
-      NucDBBinnedVariable * var3  = lhs->GetBinVariable(lhs->GetSortingVariable2());
-      NucDBBinnedVariable * var4  = rhs->GetBinVariable(rhs->GetSortingVariable2());
-      if(!var3 || !var4) {
-         Error("Compare","Could not find both bin variables. Check sorting variable name.");
-         return false;
+      int n = lhs->GetNSortVariables();
+      for(int i = n-1; i>=0; i--) {
+         NucDBBinnedVariable * var3  = lhs->GetSortPriority(i);
+         NucDBBinnedVariable * var4  = rhs->GetSortPriority(i);
+         if(!var3 || !var4) {
+            Error("Compare","Could not find both bin variables. Check sorting variable name.");
+            return false;
+         }
+         double b0 = var3->GetCenter();
+         double b1 = var4->GetCenter();
+         if(b0!=b1) {
+            //std::cout << var3->GetName() << b0 << " < " << b1 << std::endl;
+            return( b0<b1 );
+         }
+
+         //if( var3->Contains(b1) ) {
+         //   //std::cout << var3->GetName() << " contains " << var4->GetName() << std::endl;
+         //}
+         //if( !(var3->Contains(b1)) && (var3->IsBelow(b1))  )  true;
+         //std::cout << " not true"; 
+         //if( !(var4->Contains(b0)) && (var4->IsBelow(b0))  )  false;
+         //std::cout << " not false"; 
       }
-      double b0 = var3->GetCenter();
-      double b1 = var4->GetCenter();
-      if( !(var3->Contains(b1)) && (var3->IsBelow(b1))  )  true;
-      if( !(var4->Contains(b0)) && (var4->IsBelow(b0))  )  false;
       //lhs->Print();
       //if( (*lhs) < (*rhs) ) {
-      //   std::cout << " is less than " << std::endl;
+      //   std::cout << " LHS is < " << std::endl;
       //} else {
-      //   std::cout << " is not less than " << std::endl;
+      //   std::cout << " LHS is > " << std::endl;
       //}
       //rhs->Print();
 
-          return( (*lhs) < (*rhs) );
+      return( (*lhs) < (*rhs) );
    }
 //_____________________________________________________________________________
-   void StableSort(TList * list) { 
-      if(!list) {
-         std::cout << "NULL list to sort" << std::endl;
-         return;
-      }
+   TList *  StableSort( const TList & list ) { 
       std::vector<NucDBDataPoint*> templist;
-      Int_t n1 = list->GetEntries();
-      for(int i = 0; i < list->GetEntries();i++) {
-         NucDBDataPoint * point = (NucDBDataPoint*)list->At(i);
+      Int_t n1 = list.GetEntries();
+      for(int i = 0; i < list.GetEntries();i++) {
+         NucDBDataPoint * point = (NucDBDataPoint*)list.At(i);
          templist.push_back(point);
       }
-      list->Clear();
+      //std::sort (templist.begin(), templist.end(), CompareDataPoint );
       std::stable_sort (templist.begin(), templist.end(), CompareDataPoint );
       Int_t n2 =  templist.size();
+      TList * newlist  = new TList();
       for(int i = 0; i< templist.size() ; i++ )  { 
-         templist[i]->Print();
-         list->Add( templist[i] );
+         //templist[i]->Print();
+         newlist->Add( new NucDBDataPoint( *(templist[i]))  );
       }
       if( n1 != n2 ) {
          std::cout << " ERROR sorting counts not equal! " << std::endl;
       }
+      return newlist;
    }
 
 

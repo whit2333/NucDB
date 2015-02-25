@@ -24,8 +24,11 @@ class NucDBCalculation : public TNamed {
    public:
       NucDBCalculation(const char * name ="unknowncalc",const char * title="unknown") : TNamed(name,title) {
          fMeasurements.Clear();
+         fMeasurements.SetOwner(true);
       }
-      virtual ~NucDBCalculation() { }
+      virtual ~NucDBCalculation() {
+         fMeasurements.Clear();
+      }
 
       NucDBMeasurement * GetMeasurement(const char * name) {
          NucDBMeasurement * meas = 0;
@@ -51,6 +54,10 @@ class NucDBCalculation : public TNamed {
       void AddMeasurement(NucDBMeasurement* meas){
          if(meas) meas->SetExperimentName(GetName());
          if(meas) fMeasurements.Add(meas);
+      }
+
+      void ClearMeasurements() {
+         fMeasurements.Clear();
       }
 
       void Print(Option_t * opt = "") const {

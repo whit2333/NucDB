@@ -73,6 +73,10 @@ class NucDBPaper : public TNamed {
 
       TList * GetCalculations(){ return(&fCalculations); }
 
+      void ClearCalculations(){
+         fCalculations.Clear();
+      }
+
       //    void PlotCl(const char * var = "x"){
       //       TCanvas * c1 = new TCanvas( Form("%splots",GetName()),Form("%s plots",GetTitle() ) );
       //       c1->Divide(2,fCalculations.GetEntries()/2);

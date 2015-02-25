@@ -72,7 +72,7 @@ void NucDBMeasurement::AddDataPoints(TList * listOfPoints, bool clear) {
    if(listOfPoints) {
       if(clear) ClearDataPoints();
       for(int i = 0; i < listOfPoints->GetEntries();i++) 
-         AddDataPoint((NucDBDataPoint*)listOfPoints->At(i));
+         AddDataPoint(new NucDBDataPoint(*((NucDBDataPoint*)listOfPoints->At(i))));
    } else {
       Error("AddDataPoints","NULL list of points");
    } 
@@ -147,7 +147,7 @@ TList * NucDBMeasurement::MergeNeighboringDataPoints(unsigned int n, const char 
    // Same as above but only adjacent merges bins if they are within dx of each other.
    // note that the argument n provides the limit on the number of adjacent bins 
    // that can be merged.
-   SortBy(var);
+   //SortBy(var);
    TList * list = new TList();
    list->Clear();
    if(n<1) {
@@ -157,6 +157,8 @@ TList * NucDBMeasurement::MergeNeighboringDataPoints(unsigned int n, const char 
    NucDBDataPoint * mergedPoint = 0;
    unsigned int i = 0;
    unsigned int nMerged = 0;
+   double mean_0 = 0.0;
+   double mean_1 = 0.0;
    NucDBBinnedVariable * previous_var = 0;
    while(i < fDataPoints.GetEntries()) {
       NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
@@ -165,13 +167,15 @@ TList * NucDBMeasurement::MergeNeighboringDataPoints(unsigned int n, const char 
          Error("MergeDataPoints(unsigned int, const char*, double,bool)","Could not find variable %s",var);
          continue;
       }
+      mean_1 = var1->GetMean();
       if(nMerged == 0 || i%n == 0){
          mergedPoint = new NucDBDataPoint(*point);
          list->Add(mergedPoint);
          nMerged = 0;
          nMerged++;
+         mean_0 = mean_1;
       } else {
-         if( TMath::Abs(previous_var->GetMean() - var1->GetMean()) < dx ) {
+         if( TMath::Abs(mean_1 - mean_0) < dx ) {
             // merge the neighboring point
             (*mergedPoint) += (*point);
             nMerged++;
@@ -181,6 +185,7 @@ TList * NucDBMeasurement::MergeNeighboringDataPoints(unsigned int n, const char 
             list->Add(mergedPoint);
             nMerged = 0;
             nMerged++;
+            mean_0 = mean_1;
          }
 
       }
@@ -188,7 +193,9 @@ TList * NucDBMeasurement::MergeNeighboringDataPoints(unsigned int n, const char 
       previous_var = var1;
    }
    if(modify) {
+      fDataPoints.SetOwner(false);
       AddDataPoints(list,true);
+      fDataPoints.SetOwner(true);
    }
    return list;
 }
@@ -203,8 +210,7 @@ TList *  NucDBMeasurement::MergeNeighboringDataPoints(
    // Same as above but only adjacent merges bins if they are within dx of each other.
    // note that the argument n provides the limit on the number of adjacent bins 
    // that can be merged.
-   // TODO: stable sort of datapoints
-   SortBy(varname,varname2);
+   //SortBy(varname,varname2);
    TList * list = new TList();
    list->Clear();
    if(n<1) {
@@ -217,6 +223,10 @@ TList *  NucDBMeasurement::MergeNeighboringDataPoints(
    unsigned int          nMerged       = 0;
    NucDBBinnedVariable * previous_var  = 0;
    NucDBBinnedVariable * previous_var2 = 0;
+   double mean_0 = 0.0;
+   double mean_1 = 0.0;
+   double mean2_0 = 0.0;
+   double mean2_1 = 0.0;
 
    while(i < fDataPoints.GetEntries()) {
 
@@ -231,14 +241,17 @@ TList *  NucDBMeasurement::MergeNeighboringDataPoints(
          Error("MergeDataPoints(unsigned int, const char*, double,bool)","Could not find variable %s",varname2);
          continue;
       }
+      mean_1 = var1->GetMean();
+      mean2_1 = var1->GetMean();
       if(nMerged == 0 || i%n == 0){
          mergedPoint = new NucDBDataPoint(*point);
          list->Add(mergedPoint);
          nMerged = 0;
          nMerged++;
+         mean_0 = mean_1;
+         mean2_0 = mean2_1;
       } else {
-         if( TMath::Abs(previous_var->GetMean() - var1->GetMean()) < dx ) 
-         if( TMath::Abs(previous_var2->GetMean() - var2->GetMean()) < dx2 ) {
+         if( (TMath::Abs(mean_0 - mean_1) < dx) && (TMath::Abs(mean2_0 - mean2_1) < dx2) ) {
             // merge the neighboring point
             (*mergedPoint) += (*point);
             nMerged++;
@@ -248,6 +261,8 @@ TList *  NucDBMeasurement::MergeNeighboringDataPoints(
             list->Add(mergedPoint);
             nMerged = 0;
             nMerged++;
+            mean_0 = mean_1;
+            mean2_0 = mean2_1;
          }
 
       }
@@ -261,6 +276,26 @@ TList *  NucDBMeasurement::MergeNeighboringDataPoints(
    return list;
 }
 //_____________________________________________________________________________
+void NucDBMeasurement::SortBy(const std::vector<std::string> & names){
+   // Sort the data by the bins.
+   // The vector are the names of bins.
+   // The very first bin is sorted by the bin mean, the 
+   // subsequent bins are sorted by the bin center. In this way a weak
+   // ordering can be easily achieved assuming many of the bins are the same.
+
+   fDataPoints.SetOwner(false);
+   for(int i = 0; i < fDataPoints.GetEntries();i++) {
+      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
+      point->SetSortPriorities(names);
+      //point->SetSortingVariable(n);
+      //point->SetSortingVariable2(n2);
+      //point->Print();
+   }
+   TList * sortedlist  = NucDB::StableSort(fDataPoints);
+   AddDataPoints(sortedlist,true);
+   fDataPoints.SetOwner(true);
+}
+//_____________________________________________________________________________
 void NucDBMeasurement::SortBy(const char * n, const char * n2){
    // Sort data according the value of the binned variable
    std::string name2 = n2;
@@ -272,11 +307,13 @@ void NucDBMeasurement::SortBy(const char * n, const char * n2){
       //point->Print();
    }
    if( !(name2.empty()) ) {
-      NucDB::StableSort(&fDataPoints);
+      TList * sortedlist  = NucDB::StableSort(&fDataPoints);
+      AddDataPoints(sortedlist,true);
    } else {
    //fDataPoints.Print();
       fDataPoints.Sort();
    }
+   fDataPoints.SetOwner(true);
 }
 //_____________________________________________________________________________
 void  NucDBMeasurement::Multiply(const char * v){
@@ -296,9 +333,11 @@ void  NucDBMeasurement::Multiply(const char * v){
 }
 //_____________________________________________________________________________
 NucDBMeasurement * NucDBMeasurement::CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin) {
-   NucDBMeasurement * m = new NucDBMeasurement(Form("%s_%s",this->GetName(),bin->GetName()),
-         Form("%s %s",this->GetTitle(),bin->GetTitle()) );
-   m->AddDataPoints(this->FilterWithBin(bin));
+   NucDBMeasurement * m = new NucDBMeasurement(
+         GetName(),
+         GetTitle() );
+   m->AddDataPoints(FilterWithBin(bin));
+   m->SetExperimentName(GetExperimentName());
    return m;
 }  
 //______________________________________________________________________________
@@ -386,7 +425,9 @@ TList *  NucDBMeasurement::FilterWithBin(NucDBBinnedVariable const *bin) {
 TList *  NucDBMeasurement::ApplyFilterWithBin(NucDBBinnedVariable *bin) {
    TList * list = FilterWithBin(bin); 
    if(list->GetEntries() <= 0 ) {
+      fDataPoints.SetOwner(false);
       ClearDataPoints();
+      fDataPoints.SetOwner(true);
       return list;
    }
    AddDataPoints(list,true);

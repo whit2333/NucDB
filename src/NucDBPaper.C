@@ -3,11 +3,12 @@
 
 //______________________________________________________________________________
 NucDBPaper::NucDBPaper(const char * name,const char * title):TNamed(name,title){
-   fCalculations.Clear();
    fCalculations.SetName("Calculations");
+   fCalculations.SetOwner(true);
 }
 //______________________________________________________________________________
 NucDBPaper::~NucDBPaper(){
+   fCalculations.Clear();
 }
 //______________________________________________________________________________
 NucDBCalculation * NucDBPaper::GetCalculation(const char * name) {

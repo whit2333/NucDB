@@ -81,12 +81,12 @@ void NucDBErrorBar::Clear(Option_t * opt){
 
 ClassImp(NucDBDataPoint)
 //_____________________________________________________________________________
-NucDBDataPoint::NucDBDataPoint(Double_t val, Double_t err) {
+NucDBDataPoint::NucDBDataPoint(Double_t val, Double_t err)
+   : fDimension(1), fNSortVariables(1), 
+   fSortingVariable("x"), fSortingVariable2("Qsquared"),
+   fValue(val)
+{
    fUnit = 0;
-   fValue = val;
-   fDimension=1;
-   fSortingVariable  = "x";
-   fSortingVariable2 = "Qsquared";
 
    fDiscreteVariables.Clear();
    fVariables.Clear();
@@ -96,6 +96,7 @@ NucDBDataPoint::NucDBDataPoint(Double_t val, Double_t err) {
    fSystematicError.Clear();
    fStatisticalError.Clear();
 
+   CalculateTotalError();
 }
 //_____________________________________________________________________________
 NucDBDataPoint::~NucDBDataPoint(){
@@ -105,6 +106,7 @@ NucDBDataPoint::NucDBDataPoint(const NucDBDataPoint& v) : TNamed(v) {
    fUnit      = v.fUnit;
    fValue     = v.fValue;
    fDimension = v.fDimension;
+   fNSortVariables = v.fNSortVariables;
 
    // not sure if this is the best way to make a deep copy. 
    TList * alist      = 0;
@@ -118,7 +120,8 @@ NucDBDataPoint::NucDBDataPoint(const NucDBDataPoint& v) : TNamed(v) {
    fSystematicError   = v.fSystematicError;
    fStatisticalError  = v.fStatisticalError;
    fTotalError        = v.fTotalError;
-   //CalculateTotalError();
+
+   CalculateTotalError();
 
 }
 //_____________________________________________________________________________
@@ -128,6 +131,7 @@ const NucDBDataPoint& NucDBDataPoint::operator=(const NucDBDataPoint &v){
    fUnit      = v.fUnit;
    fValue     = v.fValue;
    fDimension = v.fDimension;
+   fNSortVariables = v.fNSortVariables;
 
    // not sure if this is the best way to make a deep copy. 
    TList * alist      = 0;
@@ -141,7 +145,7 @@ const NucDBDataPoint& NucDBDataPoint::operator=(const NucDBDataPoint &v){
    fSystematicError   = v.fSystematicError;
    fStatisticalError  = v.fStatisticalError;
    fTotalError        = v.fTotalError;
-   //CalculateTotalError();
+   CalculateTotalError();
 
    return *this;
 }
@@ -265,7 +269,36 @@ bool   NucDBDataPoint::operator<=(const NucDBDataPoint & rhs) const {
 bool   NucDBDataPoint::operator>=(const NucDBDataPoint & rhs) const { 
    return( !((*this) < rhs) );
 }
+//______________________________________________________________________________
+NucDBBinnedVariable * NucDBDataPoint::GetSortPriority(Int_t p) const {
+   // returns the first binned variable found with sort priority p.
+   for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
+      NucDBBinnedVariable* aVar = ((NucDBBinnedVariable*)fBinnedVariables.At(i));
+      if( aVar->GetSortPriority() == p) {
+        return aVar;
+      }
+   }
+   return 0;
+}
 //_____________________________________________________________________________
+void NucDBDataPoint::SetSortPriorities(const std::vector<std::string> & names){
+   fNSortVariables = 0;
+   for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
+      ((NucDBBinnedVariable*)fBinnedVariables.At(i))->SetSortPriority(-1);
+   }
+   for( auto name : names ) {
+      //if(fNSortVariables == 0) {
+      //   SetSortingVariable(name.c_str());
+      //}
+      //std::cout << " setting " << name  <<  " To " << fNSortVariables << std::endl;
+      NucDBBinnedVariable * avar = GetBinVariable(name.c_str());
+      if( avar ) {
+         avar->SetSortPriority(fNSortVariables) ;
+         fNSortVariables++;
+      }
+   }
+}
+//______________________________________________________________________________
 Int_t   NucDBDataPoint::Compare(const TObject *obj) const { 
    NucDBDataPoint      * dbobj = (NucDBDataPoint*)obj; 
    if( (*this) > (*dbobj) ) return 1;

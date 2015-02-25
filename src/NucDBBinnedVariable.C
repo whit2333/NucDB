@@ -44,8 +44,11 @@ NucDBBinnedVariable::NucDBBinnedVariable(
    fMinimum(y-dy),
    fMaximum(y+dy),
    fMean(y),
-   fAverage(y)
-{ }
+   fAverage(y),
+   fSortPriority(-1)
+{
+   SetBinMinimum(fMinimum);
+}
 //_____________________________________________________________________________
 NucDBBinnedVariable::~NucDBBinnedVariable(){ }
 //_____________________________________________________________________________
@@ -57,6 +60,7 @@ NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v) {
    fMean     = v.GetMean();
    fAverage  = v.GetAverage();
    fCenter   = v.GetCenter();
+   fSortPriority = v.fSortPriority; 
 }
 //_____________________________________________________________________________
 const NucDBBinnedVariable& NucDBBinnedVariable::operator+=(const NucDBBinnedVariable& v) {
@@ -82,6 +86,7 @@ NucDBBinnedVariable& NucDBBinnedVariable::operator=(const NucDBBinnedVariable& v
       fMaximum  = v.GetMaximum();
       fMean     = v.GetMean();
       fAverage  = v.GetAverage();
+      fSortPriority = v.fSortPriority; 
    }
    return *this;    // Return ref for multiple assignment
 }
@@ -136,7 +141,7 @@ void NucDBBinnedVariable::SetAverage(      Double_t val) {
 
 void      NucDBBinnedVariable::Print() {
    std::cout << "  |" << GetName() << "|=" << fAverage << "       "
-      << "  " << fMinimum << " < " << GetName() << " < " << fMaximum << "\n";
+      << "  " << fMinimum << " < " << GetName() << " < " << fMaximum << " sort: " << fSortPriority << "\n";
 }
 //_____________________________________________________________________________
 //_____________________________________________________________________________

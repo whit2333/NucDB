@@ -154,10 +154,12 @@ class NucDBMeasurement : public TNamed {
             double         dx2    ,
             bool           modify = false);
 
+
       /** Sort the datapoints by the supplied variable.
        *  TODO: Fix to be a stable sort such that the order is preserved.
        */ 
       void     SortBy(const char * n = "x", const char * n2 = "");
+      void     SortBy(const std::vector<std::string> & names);
 
       /** Multiply the datapoint by the value of the variable supplied.  */
       void     Multiply(const char * v );
@@ -191,6 +193,13 @@ class NucDBMeasurement : public TNamed {
 
       const TList& GetDataRef() const { return(fDataPoints);}
 
+      /** Print information about the experiment. 
+       *  Options are:
+       *     - "v" prints variables
+       *     - "ref" prints the references
+       *     - "comm" prints comments
+       *     - "data" calls print for all the datapoints
+       */
       void    Print(     Option_t * opt = "") const ; // *MENU*
       void    PrintData( Option_t * opt = "") const ; // *MENU*
 

@@ -101,8 +101,9 @@ class NucDBBinnedVariable : public TNamed {
       Double_t  fMean;    // Mean value (not always the center);
       Double_t  fAverage; // Bin center TODO: change name 
       Double_t  fCenter; // Bin center TODO: change name 
-
       NucDBUnit fUnit;
+
+      Int_t     fSortPriority;
 
    public :
       NucDBBinnedVariable(const char* name = "BinnedVariable", const char* title = "A Binned Variable", Double_t y = 1.0, Double_t dy = 0.001);
@@ -121,6 +122,9 @@ class NucDBBinnedVariable : public TNamed {
       bool Contains(double) const ;
       bool IsAbove(double) const ;
       bool IsBelow(double) const ;
+
+      Int_t       GetSortPriority() const {return fSortPriority;}
+      void        SetSortPriority(Int_t v){fSortPriority=v;}
 
       Double_t    GetBinMinimum() const {return(fMinimum);}
       Double_t    GetBinMaximum() const {return(fMaximum);}
