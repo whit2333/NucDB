@@ -196,7 +196,8 @@ if __name__ == "__main__":
     extractor3.istatErr=3
     extractor3.isysErr=4
     extractor3.SetMeasurement(A1p)
-    extractor3.SetInputFile("experiments/HERMES/a1pd.dat",25, 70-25)
+    #extractor3.SetInputFile("experiments/HERMES/a1pd.dat",25, 70-25)
+    extractor3.SetInputFile("experiments/HERMES/a1pd.dat",101)
     extractor3.fCurrentDataPoint.AddBinVariable(Xbjorken)
     extractor3.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor3.Initialize()
@@ -215,7 +216,8 @@ if __name__ == "__main__":
     extractor4.istatErr  = 7
     extractor4.isysErr   = 8
     extractor4.SetMeasurement(A1d)
-    extractor4.SetInputFile("experiments/HERMES/a1pd.dat",25,70-25)
+    #extractor4.SetInputFile("experiments/HERMES/a1pd.dat",25,70-25)
+    extractor4.SetInputFile("experiments/HERMES/a1pd.dat",101)
     extractor4.fCurrentDataPoint.AddBinVariable(Xbjorken)
     extractor4.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor4.Initialize()
@@ -227,14 +229,16 @@ if __name__ == "__main__":
     if not g1p :
         g1p = NucDBMeasurement("g1p","g_{1}^{p}")
         experiment.AddMeasurement(g1p)
-    g1p.Clear()
+    g1p.ClearDataPoints()
     g1p.SetColor(4004)
     extractor5 = HERMESExtractor()
     extractor5.iValueRow=2
     extractor5.istatErr=3
     extractor5.isysErr=4
     extractor5.SetMeasurement(g1p)
-    extractor5.SetInputFile("experiments/HERMES/g1pd.dat",25,70-25)
+    #extractor5.SetInputFile("experiments/HERMES/g1pd.dat",25,70-25)
+    # using largest binning
+    extractor5.SetInputFile("experiments/HERMES/g1pd.dat",101)
     extractor5.fCurrentDataPoint.AddBinVariable(Xbjorken)
     extractor5.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor5.Initialize()
@@ -253,7 +257,9 @@ if __name__ == "__main__":
     extractor6.istatErr  = 7
     extractor6.isysErr   = 8
     extractor6.SetMeasurement(g1d)
-    extractor6.SetInputFile("experiments/HERMES/g1pd.dat",25,70-25)
+    #extractor6.SetInputFile("experiments/HERMES/g1pd.dat",25,70-25)
+    # using largest binning
+    extractor6.SetInputFile("experiments/HERMES/g1pd.dat",101)
     extractor6.fCurrentDataPoint.AddBinVariable(Xbjorken)
     extractor6.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor6.Initialize()
@@ -272,7 +278,8 @@ if __name__ == "__main__":
     extractor7.istatErr  = 3
     extractor7.isysErr   = 4
     extractor7.SetMeasurement(g1n)
-    extractor7.SetInputFile("experiments/HERMES/g1n.dat",26,71-26)
+    #extractor7.SetInputFile("experiments/HERMES/g1n.dat",26,71-26)
+    extractor7.SetInputFile("experiments/HERMES/g1n.dat",101)
     extractor7.fCurrentDataPoint.AddBinVariable(Xbjorken)
     extractor7.fCurrentDataPoint.AddBinVariable(Qsq)
     extractor7.Initialize()

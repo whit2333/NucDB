@@ -115,6 +115,26 @@ namespace NucDB {
    }
 //______________________________________________________________________________
 
+   NucDBMeasurement * FindExperiment(const char * name, TList * meas_list){
+      // searches for name in the experinment name measurement
+      // returns the first match
+      NucDBMeasurement * aMeas = 0;
+      if(!meas_list) {
+         std::cout << "Measurement list is Null" << std::endl;
+         return 0;
+      }
+      for(int i = 0; i<meas_list->GetEntries();i++) {
+         aMeas = (NucDBMeasurement*)meas_list->At(i);
+         std::string n2 = aMeas->GetExperimentName();
+         std::size_t found = n2.find(name);
+         if (found!=std::string::npos) {
+            return aMeas;
+         }
+      }
+      return 0;
+   }
+//______________________________________________________________________________
+
    NucDBMeasurement * Merge(TList * meas_list, const char * name )
    {
       if(!meas_list) {

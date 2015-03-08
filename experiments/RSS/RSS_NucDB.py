@@ -46,7 +46,7 @@ class RSSExtractor(NucDBRawDataExtractor):
             nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
         #
-        #self.fCurrentDataPoint.Print()
+        self.fCurrentDataPoint.Print()
         #x.Print()
         #Qsq.Print()
 
@@ -248,13 +248,29 @@ if __name__ == "__main__":
     
     Qsquared.SetBinValueSize(1.3,1.0)
     d2p_data.SetValue(0.0057)
-    d2p_data.GetSystError().SetError(0.0007)
     d2p_data.GetStatError().SetError(0.0009)  
+    d2p_data.GetSystError().SetError(0.0007)
     d2p_data.CalculateTotalError();
-    
     d2p.AddDataPoint(copy.deepcopy( d2p_data )) 
     
-    d2p.BuildGraph("Qsquared")
+    d2p = experiment.GetMeasurement("d2p all")
+    if not d2p :
+        d2p = NucDBMeasurement("d2p all","d_{2}^{p}")
+        experiment.AddMeasurement(d2p)
+    d2p.ClearDataPoints()
+    d2p.SetColor(4010)
+    
+    Qsquared = NucDBBinnedVariable("Qsquared","Q^{2}")
+    
+    d2p_data = NucDBDataPoint();
+    d2p_data.AddBinVariable(Qsquared)
+    
+    Qsquared.SetBinValueSize(1.3,1.0)
+    d2p_data.SetValue(0.0104)
+    d2p_data.GetStatError().SetError(0.0004)  
+    d2p_data.GetSystError().SetError(0.0013)
+    d2p_data.CalculateTotalError();
+    d2p.AddDataPoint(copy.deepcopy( d2p_data )) 
     
     experiment.Print()
     manager.SaveExperiment(experiment)

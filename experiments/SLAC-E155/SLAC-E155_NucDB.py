@@ -9,6 +9,7 @@ class SLACE155Extractor(NucDBRawDataExtractor):
         NucDBRawDataExtractor.__init__(self)
         self.iValueRow=4
         self.iValueRowErr=5
+        self.iSystErr=5
 
     def ParseLine(self):
         """ See input file for column structures
@@ -240,6 +241,13 @@ class SLACE155xExtractor(NucDBRawDataExtractor):
         self.iValueRowErrHi = 10
         self.iValueRowErrLo = 11
 
+    def SystErrxg2p(self,x):
+        return 0.0016 - 0.0012*x
+
+    def SystErrxg2d(self,x):
+        return 0.0009 - 0.0008*x
+
+
     def ParseLine(self):
         """ See input file for column structures
         """
@@ -252,6 +260,7 @@ class SLACE155xExtractor(NucDBRawDataExtractor):
         values = self.currentline.split()
         self.rowcut.currentValue=int(0) # does nothign
 
+        xval = float(values[ixbjorken])
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetMean(float(values[ixbjorken]))
         x.SetBinMinimum(float(values[ixMin]))
@@ -266,6 +275,7 @@ class SLACE155xExtractor(NucDBRawDataExtractor):
 
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow])/float(values[ixbjorken]))
         self.fCurrentDataPoint.GetStatError().SetErrorSize(float(values[self.iValueRowErrHi])/float(values[ixbjorken]),abs(float(values[self.iValueRowErrLo]))/float(values[ixbjorken]))
+        self.fCurrentDataPoint.GetSystError().SetError(self.SystErrxg2p(xval)/xval)
         self.fCurrentDataPoint.CalculateTotalError()
         #
         W = self.fCurrentDataPoint.GetDependentVariable("W")
@@ -305,6 +315,7 @@ class SLACE155xExtractorA(NucDBRawDataExtractor):
         values = self.currentline.split()
         self.rowcut.currentValue=int(0) # does nothign
 
+        xval = float(values[ixbjorken])
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetMean(float(values[ixbjorken]))
         x.SetBinMinimum(float(values[ixMin]))
@@ -318,7 +329,7 @@ class SLACE155xExtractorA(NucDBRawDataExtractor):
         #Qsq.Print()
 
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
-        self.fCurrentDataPoint.GetStatError().SetErrorSize(float(values[self.iValueRowErrHi]),abs(float(values[self.iValueRowErrLo])))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.iValueRowErrHi]))
         self.fCurrentDataPoint.CalculateTotalError()
         #
         W = self.fCurrentDataPoint.GetDependentVariable("W")
@@ -642,6 +653,8 @@ if __name__ == "__main__":
     Ebeam    = NucDBBinnedVariable("Ebeam","E")
     theta    = NucDBBinnedVariable("theta","#theta")
 
+    # -----------------------------------------------------------
+    #
     g2p = experiment.GetMeasurement("g2p")
     if not g2p :
         g2p = NucDBMeasurement("g2p","g_{2}^{p}")
@@ -649,6 +662,8 @@ if __name__ == "__main__":
     g2p.ClearDataPoints()
     g2p.SetColor(8)
     
+    # -----------------------------------------------------------
+    #
     g2d = experiment.GetMeasurement("g2d")
     if not g2d :
         g2d = NucDBMeasurement("g2d","g_{2}^{d}")
@@ -656,6 +671,8 @@ if __name__ == "__main__":
     g2d.ClearDataPoints()
     g2d.SetColor(8)
 
+    # -----------------------------------------------------------
+    #
     A2p = experiment.GetMeasurement("A2p")
     if not A2p :
         A2p = NucDBMeasurement("A2p","A_{2}^{p}")
@@ -663,6 +680,8 @@ if __name__ == "__main__":
     A2p.ClearDataPoints()
     A2p.SetColor(8)
     
+    # -----------------------------------------------------------
+    #
     A2d = experiment.GetMeasurement("A2d")
     if not A2d :
         A2d = NucDBMeasurement("A2d","A_{2}^{d}")

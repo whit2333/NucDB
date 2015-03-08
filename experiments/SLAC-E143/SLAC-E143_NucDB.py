@@ -32,8 +32,8 @@ class SLACE143Extractor(NucDBRawDataExtractor):
     def __init__(self):
         NucDBRawDataExtractor.__init__(self)
         self.iValueRow=4
-        self.isysErr=5
-        self.istatErr=6
+        self.isysErr=6
+        self.istatErr=5
         self.ixMin=0
         self.ixMax=1
         self.ixbjorken=2
@@ -47,6 +47,8 @@ class SLACE143Extractor(NucDBRawDataExtractor):
         self.rowcut.currentValue=int(0) # does nothign
         x = self.fCurrentDataPoint.GetBinVariable('x')
         x.SetBinValueSize(float(values[self.ixbjorken]),deltax)
+        x.SetBinMinimum(float(values[self.ixMin]))
+        x.SetBinMaximum(float(values[self.ixMax]))
         #x.Print()
         Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
         Qsq.SetBinValueSize(float(values[self.iQsq]),0.1)
@@ -79,8 +81,8 @@ class SLACE143ExtractorR(NucDBRawDataExtractor):
     def __init__(self):
         NucDBRawDataExtractor.__init__(self) 
         self.iValueRow=3
-        self.isysErr=4
-        self.istatErr=5
+        self.isysErr=5
+        self.istatErr=4
 
     def ParseLine(self):
         """ See input file for column structures
@@ -130,8 +132,8 @@ class SLACE143ExtractorA1p(NucDBRawDataExtractor):
     def __init__(self):
         NucDBRawDataExtractor.__init__(self) 
         self.iValueRow=2
-        self.isysErr=3
-        self.istatErr=4
+        self.istatErr=3
+        self.isysErr=4
 
     def ParseLine(self):
         """ See input file for column structures

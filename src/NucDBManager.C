@@ -29,10 +29,11 @@ NucDBManager::NucDBManager(Int_t opt) {
 
    fColors.push_back(1);
    fColors.push_back(2);
-   fColors.push_back(3);
+   //fColors.push_back(3);
    fColors.push_back(4);
    fColors.push_back(6);
    fColors.push_back(7);
+   fColors.push_back(8);
 
    fMarkers.push_back(20);
    fMarkers.push_back(21);

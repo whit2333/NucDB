@@ -123,6 +123,7 @@ class NucDBMeasurement : public TNamed {
        *  If modify is called, the measurement's data points are replaced with the merged datapoints.
        */ 
       TList *  MergeDataPoints(unsigned int n = 2, const char * var = "x", bool modify=false);
+      TList *  MergeDataPoints(const std::vector<int>  & points, bool modify=false);
 
       /** Merge datapoints that fall in the bin.
        *  Returns the datapoint of all the points merged. 
@@ -216,7 +217,8 @@ class NucDBMeasurement : public TNamed {
       void           AddRef(NucDBReference * r) { fReferences.Add(r); }
 
       /** Build a graph with errors */
-      TGraphErrors * BuildGraph(const char * var = "x"); // *MENU*
+      TGraphErrors * BuildGraph(const char * var = "x", bool syst_err = false); // *MENU*
+      TGraphErrors * BuildSystematicErrorBand(const char * var = "x", double offset = 0.0); // *MENU*
       TGraph * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
 
       TMultiGraph * BuildGraphUnique(const char * var = "x", const char * uniqueVar = "Qsquared", TLegend * leg = 0 ); // *MENU*

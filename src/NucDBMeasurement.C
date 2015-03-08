@@ -87,6 +87,44 @@ void NucDBMeasurement::RemoveDataPoints(TList * listOfPoints) {
    } 
 }
 //_____________________________________________________________________________
+TList *  NucDBMeasurement::MergeDataPoints(const std::vector<int> & points, bool modify){
+   //  merge  points by the vector of number indicating how many points to merge 
+   // A vector of {3,2,5} will merge 3 bins, then the next 2, then the next 5.
+   // After which no m ore merging is done.
+   // sorting shold be done before hand.
+   TList * list = new TList();
+   NucDBDataPoint * mergedPoint = 0;
+   Int_t n_merged = 0;
+   Int_t Nmax = fDataPoints.GetEntries();
+   for(auto Nmerge : points ) {
+      int i = 0;
+      if(n_merged >= Nmax ) break;
+      while(i < Nmerge) {
+         if(n_merged >= Nmax ) break;
+         NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(n_merged);
+         if(i%Nmerge == 0){
+            mergedPoint = new NucDBDataPoint(*point);
+            list->Add(mergedPoint);
+         } else {
+            (*mergedPoint) += (*point);
+         }
+         n_merged++;
+         i++;
+      }
+   }
+   // Add all the remaining points
+   while(n_merged < fDataPoints.GetEntries()) {
+      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(n_merged);
+      mergedPoint = new NucDBDataPoint(*point);
+      list->Add(mergedPoint);
+      n_merged++;
+   }
+   if(modify) {
+      AddDataPoints(list,true);
+   }
+   return list;
+}
+//______________________________________________________________________________
 TList *  NucDBMeasurement::MergeDataPoints(unsigned int n, const char * var, bool modify){
    SortBy(var);
    TList * list = new TList();
@@ -850,7 +888,36 @@ void NucDBMeasurement::PrintBreakDown(const char * var, int nmax) const {
 }
 
 //______________________________________________________________________________
-TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
+TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, double offset) {
+   //if(fGraph) delete fGraph;
+   TGraphErrors        * gr    = 0;
+   NucDBDataPoint      * point = 0;
+   NucDBBinnedVariable * var   = 0;
+   gr = new TGraphErrors(fNumberOfDataPoints);
+   for(int i = 0; i < fNumberOfDataPoints;i++) {
+      point = (NucDBDataPoint *) fDataPoints.At(i);
+      var = point->FindVariable(varName);
+      if( var ) {
+         point->CalculateTotalError();
+         double err = point->GetSystError().GetError();
+         gr->SetPoint(i,var->GetMean(),err+offset);
+         gr->SetPointError(i,0.0,err);
+      } else {
+         Error("BuildGraph","Variable, %s, not found!",varName);
+         gr->SetPoint(i,0,0);
+         gr->SetPointError(i,0,0);
+         break;
+      }
+   }
+   gr->SetMarkerColor(GetColor());
+   gr->SetLineColor(GetColor());
+   gr->SetMarkerStyle(20);
+   gr->SetDrawOption("aep");
+   fGraphs.Add(gr);
+   return(gr);
+}
+//______________________________________________________________________________
+TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName , bool syst_err  ) {
    //if(fGraph) delete fGraph;
    TGraphErrors        * gr    = 0;
    NucDBDataPoint      * point = 0;
@@ -862,8 +929,12 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName ) {
       var = point->FindVariable(varName);
       if( var ) {
          point->CalculateTotalError();
+         double err = point->GetStatError().GetError();
+         if( syst_err ) { 
+            err += point->GetSystError().GetError();
+         }
          gr->SetPoint(i,var->GetMean(),point->GetValue());
-         gr->SetPointError(i,0.0,point->GetTotalError().GetError());
+         gr->SetPointError(i,0.0,err);
       } else {
          Error("BuildGraph","Variable, %s, not found!",varName);
          gr->SetPoint(i,0,0);

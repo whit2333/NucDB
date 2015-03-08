@@ -24,6 +24,8 @@ namespace NucDB {
     */
    NucDBMeasurement * GetExperiment(const char * exp_name, TList * meas_list);
 
+   NucDBMeasurement * FindExperiment(const char * name, TList * meas_list);
+
    NucDBMeasurement * Merge(TList * meas_list, const char * name = "" );
 
    /** Merge all the datapoints in the list into a single data point.
