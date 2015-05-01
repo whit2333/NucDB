@@ -5,18 +5,17 @@ Int_t inclusive_NucDB(){
 
    NucDBExperiment * exp = 0;
    NucDBMeasurement * meas = 0;
-   exp = dbman->GetExperiment("Erevan");
+   exp = dbman->GetExperiment("Yerevan");
    if(!exp ) {
-      exp = new NucDBExperiment("Erevan","Erevan");
+      exp = new NucDBExperiment("Yerevan","Yerevan");
    }
-   meas = exp->GetMeasurement("sig_piplus");
+   meas = exp->GetMeasurement("sigma_12C(gamma,pi-)X");
    if(meas) delete meas;
    meas = 0;
    if(!meas){
-      meas= new NucDBMeasurement("sig_piplus","#frac{d#sigma}{dE_{#pi}d#Omega}");
+      meas= new NucDBMeasurement("sigma_12C(gamma,pi-)X","#frac{d#sigma}{dE_{#pi}d#Omega}");
       exp->AddMeasurement(meas);
    }
-
 
    NucDBBinnedVariable    Ebeam("Ebeam","E_{beam}");
    NucDBBinnedVariable    T("Tkin","T_{#pi}");
