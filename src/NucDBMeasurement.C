@@ -547,8 +547,11 @@ void NucDBMeasurement::PrintTable(std::ostream& stream) const {
       }
       std::string column =  GetName();
       stream <<  std::setw(14) << column << " " ;
-      column += "_err";
-      stream << std::setw(14) << column ;
+      column += "_StatErr";
+      stream << std::setw(14) << column << " " ;
+      column =  GetName();
+      column += "_SystErr";
+      stream << std::setw(14) << column  ;
       stream << std::endl;
    }
 
@@ -564,7 +567,9 @@ void NucDBMeasurement::PrintTable(std::ostream& stream) const {
          stream << std::setw(14) << var->GetMean() << " " ;
          stream << std::setw(14) << var->GetMaximum() << " " ;
       }
-      stream <<  std::setw(14) << aPoint->GetValue() << " " << std::setw(14) << aPoint->GetError() ;
+      stream <<  std::setw(14) << aPoint->GetValue() << " " 
+             << std::setw(14) << aPoint->GetStatError().GetError() << " "  
+             << std::setw(14) << aPoint->GetSystError().GetError() ;
       stream << std::endl;
    }
 }

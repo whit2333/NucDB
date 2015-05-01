@@ -272,6 +272,26 @@ if __name__ == "__main__":
     d2p_data.CalculateTotalError();
     d2p.AddDataPoint(copy.deepcopy( d2p_data )) 
     
+    # ---------------------------
+    # I 
+    d2p = experiment.GetMeasurement("d2p I")
+    if not d2p :
+        d2p = NucDBMeasurement("d2p I","d_{2}^{p}")
+        experiment.AddMeasurement(d2p)
+    d2p.ClearDataPoints()
+    d2p.SetColor(4010)
+    
+    Qsquared = NucDBBinnedVariable("Qsquared","Q^{2}")
+    
+    d2p_data = NucDBDataPoint();
+    d2p_data.AddBinVariable(Qsquared)
+    
+    Qsquared.SetBinValueSize(1.28,0.5)
+    d2p_data.SetValue(0.0364)
+    d2p_data.GetStatError().SetError(0.0006)  
+    d2p_data.GetSystError().SetError(0.0027)
+    d2p_data.CalculateTotalError();
+    d2p.AddDataPoint(copy.deepcopy( d2p_data )) 
     experiment.Print()
     manager.SaveExperiment(experiment)
     

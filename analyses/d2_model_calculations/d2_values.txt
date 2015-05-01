@@ -1,0 +1,37 @@
+
+Q2(GeV/c)^2   d2                          comments
+5.0           d2p = 0.005 +- 0.008         SLACE155 http://inspirehep.net/record/493768
+5.0           d2d = 0.008 +- 0.005         SLACE155 http://inspirehep.net/record/493768
+5.0           d2p = 0.007 +- 0.004         Combined SLAC E155 + E142 + E154 + E143 http://inspirehep.net/record/493768
+5.0           d2n = 0.004 +- 0.010         Combined SLAC E155 + E142 + E154 + E143 http://inspirehep.net/record/493768
+
+CM Bag model
+5.0           d2p = 0.0174                 http://inspirehep.net/record/417451
+5.0           d2n = -0.00253               http://inspirehep.net/record/417451
+5.0           d2d = 0.00679               http://inspirehep.net/record/417451
+
+MIT Bag model
+5.0           d2p = 0.01                http://inspirehep.net/record/417451
+5.0           d2p = 0.00                http://inspirehep.net/record/417451
+5.0           d2d = 0.005                http://inspirehep.net/record/417451
+
+QCD sum rules
+5.0           d2p = -0.006 +- 0.003                http://inspirehep.net/record/417451
+5.0           d2n = -0.030 +- 0.010                http://inspirehep.net/record/417451
+5.0           d2d = -0.017 +- 0.005                http://inspirehep.net/record/417451
+
+5.0           d2p = -0.003 +- 0.003                http://inspirehep.net/record/417451
+5.0           d2n = -0.025 +- 0.010                http://inspirehep.net/record/417451
+5.0           d2d = -0.013 +- 0.005                http://inspirehep.net/record/417451
+
+Lattice QCD (OLD)
+5.0           d2p = -0.0480 +- 0.005      
+5.0           d2n = -0.0039 +- 0.0027     
+5.0           d2d = -0.0220 +- 0.006      
+
+SLAC E143
+5.0           d2p = 0.0054 +- 0.005                http://inspirehep.net/record/4174510 5.0           d2d = 0.0039 +- 0.0092                http://inspirehep.net/record/4174510
+
+
+http://inspirehep.net/record/395093
+Sumrule 

@@ -154,17 +154,21 @@ const NucDBDataPoint& NucDBDataPoint::operator+=(const NucDBDataPoint &v){
    // Calculates the weighted mean and variance of the mean
 
    CalculateTotalError(); 
-   Double_t num = fValue/TMath::Power(fTotalError.GetError(),2.0)
-                  + v.fValue/TMath::Power(v.fTotalError.GetError(),2.0);
-   Double_t den = 1.0/TMath::Power(fTotalError.GetError(),2.0)
-                  + 1.0/TMath::Power(v.fTotalError.GetError(),2.0);
+   Double_t num = fValue/TMath::Power(fStatisticalError.GetError(),2.0)
+                  + v.fValue/TMath::Power(v.fStatisticalError.GetError(),2.0);
+   Double_t den = 1.0/TMath::Power(fStatisticalError.GetError(),2.0)
+                  + 1.0/TMath::Power(v.fStatisticalError.GetError(),2.0);
    fValue       = num/den;
    Double_t err = TMath::Sqrt(1.0/den);
 
    // The systematic error is set to zero and all the error is pushed to the systematic
    fStatisticalError.SetError(err);
-   fTotalError.SetError(err);
-   fSystematicError.SetError(0.0);
+   //fTotalError.SetError(err);
+
+   Double_t sys1 = fSystematicError.GetError();
+   Double_t sys2 = v.fSystematicError.GetError();
+
+   fSystematicError.SetError((sys1+sys2)/2.0);
 
    // Merge the bins
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {

@@ -1,0 +1,264 @@
+--001a11c2cffeb2bdd20504393a02
+Content-Type: text/plain; charset=UTF-8
+
+Here are Lenny's Chiral Soliton model numbers for d2n and d2p.
+
+-Matt
+---------- Forwarded message ----------
+From: Leonard Gamberg <lpg10@psu.edu>
+Date: Sun, Mar 30, 2014 at 9:29 AM
+Subject: Fwd: d2p and d2n
+To: Zein-Eddine Meziani <meziani@temple.edu>, Zein-Eddine Meziani <
+MEZIANI@verizon.net>, "Weigel, Herbert <weigel@sun.ac.za>" <weigel@sun.ac.za>,
+matt posik <mposik1983@gmail.com>, Leonard Gamberg <lpg10@psu.edu>
+
+
+ Well this is the email that I was looking for....
+
+Zein Eddine and I were in his office about a month ago and I
+remembered that Herbert had calculated d2n at various values
+or Q^2.  I finally found this email in the files I downloaded
+from my linux machine.
+
+As you can see the values in my talk are only for Q^2= 4GeV^2
+and without the update that Herbert put in which it might take
+some thought to dig up. I have some more emails between us and
+Xiaochao on this. But this seems to be the last we did on d2n in 2004.
+Regarding the modification and the values below as compared to my
+table I in my talk I'll try to find out from some emails between us
+and Xiaocho.
+
+Best, Leonard
+
+
+-------- Original Message --------  Subject: d2p and d2n  Date: Tue, 4 May
+2004 08:03:31 -0400 (EDT)  From: Herbert Weigel <weigel@lns.mit.edu>
+<weigel@lns.mit.edu>  To: Xiaochao Zheng <xiaochao@jlab.org>
+<xiaochao@jlab.org>  CC: weigel@physik.uni-siegen.de, Leonard Gamberg
+<lpg10@psu.edu> <lpg10@psu.edu>
+
+Dear Xiaochao,
+
+the e-mail system at Siegen University is not working
+properly, so I use my MIT account to answer.
+
+First, here are the data for d2 as they come out the
+computer:
+
+Q^2=3GeV^2
+ D2 (p) =   0.00486181576
+ D2 (n) =  -0.00184613729
+
+Q^2=5GeV^2
+ D2 (p) =   0.00435609369
+ D2 (n) =  -0.00166798373
+
+Q^2=10GeV^2
+ D2 (p) =   0.00381175587
+ D2 (n) =  -0.00145107071
+
+Q^2=100GeV^2
+ D2 (p) =   0.00271389848
+ D2 (n) =  -0.00103804698
+
+These do *not* include the update for g_1. When
+they are included D2(p)\approx 0.01 and
+D2(n) \approx 0.005. However, w/o updating g_2
+these numbers have some twist-2 contribution
+and are thus inconsitent.
+
+Concerning Balitsky et al. Note that there is an
+erratum PLB318 (93) 648 according to which the
+sign of D2(n) should be changed. That would then
+be consistent with Song's quotation when multiplied
+by -3. But shouldn't the factor be +3? That's what
+we use.
+
+Ehrnsperger & Sch"afer do not compute g_2 at all.
+When comparing their model calculation for g_1 to data
+they use two assumptions a) g_2 = g_2^{WW} (purely
+twist-2) and b) g_2=0. So I assume that the results
+quoted by E155x are from b).
+
+A (1-x)^\alpha dependence is often adopted to model the
+large x behavior of structure functions (they must
+vanish at x=1). To some extend quark counting rules
+can be used to motivate certain values for \alpha.
+However, I suspect that E155x took \alpha=1 and
+\alpha=2 just as a choice.
+
+I hope these lines arrive and are helpful.
+
+Best regards,
+Herbert.
+
+
+
+
+
+
+
+
+
+
+-- 
+ Matthew Posik
+ Postdoctoral Fellow
+
+ Temple University
+ Department of Physics
+ Barton Hall
+ 1900 North 13th Street
+ Philadelphia, PA 19122
+ USA
+
+ TU Office: Barton Hall, A319
+
+--001a11c2cffeb2bdd20504393a02
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Here are Lenny&#39;s Chiral Soliton model numbers for d2n =
+and d2p.<div><br></div><div>-Matt<br><div class=3D"gmail_quote">---------- =
+Forwarded message ----------<br>From: <b class=3D"gmail_sendername">Leonard=
+ Gamberg</b> <span dir=3D"ltr">&lt;<a href=3D"mailto:lpg10@psu.edu">lpg10@p=
+su.edu</a>&gt;</span><br>Date: Sun, Mar 30, 2014 at 9:29 AM<br>Subject: Fwd=
+: d2p and d2n<br>To: Zein-Eddine Meziani &lt;<a href=3D"mailto:meziani@temp=
+le.edu">meziani@temple.edu</a>&gt;, Zein-Eddine Meziani &lt;<a href=3D"mail=
+to:MEZIANI@verizon.net">MEZIANI@verizon.net</a>&gt;, &quot;Weigel, Herbert =
+&lt;<a href=3D"mailto:weigel@sun.ac.za">weigel@sun.ac.za</a>&gt;&quot; &lt;=
+<a href=3D"mailto:weigel@sun.ac.za">weigel@sun.ac.za</a>&gt;, matt posik &l=
+t;<a href=3D"mailto:mposik1983@gmail.com">mposik1983@gmail.com</a>&gt;, Leo=
+nard Gamberg &lt;<a href=3D"mailto:lpg10@psu.edu">lpg10@psu.edu</a>&gt;<br>=
+<br><br>
+ =20
+
+   =20
+ =20
+  <div bgcolor=3D"#FFFFFF" text=3D"#000000">
+    Well this is the email that I was looking for.... <br>
+    <br>
+    Zein Eddine and I were in his office about a month ago and I<br>
+    remembered that Herbert had calculated d2n at various values<br>
+    or Q^2.=C2=A0 I finally found this email in the files I downloaded<br>
+    from my linux machine.<br>
+    <br>
+    As you can see the values in my talk are only for Q^2=3D 4GeV^2<br>
+    and without the update that Herbert put in which it might take<br>
+    some thought to dig up. I have some more emails between us and <br>
+    Xiaochao on this. But this seems to be the last we did on d2n in
+    2004.<br>
+    Regarding the modification and the values below as compared to my<br>
+    table I in my talk I&#39;ll try to find out from some emails between us=
+<br>
+    and Xiaocho.<br>
+    <br>
+    Best, Leonard <br>
+    <div><br>
+      <br>
+      -------- Original Message --------
+      <table cellpadding=3D"0" cellspacing=3D"0" border=3D"0">
+        <tbody>
+          <tr>
+            <th align=3D"RIGHT" nowrap valign=3D"BASELINE">Subject:
+            </th>
+            <td>d2p and d2n</td>
+          </tr>
+          <tr>
+            <th align=3D"RIGHT" nowrap valign=3D"BASELINE">Date: </th>
+            <td>Tue, 4 May 2004 08:03:31 -0400 (EDT)</td>
+          </tr>
+          <tr>
+            <th align=3D"RIGHT" nowrap valign=3D"BASELINE">From: </th>
+            <td>Herbert Weigel <a href=3D"mailto:weigel@lns.mit.edu" target=
+=3D"_blank">&lt;weigel@lns.mit.edu&gt;</a></td>
+          </tr>
+          <tr>
+            <th align=3D"RIGHT" nowrap valign=3D"BASELINE">To: </th>
+            <td>Xiaochao Zheng <a href=3D"mailto:xiaochao@jlab.org" target=
+=3D"_blank">&lt;xiaochao@jlab.org&gt;</a></td>
+          </tr>
+          <tr>
+            <th align=3D"RIGHT" nowrap valign=3D"BASELINE">CC: </th>
+            <td><a href=3D"mailto:weigel@physik.uni-siegen.de" target=3D"_b=
+lank">weigel@physik.uni-siegen.de</a>, Leonard Gamberg
+              <a href=3D"mailto:lpg10@psu.edu" target=3D"_blank">&lt;lpg10@=
+psu.edu&gt;</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <pre>Dear Xiaochao,
+
+the e-mail system at Siegen University is not working
+properly, so I use my MIT account to answer.
+
+First, here are the data for d2 as they come out the
+computer:
+
+Q^2=3D3GeV^2
+ D2 (p) =3D   0.00486181576
+ D2 (n) =3D  -0.00184613729
+
+Q^2=3D5GeV^2
+ D2 (p) =3D   0.00435609369
+ D2 (n) =3D  -0.00166798373
+
+Q^2=3D10GeV^2
+ D2 (p) =3D   0.00381175587
+ D2 (n) =3D  -0.00145107071
+
+Q^2=3D100GeV^2
+ D2 (p) =3D   0.00271389848
+ D2 (n) =3D  -0.00103804698
+
+These do *not* include the update for g_1. When
+they are included D2(p)\approx 0.01 and=20
+D2(n) \approx 0.005. However, w/o updating g_2
+these numbers have some twist-2 contribution
+and are thus inconsitent.
+
+Concerning Balitsky et al. Note that there is an
+erratum PLB318 (93) 648 according to which the=20
+sign of D2(n) should be changed. That would then
+be consistent with Song&#39;s quotation when multiplied
+by -3. But shouldn&#39;t the factor be +3? That&#39;s what
+we use.
+
+Ehrnsperger &amp; Sch&quot;afer do not compute g_2 at all.
+When comparing their model calculation for g_1 to data
+they use two assumptions a) g_2 =3D g_2^{WW} (purely=20
+twist-2) and b) g_2=3D0. So I assume that the results
+quoted by E155x are from b).=20
+
+A (1-x)^\alpha dependence is often adopted to model the
+large x behavior of structure functions (they must=20
+vanish at x=3D1). To some extend quark counting rules
+can be used to motivate certain values for \alpha.
+However, I suspect that E155x took \alpha=3D1 and=20
+\alpha=3D2 just as a choice.
+
+I hope these lines arrive and are helpful.
+
+Best regards,
+Herbert.
+
+
+
+
+</pre>
+      <br>
+    </div>
+    <br>
+  </div>
+
+</div><br><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr">=C2=A0Ma=
+tthew Posik<br><div>=C2=A0Postdoctoral Fellow<br></div><div><br></div><div>=
+=C2=A0Temple University=C2=A0</div><div>=C2=A0Department of Physics</div><d=
+iv>=C2=A0Barton Hall <br></div><div>=C2=A01900 North 13th Street</div><div>=
+=C2=A0Philadelphia, PA 19122</div><div>=C2=A0USA</div><div><br></div><div>=
+=C2=A0TU Office: Barton Hall, A319</div><br></div>
+</div></div>
+
+--001a11c2cffeb2bdd20504393a02--
