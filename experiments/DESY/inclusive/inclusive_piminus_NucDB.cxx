@@ -316,6 +316,121 @@ Int_t inclusive_piminus_NucDB(){
    }
 
 
+   // ----------------------------------------------
+   // deuteron target
+   meas = exp->GetMeasurement("sigma_d(e,pi-)X");
+   if(!meas){
+      meas= new NucDBMeasurement("sigma_d(e,pi-)X","#frac{d#sigma}{dE_{#pi}d#Omega}");
+      exp->AddMeasurement(meas);
+      meas->AddRef(ref);
+   }
+   meas->ClearDataPoints();
+
+   // E = 3.5
+   std::ifstream file("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_3.5GeV.png.dat");
+   if( !(file.good()) ) return -4;
+   while( !(file.eof()) ){
+
+      file >> x >> y >> ey1 >> ey2;
+
+      double sym_err = (TMath::Abs(ey1) + TMath::Abs(ey2))/2.0;
+      double p_pi   = x;//TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
+      double E_pi   = TMath::Sqrt(p_pi*p_pi + M_pion*M_pion/(GeV*GeV));
+      double T_pi   = E_pi - M_pion/(GeV);
+
+      theta.SetValueSize(  13.0, 1.57/2.0);
+      Ebeam.SetValueSize(    3.5, 0.001);
+      Ppi.SetValueSize(     p_pi, 0.001);
+      Epi.SetValueSize(     E_pi, 0.001);
+      Tpi.SetValueSize(     T_pi, 0.001);
+
+      // E/p is the jacobian dp/dE
+      point.SetValue( y*scale ); 
+      point.SetStatError(sym_err*scale); 
+      point.CalculateTotalError();
+      // copy the point and add it to the measurement
+      meas->AddDataPoint(new NucDBDataPoint(point));
+   }
+
+   // E = 4.5
+   std::ifstream file("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_4.5GeV.png.dat");
+   if( !(file.good()) ) return -4;
+   while( !(file.eof()) ){
+
+      file >> x >> y >> ey1 >> ey2;
+
+      double sym_err = (TMath::Abs(ey1) + TMath::Abs(ey2))/2.0;
+      double p_pi   = x;//TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
+      double E_pi   = TMath::Sqrt(p_pi*p_pi + M_pion*M_pion/(GeV*GeV));
+      double T_pi   = E_pi - M_pion/(GeV);
+
+      theta.SetValueSize(  13.0, 1.57/2.0);
+      Ebeam.SetValueSize(    4.5, 0.001);
+      Ppi.SetValueSize(     p_pi, 0.001);
+      Epi.SetValueSize(     E_pi, 0.001);
+      Tpi.SetValueSize(     T_pi, 0.001);
+
+      // E/p is the jacobian dp/dE
+      point.SetValue( y*scale ); 
+      point.SetStatError(sym_err*scale); 
+      point.CalculateTotalError();
+      // copy the point and add it to the measurement
+      meas->AddDataPoint(new NucDBDataPoint(point));
+   }
+
+   // E = 5.0
+   std::ifstream file("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_5.0GeV.png.dat");
+   if( !(file.good()) ) return -4;
+   while( !(file.eof()) ){
+
+      file >> x >> y >> ey1 >> ey2;
+
+      double sym_err = (TMath::Abs(ey1) + TMath::Abs(ey2))/2.0;
+      double p_pi   = x;//TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
+      double E_pi   = TMath::Sqrt(p_pi*p_pi + M_pion*M_pion/(GeV*GeV));
+      double T_pi   = E_pi - M_pion/(GeV);
+
+      theta.SetValueSize(  13.0, 1.57/2.0);
+      Ebeam.SetValueSize(    5.0, 0.001);
+      Ppi.SetValueSize(     p_pi, 0.001);
+      Epi.SetValueSize(     E_pi, 0.001);
+      Tpi.SetValueSize(     T_pi, 0.001);
+
+      // E/p is the jacobian dp/dE
+      point.SetValue( y*scale ); 
+      point.SetStatError(sym_err*scale); 
+      point.CalculateTotalError();
+      // copy the point and add it to the measurement
+      meas->AddDataPoint(new NucDBDataPoint(point));
+   }
+
+   // E = 6.0
+   std::ifstream file("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_6.0GeV.png.dat");
+   if( !(file.good()) )  return -4;
+   while( !(file.eof()) ){
+
+      file >> x >> y >> ey1 >> ey2;
+
+      double sym_err = (TMath::Abs(ey1) + TMath::Abs(ey2))/2.0;
+      double p_pi   = x;//TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
+      double E_pi   = TMath::Sqrt(p_pi*p_pi + M_pion*M_pion/(GeV*GeV));
+      double T_pi   = E_pi - M_pion/(GeV);
+
+      theta.SetValueSize(  13.0, 1.57/2.0);
+      Ebeam.SetValueSize(    6.0, 0.001);
+      Ppi.SetValueSize(     p_pi, 0.001);
+      Epi.SetValueSize(     E_pi, 0.001);
+      Tpi.SetValueSize(     T_pi, 0.001);
+
+      // E/p is the jacobian dp/dE
+      point.SetValue( y*scale ); 
+      point.SetStatError(sym_err*scale); 
+      point.CalculateTotalError();
+      // copy the point and add it to the measurement
+      meas->AddDataPoint(new NucDBDataPoint(point));
+   }
+
+
 
    exp->Print();
 
