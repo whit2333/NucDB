@@ -1,0 +1,13 @@
+Path: /HepData/266/d12-x1-y1
+The first moment integral for the nonsinglet structure function G1(NS)
+Location: P 14
+PLAB IN GEV : 100 TO 190
+RE : MU+ DEUT --> MU+ X
+RE : MU+ P --> MU+ X
+sqrts : 13.729 - 18.903 GeV
+x: X
+y : INT(G1(NAME=NS))*D(X)
+x	xlow	xhigh	y	dy+	dy-	dy+	dy-	dy+	dy-	
+0.3515	0.003	0.7	0.184	+0.016	-0.016	+0.014	-0.014	+0.001	-0.001
+0.5	0.0	1.0	0.198	+0.023	-0.023
+
