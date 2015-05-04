@@ -196,6 +196,7 @@ endforeach(aSharedLib)
 
 FILE(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.h" "${PROJECT_SOURCE_DIR}/include/*.h" "${PROJECT_BINARY_DIR}/*.h")
 FILE(GLOB PCM_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.pcm" "${PROJECT_SOURCE_DIR}/*.pcm" "${PROJECT_BINARY_DIR}/*.pcm")
+FILE(GLOB python_files "${CMAKE_CURRENT_SOURCE_DIR}/python/*")
 
 # -----------------------------------------------------------
 # Set the library version in the main CMakeLists.txt
@@ -239,6 +240,7 @@ endforeach(aLib)
 install(TARGETS NucDB DESTINATION lib)
 INSTALL(FILES ${files} DESTINATION include/NucDB)
 install(FILES ${PCM_FILES} DESTINATION lib)
+install(FILES ${python_files} DESTINATION lib)
 
 install(TARGETS nucdb-config DESTINATION bin)
 

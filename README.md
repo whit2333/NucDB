@@ -3,6 +3,16 @@ NucDB
 
 An interface to experimental and theoretical data for nuclear and particle physics.
 
+Naming Convention
+-----------------
+
+###Measurement Names
+
+Differential cross sections are named "sigma" and follow the usual shorthand reaction notation.
+Nuclear targets are labeled by A then their periodic table symbol.
+
+    "sigma_12C(gamma,pi+)X" = differential cross section for 12C + gamma --> pi+ + X
+
 
 Installing
 ------------

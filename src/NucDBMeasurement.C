@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 #include "TGraphAsymmErrors.h"
+#include "NucDBManager.h"
 
 ClassImp(NucDBMeasurement)
 //_____________________________________________________________________________
@@ -1000,6 +1001,8 @@ TMultiGraph * NucDBMeasurement::BuildGraphUnique(const char * var, const char * 
    // returns a multi graph for unique values plotted vs var
    TMultiGraph * mg = new TMultiGraph();
 
+   NucDBManager * dbman = NucDBManager::GetManager();
+
    std::vector<double> unique_var;
    std::vector<int> unique_var_counts;
    GetUniqueBinnedVariableValues(uniqueVar,unique_var,unique_var_counts);
@@ -1057,12 +1060,18 @@ TMultiGraph * NucDBMeasurement::BuildGraphUnique(const char * var, const char * 
             gr->SetPoint( nPoints,var1->GetMean(),point->GetValue());
             gr->SetPointError(nPoints,0.0,point->GetTotalError().GetError());
             nPoints++;
+            if(leg) {
+               if(leg->GetListOfPrimitives()->GetEntries() == j) {
+                  leg->AddEntry(gr,Form("%s %s = %.2f", GetExperimentName(),var0.GetTitle(),unique_var[j]), "p" );
+               }
+            }
          }
       } // loop on points
 
-      gr->SetMarkerColor(kRed+j);
-      gr->SetLineColor(  kRed+j);
-      gr->SetMarkerStyle(20);
+      Int_t acol = dbman->NextColor();
+      gr->SetMarkerColor( acol );
+      gr->SetLineColor(  acol );
+      gr->SetMarkerStyle(dbman->NextMarker());
       mg->Add(gr,"p");
 
    } // unique variable

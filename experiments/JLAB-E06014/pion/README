@@ -1,0 +1,21 @@
+======================================== README ========================================
+
+>> Description 
+
+   This directory contains the inclusive unpolarized pion production cross section
+   for electron beam energies of E = 4.74 GeV (4-pass) and 5.89 GeV (5-pass), at a 
+   scattering angle of 45 deg.  The target was 3He.  
+
+>> Directories 
+
+   Negative: pi- cross sections 
+   Positive: pi+ cross sections 
+
+>> File Format 
+
+   < E' (MeV) > < xs (pb/MeV/sr) > < stat error (pb/MeV/sr) > 
+
+   where E' is the scattered electron energy.
+
+
+ 

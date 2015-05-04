@@ -135,6 +135,8 @@ database:
 	root -b -q -l analyses/Osipenko_et_al/Osipenko_et_al_NucDB.cxx
 	#./analyses/maid_all
 	python analyses/LATTICE_Gockeler_et_al/LATTICE_NucDB.py
+	root -b -q -l experiments/DESY/inclusive/inclusive_piminus_NucDB.cxx
+	root -b -q -l experiments/JLAB-E06014/inclusive_d2n_NucDB.cxx 
 
 databaseclean:
 	rm data/NucDB.root
