@@ -3,7 +3,7 @@
 ClassImp(NucDBDatabase)
 //_____________________________________________________________________________
 
-void NucDBDatabase::Print() const {
+void NucDBDatabase::Print(Option_t *option) const {
       std::cout << "Database : " << GetName() << " , title = " << GetTitle() << "\n";
       ListExperiments();
       ListPapers();
