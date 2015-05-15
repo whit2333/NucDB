@@ -20,6 +20,7 @@ Int_t inclusive_NucDB(){
    NucDBBinnedVariable    Ebeam("Ebeam","E_{beam}");
    NucDBBinnedVariable    T("Tkin","T_{#pi}");
    NucDBBinnedVariable    Ppi("P","p_{#pi}");
+   NucDBBinnedVariable    PTpi("PT","p_{T}");
    NucDBBinnedVariable    Epi("E","E_{#pi}");
    NucDBBinnedVariable    theta("theta","theta_{#pi}");
 
@@ -30,6 +31,7 @@ Int_t inclusive_NucDB(){
    point.AddBinVariable(&T);
    point.AddBinVariable(&Epi);
    point.AddBinVariable(&Ppi);
+   point.AddBinVariable(&PTpi);
 
    double scale = 1000.0;
    double x,y;
@@ -37,11 +39,15 @@ Int_t inclusive_NucDB(){
    std::ifstream file("experiments/Yerevan/pion_data_alanakian/alanakian_piminus_20deg.dat");
    while( !(file.eof()) ){
       file >> x >> y ;
-      double e_tot  = M_pion/GeV + x;
-      double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
-      theta.SetValueSize(  20.0, 0.001);
+      double e_tot     = M_pion/GeV + x;
+      double p_pi      = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
+      double theta_pi  = 20.0;
+      double pt_pi     = p_pi*TMath::Sin(theta_pi*degree);
+
+      theta.SetValueSize( theta_pi, 0.001);
       Ebeam.SetValueSize(   4.5, 0.001);
       Ppi.SetValueSize(    p_pi, 0.001);
+      PTpi.SetValueSize(   pt_pi, 0.001);
       Epi.SetValueSize(   e_tot, 0.001);
       T.SetValueSize(         x, 0.001);
 
@@ -63,9 +69,12 @@ Int_t inclusive_NucDB(){
       file >> x >> y ;
       double e_tot  = M_pion/GeV + x;
       double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
-      theta.SetValueSize(  40.0, 0.001);
+      double theta_pi  = 40.0;
+      double pt_pi     = p_pi*TMath::Sin(theta_pi*degree);
+      theta.SetValueSize( theta_pi, 0.001);
       Ebeam.SetValueSize(   4.5, 0.001);
       Ppi.SetValueSize(    p_pi, 0.001);
+      PTpi.SetValueSize(   pt_pi, 0.001);
       Epi.SetValueSize(   e_tot, 0.001);
       T.SetValueSize(         x, 0.001);
 
@@ -87,9 +96,12 @@ Int_t inclusive_NucDB(){
       file >> x >> y ;
       double e_tot  = M_pion/GeV + x;
       double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
-      theta.SetValueSize(  60.0, 0.001);
+      double theta_pi  = 60.0;
+      double pt_pi     = p_pi*TMath::Sin(theta_pi*degree);
+      theta.SetValueSize(  theta_pi, 0.001);
       Ebeam.SetValueSize(   4.5, 0.001);
       Ppi.SetValueSize(    p_pi, 0.001);
+      PTpi.SetValueSize(   pt_pi, 0.001);
       Epi.SetValueSize(   e_tot, 0.001);
       T.SetValueSize(         x, 0.001);
 
@@ -112,9 +124,13 @@ Int_t inclusive_NucDB(){
       file >> x >> y ;
       double e_tot  = M_pion/GeV + x;
       double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
+      double theta_pi  = 90.0;
+      double pt_pi     = p_pi*TMath::Sin(theta_pi*degree);
+      theta.SetValueSize(  theta_pi, 0.001);
       theta.SetValueSize(  90.0, 0.001);
       Ebeam.SetValueSize(   4.5, 0.001);
       Ppi.SetValueSize(    p_pi, 0.001);
+      PTpi.SetValueSize(   pt_pi, 0.001);
       Epi.SetValueSize(   e_tot, 0.001);
       T.SetValueSize(         x, 0.001);
 
@@ -136,9 +152,12 @@ Int_t inclusive_NucDB(){
       file >> x >> y ;
       double e_tot  = M_pion/GeV + x;
       double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
-      theta.SetValueSize(  120.0, 0.001);
+      double theta_pi  = 120.0;
+      double pt_pi     = p_pi*TMath::Sin(theta_pi*degree);
+      theta.SetValueSize(  theta_pi, 0.001);
       Ebeam.SetValueSize(   4.5, 0.001);
       Ppi.SetValueSize(    p_pi, 0.001);
+      PTpi.SetValueSize(   pt_pi, 0.001);
       Epi.SetValueSize(   e_tot, 0.001);
       T.SetValueSize(         x, 0.001);
 
@@ -168,9 +187,12 @@ Int_t inclusive_NucDB(){
       file >> x >> y ;
       double e_tot  = M_pion/GeV + x;
       double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
-      theta.SetValueSize(  20.0, 0.001);
+      double theta_pi  = 20.0;
+      double pt_pi     = p_pi*TMath::Sin(theta_pi*degree);
+      theta.SetValueSize(  theta_pi, 0.001);
       Ebeam.SetValueSize(   4.5, 0.001);
       Ppi.SetValueSize(    p_pi, 0.001);
+      PTpi.SetValueSize(   pt_pi, 0.001);
       Epi.SetValueSize(   e_tot, 0.001);
       T.SetValueSize(         x, 0.001);
 
@@ -192,9 +214,12 @@ Int_t inclusive_NucDB(){
       file >> x >> y ;
       double e_tot  = M_pion/GeV + x;
       double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
-      theta.SetValueSize(  40.0, 0.001);
+      double theta_pi  = 40.0;
+      double pt_pi     = p_pi*TMath::Sin(theta_pi*degree);
+      theta.SetValueSize(  theta_pi, 0.001);
       Ebeam.SetValueSize(   4.5, 0.001);
       Ppi.SetValueSize(    p_pi, 0.001);
+      PTpi.SetValueSize(   pt_pi, 0.001);
       Epi.SetValueSize(   e_tot, 0.001);
       T.SetValueSize(         x, 0.001);
 
@@ -216,9 +241,12 @@ Int_t inclusive_NucDB(){
       file >> x >> y ;
       double e_tot  = M_pion/GeV + x;
       double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
-      theta.SetValueSize(  60.0, 0.001);
+      double theta_pi  = 60.0;
+      double pt_pi     = p_pi*TMath::Sin(theta_pi*degree);
+      theta.SetValueSize(  theta_pi, 0.001);
       Ebeam.SetValueSize(   4.5, 0.001);
       Ppi.SetValueSize(    p_pi, 0.001);
+      PTpi.SetValueSize(   pt_pi, 0.001);
       Epi.SetValueSize(   e_tot, 0.001);
       T.SetValueSize(         x, 0.001);
 
@@ -241,9 +269,12 @@ Int_t inclusive_NucDB(){
       file >> x >> y ;
       double e_tot  = M_pion/GeV + x;
       double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
-      theta.SetValueSize(  90.0, 0.001);
+      double theta_pi  = 90.0;
+      double pt_pi     = p_pi*TMath::Sin(theta_pi*degree);
+      theta.SetValueSize(  theta_pi, 0.001);
       Ebeam.SetValueSize(   4.5, 0.001);
       Ppi.SetValueSize(    p_pi, 0.001);
+      PTpi.SetValueSize(   pt_pi, 0.001);
       Epi.SetValueSize(   e_tot, 0.001);
       T.SetValueSize(         x, 0.001);
 
@@ -265,9 +296,12 @@ Int_t inclusive_NucDB(){
       file >> x >> y ;
       double e_tot  = M_pion/GeV + x;
       double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
-      theta.SetValueSize(  120.0, 0.001);
+      double theta_pi  = 120.0;
+      double pt_pi     = p_pi*TMath::Sin(theta_pi*degree);
+      theta.SetValueSize(  theta_pi, 0.001);
       Ebeam.SetValueSize(   4.5, 0.001);
       Ppi.SetValueSize(    p_pi, 0.001);
+      PTpi.SetValueSize(   pt_pi, 0.001);
       Epi.SetValueSize(   e_tot, 0.001);
       T.SetValueSize(         x, 0.001);
 

@@ -25,6 +25,7 @@ Int_t inclusive_d2n_NucDB(){
    point.AddBinVariable(&T);
    point.AddBinVariable(&Epi);
    point.AddBinVariable(&Ppi);
+   point.AddBinVariable(&PTpi);
 
    double th = 45.0*degree; 
    double col[3]; 
