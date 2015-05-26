@@ -197,7 +197,9 @@ void NucDBDataPoint::CalculateTotalError(){
 }
 //_____________________________________________________________________________
 void NucDBDataPoint::Print(Option_t * opt) const {
-   std::cout << GetName() << " = " << GetValue() << " +- " << GetTotalError().GetError() << "\n";
+   std::cout << GetName() << " = " << GetValue()
+             << " +- " << GetStatError().GetError() << "(stat)" 
+             << " +- " << GetSystError().GetError() << "(sys) "<< "\n";
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
       ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print(); 
    }

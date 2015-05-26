@@ -139,10 +139,10 @@ void NucDBBinnedVariable::SetAverage(      Double_t val) {
 }
 //_____________________________________________________________________________
 
-void      NucDBBinnedVariable::Print(Option_t *option) const {
-   std::cout << "  |" << GetName() << "|=" << fAverage << "       "
-      << "  " << fMinimum << " < " << GetName() << " < " << fMaximum << " sort: " << fSortPriority << "\n";
+void      NucDBBinnedVariable::Print() {
+   std::cout << " |" << GetName() << "|=" << fAverage << " "
+             << " (" << fMinimum << " < " << GetName() << " < " << fMaximum << ")\n" ;
+             //<< " sort: " << fSortPriority << "\n";
 }
-//_____________________________________________________________________________
 //_____________________________________________________________________________
 
