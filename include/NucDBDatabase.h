@@ -29,7 +29,7 @@ class NucDBDatabase : public TNamed {
       void ListExperiments() const ;   // *MENU*
       void ListMeasurements() const ;  // *MENU*
       void ListPapers() const ;        // *MENU*
-      void Print() const ;             // *MENU*
+      void Print(Option_t *option="") const ;             // *MENU*
 
       TList * GetExperiments(){return(&fExperiments);}
       TList * GetMeasurements(){return(&fMeasurements);}

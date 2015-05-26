@@ -43,7 +43,7 @@ Int_t inclusive_pion_NucDB(){
    std::string line;
 
    // ----------------------------------------------
-   // C12 target 
+   // p target  pi-
    meas = exp->GetMeasurement("sigma_p(gamma,pi-)X");
    if(!meas){
       meas= new NucDBMeasurement("sigma_p(gamma,pi-)X","#frac{d#sigma}{dE_{#pi}d#Omega}");
@@ -52,7 +52,85 @@ Int_t inclusive_pion_NucDB(){
    }
    meas->ClearDataPoints();
 
-   std::ifstream file("experiments/SLAC-WISER/wiser/table_IV_proton.txt");
+   std::ifstream file("experiments/SLAC-WISER/wiser/pi_minus_proton.txt");
+   if( !(file.good()) ) return -4;
+   std::getline(file,line);
+
+   while( !(file.eof()) ){
+
+      file >> k0 >> P_max >> Plab >> P_T >> P_L >> k_min >> y >> ey1 ;
+
+      if( file.eof() ) break;
+      double th_pi = TMath::ASin(P_T/Plab) ;
+      //double sym_err = (TMath::Abs(ey1) + TMath::Abs(ey2))/2.0;
+      //double p_pi   = x;//TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
+      double E_pi   = TMath::Sqrt(Plab*Plab + M_pion*M_pion/(GeV*GeV));
+      double T_pi   = E_pi - M_pion/(GeV);
+
+      theta.SetValueSize(  th_pi/degree, 0.001);
+      Ebeam.SetValueSize(   k0, 0.001);
+      Ppi.SetValueSize(     Plab, 0.001);
+      PT.SetValueSize(      P_T,  0.001);
+      Epi.SetValueSize(     E_pi, 0.001);
+      Tpi.SetValueSize(     T_pi, 0.001);
+
+      point.SetValue( y*scale ); 
+      point.SetStatError(ey1*scale); 
+      point.CalculateTotalError();
+      // copy the point and add it to the measurement
+      meas->AddDataPoint(new NucDBDataPoint(point));
+   }
+
+   // ----------------------------------------------
+   // d target  pi-
+   meas = exp->GetMeasurement("sigma_d(gamma,pi-)X");
+   if(!meas){
+      meas= new NucDBMeasurement("sigma_d(gamma,pi-)X","#frac{d#sigma}{dE_{#pi}d#Omega}");
+      exp->AddMeasurement(meas);
+      //meas->AddRef(ref);
+   }
+   meas->ClearDataPoints();
+
+   std::ifstream file("experiments/SLAC-WISER/wiser/pi_minus_deuteron.txt");
+   if( !(file.good()) ) return -4;
+   std::getline(file,line);
+
+   while( !(file.eof()) ){
+
+      file >> k0 >> P_max >> Plab >> P_T >> P_L >> k_min >> y >> ey1 ;
+
+      if( file.eof() ) break;
+      double th_pi = TMath::ASin(P_T/Plab) ;
+      //double sym_err = (TMath::Abs(ey1) + TMath::Abs(ey2))/2.0;
+      //double p_pi   = x;//TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
+      double E_pi   = TMath::Sqrt(Plab*Plab + M_pion*M_pion/(GeV*GeV));
+      double T_pi   = E_pi - M_pion/(GeV);
+
+      theta.SetValueSize(  th_pi/degree, 0.001);
+      Ebeam.SetValueSize(   k0, 0.001);
+      Ppi.SetValueSize(     Plab, 0.001);
+      PT.SetValueSize(      P_T,  0.001);
+      Epi.SetValueSize(     E_pi, 0.001);
+      Tpi.SetValueSize(     T_pi, 0.001);
+
+      point.SetValue( y*scale ); 
+      point.SetStatError(ey1*scale); 
+      point.CalculateTotalError();
+      // copy the point and add it to the measurement
+      meas->AddDataPoint(new NucDBDataPoint(point));
+   }
+
+   // ----------------------------------------------
+   // p target  pi+
+   meas = exp->GetMeasurement("sigma_p(gamma,pi+)X");
+   if(!meas){
+      meas= new NucDBMeasurement("sigma_p(gamma,pi+)X","#frac{d#sigma}{dE_{#pi}d#Omega}");
+      exp->AddMeasurement(meas);
+      //meas->AddRef(ref);
+   }
+   meas->ClearDataPoints();
+
+   std::ifstream file("experiments/SLAC-WISER/wiser/pi_plus_proton.txt");
    if( !(file.good()) ) return -4;
    std::getline(file,line);
    std::getline(file,line);
@@ -81,7 +159,44 @@ Int_t inclusive_pion_NucDB(){
       meas->AddDataPoint(new NucDBDataPoint(point));
    }
 
+   // ----------------------------------------------
+   // d target  pi+
+   meas = exp->GetMeasurement("sigma_d(gamma,pi+)X");
+   if(!meas){
+      meas= new NucDBMeasurement("sigma_d(gamma,pi+)X","#frac{d#sigma}{dE_{#pi}d#Omega}");
+      exp->AddMeasurement(meas);
+      //meas->AddRef(ref);
+   }
+   meas->ClearDataPoints();
 
+   std::ifstream file("experiments/SLAC-WISER/wiser/pi_plus_deuteron.txt");
+   if( !(file.good()) ) return -4;
+   std::getline(file,line);
+   std::getline(file,line);
+   while( !(file.eof()) ){
+
+      file >> k0 >> P_max >> Plab >> P_T >> P_L >> k_min >> y >> ey1 ;
+
+      if( file.eof() ) break;
+      double th_pi = TMath::ASin(P_T/Plab) ;
+      //double sym_err = (TMath::Abs(ey1) + TMath::Abs(ey2))/2.0;
+      //double p_pi   = x;//TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
+      double E_pi   = TMath::Sqrt(Plab*Plab + M_pion*M_pion/(GeV*GeV));
+      double T_pi   = E_pi - M_pion/(GeV);
+
+      theta.SetValueSize(  th_pi/degree, 0.001);
+      Ebeam.SetValueSize(   k0, 0.001);
+      Ppi.SetValueSize(     Plab, 0.001);
+      PT.SetValueSize(      P_T,  0.001);
+      Epi.SetValueSize(     E_pi, 0.001);
+      Tpi.SetValueSize(     T_pi, 0.001);
+
+      point.SetValue( y*scale ); 
+      point.SetStatError(ey1*scale); 
+      point.CalculateTotalError();
+      // copy the point and add it to the measurement
+      meas->AddDataPoint(new NucDBDataPoint(point));
+   }
 
    exp->Print();
 

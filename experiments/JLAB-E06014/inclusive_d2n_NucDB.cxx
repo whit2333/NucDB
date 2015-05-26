@@ -15,7 +15,7 @@ Int_t inclusive_d2n_NucDB(){
    NucDBBinnedVariable    theta("theta","#theta_{#pi}",45.0,0.25); // unknown bin size
    NucDBBinnedVariable    T(  "T","T_{#pi}"); // unknown bin size
    NucDBBinnedVariable    Ppi("P","p_{#pi}");
-   NucDBBinnedVariable    PTpi("P_T","p_{T}");
+   NucDBBinnedVariable    PTpi("PT","p_{T}");
    NucDBBinnedVariable    Epi("E","E_{#pi}");
 
    NucDBDataPoint   * apoint = 0 ;
@@ -25,6 +25,7 @@ Int_t inclusive_d2n_NucDB(){
    point.AddBinVariable(&T);
    point.AddBinVariable(&Epi);
    point.AddBinVariable(&Ppi);
+   point.AddBinVariable(&PTpi);
 
    double th = 45.0*degree; 
    double col[3]; 

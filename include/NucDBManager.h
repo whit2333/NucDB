@@ -118,7 +118,7 @@ class NucDBManager : public TObject {
          // returns next color in list
          Int_t col = fColors[fi_color];
          fi_color++;
-         if( fi_color == fColors.size() ) fi_color = 0;
+         if( (unsigned int)fi_color == fColors.size() ) fi_color = 0;
          return col;
       }
       Int_t  NextMarker() {
@@ -126,7 +126,7 @@ class NucDBManager : public TObject {
          // returns next color in list
          Int_t mark = fMarkers[fi_marker];
          fi_marker++;
-         if( fi_marker == fMarkers.size() ) fi_marker = 0;
+         if( (unsigned int)fi_marker == fMarkers.size() ) fi_marker = 0;
          return mark;
       }
       void SetMarkers(const std::vector<int> & m) { fMarkers =  m; }

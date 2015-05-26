@@ -38,7 +38,7 @@ class NucDBVariable : public TNamed {
       bool operator==(const NucDBVariable &other) const {return(other.fValue == fValue );}
       bool operator!=(const NucDBVariable &other) const { return !(*this == other);}
 
-      virtual void         Print(); // *MENU*
+      virtual void         Print(Option_t *option="") const ; // *MENU*
 
       virtual Double_t     GetValue() const {return(fValue);}
       void                 SetValue(Double_t v){fValue = v;} // *MENU*
@@ -77,7 +77,7 @@ class NucDBDiscreteVariable : public TNamed {
          return *this;
       }
 
-      void         Print(); // *MENU*
+      void         Print(Option_t *option="") const ; // *MENU*
 
       Int_t             GetValue() const {return(fValue);}
       void              SetValue(Int_t v){fValue = v;} // *MENU* 
@@ -147,7 +147,7 @@ class NucDBBinnedVariable : public TNamed {
       void        SetValueSize(    Double_t val, Double_t size){ SetBinValueSize(val,size);}
       void        SetMeanLimits(   Double_t val, Double_t min, Double_t max){ SetMean(val);SetBinMinimum(min);SetBinMaximum(max);fAverage=fCenter;}
       void        SetUnit(   const NucDBUnit& u) { fUnit = u; }
-      void        Print() ; // *MENU*
+      void        Print(Option_t *option="") const ; // *MENU*
       const NucDBUnit&   GetUnit(){return fUnit;}
 
       ClassDef(NucDBBinnedVariable,4)

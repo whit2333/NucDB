@@ -9,7 +9,7 @@ NucDBVariable::NucDBVariable(const char*n, const char* t ) : TNamed(n,t) {
 NucDBVariable::~NucDBVariable(){
 }
 //_____________________________________________________________________________
-void NucDBVariable::Print() {
+void NucDBVariable::Print(Option_t *option) const {
       std::cout << " " << GetName() << " = " << fValue << "\n";
 }
 //_____________________________________________________________________________
@@ -26,7 +26,7 @@ NucDBDiscreteVariable::~NucDBDiscreteVariable(){
 }
 //_____________________________________________________________________________
 
-void NucDBDiscreteVariable::Print() {
+void NucDBDiscreteVariable::Print(Option_t *option) const {
    std::cout << " " << GetName() << " = " << fValue << "\n";
 }
 //_____________________________________________________________________________
@@ -144,6 +144,5 @@ void      NucDBBinnedVariable::Print() {
              << " (" << fMinimum << " < " << GetName() << " < " << fMaximum << ")\n" ;
              //<< " sort: " << fSortPriority << "\n";
 }
-//_____________________________________________________________________________
 //_____________________________________________________________________________
 
