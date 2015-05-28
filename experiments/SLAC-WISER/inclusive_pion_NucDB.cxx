@@ -80,6 +80,7 @@ Int_t inclusive_pion_NucDB(){
       // copy the point and add it to the measurement
       meas->AddDataPoint(new NucDBDataPoint(point));
    }
+   meas->Print("data");
 
    // ----------------------------------------------
    // d target  pi-
@@ -158,7 +159,6 @@ Int_t inclusive_pion_NucDB(){
       // copy the point and add it to the measurement
       meas->AddDataPoint(new NucDBDataPoint(point));
    }
-   meas->Print("data");
 
    // ----------------------------------------------
    // d target  pi+

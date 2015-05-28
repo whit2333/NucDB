@@ -50,6 +50,8 @@ Int_t inclusive_d2n_NucDB(){
 
       double p_pi   = col[0]/1000.0;
       double e_tot  = TMath::Sqrt(p_pi*p_pi + M_pion*M_pion/(GeV*GeV));
+      //double e_tot  = col[0]/1000.0;
+      //double p_pi   = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
       double Tkine  = e_tot - M_pion/GeV;
       double pt     = p_pi*TMath::Sin(th);
 
@@ -59,8 +61,8 @@ Int_t inclusive_d2n_NucDB(){
       T.SetValueSize(     Tkine, 0.001);
       PTpi.SetValueSize(     pt, 0.001);
 
-      point.SetValue( col[1] ); 
-      point.SetStatError(col[2]); 
+      point.SetValue(       col[1] ); 
+      point.SetStatError(   col[2]); 
       point.CalculateTotalError();
       meas->AddDataPoint(new NucDBDataPoint(point));
    }
@@ -77,6 +79,8 @@ Int_t inclusive_d2n_NucDB(){
 
       double p_pi   = col[0]/1000.0;
       double e_tot  = TMath::Sqrt(p_pi*p_pi + M_pion*M_pion/(GeV*GeV));
+      //double e_tot   = col[0]/1000.0;
+      //double p_pi  = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
       double Tkine  = e_tot - M_pion/GeV;
       double pt     = p_pi*TMath::Sin(th);
 
@@ -114,6 +118,8 @@ Int_t inclusive_d2n_NucDB(){
 
       double p_pi   = col[0]/1000.0;
       double e_tot  = TMath::Sqrt(p_pi*p_pi + M_pion*M_pion/(GeV*GeV));
+      //double e_tot   = col[0]/1000.0;
+      //double p_pi  = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
       double Tkine  = e_tot - M_pion/GeV;
       double pt     = p_pi*TMath::Sin(th);
 
@@ -141,6 +147,8 @@ Int_t inclusive_d2n_NucDB(){
 
       double p_pi   = col[0]/1000.0;
       double e_tot  = TMath::Sqrt(p_pi*p_pi + M_pion*M_pion/(GeV*GeV));
+      //double e_tot   = col[0]/1000.0;
+      //double p_pi  = TMath::Sqrt(e_tot*e_tot - M_pion*M_pion/(GeV*GeV));
       double Tkine  = e_tot - M_pion/GeV;
       double pt     = p_pi*TMath::Sin(th);
 
@@ -157,6 +165,7 @@ Int_t inclusive_d2n_NucDB(){
    }
    file.close();
 
+   exp->Print();
 
    dbman->SaveExperiment(exp);
    return 0;
