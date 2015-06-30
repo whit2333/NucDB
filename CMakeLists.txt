@@ -57,35 +57,16 @@ set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} ")
 
 #----------------------------------------------------------------------------
 # Find ROOT (required package)
-find_package(ROOT QUIET)
-if(NOT ROOT_FOUND)
-   message(STATUS "ROOT package not found. ")  
-   return()
-endif()
+list(APPEND CMAKE_PREFIX_PATH $ENV{ROOTSYS})
+find_package(ROOT REQUIRED COMPONENTS MathCore RIO Hist MathMore Graf Graf3d
+   Gpad GX11 GeomPainter X3d Gviz3d RGL
+   Eve EG Foam GenVector Geom GLEW Gui HistPainter MathCore Matrix MLP Net
+   Physics Spectrum Thread Tree TreeViewer)
+include(${ROOT_USE_FILE})
+include_directories(${CMAKE_SOURCE_DIR} ${ROOT_INCLUDE_DIRS})
+add_definitions(${ROOT_CXX_FLAGS})
 
-#----------------------------------------------------------------------------
-# Find CLHEP (required package)
-#find_package(CLHEP QUIET)
-#if(NOT CLHEP_FOUND)
-#   message(STATUS "CLHEP package not found. ")  
-#   return()
-#endif()
-
-#----------------------------------------------------------------------------
-# Find MySQL (required package)
-#find_package(MySQL QUIET)
-#if(NOT MYSQL_FOUND)
-#   message(STATUS "MySQL package not found. ")  
-#   return()
-#endif()
-
-#----------------------------------------------------------------------------
-# Find SQLite3 (required package)
-#find_package(SQLite3 QUIET)
-#if(NOT SQLITE3_FOUND)
-#   message(STATUS "SQLite3 package not found. ")  
-#   return()
-#endif()
+find_package(CLHEP REQUIRED)
 
 
 set(LINK_DIRECTORIES
@@ -178,7 +159,8 @@ foreach(aSharedLib ${NucDB_LIB_NAMES})
    set(NucDB_SHARED_LIBS ${NucDB_SHARED_LIBS} "${CMAKE_BINARY_DIR}/lib/NucDB${aSharedLib}.so")
    set(NucDB_ROOT_DICT_SRCS ${NucDB_ROOT_DICT_SRCS} "NucDB${aSharedLib}Dict.cxx")
    if(NUCDB_USE_ROOT6)
-      set(NucDB_PCM_FILES ${NucDB_PCM_FILES} "NucDB${aSharedLib}Dict_rdict.pcm")
+      #set(lib_PCM_FILE "${PROJECT_BINARY_DIR}/src/${aname}/${libname}Dict_rdict.pcm")
+      set(NucDB_PCM_FILES ${NucDB_PCM_FILES} "${PROJECT_BINARY_DIR}/NucDB${aSharedLib}Dict_rdict.pcm")
    endif(NUCDB_USE_ROOT6)
    if(NOT NUCDB_USE_ROOT6)
       set(NucDB_ROOT_DICTS ${NucDB_ROOT_DICTS} "NucDB${aSharedLib}Dict.h")
@@ -186,7 +168,8 @@ foreach(aSharedLib ${NucDB_LIB_NAMES})
    endif(NOT NUCDB_USE_ROOT6)
 endforeach(aSharedLib)
 
-ADD_CUSTOM_TARGET(ROOTDICTS DEPENDS ${NucDB_ROOT_DICT_SRCS} ${NucDB_ROOT_DICT_HEADERS} )
+
+#ADD_CUSTOM_TARGET(ROOTDICTS DEPENDS ${NucDB_ROOT_DICT_SRCS} ${NucDB_ROOT_DICT_HEADERS} )
 
 foreach(aSharedLib ${NucDB_LIB_NAMES})
    include(${aSharedLib})

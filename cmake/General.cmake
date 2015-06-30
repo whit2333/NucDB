@@ -24,7 +24,8 @@ endforeach(infileName)
 # dictionary
 set(General_LINKDEF ${PROJECT_SOURCE_DIR}/include/NucDBGeneral_LinkDef.h )
 set(General_DICTIONARY ${CMAKE_CURRENT_BINARY_DIR}/NucDBGeneralDict.cxx) 
-ROOT_GENERATE_DICTIONARY("${General_HEADERS}" "${General_LINKDEF}" "${General_DICTIONARY}" "${INCLUDE_DIRECTORIES}")
+#ROOT_GENERATE_DICTIONARY("${General_HEADERS}" "${General_LINKDEF}" "${General_DICTIONARY}" "${INCLUDE_DIRECTORIES}")
+ROOT_GENERATE_DICTIONARY(${General_DICTIONARY} ${General_HEADERS} LINKDEF ${General_LINKDEF} OPTIONS -p)
 
 # add the dictionary to the list of source files
 SET(General_SRCS ${General_SRCS} ${General_DICTIONARY}) 

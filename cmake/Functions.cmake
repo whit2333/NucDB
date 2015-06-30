@@ -15,7 +15,8 @@ endforeach(infileName)
 # dictionary
 set(Functions_LINKDEF ${PROJECT_SOURCE_DIR}/include/NucDBFunctions_LinkDef.h )
 set(Functions_DICTIONARY ${CMAKE_CURRENT_BINARY_DIR}/NucDBFunctionsDict.cxx) 
-ROOT_GENERATE_DICTIONARY("${Functions_HEADERS}" "${Functions_LINKDEF}" "${Functions_DICTIONARY}" "${INCLUDE_DIRECTORIES}")
+#ROOT_GENERATE_DICTIONARY("${Functions_HEADERS}" "${Functions_LINKDEF}" "${Functions_DICTIONARY}" "${INCLUDE_DIRECTORIES}")
+ROOT_GENERATE_DICTIONARY(${Functions_DICTIONARY} ${Functions_HEADERS} LINKDEF ${Functions_LINKDEF} OPTIONS -p)
 
 # add the dictionary to the list of source files
 SET(Functions_SRCS ${Functions_SRCS} ${Functions_DICTIONARY}) 
