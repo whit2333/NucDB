@@ -1,13 +1,53 @@
 #----------------------------------------------------------------------------
 # Setup the project
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
-project(NucDB CXX Fortran)
+project(NucDB CXX)
+
+set(NucDB_LIB_NAMES 
+   NucDB
+   )
+set(NucDB_EXE_NAMES
+   runtest
+   )
 
 # The version number.
-set (NucDB_VERSION_MAJOR 1)
-set (NucDB_VERSION_MINOR 0)
+set(NucDB_MAJOR_VERSION 1)
+set(NucDB_MINOR_VERSION 0)
+set(NucDB_PATCH_VERSION 0)
+set(NucDB_VERSION ${NucDB_MAJOR_VERSION}.${NucDB_MINOR_VERSION}.${NucDB_PATCH_VERSION})
 
+set (PROJECT_USE_ROOT6 ${NUCDB_USE_ROOT6})
+# ---------------------------------------------------------------------------
+# Configure the find_package outputs for this library
+# Offer the user the choice of overriding the installation directories
+set(INSTALL_LIB_DIR lib CACHE PATH "Installation directory for libraries")
+set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
+set(INSTALL_INCLUDE_DIR include CACHE PATH "Installation directory for header files")
+if(WIN32 AND NOT CYGWIN)
+   set(DEF_INSTALL_CMAKE_DIR CMake)
+else()
+   set(DEF_INSTALL_CMAKE_DIR lib/${PROJECT_NAME})
+endif()
+set(INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH "Installation directory for CMake files")
+
+# Make relative paths absolute (needed later on)
+foreach(p LIB BIN INCLUDE CMAKE)
+  set(var INSTALL_${p}_DIR)
+  if(NOT IS_ABSOLUTE "${${var}}")
+    set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
+  endif()
+endforeach()
+
+#MESSAGE("installprefix : ${CMAKE_INSTALL_PREFIX}")
+if(NOT CMAKE_INSTALL_PREFIX)
+   SET(FieldTest_PREFIX "/usr/local")
+else() 
+   SET(FieldTest_PREFIX ${CMAKE_INSTALL_PREFIX})
+endif()
+
+# ---------------------------------------------------------------------------
+#
 set (NucDB_CXX_CFLAGS)
 set (NucDB_CXX_LDFLAGS)
 set (NucDB_CXX_LIBS)
@@ -15,45 +55,62 @@ set (NucDB_CXX_INC_DIR)
 set (NucDB_FC_CFLAGS)
 set (NucDB_GRID_DATA_DIR)
 set (NucDB_PCM_FILES)
-
-set (PROJECT_USE_ROOT6 ${NUCDB_USE_ROOT6})
-
-#-------------------------------------------------------
-set(CMAKE_MODULE_PATH
-   ${PROJECT_SOURCE_DIR}/cmake/Modules 
-   ${PROJECT_SOURCE_DIR}/cmake
-   ${CMAKE_MODULE_PATH}
-   )
-
-# Grid dir
 set (NucDB_DATA_DIR "${PROJECT_SOURCE_DIR}/data")
 
+
+set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
+set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
+
+# ---------------------------------------------------------------------------
+set(CMAKE_MODULE_PATH
+   ${CMAKE_MODULE_PATH}
+   ${PROJECT_SOURCE_DIR}/cmake/Modules 
+   ${PROJECT_SOURCE_DIR}/cmake
+   )
+
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON)
+
+# ---------------------------------------------------------------------------
+# Must be out of source build
 macro(NucDB_CHECK_OUT_OF_SOURCE_BUILD)
    get_filename_component(bindir_parent ${CMAKE_BINARY_DIR} PATH)
    if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
       file(REMOVE_RECURSE ${CMAKE_SOURCE_DIR}/Testing)
       file(REMOVE ${CMAKE_SOURCE_DIR}/DartConfiguration.tcl)
-      message(FATAL_ERROR "NucDB should be built as an out of source build, to keep the source directory clean. Please create a extra build directory and run the command 'cmake <path_to_source_dir>' in this newly created directory. You have also to delete the directory CMakeFiles and the file CMakeCache.txt in the source directory. Otherwise cmake will complain even if you run it from an out-of-source directory.")
+      message(FATAL_ERROR "NucDB should be built as an out of source build, to keep the source directory clean. Please create a extra build directory and run the command 'cmake <path_to_source_dir>' in this newly created directory.  You have also to delete the directory CMakeFiles and the file CMakeCache.txt in the source directory. Otherwise cmake will complain even if you run it from an out-of-source directory.")
    elseif(IS_SYMLINK ${CMAKE_BINARY_DIR} AND CMAKE_SOURCE_DIR STREQUAL bindir_parent)
       message(FATAL_ERROR "NucDB cannot be built from a sub-directory of the source tree that is a symlink. This is a current limitation of CMake. Please create a real build directory and run the command 'cmake <path_to_source_dir>' in this newly created directory.")
    endif()
 endmacro()
+# NOTE: Doesn't work with older cmake versions:
+NucDB_CHECK_OUT_OF_SOURCE_BUILD()
 
-#Doesn't work with older cmake versions:
-#NucDB_CHECK_OUT_OF_SOURCE_BUILD()
+# ----------------------------------------------------------------------------
+# Compiler Options 
 
-# Check the compiler and set the compile and link flags
 #set(CMAKE_BUILD_TYPE Debug)
 
-set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
-set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
+# --------
+# C++
+set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} ")
 
 # not sure this is the best way to do this....
 set(NucDB_FC_CFLAGS "${NucDB_FC_CFLAGS} ${CMAKE_Fortran_FLAGS}")
 #set(CMAKE_Fortran_FLAGS " -D\"NucDB_PDF_GRID_DIR='${NucDB_PDF_GRID_DIR}'\" -g -O2 -Wall -fPIC -Iinclude -ffixed-line-length-none -x f77-cpp-input ")
 set(CMAKE_Fortran_FLAGS " -D\"NucDB_PDF_GRID_DIR='${NucDB_PDF_GRID_DIR}'\" -g -O2 -Wall  -ffixed-line-length-none -x f77-cpp-input ")
 
-set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} ")
+#---------------------------------------------------------------------------
+# ROOT compile flags
+#EXECUTE_PROCESS(COMMAND root-config --cflags OUTPUT_VARIABLE ROOT_CXX_FLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
+#
+#EXECUTE_PROCESS(COMMAND insane-config --inc OUTPUT_VARIABLE INSANE_CXX_FLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${INSANE_CXX_FLAGS}")
+#
+#set(NucDB_CXX_CFLAGS "${NucDB_CXX_CFLAGS} ${CMAKE_CXX_FLAGS}")
 
 #----------------------------------------------------------------------------
 # Find ROOT (required package)
@@ -87,17 +144,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include
    ${INCLUDE_DIRECTORIES}
    )
 
-message(STATUS " ${INCLUDE_DIRECTORIES} ")  
-
-#---------------------------------------------------------------------------
-# ROOT compile flags
-EXECUTE_PROCESS(COMMAND root-config --cflags OUTPUT_VARIABLE ROOT_CXX_FLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
-
-EXECUTE_PROCESS(COMMAND insane-config --inc OUTPUT_VARIABLE INSANE_CXX_FLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${INSANE_CXX_FLAGS}")
-
-set(NucDB_CXX_CFLAGS "${NucDB_CXX_CFLAGS} ${CMAKE_CXX_FLAGS}")
+#message(STATUS " ${INCLUDE_DIRECTORIES} ")  
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
@@ -121,11 +168,12 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${ROOT_LD_FLAGS}")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}  -lGeomPainter -lGeom -lEve -lTreeViewer -lSpectrum -lSpectrumPainter -lFoam ")
 #set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}   -Wl,-rpath-link,/home/whit/lib ")
 
- 
-
 set(NucDB_CXX_LIBS "-L${CMAKE_INSTALL_PREFIX}/lib -lNucDB ${NucDB_CXX_LIBS} ")
 set(NucDB_CXX_LDFLAGS "${NucDB_CXX_LDFLAGS} ${CMAKE_SHARED_LINKER_FLAGS}")
 set(NucDB_CXX_INC_DIR "-I${CMAKE_INSTALL_PREFIX}/include/NucDB ")
+
+# ---------------------------------------
+set(NucDB_CXX_LIBS  "-lNucDB${aSharedLib} ")
 
 # configure a header file to pass some of the CMake settings to the source code
 configure_file (
@@ -134,8 +182,20 @@ configure_file (
    )
 
 #----------------------------------------------------------------------------
+# Libraries 
+foreach(aSharedLib ${NucDB_LIBRARIES})
+  include_directories(${PROJECT_SOURCE_DIR}/${aSharedLib}/include)
+  add_subdirectory("src/${aSharedLib}")
+endforeach(aSharedLib)
+
+# ---------------------------------------------------------------------------
+# Executables 
+#add_subdirectory(config)
+#add_subdirectory(runtest)
+
+#----------------------------------------------------------------------------
 # Add the executable
-add_executable(nucdb-config nucdb-config.cxx )
+#add_executable(nucdb-config nucdb-config.cxx )
 #add_executable(${myexe} ${mymain} ${sources} ${headers})
 
 #target_link_libraries(NucDB ${myObjects} 
@@ -144,70 +204,44 @@ add_executable(nucdb-config nucdb-config.cxx )
 #   ${SQLITE3_LIBRARIES} 
 #   ${ROOT_LIBRARIES} )
 
-set(NucDB_LIB_NAMES
-   General
-   Functions
-   )
-
 set(NucDB_SHARED_LIBS)
 set(NucDB_ROOT_DICTS)
 set(NucDB_ROOT_DICT_HEADERS)
 
+# ---------------------------------------
+foreach(aSharedLib ${NucDB_LIB_NAMES})
+   set(NucDB_CXX_LIBS      "${NucDB_CXX_LIBS} -l${aSharedLib} ")
+endforeach(aSharedLib)
 
 # ---------------------------------------
 foreach(aSharedLib ${NucDB_LIB_NAMES})
-   set(NucDB_SHARED_LIBS ${NucDB_SHARED_LIBS} "${CMAKE_BINARY_DIR}/lib/NucDB${aSharedLib}.so")
-   set(NucDB_ROOT_DICT_SRCS ${NucDB_ROOT_DICT_SRCS} "NucDB${aSharedLib}Dict.cxx")
+   set(NucDB_SHARED_LIBS ${NucDB_SHARED_LIBS} "${CMAKE_BINARY_DIR}/lib/${aSharedLib}.so")
+   set(NucDB_ROOT_DICT_SRCS ${NucDB_ROOT_DICT_SRCS} "${aSharedLib}Dict.cxx")
    if(NUCDB_USE_ROOT6)
       #set(lib_PCM_FILE "${PROJECT_BINARY_DIR}/src/${aname}/${libname}Dict_rdict.pcm")
-      set(NucDB_PCM_FILES ${NucDB_PCM_FILES} "${PROJECT_BINARY_DIR}/NucDB${aSharedLib}Dict_rdict.pcm")
+      set(NucDB_PCM_FILES ${NucDB_PCM_FILES} "${PROJECT_BINARY_DIR}/${aSharedLib}Dict_rdict.pcm")
    endif(NUCDB_USE_ROOT6)
    if(NOT NUCDB_USE_ROOT6)
-      set(NucDB_ROOT_DICTS ${NucDB_ROOT_DICTS} "NucDB${aSharedLib}Dict.h")
-      set(NucDB_ROOT_DICT_HEADERS ${NucDB_ROOT_DICT_HEADERS} "NucDB${aSharedLib}Dict.h")
+      set(NucDB_ROOT_DICTS ${NucDB_ROOT_DICTS} "${aSharedLib}Dict.h")
+      set(NucDB_ROOT_DICT_HEADERS ${NucDB_ROOT_DICT_HEADERS} "${aSharedLib}Dict.h")
    endif(NOT NUCDB_USE_ROOT6)
 endforeach(aSharedLib)
 
-
-#ADD_CUSTOM_TARGET(ROOTDICTS DEPENDS ${NucDB_ROOT_DICT_SRCS} ${NucDB_ROOT_DICT_HEADERS} )
-
 foreach(aSharedLib ${NucDB_LIB_NAMES})
-   include(${aSharedLib})
-   add_dependencies(NucDB${aSharedLib} ROOTDICTS)
+   #include(${aSharedLib})
+   add_subdirectory("src/${aSharedLib}")
 endforeach(aSharedLib)
 
+#foreach(anExeName ${FieldTest_EXE_NAMES})
+#   #include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/${anExeName}/include)
+#   add_subdirectory("src/${anExeName}")
+#endforeach(anExeName)
+export(PACKAGE ${PROJECT_NAME})
 
-FILE(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.h" "${PROJECT_SOURCE_DIR}/include/*.h" "${PROJECT_BINARY_DIR}/*.h")
-FILE(GLOB PCM_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.pcm" "${PROJECT_SOURCE_DIR}/*.pcm" "${PROJECT_BINARY_DIR}/*.pcm")
-FILE(GLOB python_files "${CMAKE_CURRENT_SOURCE_DIR}/python/*")
 
-# -----------------------------------------------------------
-# Set the library version in the main CMakeLists.txt
-SET(NucDB_MAJOR_VERSION 0)
-SET(NucDB_MINOR_VERSION 0)
-SET(NucDB_PATCH_VERSION 0)
-SET(NucDB_VERSION "${NucDB_MAJOR_VERSION}.${NucDB_MINOR_VERSION}.${NucDB_PATCH_VERSION}")
-SET(NucDB_LIBRARY_PROPERTIES ${NucDB_LIBRARY_PROPERTIES}
-    VERSION "${NucDB_VERSION}"
-    SOVERSION "${NucDB_MAJOR_VERSION}"
-    SUFFIX ".so"
-)
-set(NucDB_SRCS
-   ${General_SRCS}
-   ${Functions_SRCS}
-   )
-
-add_library(NucDB SHARED ${NucDB_SRCS})
-target_link_libraries(NucDB ${ROOT_LIBRARIES})
-add_dependencies(NucDB ROOTDICTS)
-set_target_properties(NucDB PROPERTIES ${NucDB_LIBRARY_PROPERTIES})
-
-# ------------------------------------------------------------------------------
-# Build the shared libraries 
-
-foreach(aLib ${NucDB_LIB_NAMES})
-   install(TARGETS "NucDB${aLib}" DESTINATION   lib)
-endforeach(aLib)
+#FILE(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.h" "${PROJECT_SOURCE_DIR}/include/*.h" "${PROJECT_BINARY_DIR}/*.h")
+#FILE(GLOB PCM_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.pcm" "${PROJECT_SOURCE_DIR}/*.pcm" "${PROJECT_BINARY_DIR}/*.pcm")
+#FILE(GLOB python_files "${CMAKE_CURRENT_SOURCE_DIR}/python/*")
 
 #install(TARGETS Cluster DESTINATION lib) #${CMAKE_BINARY_DIR}/lib)
 #install(TARGETS Cut DESTINATION     lib) #${CMAKE_BINARY_DIR}/lib)
@@ -220,12 +254,12 @@ endforeach(aLib)
 # ------------------------------------------------------------------------------
 # Build the binary 
 #install(TARGETS NucDB DESTINATION ${CMAKE_BINARY_DIR}/lib)
-install(TARGETS NucDB DESTINATION lib)
-INSTALL(FILES ${files} DESTINATION include/NucDB)
-install(FILES ${PCM_FILES} DESTINATION lib)
-install(FILES ${python_files} DESTINATION lib)
+#install(TARGETS NucDB DESTINATION lib)
+#INSTALL(FILES ${files} DESTINATION include/NucDB)
+#install(FILES ${PCM_FILES} DESTINATION lib)
+#install(FILES ${python_files} DESTINATION lib)
 
-install(TARGETS nucdb-config DESTINATION bin)
+#install(TARGETS nucdb-config DESTINATION bin)
 
 MESSAGE("          NucDB_CXX_LIBS: ${NucDB_CXX_LIBS}")
 MESSAGE("       NucDB_CXX_LDFLAGS: ${NucDB_CXX_LDFLAGS}")
