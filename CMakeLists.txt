@@ -8,7 +8,6 @@ set(NucDB_LIB_NAMES
    NucDB
    )
 set(NucDB_EXE_NAMES
-   runtest
    )
 
 # The version number.
@@ -41,9 +40,9 @@ endforeach()
 
 #MESSAGE("installprefix : ${CMAKE_INSTALL_PREFIX}")
 if(NOT CMAKE_INSTALL_PREFIX)
-   SET(FieldTest_PREFIX "/usr/local")
+   SET(NucDB_PREFIX "/usr/local")
 else() 
-   SET(FieldTest_PREFIX ${CMAKE_INSTALL_PREFIX})
+   SET(NucDB_PREFIX ${CMAKE_INSTALL_PREFIX})
 endif()
 
 # ---------------------------------------------------------------------------
@@ -232,34 +231,104 @@ foreach(aSharedLib ${NucDB_LIB_NAMES})
    add_subdirectory("src/${aSharedLib}")
 endforeach(aSharedLib)
 
-#foreach(anExeName ${FieldTest_EXE_NAMES})
-#   #include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/${anExeName}/include)
-#   add_subdirectory("src/${anExeName}")
-#endforeach(anExeName)
+foreach(anExeName ${NucDB_EXE_NAMES})
+   #include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/${anExeName}/include)
+   add_subdirectory("src/${anExeName}")
+endforeach(anExeName)
+
+add_subdirectory("config")
+
 export(PACKAGE ${PROJECT_NAME})
 
+FILE(GLOB GENERATED_HEADERS 
+   "${CMAKE_CURRENT_SOURCE_DIR}/*.h" 
+   "${PROJECT_BINARY_DIR}/NucDBConfig.h")
+FILE(GLOB PCM_FILES "${PROJECT_BINARY_DIR}/*.pcm")
 
-#FILE(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.h" "${PROJECT_SOURCE_DIR}/include/*.h" "${PROJECT_BINARY_DIR}/*.h")
-#FILE(GLOB PCM_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.pcm" "${PROJECT_SOURCE_DIR}/*.pcm" "${PROJECT_BINARY_DIR}/*.pcm")
-#FILE(GLOB python_files "${CMAKE_CURRENT_SOURCE_DIR}/python/*")
+# -----------------------------------------------------------
+# Set the library version in the main CMakeLists.txt
+SET(NucDB_LIBRARY_PROPERTIES ${NucDB_LIBRARY_PROPERTIES}
+    VERSION "${NucDB_VERSION}"
+    SOVERSION "${NucDB_MAJOR_VERSION}"
+    SUFFIX ".so"
+)
 
-#install(TARGETS Cluster DESTINATION lib) #${CMAKE_BINARY_DIR}/lib)
-#install(TARGETS Cut DESTINATION     lib) #${CMAKE_BINARY_DIR}/lib)
-#install(TARGETS Event DESTINATION   lib) #${CMAKE_BINARY_DIR}/lib)
-#install(TARGETS General DESTINATION lib) #${CMAKE_BINARY_DIR}/lib)
-#install(TARGETS Geo DESTINATION     lib) #${CMAKE_BINARY_DIR}/lib)
-#install(TARGETS Math DESTINATION    lib) #${CMAKE_BINARY_DIR}/lib)
-#install(TARGETS Physics DESTINATION lib) #${CMAKE_BINARY_DIR}/lib)
+set(NucDB_SRCS
+   ${Cluster_SRCS}
+   ${Cut_SRCS}
+   ${Event_SRCS}
+   ${General_SRCS}
+   ${Geo_SRCS}
+   ${Math_SRCS}
+   ${Neural_SRCS}
+   ${Physics_SRCS}
+   ${Physics2_SRCS}
+   )
+set_source_files_properties(
+   ${NucDB_SRCS}
+   PROPERTIES COMPILE_FLAGS "")
+#   PROPERTIES COMPILE_FLAGS "-Wall  -Wextra -Wcomment ")
+
+#add_library(NucDB SHARED ${NucDB_SRCS})
+#target_link_libraries(NucDB ${ROOT_LIBRARIES})
+#add_dependencies(NucDB ROOTDICTS)
+#set_target_properties(NucDB PROPERTIES ${NucDB_LIBRARY_PROPERTIES})
+
+# ------------------------------------------------------------------------------
+# Install the libraries 
+#foreach(aLib ${NucDB_LIB_NAMES})
+#   install(TARGETS "NucDB${aLib}" DESTINATION   lib)
+#endforeach(aLib)
 
 # ------------------------------------------------------------------------------
 # Build the binary 
-#install(TARGETS NucDB DESTINATION ${CMAKE_BINARY_DIR}/lib)
 #install(TARGETS NucDB DESTINATION lib)
-#INSTALL(FILES ${files} DESTINATION include/NucDB)
-#install(FILES ${PCM_FILES} DESTINATION lib)
-#install(FILES ${python_files} DESTINATION lib)
+INSTALL(FILES ${files} DESTINATION include/NucDB)
+install(FILES ${PCM_FILES} DESTINATION lib)
+#install(TARGETS NucDB-config DESTINATION bin)
 
-#install(TARGETS nucdb-config DESTINATION bin)
+
+# ----------------------------------------------------------------------------
+# The cmake stuff goes here
+
+# Add all targets to the build-tree export set
+#export(TARGETS NucDB FILE "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
+# TODO: replace "NucDB" with smaller libraries
+
+# Export the package for use from the build-tree
+# (this registers the build-tree with a global CMake-registry)
+export(PACKAGE ${PROJECT_NAME})
+
+set(CONF_LIBRARIES 
+   ${PROJECT_NAME}  # TODO: Break big library into smaller ones
+   )
+
+set(CONF_EXECUTABLES 
+   NucDB-config
+   )
+
+set(CONF_INCLUDE_DIRS 
+   ${CMAKE_INSTALL_PREFIX}/include
+   ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME}
+   )
+
+set(CONF_LIBRARY_DIRS 
+   ${CMAKE_INSTALL_PREFIX}/lib
+   )
+
+configure_file(${PROJECT_NAME}Config.cmake.in "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${PROJECT_NAME}Config.cmake" @ONLY)
+configure_file(${PROJECT_NAME}ConfigVersion.cmake.in "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${PROJECT_NAME}ConfigVersion.cmake" @ONLY)
+
+# Install the FooBarConfig.cmake and FooBarConfigVersion.cmake
+install(FILES
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${PROJECT_NAME}Config.cmake"
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${PROJECT_NAME}ConfigVersion.cmake"
+  DESTINATION "${INSTALL_CMAKE_DIR}" COMPONENT dev)
+
+# Install the export set for use with the install-tree
+install(EXPORT ${PROJECT_NAME}Targets DESTINATION
+  "${INSTALL_CMAKE_DIR}" COMPONENT dev)
+
 
 MESSAGE("          NucDB_CXX_LIBS: ${NucDB_CXX_LIBS}")
 MESSAGE("       NucDB_CXX_LDFLAGS: ${NucDB_CXX_LDFLAGS}")

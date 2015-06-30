@@ -1,6 +1,6 @@
 // the configured options and settings for Tutorial
-#define NucDB_VERSION_MAJOR @NucDB_VERSION_MAJOR@
-#define NucDB_VERSION_MINOR @NucDB_VERSION_MINOR@
+#define NucDB_MAJOR_VERSION @NucDB_MAJOR_VERSION@
+#define NucDB_MINOR_VERSION @NucDB_MINOR_VERSION@
 
 #define NucDB_DATA_DIR      "@NucDB_DATA_DIR@"
 #define NucDB_CXX_CFLAGS    "@NucDB_CXX_CFLAGS@"
