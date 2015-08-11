@@ -834,6 +834,19 @@ if __name__ == "__main__":
     A2pExtractor.Initialize()
     A2pExtractor.ExtractAllValues()
 
+    # -----------------------------------------------------------
+    #
+    Gamma1p = experiment.GetMeasurement("Gamma1p")
+    if not Gamma1p :
+        Gamma1p = NucDBMeasurement("Gamma1p","#Gamma_{1}^{p}")
+        experiment.AddMeasurement(Gamma1p)
+    Gamma1p.SetColor(1)
+    Gamma1p.ClearDataPoints()
+    Q2    = NucDBBinnedVariable("Qsquared","Q^{2}",5.0,1.0)
+    point = NucDBDataPoint(0.118,0.004+0.007)
+    point.AddBinVariable(Q2)
+    Gamma1p.AddDataPoint(point)
+
 
     experiment.Print()
     manager.SaveExperiment(experiment)
