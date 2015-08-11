@@ -7,3 +7,5 @@ install(TARGETS ${exename}
   # IMPORTANT: Add the bar executable to the "export-set"
   EXPORT ${PROJECT_NAME}Targets
   RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin)
+
+
