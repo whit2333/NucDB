@@ -59,7 +59,7 @@ class NucDBDependentVariable : public NucDBBinnedVariable {
       double              (*fFunc2) (double,double); //->
       double              (*fFunc3) (double,double,double); //->
 
-      ClassDef(NucDBDependentVariable,1)
+      ClassDef(NucDBDependentVariable,2)
 };
 
 class NucDBThetaDV_rad  : public NucDBDependentVariable {

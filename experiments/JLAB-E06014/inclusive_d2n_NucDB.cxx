@@ -71,7 +71,7 @@ Int_t inclusive_d2n_NucDB(){
    // -----------------------------------------------------------
    // 4.7 GeV beam data
    // < P (MeV) > < xs (pb/MeV/sr) > < stat error (pb/MeV/sr) > 
-   std::ifstream file("experiments/JLAB-E06014/pion/Positive/cs_4-pass.dat");
+   file = std::ifstream("experiments/JLAB-E06014/pion/Positive/cs_4-pass.dat");
    while( !(file.eof()) ){
 
       file >> col[0] >> col[1] >> col[2];
@@ -110,7 +110,7 @@ Int_t inclusive_d2n_NucDB(){
    // -----------------------------------------------------------
    // 5.9 GeV beam data
    // < P (MeV) > < xs (pb/MeV/sr) > < stat error (pb/MeV/sr) > 
-   std::ifstream file("experiments/JLAB-E06014/pion/Negative/cs_5-pass.dat");
+   file = std::ifstream("experiments/JLAB-E06014/pion/Negative/cs_5-pass.dat");
    while( !(file.eof()) ){
 
       file >> col[0] >> col[1] >> col[2];
@@ -139,7 +139,7 @@ Int_t inclusive_d2n_NucDB(){
    // -----------------------------------------------------------
    // 4.7 GeV beam data
    // < P (MeV) > < xs (pb/MeV/sr) > < stat error (pb/MeV/sr) > 
-   std::ifstream file("experiments/JLAB-E06014/pion/Negative/cs_4-pass.dat");
+   file = std::ifstream("experiments/JLAB-E06014/pion/Negative/cs_4-pass.dat");
    while( !(file.eof()) ){
 
       file >> col[0] >> col[1] >> col[2];

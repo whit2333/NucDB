@@ -79,7 +79,7 @@ Int_t inclusive_piminus_NucDB(){
    }
 
    // E = 3.5
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_12C_pi_minus_13deg_3.5GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_12C_pi_minus_13deg_3.5GeV.png.dat");
    if( !(file.good()) ) return -4;
    while( !(file.eof()) ){
 
@@ -107,7 +107,7 @@ Int_t inclusive_piminus_NucDB(){
 
 
    // E = 4.5
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_12C_pi_minus_13deg_4.5GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_12C_pi_minus_13deg_4.5GeV.png.dat");
    if( file.good() ) while( !(file.eof()) ){
 
       file >> x >> y >> ey1 >> ey2;
@@ -134,7 +134,7 @@ Int_t inclusive_piminus_NucDB(){
    }
 
    // E = 5.0
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_12C_pi_minus_13deg_5.0GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_12C_pi_minus_13deg_5.0GeV.png.dat");
    if( !(file.good()) ) return -4;
    while( !(file.eof()) ){
 
@@ -162,7 +162,7 @@ Int_t inclusive_piminus_NucDB(){
    }
 
    // E = 6.0
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_12C_pi_minus_13deg_6.0GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_12C_pi_minus_13deg_6.0GeV.png.dat");
    if( !(file.good()) ) return -4;
    while( !(file.eof()) ){
 
@@ -201,7 +201,7 @@ Int_t inclusive_piminus_NucDB(){
    meas->ClearDataPoints();
 
    // E = 2.68
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_2.68GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_2.68GeV.png.dat");
    if( !(file.good()) ) return -4;
    while( !(file.eof()) ){
 
@@ -230,7 +230,7 @@ Int_t inclusive_piminus_NucDB(){
    }
 
    // E = 3.5
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_3.5GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_3.5GeV.png.dat");
    if( !(file.good()) ) return -4;
    while( !(file.eof()) ){
 
@@ -259,7 +259,7 @@ Int_t inclusive_piminus_NucDB(){
    }
 
    // E = 4.5
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_4.5GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_4.5GeV.png.dat");
    if( !(file.good()) ) return -4;
    while( !(file.eof()) ){
 
@@ -288,7 +288,7 @@ Int_t inclusive_piminus_NucDB(){
    }
 
    // E = 5.0
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_5.0GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_5.0GeV.png.dat");
    if( !(file.good()) ) return -4;
    while( !(file.eof()) ){
 
@@ -317,7 +317,7 @@ Int_t inclusive_piminus_NucDB(){
    }
 
    // E = 6.0
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_6.0GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_6.0GeV.png.dat");
    if( !(file.good()) )  return -4;
    while( !(file.eof()) ){
 
@@ -357,7 +357,7 @@ Int_t inclusive_piminus_NucDB(){
    meas->ClearDataPoints();
 
    // E = 3.5
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_3.5GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_3.5GeV.png.dat");
    if( !(file.good()) ) return -4;
    while( !(file.eof()) ){
 
@@ -386,7 +386,7 @@ Int_t inclusive_piminus_NucDB(){
    }
 
    // E = 4.5
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_4.5GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_4.5GeV.png.dat");
    if( !(file.good()) ) return -4;
    while( !(file.eof()) ){
 
@@ -415,7 +415,7 @@ Int_t inclusive_piminus_NucDB(){
    }
 
    // E = 5.0
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_5.0GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_5.0GeV.png.dat");
    if( !(file.good()) ) return -4;
    while( !(file.eof()) ){
 
@@ -444,7 +444,7 @@ Int_t inclusive_piminus_NucDB(){
    }
 
    // E = 6.0
-   std::ifstream file("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_6.0GeV.png.dat");
+   file = std::ifstream("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_6.0GeV.png.dat");
    if( !(file.good()) )  return -4;
    while( !(file.eof()) ){
 
