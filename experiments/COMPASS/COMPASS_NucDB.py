@@ -54,6 +54,55 @@ class COMPASSExtractor(NucDBRawDataExtractor):
         self.fCurrentDataPoint.CalculateDependentVariables()
         #self.fCurrentDataPoint.Print()
 
+class COMPASSExtractor2(NucDBRawDataExtractor):
+    def __init__(self):
+        NucDBRawDataExtractor.__init__(self)
+        self.ixbj_min      = 0
+        self.ixbj_max      = 1
+        self.ixbj          = 2
+        self.iQsq          = 3
+        self.iValueRow     = 4
+        self.istatErr      = 5
+        self.isysErr       = 6
+
+    def ParseLine(self):
+        """ Columns: x_min,x_max,<x>,Q2,A1p,A1p(stat),A1p(syst),g1p,g1p(stat),g1p(syst)
+        """
+        print self.currentline
+        values = self.currentline.split()
+
+        Ebeam  = self.fCurrentDataPoint.GetBinVariable('Ebeam')
+        if Ebeam :
+            Ebeam.SetBinValueSize(180.0,20.0)
+
+        x = self.fCurrentDataPoint.GetBinVariable('x')
+        if x :
+            x.SetMeanLimits(float(values[self.ixbj]),float(values[self.ixbj_min]),float(values[self.ixbj_max]))
+        Qsq = self.fCurrentDataPoint.GetBinVariable("Qsquared")
+        if Qsq : 
+            Qsq.SetBinValueSize(float(values[self.iQsq]),0.1)
+        self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
+        self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr].lstrip('+')))
+        self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isysErr].lstrip('+')))
+        self.fCurrentDataPoint.CalculateTotalError()
+        #
+        W = self.fCurrentDataPoint.GetDependentVariable("W")
+        if not W :
+            W   = NucDBInvariantMassDV()
+            self.fCurrentDataPoint.AddDependentVariable(W)
+        if W :
+            W.SetVariable(0,x)
+            W.SetVariable(1,Qsq)
+        nu = self.fCurrentDataPoint.GetDependentVariable("nu")
+        if not nu :
+            nu   = NucDBPhotonEnergyDV()
+            self.fCurrentDataPoint.AddDependentVariable(nu)
+        if nu :
+            nu.SetVariable(0,x)
+            nu.SetVariable(1,Qsq)
+        self.fCurrentDataPoint.CalculateDependentVariables()
+        #self.fCurrentDataPoint.Print()
+
 
 
 if __name__ == "__main__":
@@ -112,7 +161,7 @@ if __name__ == "__main__":
     extractor.fCurrentDataPoint.AddBinVariable(Ebeam)
     extractor.Initialize()
     extractor.ExtractAllValues()
-    A1p.BuildGraph()
+    #A1p.BuildGraph()
     
 
     # g1p
@@ -178,6 +227,29 @@ if __name__ == "__main__":
     extractor.Initialize()
     extractor.ExtractAllValues()
     g1d.BuildGraph()
+
+# --------------------------------------------------------------
+# 2015 data from arxiv
+
+    ref = NucDBReference("COMPASS2015","The Spin Structure Function $g_1^{\\rm p}$ of the Proton and a Test of the Bjorken Sum Rule")
+    ref.SetDescription("COMPASS arxiv paper for A1p and g1p")
+    ref.SetURL("http://inspirehep.net/record/1357198")
+
+    A1p = experiment.GetMeasurement("A1p")
+    if not A1p :
+        A1p = NucDBMeasurement("A1p","A_{1}^{p}")
+        experiment.AddMeasurement(A1p)
+    A1p.AddRef(ref)
+    A1p.AddComment("2015 Muon energy at 160 and 200 GeV.")
+
+    extractor = COMPASSExtractor2()
+    extractor.SetMeasurement(A1p)
+    extractor.SetInputFile("experiments/COMPASS/A1p_march_2015.txt",1)
+    extractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    extractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    extractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    extractor.Initialize()
+    extractor.ExtractAllValues()
 
     experiment.Print("comm")
     if not experiment.GetRefs().GetEntries() : 
