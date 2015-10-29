@@ -10,6 +10,10 @@ set(NucDB_LIB_NAMES
 set(NucDB_EXE_NAMES
    )
 
+if(NOT NUCDB_USE_ROOT6)
+   set(NUCDB_USE_ROOT6 ON)
+endif()
+
 # The version number.
 set(NucDB_MAJOR_VERSION 1)
 set(NucDB_MINOR_VERSION 0)
