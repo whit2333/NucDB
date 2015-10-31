@@ -939,7 +939,7 @@ TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, 
          double err = point->GetSystError().GetError();
          multiplier = fn( var->GetMean() );
          gr->SetPoint(i,var->GetMean(), multiplier*err + offset);
-         gr->SetPointError(i,0.0,err);
+         gr->SetPointError(i,0.0,multiplier*err);
       } else {
          Error("BuildGraph","Variable, %s, not found!",varName);
          gr->SetPoint(i,0,0);
