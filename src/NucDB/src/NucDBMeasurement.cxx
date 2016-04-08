@@ -906,8 +906,12 @@ TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, 
       if( var ) {
          point->CalculateTotalError();
          double err = point->GetSystError().GetError();
-         gr->SetPoint(i,var->GetMean(),err+offset);
-         gr->SetPointError(i,0.0,err);
+            gr->SetPoint(i,var->GetMean(),err+offset);
+            gr->SetPointError(i,0.0,err);
+         if( std::isinf(err) || std::isnan(err) ) {
+            gr->SetPoint(i,var->GetMean(),0.0+offset);
+            gr->SetPointError(i,0.0,0.0);
+         }
       } else {
          Error("BuildGraph","Variable, %s, not found!",varName);
          gr->SetPoint(i,0,0);
