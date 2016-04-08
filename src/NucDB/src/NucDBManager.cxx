@@ -16,7 +16,8 @@ ClassImp(NucDBManager)
 NucDBManager * NucDBManager::fgDBManager = 0;
 //_____________________________________________________________________________
 
-NucDBManager::NucDBManager(Int_t opt) {
+NucDBManager::NucDBManager(const char * file, Int_t opt) : fFileName(file)
+{
    fDatabase  = 0;
    fExperiments  = 0;
    fPapers       = 0;
@@ -46,16 +47,25 @@ NucDBManager::NucDBManager(Int_t opt) {
    fStandardUnits.Add(new NucDBMassUnit());
    fStandardUnits.Add(new NucDBXSectionUnit());
 
-   fFile = 0;
-   if(!opt) fFile = new TFile(Form("%s/NucDB.root",NucDB_DATA_DIR),"READ");
-   else fFile = new TFile(Form("%s/NucDB.root",NucDB_DATA_DIR),"UPDATE");
+   if( fFileName.empty() ) {
+      if(!opt){
+         fFile = new TFile(Form("%s/NucDB.root",NucDB_DATA_DIR),"READ");
+      } else  {
+         fFile = new TFile(Form("%s/NucDB.root",NucDB_DATA_DIR),"UPDATE");
+      }
+   } else {
+      if(!opt){
+         fFile = new TFile(fFileName.c_str(),"READ");
+      } else  {
+         fFile = new TFile(fFileName.c_str(),"UPDATE");
+      }
+   }
 
    fFile->cd();
 
    Load();
-
 }
-//_____________________________________________________________________________
+//______________________________________________________________________________
 
 NucDBManager::~NucDBManager(){
       fFile->Write();
