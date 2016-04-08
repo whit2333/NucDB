@@ -235,6 +235,18 @@ Int_t d2n_NucDB(){
          std::cout << "Warning differing Q2 values" << std::endl;
       }
 
+      NucDBBinnedVariable * xvar  = point2.GetBinVariable("x");
+      NucDBBinnedVariable * Q2var = point2.GetBinVariable("Qsquared");
+      NucDBDependentVariable * W = point2.GetDependentVariable("W");
+      if(!W) {
+         W = new NucDBInvariantMassDV();
+         point2.AddDependentVariable(W);
+      }
+      if(W) {
+         W->SetVariable(0,xvar);
+         W->SetVariable(1,Q2var);
+      }
+
       // g1
       Q2.SetValueSize(Q2_1,0.001);
       x.SetValueSize(x_1,0.001);
