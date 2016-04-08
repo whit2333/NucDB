@@ -23,6 +23,7 @@ class JLABE97103DataExtractor(NucDBRawDataExtractor) :
         iQsq      = 4
         #print self.currentline
         values = self.currentline.split(',')
+        print values[10]
         self.rowcut.currentValue=int(0) # does nothign
         Eb = self.fCurrentDataPoint.GetBinVariable('E')
         Eb.SetBinValueSize(float(values[iEbeam]),0.001)
@@ -71,12 +72,10 @@ class JLABE97103DataExtractor(NucDBRawDataExtractor) :
             nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
         self.fCurrentDataPoint.SetValue(float(values[self.iValueRow]))
+        #print float(values[self.istatErr])
         self.fCurrentDataPoint.GetStatError().SetError(float(values[self.istatErr]))
         self.fCurrentDataPoint.GetSystError().SetError(float(values[self.isystErr]))
-
-        #self.fCurrentDataPoint.Print()
-
-
+        self.fCurrentDataPoint.CalculateTotalError()
 
 
 if __name__ == "__main__":
@@ -99,6 +98,7 @@ if __name__ == "__main__":
     epsilon  = NucDBBinnedVariable("epsilon","#epsilon")
     Pt       = NucDBBinnedVariable("Pt","P_t")
 
+    ###########################################################
     # g1n 
     A = experiment.GetMeasurement("g1n")
     if not A:
@@ -147,6 +147,47 @@ if __name__ == "__main__":
     AExtractor.Initialize()
     AExtractor.ExtractAllValues()
     A.BuildGraph()
+
+    ###########################################################
+    # g1He3
+    A = experiment.GetMeasurement("g1He3")
+    if not A:
+        A = NucDBMeasurement("g1He3","g_{1}^{^{3}He}")
+        experiment.AddMeasurement(A)
+    A.ClearDataPoints()
+    AExtractor = JLABE97103DataExtractor() 
+    AExtractor.SetMeasurement(A)
+    AExtractor.iValueRow = 11 
+    AExtractor.istatErr  = 12
+    AExtractor.isystErr  = 13 
+    AExtractor.SetInputFile("experiments/JLAB-E97103/JLabE97103_He",11,5)
+    AExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    AExtractor.fCurrentDataPoint.AddBinVariable(Eprime)
+    AExtractor.fCurrentDataPoint.AddBinVariable(theta)
+    AExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    AExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    AExtractor.Initialize()
+    AExtractor.ExtractAllValues()
+   
+    # g2He3
+    A = experiment.GetMeasurement("g2He3")
+    if not A:
+        A = NucDBMeasurement("g2He3","g_{2}^{^{3}He}")
+        experiment.AddMeasurement(A)
+    A.ClearDataPoints()
+    AExtractor = JLABE97103DataExtractor() 
+    AExtractor.SetMeasurement(A)
+    AExtractor.iValueRow = 14 
+    AExtractor.istatErr  = 15
+    AExtractor.isystErr  = 16 
+    AExtractor.SetInputFile("experiments/JLAB-E97103/JLabE97103_He",11,5)
+    AExtractor.fCurrentDataPoint.AddBinVariable(Ebeam)
+    AExtractor.fCurrentDataPoint.AddBinVariable(Eprime)
+    AExtractor.fCurrentDataPoint.AddBinVariable(theta)
+    AExtractor.fCurrentDataPoint.AddBinVariable(Xbjorken)
+    AExtractor.fCurrentDataPoint.AddBinVariable(Qsq)
+    AExtractor.Initialize()
+    AExtractor.ExtractAllValues()
 
     experiment.Print()
     manager.SaveExperiment(experiment)

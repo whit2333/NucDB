@@ -40,13 +40,9 @@ class NucDBManager : public TObject {
       Int_t fi_color;
       Int_t fi_marker;
 
-   protected:
 
-      /** If opt is not zero it is opened in UPDATE mode, otherwise it is readonly.
-      */ 
-      NucDBManager(Int_t opt = 0);
-
-      TFile      * fFile;
+      std::string  fFileName = "";
+      TFile      * fFile     = nullptr;
       TDirectory * fExpDir;
       TDirectory * fPapersDir;
       TDirectory * fCalcDir;
@@ -61,6 +57,12 @@ class NucDBManager : public TObject {
       void   AddNewMeasurements(NucDBExperiment * exp);
 
    public :
+
+      /*! If opt is not zero it is opened in UPDATE mode, otherwise it is readonly.  */ 
+      NucDBManager() : NucDBManager(0) { }
+      NucDBManager(Int_t opt) : NucDBManager("",opt) { }
+      NucDBManager(const char * file, Int_t opt);
+
       static NucDBManager * GetManager(int opt = 0){
          if(!fgDBManager) fgDBManager = new NucDBManager(opt);
          return(fgDBManager);

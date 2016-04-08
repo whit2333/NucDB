@@ -892,7 +892,6 @@ void NucDBMeasurement::PrintBreakDown(const char * var, int nmax) const {
 
 
 }
-
 //______________________________________________________________________________
 TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, double offset) {
    //if(fGraph) delete fGraph;
@@ -912,6 +911,39 @@ TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, 
             gr->SetPoint(i,var->GetMean(),0.0+offset);
             gr->SetPointError(i,0.0,0.0);
          }
+      } else {
+         Error("BuildGraph","Variable, %s, not found!",varName);
+         gr->SetPoint(i,0,0);
+         gr->SetPointError(i,0,0);
+         break;
+      }
+   }
+   gr->SetMarkerColor(GetColor());
+   gr->SetLineColor(GetColor());
+   gr->SetMarkerStyle(20);
+   gr->SetDrawOption("aep");
+   fGraphs.Add(gr);
+   return(gr);
+}
+//______________________________________________________________________________
+
+TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, std::function<double(double)> fn, double offset)
+{
+   //if(fGraph) delete fGraph;
+   TGraphErrors        * gr    = 0;
+   NucDBDataPoint      * point = 0;
+   NucDBBinnedVariable * var   = 0;
+   gr = new TGraphErrors(fNumberOfDataPoints);
+   for(int i = 0; i < fNumberOfDataPoints;i++) {
+      point = (NucDBDataPoint *) fDataPoints.At(i);
+      var = point->FindVariable(varName);
+      double multiplier = 1.0;
+      if( var ) {
+         point->CalculateTotalError();
+         double err = point->GetSystError().GetError();
+         multiplier = fn( var->GetMean() );
+         gr->SetPoint(i,var->GetMean(), multiplier*err + offset);
+         gr->SetPointError(i,0.0,multiplier*err);
       } else {
          Error("BuildGraph","Variable, %s, not found!",varName);
          gr->SetPoint(i,0,0);

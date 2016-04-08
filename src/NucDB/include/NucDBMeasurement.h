@@ -11,6 +11,7 @@
 #include "TAxis.h"
 #include "TBrowser.h"
 //#include "NucDBPaper.h"
+#include <functional>
 #include <vector>
 #include <algorithm>
 #include "NucDBReference.h"
@@ -217,8 +218,17 @@ class NucDBMeasurement : public TNamed {
       void           AddRef(NucDBReference * r) { fReferences.Add(r); }
 
       /** Build a graph with errors */
-      TGraphErrors * BuildGraph(const char * var = "x", bool syst_err = false); // *MENU*
+      TGraphErrors * BuildGraph(const char * varName = "x", bool syst_err = false); // *MENU*
       TGraphErrors * BuildSystematicErrorBand(const char * var = "x", double offset = 0.0); // *MENU*
+
+      /** This version builds an error band but multiplies by the fn argument.
+       *  The function is function of the varName variable.
+       *
+       *  For example, this can be  used to take the error band of g1(x) to an
+       *  error gand in x^2*g1(x).
+       */
+      TGraphErrors * BuildSystematicErrorBand(const char * varName, std::function<double(double)> f  , double offset = 0.0);
+
       TGraph * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
 
       TMultiGraph * BuildGraphUnique(const char * var = "x", const char * uniqueVar = "Qsquared", TLegend * leg = 0 ); // *MENU*

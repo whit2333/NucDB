@@ -52,8 +52,8 @@ class JLABE99117Extractor(NucDBRawDataExtractor):
             nu.SetVariable(1,Qsq)
         self.fCurrentDataPoint.CalculateDependentVariables()
         #
-        #self.fCurrentDataPoint.Print()
-        self.linesRead+=1
+        self.fCurrentDataPoint.Print()
+        #self.linesRead+=1
 
 
 if __name__ == "__main__":

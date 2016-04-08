@@ -17,12 +17,19 @@ Int_t g1p_kinematic_coverage(){
    mg->Draw("a");
 
    TLegend * leg = new TLegend(0.7, 0.75, 0.95, 0.95);
-   leg->SetHeader("F_{2}^{p} measurments");
+   leg->SetHeader("g_{1}^{p} measurments");
+   leg->SetBorderSize(1);
+   //leg->SetMargin(0.3);
+   leg->SetEntrySeparation(0.05);
 
    for (int i = 0; i < measurementsList->GetEntries(); i++) {
       NucDBMeasurement * ameas = (NucDBMeasurement*)measurementsList->At(i);
       TGraphErrors * agraph = (TGraphErrors*)graphList->At(i);
-      agraph->SetFillColorAlpha(kRed,0.8);
+      int a_color = manager->NextColor();
+      agraph->SetMarkerColor(a_color);
+      agraph->SetLineColor(a_color);
+      //agraph->SetFillColorAlpha(kRed,0.8);
+      agraph->SetFillColorAlpha(a_color,0.8);
       //agraph->SetFillStyle(4050);
       leg->AddEntry(agraph, Form("%s g1p", ameas->GetExperimentName()), "ep");
    }
