@@ -21,6 +21,7 @@ include_directories(${PROJECT_SOURCE_DIR}/src/${aname}/include)
 set(lib_files
    NucDBFuncs
    NucDBUtil
+   NucDBErrorBar
    NucDBDataPoint
    NucDBMeasurement
    NucDBUnits

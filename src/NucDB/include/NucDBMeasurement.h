@@ -193,6 +193,8 @@ class NucDBMeasurement : public TNamed {
 
       TList * GetDataPoints() {return(&fDataPoints);}
 
+      NucDBDataPoint * GetDataPoint(int i){return( (NucDBDataPoint*)fDataPoints.At(i) );}
+
       const TList& GetDataRef() const { return(fDataPoints);}
 
       /** Print information about the experiment. 

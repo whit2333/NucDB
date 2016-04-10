@@ -280,8 +280,10 @@ TList *  NucDBMeasurement::MergeNeighboringDataPoints(
          Error("MergeDataPoints(unsigned int, const char*, double,bool)","Could not find variable %s",varname2);
          continue;
       }
+      mean_0 = mean_1;
+      mean2_0 = mean2_1;
       mean_1 = var1->GetMean();
-      mean2_1 = var1->GetMean();
+      mean2_1 = var2->GetMean();
       if(nMerged == 0 || i%n == 0){
          mergedPoint = new NucDBDataPoint(*point);
          list->Add(mergedPoint);
@@ -290,6 +292,8 @@ TList *  NucDBMeasurement::MergeNeighboringDataPoints(
          mean_0 = mean_1;
          mean2_0 = mean2_1;
       } else {
+         mean_0  = mergedPoint->GetBinVariable(varname)->GetMean();
+         mean2_0 = mergedPoint->GetBinVariable(varname2)->GetMean();
          if( (TMath::Abs(mean_0 - mean_1) < dx) && (TMath::Abs(mean2_0 - mean2_1) < dx2) ) {
             // merge the neighboring point
             (*mergedPoint) += (*point);
