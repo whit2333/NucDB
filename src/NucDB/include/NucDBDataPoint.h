@@ -32,14 +32,23 @@ class NucDBDataPoint : public TNamed {
       mutable NucDBErrorBar fTotalError;
 
    public :
-      NucDBDataPoint(Double_t val=0.0, Double_t err=0.0);
+      NucDBDataPoint(Double_t val=0.0, Double_t err=0.0, Double_t syst=0.0);
       virtual ~NucDBDataPoint();
 
-      const NucDBDataPoint& operator=(const NucDBDataPoint& v) ;
+      NucDBDataPoint(const NucDBDataPoint& v) ;
+      NucDBDataPoint(NucDBDataPoint&&) = default;
+      //NucDBDataPoint& operator=(const NucDBDataPoint&) = default;
+      NucDBDataPoint& operator=(NucDBDataPoint&&) = default;
+      //virtual ~NucDBDataPoint() = default;
+
+      NucDBDataPoint& operator=(const NucDBDataPoint& v) ;
 
       /** Calculates the weighted mean and sets the error to the variance of the mean. */
       const NucDBDataPoint& operator+=(const NucDBDataPoint& v) ;
       const NucDBDataPoint& operator+(const NucDBDataPoint& v) const ;
+
+      const NucDBDataPoint& operator-=(const NucDBDataPoint& v) ;
+      const NucDBDataPoint& operator-(const NucDBDataPoint& v) const ;
 
       bool  operator==(const NucDBDataPoint & rhs) const ; 
       bool  operator!=(const NucDBDataPoint & rhs) const ; 
@@ -63,14 +72,13 @@ class NucDBDataPoint : public TNamed {
 
       void  SetSortPriorities(const std::vector<std::string> & names);
       Int_t GetNSortVariables() const { return fNSortVariables; }
-      NucDBBinnedVariable * GetSortPriority(Int_t p) const;
+
+      NucDBBinnedVariable * GetSortPriority(int p) const;
 
       Bool_t  IsSortable() const { return kTRUE; }
       Int_t   Compare(const TObject *obj) const ;
 
 
-      /** Performs deep copy. */
-      NucDBDataPoint(const NucDBDataPoint& v) ;
 
       Bool_t  IsFolder() const { return kTRUE; }
       void    Browse(TBrowser* b) {
@@ -94,6 +102,8 @@ class NucDBDataPoint : public TNamed {
 
       void  SetStatError(double v){fStatisticalError.SetError(v); }
       void  SetSystError(double v){ fSystematicError.SetError(v); }
+
+      void  SetUncertainty(double v){fStatisticalError.SetError(v); }
 
       const NucDBErrorBar& GetStatError() const { return(fStatisticalError); }
       const NucDBErrorBar& GetSystError() const { return(fSystematicError); }
@@ -129,7 +139,7 @@ class NucDBDataPoint : public TNamed {
       void                     AddVariable(NucDBVariable * var);
       NucDBVariable *          GetVariable(const char * name) const ;
 
-      ClassDef(NucDBDataPoint,3)
+      ClassDef(NucDBDataPoint,4)
 };
 
 

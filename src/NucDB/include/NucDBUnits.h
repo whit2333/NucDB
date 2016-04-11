@@ -28,6 +28,11 @@ public:
    }
    virtual ~NucDBUnit(){ }
 
+   NucDBUnit(NucDBUnit&&) = default;
+   NucDBUnit& operator=(const NucDBUnit&) = default;
+   NucDBUnit& operator=(NucDBUnit&&) = default;
+   //virtual ~NucDBUnit() = default;
+
    NucDBUnit& operator*=(const NucDBUnit& rhs){
            TString name(Form("%s%s",this->GetName(),rhs.GetName()));
 	   TString title(Form("%s %s",this->GetTitle(),rhs.GetTitle()));

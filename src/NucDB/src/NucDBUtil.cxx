@@ -197,8 +197,10 @@ namespace NucDB {
       }
       return plist;
    }
-//_____________________________________________________________________________
-   bool CompareDataPoint(const NucDBDataPoint *lhs, const NucDBDataPoint *rhs) {
+   //_____________________________________________________________________________
+   
+   bool CompareDataPoint(const NucDBDataPoint *lhs, const NucDBDataPoint *rhs)
+   {
       int n = lhs->GetNSortVariables();
       for(int i = n-1; i>=0; i--) {
          NucDBBinnedVariable * var3  = lhs->GetSortPriority(i);
@@ -207,8 +209,8 @@ namespace NucDB {
             Error("Compare","Could not find both bin variables. Check sorting variable name.");
             return false;
          }
-         double b0 = var3->GetCenter();
-         double b1 = var4->GetCenter();
+         double b0 = var3->GetMean();
+         double b1 = var4->GetMean();
          if(b0!=b1) {
             //std::cout << var3->GetName() << b0 << " < " << b1 << std::endl;
             return( b0<b1 );

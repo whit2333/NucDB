@@ -23,6 +23,12 @@ class NucDBVariable : public TNamed {
    public:
       NucDBVariable(const char* n = "aVariable", const char* t = "A Variable");
       virtual ~NucDBVariable();
+
+      NucDBVariable(NucDBVariable&&) = default;
+      //NucDBVariable& operator=(const NucDBVariable&) = default;
+      NucDBVariable& operator=(NucDBVariable&&) = default;
+      //virtual ~NucDBVariable() = default;
+ 
       NucDBVariable(const NucDBVariable& v):TNamed(v){
          fUnit  = v.GetUnit();
          fValue = v.GetValue();
@@ -60,6 +66,11 @@ class NucDBDiscreteVariable : public TNamed {
    public:
       NucDBDiscreteVariable(const char* name = "DiscreteVariable", const char* title = "A Discrete Variable") ;
       virtual ~NucDBDiscreteVariable();
+
+      NucDBDiscreteVariable(NucDBDiscreteVariable&&) = default;
+      //NucDBDiscreteVariable& operator=(const NucDBDiscreteVariable&) = default;
+      NucDBDiscreteVariable& operator=(NucDBDiscreteVariable&&) = default;
+      //virtual ~NucDBDiscreteVariable() = default;
 
       bool operator==(const NucDBDiscreteVariable &other) const {return(other.fValue == fValue );}
       bool operator!=(const NucDBDiscreteVariable &other) const { return !(*this == other);}
@@ -111,8 +122,16 @@ class NucDBBinnedVariable : public TNamed {
       virtual ~NucDBBinnedVariable();
       NucDBBinnedVariable& operator=(const NucDBBinnedVariable& v) ;
 
+      NucDBBinnedVariable(NucDBBinnedVariable&&) = default;
+      //NucDBBinnedVariable& operator=(const NucDBBinnedVariable&) = default;
+      NucDBBinnedVariable& operator=(NucDBBinnedVariable&&) = default;
+      //virtual ~NucDBBinnedVariable() = default;
+
       const NucDBBinnedVariable& operator+=(const NucDBBinnedVariable& v) ;
       const NucDBBinnedVariable& operator+( const NucDBBinnedVariable& v) const ;
+
+      const NucDBBinnedVariable& operator-=(const NucDBBinnedVariable& v) ;
+      const NucDBBinnedVariable& operator-( const NucDBBinnedVariable& v) const ;
 
       /** returns true if the bin values overlap */
       bool BinsOverlap(const NucDBBinnedVariable &var) const ;

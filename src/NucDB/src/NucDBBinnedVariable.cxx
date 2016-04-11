@@ -50,10 +50,13 @@ NucDBBinnedVariable::NucDBBinnedVariable(
    SetBinMinimum(fMinimum);
 }
 //_____________________________________________________________________________
-NucDBBinnedVariable::~NucDBBinnedVariable(){ }
+
+NucDBBinnedVariable::~NucDBBinnedVariable()
+{ }
 //_____________________________________________________________________________
 
-NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v) {
+NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v)
+{
    SetNameTitle(v.GetName(),v.GetTitle());
    fMinimum  = v.GetMinimum();
    fMaximum  = v.GetMaximum();
@@ -63,6 +66,7 @@ NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v) {
    fSortPriority = v.fSortPriority; 
 }
 //_____________________________________________________________________________
+
 const NucDBBinnedVariable& NucDBBinnedVariable::operator+=(const NucDBBinnedVariable& v) {
    // a weight for finding where the mean should be.
    double weight = GetBinSize()/v.GetBinSize(); 
@@ -75,10 +79,35 @@ const NucDBBinnedVariable& NucDBBinnedVariable::operator+=(const NucDBBinnedVari
    return *this;
 }
 //______________________________________________________________________________
+
 const NucDBBinnedVariable& NucDBBinnedVariable::operator+( const NucDBBinnedVariable& v) const {
    return( NucDBBinnedVariable(*this) += v );
 }
 //______________________________________________________________________________
+
+const NucDBBinnedVariable& NucDBBinnedVariable::operator-=(const NucDBBinnedVariable& v) {
+   // a weight for finding where the mean should be.
+   double weight = GetBinSize()/v.GetBinSize(); 
+
+   double delta_average = fAverage - v.GetAverage();
+   double delta_mean    = fMean    - v.fMean;
+   double delta_min     = fMinimum - v.GetBinMinimum();
+   double delta_max     = fMaximum - v.GetBinMaximum();
+
+   SetBinMaximum(delta_min);
+   SetBinMinimum(delta_max);
+   fMean       = delta_mean;
+   fAverage    = delta_average;
+
+   return *this;
+}
+//______________________________________________________________________________
+
+const NucDBBinnedVariable& NucDBBinnedVariable::operator-( const NucDBBinnedVariable& v) const {
+   return( NucDBBinnedVariable(*this) -= v );
+}
+//______________________________________________________________________________
+
 NucDBBinnedVariable& NucDBBinnedVariable::operator=(const NucDBBinnedVariable& v) {
    if ( this != &v) {  
       SetNameTitle(v.GetName(),v.GetTitle());
@@ -140,8 +169,10 @@ void NucDBBinnedVariable::SetAverage(      Double_t val) {
 //_____________________________________________________________________________
 
 void      NucDBBinnedVariable::Print(Option_t *option) const {
-   std::cout << " |" << GetName() << "|=" << fAverage << " "
-             << " (" << fMinimum << " < " << GetName() << " < " << fMaximum << ")\n" ;
+   std::cout 
+      << "|" << GetName() << "|=" << fAverage 
+      << "  mean: " << fMean << ", center: " << fCenter 
+      << " (" << fMinimum << " < " << GetName() << " < " << fMaximum << ")\n" ;
              //<< " sort: " << fSortPriority << "\n";
 }
 //_____________________________________________________________________________

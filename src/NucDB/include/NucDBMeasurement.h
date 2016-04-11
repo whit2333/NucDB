@@ -157,9 +157,14 @@ class NucDBMeasurement : public TNamed {
             bool           modify = false);
 
 
-      /** Sort the datapoints by the supplied variable.
-       *  TODO: Fix to be a stable sort such that the order is preserved.
-       */ 
+      TList * MergeDataPoints(
+            unsigned int n, 
+            const std::vector<NucDBBinnedVariable>& bin_sizes, 
+            bool modify);
+
+         /** Sort the datapoints by the supplied variable.
+          *  TODO: Fix to be a stable sort such that the order is preserved.
+          */ 
       void     SortBy(const char * n = "x", const char * n2 = "");
       void     SortBy(const std::vector<std::string> & names);
 
@@ -222,6 +227,8 @@ class NucDBMeasurement : public TNamed {
       /** Build a graph with errors */
       TGraphErrors * BuildGraph(const char * varName = "x", bool syst_err = false); // *MENU*
       TGraphErrors * BuildSystematicErrorBand(const char * var = "x", double offset = 0.0); // *MENU*
+
+      TGraphErrors * BuildOrderedGraph(const char * varName = "", bool syst_err = false); // *MENU*
 
       /** This version builds an error band but multiplies by the fn argument.
        *  The function is function of the varName variable.

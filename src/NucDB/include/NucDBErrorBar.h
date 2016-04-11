@@ -3,6 +3,7 @@
 
 #include "TObject.h"
 #include "TMath.h"
+#include <iostream>
 
 /** Base class for an error bar.
  */
