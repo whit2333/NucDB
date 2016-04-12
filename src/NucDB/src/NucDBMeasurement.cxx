@@ -272,13 +272,13 @@ TList * NucDBMeasurement::MergeDataPoints(
    // Using the operator- for the datapoint/bins 
 
    TList * datapoints = (TList*)(fDataPoints.Clone());
-   datapoints->Print();
+   //datapoints->Print();
    datapoints->SetOwner(false);
 
    TList * list = new TList();
    list->Clear();
    if(n<1) {
-      Error("MergeDataPoints","Wrong number of bins to merge. ");
+      Error("MergeDataPoints","Wrong number of bins to merge.");
       return list;
    }
 
@@ -290,11 +290,7 @@ TList * NucDBMeasurement::MergeDataPoints(
    TIter next(datapoints);
    while( (p1  = (NucDBDataPoint*)next()) ) {
 
-      //p1->Print();
       mergedPoint = new NucDBDataPoint(*p1);
-      //mergedPoint->Print();
-
-      // Remove point from list
       list->Add(mergedPoint);
       datapoints->Remove(p1);
       nMerged = 0;
@@ -307,26 +303,27 @@ TList * NucDBMeasurement::MergeDataPoints(
 
          merge_bins = true;
          NucDBDataPoint delta_p(*p1);
-         delta_p -=(*p2);
+         delta_p -= (*p2);
 
          for(auto bin : bin_sizes){
             double bin_half_width = bin.GetBinSize();
             auto   bin_delta      = delta_p.GetBinVariable(bin.GetName());
             double diff           = bin_delta->GetMean();
-            bin_delta->Print();
-            if( diff > bin_half_width ) {
+            //bin_delta->Print();
+            if( diff*diff > bin_half_width*bin_half_width ) {
                merge_bins = false;
                break;
             }
          }
-         if( merge_bins ) {
+         if( merge_bins ){
+            //delta_p.Print();
             (*mergedPoint) += (*p2);
             nMerged++;
             datapoints->Remove(p2);
-            //std::cout << nMerged << std::endl;
          }
-         if( n <= nMerged ) {
+         if( n <= nMerged ){
             //std::cout << "reached " << n << std::endl;
+            //mergedPoint->Print();
             next  = TIter(datapoints);
             break;
          }
