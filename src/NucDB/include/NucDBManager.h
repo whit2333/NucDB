@@ -94,6 +94,7 @@ class NucDBManager : public TObject {
        */
       TList *            GetMeasurements(const char * measurement);
       TList *            GetMeasurementCalculations(const char * measurement);
+      std::vector<NucDBMeasurement*>  GetAllMeasurements(const char * measurement);
 
       /** Returns a TMultiGraph of the measurment for the given variable. */
       TMultiGraph *      GetMultiGraph(const char * measurement, const char * var = "x");

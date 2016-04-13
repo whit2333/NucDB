@@ -7,11 +7,6 @@
 #include "TROOT.h"
 #include "TGraphAsymmErrors.h"
 
-ClassImp(NucDBManager)
-//_____________________________________________________________
-// A description of the class starts with the line above, and
-// will take place here !
-//
 
 NucDBManager * NucDBManager::fgDBManager = 0;
 //_____________________________________________________________________________
@@ -33,13 +28,16 @@ NucDBManager::NucDBManager(const char * file, Int_t opt) : fFileName(file)
    //fColors.push_back(3);
    fColors.push_back(4);
    fColors.push_back(6);
-   fColors.push_back(7);
+   fColors.push_back(9);
    fColors.push_back(8);
+   fColors.push_back(34);
 
    fMarkers.push_back(20);
    fMarkers.push_back(21);
    fMarkers.push_back(22);
    fMarkers.push_back(23);
+   fMarkers.push_back(33);
+   fMarkers.push_back(34);
 
    fStandardUnits.Clear();
    fStandardUnits.Add(new NucDBEnergyUnit());
@@ -120,7 +118,8 @@ NucDBPaper * NucDBManager::GetPaper(const char * name) {
 }
 //_____________________________________________________________________________
 
-TList * NucDBManager::GetMeasurements(const char * measurement) {
+TList * NucDBManager::GetMeasurements(const char * measurement)
+{
       TList * expList = GetExperiments(); 
       TList * measList = new TList();
       measList->Clear();
@@ -129,9 +128,24 @@ TList * NucDBManager::GetMeasurements(const char * measurement) {
          if(aMeas) measList->Add(aMeas);
       }
       return(measList);
-   }
+}
 //_____________________________________________________________________________
-TList * NucDBManager::GetMeasurementCalculations(const char * measurement) {
+
+std::vector<NucDBMeasurement*>  NucDBManager::GetAllMeasurements(const char * measurement)
+{
+   std::vector<NucDBMeasurement*> measurements;
+   TList * expList = GetExperiments(); 
+   //TList * measList = new TList();
+   //measList->Clear();
+   for(int i = 0;i<expList->GetEntries();i++) {
+      NucDBMeasurement * aMeas = ((NucDBExperiment*)expList->At(i))->GetMeasurement(measurement);
+      if(aMeas) measurements.push_back(aMeas);
+   }
+   return(measurements);
+}
+//______________________________________________________________________________
+
+      TList * NucDBManager::GetMeasurementCalculations(const char * measurement) {
    TList * papList = GetPapers(); 
    TList * measList = new TList();
    measList->Clear();
