@@ -1,8 +1,8 @@
 #include "NucDBBinnedVariable.h"
+#include <sstream>
 
-ClassImp(NucDBVariable)
-//_____________________________________________________________________________
-NucDBVariable::NucDBVariable(const char*n, const char* t ) : TNamed(n,t) {
+NucDBVariable::NucDBVariable(const char*n, const char* t ) : TNamed(n,t)
+{
    fValue = 0.0;
 }
 //_____________________________________________________________________________
@@ -132,6 +132,7 @@ bool NucDBBinnedVariable::BinsOverlap(const NucDBBinnedVariable &var) const {
    else return false;
 }
 //_____________________________________________________________________________
+
 bool NucDBBinnedVariable::Contains(double v) const {
    if( ( v >= GetMinimum() ) && ( v < GetMaximum() ) ) return true;
    return false;
@@ -176,4 +177,15 @@ void      NucDBBinnedVariable::Print(Option_t *option) const {
              //<< " sort: " << fSortPriority << "\n";
 }
 //_____________________________________________________________________________
+
+const char * NucDBBinnedVariable::GetLegendString() const
+{
+   std::stringstream  ss;
+   ss << "|" << GetTitle() << "|=" << fMean
+      << " (" << fMinimum << " < " << GetTitle() << " < " << fMaximum << ")" ;
+   //<< " sort: " << fSortPriority << "\n";
+   std::string* res = new std::string(ss.str());
+   return res->c_str();
+}
+//______________________________________________________________________________
 

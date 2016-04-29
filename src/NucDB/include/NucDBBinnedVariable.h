@@ -5,6 +5,7 @@
 #include "TObject.h"
 #include "TList.h"
 #include <iostream>
+#include <string>
 #include "NucDBUnits.h"
 #include "TBrowser.h"
 
@@ -90,6 +91,7 @@ class NucDBDiscreteVariable : public TNamed {
 
       void         Print(Option_t *option="") const ; // *MENU*
 
+
       Int_t             GetValue() const {return(fValue);}
       void              SetValue(Int_t v){fValue = v;} // *MENU* 
 
@@ -167,9 +169,12 @@ class NucDBBinnedVariable : public TNamed {
       void        SetMeanLimits(   Double_t val, Double_t min, Double_t max){ SetMean(val);SetBinMinimum(min);SetBinMaximum(max);fAverage=fCenter;}
       void        SetUnit(   const NucDBUnit& u) { fUnit = u; }
       void        Print(Option_t *option="") const ; // *MENU*
+
+      const char *       GetLegendString() const;
+
       const NucDBUnit&   GetUnit(){return fUnit;}
 
-      ClassDef(NucDBBinnedVariable,4)
+      ClassDef(NucDBBinnedVariable,5)
 };
 
 #endif

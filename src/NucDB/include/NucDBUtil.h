@@ -1,6 +1,8 @@
 #ifndef NucDBUtil_HH
 #define NucDBUtil_HH 1
 
+#include <vector>
+
 class TList;
 class TLegend;
 class TMultiGraph;
@@ -25,6 +27,9 @@ namespace NucDB {
    NucDBMeasurement * GetExperiment(const char * exp_name, TList * meas_list);
 
    NucDBMeasurement * FindExperiment(const char * name, TList * meas_list);
+
+   NucDBMeasurement * RemoveExperiment(const char * name, TList * meas_list);
+   std::vector<NucDBMeasurement*> RemoveExperiment(const char * name, std::vector<NucDBMeasurement*> meas_list);
 
    NucDBMeasurement * Merge(TList * meas_list, const char * name = "" );
 

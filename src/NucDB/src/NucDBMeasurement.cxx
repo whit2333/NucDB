@@ -531,7 +531,7 @@ TList *  NucDBMeasurement::FilterWith(NucDBVariable const *v)
    }
    for(int i = 0; i < fDataPoints.GetEntries();i++) {
       NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
-      NucDBVariable * var    = point->GetVariable(v->GetName());
+      NucDBVariable  * var    = point->GetVariable(v->GetName());
       if(var){
          if ( (*v) == (*var) ) list->Add(point);
       }
@@ -568,15 +568,20 @@ TList *  NucDBMeasurement::FilterWithBin(NucDBBinnedVariable const *bin)
       return list;
    }
    for(int i = 0; i < fDataPoints.GetEntries();i++) {
-      NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
-      NucDBBinnedVariable * var = point->GetBinVariable(bin->GetName());
+      NucDBDataPoint      * point = (NucDBDataPoint*)fDataPoints.At(i);
+      NucDBBinnedVariable * var   = point->GetBinVariable(bin->GetName());
       if(var){
-         if ( (*var) == (*bin) ) list->Add(point);
+         if( bin->Contains(var->GetMean()) ){
+         //if( (*var) == (*bin) ){
+            list->Add(point);
+         }
          continue;
       }
       NucDBDependentVariable * dvar = point->GetDependentVariable(bin->GetName());
       if(dvar){
-         if ( (*dvar) == (*bin) ) list->Add(point);
+         if ( (*dvar) == (*bin) ) {
+            list->Add(point);
+         }
       }
    }
    return list;

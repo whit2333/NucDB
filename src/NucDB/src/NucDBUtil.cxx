@@ -115,6 +115,50 @@ namespace NucDB {
    }
 //______________________________________________________________________________
 
+   std::vector<NucDBMeasurement*> RemoveExperiment(const char * name, std::vector<NucDBMeasurement*> meas_list)
+   {
+      std::vector<NucDBMeasurement*> ret_list;
+      std::string n1 = name;
+      //NucDBMeasurement * ret_meas = nullptr;
+      
+      int i = 0;
+      for(auto m : meas_list ) {
+
+         std::string n2 = m->GetExperimentName();
+         //std::size_t found = n2.find(name);
+         if( n1 == n2 ) {
+            //std::cout << " found " << found << std::endl;
+            //ret_meas = m;
+            //meas_list.erase(meas_list.begin() + i);
+         } else {
+            ret_list.push_back(m);
+         }
+         i++;
+      }
+      return ret_list;
+   }
+   //______________________________________________________________________________
+   
+   NucDBMeasurement * RemoveExperiment(const char * name, TList * meas_list)
+   {
+      NucDBMeasurement * aMeas = 0;
+      if(!meas_list) {
+         std::cout << "Measurement list is Null" << std::endl;
+         return 0;
+      }
+      for(int i = 0; i<meas_list->GetEntries();i++) {
+         aMeas = (NucDBMeasurement*)meas_list->At(i);
+         std::string n2 = aMeas->GetExperimentName();
+         std::size_t found = n2.find(name);
+         if (found!=std::string::npos) {
+            meas_list->Remove(aMeas);
+            return aMeas;
+         }
+      }
+      return nullptr;
+   }
+   //______________________________________________________________________________
+
    NucDBMeasurement * FindExperiment(const char * name, TList * meas_list){
       // searches for name in the experinment name measurement
       // returns the first match
@@ -149,7 +193,7 @@ namespace NucDB {
       NucDBMeasurement * merged_meas = new NucDBMeasurement(name,name);
       for(int i = 0; i<meas_list->GetEntries();i++) {
          NucDBMeasurement * aMeas = (NucDBMeasurement*)meas_list->At(i);
-         merged_meas->AddDataPoints(aMeas->GetDataPoints());
+         merged_meas->AddDataPoints((TList*)aMeas->GetDataPoints()->Clone());
       }
       return merged_meas;
    }

@@ -23,14 +23,13 @@ NucDBManager::NucDBManager(const char * file, Int_t opt) : fFileName(file)
    fi_color  = 0;
    fi_marker = 0;
 
-   fColors.push_back(1);
-   fColors.push_back(2);
-   //fColors.push_back(3);
-   fColors.push_back(4);
-   fColors.push_back(6);
-   fColors.push_back(9);
-   fColors.push_back(8);
-   fColors.push_back(34);
+   fColors.push_back(1);  // black
+   fColors.push_back(2);  // red
+   fColors.push_back(4);  // blue
+   fColors.push_back(6);  // magenta
+   fColors.push_back(9);  // purple
+   fColors.push_back(8);  // green
+   fColors.push_back(34); // gray-blue
 
    fMarkers.push_back(20);
    fMarkers.push_back(21);
