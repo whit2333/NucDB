@@ -66,6 +66,8 @@ database:
 	python analyses/LATTICE_Gockeler_et_al/LATTICE_NucDB.py
 	root -b -q -l experiments/DESY/inclusive/inclusive_piminus_NucDB.cxx
 	root -b -q -l experiments/JLAB-E06014/inclusive_d2n_NucDB.cxx 
+	root -b -q -l experiments/DVCS/JLAB-E00-110/JLAB_E00110_NucDB.cxx
+
 
 databaseclean:
 	rm data/NucDB.root
