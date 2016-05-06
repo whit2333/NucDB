@@ -50,6 +50,8 @@ Int_t inclusive_piminus_NucDB(){
       meas->AddRef(ref);
    }
    meas->ClearDataPoints();
+   meas->SetType(NucDB::Type::CrossSection);
+   meas->SetProcesses( {NucDB::Process::Inclusive, NucDB::Process::Electroproduction} );
 
    // E = 2.68
    std::ifstream file("experiments/DESY/inclusive/electroproduction_12C_pi_minus_13deg_2.68GeV.png.dat");
@@ -199,6 +201,8 @@ Int_t inclusive_piminus_NucDB(){
       meas->AddRef(ref);
    }
    meas->ClearDataPoints();
+   meas->SetType(NucDB::Type::CrossSection);
+   meas->SetProcesses( {NucDB::Process::Inclusive, NucDB::Process::Electroproduction} );
 
    // E = 2.68
    file = std::ifstream("experiments/DESY/inclusive/electroproduction_p_pi_minus_13deg_2.68GeV.png.dat");
@@ -355,6 +359,8 @@ Int_t inclusive_piminus_NucDB(){
       meas->AddRef(ref);
    }
    meas->ClearDataPoints();
+   meas->SetType(NucDB::Type::CrossSection);
+   meas->SetProcesses( {NucDB::Process::Inclusive, NucDB::Process::Electroproduction} );
 
    // E = 3.5
    file = std::ifstream("experiments/DESY/inclusive/electroproduction_d_pi_minus_13deg_3.5GeV.png.dat");
