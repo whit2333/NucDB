@@ -154,6 +154,13 @@ set(NucDB_SHARED_LIBS)
 set(NucDB_ROOT_DICTS)
 set(NucDB_ROOT_DICT_HEADERS)
 
+# ------------------------------
+# Deprecated python extractor installed into lib 
+# assuming that CMAKE_INSTALL_PREFIX/lib is in PYTHONPATH
+install(
+   FILES ${PROJECT_SOURCE_DIR}/python/NucDBExtractors.py
+   DESTINATION lib )
+
 # ---------------------------------------
 
 # configure a header file to pass some of the CMake settings to the source code
