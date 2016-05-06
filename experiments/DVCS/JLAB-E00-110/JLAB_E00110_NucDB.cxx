@@ -81,7 +81,7 @@ void add_DVCS_data(const char * fname, NucDBMeasurement * meas)
          point.SetStatError( eStat[i] ); 
          point.SetSystError( NucDBErrorBar(eSys1[i],eSys2[i]) ); 
          point.CalculateTotalError();
-         point.Print();
+         //point.Print();
          // copy the point and add it to the measurement
          meas->AddDataPoint(new NucDBDataPoint(point));
       }
@@ -108,6 +108,8 @@ void JLAB_E00110_NucDB()
       experiment->AddMeasurement(meas);
    }
    meas->ClearDataPoints();
+   meas->SetType( NucDB::Type::CrossSection );
+   meas->SetProcesses( {NucDB::Process::DVCS, NucDB::Process::Exclusive} );
 
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_VII.dat",meas);
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_VIII.dat",meas);
@@ -121,6 +123,9 @@ void JLAB_E00110_NucDB()
       experiment->AddMeasurement(meas);
    }
    meas->ClearDataPoints();
+   meas->SetType( NucDB::Type::CrossSectionDifference );
+   meas->SetProcesses( {NucDB::Process::DVCS, NucDB::Process::Exclusive} );
+
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_IX.dat",meas);
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_X.dat",meas);
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_XI.dat",meas);

@@ -38,6 +38,8 @@ Int_t inclusive_d2n_NucDB(){
       exp->AddMeasurement(meas);
    }
    meas->ClearDataPoints();
+   meas->SetType(NucDB::Type::CrossSection);
+   meas->SetProcesses( {NucDB::Process::Inclusive, NucDB::Process::Electroproduction} );
 
    // -----------------------------------------------------------
    // 5.9 GeV beam data
@@ -107,6 +109,8 @@ Int_t inclusive_d2n_NucDB(){
       exp->AddMeasurement(meas);
    }
    meas->ClearDataPoints();
+   meas->SetType(NucDB::Type::CrossSection);
+   meas->SetProcesses( {NucDB::Process::Inclusive, NucDB::Process::Electroproduction} );
    // -----------------------------------------------------------
    // 5.9 GeV beam data
    // < P (MeV) > < xs (pb/MeV/sr) > < stat error (pb/MeV/sr) > 

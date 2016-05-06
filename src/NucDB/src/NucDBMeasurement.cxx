@@ -7,6 +7,50 @@
 #include "TGraphAsymmErrors.h"
 #include "NucDBManager.h"
 
+namespace NucDB {
+      std::ostream& operator<< (std::ostream & os, Type t)
+      {
+         switch (t)
+         {
+            case Type::CrossSection          : return os << "CrossSection";
+            case Type::CrossSectionDifference: return os << "CrossSectionDifference";
+            case Type::Asymmetry             : return os << "Asymmetry";
+            case Type::Ratio                 : return os << "Ratio";
+            case Type::FormFactor            : return os << "FormFactor";
+            case Type::StructureFunction     : return os << "StructureFunction";
+            case Type::PDF                   : return os << "PDF";
+            case Type::TMD                   : return os << "TMD";
+            case Type::GPD                   : return os << "GPD";
+            case Type::ComptonFormFactor     : return os << "ComptonFormFactor";
+            case Type::MatrixElement         : return os << "MatrixElement";
+            case Type::Amplitude             : return os << "Amplitude";
+            case Type::Other                 : return os << "Other";
+         };
+         return os << static_cast<std::uint16_t>(t);
+      }
+
+      std::ostream& operator<< (std::ostream & os, Process p)
+      {
+         switch(p)
+         {
+            case Process::DIS               : return os << "DIS";
+            case Process::Elastic           : return os << "Elastic";
+            case Process::DVCS              : return os << "DVCS";
+            case Process::DVMP              : return os << "DVMP";
+            case Process::SIDIS             : return os << "SIDIS";
+            case Process::DrellYan          : return os << "DrellYan";
+            case Process::Inclusive         : return os << "Inclusive";
+            case Process::Exclusive         : return os << "Exclusive";
+            case Process::Electroproduction : return os << "Electroproduction";
+            case Process::Photoproduction   : return os << "Photoproduction";
+            case Process::Other             : return os << "Other";
+         };
+         return os << static_cast<std::uint16_t>(p);
+      }
+}
+//______________________________________________________________________________
+
+
 
 NucDBMeasurement::NucDBMeasurement(const char * name,const char * title) :
    TNamed(name,title)
@@ -633,6 +677,8 @@ void NucDBMeasurement::Print(Option_t * opt ) const
    std::cout << "     title       : " << GetTitle() << "\n";
    std::cout << "     Experiment  : " << GetExperimentName() << std::endl;
    std::cout << "     NDataPoints : " << fNumberOfDataPoints <<  "\n";
+   std::cout << "     Type        : " << fType <<  "\n";
+   std::cout << "     Processes   : " ; for(const auto p:fProcesses){ std::cout << p << " ";}; std::cout <<  "\n";
    if(printvars && fNumberOfDataPoints>0){
       const NucDBDataPoint * p0 = (const NucDBDataPoint*)fDataPoints.At(0);
       const TList& vars = p0->GetBinnedVariablesRef(); 

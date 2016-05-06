@@ -19,6 +19,41 @@
 #include "TLegend.h"
 #include "NucDBUtil.h"
 
+namespace NucDB {
+
+      enum class Type {
+         CrossSection, 
+         CrossSectionDifference, 
+         Asymmetry, 
+         Ratio, 
+         FormFactor,
+         StructureFunction,
+         PDF,
+         TMD,
+         GPD,
+         ComptonFormFactor,
+         MatrixElement,
+         Amplitude,
+         Other
+      };
+      std::ostream& operator<< (std::ostream & os, Type t);
+
+      enum class Process {
+         DIS, 
+         Elastic, 
+         DVCS, 
+         DVMP, 
+         SIDIS, 
+         DrellYan,
+         Inclusive,
+         Exclusive,
+         Electroproduction,
+         Photoproduction,
+         Other
+      };
+      std::ostream& operator<< (std::ostream & os, Process p);
+}
+
 /** A measured quantitiy.
  * 
  *  Many of these may fall under a single experiment, for example "F1p" and "F2p"
@@ -33,8 +68,16 @@
  *
  */
 class NucDBMeasurement : public TNamed {
+
+   public:
+
    private:
       Int_t    fColor;
+
+      NucDB::Type                  fType;     
+      std::vector<NucDB::Process>  fProcesses; // Can full under more than one process 
+      
+      // e.g. fProcesses = {DVCS, Exclusive};
 
    protected:
       TList    fDataPoints;           // data points
@@ -276,6 +319,20 @@ class NucDBMeasurement : public TNamed {
        */
       void  PrintBreakDown(const char * var = "theta", int nmax = 20) const ;
 
+      void SetType(NucDB::Type t)                      { fType = t; }
+      void AddProcess(NucDB::Process p)                { fProcesses.push_back(p); }
+      void SetProcesses(std::vector<NucDB::Process> p) { fProcesses = p ; }
+      void ClearProcesses()                            { fProcesses.clear(); }
+
+      NucDB::Type                 GetType() const { return fType; }
+      std::vector<NucDB::Process> GetProcesses() const { return fProcesses; }
+      bool IsType(NucDB::Type t)       const { return( t==fType ? true : false ) ; }
+      bool IsProcess(NucDB::Process p) const {
+         using namespace std;
+         return(find(begin(fProcesses), end(fProcesses), p) != end(fProcesses) ? true : false ) ;
+      }
+
+
    protected:
 
       //Int_t     CalculateVariable(NucDBDependentVariable * var);
@@ -288,7 +345,9 @@ class NucDBMeasurement : public TNamed {
       //TList  * GetPapers(){ return(&fPapers); }
       //void     AddPapers(NucDBPaper * p) { fPapers.Add(p); }
 
-      ClassDef(NucDBMeasurement,1)
+
+
+      ClassDef(NucDBMeasurement,2)
 };
 
 

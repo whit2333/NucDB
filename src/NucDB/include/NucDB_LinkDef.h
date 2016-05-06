@@ -11,6 +11,9 @@
 #pragma link C++ namespace NucDB;
 #pragma link C++ namespace NucDB::Kine;
 
+#pragma link C++ enum NucDB::Type;
+#pragma link C++ enum NucDB::Process;
+
 #pragma link C++ function NucDB::Kine::to_radians(double);
 #pragma link C++ function NucDB::Kine::to_degrees(double);
 
