@@ -125,6 +125,7 @@ void JLAB_E00110_NucDB()
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_X.dat",meas);
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_XI.dat",meas);
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_XIV.dat",meas);
+   add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_XV.dat",meas);
    
    // ----------------------------------------------------------------
    auto gr = meas->BuildGraph("phi");

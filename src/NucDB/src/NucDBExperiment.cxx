@@ -20,7 +20,7 @@ void NucDBExperiment::AddMeasurement(NucDBMeasurement* meas){
 //_____________________________________________________________________________
 
 NucDBMeasurement * NucDBExperiment::GetMeasurement(const char * name) {
-   NucDBMeasurement * meas = 0;
+   NucDBMeasurement * meas = nullptr;
    for(int i = 0;i<fMeasurements.GetEntries();i++) {
       if( !strcmp(((NucDBMeasurement *)fMeasurements.At(i))->GetName(),name) ) {
          meas = (NucDBMeasurement *)fMeasurements.At(i) ;
