@@ -20,6 +20,7 @@ class NucDBDataPoint : public TNamed {
       Int_t          fNSortVariables;
       TString        fSortingVariable;
       TString        fSortingVariable2;
+      int            fDataSet   = 0;
 
    protected:
       Double_t       fValue;
@@ -56,6 +57,9 @@ class NucDBDataPoint : public TNamed {
       bool  operator< (const NucDBDataPoint & rhs) const ; 
       bool  operator>=(const NucDBDataPoint & rhs) const ; 
       bool  operator<=(const NucDBDataPoint & rhs) const ; 
+
+      void  SetDataSet(int s) { fDataSet = s; }
+      int   GetDataSet() const { return fDataSet; }
 
       void  Multiply(Double_t v){
          fStatisticalError.Multiply(v);
@@ -139,7 +143,7 @@ class NucDBDataPoint : public TNamed {
       void                     AddVariable(NucDBVariable * var);
       NucDBVariable *          GetVariable(const char * name) const ;
 
-      ClassDef(NucDBDataPoint,4)
+      ClassDef(NucDBDataPoint,5)
 };
 
 

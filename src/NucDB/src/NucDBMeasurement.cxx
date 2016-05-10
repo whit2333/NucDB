@@ -96,6 +96,8 @@ void NucDBMeasurement::ClearDataPoints()
 {
    fDataPoints.Clear();
    fNumberOfDataPoints=0;
+   fSets.clear();
+   fNSets = 0;
 }
 //_____________________________________________________________________________
 
@@ -103,6 +105,7 @@ void NucDBMeasurement::AddDataPoint(NucDBDataPoint *point)
 {
    if(point) {
       point->SetNameTitle(Form("p%d",fNumberOfDataPoints),Form("p%d",fNumberOfDataPoints));
+      point->SetDataSet(fNSets);
       fDataPoints.Add(point);
       fNumberOfDataPoints++;
    } else {
@@ -676,7 +679,7 @@ void NucDBMeasurement::Print(Option_t * opt ) const
    std::cout << " " << GetName() << "\n";
    std::cout << "     title       : " << GetTitle() << "\n";
    std::cout << "     Experiment  : " << GetExperimentName() << std::endl;
-   std::cout << "     NDataPoints : " << fNumberOfDataPoints <<  "\n";
+   std::cout << "     NDataPoints : " << fNumberOfDataPoints <<  ", in " << fNSets << " data-sets\n";
    std::cout << "     Type        : " << fType <<  "\n";
    std::cout << "     Processes   : " ; for(const auto p:fProcesses){ std::cout << p << " ";}; std::cout <<  "\n";
    if(printvars && fNumberOfDataPoints>0){

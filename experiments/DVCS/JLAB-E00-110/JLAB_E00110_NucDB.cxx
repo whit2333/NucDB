@@ -111,9 +111,16 @@ void JLAB_E00110_NucDB()
    meas->SetType( NucDB::Type::CrossSection );
    meas->SetProcesses( {NucDB::Process::DVCS, NucDB::Process::Exclusive} );
 
+   meas->AddSet("Table VII");
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_VII.dat",meas);
+
+   meas->AddSet("Table VIII");
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_VIII.dat",meas);
+
+   meas->AddSet("Table XII");
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_XII.dat",meas);
+
+   meas->AddSet("Table XIII");
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_XIII.dat",meas);
   
    // ----------------------------------------------------------------
@@ -126,17 +133,26 @@ void JLAB_E00110_NucDB()
    meas->SetType( NucDB::Type::CrossSectionDifference );
    meas->SetProcesses( {NucDB::Process::DVCS, NucDB::Process::Exclusive} );
 
+   meas->AddSet("Table IX");
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_IX.dat",meas);
+
+   meas->AddSet("Table X");
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_X.dat",meas);
+
+   meas->AddSet("Table XI");
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_XI.dat",meas);
+
+   meas->AddSet("Table XIV");
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_XIV.dat",meas);
+
+   meas->AddSet("Table XV");
    add_DVCS_data("experiments/DVCS/JLAB-E00-110/table_XV.dat",meas);
    
    // ----------------------------------------------------------------
    auto gr = meas->BuildGraph("phi");
    gr->Draw("aep");
 
-   experiment->Print();
+   experiment->Print("data");
 
    dbman->SaveExperiment(experiment);
 }

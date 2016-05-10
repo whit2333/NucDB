@@ -8,7 +8,6 @@ NucDBDataPoint::NucDBDataPoint(Double_t val, Double_t err, Double_t syst)
 {
    fUnit = 0;
 
-
    fDiscreteVariables.Clear();
    fVariables.Clear();
    fBinnedVariables.Clear();
@@ -34,6 +33,7 @@ NucDBDataPoint::NucDBDataPoint(const NucDBDataPoint& v) : TNamed(v)
    fValue     = v.fValue;
    fDimension = v.fDimension;
    fNSortVariables = v.fNSortVariables;
+   fDataSet   = v.fDataSet;
 
    // not sure if this is the best way to make a deep copy. 
    TList * alist      = 0;
@@ -61,6 +61,7 @@ NucDBDataPoint& NucDBDataPoint::operator=(const NucDBDataPoint &v)
    fValue     = v.fValue;
    fDimension = v.fDimension;
    fNSortVariables = v.fNSortVariables;
+   fDataSet   = v.fDataSet;
 
    // not sure if this is the best way to make a deep copy. 
    TList * alist      = 0;
@@ -175,7 +176,8 @@ void NucDBDataPoint::Print(Option_t * opt) const
 {
    std::cout << std::setw(6) << GetName() << " = " << GetValue()
              << " +- " << GetStatError().GetError() << "(stat)" 
-             << " +- " << GetSystError().GetError() << "(sys) "<< "\n";
+             << " +- " << GetSystError().GetError() << "(sys) ";
+   std::cout << " dataset(" << fDataSet << ")\n";
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
       ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print(); 
    }

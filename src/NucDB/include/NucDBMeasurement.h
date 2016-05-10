@@ -76,8 +76,11 @@ class NucDBMeasurement : public TNamed {
 
       NucDB::Type                  fType;     
       std::vector<NucDB::Process>  fProcesses; // Can full under more than one process 
-      
       // e.g. fProcesses = {DVCS, Exclusive};
+      
+      // Sets are logical groupings of data.
+      std::vector<std::string>  fSets;
+      int                       fNSets = 0; // Current number of sets
 
    protected:
       TList    fDataPoints;           // data points
@@ -91,11 +94,18 @@ class NucDBMeasurement : public TNamed {
       TList    fReferences;           // List of references
       TList    fComments;             // List of TObjString comments
 
+
    public:
       NucDBMeasurement(const char * name ="unknown-meas",const char * title="unknown meas");
       virtual ~NucDBMeasurement();
 
       NucDBMeasurement(const NucDBMeasurement& v);
+
+      int  GetNSets() const { return fSets.size(); }
+      void AddSet(const char * desc = "") {
+         fSets.push_back( std::string(desc) );
+         fNSets++;
+      }
 
       void PrintComments() const {
          TString prefix = " o ";
