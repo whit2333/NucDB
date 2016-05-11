@@ -236,6 +236,8 @@ class NucDBMeasurement : public TNamed {
        */ 
       NucDBMeasurement * NewMeasurementWithFilter(const NucDBBinnedVariable * bin) ;
 
+      NucDBMeasurement * GetDataSet(int i_set);
+
       /** Uses the vector of values to filter the data, creating a new measurment for each value.
        *  This can be used with GetUniqueBinnedVariableValues(), as is done in the method wich only takes a variable name.
        */

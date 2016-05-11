@@ -8,10 +8,13 @@ class TLegend;
 class TMultiGraph;
 class NucDBDataPoint;
 class NucDBBinnedVariable;
-class NucDBMeasurement;
 class NucDBExperiment;
+class NucDBMeasurement;
+
 
 namespace NucDB {
+
+   enum class Type;
 
    void ApplyFilterOnList(NucDBBinnedVariable * var, TList * list);
 
@@ -29,6 +32,7 @@ namespace NucDB {
    NucDBMeasurement * FindExperiment(const char * name, TList * meas_list);
 
    NucDBMeasurement * RemoveExperiment(const char * name, TList * meas_list);
+
    std::vector<NucDBMeasurement*> RemoveExperiment(const char * name, std::vector<NucDBMeasurement*> meas_list);
 
    NucDBMeasurement * Merge(TList * meas_list, const char * name = "" );
@@ -43,6 +47,10 @@ namespace NucDB {
 
    bool CompareDataPoint(const NucDBDataPoint *lhs, const NucDBDataPoint *rhs) ;
    TList * StableSort(const TList & list) ; 
+
+   void Print(const std::vector<NucDBMeasurement*>& measurements);
+
+   std::vector<NucDBMeasurement*> SelectType(NucDB::Type type, const std::vector<NucDBMeasurement*>& list );
 
 }
 

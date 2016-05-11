@@ -130,6 +130,21 @@ TList * NucDBManager::GetMeasurements(const char * measurement)
 }
 //_____________________________________________________________________________
 
+std::vector<NucDBMeasurement*> NucDBManager::GetMeasurements(NucDB::Process proc)
+{
+   TList * expList = GetExperiments(); 
+   std::vector<NucDBMeasurement*> measList;
+   for(int i = 0;i<expList->GetEntries();i++) {
+      auto exp = ((NucDBExperiment*)expList->At(i));
+      std::vector<NucDBMeasurement*> meass = exp->GetMeasurements(proc);
+      for(auto m: meass){
+         measList.push_back(m);
+      }
+   }
+   return(measList);
+}
+//_____________________________________________________________________________
+
 std::vector<NucDBMeasurement*>  NucDBManager::GetAllMeasurements(const char * measurement)
 {
    std::vector<NucDBMeasurement*> measurements;

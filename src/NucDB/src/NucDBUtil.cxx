@@ -300,6 +300,45 @@ namespace NucDB {
       return newlist;
    }
 
+   void Print(const std::vector<NucDBMeasurement*>& measurements)
+   {
+      for(auto m : measurements) {
+         m->Print();
+      }
+   }
+
+   std::vector<NucDBMeasurement*> SelectType(NucDB::Type type,const std::vector<NucDBMeasurement*>& list)
+   {
+      std::vector<NucDBMeasurement*> results;
+      for(auto m : list){
+         if( m->IsType(type) ) {
+            results.push_back(m);
+         }
+      }
+      return results;
+   }
+
+   template<class T>
+   std::vector<T> ToVector(TList * l){
+      std::vector<T> result;
+      int n = l->GetEntries();
+      l->SetOwner(false);
+      for(int i=0; i<n; i++){
+         T v = (T)l->At(i);
+         result.push_back(v);
+      }
+      return result;
+   }
+
+   template<class T>
+   TList* ToList(const std::vector<T>& v )
+   {
+      TList * l = new TList();
+      for(auto x: v){
+         l->Add(x);
+      }
+      return l;
+   }
 
 }
 

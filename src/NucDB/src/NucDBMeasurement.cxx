@@ -544,6 +544,23 @@ NucDBMeasurement * NucDBMeasurement::NewMeasurementWithFilter(NucDBBinnedVariabl
 }
 //______________________________________________________________________________
 
+NucDBMeasurement * NucDBMeasurement::GetDataSet(int i_set)
+{
+   NucDBMeasurement * m = new NucDBMeasurement(
+         GetName(),
+         GetTitle() );
+   m->SetExperimentName(GetExperimentName());
+
+   for(int i = 0; i < fDataPoints.GetEntries();i++) {
+      NucDBDataPoint      * point = (NucDBDataPoint*)fDataPoints.At(i);
+      if(point->GetDataSet() == i_set) {
+         m->AddDataPoint(point);
+      }
+   }
+   return m;
+}
+//______________________________________________________________________________
+
 TList * NucDBMeasurement::CreateMeasurementsWithUniqueBins(const std::vector<double> & vect, const char * var)
 {
    TList * list = new TList();

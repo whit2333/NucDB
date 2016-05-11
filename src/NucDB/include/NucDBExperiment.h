@@ -36,6 +36,8 @@ class NucDBExperiment : public TNamed {
       TList *            GetMeasurements(){ return(&fMeasurements); }
       void               ListMeasurements(){ fMeasurements.Print(); }
 
+      std::vector<NucDBMeasurement*> GetMeasurements(NucDB::Process proc);
+
       /** Returns a new list containing all the refs from each measurement.  */
       TList * GetRefs(){
          TList * refs         = new TList();
