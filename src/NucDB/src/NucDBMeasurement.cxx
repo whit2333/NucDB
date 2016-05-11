@@ -554,7 +554,7 @@ NucDBMeasurement * NucDBMeasurement::GetDataSet(int i_set)
    for(int i = 0; i < fDataPoints.GetEntries();i++) {
       NucDBDataPoint      * point = (NucDBDataPoint*)fDataPoints.At(i);
       if(point->GetDataSet() == i_set) {
-         m->AddDataPoint(point);
+         m->AddDataPoint(new NucDBDataPoint(*point));
       }
    }
    return m;
