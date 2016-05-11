@@ -1,0 +1,740 @@
+---
+record_ids: # optional
+  - {type: inspire, id: 1257385}
+  - {type: red, id: 3579}
+publicationyear: 2013
+preprintyear: 2013
+dateupdated: '26/02/2015 17:32:12'
+modifications: # what, by whom and when encoded or changed
+  - {action: 'Encoded', date: '26 FEB 2015', who: 'Mike Whalley'}
+comment: | # preserve newlines
+    CERN-SPS-NA.  Exclusive production of $\rho^0$ mesons was studied at the COMPASS experiment by scattering 160 GeV/$c$ muons off transversely polarised protons. Five single-spin and three double-spin azimuthal asymmetries were measured as a function of $Q^2$, $x_{Bj}$, or $p_{T}^{2}$. The $\sin \phi_S$ asymmetry is found to be $-0.019 \pm 0.008(stat.) \pm 0.003(syst.)$. All other asymmetries are also found to be of small magnitude and consistent with zero within experimental uncertainties. Very recent calculations using a GPD-based model agree well with the present results. The data is interpreted as evidence for the existence of chiral-odd, transverse generalized parton distributions.
+additional_resources:
+
+---
+name: 'Table 1'
+label: 'Data from F 3'
+description: |
+    Single-spin azimuthal asymmetries for a transversely (T) polarised target and unpolarised (U) beam.
+keywords:
+  - {name: reactions, values: ['MU+ P --> RHO0 X']}
+  - {name: observables, values: ['ASYM']}
+  - {name: phrases, values: ['Inclusive', 'Asymmetry Measurement']}
+additional_resources:
+independent_variables:
+  - header: {name: '$x_Bj$'}
+    values:
+      - {value: 0.013, low: 0.003, high: 0.02}
+      - {low: 0.02, high: 0.03}
+      - {value: 0.038, low: 0.03, high: 0.05}
+      - {value: 0.088, low: 0.05, high: 0.35}
+  - header: {name: '$<Q^2> (GeV/c)^2$'}
+    values:
+      - {value: 1.43}
+      - {value: 1.62}
+      - {value: 1.91}
+      - {value: 3.84}
+  - header: {name: '$<p_T^2>(GeV/c)^2$'}
+    values:
+      - {value: 0.17}
+      - {value: 0.18}
+      - {value: 0.18}
+      - {value: 0.19}
+dependent_variables:
+  - header: {name: '$A_{UT,p}^{\sin(\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.017
+        errors:
+          - {symerror: 0.016, label: 'stat'}
+          - {symerror: 0.004, label: 'sys'}
+      - value: 0.013
+        errors:
+          - {symerror: 0.022, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: -0.021
+        errors:
+          - {symerror: 0.022, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: 0.023
+        errors:
+          - {symerror: 0.038, label: 'stat'}
+          - {symerror: 0.01, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin(\phi+\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.018
+        errors:
+          - {symerror: 0.036, label: 'stat'}
+          - {symerror: 0.011, label: 'sys'}
+      - value: -0.031
+        errors:
+          - {symerror: 0.044, label: 'stat'}
+          - {symerror: 0.013, label: 'sys'}
+      - value: -0.082
+        errors:
+          - {symerror: 0.044, label: 'stat'}
+          - {symerror: 0.013, label: 'sys'}
+      - value: 0.038
+        errors:
+          - {symerror: 0.072, label: 'stat'}
+          - {symerror: 0.021, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin(2\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.011
+        errors:
+          - {symerror: 0.013, label: 'stat'}
+          - {symerror: 0.005, label: 'sys'}
+      - value: -0.015
+        errors:
+          - {symerror: 0.016, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: 0.008
+        errors:
+          - {symerror: 0.017, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: -0.005
+        errors:
+          - {symerror: 0.028, label: 'stat'}
+          - {symerror: 0.01, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin(3\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.021
+        errors:
+          - {symerror: 0.04, label: 'stat'}
+          - {symerror: 0.013, label: 'sys'}
+      - value: 0.012
+        errors:
+          - {symerror: 0.048, label: 'stat'}
+          - {symerror: 0.015, label: 'sys'}
+      - value: 0.084
+        errors:
+          - {symerror: 0.048, label: 'stat'}
+          - {symerror: 0.015, label: 'sys'}
+      - value: -0.004
+        errors:
+          - {symerror: 0.077, label: 'stat'}
+          - {symerror: 0.024, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin\phi_S}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.031
+        errors:
+          - {symerror: 0.013, label: 'stat'}
+          - {symerror: 0.005, label: 'sys'}
+      - value: -0.011
+        errors:
+          - {symerror: 0.016, label: 'stat'}
+          - {symerror: 0.007, label: 'sys'}
+      - value: -0.012
+        errors:
+          - {symerror: 0.017, label: 'stat'}
+          - {symerror: 0.007, label: 'sys'}
+      - value: -0.016
+        errors:
+          - {symerror: 0.03, label: 'stat'}
+          - {symerror: 0.012, label: 'sys'}
+
+---
+name: 'Table 2'
+label: 'Data from F 3'
+description: |
+    Single-spin azimuthal asymmetries for a transversely (T) polarised target and unpolarised (U) beam.
+keywords:
+  - {name: reactions, values: ['MU+ P --> RHO0 X']}
+  - {name: observables, values: ['ASYM']}
+  - {name: phrases, values: ['Inclusive', 'Asymmetry Measurement']}
+additional_resources:
+independent_variables:
+  - header: {name: '$Q^2 (GeV/c)^2$'}
+    values:
+      - {low: 1.0, high: 1.2}
+      - {value: 1.38, low: 1.2, high: 1.6}
+      - {value: 1.94, low: 1.6, high: 2.4}
+      - {value: 4.04, low: 2.4, high: 10.0}
+  - header: {name: '$<x_Bj>$'}
+    values:
+      - {value: 0.019}
+      - {value: 0.025}
+      - {value: 0.035}
+      - {value: 0.076}
+  - header: {name: '$<p_T^2>(GeV/c)^2$'}
+    values:
+      - {value: 0.18}
+      - {value: 0.18}
+      - {value: 0.18}
+      - {value: 0.19}
+dependent_variables:
+  - header: {name: '$A_{UT,p}^{\sin(\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.019
+        errors:
+          - {symerror: 0.02, label: 'stat'}
+          - {symerror: 0.005, label: 'sys'}
+      - value: -0.015
+        errors:
+          - {symerror: 0.019, label: 'stat'}
+          - {symerror: 0.005, label: 'sys'}
+      - value: -0.002
+        errors:
+          - {symerror: 0.021, label: 'stat'}
+          - {symerror: 0.005, label: 'sys'}
+      - value: 0.015
+        errors:
+          - {symerror: 0.03, label: 'stat'}
+          - {symerror: 0.008, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin(\phi+\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.055
+        errors:
+          - {symerror: 0.042, label: 'stat'}
+          - {symerror: 0.013, label: 'sys'}
+      - value: -0.029
+        errors:
+          - {symerror: 0.039, label: 'stat'}
+          - {symerror: 0.012, label: 'sys'}
+      - value: 0.016
+        errors:
+          - {symerror: 0.044, label: 'stat'}
+          - {symerror: 0.013, label: 'sys'}
+      - value: -0.034
+        errors:
+          - {symerror: 0.06, label: 'stat'}
+          - {symerror: 0.018, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin(2\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.008
+        errors:
+          - {symerror: 0.015, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: 0.007
+        errors:
+          - {symerror: 0.014, label: 'stat'}
+          - {symerror: 0.005, label: 'sys'}
+      - value: 0.002
+        errors:
+          - {symerror: 0.016, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: -0.01
+        errors:
+          - {symerror: 0.023, label: 'stat'}
+          - {symerror: 0.008, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin(3\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.028
+        errors:
+          - {symerror: 0.046, label: 'stat'}
+          - {symerror: 0.015, label: 'sys'}
+      - value: 0.096
+        errors:
+          - {symerror: 0.043, label: 'stat'}
+          - {symerror: 0.014, label: 'sys'}
+      - value: 0.0
+        errors:
+          - {symerror: 0.049, label: 'stat'}
+          - {symerror: 0.015, label: 'sys'}
+      - value: 0.059
+        errors:
+          - {symerror: 0.065, label: 'stat'}
+          - {symerror: 0.021, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin\phi_S}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.006
+        errors:
+          - {symerror: 0.016, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: -0.035
+        errors:
+          - {symerror: 0.015, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: -0.008
+        errors:
+          - {symerror: 0.017, label: 'stat'}
+          - {symerror: 0.007, label: 'sys'}
+      - value: -0.028
+        errors:
+          - {symerror: 0.023, label: 'stat'}
+          - {symerror: 0.009, label: 'sys'}
+
+---
+name: 'Table 3'
+label: 'Data from F 3'
+description: |
+    Single-spin azimuthal asymmetries for a transversely (T) polarised target and unpolarised (U) beam.
+keywords:
+  - {name: reactions, values: ['MU+ P --> RHO0 X']}
+  - {name: observables, values: ['ASYM']}
+  - {name: phrases, values: ['Inclusive', 'Asymmetry Measurement']}
+additional_resources:
+independent_variables:
+  - header: {name: '$p_T^2 (GeV/c)^2$'}
+    values:
+      - {value: 0.07, low: 0.05, high: 0.10}
+      - {value: 0.12, low: 0.10, high: 0.15}
+      - {low: 0.15, high: 0.25}
+      - {low: 0.25, high: 0.35}
+      - {value: 0.42, low: 0.35, high: 0.50}
+  - header: {name: '$<x_Bj>$'}
+    values:
+      - {value: 0.037}
+      - {value: 0.039}
+      - {value: 0.040}
+      - {value: 0.042}
+      - {value: 0.043}
+  - header: {name: '$<Q^2> (GeV/c)^2$'}
+    values:
+      - {value: 2.07}
+      - {value: 2.13}
+      - {value: 2.18}
+      - {value: 2.24}
+      - {value: 2.29}
+dependent_variables:
+  - header: {name: '$A_{UT,p}^{\sin(\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.008
+        errors:
+          - {symerror: 0.017, label: 'stat'}
+          - {symerror: 0.004, label: 'sys'}
+      - value: 0.007
+        errors:
+          - {symerror: 0.024, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: 0.002
+        errors:
+          - {symerror: 0.023, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: -0.058
+        errors:
+          - {symerror: 0.035, label: 'stat'}
+          - {symerror: 0.009, label: 'sys'}
+      - value: 0.003
+        errors:
+          - {symerror: 0.041, label: 'stat'}
+          - {symerror: 0.01, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin(\phi+\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.004
+        errors:
+          - {symerror: 0.036, label: 'stat'}
+          - {symerror: 0.011, label: 'sys'}
+      - value: -0.045
+        errors:
+          - {symerror: 0.05, label: 'stat'}
+          - {symerror: 0.015, label: 'sys'}
+      - value: -0.033
+        errors:
+          - {symerror: 0.049, label: 'stat'}
+          - {symerror: 0.015, label: 'sys'}
+      - value: -0.096
+        errors:
+          - {symerror: 0.071, label: 'stat'}
+          - {symerror: 0.021, label: 'sys'}
+      - value: -0.005
+        errors:
+          - {symerror: 0.083, label: 'stat'}
+          - {symerror: 0.024, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin(2\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.017
+        errors:
+          - {symerror: 0.013, label: 'stat'}
+          - {symerror: 0.005, label: 'sys'}
+      - value: 0.004
+        errors:
+          - {symerror: 0.019, label: 'stat'}
+          - {symerror: 0.007, label: 'sys'}
+      - value: -0.012
+        errors:
+          - {symerror: 0.018, label: 'stat'}
+          - {symerror: 0.006, label: 'sys'}
+      - value: 0.034
+        errors:
+          - {symerror: 0.026, label: 'stat'}
+          - {symerror: 0.009, label: 'sys'}
+      - value: -0.045
+        errors:
+          - {symerror: 0.031, label: 'stat'}
+          - {symerror: 0.011, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin(3\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.003
+        errors:
+          - {symerror: 0.039, label: 'stat'}
+          - {symerror: 0.012, label: 'sys'}
+      - value: 0.001
+        errors:
+          - {symerror: 0.055, label: 'stat'}
+          - {symerror: 0.017, label: 'sys'}
+      - value: 0.033
+        errors:
+          - {symerror: 0.053, label: 'stat'}
+          - {symerror: 0.017, label: 'sys'}
+      - value: 0.106
+        errors:
+          - {symerror: 0.077, label: 'stat'}
+          - {symerror: 0.024, label: 'sys'}
+      - value: 0.137
+        errors:
+          - {symerror: 0.09, label: 'stat'}
+          - {symerror: 0.029, label: 'sys'}
+  - header: {name: '$A_{UT,p}^{\sin\phi_S}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.019
+        errors:
+          - {symerror: 0.013, label: 'stat'}
+          - {symerror: 0.005, label: 'sys'}
+      - value: -0.002
+        errors:
+          - {symerror: 0.019, label: 'stat'}
+          - {symerror: 0.007, label: 'sys'}
+      - value: -0.014
+        errors:
+          - {symerror: 0.018, label: 'stat'}
+          - {symerror: 0.007, label: 'sys'}
+      - value: -0.044
+        errors:
+          - {symerror: 0.026, label: 'stat'}
+          - {symerror: 0.01, label: 'sys'}
+      - value: -0.038
+        errors:
+          - {symerror: 0.032, label: 'stat'}
+          - {symerror: 0.012, label: 'sys'}
+
+---
+name: 'Table 4'
+label: 'Data from F 4'
+description: |
+    Double-spin azimuthal asymmetries for a transversely (T) polarised target and a longitudinally (L) polarised beam.
+keywords:
+  - {name: reactions, values: ['MU+ P --> RHO0 X']}
+  - {name: observables, values: ['ASYM']}
+  - {name: phrases, values: ['Inclusive', 'Asymmetry Measurement']}
+additional_resources:
+independent_variables:
+  - header: {name: '$x_Bj$'}
+    values:
+      - {value: 0.013, low: 0.003, high: 0.02}
+      - {low: 0.02, high: 0.03}
+      - {value: 0.038, low: 0.03, high: 0.05}
+      - {value: 0.088, low: 0.05, high: 0.35}
+  - header: {name: '$<Q^2> (GeV/c)^2$'}
+    values:
+      - {value: 1.43}
+      - {value: 1.62}
+      - {value: 1.91}
+      - {value: 3.84}
+  - header: {name: '$<p_T^2>(GeV/c)^2$'}
+    values:
+      - {value: 0.17}
+      - {value: 0.18}
+      - {value: 0.18}
+      - {value: 0.19}
+dependent_variables:
+  - header: {name: '$A_{LT,p}^{\cos(\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.03
+        errors:
+          - {symerror: 0.05, label: 'stat'}
+          - {symerror: 0.03, label: 'sys'}
+      - value: 0.02
+        errors:
+          - {symerror: 0.11, label: 'stat'}
+          - {symerror: 0.06, label: 'sys'}
+      - value: 0.1
+        errors:
+          - {symerror: 0.16, label: 'stat'}
+          - {symerror: 0.09, label: 'sys'}
+      - value: 0.36
+        errors:
+          - {symerror: 0.29, label: 'stat'}
+          - {symerror: 0.16, label: 'sys'}
+  - header: {name: '$A_{LT,p}^{\cos(2\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.02
+        errors:
+          - {symerror: 0.07, label: 'stat'}
+          - {symerror: 0.03, label: 'sys'}
+      - value: 0.1
+        errors:
+          - {symerror: 0.17, label: 'stat'}
+          - {symerror: 0.07, label: 'sys'}
+      - value: 0.24
+        errors:
+          - {symerror: 0.22, label: 'stat'}
+          - {symerror: 0.1, label: 'sys'}
+      - value: 0.18
+        errors:
+          - {symerror: 0.4, label: 'stat'}
+          - {symerror: 0.17, label: 'sys'}
+  - header: {name: '$A_{LT,p}^{\cos\phi_S}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.05
+        errors:
+          - {symerror: 0.06, label: 'stat'}
+          - {symerror: 0.04, label: 'sys'}
+      - value: -0.08
+        errors:
+          - {symerror: 0.15, label: 'stat'}
+          - {symerror: 0.09, label: 'sys'}
+      - value: -0.31
+        errors:
+          - {symerror: 0.2, label: 'stat'}
+          - {symerror: 0.12, label: 'sys'}
+      - value: 0.02
+        errors:
+          - {symerror: 0.36, label: 'stat'}
+          - {symerror: 0.21, label: 'sys'}
+
+---
+name: 'Table 5'
+label: 'Data from F 4'
+description: |
+    Double-spin azimuthal asymmetries for a transversely (T) polarised target and a longitudinally (L) polarised beam.
+keywords:
+  - {name: reactions, values: ['MU+ P --> RHO0 X']}
+  - {name: observables, values: ['ASYM']}
+  - {name: phrases, values: ['Inclusive', 'Asymmetry Measurement']}
+additional_resources:
+independent_variables:
+  - header: {name: '$Q^2 (GeV/c)^2$'}
+    values:
+      - {low: 1.0, high: 1.2}
+      - {value: 1.38, low: 1.2, high: 1.6}
+      - {value: 1.94, low: 1.6, high: 2.4}
+      - {value: 4.04, low: 2.4, high: 10.0}
+  - header: {name: '$<x_Bj>$'}
+    values:
+      - {value: 0.019}
+      - {value: 0.025}
+      - {value: 0.035}
+      - {value: 0.076}
+  - header: {name: '$<p_T^2>(GeV/c)^2$'}
+    values:
+      - {value: 0.18}
+      - {value: 0.18}
+      - {value: 0.18}
+      - {value: 0.19}
+dependent_variables:
+  - header: {name: '$A_{LT,p}^{\cos(\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.13
+        errors:
+          - {symerror: 0.09, label: 'stat'}
+          - {symerror: 0.05, label: 'sys'}
+      - value: 0.12
+        errors:
+          - {symerror: 0.08, label: 'stat'}
+          - {symerror: 0.06, label: 'sys'}
+      - value: -0.06
+        errors:
+          - {symerror: 0.1, label: 'stat'}
+          - {symerror: 0.06, label: 'sys'}
+      - value: 0.13
+        errors:
+          - {symerror: 0.14, label: 'stat'}
+          - {symerror: 0.08, label: 'sys'}
+  - header: {name: '$A_{LT,p}^{\cos(2\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.01
+        errors:
+          - {symerror: 0.13, label: 'stat'}
+          - {symerror: 0.06, label: 'sys'}
+      - value: 0.09
+        errors:
+          - {symerror: 0.13, label: 'stat'}
+          - {symerror: 0.06, label: 'sys'}
+      - value: 0.09
+        errors:
+          - {symerror: 0.15, label: 'stat'}
+          - {symerror: 0.06, label: 'sys'}
+      - value: 0.2
+        errors:
+          - {symerror: 0.21, label: 'stat'}
+          - {symerror: 0.09, label: 'sys'}
+  - header: {name: '$A_{LT,p}^{\cos\phi_S}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.01
+        errors:
+          - {symerror: 0.12, label: 'stat'}
+          - {symerror: 0.07, label: 'sys'}
+      - value: -0.34
+        errors:
+          - {symerror: 0.12, label: 'stat'}
+          - {symerror: 0.07, label: 'sys'}
+      - value: 0.04
+        errors:
+          - {symerror: 0.13, label: 'stat'}
+          - {symerror: 0.08, label: 'sys'}
+      - value: -0.08
+        errors:
+          - {symerror: 0.19, label: 'stat'}
+          - {symerror: 0.11, label: 'sys'}
+
+---
+name: 'Table 6'
+label: 'Data from F 4'
+description: |
+    Double-spin azimuthal asymmetries for a transversely (T) polarised target and a longitudinally (L) polarised beam.
+keywords:
+  - {name: reactions, values: ['MU+ P --> RHO0 X']}
+  - {name: observables, values: ['ASYM']}
+  - {name: phrases, values: ['Inclusive', 'Asymmetry Measurement']}
+additional_resources:
+independent_variables:
+  - header: {name: '$p_T^2 (GeV/c)^2$'}
+    values:
+      - {value: 0.07, low: 0.05, high: 0.10}
+      - {value: 0.12, low: 0.10, high: 0.15}
+      - {low: 0.15, high: 0.25}
+      - {low: 0.25, high: 0.35}
+      - {value: 0.42, low: 0.35, high: 0.50}
+  - header: {name: '$<x_Bj>$'}
+    values:
+      - {value: 0.037}
+      - {value: 0.039}
+      - {value: 0.040}
+      - {value: 0.042}
+      - {value: 0.043}
+  - header: {name: '$<Q^2> (GeV/c)^2$'}
+    values:
+      - {value: 2.07}
+      - {value: 2.13}
+      - {value: 2.18}
+      - {value: 2.24}
+      - {value: 2.29}
+dependent_variables:
+  - header: {name: '$A_{LT,p}^{\cos(\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.09
+        errors:
+          - {symerror: 0.08, label: 'stat'}
+          - {symerror: 0.04, label: 'sys'}
+      - value: 0.03
+        errors:
+          - {symerror: 0.11, label: 'stat'}
+          - {symerror: 0.06, label: 'sys'}
+      - value: 0.02
+        errors:
+          - {symerror: 0.11, label: 'stat'}
+          - {symerror: 0.06, label: 'sys'}
+      - value: 0.04
+        errors:
+          - {symerror: 0.16, label: 'stat'}
+          - {symerror: 0.09, label: 'sys'}
+      - value: 0.37
+        errors:
+          - {symerror: 0.2, label: 'stat'}
+          - {symerror: 0.11, label: 'sys'}
+  - header: {name: '$A_{LT,p}^{\cos(2\phi-\phi_S)}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: 0.06
+        errors:
+          - {symerror: 0.12, label: 'stat'}
+          - {symerror: 0.05, label: 'sys'}
+      - value: -0.01
+        errors:
+          - {symerror: 0.16, label: 'stat'}
+          - {symerror: 0.07, label: 'sys'}
+      - value: 0.14
+        errors:
+          - {symerror: 0.16, label: 'stat'}
+          - {symerror: 0.07, label: 'sys'}
+      - value: 0.08
+        errors:
+          - {symerror: 0.23, label: 'stat'}
+          - {symerror: 0.1, label: 'sys'}
+      - value: 0.28
+        errors:
+          - {symerror: 0.28, label: 'stat'}
+          - {symerror: 0.12, label: 'sys'}
+  - header: {name: '$A_{LT,p}^{\cos\phi_S}$'}
+    qualifiers:
+      - {name: 'PLAB', value: '160.0', units: 'GeV'}
+      - {name: 'RE', value: 'MU+ P --> RHO0 X'}
+    values:
+      - value: -0.03
+        errors:
+          - {symerror: 0.11, label: 'stat'}
+          - {symerror: 0.06, label: 'sys'}
+      - value: -0.22
+        errors:
+          - {symerror: 0.15, label: 'stat'}
+          - {symerror: 0.09, label: 'sys'}
+      - value: -0.08
+        errors:
+          - {symerror: 0.15, label: 'stat'}
+          - {symerror: 0.09, label: 'sys'}
+      - value: -0.15
+        errors:
+          - {symerror: 0.22, label: 'stat'}
+          - {symerror: 0.13, label: 'sys'}
+      - value: -0.21
+        errors:
+          - {symerror: 0.26, label: 'stat'}
+          - {symerror: 0.15, label: 'sys'}

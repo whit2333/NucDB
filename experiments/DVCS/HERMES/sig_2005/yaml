@@ -1,0 +1,370 @@
+---
+record_ids: # optional
+  - {type: inspire, id: 682849}
+  - {type: red, id: 3421}
+publicationyear: 2005
+preprintyear: 2005
+dateupdated: '08/03/2016 12:32:34'
+modifications: # what, by whom and when encoded or changed
+  - {action: 'Encoded', date: '6 Sep 2005', who: 'Mike Whalley'}
+  - {action: 'Modified', date: '8 Mar 2016', who: 'Mike Whalley'}
+comment: | # preserve newlines
+    DESY-HERA. Measurement of the cross sections for elastic DVCS in positron proton collisions. The data come from two running periods: 1996-97 with a proton energy of 820 GeV and 1999-2000 with a proton energy of 920 GeV. The positron energy is 27.6 GeV. The data are presented separately and combined. The total integrated luminosity is 46.5 pb-1 with 35 pb-1 taken in the 1999-2000 period. The data cover the kinematic region in Q**2 from 2 to 8 GeV, W from 30 to 140 GeV and ABS(T) &lt; 1 GeV**2.
+additional_resources:
+
+---
+name: 'Table 1'
+label: 'Data from T 1,F 4'
+description: |
+    Cross section differential in T for the 1996-1997 data sample.
+keywords:
+  - {name: reactions, values: ['E+ P --> E+ GAMMA P', 'GAMMA* P --> GAMMA P']}
+  - {name: observables, values: ['DSIG/DT']}
+  - {name: phrases, values: ['Exclusive', 'Single Differential Cross Section', 'Photoproduction', 'Electron production']}
+  - {name: cmenergies, values: [30.0-120.0]}
+additional_resources:
+independent_variables:
+  - header: {name: 'ABS(T)', units: 'GEV**2'}
+    values:
+      - {value: 0.1}
+      - {value: 0.3}
+      - {value: 0.5}
+      - {value: 0.8}
+dependent_variables:
+  - header: {name: 'D(SIG)/DT', units: 'NB/GEV**2'}
+    qualifiers:
+      - {name: 'Q**2', value: '4.0 (2.0-20.0)', units: 'GeV^2'}
+      - {name: 'RE', value: 'GAMMA* P --> GAMMA P'}
+      - {name: 'SQRT(S)', value: '30.0-120.0', units: 'GeV'}
+      - {name: 'W', value: '71.0 (30.0-120.0)', units: 'GeV'}
+    values:
+      - value: 29.9
+        errors:
+          - {symerror: 4.1, label: 'stat'}
+          - {symerror: 7.1, label: 'sys'}
+      - value: 8.0
+        errors:
+          - {symerror: 1.4, label: 'stat'}
+          - {symerror: 1.4, label: 'sys'}
+      - value: 2.13
+        errors:
+          - {symerror: 0.6, label: 'stat'}
+          - {symerror: 0.69, label: 'sys'}
+      - value: 0.27
+        errors:
+          - {symerror: 0.12, label: 'stat'}
+          - {symerror: 0.14, label: 'sys'}
+
+---
+name: 'Table 2'
+label: 'Data from T 1,F 4'
+description: |
+    Cross section differential in T for the 1999-2000 data sample.
+keywords:
+  - {name: reactions, values: ['E+ P --> E+ GAMMA P', 'GAMMA* P --> GAMMA P']}
+  - {name: observables, values: ['DSIG/DT']}
+  - {name: phrases, values: ['Exclusive', 'Single Differential Cross Section', 'Photoproduction', 'Electron production']}
+  - {name: cmenergies, values: [30.0-140.0]}
+additional_resources:
+independent_variables:
+  - header: {name: 'ABS(T)', units: 'GEV**2'}
+    values:
+      - {value: 0.1}
+      - {value: 0.3}
+      - {value: 0.5}
+      - {value: 0.8}
+dependent_variables:
+  - header: {name: 'D(SIG)/DT', units: 'NB/GEV**2'}
+    qualifiers:
+      - {name: 'Q**2', value: '8.0 (4.0-80.0)', units: 'GeV^2'}
+      - {name: 'RE', value: 'GAMMA* P --> GAMMA P'}
+      - {name: 'SQRT(S)', value: '30.0-140.0', units: 'GeV'}
+      - {name: 'W', value: '82.0 (30.0-140.0)', units: 'GeV'}
+    values:
+      - value: 13.3
+        errors:
+          - {symerror: 1.9, label: 'stat'}
+          - {symerror: 3.4, label: 'sys'}
+      - value: 3.99
+        errors:
+          - {symerror: 0.57, label: 'stat'}
+          - {symerror: 0.69, label: 'sys'}
+      - value: 0.9
+        errors:
+          - {symerror: 0.25, label: 'stat'}
+          - {symerror: 0.3, label: 'sys'}
+      - value: 0.36
+        errors:
+          - {symerror: 0.09, label: 'stat'}
+          - {symerror: 0.14, label: 'sys'}
+
+---
+name: 'Table 3'
+label: 'Data from T 1,F 4'
+description: |
+    Cross section differential in T for the combined data sample.
+keywords:
+  - {name: reactions, values: ['E+ P --> E+ GAMMA P', 'GAMMA* P --> GAMMA P']}
+  - {name: observables, values: ['DSIG/DT']}
+  - {name: phrases, values: ['Exclusive', 'Single Differential Cross Section', 'Photoproduction', 'Electron production']}
+  - {name: cmenergies, values: [30.0-140.0]}
+additional_resources:
+independent_variables:
+  - header: {name: 'ABS(T)', units: 'GEV**2'}
+    values:
+      - {value: 0.1}
+      - {value: 0.3}
+      - {value: 0.5}
+      - {value: 0.8}
+dependent_variables:
+  - header: {name: 'D(SIG)/DT', units: 'NB/GEV**2'}
+    qualifiers:
+      - {name: 'Q**2', value: '8.0 (4.0-80.0)', units: 'GeV^2'}
+      - {name: 'RE', value: 'GAMMA* P --> GAMMA P'}
+      - {name: 'SQRT(S)', value: '30.0-140.0', units: 'GeV'}
+      - {name: 'W', value: '82.0 (30.0-140.0)', units: 'GeV'}
+    values:
+      - value: 12.0
+        errors:
+          - {symerror: 1.2, label: 'stat'}
+          - {symerror: 2.9, label: 'sys'}
+      - value: 3.44
+        errors:
+          - {symerror: 0.38, label: 'stat'}
+          - {symerror: 0.61, label: 'sys'}
+      - value: 0.84
+        errors:
+          - {symerror: 0.17, label: 'stat'}
+          - {symerror: 0.29, label: 'sys'}
+      - value: 0.21
+        errors:
+          - {symerror: 0.04, label: 'stat'}
+          - {symerror: 0.09, label: 'sys'}
+
+---
+name: 'Table 4'
+label: 'Data from T 2,F 5_7'
+description: |
+    Cross section as a function of Q**2 using the combined data sample.
+keywords:
+  - {name: reactions, values: ['E+ P --> E+ GAMMA P', 'GAMMA* P --> GAMMA P']}
+  - {name: observables, values: ['SIG']}
+  - {name: phrases, values: ['Exclusive', 'Integrated Cross Section', 'Cross Section', 'Photoproduction', 'Electron production']}
+  - {name: cmenergies, values: [30.0-140.0]}
+additional_resources:
+independent_variables:
+  - header: {name: 'Q**2', units: 'GEV**2'}
+    values:
+      - {value: 3.0}
+      - {value: 5.25}
+      - {value: 8.75}
+      - {value: 15.5}
+      - {value: 25.0}
+      - {value: 55.0}
+dependent_variables:
+  - header: {name: 'SIG', units: 'NB'}
+    qualifiers:
+      - {name: 'ABS(T)', value: '< 1', units: 'GEV**2'}
+      - {name: 'RE', value: 'GAMMA* P --> GAMMA P'}
+      - {name: 'SQRT(S)', value: '30.0-140.0', units: 'GeV'}
+      - {name: 'W', value: '82.0 (30.0-140.0)', units: 'GeV'}
+    values:
+      - value: 15.7
+        errors:
+          - {symerror: 2.5, label: 'stat'}
+          - {symerror: 3.4, label: 'sys'}
+      - value: 5.7
+        errors:
+          - {symerror: 1.1, label: 'stat'}
+          - {symerror: 1.4, label: 'sys'}
+      - value: 3.2
+        errors:
+          - {symerror: 0.49, label: 'stat'}
+          - {symerror: 0.69, label: 'sys'}
+      - value: 1.2
+        errors:
+          - {symerror: 0.22, label: 'stat'}
+          - {symerror: 0.32, label: 'sys'}
+      - value: 0.7
+        errors:
+          - {symerror: 0.19, label: 'stat'}
+          - {symerror: 0.19, label: 'sys'}
+      - value: 0.15
+        errors:
+          - {symerror: 0.05, label: 'stat'}
+          - {symerror: 0.05, label: 'sys'}
+
+---
+name: 'Table 5'
+label: 'Data from T 2'
+description: |
+    Cross section as a function of Q**2 for Bjorken X=0.0018.
+keywords:
+  - {name: reactions, values: ['E+ P --> E+ GAMMA P', 'GAMMA* P --> GAMMA P']}
+  - {name: observables, values: ['SIG']}
+  - {name: phrases, values: ['Exclusive', 'Integrated Cross Section', 'Cross Section', 'Photoproduction', 'Electron production']}
+  - {name: cmenergies, values: [30.0-140.0]}
+additional_resources:
+independent_variables:
+  - header: {name: 'Q**2', units: 'GEV**2'}
+    values:
+      - {value: 5.25}
+      - {value: 8.75}
+      - {value: 15.5}
+dependent_variables:
+  - header: {name: 'SIG', units: 'NB'}
+    qualifiers:
+      - {name: 'ABS(T)', value: '< 1', units: 'GEV**2'}
+      - {name: 'RE', value: 'GAMMA* P --> GAMMA P'}
+      - {name: 'SQRT(S)', value: '30.0-140.0', units: 'GeV'}
+      - {name: 'W', value: '82.0 (30.0-140.0)', units: 'GeV'}
+      - {name: 'X', value: '0.0018'}
+    values:
+      - value: 6.74
+        errors:
+          - {symerror: 0.93}
+      - value: 3.25
+        errors:
+          - {symerror: 0.51}
+      - value: 1.45
+        errors:
+          - {symerror: 0.3}
+
+---
+name: 'Table 6'
+label: 'Data from T 3,F 6_8'
+description: |
+    Cross section as a function of W for the 1996-1997 data sample.
+keywords:
+  - {name: reactions, values: ['E+ P --> E+ GAMMA P', 'GAMMA* P --> GAMMA P']}
+  - {name: observables, values: ['SIG']}
+  - {name: phrases, values: ['Exclusive', 'Integrated Cross Section', 'Cross Section', 'Photoproduction', 'Electron production']}
+  - {name: cmenergies, values: [45.0-110.0]}
+additional_resources:
+independent_variables:
+  - header: {name: 'W', units: 'GEV'}
+    values:
+      - {value: 45.0}
+      - {value: 70.0}
+      - {value: 90.0}
+      - {value: 110.0}
+dependent_variables:
+  - header: {name: 'SIG', units: 'NB'}
+    qualifiers:
+      - {name: 'ABS(T)', value: '< 1', units: 'GEV**2'}
+      - {name: 'Q**2', value: '4.0 (2.0-20.0)', units: 'GeV^2'}
+      - {name: 'RE', value: 'GAMMA* P --> GAMMA P'}
+      - {name: 'SQRT(S)', value: '45.0-110.0', units: 'GeV'}
+    values:
+      - value: 6.5
+        errors:
+          - {symerror: 0.8, label: 'stat'}
+          - {symerror: 1.1, label: 'sys'}
+      - value: 8.9
+        errors:
+          - {symerror: 1.3, label: 'stat'}
+          - {symerror: 1.6, label: 'sys'}
+      - value: 11.1
+        errors:
+          - {symerror: 2.2, label: 'stat'}
+          - {symerror: 2.7, label: 'sys'}
+      - value: 10.1
+        errors:
+          - {symerror: 4.7, label: 'stat'}
+          - {symerror: 4.6, label: 'sys'}
+
+---
+name: 'Table 7'
+label: 'Data from T 3,F 6_8'
+description: |
+    Cross section as a function of W for the 1999-2000 data sample.
+keywords:
+  - {name: reactions, values: ['E+ P --> E+ GAMMA P', 'GAMMA* P --> GAMMA P']}
+  - {name: observables, values: ['SIG']}
+  - {name: phrases, values: ['Exclusive', 'Integrated Cross Section', 'Cross Section', 'Photoproduction', 'Electron production']}
+  - {name: cmenergies, values: [45.0-130.0]}
+additional_resources:
+independent_variables:
+  - header: {name: 'W', units: 'GEV'}
+    values:
+      - {value: 45.0}
+      - {value: 70.0}
+      - {value: 90.0}
+      - {value: 110.0}
+      - {value: 130.0}
+dependent_variables:
+  - header: {name: 'SIG', units: 'NB'}
+    qualifiers:
+      - {name: 'ABS(T)', value: '< 1', units: 'GEV**2'}
+      - {name: 'Q**2', value: '8.0 (4.0-80.0)', units: 'GeV^2'}
+      - {name: 'RE', value: 'GAMMA* P --> GAMMA P'}
+      - {name: 'SQRT(S)', value: '45.0-130.0', units: 'GeV'}
+    values:
+      - value: 2.56
+        errors:
+          - {symerror: 0.36, label: 'stat'}
+          - {symerror: 0.32, label: 'sys'}
+      - value: 2.93
+        errors:
+          - {symerror: 0.63, label: 'stat'}
+          - {symerror: 0.46, label: 'sys'}
+      - value: 4.45
+        errors:
+          - {symerror: 0.83, label: 'stat'}
+          - {symerror: 0.82, label: 'sys'}
+      - value: 5.3
+        errors:
+          - {symerror: 1.4, label: 'stat'}
+          - {symerror: 1.4, label: 'sys'}
+      - value: 6.4
+        errors:
+          - {symerror: 2.5, label: 'stat'}
+          - {symerror: 2.7, label: 'sys'}
+
+---
+name: 'Table 8'
+label: 'Data from T 3,F 6_8'
+description: |
+    Cross section as a function of W for the combined data sample.
+keywords:
+  - {name: reactions, values: ['E+ P --> E+ GAMMA P', 'GAMMA* P --> GAMMA P']}
+  - {name: observables, values: ['SIG']}
+  - {name: phrases, values: ['Exclusive', 'Integrated Cross Section', 'Cross Section', 'Photoproduction', 'Electron production']}
+  - {name: cmenergies, values: [45.0-130.0]}
+additional_resources:
+independent_variables:
+  - header: {name: 'W', units: 'GEV'}
+    values:
+      - {value: 45.0}
+      - {value: 70.0}
+      - {value: 90.0}
+      - {value: 110.0}
+      - {value: 130.0}
+dependent_variables:
+  - header: {name: 'SIG', units: 'NB'}
+    qualifiers:
+      - {name: 'ABS(T)', value: '< 1', units: 'GEV**2'}
+      - {name: 'Q**2', value: '8.0 (4.0-80.0)', units: 'GeV^2'}
+      - {name: 'RE', value: 'GAMMA* P --> GAMMA P'}
+      - {name: 'SQRT(S)', value: '45.0-130.0', units: 'GeV'}
+    values:
+      - value: 2.28
+        errors:
+          - {symerror: 0.21, label: 'stat'}
+          - {symerror: 0.34, label: 'sys'}
+      - value: 2.91
+        errors:
+          - {symerror: 0.35, label: 'stat'}
+          - {symerror: 0.51, label: 'sys'}
+      - value: 3.97
+        errors:
+          - {symerror: 0.54, label: 'stat'}
+          - {symerror: 0.85, label: 'sys'}
+      - value: 4.4
+        errors:
+          - {symerror: 1.0, label: 'stat'}
+          - {symerror: 1.5, label: 'sys'}
+      - value: 6.4
+        errors:
+          - {symerror: 2.5, label: 'stat'}
+          - {symerror: 2.7, label: 'sys'}
