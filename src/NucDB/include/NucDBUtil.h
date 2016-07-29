@@ -52,7 +52,6 @@ namespace NucDB {
 
    std::vector<NucDBMeasurement*> SelectType(NucDB::Type type, const std::vector<NucDBMeasurement*>& list );
 
-
    template<class T>
    std::vector<T> ToVector(TList * l){
       std::vector<T> result;

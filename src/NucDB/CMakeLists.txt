@@ -9,7 +9,7 @@ set(lib_DICTIONARY "${libname}Dict.cxx")
 if(NUCDB_USE_ROOT6)
    # ROOT6 generates pcm files that should install with into the lib directory
    # todo: fix the install of this
-   set(lib_PCM_FILE "${PROJECT_BINARY_DIR}/src/${aname}/${libname}Dict_rdict.pcm")
+   set(lib_PCM_FILE "${PROJECT_BINARY_DIR}/src/${aname}/lib${libname}Dict_rdict.pcm")
 endif(NUCDB_USE_ROOT6)
 if(NOT NUCDB_USE_ROOT6)
    set(lib_DICTIONARY_HEADER "${libname}Dict.h")
