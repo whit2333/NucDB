@@ -1015,7 +1015,7 @@ Int_t NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name, std::ve
       if(p) {
          v = (const NucDBBinnedVariable*)p->GetBinVariable(name);
          if(v){
-            Double_t vmean = v->GetAverage();
+            Double_t vmean = v->GetMean();
             values.push_back(vmean);
             //vect.push_back(vmean);
             N++;
@@ -1061,7 +1061,7 @@ Int_t NucDBMeasurement::GetUniqueBinnedVariableValues(
       if(p) {
          v = (const NucDBBinnedVariable*)p->GetBinVariable(name);
          if(v){
-            Double_t vmean = v->GetAverage();
+            Double_t vmean = v->GetMean();
             values.push_back(vmean);
             N++;
          }
