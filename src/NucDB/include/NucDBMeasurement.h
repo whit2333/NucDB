@@ -17,6 +17,7 @@
 #include "NucDBReference.h"
 #include "TMultiGraph.h"
 #include "TLegend.h"
+#include "TH1.h"
 #include "NucDBUtil.h"
 
 namespace NucDB {
@@ -67,7 +68,7 @@ namespace NucDB {
  * \todo develop (or adopt) a naming convention  
  *
  */
-class NucDBMeasurement : public TNamed {
+class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public TAttMarker {
 
    public:
 
@@ -359,7 +360,7 @@ class NucDBMeasurement : public TNamed {
 
 
 
-      ClassDef(NucDBMeasurement,2)
+      ClassDef(NucDBMeasurement,3)
 };
 
 

@@ -70,6 +70,46 @@ namespace NucDB {
       }
       return mg;
    }
+//______________________________________________________________________________
+
+   TMultiGraph * CreateMultiGraph(std::vector<NucDBMeasurement*> vec, const char * var){
+      // creates a multi graph from a list of measurments
+      NucDBManager * dbman = NucDBManager::GetManager();
+      TMultiGraph  * mg = new TMultiGraph();
+      for(auto mes : vec) {
+         TGraph * gr = mes->BuildGraph(var);
+         if(gr) {
+            Int_t color = dbman->NextColor();
+            Int_t mark  = dbman->NextMarker();
+            gr->SetMarkerColor(color);
+            gr->SetLineColor(  color);
+            gr->SetMarkerStyle(mark);
+            mg->Add(gr,"p");
+         }
+      }
+      return mg;
+   }
+//______________________________________________________________________________
+   
+   TMultiGraph * CreateMultiKineGraph(std::vector<NucDBMeasurement*> vec, const char * var, const char * var2)
+   {
+      // creates a multi graph from a list of measurments
+      NucDBManager * dbman = NucDBManager::GetManager();
+      TMultiGraph  * mg = new TMultiGraph();
+      for(auto mes : vec) {
+         TGraph * gr = mes->BuildKinematicGraph(var,var2);
+         if(gr) {
+            Int_t color = dbman->NextColor();
+            Int_t mark  = dbman->NextMarker();
+            gr->SetMarkerColor(color);
+            gr->SetLineColor(  color);
+            gr->SetMarkerStyle(mark);
+            mg->Add(gr,"p");
+         }
+      }
+      return mg;
+   }
+//______________________________________________________________________________
 
    void FillLegend(TLegend * leg, TList * list, TMultiGraph * mg ) {
       // Fills the legend with  the list of measurements associated with the multigraph
@@ -93,6 +133,31 @@ namespace NucDB {
             gr = mes->BuildGraph();
          }
          leg->AddEntry(gr,mes->GetExperimentName(),"lp");
+      }
+   }
+//______________________________________________________________________________
+
+   void FillLegend(TLegend * leg, std::vector<NucDBMeasurement*> vec, TMultiGraph * mg ) {
+      // Fills the legend with  the list of measurements associated with the multigraph
+      if(!leg) {
+         std::cout << "Error null leg" << std::endl;
+         return ;
+      }
+      if(!mg) {
+        std::cout << "Error null multigraph" << std::endl;
+        return ;
+      }
+
+      int i = 0;
+      for(auto mes : vec) {
+         TGraph * gr = (TGraph*)(mg->GetListOfGraphs()->At(i));
+         if(!gr) {
+            // just build the default graph for the style TODO: fixe this
+           std::cout << " warning shouldn't be here in NucDB::FillLegend" <<std::endl;
+            gr = mes->BuildGraph();
+         }
+         leg->AddEntry(gr,mes->GetExperimentName(),"lp");
+         i++;
       }
    }
 

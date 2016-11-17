@@ -21,8 +21,11 @@ namespace NucDB {
    TList * FilterMeasurements( TList * list, NucDBBinnedVariable * var );
 
    TMultiGraph * CreateMultiGraph(TList * list, const char * var);
+   TMultiGraph * CreateMultiGraph(std::vector<NucDBMeasurement*>, const char * var);
+   TMultiGraph * CreateMultiKineGraph(std::vector<NucDBMeasurement*>, const char * var, const char * var2);
 
    void FillLegend(TLegend * leg, TList * list, TMultiGraph * mg );
+   void FillLegend(TLegend * leg, std::vector<NucDBMeasurement*>, TMultiGraph * mg );
 
    /** From the list of measurement for the experiment name.
     *  Returns the first one found. Returns zero if not found.
