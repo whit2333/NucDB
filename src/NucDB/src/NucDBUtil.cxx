@@ -47,6 +47,24 @@ namespace NucDB {
       }
       return filtered_list;
    }
+   //______________________________________________________________________________
+
+   std::vector<NucDBMeasurement*> FilterMeasurements( std::vector<NucDBMeasurement*> list, NucDBBinnedVariable * var )
+   {
+      std::vector<NucDBMeasurement*> filtered_list;
+      if(!var) {
+         std::cout << "Error null bin variable" << std::endl;
+         return filtered_list;
+      }
+      for(auto mes  : list) {
+         NucDBMeasurement * meas2  = mes->NewMeasurementWithFilter(var);
+         if( meas2->GetNDataPoints() > 0 ) {
+            filtered_list.push_back(meas2);
+         }
+      }
+      return filtered_list;
+   }
+
 
    TMultiGraph * CreateMultiGraph(TList * list, const char * var) {
       // creates a multi graph from a list of measurments

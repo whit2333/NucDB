@@ -73,7 +73,6 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
    public:
 
    private:
-      Int_t    fColor;
 
       NucDB::Type                  fType;     
       std::vector<NucDB::Process>  fProcesses; // Can full under more than one process 
@@ -274,8 +273,8 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
       const char * GetExperimentName() const {return(fExperimentName.Data());}
       void    SetExperimentName(const char * s){fExperimentName = s;}
       Int_t   GetNDataPoints() const {return(fNumberOfDataPoints);}
-      void    SetColor(Int_t col){fColor = col;}
-      Int_t   GetColor() const {return(fColor);}
+      void    SetColor(Int_t col){SetMarkerColor(col);SetFillColor(col);SetLineColor(col);}
+      Int_t   GetColor() const {return(GetMarkerColor());}
 
       const TList *  GetRefs() const { return &fReferences ; }
       void           AddRef(NucDBReference * r) { fReferences.Add(r); }

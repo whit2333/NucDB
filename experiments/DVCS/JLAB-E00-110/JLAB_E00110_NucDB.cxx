@@ -152,7 +152,7 @@ void JLAB_E00110_NucDB()
    auto gr = meas->BuildGraph("phi");
    gr->Draw("aep");
 
-   experiment->Print("data");
+   experiment->Print();
 
    dbman->SaveExperiment(experiment);
 }

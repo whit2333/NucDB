@@ -53,11 +53,11 @@ namespace NucDB {
 
 
 NucDBMeasurement::NucDBMeasurement(const char * name,const char * title) :
-   TNamed(name,title)
+   TNamed(name,title), TAttMarker(1,20,1.3)
+   //Color_t color, Style_t style, Size_t msize
 {
    fNumberOfDataPoints=0;
    fDataPoints.Clear();
-   fColor=1;
    fExperimentName="";
 }
 //_____________________________________________________________________________
@@ -66,10 +66,11 @@ NucDBMeasurement::~NucDBMeasurement()
 { }
 //_____________________________________________________________________________
 
-NucDBMeasurement::NucDBMeasurement(const NucDBMeasurement& v)
+NucDBMeasurement::NucDBMeasurement(const NucDBMeasurement& v):
+  TNamed(v),TAttLine(v), TAttFill(v), TAttMarker(v)
 {
-   SetNameTitle(v.GetName(),v.GetTitle());
-   fColor = v.GetColor();
+   //SetNameTitle(v.GetName(),v.GetTitle());
+   //fColor = v.GetColor();
    SetExperimentName(v.GetExperimentName());
    fNumberOfDataPoints = v.fNumberOfDataPoints;
 
@@ -1147,9 +1148,9 @@ TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, 
          break;
       }
    }
-   gr->SetMarkerColor(GetColor());
-   gr->SetLineColor(GetColor());
-   gr->SetMarkerStyle(20);
+   gr->SetMarkerColor(GetMarkerColor());
+   gr->SetLineColor(GetLineColor());
+   gr->SetMarkerStyle(GetMarkerStyle());
    gr->SetDrawOption("aep");
    fGraphs.Add(gr);
    return(gr);
@@ -1180,9 +1181,9 @@ TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, 
          break;
       }
    }
-   gr->SetMarkerColor(GetColor());
-   gr->SetLineColor(GetColor());
-   gr->SetMarkerStyle(20);
+   gr->SetMarkerColor(GetMarkerColor());
+   gr->SetLineColor(GetLineColor());
+   gr->SetMarkerStyle(GetMarkerStyle());
    gr->SetDrawOption("aep");
    fGraphs.Add(gr);
    return(gr);
@@ -1219,9 +1220,9 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName , bool syst_err
       gr->GetXaxis()->SetTitle(var->GetTitle());
       gr->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
    }
-   gr->SetMarkerColor(GetColor());
-   gr->SetLineColor(GetColor());
-   gr->SetMarkerStyle(20);
+   gr->SetMarkerColor(GetMarkerColor());
+   gr->SetLineColor(GetLineColor());
+   gr->SetMarkerStyle(GetMarkerStyle());
    gr->SetDrawOption("aep");
    fGraphs.Add(gr);
    return(gr);
@@ -1261,9 +1262,9 @@ TGraphErrors * NucDBMeasurement::BuildOrderedGraph(const char * varName, bool sy
       gr->GetXaxis()->SetTitle(var->GetTitle());
       gr->SetTitle(Form("%s Vs %s",GetTitle(),var->GetTitle()));
    }
-   gr->SetMarkerColor(GetColor());
-   gr->SetLineColor(GetColor());
-   gr->SetMarkerStyle(20);
+   gr->SetMarkerColor(GetMarkerColor());
+   gr->SetLineColor(GetLineColor());
+   gr->SetMarkerStyle(GetMarkerStyle());
    gr->SetDrawOption("aep");
    fGraphs.Add(gr);
    return(gr);
@@ -1297,9 +1298,9 @@ TGraph * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , const cha
       gr->GetYaxis()->SetTitle(var2->GetTitle());
       gr->SetTitle(Form("%s Vs %s",var1->GetTitle(),var2->GetTitle()));
    }
-   gr->SetMarkerColor(GetColor());
-   gr->SetLineColor(GetColor());
-   gr->SetMarkerStyle(20);
+   gr->SetMarkerColor(GetMarkerColor());
+   gr->SetLineColor(GetLineColor());
+   gr->SetMarkerStyle(GetMarkerStyle());
    //gr->SetLineStyle(1);
    //gr->SetLineWidth(0);
    gr->SetDrawOption("aep");
@@ -1387,6 +1388,9 @@ TMultiGraph * NucDBMeasurement::BuildGraphUnique(
       gr->SetMarkerColor( acol );
       gr->SetLineColor(  acol );
       gr->SetMarkerStyle(dbman->NextMarker());
+      //gr->SetMarkerColor(GetMarkerColor());
+      //gr->SetLineColor(GetLineColor());
+      //gr->SetMarkerStyle(GetMarkerStyle());
       mg->Add(gr,"p");
 
    } // unique variable

@@ -18,7 +18,8 @@ namespace NucDB {
 
    void ApplyFilterOnList(NucDBBinnedVariable * var, TList * list);
 
-   TList * FilterMeasurements( TList * list, NucDBBinnedVariable * var );
+   TList *                        FilterMeasurements( TList * list, NucDBBinnedVariable * var );
+   std::vector<NucDBMeasurement*> FilterMeasurements( std::vector<NucDBMeasurement*>, NucDBBinnedVariable * var );
 
    TMultiGraph * CreateMultiGraph(TList * list, const char * var);
    TMultiGraph * CreateMultiGraph(std::vector<NucDBMeasurement*>, const char * var);
