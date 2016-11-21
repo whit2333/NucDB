@@ -529,11 +529,11 @@ void  NucDBMeasurement::Multiply(const char * v)
 
 NucDBMeasurement * NucDBMeasurement::CreateMeasurementFilteredWithBin(NucDBBinnedVariable const * bin)
 {
-   NucDBMeasurement * m = new NucDBMeasurement(
-         GetName(),
-         GetTitle() );
-   m->AddDataPoints(FilterWithBin(bin));
-   m->SetExperimentName(GetExperimentName());
+   NucDBMeasurement * m = new NucDBMeasurement(*this);
+         //GetName(), GetTitle() );
+   m->ClearDataPoints(); 
+   m->AddDataPoints( FilterWithBin(bin) );
+   //m->SetExperimentName(GetExperimentName());
    return m;
 }  
 //______________________________________________________________________________
@@ -547,10 +547,10 @@ NucDBMeasurement * NucDBMeasurement::NewMeasurementWithFilter(NucDBBinnedVariabl
 
 NucDBMeasurement * NucDBMeasurement::GetDataSet(int i_set)
 {
-   NucDBMeasurement * m = new NucDBMeasurement(
-         GetName(),
-         GetTitle() );
-   m->SetExperimentName(GetExperimentName());
+   NucDBMeasurement * m = new NucDBMeasurement(*this);
+   m->ClearDataPoints();
+         //GetName(), GetTitle() );
+   //m->SetExperimentName(GetExperimentName());
 
    for(int i = 0; i < fDataPoints.GetEntries();i++) {
       NucDBDataPoint      * point = (NucDBDataPoint*)fDataPoints.At(i);
@@ -568,7 +568,8 @@ TList * NucDBMeasurement::CreateMeasurementsWithUniqueBins(const std::vector<dou
    int i = 0;
    for(double val : vect )  {
       NucDBBinnedVariable aVar(var,var,val,0.001);
-      NucDBMeasurement * aMeas = new NucDBMeasurement(Form("%s_%d",GetName(),i),Form("%s %d",GetTitle(),i));
+      NucDBMeasurement * aMeas = new NucDBMeasurement(*this);//Form("%s_%d",GetName(),i),Form("%s %d",GetTitle(),i));
+      aMeas->ClearDataPoints();
       aMeas->AddDataPoints( FilterWithBin(&aVar) );
       list->Add(aMeas);
       i++;
@@ -685,6 +686,15 @@ TList *  NucDBMeasurement::ApplyFilterWith(NucDBVariable *v)
    return list;
 }
 //______________________________________________________________________________
+
+void  NucDBMeasurement::TransformDataPoints(std::function<void(NucDBDataPoint*)> func)
+{
+  for(int i = 0; i < fDataPoints.GetEntries();i++) {
+    NucDBDataPoint      * point = (NucDBDataPoint*)fDataPoints.At(i);
+    func(point);
+  }
+}
+//_____________________________________________________________________________
 
 void NucDBMeasurement::Print(Option_t * opt ) const
 {

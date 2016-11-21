@@ -13,6 +13,44 @@
 
 namespace NucDB {
 
+   int  SetColors(std::vector<NucDBMeasurement*> meas, std::vector<int> colors) 
+   {
+      NucDBManager * dbman = NucDBManager::GetManager();
+      if( meas.size() < colors.size() ) {
+        std::cout << "Warning NucDB::SetColors(meas,colors): colors less than number of measurements\n";
+      }
+      for(int i = 0; i< meas.size();i++) {
+        int col = 0;
+        if(i<colors.size()) {
+          col = colors.at(i);
+        } else {
+          col = dbman->NextColor();
+        }
+        meas[i]->SetColor(col);
+      }
+      return meas.size();
+   }
+   //______________________________________________________________________________
+   
+   int  SetColors(std::vector<NucDBMeasurement*> meas, int color) 
+   {
+      for(auto m : meas ) {
+        m->SetColor(color);
+      }
+      return meas.size();
+   }
+   //______________________________________________________________________________
+
+   int  SetLineColor(std::vector<NucDBMeasurement*> meas, int color) 
+   {
+      for(auto m : meas ) {
+        m->SetLineColor(color);
+      }
+      return meas.size();
+   }
+   //______________________________________________________________________________
+
+
    void ApplyFilterOnList(NucDBBinnedVariable * var, TList * list) {
       if(!var) {
          std::cout << "Error null bin variable" << std::endl;
@@ -78,10 +116,10 @@ namespace NucDB {
          NucDBMeasurement * mes = (NucDBMeasurement*)list->At(i);
          TGraph * gr = mes->BuildGraph(var);
          if(gr) {
-            Int_t color = dbman->NextColor();
-            Int_t mark  = dbman->NextMarker();
+            Int_t color = mes->GetColor();//dbman->NextColor();
+            Int_t mark  = mes->GetMarkerStyle();//dbman->NextMarker();
             gr->SetMarkerColor(color);
-            gr->SetLineColor(  color);
+            gr->SetLineColor(  mes->GetLineColor());
             gr->SetMarkerStyle(mark);
             mg->Add(gr,"p");
          }
@@ -97,10 +135,10 @@ namespace NucDB {
       for(auto mes : vec) {
          TGraph * gr = mes->BuildGraph(var);
          if(gr) {
-            Int_t color = dbman->NextColor();
-            Int_t mark  = dbman->NextMarker();
+            Int_t color = mes->GetColor();//dbman->NextColor();
+            Int_t mark  = mes->GetMarkerStyle();//dbman->NextMarker();
             gr->SetMarkerColor(color);
-            gr->SetLineColor(  color);
+            gr->SetLineColor(  mes->GetLineColor());
             gr->SetMarkerStyle(mark);
             mg->Add(gr,"p");
          }
@@ -117,10 +155,10 @@ namespace NucDB {
       for(auto mes : vec) {
          TGraph * gr = mes->BuildKinematicGraph(var,var2);
          if(gr) {
-            Int_t color = dbman->NextColor();
-            Int_t mark  = dbman->NextMarker();
+            Int_t color = mes->GetColor();//dbman->NextColor();
+            Int_t mark  = mes->GetMarkerStyle();//dbman->NextMarker();
             gr->SetMarkerColor(color);
-            gr->SetLineColor(  color);
+            gr->SetLineColor(  mes->GetLineColor());
             gr->SetMarkerStyle(mark);
             mg->Add(gr,"p");
          }
@@ -277,6 +315,16 @@ namespace NucDB {
       for(int i = 0; i<meas_list->GetEntries();i++) {
          NucDBMeasurement * aMeas = (NucDBMeasurement*)meas_list->At(i);
          merged_meas->AddDataPoints((TList*)aMeas->GetDataPoints()->Clone());
+      }
+      return merged_meas;
+   }
+//______________________________________________________________________________
+
+   NucDBMeasurement * Merge(const std::vector<NucDBMeasurement*>& list , const char * name )
+   {
+      NucDBMeasurement * merged_meas = new NucDBMeasurement(name,name);
+      for(auto m : list) {
+         merged_meas->AddDataPoints((TList*)m->GetDataPoints()->Clone());
       }
       return merged_meas;
    }

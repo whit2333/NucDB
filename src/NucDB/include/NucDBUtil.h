@@ -16,6 +16,10 @@ namespace NucDB {
 
    enum class Type;
 
+   int  SetColors( std::vector<NucDBMeasurement*>, std::vector<int>);
+   int  SetColors( std::vector<NucDBMeasurement*>, int);
+   int  SetLineColor(std::vector<NucDBMeasurement*> meas, int color) ;
+
    void ApplyFilterOnList(NucDBBinnedVariable * var, TList * list);
 
    TList *                        FilterMeasurements( TList * list, NucDBBinnedVariable * var );
@@ -40,6 +44,7 @@ namespace NucDB {
    std::vector<NucDBMeasurement*> RemoveExperiment(const char * name, std::vector<NucDBMeasurement*> meas_list);
 
    NucDBMeasurement * Merge(TList * meas_list, const char * name = "" );
+   NucDBMeasurement * Merge(const std::vector<NucDBMeasurement*>&, const char * name = "" );
 
    /** Merge all the datapoints in the list into a single data point.
     */

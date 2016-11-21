@@ -4,6 +4,7 @@
 #include "TNamed.h"
 #include "TList.h"
 #include <iostream>
+#include <functional>
 #include "NucDBDataPoint.h"
 #include "TGraphErrors.h"
 #include "TString.h"
@@ -250,6 +251,10 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
       TList *  ApplyFilterWithBin(NucDBBinnedVariable *bin);
       TList *  ApplyFilterWith(NucDBDiscreteVariable *v);
       TList *  ApplyFilterWith(NucDBVariable *v);
+
+      /** Transform the data set by calling the supplied function for each data point.
+       */
+      void  TransformDataPoints(std::function<void(NucDBDataPoint*)> func);
 
       TList * GetDataPoints() {return(&fDataPoints);}
 

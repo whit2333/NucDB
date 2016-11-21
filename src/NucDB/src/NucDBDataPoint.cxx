@@ -107,7 +107,7 @@ const NucDBDataPoint& NucDBDataPoint::operator+=(const NucDBDataPoint &v)
       NucDBBinnedVariable* binVar1 = (NucDBBinnedVariable*)fBinnedVariables.At(i); 
       NucDBBinnedVariable* binVar2 = v.GetBinVariable(binVar1->GetName()); 
       if(!binVar2){
-         Error("NucDBDataPoint::operator+=","Could not find matching bin variable");
+         Error("NucDBDataPoint::operator+=","Could not find matching bin variable %s",binVar1->GetName());
          continue;
       }
       (*binVar1) += (*binVar2);
