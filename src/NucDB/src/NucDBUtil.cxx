@@ -102,7 +102,48 @@ namespace NucDB {
       }
       return filtered_list;
    }
+//______________________________________________________________________________
 
+   std::vector<double> Values(std::vector<NucDBDataPoint*> points )
+   {
+     std::vector<double> res;
+     for(auto p  : points) {
+       res.push_back(p->GetValue());
+     }
+     return res;
+   }
+   //______________________________________________________________________________
+   
+   std::vector<double> Errors(std::vector<NucDBDataPoint*> points )
+   {
+     std::vector<double> res;
+     for(auto p  : points) {
+       res.push_back(p->GetError());
+     }
+     return res;
+   }
+   //______________________________________________________________________________
+
+
+   std::vector<double> BinValues(std::vector<NucDBDataPoint*> points , const char * var)
+   {
+     std::vector<double> res;
+     for(auto p  : points) {
+       res.push_back(p->GetBinVariable(var)->GetMean());
+     }
+     return res;
+   }
+   //______________________________________________________________________________
+   
+   std::vector<double> BinSizes(std::vector<NucDBDataPoint*> points , const char * var)
+   {
+     std::vector<double> res;
+     for(auto p  : points) {
+       res.push_back(p->GetBinVariable(var)->GetBinWidth());
+     }
+     return res;
+   }
+   //______________________________________________________________________________
 
    TMultiGraph * CreateMultiGraph(TList * list, const char * var) {
       // creates a multi graph from a list of measurments
@@ -216,12 +257,13 @@ namespace NucDB {
          i++;
       }
    }
+   //______________________________________________________________________________
 
    /** From the list of measurement for the experiment name.
     *  Returns the first one found.
     */
    NucDBMeasurement * GetExperiment(const char * exp_name, TList * meas_list){
-      NucDBMeasurement * aMeas = 0;
+      NucDBMeasurement * aMeas = nullptr;
       if(!meas_list) {
          std::cout << "Measurement list is Null" << std::endl;
          return 0;
@@ -230,6 +272,20 @@ namespace NucDB {
          aMeas = (NucDBMeasurement*)meas_list->At(i);
          if( !strcmp(exp_name,aMeas->GetExperimentName()) ) {
             return aMeas;
+         }
+      }
+      return 0;
+   }
+//______________________________________________________________________________
+
+   /** From the list of measurement for the experiment name.
+    *  Returns the first one found.
+    */
+   NucDBMeasurement * GetExperiment(const char * exp_name, std::vector<NucDBMeasurement*> meas_list){
+      NucDBMeasurement * aMeas = nullptr;
+      for(auto m: meas_list) {
+         if( !strcmp(exp_name,m->GetExperimentName()) ) {
+            return m;
          }
       }
       return 0;

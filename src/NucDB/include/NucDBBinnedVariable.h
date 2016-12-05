@@ -157,6 +157,7 @@ class NucDBBinnedVariable : public TNamed {
       Double_t    GetCenter()     const {return(fCenter);}
       Double_t    Center()        const {return(fCenter);}
       Double_t    GetBinSize()    const {return(fMaximum-fMinimum);}
+      Double_t    GetBinWidth()   const {return((fMaximum-fMinimum)/2.0);}
       Double_t    GetBinSizeLow()    const {return(TMath::Abs(fMean-fMinimum));}
       Double_t    GetBinSizeHigh()    const {return(TMath::Abs(fMaximum-fMean));}
       void        SetBinMinimum(   Double_t val) {fMinimum =val;fCenter=fMinimum+(fMaximum-fMinimum)/2.0;fAverage=fCenter;}

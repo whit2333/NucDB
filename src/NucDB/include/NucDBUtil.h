@@ -25,6 +25,11 @@ namespace NucDB {
    TList *                        FilterMeasurements( TList * list, NucDBBinnedVariable * var );
    std::vector<NucDBMeasurement*> FilterMeasurements( std::vector<NucDBMeasurement*>, NucDBBinnedVariable * var );
 
+   std::vector<double> Values( std::vector<NucDBDataPoint*> points );
+   std::vector<double> Errors( std::vector<NucDBDataPoint*> points );
+   std::vector<double> BinValues(  std::vector<NucDBDataPoint*> points, const char * var = "x");
+   std::vector<double> BinSizes(   std::vector<NucDBDataPoint*> points, const char * var = "x");
+
    TMultiGraph * CreateMultiGraph(TList * list, const char * var);
    TMultiGraph * CreateMultiGraph(std::vector<NucDBMeasurement*>, const char * var);
    TMultiGraph * CreateMultiKineGraph(std::vector<NucDBMeasurement*>, const char * var, const char * var2);
@@ -36,11 +41,11 @@ namespace NucDB {
     *  Returns the first one found. Returns zero if not found.
     */
    NucDBMeasurement * GetExperiment(const char * exp_name, TList * meas_list);
+   NucDBMeasurement * GetExperiment(const char * exp_name, std::vector<NucDBMeasurement*> meas_list);
 
    NucDBMeasurement * FindExperiment(const char * name, TList * meas_list);
 
    NucDBMeasurement * RemoveExperiment(const char * name, TList * meas_list);
-
    std::vector<NucDBMeasurement*> RemoveExperiment(const char * name, std::vector<NucDBMeasurement*> meas_list);
 
    NucDBMeasurement * Merge(TList * meas_list, const char * name = "" );

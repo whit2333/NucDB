@@ -84,5 +84,6 @@
 #pragma link C++ class NucDBMassUnit+;
 #pragma link C++ class NucDBXSectionUnit+;
 
+#pragma link C++ class NucDB::Chi2Function+;
 
 #endif

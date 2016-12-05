@@ -33,6 +33,7 @@ set(lib_files
    NucDBReference
    NucDBExperiment
    NucDBDatabase
+   Chi2Function
 )
 
 set(lib_Fortran_files
