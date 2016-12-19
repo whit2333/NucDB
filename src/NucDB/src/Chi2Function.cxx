@@ -1,6 +1,7 @@
 #include "Chi2Function.h"
 #include "Fit/FitResult.h"
 #include "TMath.h"
+#include "TH1.h"
 #include "Math/QuantFuncMathCore.h"
 
 #include "Math/IParamFunction.h"
@@ -57,8 +58,6 @@ namespace NucDB {
       return fNucDBFCN(x,i); 
   }
   //______________________________________________________________________________
-  //______________________________________________________________________________
-
 
   std::vector<double> Chi2Function::GetConfidenceIntervals(const ROOT::Fit::FitResult& result, double cl,
      std::function<double(const double *, const double * )> f, std::vector<NucDBDataPoint*> data_points)
@@ -82,7 +81,6 @@ namespace NucDB {
     std::vector<double> xpoint(ndim);
     std::vector<double> grad(npar);
     std::vector<double> vsum(npar);
-
     std::vector<double> res;
 
     auto params = result.Parameters();
@@ -131,9 +129,7 @@ namespace NucDB {
     }
     return res;
   }
-
-
-//______________________________________________________________________________
+  //______________________________________________________________________________
 
   std::vector<double> Chi2Function::GetConfidenceIntervals(const ROOT::Fit::FitResult& result, double cl,
       std::function<double(const double *, const double * )> f, std::vector<double> x1val, std::vector<double> x2val)
@@ -157,7 +153,6 @@ namespace NucDB {
     std::vector<double> xpoint(ndim);
     std::vector<double> grad(npar);
     std::vector<double> vsum(npar);
-
     std::vector<double> res;
 
     auto params = result.Parameters();
@@ -183,7 +178,7 @@ namespace NucDB {
       ROOT::Math::RichardsonDerivator d;
       for (unsigned int ipar = 0; ipar < npar; ++ipar) {
         ROOT::Math::OneDimParamFunctionAdapter<std::function<double(const double *, const double * )> > fadapter(
-            fModelFunction,&xpoint.front(), &params.front(), ipar );
+            fModelFunction, &xpoint.front(), &params.front(), ipar );
         d.SetFunction(fadapter);
         grad[ipar] = d(params[ipar] ); // evaluate df/dp
       }
@@ -207,6 +202,47 @@ namespace NucDB {
     return res;
   }
   //______________________________________________________________________________
+  
+  TH1*  Chi2Function::GetConfidenceIntervals(const ROOT::Fit::FitResult& result, double cl,
+      std::function<double(const double *, const double * )> f, const TH1 * h, double x2)
+  {
+    Bool_t addStatus = TH1::AddDirectoryStatus();
+    TH1::AddDirectory( kFALSE );
+    TH1 * res = (TH1*)h->Clone("confidence_interval");
+    TH1::AddDirectory(addStatus);
+
+    Int_t   xmax = h->GetNbinsX();
+    Int_t   ymax = h->GetNbinsY();
+    Int_t   zmax = h->GetNbinsZ();
+
+    std::vector<double> args = {0.0,2.0};
+    std::vector<double> x_1;
+    std::vector<double> x_2;
+    auto params = result.Parameters();
+
+    for(Int_t i=1; i<= xmax; i++){
+      for(Int_t j=1; j<= ymax; j++){
+        for(Int_t k=1; k<= zmax; k++){
+          Int_t bin = h->GetBin(i, j, k);
+          double x = h->GetXaxis()->GetBinCenter(i);
+          x_1.push_back(x);
+          x_2.push_back(x2);
+          args = {x,x2};
+          res->SetBinContent( bin, f(&args[0],&params[0]) );
+        }
+      }
+    }
+    std::vector<double>  ci_res = GetConfidenceIntervals(result, cl, f, x_1, x_2);
+
+    int ibin = 1;
+    for(auto CI : ci_res) {
+      res->SetBinError( ibin, CI );
+      ibin++;
+    }
+    return res;
+  }
+  //______________________________________________________________________________
+
 
 }
 

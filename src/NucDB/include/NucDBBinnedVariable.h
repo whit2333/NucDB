@@ -6,6 +6,7 @@
 #include "TList.h"
 #include <iostream>
 #include <string>
+
 #include "NucDBUnits.h"
 #include "TBrowser.h"
 
@@ -17,6 +18,7 @@
  *   - print method
  */
 class NucDBVariable : public TNamed {
+
    protected:
       NucDBUnit  fUnit;
       Double_t   fValue;
@@ -30,9 +32,10 @@ class NucDBVariable : public TNamed {
       NucDBVariable& operator=(NucDBVariable&&) = default;
       //virtual ~NucDBVariable() = default;
  
-      NucDBVariable(const NucDBVariable& v):TNamed(v){
-         fUnit  = v.GetUnit();
-         fValue = v.GetValue();
+      NucDBVariable(const NucDBVariable& v)//:TNamed(v)
+      {
+        fUnit  = v.GetUnit();
+        fValue = v.GetValue();
       }
       NucDBVariable& operator=(const NucDBVariable& v){
          TNamed::operator=(v);
@@ -76,7 +79,7 @@ class NucDBDiscreteVariable : public TNamed {
       bool operator==(const NucDBDiscreteVariable &other) const {return(other.fValue == fValue );}
       bool operator!=(const NucDBDiscreteVariable &other) const { return !(*this == other);}
 
-      NucDBDiscreteVariable(const NucDBDiscreteVariable& v):TNamed(v){
+      NucDBDiscreteVariable(const NucDBDiscreteVariable& v){
          fUnit  = v.GetUnit();
          fValue = v.GetValue();
       }

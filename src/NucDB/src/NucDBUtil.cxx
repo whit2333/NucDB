@@ -8,47 +8,112 @@
 #include "NucDBBinnedVariable.h"
 #include "NucDBManager.h"
 
-#include <iostream>
-#include <string>
-
 namespace NucDB {
 
-   int  SetColors(std::vector<NucDBMeasurement*> meas, std::vector<int> colors) 
-   {
-      NucDBManager * dbman = NucDBManager::GetManager();
-      if( meas.size() < colors.size() ) {
-        std::cout << "Warning NucDB::SetColors(meas,colors): colors less than number of measurements\n";
-      }
-      for(int i = 0; i< meas.size();i++) {
-        int col = 0;
-        if(i<colors.size()) {
-          col = colors.at(i);
-        } else {
-          col = dbman->NextColor();
-        }
-        meas[i]->SetColor(col);
-      }
-      return meas.size();
-   }
-   //______________________________________________________________________________
-   
-   int  SetColors(std::vector<NucDBMeasurement*> meas, int color) 
-   {
-      for(auto m : meas ) {
-        m->SetColor(color);
-      }
-      return meas.size();
-   }
-   //______________________________________________________________________________
+  std::ostream& operator<< (std::ostream & os, Type t)
+  {
+    switch (t)
+    {
+      case Type::CrossSection          : return os << "CrossSection";
+      case Type::CrossSectionDifference: return os << "CrossSectionDifference";
+      case Type::Asymmetry             : return os << "Asymmetry";
+      case Type::Ratio                 : return os << "Ratio";
+      case Type::FormFactor            : return os << "FormFactor";
+      case Type::StructureFunction     : return os << "StructureFunction";
+      case Type::PDF                   : return os << "PDF";
+      case Type::TMD                   : return os << "TMD";
+      case Type::GPD                   : return os << "GPD";
+      case Type::ComptonFormFactor     : return os << "ComptonFormFactor";
+      case Type::MatrixElement         : return os << "MatrixElement";
+      case Type::Amplitude             : return os << "Amplitude";
+      case Type::Other                 : return os << "Other";
+    };
+    return os << static_cast<std::uint16_t>(t);
+  }
 
-   int  SetLineColor(std::vector<NucDBMeasurement*> meas, int color) 
-   {
-      for(auto m : meas ) {
-        m->SetLineColor(color);
+  std::ostream& operator<< (std::ostream & os, Process p)
+  {
+    switch(p)
+    {
+      case Process::DIS               : return os << "DIS";
+      case Process::Elastic           : return os << "Elastic";
+      case Process::DVCS              : return os << "DVCS";
+      case Process::DVMP              : return os << "DVMP";
+      case Process::SIDIS             : return os << "SIDIS";
+      case Process::DrellYan          : return os << "DrellYan";
+      case Process::Inclusive         : return os << "Inclusive";
+      case Process::Exclusive         : return os << "Exclusive";
+      case Process::Electroproduction : return os << "Electroproduction";
+      case Process::Photoproduction   : return os << "Photoproduction";
+      case Process::Other             : return os << "Other";
+    };
+    return os << static_cast<std::uint16_t>(p);
+  }
+  //______________________________________________________________________________
+
+  int  SetColors(std::vector<NucDBMeasurement*> meas, std::vector<int> colors) 
+  {
+    NucDBManager * dbman = NucDBManager::GetManager();
+    if( meas.size() > colors.size() ) {
+      std::cout << "Warning NucDB::SetColors(meas,colors): colors less than number of measurements\n";
+    }
+    for(int i = 0; i< meas.size();i++) {
+      int col = 0;
+      if(i<colors.size()) {
+        col = colors.at(i);
+      } else {
+        col = dbman->NextColor();
       }
-      return meas.size();
+      meas[i]->SetColor(col);
+    }
+    return meas.size();
+  }
+  //______________________________________________________________________________
+
+  int  SetColors(std::vector<NucDBMeasurement*> meas, int color) 
+  {
+    for(auto m : meas ) {
+      m->SetColor(color);
+    }
+    return meas.size();
+  }
+  //______________________________________________________________________________
+
+  int  SetLineColor(std::vector<NucDBMeasurement*> meas, int color) 
+  {
+    for(auto m : meas ) {
+      m->SetLineColor(color);
+    }
+    return meas.size();
+  }
+  //______________________________________________________________________________
+
+   std::vector<int> GoodColors(int ncol, int offset)
+   {
+     std::vector<int> res = {1,2,4,6,8,9};
+     int ncols = res.size();
+     if(ncols>=ncol){
+       res.resize(ncol);
+       return res;
+     }
+     int counter = 0;
+     int j = 0;
+     int stride = 11;
+     for(int i = ncols; i<ncol+offset; i++){
+
+       int a_col = 20+stride*counter + j;
+
+       if(a_col>100) a_col=1;
+       res.push_back(a_col);
+       counter++;
+       if(counter == stride) {
+         counter=0;
+         j++;
+       }
+     }
+     res.erase(res.begin(),res.begin()+offset);
+     return res;
    }
-   //______________________________________________________________________________
 
 
    void ApplyFilterOnList(NucDBBinnedVariable * var, TList * list) {
@@ -174,7 +239,7 @@ namespace NucDB {
       NucDBManager * dbman = NucDBManager::GetManager();
       TMultiGraph  * mg = new TMultiGraph();
       for(auto mes : vec) {
-         TGraph * gr = mes->BuildGraph(var);
+         TGraphErrors * gr = mes->BuildGraph(var);
          if(gr) {
             Int_t color = mes->GetColor();//dbman->NextColor();
             Int_t mark  = mes->GetMarkerStyle();//dbman->NextMarker();
@@ -486,6 +551,8 @@ namespace NucDB {
       }
       return newlist;
    }
+//______________________________________________________________________________
+
 
    void Print(const std::vector<NucDBMeasurement*>& measurements)
    {
@@ -493,6 +560,8 @@ namespace NucDB {
          m->Print();
       }
    }
+//______________________________________________________________________________
+
 
    std::vector<NucDBMeasurement*> SelectType(NucDB::Type type,const std::vector<NucDBMeasurement*>& list)
    {
@@ -504,6 +573,106 @@ namespace NucDB {
       }
       return results;
    }
+   //______________________________________________________________________________
+
+   TH1* GetConfidenceIntervals(const TMatrixDSym& cov, double Chi2, double Ndf, double cl, 
+       std::function<double(const double *, const double * )> f, const int Ndim,
+       const std::vector<double>& pars, const TH1 * h, int i_var, std::vector<double> fixed_coords)
+   {
+     Bool_t addStatus = TH1::AddDirectoryStatus();
+     TH1::AddDirectory( kFALSE );
+     TH1 * res = (TH1*)h->Clone("confidence_interval");
+     TH1::AddDirectory(addStatus);
+
+     Int_t   xmax = h->GetNbinsX();
+     Int_t   ymax = h->GetNbinsY();
+     Int_t   zmax = h->GetNbinsZ();
+
+     int ndim = fixed_coords.size();
+     std::vector<std::vector<double>> args;
+     std::vector<double> x_1;
+     std::vector<double> x_2;
+
+     for(Int_t i=1; i<= xmax; i++){
+       for(Int_t j=1; j<= ymax; j++){
+          for(Int_t k=1; k<= zmax; k++){
+            Int_t bin = h->GetBin(i, j, k);
+            double x = h->GetXaxis()->GetBinCenter(i);
+            fixed_coords[i_var] = x;
+            args.push_back(fixed_coords);
+            res->SetBinContent( bin, f(fixed_coords.data(),&pars[0]) );
+          }
+        }
+      }
+      std::vector<double>  ci_res = GetConfidenceIntervals(cov, Chi2, Ndf, cl, f, Ndim, pars, args);
+
+      int ibin = 1;
+      for(auto CI : ci_res) {
+        res->SetBinError( ibin, CI );
+        ibin++;
+      }
+      return res;
+    }
+   //______________________________________________________________________________
+
+   std::vector<double> GetConfidenceIntervals(const TMatrixDSym& cov, double Chi2, double Ndf, double cl,
+      std::function<double(const double *, const double * )> f, const int Ndim,
+      const std::vector<double>& pars, const std::vector<std::vector<double>>& coords  )
+    {
+      int    npar       = pars.size();
+      int    npoints    = coords.size();//NPoints();
+      double corrFactor = 1.0;
+      bool   norm       = true;
+      if (Chi2 <= 0 || Ndf == 0) norm = false;
+      if (norm) {
+        corrFactor = TMath::StudentQuantile(0.5 + cl/2, Ndf) * std::sqrt( Chi2/Ndf );
+      } else {
+        // value to go up in chi2 (1: 1 sigma error(CL=0.683) , 4: 2 sigma errors
+        corrFactor = ROOT::Math::chisquared_quantile(cl, 1);
+      }
+      std::vector<double> xpoint(Ndim);
+      std::vector<double> grad(npar);
+      std::vector<double> vsum(npar);
+      std::vector<double> res;
+      // loop on the points
+      for (unsigned int ipoint = 0; ipoint < npoints; ++ipoint) {
+        //xpoint[0] = coords.at(ipoint).at(0);
+        //xpoint[1] = coords.at(ipoint).at(1);
+        for(int ivar = 0; ivar < Ndim; ivar++) {
+          xpoint[ivar] = coords.at(ipoint).at(ivar);
+        }
+
+        // calculate gradient of fitted function w.r.t the parameters
+        // check first if fFitFunction provides parameter gradient or not
+        // does not provide gradient
+        // t.b.d : skip calculation for fixed parameters
+        ROOT::Math::RichardsonDerivator d;
+        for (unsigned int ipar = 0; ipar < npar; ++ipar) {
+          ROOT::Math::OneDimParamFunctionAdapter<std::function<double(const double *, const double * )> > fadapter(
+              f,&xpoint.front(), &pars.front(), ipar );
+          d.SetFunction(fadapter);
+          grad[ipar] = d(pars.at(ipar) ); // evaluate df/dp
+        }
+
+        // multiply covariance matrix with gradient
+        vsum.assign(npar,0.0);
+        for (unsigned int ipar = 0; ipar < npar; ++ipar) {
+          for (unsigned int jpar = 0; jpar < npar; ++jpar) {
+            vsum[ipar] += cov(ipar,jpar) * grad[jpar];
+          }
+        }
+        // multiply gradient by vsum
+        double r2 = 0;
+        for (unsigned int ipar = 0; ipar < npar; ++ipar) {
+          r2 += grad[ipar] * vsum[ipar];
+        }
+        double r = std::sqrt(r2);
+        //ci[ipoint] = r * corrFactor;
+        res.push_back(r * corrFactor);
+      }
+      return res;
+    }
+  //______________________________________________________________________________
 
 }
 

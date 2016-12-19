@@ -1,12 +1,15 @@
-#ifdef __CINT__
+#ifdef __CLING__
 
 #pragma link off all globals;
 #pragma link off all classes;
 #pragma link off all functions;
-#pragma link C++ all typedef;
+#pragma link off all typedef;
+#pragma link off all namespace;
 
 #pragma link C++ nestedclass;
 #pragma link C++ nestedtypedef;
+
+//#pragma link C++ defined_in NucDB;
 
 #pragma link C++ namespace NucDB;
 #pragma link C++ namespace NucDB::Kine;
@@ -47,10 +50,21 @@
 #pragma link C++ function NucDB::FindExperiment(const char *,TList*);
 #pragma link C++ function NucDB::MergeDataPoints(TList*);
 
+#pragma link C++ function NucDB::GetConfidenceIntervals;
+#pragma link C++ class std::function<double(const double*,const double*)>+;
+#pragma link C++ class std::function<double(double*,double*)>+;
 
 #pragma link C++ class NucDBManager+;
 #pragma link C++ global fgDBManager;
 #pragma link C++ class NucDBDatabase+;
+
+#pragma link C++ class NucDBUnit+;
+#pragma link C++ class NucDBInverseUnit+;
+#pragma link C++ class NucDBEnergyUnit+;
+#pragma link C++ class NucDBEnergyMeV+;
+#pragma link C++ class NucDBMomentumUnit+;
+#pragma link C++ class NucDBMassUnit+;
+#pragma link C++ class NucDBXSectionUnit+;
 
 #pragma link C++ class NucDBVariable+;
 #pragma link C++ class NucDBDiscreteVariable+;
@@ -76,14 +90,16 @@
 #pragma link C++ class NucDBPaper+;
 #pragma link C++ class NucDBReference+;
 
-#pragma link C++ class NucDBUnit+;
-#pragma link C++ class NucDBInverseUnit+;
-#pragma link C++ class NucDBEnergyUnit+;
-#pragma link C++ class NucDBEnergyMeV+;
-#pragma link C++ class NucDBMomentumUnit+;
-#pragma link C++ class NucDBMassUnit+;
-#pragma link C++ class NucDBXSectionUnit+;
-
 #pragma link C++ class NucDB::Chi2Function+;
+
+//#pragma link C++ class std::array<std::string,2>+;
+//#pragma link C++ class std::vector<std::array<double,2>>+;
+//
+//#pragma link C++ function NucDB::GetConfidenceIntervals<2>(const TMatrixDSym&, double, double, double, std::function<double(const double*, const double* )> , const std::vector<double>&, const std::vector<NucDBDataPoint*>& , const std::array<std::string,2>&);
+//#pragma link C++ function NucDB::GetConfidenceIntervals<2>(const TMatrixDSym&, double, double, double, std::function<double(const double *, const double * )> , const std::vector<double>&, const std::vector<std::array<double,2>>& );
+//#pragma link C++ function NucDB::GetConfidenceIntervals<2>(const TMatrixDSym&, double, double, double, std::function<double(const double *, const double * )> ,const std::vector<double>& , const TH1*, unsigned int, std::array<double,2> );
+
+//#pragma link C++ function NucDB::GetConfidenceIntervals(const TMatrixDSym&, double, double, double, std::function<double(const double *, const double * )> , const int, const std::vector<double>&, const std::vector<std::vector<double>>& );
+//#pragma link C++ function NucDB::GetConfidenceIntervals(const TMatrixDSym&, double, double, double, std::function<double(const double *, const double * )>, const int, const std::vector<double>& , const TH1*, int, std::vector<double> );
 
 #endif

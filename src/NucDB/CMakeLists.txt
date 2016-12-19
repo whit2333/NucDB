@@ -46,6 +46,9 @@ foreach(infileName ${lib_files})
    SET(lib_HEADERS ${lib_HEADERS} ${PROJECT_SOURCE_DIR}/src/${aname}/include/${infileName}.h)
 endforeach(infileName)
 
+file(GLOB template_headers ${PROJECT_SOURCE_DIR}/src/${aname}/include/*.hxx)
+SET(lib_HEADERS ${lib_HEADERS} ${template_headers})
+
 set(lib_Fortran_SRCs)
 foreach(infileName ${lib_Fortran_files})
    SET(lib_Fortran_SRCs ${lib_Fortran_SRCs} "${PROJECT_SOURCE_DIR}/src/${aname}/src/${infileName}.f")
@@ -78,6 +81,7 @@ if(NUCDB_USE_ROOT6)
    FILES ${lib_PCM_FILE} 
    DESTINATION lib )
 endif(NUCDB_USE_ROOT6)
+
 
 install(
    FILES ${lib_HEADERS} 

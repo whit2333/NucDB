@@ -17,7 +17,7 @@ namespace NucDB {
   class Chi2Function : public ROOT::Math::FitMethodFunction {
     
     private:
-      std::function<double(const double *, int)> fNucDBFCN;
+      std::function<double(const double *, int)>           fNucDBFCN;
       std::function<double(const double *, const double*)> fModelFunction;
 
     public:
@@ -45,7 +45,9 @@ namespace NucDB {
       
       std::vector<double> GetConfidenceIntervals(const ROOT::Fit::FitResult& result, double cl,
           std::function<double(const double *, const double * )> f, std::vector<double> xval, std::vector<double> x2val);
-      
+
+      TH1* GetConfidenceIntervals(const ROOT::Fit::FitResult& result, double cl,
+          std::function<double(const double *, const double * )> f, const TH1 * h, double x2);
 
       ClassDef(Chi2Function,1)
   };

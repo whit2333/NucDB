@@ -8,45 +8,6 @@
 #include "NucDBManager.h"
 
 namespace NucDB {
-      std::ostream& operator<< (std::ostream & os, Type t)
-      {
-         switch (t)
-         {
-            case Type::CrossSection          : return os << "CrossSection";
-            case Type::CrossSectionDifference: return os << "CrossSectionDifference";
-            case Type::Asymmetry             : return os << "Asymmetry";
-            case Type::Ratio                 : return os << "Ratio";
-            case Type::FormFactor            : return os << "FormFactor";
-            case Type::StructureFunction     : return os << "StructureFunction";
-            case Type::PDF                   : return os << "PDF";
-            case Type::TMD                   : return os << "TMD";
-            case Type::GPD                   : return os << "GPD";
-            case Type::ComptonFormFactor     : return os << "ComptonFormFactor";
-            case Type::MatrixElement         : return os << "MatrixElement";
-            case Type::Amplitude             : return os << "Amplitude";
-            case Type::Other                 : return os << "Other";
-         };
-         return os << static_cast<std::uint16_t>(t);
-      }
-
-      std::ostream& operator<< (std::ostream & os, Process p)
-      {
-         switch(p)
-         {
-            case Process::DIS               : return os << "DIS";
-            case Process::Elastic           : return os << "Elastic";
-            case Process::DVCS              : return os << "DVCS";
-            case Process::DVMP              : return os << "DVMP";
-            case Process::SIDIS             : return os << "SIDIS";
-            case Process::DrellYan          : return os << "DrellYan";
-            case Process::Inclusive         : return os << "Inclusive";
-            case Process::Exclusive         : return os << "Exclusive";
-            case Process::Electroproduction : return os << "Electroproduction";
-            case Process::Photoproduction   : return os << "Photoproduction";
-            case Process::Other             : return os << "Other";
-         };
-         return os << static_cast<std::uint16_t>(p);
-      }
 }
 //______________________________________________________________________________
 
@@ -137,6 +98,15 @@ void NucDBMeasurement::AddDataPoints(TList * listOfPoints, bool clear)
    } 
 }
 //_____________________________________________________________________________
+
+void  NucDBMeasurement::AddDataPoints(std::vector<NucDBDataPoint*> listOfPoints, bool clear)
+{
+  if(clear) ClearDataPoints();
+  for(auto ap: listOfPoints) {
+      AddDataPoint(new NucDBDataPoint(*ap));
+  } 
+}
+//______________________________________________________________________________
 
 void NucDBMeasurement::RemoveDataPoints(TList * listOfPoints)
 {
@@ -545,23 +515,6 @@ NucDBMeasurement * NucDBMeasurement::NewMeasurementWithFilter(NucDBBinnedVariabl
 }
 //______________________________________________________________________________
 
-NucDBMeasurement * NucDBMeasurement::GetDataSet(int i_set)
-{
-   NucDBMeasurement * m = new NucDBMeasurement(*this);
-   m->ClearDataPoints();
-         //GetName(), GetTitle() );
-   //m->SetExperimentName(GetExperimentName());
-
-   for(int i = 0; i < fDataPoints.GetEntries();i++) {
-      NucDBDataPoint      * point = (NucDBDataPoint*)fDataPoints.At(i);
-      if(point->GetDataSet() == i_set) {
-         m->AddDataPoint(new NucDBDataPoint(*point));
-      }
-   }
-   return m;
-}
-//______________________________________________________________________________
-
 TList * NucDBMeasurement::CreateMeasurementsWithUniqueBins(const std::vector<double> & vect, const char * var)
 {
    TList * list = new TList();
@@ -584,7 +537,44 @@ TList * NucDBMeasurement::CreateMeasurementsWithUniqueBins(const char * var)
    GetUniqueBinnedVariableValues(var,unique_values );
    return( CreateMeasurementsWithUniqueBins(unique_values,var) );
 }
+//______________________________________________________________________________
 
+std::vector<NucDBMeasurement*> NucDBMeasurement::CreateDataSetMeasurements() const
+{
+  std::vector<NucDBMeasurement*> res;
+  for(int i_set=1; i_set<=GetNSets(); i_set++){
+    auto a_mes = GetDataSet(i_set);
+    res.push_back(a_mes);
+  }
+  return res;
+}
+//______________________________________________________________________________
+
+NucDBMeasurement * NucDBMeasurement::GetDataSet(int i_set) const
+{
+   NucDBMeasurement * m = new NucDBMeasurement(GetName(),GetTitle());
+   auto data_points = GetDataSetPoints(i_set);
+   m->AddDataPoints(data_points,true);
+   m->SetExperimentName(GetExperimentName());
+   return m;
+}
+//______________________________________________________________________________
+
+
+std::vector<NucDBDataPoint*>   NucDBMeasurement::GetDataSetPoints(int set) const
+{
+  std::vector<NucDBDataPoint*>  res;
+  if((set > GetNSets()) || (set < 0)) {
+    return res;
+  }
+  for(int i = 0; i < fDataPoints.GetEntries();i++) {
+    NucDBDataPoint      * point = (NucDBDataPoint*)fDataPoints.At(i);
+    if( (point->GetDataSet() == set) || (set == 0) ){
+      res.push_back(point);
+    }
+  }
+  return res;
+}
 //_____________________________________________________________________________
 
 TList *  NucDBMeasurement::FilterWith(NucDBVariable const *v)

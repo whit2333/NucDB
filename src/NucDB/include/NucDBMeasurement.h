@@ -21,40 +21,6 @@
 #include "TH1.h"
 #include "NucDBUtil.h"
 
-namespace NucDB {
-
-      enum class Type {
-         CrossSection, 
-         CrossSectionDifference, 
-         Asymmetry, 
-         Ratio, 
-         FormFactor,
-         StructureFunction,
-         PDF,
-         TMD,
-         GPD,
-         ComptonFormFactor,
-         MatrixElement,
-         Amplitude,
-         Other
-      };
-      std::ostream& operator<< (std::ostream & os, Type t);
-
-      enum class Process {
-         DIS, 
-         Elastic, 
-         DVCS, 
-         DVMP, 
-         SIDIS, 
-         DrellYan,
-         Inclusive,
-         Exclusive,
-         Electroproduction,
-         Photoproduction,
-         Other
-      };
-      std::ostream& operator<< (std::ostream & os, Process p);
-}
 
 /** A measured quantitiy.
  * 
@@ -150,6 +116,7 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
        *  clear exisiting datapoints.
        */
       void    AddDataPoints(TList * listOfPoints, bool clear=false );
+      void    AddDataPoints(std::vector<NucDBDataPoint*> listOfPoints, bool clear=false );
 
       /** Remove a list of datapoints from the list of points. 
        */
@@ -163,6 +130,7 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
 
       /** Returns a list of datapoints equal to variable.  */
       TList *  FilterWith(NucDBVariable const *v);
+
 
 
       /** Returns list of data points which have be merged. 
@@ -237,14 +205,18 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
        */ 
       NucDBMeasurement * NewMeasurementWithFilter(const NucDBBinnedVariable * bin) ;
 
-      NucDBMeasurement * GetDataSet(int i_set);
 
       /** Uses the vector of values to filter the data, creating a new measurment for each value.
        *  This can be used with GetUniqueBinnedVariableValues(), as is done in the method wich only takes a variable name.
        */
       TList *  CreateMeasurementsWithUniqueBins(const std::vector<double> & vect,const char * var = "x");
-
       TList *  CreateMeasurementsWithUniqueBins(const char * var = "x");
+
+      /** Simply create a new measurement for each dataset.
+       */
+      std::vector<NucDBMeasurement*> CreateDataSetMeasurements() const;
+      NucDBMeasurement*              GetDataSet(int i_set) const;
+      std::vector<NucDBDataPoint*>   GetDataSetPoints(int set) const;
 
 
       /** Same as FilterWithBin(bin) but it modifies the measurement.  */
