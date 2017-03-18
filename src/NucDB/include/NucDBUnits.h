@@ -60,12 +60,12 @@ class NucDBUnit : public TNamed {
 
 class NucDBInverseUnit : public NucDBUnit {
   public:
-    NucDBInverseUnit(NucDBUnit * unit = 0){
+    NucDBInverseUnit(NucDBUnit * unit = nullptr){
       if(unit) {
         SetInvertedUnit(unit);
       }
     }
-    virtual ~NucDBInverseUnit(){}
+    virtual ~NucDBInverseUnit()= default;
 
     void SetInvertedUnit(NucDBUnit * unit){
       if(!unit) printf(" Null unit to be inverted\n");
@@ -84,7 +84,7 @@ class NucDBEnergyUnit : public NucDBUnit {
     NucDBEnergyUnit(const char * name ="energy",const char * title="GeV")
       :NucDBUnit(name,title) {
       }
-    virtual ~NucDBEnergyUnit(){ }
+    virtual ~NucDBEnergyUnit()= default;
     ClassDef(NucDBEnergyUnit,1)
 };
 
@@ -93,7 +93,7 @@ class NucDBEnergyMeV : public NucDBEnergyUnit {
     NucDBEnergyMeV(const char * n = "MeV",const char * t ="MeV"):NucDBEnergyUnit(n,t){
       fConversionFactor = 1.0/1000.0;
     }
-    virtual ~NucDBEnergyMeV(){}
+    virtual ~NucDBEnergyMeV()= default;
 
     ClassDef(NucDBEnergyMeV,1)
 };
@@ -104,7 +104,7 @@ class NucDBMomentumUnit : public NucDBUnit {
     NucDBMomentumUnit(const char * name ="momentum",const char * title="GeV/c")
       :NucDBUnit(name,title) {
       }
-    virtual ~NucDBMomentumUnit(){ }
+    virtual ~NucDBMomentumUnit()= default;
     ClassDef(NucDBMomentumUnit,1)
 };
 
@@ -114,7 +114,7 @@ class NucDBMassUnit : public NucDBUnit {
     NucDBMassUnit(const char * name ="mass",const char * title="GeV/c^2")
       :NucDBUnit(name,title) {
       }
-    virtual ~NucDBMassUnit(){ }
+    virtual ~NucDBMassUnit()= default;
     ClassDef(NucDBMassUnit,1)
 };
 
@@ -124,7 +124,7 @@ class NucDBXSectionUnit : public NucDBUnit {
     NucDBXSectionUnit(const char * name ="xsection",const char * title="mb")
       :NucDBUnit(name,title) {
       }
-    virtual ~NucDBXSectionUnit(){ }
+    virtual ~NucDBXSectionUnit()= default;
     ClassDef(NucDBXSectionUnit,1)
 };
 

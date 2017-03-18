@@ -155,7 +155,7 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
        */
       NucDBDataPoint * MergeDataPoints(
             NucDBBinnedVariable * var, 
-            NucDBBinnedVariable * var2 = 0, 
+            NucDBBinnedVariable * var2 = nullptr, 
             bool                  modify = false);
 
       /** Similar to MergeDataPoints(unsigned int n, const char * var, bool modify). However, 
@@ -272,7 +272,7 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
 
       TGraph * BuildKinematicGraph(const char * var1Name = "x", const char * var2Name = "Qsquared"); // *MENU*
 
-      TMultiGraph * BuildGraphUnique(const char * var = "x", const char * uniqueVar = "Qsquared", TLegend * leg = 0 ); // *MENU*
+      TMultiGraph * BuildGraphUnique(const char * var = "x", const char * uniqueVar = "Qsquared", TLegend * leg = nullptr ); // *MENU*
 
       // Uses only the first datapoint
       //const TList *        GetBinnedVariables() const { return(&fBinnedVariables);}

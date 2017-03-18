@@ -7,7 +7,7 @@ NucDBExperiment::NucDBExperiment(const char * name ,const char * title) : TNamed
 }
 //_____________________________________________________________________________
 
-NucDBExperiment::~NucDBExperiment(){}
+NucDBExperiment::~NucDBExperiment()= default;
 //_____________________________________________________________________________
 
 void NucDBExperiment::AddMeasurement(NucDBMeasurement* meas){

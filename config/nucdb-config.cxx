@@ -25,15 +25,15 @@ int main(int argc, char * argv[]) {
    }
    const struct option longopts[] =
    {
-      {"version",   no_argument,  0, 'v'},
-      {"help",      no_argument,  0, 'h'},
-      {"libs",      no_argument,  0, 'l'},
-      {"cflags",    no_argument,  0, 'c'},
-      {"ldflags",   no_argument,  0, 'd'},
-      {"inc",       no_argument,  0, 'i'},
-      {"grid",      no_argument,  0, 'g'},
-      {"prefix",    no_argument,  0, 'p'},
-      {0,0,0,0}
+      {"version",   no_argument,  nullptr, 'v'},
+      {"help",      no_argument,  nullptr, 'h'},
+      {"libs",      no_argument,  nullptr, 'l'},
+      {"cflags",    no_argument,  nullptr, 'c'},
+      {"ldflags",   no_argument,  nullptr, 'd'},
+      {"inc",       no_argument,  nullptr, 'i'},
+      {"grid",      no_argument,  nullptr, 'g'},
+      {"prefix",    no_argument,  nullptr, 'p'},
+      {nullptr,0,nullptr,0}
    };
 
    int index = 0;

@@ -24,7 +24,7 @@ NucDBMeasurement::NucDBMeasurement(const char * name,const char * title) :
 //_____________________________________________________________________________
 
 NucDBMeasurement::~NucDBMeasurement()
-{ }
+= default;
 //_____________________________________________________________________________
 
 NucDBMeasurement::NucDBMeasurement(const NucDBMeasurement& v):
@@ -126,7 +126,7 @@ TList *  NucDBMeasurement::MergeDataPoints(const std::vector<int> & points, bool
    // After which no m ore merging is done.
    // sorting shold be done before hand.
    TList * list = new TList();
-   NucDBDataPoint * mergedPoint = 0;
+   NucDBDataPoint * mergedPoint = nullptr;
    Int_t n_merged = 0;
    Int_t Nmax = fDataPoints.GetEntries();
    for(auto Nmerge : points ) {
@@ -172,7 +172,7 @@ TList * NucDBMeasurement::MergeDataPoints(
       return list;
    }
 
-   NucDBDataPoint * mergedPoint = 0;
+   NucDBDataPoint * mergedPoint = nullptr;
    unsigned int i = 0;
    while(i < fDataPoints.GetEntries()) {
       NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
@@ -198,19 +198,19 @@ NucDBDataPoint * NucDBMeasurement::MergeDataPoints(
 {
    if(!var) {
       std::cout << "Null binned variable provided!" << std::endl;
-      return 0;
+      return nullptr;
    }
    TList * plist = FilterWithBin(var);
    if(!plist) {
       std::cout << "Null list returned!" << std::endl;
-      return 0;
+      return nullptr;
    }
    if(var2) {
       plist = NucDB::FilterDataPoints(plist,var2);
    }
    if( plist->GetEntries() <= 0 ) {
       std::cout << "Empty list of data points!" << std::endl;
-      return 0;
+      return nullptr;
    }
    NucDBDataPoint * aPoint  = NucDB::MergeDataPoints(plist);
    if(modify) {
@@ -233,12 +233,12 @@ TList * NucDBMeasurement::MergeNeighboringDataPoints(unsigned int n, const char 
       Error("MergeDataPoints","Wrong number of bins to merge. ");
       return list;
    }
-   NucDBDataPoint * mergedPoint = 0;
+   NucDBDataPoint * mergedPoint = nullptr;
    unsigned int i = 0;
    unsigned int nMerged = 0;
    double mean_0 = 0.0;
    double mean_1 = 0.0;
-   NucDBBinnedVariable * previous_var = 0;
+   NucDBBinnedVariable * previous_var = nullptr;
    while(i < fDataPoints.GetEntries()) {
       NucDBDataPoint * point = (NucDBDataPoint*)fDataPoints.At(i);
       NucDBBinnedVariable * var1 = point->GetBinVariable(var);
@@ -376,11 +376,11 @@ TList *  NucDBMeasurement::MergeNeighboringDataPoints(
       return list;
    }
 
-   NucDBDataPoint *      mergedPoint   = 0;
+   NucDBDataPoint *      mergedPoint   = nullptr;
    unsigned int          i             = 0;
    unsigned int          nMerged       = 0;
-   NucDBBinnedVariable * previous_var  = 0;
-   NucDBBinnedVariable * previous_var2 = 0;
+   NucDBBinnedVariable * previous_var  = nullptr;
+   NucDBBinnedVariable * previous_var2 = nullptr;
    double mean_0  = 0.0;
    double mean_1  = 0.0;
    double mean2_0 = 0.0;
@@ -703,7 +703,7 @@ void NucDBMeasurement::Print(Option_t * opt ) const
    if(printvars && fNumberOfDataPoints>0){
       const NucDBDataPoint * p0 = (const NucDBDataPoint*)fDataPoints.At(0);
       const TList& vars = p0->GetBinnedVariablesRef(); 
-      NucDBBinnedVariable * var = 0;
+      NucDBBinnedVariable * var = nullptr;
       for(int j=0;j<vars.GetEntries();j++) {
          var = (NucDBBinnedVariable*)vars.At(j);
          std::vector<double> vals;
@@ -800,7 +800,7 @@ NucDBBinnedVariable* NucDBMeasurement::GetBinnedVariable(const char * name)
    //   if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
    //      return((NucDBBinnedVariable*)fBinnedVariables.At(i));
    //}
-   return(0);
+   return(nullptr);
 }
 //______________________________________________________________________________
 
@@ -809,8 +809,8 @@ Int_t NucDBMeasurement::AddDependentVariable(NucDBDependentVariable * var)
    // Adding variables to already measurment with existing data.
    if(!var) return -1;
    const TList * datapoints = GetDataPoints();
-   NucDBDataPoint      * p    = 0;
-   NucDBDependentVariable * vcopy = 0;
+   NucDBDataPoint      * p    = nullptr;
+   NucDBDependentVariable * vcopy = nullptr;
    for(int i = 0;i<datapoints->GetEntries();i++) {
       p = (NucDBDataPoint*)datapoints->At(i);
       if(p) {
@@ -841,7 +841,7 @@ NucDBDependentVariable* NucDBMeasurement::GetDependentVariable(const char * name
    //   if( !strcmp( ((NucDBBinnedVariable*)fDependentVariables.At(i))->GetName(),name) ) 
    //      return((NucDBBinnedVariable*)fDependentVariables.At(i));
    //}
-   return(0);
+   return(nullptr);
 }
 //______________________________________________________________________________
 
@@ -893,7 +893,7 @@ NucDBDiscreteVariable* NucDBMeasurement::GetDiscreteVariable(const char * name)
    //   if( !strcmp( ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->GetName(),name) ) 
    //      return((NucDBDiscreteVariable*)fDiscreteVariables.At(i));
    //}
-   return(0);
+   return(nullptr);
 }
 //______________________________________________________________________________
 
@@ -902,8 +902,8 @@ Double_t NucDBMeasurement::GetBinnedVariableMean(const char * name)
    Double_t tot = 0;
    Int_t N = 0;
    const TList * datapoints = GetDataPoints();
-   NucDBDataPoint * p = 0;
-   NucDBBinnedVariable * v = 0;
+   NucDBDataPoint * p = nullptr;
+   NucDBBinnedVariable * v = nullptr;
    for(int i = 0;i<datapoints->GetEntries();i++) {
       p = (NucDBDataPoint*)datapoints->At(i);
       if(p) {
@@ -925,8 +925,8 @@ Double_t NucDBMeasurement::GetBinnedVariableVariance(const char * name)
    Double_t tot = 0;
    Int_t N = 0;
    const TList * datapoints = GetDataPoints();
-   NucDBDataPoint * p = 0;
-   NucDBBinnedVariable * v = 0;
+   NucDBDataPoint * p = nullptr;
+   NucDBBinnedVariable * v = nullptr;
    for(int i = 0;i<datapoints->GetEntries();i++) {
       p = (NucDBDataPoint*)datapoints->At(i);
       if(p) {
@@ -946,8 +946,8 @@ Double_t NucDBMeasurement::GetBinnedVariableVariance(const char * name)
 Double_t NucDBMeasurement::GetBinnedVariableMax(const char * name)
 {
    const TList * datapoints = GetDataPoints();
-   NucDBDataPoint * p       = 0;
-   NucDBBinnedVariable * v  = 0;
+   NucDBDataPoint * p       = nullptr;
+   NucDBBinnedVariable * v  = nullptr;
    double max               = 0;
 
    for(int i = 0;i<datapoints->GetEntries();i++) {
@@ -975,8 +975,8 @@ Double_t NucDBMeasurement::GetBinnedVariableMin(const char * name)
 {
 
    const TList * datapoints = GetDataPoints();
-   NucDBDataPoint * p       = 0;
-   NucDBBinnedVariable * v  = 0;
+   NucDBDataPoint * p       = nullptr;
+   NucDBBinnedVariable * v  = nullptr;
    double min               = 0;
 
    for(int i = 0;i<datapoints->GetEntries();i++) {
@@ -1006,8 +1006,8 @@ Int_t NucDBMeasurement::GetUniqueBinnedVariableValues(const char * name, std::ve
    // Returns the number of points.
    Int_t N                       = 0;
    const TList &datapoints       = GetDataRef();
-   const NucDBDataPoint * p      = 0;
-   const NucDBBinnedVariable * v = 0;
+   const NucDBDataPoint * p      = nullptr;
+   const NucDBBinnedVariable * v = nullptr;
 
    std::vector<double> values;
 
@@ -1052,8 +1052,8 @@ Int_t NucDBMeasurement::GetUniqueBinnedVariableValues(
    // Returns the number of points.
    Int_t N                       = 0;
    const TList &datapoints       = GetDataRef();
-   const NucDBDataPoint * p      = 0;
-   const NucDBBinnedVariable * v = 0;
+   const NucDBDataPoint * p      = nullptr;
+   const NucDBBinnedVariable * v = nullptr;
 
    std::vector<double> values;
 
@@ -1125,9 +1125,9 @@ void NucDBMeasurement::PrintBreakDown(const char * var, int nmax) const
 TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, double offset)
 {
    //if(fGraph) delete fGraph;
-   TGraphErrors        * gr    = 0;
-   NucDBDataPoint      * point = 0;
-   NucDBBinnedVariable * var   = 0;
+   TGraphErrors        * gr    = nullptr;
+   NucDBDataPoint      * point = nullptr;
+   NucDBBinnedVariable * var   = nullptr;
    gr = new TGraphErrors(fNumberOfDataPoints);
    for(int i = 0; i < fNumberOfDataPoints;i++) {
       point = (NucDBDataPoint *) fDataPoints.At(i);
@@ -1160,9 +1160,9 @@ TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, 
 TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, std::function<double(double)> fn, double offset)
 {
    //if(fGraph) delete fGraph;
-   TGraphErrors        * gr    = 0;
-   NucDBDataPoint      * point = 0;
-   NucDBBinnedVariable * var   = 0;
+   TGraphErrors        * gr    = nullptr;
+   NucDBDataPoint      * point = nullptr;
+   NucDBBinnedVariable * var   = nullptr;
    gr = new TGraphErrors(fNumberOfDataPoints);
    for(int i = 0; i < fNumberOfDataPoints;i++) {
       point = (NucDBDataPoint *) fDataPoints.At(i);
@@ -1193,9 +1193,9 @@ TGraphErrors * NucDBMeasurement::BuildSystematicErrorBand(const char * varName, 
 TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName , bool syst_err)
 {
    //if(fGraph) delete fGraph;
-   TGraphErrors        * gr    = 0;
-   NucDBDataPoint      * point = 0;
-   NucDBBinnedVariable * var   = 0;
+   TGraphErrors        * gr    = nullptr;
+   NucDBDataPoint      * point = nullptr;
+   NucDBBinnedVariable * var   = nullptr;
    gr = new TGraphErrors(fNumberOfDataPoints);
    gr->SetName(Form("%sVS%s",GetName(),varName));
    for(int i = 0; i < fNumberOfDataPoints;i++) {
@@ -1232,9 +1232,9 @@ TGraphErrors * NucDBMeasurement::BuildGraph(const char * varName , bool syst_err
 TGraphErrors * NucDBMeasurement::BuildOrderedGraph(const char * varName, bool syst_err)
 {
    //if(fGraph) delete fGraph;
-   TGraphErrors        * gr    = 0;
-   NucDBDataPoint      * point = 0;
-   NucDBBinnedVariable * var   = 0;
+   TGraphErrors        * gr    = nullptr;
+   NucDBDataPoint      * point = nullptr;
+   NucDBBinnedVariable * var   = nullptr;
    gr = new TGraphErrors(fNumberOfDataPoints);
    //gr->SetName(Form("%sVS%s",GetName(),varName));
    for(int i = 0; i < fNumberOfDataPoints; i++) {
@@ -1273,10 +1273,10 @@ TGraphErrors * NucDBMeasurement::BuildOrderedGraph(const char * varName, bool sy
 
 TGraph * NucDBMeasurement::BuildKinematicGraph(const char * var1Name , const char * var2Name )
 {
-   TGraphAsymmErrors        * gr    = 0;
-   NucDBDataPoint      * point = 0;
-   NucDBBinnedVariable * var1  = 0;
-   NucDBBinnedVariable * var2  = 0;
+   TGraphAsymmErrors        * gr    = nullptr;
+   NucDBDataPoint      * point = nullptr;
+   NucDBBinnedVariable * var1  = nullptr;
+   NucDBBinnedVariable * var2  = nullptr;
    gr = new TGraphAsymmErrors(fNumberOfDataPoints);
    gr->SetName(Form("%sVS%s",var1Name,var2Name));
    for(int i = 0; i < fNumberOfDataPoints;i++) {
@@ -1327,10 +1327,10 @@ TMultiGraph * NucDBMeasurement::BuildGraphUnique(
       return mg;
    }
    //if(fGraph) delete fGraph;
-   TGraphErrors        * gr    = 0;
-   NucDBDataPoint      * point = 0;
-   NucDBBinnedVariable * var1   = 0;
-   NucDBBinnedVariable * var2   = 0;
+   TGraphErrors        * gr    = nullptr;
+   NucDBDataPoint      * point = nullptr;
+   NucDBBinnedVariable * var1   = nullptr;
+   NucDBBinnedVariable * var2   = nullptr;
 
    for(int j =0; j< unique_var.size();j++) {
 

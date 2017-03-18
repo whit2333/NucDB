@@ -13,8 +13,7 @@ NucDBErrorBar::NucDBErrorBar(Double_t errp, Double_t errm){
    fTotalError = fErrorPlus + fErrorMinus;
 }
 //_____________________________________________________________________________
-NucDBErrorBar::~NucDBErrorBar(){
-}
+NucDBErrorBar::~NucDBErrorBar()= default;
 //_____________________________________________________________________________
 NucDBErrorBar::NucDBErrorBar(const NucDBErrorBar& v) {
    fTotalError = v.fTotalError;

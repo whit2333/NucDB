@@ -8,16 +8,16 @@
 #include "TGraphAsymmErrors.h"
 
 
-NucDBManager * NucDBManager::fgDBManager = 0;
+NucDBManager * NucDBManager::fgDBManager = nullptr;
 //_____________________________________________________________________________
 
 NucDBManager::NucDBManager(const char * file, Int_t opt) : fFileName(file)
 {
-   fDatabase  = 0;
-   fExperiments  = 0;
-   fPapers       = 0;
-   fMeasurements = 0;
-   fCalculations = 0;
+   fDatabase  = nullptr;
+   fExperiments  = nullptr;
+   fPapers       = nullptr;
+   fMeasurements = nullptr;
+   fCalculations = nullptr;
    fVerbosity = 2;
 
    fi_color  = 0;
@@ -67,7 +67,7 @@ NucDBManager::NucDBManager(const char * file, Int_t opt) : fFileName(file)
 NucDBManager::~NucDBManager(){
       fFile->Write();
       fFile->Close();
-      fgDBManager=0;
+      fgDBManager=nullptr;
 }
 //_____________________________________________________________________________
 
@@ -94,24 +94,24 @@ void NucDBManager::SaveDatabase(){
 //_____________________________________________________________________________
 
 NucDBExperiment * NucDBManager::GetExperiment(const char * expName) {
-      if(!fFile){ Error("GetExperiment"," NO FILE OPENED!!!"); return(0); }
-      NucDBExperiment * exp = 0;
+      if(!fFile){ Error("GetExperiment"," NO FILE OPENED!!!"); return(nullptr); }
+      NucDBExperiment * exp = nullptr;
       exp =  dynamic_cast<NucDBExperiment*>(fExperiments->FindObject(Form("%s",expName)));
       if(!exp){
          //printf(" Experiment Not found\n");
-         exp = 0;
+         exp = nullptr;
       }
       return(exp);
    }
 //_____________________________________________________________________________
 
 NucDBPaper * NucDBManager::GetPaper(const char * name) {
-   if(!fFile){ printf(" NO FILE OPENED!!! \n"); return(0); }
-   NucDBPaper * p = 0;
+   if(!fFile){ printf(" NO FILE OPENED!!! \n"); return(nullptr); }
+   NucDBPaper * p = nullptr;
    p =  dynamic_cast<NucDBPaper*>(fPapers->FindObject(Form(Form("%s",name),p)));
    if(!p){
       printf(" Paper Not found\n");
-      p = 0;
+      p = nullptr;
    }
       return(p);
 }
@@ -223,7 +223,7 @@ void NucDBManager::SaveExperiment(NucDBExperiment * exp) {
 
 void   NucDBManager::AddNewMeasurements(NucDBExperiment * exp){
    TList * ms = exp->GetMeasurements();
-   TObjString * mname = 0;
+   TObjString * mname = nullptr;
    for (int i = 0; i < ms->GetEntries(); i++) {
       NucDBMeasurement * ameas = (NucDBMeasurement *) ms->At(i);
       // find objstring if it exists
@@ -236,10 +236,10 @@ void   NucDBManager::AddNewMeasurements(NucDBExperiment * exp){
 TList * NucDBManager::GetExperiments() {
    if(!fFile) {
       Error("GetExperiments()"," File Not open!");
-      return(0);
+      return(nullptr);
    } else if( !fDatabase ){
       Error("GetExperiments()"," no database ");
-      return(0);
+      return(nullptr);
    } else if( !fExperiments ){
       fExperiments = fDatabase->GetExperiments();
    }
@@ -250,10 +250,10 @@ TList * NucDBManager::GetExperiments() {
 TList * NucDBManager::GetPapers() {
    if(!fFile) {
       Error("GetPapers()"," File Not open!");
-      return(0);
+      return(nullptr);
    } else if( !fDatabase ){
       Error("GetPapers()"," no database ");
-      return(0);
+      return(nullptr);
    } else if( !fPapers ){
       fPapers = fDatabase->GetPapers();
    }

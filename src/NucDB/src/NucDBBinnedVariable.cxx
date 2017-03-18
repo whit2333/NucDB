@@ -6,8 +6,7 @@ NucDBVariable::NucDBVariable(const char*n, const char* t ) : TNamed(n,t)
    fValue = 0.0;
 }
 //_____________________________________________________________________________
-NucDBVariable::~NucDBVariable(){
-}
+NucDBVariable::~NucDBVariable()= default;
 //_____________________________________________________________________________
 void NucDBVariable::Print(Option_t *option) const {
       std::cout << " " << GetName() << " = " << fValue << "\n";
@@ -22,8 +21,7 @@ NucDBDiscreteVariable::NucDBDiscreteVariable(const char* name , const char* titl
    fValue=0;
 }
 //_____________________________________________________________________________
-NucDBDiscreteVariable::~NucDBDiscreteVariable(){
-}
+NucDBDiscreteVariable::~NucDBDiscreteVariable()= default;
 //_____________________________________________________________________________
 
 void NucDBDiscreteVariable::Print(Option_t *option) const {
@@ -52,7 +50,7 @@ NucDBBinnedVariable::NucDBBinnedVariable(
 //_____________________________________________________________________________
 
 NucDBBinnedVariable::~NucDBBinnedVariable()
-{ }
+= default;
 //_____________________________________________________________________________
 
 NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v)

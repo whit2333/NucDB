@@ -134,11 +134,11 @@ namespace NucDB {
    TList * FilterMeasurements(TList * list, NucDBBinnedVariable * var) {
       if(!var) {
          std::cout << "Error null bin variable" << std::endl;
-         return 0;
+         return nullptr;
       }
       if(!list) {
          std::cout << "Error null list" << std::endl;
-         return 0;
+         return nullptr;
       }
       TList * filtered_list = new TList();
       for(unsigned int i = 0; i<list->GetEntries();i++) {
@@ -214,7 +214,7 @@ namespace NucDB {
       // creates a multi graph from a list of measurments
       if(!list) {
          std::cout << "Error null list" << std::endl;
-         return 0;
+         return nullptr;
       }
       NucDBManager * dbman = NucDBManager::GetManager();
       TMultiGraph * mg = new TMultiGraph();
@@ -286,7 +286,7 @@ namespace NucDB {
 
       for(unsigned int i = 0; i<list->GetEntries();i++) {
          NucDBMeasurement * mes = (NucDBMeasurement*)list->At(i);
-         TGraph * gr = 0;
+         TGraph * gr = nullptr;
          if(mg) {
             gr = (TGraph*)(mg->GetListOfGraphs()->At(i));
          }
@@ -331,7 +331,7 @@ namespace NucDB {
       NucDBMeasurement * aMeas = nullptr;
       if(!meas_list) {
          std::cout << "Measurement list is Null" << std::endl;
-         return 0;
+         return nullptr;
       }
       for(int i = 0; i<meas_list->GetEntries();i++) {
          aMeas = (NucDBMeasurement*)meas_list->At(i);
@@ -339,7 +339,7 @@ namespace NucDB {
             return aMeas;
          }
       }
-      return 0;
+      return nullptr;
    }
 //______________________________________________________________________________
 
@@ -353,7 +353,7 @@ namespace NucDB {
             return m;
          }
       }
-      return 0;
+      return nullptr;
    }
 //______________________________________________________________________________
 
@@ -383,10 +383,10 @@ namespace NucDB {
    
    NucDBMeasurement * RemoveExperiment(const char * name, TList * meas_list)
    {
-      NucDBMeasurement * aMeas = 0;
+      NucDBMeasurement * aMeas = nullptr;
       if(!meas_list) {
          std::cout << "Measurement list is Null" << std::endl;
-         return 0;
+         return nullptr;
       }
       for(int i = 0; i<meas_list->GetEntries();i++) {
          aMeas = (NucDBMeasurement*)meas_list->At(i);
@@ -404,10 +404,10 @@ namespace NucDB {
    NucDBMeasurement * FindExperiment(const char * name, TList * meas_list){
       // searches for name in the experinment name measurement
       // returns the first match
-      NucDBMeasurement * aMeas = 0;
+      NucDBMeasurement * aMeas = nullptr;
       if(!meas_list) {
          std::cout << "Measurement list is Null" << std::endl;
-         return 0;
+         return nullptr;
       }
       for(int i = 0; i<meas_list->GetEntries();i++) {
          aMeas = (NucDBMeasurement*)meas_list->At(i);
@@ -417,7 +417,7 @@ namespace NucDB {
             return aMeas;
          }
       }
-      return 0;
+      return nullptr;
    }
 //______________________________________________________________________________
 
@@ -425,11 +425,11 @@ namespace NucDB {
    {
       if(!meas_list) {
          std::cout << "cannot merge: measurement list is Null" << std::endl;
-         return 0;
+         return nullptr;
       }
       if(meas_list->GetEntries() <= 0) {
          std::cout << "cannot merge: measurement list is empty" << std::endl;
-         return 0;
+         return nullptr;
       }
 
       NucDBMeasurement * merged_meas = new NucDBMeasurement(name,name);
@@ -454,14 +454,14 @@ namespace NucDB {
    NucDBDataPoint *  MergeDataPoints(TList * points){
       if(!points) {
          std::cout << "Null points list" << std::endl;
-         return 0;
+         return nullptr;
       }
       if(points->GetEntries() <= 0 ) {
          std::cout << "Empty points list" << std::endl;
-         return 0;
+         return nullptr;
       }
 
-      NucDBDataPoint * mergedPoint = 0;
+      NucDBDataPoint * mergedPoint = nullptr;
       for(unsigned int i = 0; i< points->GetEntries(); i++) {
          NucDBDataPoint * point = (NucDBDataPoint*)points->At(i);
          if(i == 0){

@@ -12,7 +12,7 @@ NucDBPaper::~NucDBPaper(){
 }
 //______________________________________________________________________________
 NucDBCalculation * NucDBPaper::GetCalculation(const char * name) {
-   NucDBCalculation * meas = 0;
+   NucDBCalculation * meas = nullptr;
    for(int i = 0;i<fCalculations.GetEntries();i++) {
       if( !strcmp(((NucDBCalculation *)fCalculations.At(i))->GetName(),name) ) {
          meas = (NucDBCalculation *)fCalculations.At(i) ;

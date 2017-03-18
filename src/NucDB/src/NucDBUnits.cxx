@@ -12,7 +12,7 @@ NucDBUnit::NucDBUnit(const char * name,const char * title)
 //______________________________________________________________________________
 
 NucDBUnit::~NucDBUnit()
-{ }
+= default;
 //______________________________________________________________________________
 
 NucDBUnit& NucDBUnit::operator*=(const NucDBUnit& rhs)

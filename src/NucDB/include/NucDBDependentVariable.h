@@ -70,7 +70,7 @@ class NucDBThetaDV_rad  : public NucDBDependentVariable {
          SetVariable(0,th);
          SetFunc1( &NucDB::Kine::to_radians );
       }
-      virtual ~NucDBThetaDV_rad(){}
+      virtual ~NucDBThetaDV_rad()= default;
 
       ClassDef(NucDBThetaDV_rad,1);
 };
@@ -83,7 +83,7 @@ class NucDBThetaDV_deg  : public NucDBDependentVariable {
          SetVariable(0,th);
          SetFunc1( &NucDB::Kine::to_radians );
       }
-      virtual ~NucDBThetaDV_deg(){}
+      virtual ~NucDBThetaDV_deg()= default;
 
       ClassDef(NucDBThetaDV_deg,1);
 };
@@ -103,7 +103,7 @@ class NucDBInvariantMassDV  : public NucDBDependentVariable {
          SetVariable(1,Q2);
          SetFunc2( &NucDB::Kine::W_xQ2_proton );
       }
-      virtual ~NucDBInvariantMassDV(){}
+      virtual ~NucDBInvariantMassDV()= default;
 
       ClassDef(NucDBInvariantMassDV,1);
 };
@@ -118,7 +118,7 @@ class NucDBInvariantMassDV_Q2nu  : public NucDBDependentVariable {
          SetVariable(1,nu);
          SetFunc2( &NucDB::Kine::W_Q2nu_proton );
       }
-      virtual ~NucDBInvariantMassDV_Q2nu(){}
+      virtual ~NucDBInvariantMassDV_Q2nu()= default;
 
       ClassDef(NucDBInvariantMassDV_Q2nu,1);
 };
@@ -133,7 +133,7 @@ class NucDBW2DV_Q2nu  : public NucDBDependentVariable {
          SetVariable(1,nu);
          SetFunc2( &NucDB::Kine::W2_Q2nu_proton );
       }
-      virtual ~NucDBW2DV_Q2nu(){}
+      virtual ~NucDBW2DV_Q2nu()= default;
 
       ClassDef(NucDBW2DV_Q2nu,1);
 };
@@ -153,7 +153,7 @@ class NucDBPhotonEnergyDV  : public NucDBDependentVariable {
          SetVariable(1,Q2);
          SetFunc2( &NucDB::Kine::nu_xQ2_proton);
       }
-      virtual ~NucDBPhotonEnergyDV(){}
+      virtual ~NucDBPhotonEnergyDV()= default;
 
       ClassDef(NucDBPhotonEnergyDV,1);
 };
@@ -173,7 +173,7 @@ class NucDBxBjorkenDV  : public NucDBDependentVariable {
          SetVariable(1,Q2);
          SetFunc2( &NucDB::Kine::xBjorken_WQsq_proton );
       }
-      virtual ~NucDBxBjorkenDV(){}
+      virtual ~NucDBxBjorkenDV()= default;
 
       ClassDef(NucDBxBjorkenDV,2);
 };
@@ -192,7 +192,7 @@ class NucDBQ2DV_EEpTheta  : public NucDBDependentVariable {
          SetVariable(2,theta);
          SetFunc3( &NucDB::Kine::Qsquared_Etheta );
       }
-      virtual ~NucDBQ2DV_EEpTheta(){}
+      virtual ~NucDBQ2DV_EEpTheta()= default;
 
       ClassDef(NucDBQ2DV_EEpTheta,2);
 };

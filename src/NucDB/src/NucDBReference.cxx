@@ -27,9 +27,7 @@ NucDBReference::NucDBReference(const char * n , const char * t ): TNamed(n,t) {
    fPapers.SetName("Papers");
 }
 //________________________________________________________________________________
-NucDBReference::~NucDBReference(){
-
-}
+NucDBReference::~NucDBReference()= default;
 //________________________________________________________________________________
 
 void NucDBReference::Print(Option_t * opt) const {

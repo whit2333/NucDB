@@ -6,7 +6,7 @@ NucDBDataPoint::NucDBDataPoint(Double_t val, Double_t err, Double_t syst)
    fSortingVariable("x"), fSortingVariable2("Qsquared"),
    fValue(val)
 {
-   fUnit = 0;
+   fUnit = nullptr;
 
    fDiscreteVariables.Clear();
    fVariables.Clear();
@@ -24,7 +24,7 @@ NucDBDataPoint::NucDBDataPoint(Double_t val, Double_t err, Double_t syst)
 //_____________________________________________________________________________
 
 NucDBDataPoint::~NucDBDataPoint()
-{ }
+= default;
 //_____________________________________________________________________________
 
 NucDBDataPoint::NucDBDataPoint(const NucDBDataPoint& v) : TNamed(v)
@@ -36,7 +36,7 @@ NucDBDataPoint::NucDBDataPoint(const NucDBDataPoint& v) : TNamed(v)
    fDataSet   = v.fDataSet;
 
    // not sure if this is the best way to make a deep copy. 
-   TList * alist      = 0;
+   TList * alist      = nullptr;
    alist              = (TList*)v.fDiscreteVariables.Clone();
    fDiscreteVariables.AddAll(alist);
    alist              = (TList*)v.fVariables.Clone();
@@ -64,7 +64,7 @@ NucDBDataPoint& NucDBDataPoint::operator=(const NucDBDataPoint &v)
    fDataSet   = v.fDataSet;
 
    // not sure if this is the best way to make a deep copy. 
-   TList * alist      = 0;
+   TList * alist      = nullptr;
    alist              = (TList*)v.fDiscreteVariables.Clone();
    fDiscreteVariables.AddAll(alist);
    alist              = (TList*)v.fVariables.Clone();
@@ -277,7 +277,7 @@ NucDBBinnedVariable * NucDBDataPoint::GetSortPriority(int p) const
         return aVar;
       }
    }
-   return 0;
+   return nullptr;
 }
 //_____________________________________________________________________________
 
@@ -308,7 +308,7 @@ Int_t   NucDBDataPoint::Compare(const TObject *obj) const
 //______________________________________________________________________________
 
 NucDBBinnedVariable* NucDBDataPoint::FindVariable(const char * name) {
-   NucDBBinnedVariable * avar = 0;
+   NucDBBinnedVariable * avar = nullptr;
    if( !avar ) avar = GetBinVariable(name);
    if( !avar ) avar = GetDependentVariable(name);
    /*   if( !avar ) avar = GetDiscreteVariable(name);*/
@@ -321,7 +321,7 @@ NucDBBinnedVariable* NucDBDataPoint::GetBinVariable(const char * name) const {
       if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
          return((NucDBBinnedVariable*)fBinnedVariables.At(i));
    }
-   return(0);
+   return(nullptr);
 }
 //_____________________________________________________________________________
 
@@ -340,7 +340,7 @@ NucDBDiscreteVariable* NucDBDataPoint::GetDiscreteVariable(const char * name) {
           if( !strcmp( ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->GetName(),name) ) 
              return((NucDBDiscreteVariable*)fDiscreteVariables.At(i));
       }
-      return(0);
+      return(nullptr);
    }
 //_____________________________________________________________________________
 
@@ -359,7 +359,7 @@ NucDBVariable* NucDBDataPoint::GetVariable(const char * name) const {
       if( !strcmp( ((NucDBVariable*)fVariables.At(i))->GetName(),name) ) 
          return((NucDBVariable*)fVariables.At(i));
    }
-   return(0);
+   return(nullptr);
 }
 //_____________________________________________________________________________
 
@@ -381,7 +381,7 @@ NucDBDependentVariable* NucDBDataPoint::GetDependentVariable(const char * name)
       if( !strcmp( var->GetName(),name) ) 
          return(var);
    }
-   return(0);
+   return(nullptr);
 }
 //_____________________________________________________________________________
 
@@ -418,7 +418,7 @@ Int_t NucDBDataPoint::AddDependentVariable(NucDBDependentVariable * var)
 
 void NucDBDataPoint::CalculateDependentVariables()
 {
-   NucDBDependentVariable * var = 0;
+   NucDBDependentVariable * var = nullptr;
    for(int i = 0;i<fBinnedVariables.GetEntries(); i++ ){
       var = dynamic_cast<NucDBDependentVariable*>(fBinnedVariables.At(i));
       if(var) {

@@ -6,7 +6,7 @@ ClassImp(NucDBDependentVariable)
 NucDBDependentVariable::NucDBDependentVariable(const char * n ,const char * t) 
    : NucDBBinnedVariable(n,t) {
       fNDepVars = 2;
-      fFunction = 0;
+      fFunction = nullptr;
       for(int i =0;i<4;i++){
          x[i]     = 0;
          p[i]     = 0;
@@ -15,9 +15,9 @@ NucDBDependentVariable::NucDBDependentVariable(const char * n ,const char * t)
             fVar_limits[i][j] = 0.0;
          }
       }
-      fFunc1 = 0;
-      fFunc2 = 0;
-      fFunc3 = 0;
+      fFunc1 = nullptr;
+      fFunc2 = nullptr;
+      fFunc3 = nullptr;
       //fFunc4 = 0;
    }
 //_____________________________________________________________________________
@@ -45,7 +45,7 @@ NucDBDependentVariable& NucDBDependentVariable::operator=(const NucDBDependentVa
          }
          //if(v.fVars[i]) fVars[i] = new NucDBBinnedVariable(*(v.fVars[i]));
       }
-      TList * alist      = 0;
+      TList * alist      = nullptr;
       alist              = (TList*)v.fVariables.Clone();
       fVariables.AddAll(alist);
       alist              = (TList*)v.fDependentVariableNames.Clone();
@@ -80,10 +80,10 @@ void NucDBDependentVariable::SetVariable(Int_t n, NucDBBinnedVariable * avar ){
 //_____________________________________________________________________________
 
 NucDBBinnedVariable * NucDBDependentVariable::GetVariable(Int_t n ){
-   NucDBBinnedVariable *var = 0;
+   NucDBBinnedVariable *var = nullptr;
    if( n >= fVariables.GetEntries() ) {
       Error("GetVariable","variable index number is too big");
-      return(0);
+      return(nullptr);
    }
    var = (NucDBBinnedVariable *) fVariables.At(n);
    return(var);
@@ -96,14 +96,14 @@ Double_t NucDBDependentVariable::GetValue(){
       return(0.0);
    }
    Double_t res = 0.0;
-   if(fNDepVars ==1 && fFunc1 != 0 ) {
+   if(fNDepVars ==1 && fFunc1 != nullptr ) {
       res = (*fFunc1)(x[0]);
    }
-   if(fNDepVars ==2 && fFunc2 != 0 ) {
+   if(fNDepVars ==2 && fFunc2 != nullptr ) {
       //std::cout << "x[0],x[1] = " << x[0] << "," << x[1] << std::endl;
       res =  (*fFunc2)(x[0],x[1]) ;
    }
-   if(fNDepVars ==3 && fFunc3 != 0 ) {
+   if(fNDepVars ==3 && fFunc3 != nullptr ) {
       //std::cout << "x[] = " << x[0] << "," << x[1]<< "," << x[2] << std::endl;
       res = (*fFunc3)(x[0],x[1],x[2]);
    }
@@ -147,21 +147,21 @@ Double_t   NucDBDependentVariable::FindMaximum(){
 
    // 1 Dim
    for(int i1 = 0; i1 <2;i1++){ 
-      if( fNDepVars == 1 && fFunc1 != 0 ) {
+      if( fNDepVars == 1 && fFunc1 != nullptr ) {
          temp = (*fFunc1)(fVar_limits[0][i1]);
          if( temp > res ) res = temp;
       } else {
 
          // 2 Dim
          for(int i2 = 0; i2 <2;i2++) { 
-            if( fNDepVars ==2 && fFunc2 != 0 ) {
+            if( fNDepVars ==2 && fFunc2 != nullptr ) {
                temp = (*fFunc2)(fVar_limits[0][i1],fVar_limits[1][i2]);
                if( temp > res ) res = temp;
             } else {
 
                // 3 dim
                for(int i3 = 0; i3 <2;i3++){ 
-                  if(fNDepVars ==3 && fFunc3 != 0 ) {
+                  if(fNDepVars ==3 && fFunc3 != nullptr ) {
                      temp = (*fFunc3)(fVar_limits[0][i1],fVar_limits[1][i2],fVar_limits[2][i3]);
                      if( temp > res ) res = temp;
                   } else {
@@ -194,21 +194,21 @@ Double_t   NucDBDependentVariable::FindMinimum(){
 
    // 1 Dim
    for(int i1 = 0; i1 <2;i1++){ 
-      if( fNDepVars == 1 && fFunc1 != 0 ) {
+      if( fNDepVars == 1 && fFunc1 != nullptr ) {
          temp = (*fFunc1)(fVar_limits[0][i1]);
          if( temp < res ) res = temp;
       } else {
 
          // 2 Dim
          for(int i2 = 0; i2 <2;i2++) { 
-            if( fNDepVars ==2 && fFunc2 != 0 ) {
+            if( fNDepVars ==2 && fFunc2 != nullptr ) {
                temp = (*fFunc2)(fVar_limits[0][i1],fVar_limits[1][i2]);
                if( temp < res ) res = temp;
             } else {
 
                // 3 dim
                for(int i3 = 0; i3 <2;i3++){ 
-                  if(fNDepVars ==3 && fFunc3 != 0 ) {
+                  if(fNDepVars ==3 && fFunc3 != nullptr ) {
                      temp = (*fFunc3)(fVar_limits[0][i1],fVar_limits[1][i2],fVar_limits[2][i3]);
                      if( temp < res ) res = temp;
                   } else {

@@ -17,7 +17,7 @@ class NucDBDatabase : public TNamed {
 
    public:
       NucDBDatabase(const char * n ="NucDB-database",const char * t = "NucDB Database") : TNamed(n,t){}
-      virtual ~NucDBDatabase(){}
+      virtual ~NucDBDatabase()= default;
 
       Bool_t IsFolder() const { return kTRUE; }
       void   Browse(TBrowser* b) {
