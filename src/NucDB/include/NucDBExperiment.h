@@ -43,8 +43,9 @@ class NucDBExperiment : public TNamed {
          auto * refs         = new TList();
          NucDBMeasurement * m = nullptr;
          for(int i = 0;i<fMeasurements.GetEntries();i++){
-            m = (NucDBMeasurement*)fMeasurements.At(i);
-            if(m->GetRefs()->GetEntries()>0)refs->AddAll(m->GetRefs());
+            m = dynamic_cast<NucDBMeasurement*>(fMeasurements.At(i));
+            if(m->GetRefs()->GetEntries()>0) {refs->AddAll(m->GetRefs());
+}
          }
          return(refs);
       }

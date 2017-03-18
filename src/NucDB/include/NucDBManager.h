@@ -43,9 +43,9 @@ class NucDBManager : public TObject {
 
       std::string  fFileName = "";
       TFile      * fFile     = nullptr;
-      TDirectory * fExpDir;
-      TDirectory * fPapersDir;
-      TDirectory * fCalcDir;
+      TDirectory * fExpDir{};
+      TDirectory * fPapersDir{};
+      TDirectory * fCalcDir{};
 
       static NucDBManager * fgDBManager;
 
@@ -64,7 +64,8 @@ class NucDBManager : public TObject {
       NucDBManager(const char * file, Int_t opt);
 
       static NucDBManager * GetManager(int opt = 0){
-         if(!fgDBManager) fgDBManager = new NucDBManager(opt);
+         if(!fgDBManager) { fgDBManager = new NucDBManager(opt);
+}
          return(fgDBManager);
       }
 
@@ -119,19 +120,23 @@ class NucDBManager : public TObject {
       TList * GetRefs(); 
 
       Int_t  NextColor() {
-         if( fColors.size() == 0 ) return 1; // black
+         if( fColors.size() == 0 ) { return 1; // black
+}
          // returns next color in list
          Int_t col = fColors[fi_color];
          fi_color++;
-         if( (unsigned int)fi_color == fColors.size() ) fi_color = 0;
+         if( (unsigned int)fi_color == fColors.size() ) { fi_color = 0;
+}
          return col;
       }
       Int_t  NextMarker() {
-         if( fMarkers.size() == 0 ) return 20; // filled circle
+         if( fMarkers.size() == 0 ) { return 20; // filled circle
+}
          // returns next color in list
          Int_t mark = fMarkers[fi_marker];
          fi_marker++;
-         if( (unsigned int)fi_marker == fMarkers.size() ) fi_marker = 0;
+         if( (unsigned int)fi_marker == fMarkers.size() ) { fi_marker = 0;
+}
          return mark;
       }
       void SetMarkers(const std::vector<int> & m) { fMarkers =  m; }

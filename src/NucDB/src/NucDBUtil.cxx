@@ -103,7 +103,8 @@ namespace NucDB {
 
        int a_col = 20+stride*counter + j;
 
-       if(a_col>100) a_col=1;
+       if(a_col>100) { a_col=1;
+}
        res.push_back(a_col);
        counter++;
        if(counter == stride) {
@@ -126,7 +127,7 @@ namespace NucDB {
          return;
       }
       for(unsigned int i = 0; i<list->GetEntries();i++) {
-         auto * mes = (NucDBMeasurement*)list->At(i);
+         auto * mes = dynamic_cast<NucDBMeasurement*>(list->At(i));
          mes->ApplyFilterWithBin(var);
       }
    }
@@ -142,7 +143,7 @@ namespace NucDB {
       }
       auto * filtered_list = new TList();
       for(unsigned int i = 0; i<list->GetEntries();i++) {
-         auto * mes    = (NucDBMeasurement*)list->At(i);
+         auto * mes    = dynamic_cast<NucDBMeasurement*>(list->At(i));
          NucDBMeasurement * meas2  = mes->NewMeasurementWithFilter(var);
          if( meas2->GetNDataPoints() > 0 ) {
             filtered_list->Add(meas2);
@@ -219,7 +220,7 @@ namespace NucDB {
       NucDBManager * dbman = NucDBManager::GetManager();
       auto * mg = new TMultiGraph();
       for(unsigned int i = 0; i<list->GetEntries();i++) {
-         auto * mes = (NucDBMeasurement*)list->At(i);
+         auto * mes = dynamic_cast<NucDBMeasurement*>(list->At(i));
          TGraph * gr = mes->BuildGraph(var);
          if(gr) {
             Int_t color = mes->GetColor();//dbman->NextColor();
@@ -285,10 +286,10 @@ namespace NucDB {
       }
 
       for(unsigned int i = 0; i<list->GetEntries();i++) {
-         auto * mes = (NucDBMeasurement*)list->At(i);
+         auto * mes = dynamic_cast<NucDBMeasurement*>(list->At(i));
          TGraph * gr = nullptr;
          if(mg) {
-            gr = (TGraph*)(mg->GetListOfGraphs()->At(i));
+            gr = dynamic_cast<TGraph*>(mg->GetListOfGraphs()->At(i));
          }
          if(!gr) {
             // just build the default graph for the style TODO: fixe this
@@ -312,7 +313,7 @@ namespace NucDB {
 
       int i = 0;
       for(auto mes : vec) {
-         auto * gr = (TGraph*)(mg->GetListOfGraphs()->At(i));
+         auto * gr = dynamic_cast<TGraph*>(mg->GetListOfGraphs()->At(i));
          if(!gr) {
             // just build the default graph for the style TODO: fixe this
            std::cout << " warning shouldn't be here in NucDB::FillLegend" <<std::endl;
@@ -334,7 +335,7 @@ namespace NucDB {
          return nullptr;
       }
       for(int i = 0; i<meas_list->GetEntries();i++) {
-         aMeas = (NucDBMeasurement*)meas_list->At(i);
+         aMeas = dynamic_cast<NucDBMeasurement*>(meas_list->At(i));
          if( !strcmp(exp_name,aMeas->GetExperimentName()) ) {
             return aMeas;
          }
@@ -389,7 +390,7 @@ namespace NucDB {
          return nullptr;
       }
       for(int i = 0; i<meas_list->GetEntries();i++) {
-         aMeas = (NucDBMeasurement*)meas_list->At(i);
+         aMeas = dynamic_cast<NucDBMeasurement*>(meas_list->At(i));
          std::string n2 = aMeas->GetExperimentName();
          std::size_t found = n2.find(name);
          if (found!=std::string::npos) {
@@ -410,7 +411,7 @@ namespace NucDB {
          return nullptr;
       }
       for(int i = 0; i<meas_list->GetEntries();i++) {
-         aMeas = (NucDBMeasurement*)meas_list->At(i);
+         aMeas = dynamic_cast<NucDBMeasurement*>(meas_list->At(i));
          std::string n2 = aMeas->GetExperimentName();
          std::size_t found = n2.find(name);
          if (found!=std::string::npos) {
@@ -434,8 +435,8 @@ namespace NucDB {
 
       auto * merged_meas = new NucDBMeasurement(name,name);
       for(int i = 0; i<meas_list->GetEntries();i++) {
-         auto * aMeas = (NucDBMeasurement*)meas_list->At(i);
-         merged_meas->AddDataPoints((TList*)aMeas->GetDataPoints()->Clone());
+         auto * aMeas = dynamic_cast<NucDBMeasurement*>(meas_list->At(i));
+         merged_meas->AddDataPoints(dynamic_cast<TList*>(aMeas->GetDataPoints()->Clone()));
       }
       return merged_meas;
    }
@@ -445,7 +446,7 @@ namespace NucDB {
    {
       auto * merged_meas = new NucDBMeasurement(name,name);
       for(auto m : list) {
-         merged_meas->AddDataPoints((TList*)m->GetDataPoints()->Clone());
+         merged_meas->AddDataPoints(dynamic_cast<TList*>(m->GetDataPoints()->Clone()));
       }
       return merged_meas;
    }
@@ -463,7 +464,7 @@ namespace NucDB {
 
       NucDBDataPoint * mergedPoint = nullptr;
       for(unsigned int i = 0; i< points->GetEntries(); i++) {
-         auto * point = (NucDBDataPoint*)points->At(i);
+         auto * point = dynamic_cast<NucDBDataPoint*>(points->At(i));
          if(i == 0){
             mergedPoint = new NucDBDataPoint(*point);
          } else {
@@ -488,7 +489,8 @@ namespace NucDB {
          }
          NucDBBinnedVariable * var2    = point->GetBinVariable(var->GetName());
          if(var2){
-            if ( (*var) == (*var2) ) plist->Add(point);
+            if ( (*var) == (*var2) ) { plist->Add(point);
+}
          }
       }
       return plist;
@@ -535,7 +537,7 @@ namespace NucDB {
       std::vector<NucDBDataPoint*> templist;
       Int_t n1 = list.GetEntries();
       for(int i = 0; i < list.GetEntries();i++) {
-         auto * point = (NucDBDataPoint*)list.At(i);
+         auto * point = dynamic_cast<NucDBDataPoint*>(list.At(i));
          templist.push_back(point);
       }
       //std::sort (templist.begin(), templist.end(), CompareDataPoint );
@@ -581,7 +583,7 @@ namespace NucDB {
    {
      Bool_t addStatus = TH1::AddDirectoryStatus();
      TH1::AddDirectory( kFALSE );
-     auto * res = (TH1*)h->Clone("confidence_interval");
+     auto * res = dynamic_cast<TH1*>(h->Clone("confidence_interval"));
      TH1::AddDirectory(addStatus);
 
      Int_t   xmax = h->GetNbinsX();
@@ -623,7 +625,8 @@ namespace NucDB {
       int    npoints    = coords.size();//NPoints();
       double corrFactor = 1.0;
       bool   norm       = true;
-      if (Chi2 <= 0 || Ndf == 0) norm = false;
+      if (Chi2 <= 0 || Ndf == 0) { norm = false;
+}
       if (norm) {
         corrFactor = TMath::StudentQuantile(0.5 + cl/2, Ndf) * std::sqrt( Chi2/Ndf );
       } else {

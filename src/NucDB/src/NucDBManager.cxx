@@ -123,8 +123,9 @@ TList * NucDBManager::GetMeasurements(const char * measurement)
       auto * measList = new TList();
       measList->Clear();
       for(int i = 0;i<expList->GetEntries();i++) {
-         NucDBMeasurement * aMeas = ((NucDBExperiment*)expList->At(i))->GetMeasurement(measurement);
-         if(aMeas) measList->Add(aMeas);
+         NucDBMeasurement * aMeas = (dynamic_cast<NucDBExperiment*>(expList->At(i)))->GetMeasurement(measurement);
+         if(aMeas) { measList->Add(aMeas);
+}
       }
       return(measList);
 }
@@ -135,7 +136,7 @@ std::vector<NucDBMeasurement*> NucDBManager::GetMeasurements(NucDB::Process proc
    TList * expList = GetExperiments(); 
    std::vector<NucDBMeasurement*> measList;
    for(int i = 0;i<expList->GetEntries();i++) {
-      auto exp = ((NucDBExperiment*)expList->At(i));
+      auto exp = (dynamic_cast<NucDBExperiment*>(expList->At(i)));
       std::vector<NucDBMeasurement*> meass = exp->GetMeasurements(proc);
       for(auto m: meass){
          measList.push_back(m);
@@ -152,8 +153,9 @@ std::vector<NucDBMeasurement*>  NucDBManager::GetAllMeasurements(const char * me
    //TList * measList = new TList();
    //measList->Clear();
    for(int i = 0;i<expList->GetEntries();i++) {
-      NucDBMeasurement * aMeas = ((NucDBExperiment*)expList->At(i))->GetMeasurement(measurement);
-      if(aMeas) measurements.push_back(aMeas);
+      NucDBMeasurement * aMeas = (dynamic_cast<NucDBExperiment*>(expList->At(i)))->GetMeasurement(measurement);
+      if(aMeas) { measurements.push_back(aMeas);
+}
    }
    return(measurements);
 }
@@ -164,12 +166,13 @@ std::vector<NucDBMeasurement*>  NucDBManager::GetAllMeasurements(const char * me
    auto * measList = new TList();
    measList->Clear();
    for(int i = 0; i<papList->GetEntries(); i++) {
-      auto * aPaper = (NucDBPaper*)papList->At(i);
+      auto * aPaper = dynamic_cast<NucDBPaper*>(papList->At(i));
       TList * calcs = aPaper->GetCalculations();
       for(int j = 0; j<calcs->GetEntries(); j++) {
-         auto * aCalc = (NucDBCalculation*)calcs->At(j);
+         auto * aCalc = dynamic_cast<NucDBCalculation*>(calcs->At(j));
          NucDBMeasurement * aMeas = aCalc->GetMeasurement(measurement);
-         if(aMeas) measList->Add(aMeas);
+         if(aMeas) { measList->Add(aMeas);
+}
       }
    }
    return(measList);
@@ -180,7 +183,7 @@ TMultiGraph *      NucDBManager::GetMultiGraph(const char * measurement, const c
    auto * mg = new TMultiGraph();
    TList * meas = GetMeasurements(measurement);
    for(int i = 0 ; i < meas->GetEntries(); i++) {
-      auto * am = (NucDBMeasurement*)meas->At(i);
+      auto * am = dynamic_cast<NucDBMeasurement*>(meas->At(i));
       TGraphErrors * gr = am->BuildGraph(var);
       mg->Add(gr,"p");
    }
@@ -191,7 +194,7 @@ TMultiGraph *      NucDBManager::GetKinematicMultiGraph(const char * measurement
    auto * mg   = new TMultiGraph();
    TList       * meas = GetMeasurements(measurement);
    for(int i = 0 ; i < meas->GetEntries(); i++) {
-      auto * am = (NucDBMeasurement*)meas->At(i);
+      auto * am = dynamic_cast<NucDBMeasurement*>(meas->At(i));
       TGraph * gr = am->BuildKinematicGraph(var1,var2);
       gr->SetFillColorAlpha(kRed,0.3);
       //gROOT->GetColor(40+i)->SetAlpha(1.0);
@@ -212,9 +215,10 @@ void NucDBManager::SavePaper(NucDBPaper * p) {
 void NucDBManager::SaveExperiment(NucDBExperiment * exp) {
       if(!fFile){ printf(" NO FILE OPENED!!! \n"); }
       // Check to see if experiment already exists
-      auto * anexp = (NucDBExperiment*)fExperiments->FindObject(exp->GetName());
+      auto * anexp = dynamic_cast<NucDBExperiment*>(fExperiments->FindObject(exp->GetName()));
       // if it does not, then add it.
-      if(exp != anexp) fExperiments->Add(exp);
+      if(exp != anexp) { fExperiments->Add(exp);
+}
       AddNewMeasurements(exp);
       SaveDatabase();
 
@@ -225,11 +229,12 @@ void   NucDBManager::AddNewMeasurements(NucDBExperiment * exp){
    TList * ms = exp->GetMeasurements();
    TObjString * mname = nullptr;
    for (int i = 0; i < ms->GetEntries(); i++) {
-      auto * ameas = (NucDBMeasurement *) ms->At(i);
+      auto * ameas = dynamic_cast<NucDBMeasurement *>( ms->At(i));
       // find objstring if it exists
-      mname = (TObjString*) fMeasurements->FindObject(ameas->GetName());
+      mname = dynamic_cast<TObjString*>( fMeasurements->FindObject(ameas->GetName()));
       // if there is no measurment by that name, at new objstring
-      if(!mname) fMeasurements->Add(new TObjString(ameas->GetName()));
+      if(!mname) { fMeasurements->Add(new TObjString(ameas->GetName()));
+}
    }
 }
 //_____________________________________________________________________________
@@ -284,23 +289,23 @@ Int_t NucDBManager::ListMeasurementsByExperiment(const char * measurement)  {
    if( !strcmp("",measurement) ) {
       TList * exps = GetExperiments();
       for(int i = 0; i< exps->GetEntries();i++){
-         auto * exp  = (NucDBExperiment*)exps->At(i);
+         auto * exp  = dynamic_cast<NucDBExperiment*>(exps->At(i));
          std::cout << " - " << exp->GetName() << "\n";
          TList * meas = exp->GetMeasurements();
          for(int j = 0; j<  meas->GetEntries();j++){
-            auto * am = (NucDBMeasurement*)(meas->At(j));
+            auto * am = dynamic_cast<NucDBMeasurement*>(meas->At(j));
             std::cout << "   - " << am->GetName() << "\n";
          }
       }
    } else {
       TList * exps = GetExperiments();
       for(int i = 0; i< exps->GetEntries();i++){
-         auto * exp  = (NucDBExperiment*)exps->At(i);
+         auto * exp  = dynamic_cast<NucDBExperiment*>(exps->At(i));
          if(exp->GetMeasurement(measurement) ) {
             std::cout << " - " << exp->GetName() << "\n";
             TList * meas = exp->GetMeasurements();
             for(int j = 0; j<  meas->GetEntries();j++){
-               auto * am = (NucDBMeasurement*)(meas->At(j));
+               auto * am = dynamic_cast<NucDBMeasurement*>(meas->At(j));
                std::cout << "   - " << am->GetName() << "\n";
             }
          }
@@ -317,10 +322,10 @@ Int_t NucDBManager::ListMeasurements(const char * n ) {
    std::pair<std::set<std::string>::iterator,bool> ret;
 
    for(int i=0;i<exps->GetEntries();i++) {
-      auto * anExp = (NucDBExperiment*)exps->At(i);
+      auto * anExp = dynamic_cast<NucDBExperiment*>(exps->At(i));
       TList * expMeas = anExp->GetMeasurements();
       for(int j=0;j<expMeas->GetEntries();j++) {
-         auto * aMeas = (NucDBMeasurement*)expMeas->At(j);
+         auto * aMeas = dynamic_cast<NucDBMeasurement*>(expMeas->At(j));
          TString aName            = aMeas->GetName();
          TString aTitle           = aMeas->GetTitle();
          std::stringstream ss;
@@ -345,7 +350,7 @@ TList * NucDBManager::GetRefs() {
       auto * refs = new TList();
       TList * exps = GetExperiments();
       for(int i=0;i<exps->GetEntries();i++) {
-         auto * anExp = (NucDBExperiment*)exps->At(i);
+         auto * anExp = dynamic_cast<NucDBExperiment*>(exps->At(i));
          refs->AddAll(anExp->GetRefs());
       }
       refs->Print();
@@ -354,17 +359,18 @@ TList * NucDBManager::GetRefs() {
 //_____________________________________________________________________________
 Int_t NucDBManager::ListCalculations(const char * n ) {
    TList * exps = GetPapers();
-   if(!exps) return -1;
+   if(!exps) { return -1;
+}
 
    std::set<std::string>                           Calculations;
    std::set<std::string>::iterator                 it;
    std::pair<std::set<std::string>::iterator,bool> ret;
 
    for(int i=0;i<exps->GetEntries();i++) {
-      auto * anExp = (NucDBPaper*)exps->At(i);
+      auto * anExp = dynamic_cast<NucDBPaper*>(exps->At(i));
       TList * expMeas = anExp->GetCalculations();
       for(int j=0;j<expMeas->GetEntries();j++) {
-         auto * aCalc = (NucDBCalculation*)expMeas->At(j);
+         auto * aCalc = dynamic_cast<NucDBCalculation*>(expMeas->At(j));
          TString aName            = aCalc->GetName();
          TString aTitle           = aCalc->GetTitle();
          std::stringstream ss;

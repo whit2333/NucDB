@@ -68,8 +68,10 @@ NucDBBinnedVariable::NucDBBinnedVariable(const NucDBBinnedVariable& v)
 const NucDBBinnedVariable& NucDBBinnedVariable::operator+=(const NucDBBinnedVariable& v) {
    // a weight for finding where the mean should be.
    double weight = GetBinSize()/v.GetBinSize(); 
-   if(fMinimum > v.GetMinimum() ) fMinimum = v.GetMinimum();
-   if(fMaximum < v.GetMaximum() ) fMaximum = v.GetMaximum();
+   if(fMinimum > v.GetMinimum() ) { fMinimum = v.GetMinimum();
+}
+   if(fMaximum < v.GetMaximum() ) { fMaximum = v.GetMaximum();
+}
    SetBinMaximum(fMaximum);
    SetBinMinimum(fMinimum);
    fMean    = (weight*fMean + v.fMean)/(weight+1);
@@ -123,24 +125,28 @@ bool NucDBBinnedVariable::BinsOverlap(const NucDBBinnedVariable &var) const {
    //       std::cout << " Min " <<  var.GetMinimum() 
    //                 << " <" << fMinimum 
    //                 << " < " << var.GetMaximum() << "\n";
-   if( fMinimum >= var.GetMinimum()  && fMinimum <= var.GetMaximum()) return true;
-   else if(fMaximum >= var.GetMinimum()  && fMaximum <= var.GetMaximum()) return true;
-   else if( var.GetMinimum() >= GetMinimum()  && var.GetMinimum() <= GetMaximum()) return true;
-   else if( var.GetMaximum() >= GetMinimum()  && var.GetMaximum() <= GetMaximum()) return true;
-   else return false;
+   if( fMinimum >= var.GetMinimum()  && fMinimum <= var.GetMaximum()) { return true;
+   } else if(fMaximum >= var.GetMinimum()  && fMaximum <= var.GetMaximum()) { return true;
+   } else if( var.GetMinimum() >= GetMinimum()  && var.GetMinimum() <= GetMaximum()) { return true;
+   } else if( var.GetMaximum() >= GetMinimum()  && var.GetMaximum() <= GetMaximum()) { return true;
+   } else { return false;
+}
 }
 //_____________________________________________________________________________
 
 bool NucDBBinnedVariable::Contains(double v) const {
-   if( ( v >= GetMinimum() ) && ( v < GetMaximum() ) ) return true;
+   if( ( v >= GetMinimum() ) && ( v < GetMaximum() ) ) { return true;
+}
    return false;
 }
 bool NucDBBinnedVariable::IsBelow(double v) const {
-   if( GetMaximum() < v ) return true;
+   if( GetMaximum() < v ) { return true;
+}
    return false;
 }
 bool NucDBBinnedVariable::IsAbove(double v) const {
-   if( GetMinimum() > v ) return true;
+   if( GetMinimum() > v ) { return true;
+}
    return false;
 }
 //_____________________________________________________________________________

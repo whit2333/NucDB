@@ -22,8 +22,8 @@ void NucDBExperiment::AddMeasurement(NucDBMeasurement* meas){
 NucDBMeasurement * NucDBExperiment::GetMeasurement(const char * name) {
    NucDBMeasurement * meas = nullptr;
    for(int i = 0;i<fMeasurements.GetEntries();i++) {
-      if( !strcmp(((NucDBMeasurement *)fMeasurements.At(i))->GetName(),name) ) {
-         meas = (NucDBMeasurement *)fMeasurements.At(i) ;
+      if( !strcmp((dynamic_cast<NucDBMeasurement *>(fMeasurements.At(i)))->GetName(),name) ) {
+         meas = dynamic_cast<NucDBMeasurement *>(fMeasurements.At(i)) ;
          break;
       }
    }
@@ -35,7 +35,7 @@ NucDBMeasurement * NucDBExperiment::GetMeasurement(const char * name) {
 std::vector<NucDBMeasurement*> NucDBExperiment::GetMeasurements(NucDB::Process proc) {
    std::vector<NucDBMeasurement*> measList;
    for(int i = 0;i<fMeasurements.GetEntries();i++) {
-      auto* meas = (NucDBMeasurement *)fMeasurements.At(i);
+      auto* meas = dynamic_cast<NucDBMeasurement *>(fMeasurements.At(i));
       if( meas->IsProcess(proc) ) {
          measList.push_back(meas);
       }
@@ -49,7 +49,7 @@ void NucDBExperiment::PlotMeasurements(const char * var ){
    c1->Divide(2,fMeasurements.GetEntries()/2);
    for(int i =0; i<fMeasurements.GetEntries();i++) {
       c1->cd(i+1);
-      TGraph * gr = ((NucDBMeasurement*)fMeasurements.At(i))->BuildGraph(var);
+      TGraph * gr = (dynamic_cast<NucDBMeasurement*>(fMeasurements.At(i)))->BuildGraph(var);
       gr->Draw("ap");
    }
 }
@@ -61,8 +61,9 @@ void NucDBExperiment::Print(Option_t * opt) const {
    std::cout << "=============================================" << std::endl;;
    //std::cout << "  title = " << GetTitle() << "\n";
    //std::cout << "+++++ Measurements +++++\n";
-   for(int i =0; i<fMeasurements.GetEntries();i++)
-      ((NucDBMeasurement*)fMeasurements.At(i))->Print(opt);
+   for(int i =0; i<fMeasurements.GetEntries();i++) {
+      (dynamic_cast<NucDBMeasurement*>(fMeasurements.At(i)))->Print(opt);
+}
 }
 //______________________________________________________________________________
 void NucDBExperiment::PrintRefs(Option_t * opt ) {

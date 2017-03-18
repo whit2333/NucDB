@@ -14,12 +14,13 @@ NucDBPaper::~NucDBPaper(){
 NucDBCalculation * NucDBPaper::GetCalculation(const char * name) {
    NucDBCalculation * meas = nullptr;
    for(int i = 0;i<fCalculations.GetEntries();i++) {
-      if( !strcmp(((NucDBCalculation *)fCalculations.At(i))->GetName(),name) ) {
-         meas = (NucDBCalculation *)fCalculations.At(i) ;
+      if( !strcmp((dynamic_cast<NucDBCalculation *>(fCalculations.At(i)))->GetName(),name) ) {
+         meas = dynamic_cast<NucDBCalculation *>(fCalculations.At(i)) ;
          break;
       }
    }
-   if(!meas) std::cout << " Calculation named " << name << " NOT FOUND!\n";
+   if(!meas) { std::cout << " Calculation named " << name << " NOT FOUND!\n";
+}
    return(meas);
 }
 //______________________________________________________________________________

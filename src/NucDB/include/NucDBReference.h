@@ -52,7 +52,7 @@ class NucDBReference : public TNamed {
       void PrintComments() const {
          TString prefix = " o ";
          for(int i = 0; i< fComments.GetEntries();i++){
-            auto * comment = (TObjString*)fComments.At(i);
+            auto * comment = dynamic_cast<TObjString*>(fComments.At(i));
             TString wrapped = prefix;
             wrapped += comment->String();
             wrapped = wordWrap(wrapped,50);

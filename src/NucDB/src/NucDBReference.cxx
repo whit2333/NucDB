@@ -5,8 +5,9 @@ TString wordWrap( TString s, size_t width ) {
    size_t curWidth = width;
    while( curWidth < str.length() ) {
       std::string::size_type spacePos = str.rfind( ' ', curWidth );
-      if( spacePos == std::string::npos )
+      if( spacePos == std::string::npos ) {
          spacePos = str.find( ' ', curWidth );
+}
       if( spacePos != std::string::npos ) {
          str[ spacePos ] = '\n';
          curWidth = spacePos + width + 1;
@@ -38,7 +39,8 @@ void NucDBReference::Print(Option_t * opt) const {
    std::cout << "          URL : " << fURL.Data() << std::endl;
    std::cout << "  Description : " << fDescription.Data() << std::endl;
    std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-   if(printComments) PrintComments();
+   if(printComments) { PrintComments();
+}
    fPapers.Print(opt);
 }
 //________________________________________________________________________________

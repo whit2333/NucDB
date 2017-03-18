@@ -46,9 +46,9 @@ NucDBDependentVariable& NucDBDependentVariable::operator=(const NucDBDependentVa
          //if(v.fVars[i]) fVars[i] = new NucDBBinnedVariable(*(v.fVars[i]));
       }
       TList * alist      = nullptr;
-      alist              = (TList*)v.fVariables.Clone();
+      alist              = dynamic_cast<TList*>(v.fVariables.Clone());
       fVariables.AddAll(alist);
-      alist              = (TList*)v.fDependentVariableNames.Clone();
+      alist              = dynamic_cast<TList*>(v.fDependentVariableNames.Clone());
       fDependentVariableNames.AddAll(alist);
       fFunc1 = v.fFunc1;
       fFunc2 = v.fFunc2;
@@ -85,7 +85,7 @@ NucDBBinnedVariable * NucDBDependentVariable::GetVariable(Int_t n ){
       Error("GetVariable","variable index number is too big");
       return(nullptr);
    }
-   var = (NucDBBinnedVariable *) fVariables.At(n);
+   var = dynamic_cast<NucDBBinnedVariable *>( fVariables.At(n));
    return(var);
 }
 //_____________________________________________________________________________
@@ -149,21 +149,24 @@ Double_t   NucDBDependentVariable::FindMaximum(){
    for(int i1 = 0; i1 <2;i1++){ 
       if( fNDepVars == 1 && fFunc1 != nullptr ) {
          temp = (*fFunc1)(fVar_limits[0][i1]);
-         if( temp > res ) res = temp;
+         if( temp > res ) { res = temp;
+}
       } else {
 
          // 2 Dim
          for(int i2 = 0; i2 <2;i2++) { 
             if( fNDepVars ==2 && fFunc2 != nullptr ) {
                temp = (*fFunc2)(fVar_limits[0][i1],fVar_limits[1][i2]);
-               if( temp > res ) res = temp;
+               if( temp > res ) { res = temp;
+}
             } else {
 
                // 3 dim
                for(int i3 = 0; i3 <2;i3++){ 
                   if(fNDepVars ==3 && fFunc3 != nullptr ) {
                      temp = (*fFunc3)(fVar_limits[0][i1],fVar_limits[1][i2],fVar_limits[2][i3]);
-                     if( temp > res ) res = temp;
+                     if( temp > res ) { res = temp;
+}
                   } else {
 
                      // 4 Dim ... and that is it
@@ -196,21 +199,24 @@ Double_t   NucDBDependentVariable::FindMinimum(){
    for(int i1 = 0; i1 <2;i1++){ 
       if( fNDepVars == 1 && fFunc1 != nullptr ) {
          temp = (*fFunc1)(fVar_limits[0][i1]);
-         if( temp < res ) res = temp;
+         if( temp < res ) { res = temp;
+}
       } else {
 
          // 2 Dim
          for(int i2 = 0; i2 <2;i2++) { 
             if( fNDepVars ==2 && fFunc2 != nullptr ) {
                temp = (*fFunc2)(fVar_limits[0][i1],fVar_limits[1][i2]);
-               if( temp < res ) res = temp;
+               if( temp < res ) { res = temp;
+}
             } else {
 
                // 3 dim
                for(int i3 = 0; i3 <2;i3++){ 
                   if(fNDepVars ==3 && fFunc3 != nullptr ) {
                      temp = (*fFunc3)(fVar_limits[0][i1],fVar_limits[1][i2],fVar_limits[2][i3]);
-                     if( temp < res ) res = temp;
+                     if( temp < res ) { res = temp;
+}
                   } else {
 
                      // 4 Dim ... and that is it

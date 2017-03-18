@@ -40,9 +40,11 @@ const NucDBErrorBar& NucDBErrorBar::operator+=(const NucDBErrorBar &v){
    // - Use the mean asymmetry to get the plus and minus errors  
 
    double etot1 = fErrorPlus   + fErrorMinus;
-   if(etot1==0) etot1 = 1.0e-20;
+   if(etot1==0) { etot1 = 1.0e-20;
+}
    double etot2 = v.fErrorPlus + v.fErrorMinus;
-   if(etot2==0) etot2 = 1.0e-20;
+   if(etot2==0) { etot2 = 1.0e-20;
+}
    double eA1 = (fErrorPlus-fErrorMinus)/(etot1);
    double eA2 = (v.fErrorPlus-v.fErrorMinus)/(etot2);
    double eAavg = (eA1/TMath::Power(etot1/2.0,2.0) + eA2/TMath::Power(etot2/2.0,2.0))/

@@ -33,12 +33,13 @@ class NucDBCalculation : public TNamed {
       NucDBMeasurement * GetMeasurement(const char * name) {
          NucDBMeasurement * meas = nullptr;
          for(int i = 0;i<fMeasurements.GetEntries();i++) {
-            if( !strcmp(((NucDBMeasurement *)fMeasurements.At(i))->GetName(),name) ) {
-               meas = (NucDBMeasurement *)fMeasurements.At(i) ;
+            if( !strcmp((dynamic_cast<NucDBMeasurement *>(fMeasurements.At(i)))->GetName(),name) ) {
+               meas = dynamic_cast<NucDBMeasurement *>(fMeasurements.At(i)) ;
                break;
             }
          }
-         if(!meas) std::cout << " Calculation named " << name << " NOT FOUND!\n";
+         if(!meas) { std::cout << " Calculation named " << name << " NOT FOUND!\n";
+}
          return(meas);
       }
 
@@ -52,8 +53,10 @@ class NucDBCalculation : public TNamed {
 
    public:
       void AddMeasurement(NucDBMeasurement* meas){
-         if(meas) meas->SetExperimentName(GetName());
-         if(meas) fMeasurements.Add(meas);
+         if(meas) { meas->SetExperimentName(GetName());
+}
+         if(meas) { fMeasurements.Add(meas);
+}
       }
 
       void ClearMeasurements() {

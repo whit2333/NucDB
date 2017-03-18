@@ -26,12 +26,12 @@ class NucDBDependentVariable : public NucDBBinnedVariable {
       TList                 fDependentVariableNames;
 
    protected:
-      Int_t                 fNDepVars;
-      Double_t              x[4];      //
-      Double_t              fVar_limits[4][2];
+      Int_t                 fNDepVars{};
+      Double_t              x[4]{};      //
+      Double_t              fVar_limits[4][2]{};
       //NucDBBinnedVariable * fVars[4];  //->
-      Double_t              p[4];      //
-      TF1 *                 fFunction; //!
+      Double_t              p[4]{};      //
+      TF1 *                 fFunction{}; //!
 
 
    public :
@@ -55,9 +55,9 @@ class NucDBDependentVariable : public NucDBBinnedVariable {
       void                  SetFunc2(double (*pt2func)(double,double)){ fFunc2 = pt2func;}
       void                  SetFunc3(double (*pt2func)(double,double,double)){ fFunc3 = pt2func;}
 
-      double              (*fFunc1) (double);  //->
-      double              (*fFunc2) (double,double); //->
-      double              (*fFunc3) (double,double,double); //->
+      double              (*fFunc1) (double){};  //->
+      double              (*fFunc2) (double,double){}; //->
+      double              (*fFunc3) (double,double,double){}; //->
 
       ClassDef(NucDBDependentVariable,2)
 };

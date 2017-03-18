@@ -37,11 +37,11 @@ NucDBDataPoint::NucDBDataPoint(const NucDBDataPoint& v) : TNamed(v)
 
    // not sure if this is the best way to make a deep copy. 
    TList * alist      = nullptr;
-   alist              = (TList*)v.fDiscreteVariables.Clone();
+   alist              = dynamic_cast<TList*>(v.fDiscreteVariables.Clone());
    fDiscreteVariables.AddAll(alist);
-   alist              = (TList*)v.fVariables.Clone();
+   alist              = dynamic_cast<TList*>(v.fVariables.Clone());
    fVariables.AddAll(alist);
-   alist              = (TList*)v.fBinnedVariables.Clone();
+   alist              = dynamic_cast<TList*>(v.fBinnedVariables.Clone());
    fBinnedVariables.AddAll(alist);
 
    fSystematicError   = v.fSystematicError;
@@ -55,7 +55,8 @@ NucDBDataPoint::NucDBDataPoint(const NucDBDataPoint& v) : TNamed(v)
 
 NucDBDataPoint& NucDBDataPoint::operator=(const NucDBDataPoint &v)
 {
-   if (this == &v) return *this; 
+   if (this == &v) { return *this; 
+}
 
    fUnit      = v.fUnit;
    fValue     = v.fValue;
@@ -65,11 +66,11 @@ NucDBDataPoint& NucDBDataPoint::operator=(const NucDBDataPoint &v)
 
    // not sure if this is the best way to make a deep copy. 
    TList * alist      = nullptr;
-   alist              = (TList*)v.fDiscreteVariables.Clone();
+   alist              = dynamic_cast<TList*>(v.fDiscreteVariables.Clone());
    fDiscreteVariables.AddAll(alist);
-   alist              = (TList*)v.fVariables.Clone();
+   alist              = dynamic_cast<TList*>(v.fVariables.Clone());
    fVariables.AddAll(alist);
-   alist              = (TList*)v.fBinnedVariables.Clone();
+   alist              = dynamic_cast<TList*>(v.fBinnedVariables.Clone());
    fBinnedVariables.AddAll(alist);
 
    fSystematicError   = v.fSystematicError;
@@ -104,7 +105,7 @@ const NucDBDataPoint& NucDBDataPoint::operator+=(const NucDBDataPoint &v)
 
    // Merge the bins
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
-      auto* binVar1 = (NucDBBinnedVariable*)fBinnedVariables.At(i); 
+      auto* binVar1 = dynamic_cast<NucDBBinnedVariable*>(fBinnedVariables.At(i)); 
       NucDBBinnedVariable* binVar2 = v.GetBinVariable(binVar1->GetName()); 
       if(!binVar2){
          Error("NucDBDataPoint::operator+=","Could not find matching bin variable %s",binVar1->GetName());
@@ -141,7 +142,7 @@ const NucDBDataPoint& NucDBDataPoint::operator-=(const NucDBDataPoint &v)
 
    // Merge the bins
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
-      auto* binVar1 = (NucDBBinnedVariable*)fBinnedVariables.At(i); 
+      auto* binVar1 = dynamic_cast<NucDBBinnedVariable*>(fBinnedVariables.At(i)); 
       NucDBBinnedVariable* binVar2 = v.GetBinVariable(binVar1->GetName()); 
       if(!binVar2){
          Error("NucDBDataPoint::operator-=","Could not find matching bin variable");
@@ -179,10 +180,10 @@ void NucDBDataPoint::Print(Option_t * opt) const
              << " +- " << GetSystError().GetError() << "(sys) ";
    std::cout << " dataset(" << fDataSet << ")\n";
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
-      ((NucDBBinnedVariable*)fBinnedVariables.At(i))->Print(); 
+      (dynamic_cast<NucDBBinnedVariable*>(fBinnedVariables.At(i)))->Print(); 
    }
    for(int i=0; i<fDiscreteVariables.GetEntries();i++) {
-      ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->Print(); 
+      (dynamic_cast<NucDBDiscreteVariable*>(fDiscreteVariables.At(i)))->Print(); 
    }
    for(int i=0; i<fVariables.GetEntries();i++) {
       //((NucDBVariable*)fVariables.At(i))->Print(); 
@@ -200,7 +201,8 @@ bool   NucDBDataPoint::operator==(const NucDBDataPoint & rhs) const
    }
    double a0 = var1->GetMean();
    double a1 = var2->GetMean();
-   if( a0 != a1 ) return false; 
+   if( a0 != a1 ) { return false; 
+}
 
    //NucDBBinnedVariable * var3  = GetBinVariable(GetSortingVariable2());
    //NucDBBinnedVariable * var4  = rhs.GetBinVariable(GetSortingVariable2());
@@ -256,8 +258,10 @@ bool   NucDBDataPoint::operator>(const NucDBDataPoint & rhs) const
 
 bool   NucDBDataPoint::operator<=(const NucDBDataPoint & rhs) const
 { 
-   if( ((*this) == rhs) )  return true;
-   if( ((*this) <  rhs) )  return true;
+   if( ((*this) == rhs) ) {  return true;
+}
+   if( ((*this) <  rhs) ) {  return true;
+}
    return false;
 }
 //_____________________________________________________________________________
@@ -272,7 +276,7 @@ NucDBBinnedVariable * NucDBDataPoint::GetSortPriority(int p) const
 {
    // returns the first binned variable found with sort priority p.
    for(int i = 0; i<fBinnedVariables.GetEntries(); i++) {
-      NucDBBinnedVariable* aVar = ((NucDBBinnedVariable*)fBinnedVariables.At(i));
+      NucDBBinnedVariable* aVar = (dynamic_cast<NucDBBinnedVariable*>(fBinnedVariables.At(i)));
       if( aVar->GetSortPriority() == p) {
         return aVar;
       }
@@ -284,7 +288,7 @@ NucDBBinnedVariable * NucDBDataPoint::GetSortPriority(int p) const
 void NucDBDataPoint::SetSortPriorities(const std::vector<std::string> & names)
 {
    for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
-      ((NucDBBinnedVariable*)fBinnedVariables.At(i))->SetSortPriority(-1);
+      (dynamic_cast<NucDBBinnedVariable*>(fBinnedVariables.At(i)))->SetSortPriority(-1);
    }
    fNSortVariables = names.size();
    int n_sort = fNSortVariables - 1;
@@ -300,17 +304,21 @@ void NucDBDataPoint::SetSortPriorities(const std::vector<std::string> & names)
 
 Int_t   NucDBDataPoint::Compare(const TObject *obj) const
 { 
-   auto * dbobj = (NucDBDataPoint*)obj; 
-   if( (*this) > (*dbobj) ) return 1;
-   if( (*this) < (*dbobj) ) return -1;
+   auto * dbobj = dynamic_cast<const NucDBDataPoint*>(obj); 
+   if( (*this) > (*dbobj) ) { return 1;
+}
+   if( (*this) < (*dbobj) ) { return -1;
+}
    return 0;
 }
 //______________________________________________________________________________
 
 NucDBBinnedVariable* NucDBDataPoint::FindVariable(const char * name) {
    NucDBBinnedVariable * avar = nullptr;
-   if( !avar ) avar = GetBinVariable(name);
-   if( !avar ) avar = GetDependentVariable(name);
+   if( !avar ) { avar = GetBinVariable(name);
+}
+   if( !avar ) { avar = GetDependentVariable(name);
+}
    /*   if( !avar ) avar = GetDiscreteVariable(name);*/
    return(avar);
 }
@@ -318,8 +326,9 @@ NucDBBinnedVariable* NucDBDataPoint::FindVariable(const char * name) {
 
 NucDBBinnedVariable* NucDBDataPoint::GetBinVariable(const char * name) const {
    for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
-      if( !strcmp( ((NucDBBinnedVariable*)fBinnedVariables.At(i))->GetName(),name) ) 
-         return((NucDBBinnedVariable*)fBinnedVariables.At(i));
+      if( !strcmp( (dynamic_cast<NucDBBinnedVariable*>(fBinnedVariables.At(i)))->GetName(),name) ) { 
+         return(dynamic_cast<NucDBBinnedVariable*>(fBinnedVariables.At(i)));
+}
    }
    return(nullptr);
 }
@@ -337,8 +346,9 @@ void NucDBDataPoint::AddBinVariable(NucDBBinnedVariable * var) {
 
 NucDBDiscreteVariable* NucDBDataPoint::GetDiscreteVariable(const char * name) {
       for(int i = 0;i<fDiscreteVariables.GetEntries();i++) {
-          if( !strcmp( ((NucDBDiscreteVariable*)fDiscreteVariables.At(i))->GetName(),name) ) 
-             return((NucDBDiscreteVariable*)fDiscreteVariables.At(i));
+          if( !strcmp( (dynamic_cast<NucDBDiscreteVariable*>(fDiscreteVariables.At(i)))->GetName(),name) ) { 
+             return(dynamic_cast<NucDBDiscreteVariable*>(fDiscreteVariables.At(i)));
+}
       }
       return(nullptr);
    }
@@ -356,8 +366,9 @@ void NucDBDataPoint::AddDiscreteVariable(NucDBDiscreteVariable * var) {
 
 NucDBVariable* NucDBDataPoint::GetVariable(const char * name) const {
    for(int i = 0;i<fVariables.GetEntries();i++) {
-      if( !strcmp( ((NucDBVariable*)fVariables.At(i))->GetName(),name) ) 
-         return((NucDBVariable*)fVariables.At(i));
+      if( !strcmp( (dynamic_cast<NucDBVariable*>(fVariables.At(i)))->GetName(),name) ) { 
+         return(dynamic_cast<NucDBVariable*>(fVariables.At(i)));
+}
    }
    return(nullptr);
 }
@@ -377,9 +388,11 @@ NucDBDependentVariable* NucDBDataPoint::GetDependentVariable(const char * name)
 {
    for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
       auto* var = dynamic_cast<NucDBDependentVariable*>(fBinnedVariables.At(i));
-      if(!var) continue;
-      if( !strcmp( var->GetName(),name) ) 
+      if(!var) { continue;
+}
+      if( !strcmp( var->GetName(),name) ) { 
          return(var);
+}
    }
    return(nullptr);
 }
@@ -394,7 +407,8 @@ Int_t NucDBDataPoint::AddDependentVariable(NucDBDependentVariable * var)
          NucDBBinnedVariable * v    = var->GetVariable(j);
          if(v) {
             NucDBBinnedVariable * vdat = GetBinVariable(v->GetName());
-            if(!vdat) vdat = (NucDBBinnedVariable*)GetDependentVariable(v->GetName());
+            if(!vdat) { vdat = (NucDBBinnedVariable*)GetDependentVariable(v->GetName());
+}
             if(vdat){
                var->SetVariable(j,vdat);
             } else {

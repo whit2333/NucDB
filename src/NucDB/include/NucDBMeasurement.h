@@ -77,7 +77,7 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
       void PrintComments() const {
          TString prefix = " o ";
          for(int i = 0; i< fComments.GetEntries();i++){
-            auto * comment = (TObjString*)fComments.At(i);
+            auto * comment = dynamic_cast<TObjString*>(fComments.At(i));
             TString wrapped = prefix;
             wrapped += comment->String();
             wrapped = wordWrap(wrapped,50);
@@ -230,7 +230,7 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
 
       TList * GetDataPoints() {return(&fDataPoints);}
 
-      NucDBDataPoint * GetDataPoint(int i){return( (NucDBDataPoint*)fDataPoints.At(i) );}
+      NucDBDataPoint * GetDataPoint(int i){return( dynamic_cast<NucDBDataPoint*>(fDataPoints.At(i)) );}
 
       const TList& GetDataRef() const { return(fDataPoints);}
 

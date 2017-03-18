@@ -68,8 +68,8 @@ class NucDBInverseUnit : public NucDBUnit {
     virtual ~NucDBInverseUnit()= default;
 
     void SetInvertedUnit(NucDBUnit * unit){
-      if(!unit) printf(" Null unit to be inverted\n");
-      else {
+      if(!unit) { printf(" Null unit to be inverted\n");
+      } else {
         SetNameTitle(Form("1/%s",unit->GetName()),Form("1/%s",unit->GetTitle()));
         fConversionFactor = 1.0/unit->GetConversionFactor();
       }

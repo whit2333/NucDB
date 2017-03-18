@@ -116,7 +116,7 @@ class NucDBBinnedVariable : public TNamed {
       Double_t  fMaximum; // bin's maximum edge
       Double_t  fMean;    // Mean value (not always the center);
       Double_t  fAverage; // Bin center TODO: change name 
-      Double_t  fCenter; // Bin center TODO: change name 
+      Double_t  fCenter{}; // Bin center TODO: change name 
       NucDBUnit fUnit;
 
       Int_t     fSortPriority;

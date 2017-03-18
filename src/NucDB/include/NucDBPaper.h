@@ -67,8 +67,9 @@ class NucDBPaper : public TNamed {
       void Print(Option_t * opt = "") const {
          std::cout << " Paper : " << GetName()  << std::endl;
          std::cout << "         " << GetTitle() << std::endl;
-         for(int i =0; i<fCalculations.GetEntries();i++)
-            ((NucDBCalculation*)fCalculations.At(i))->Print(opt);
+         for(int i =0; i<fCalculations.GetEntries();i++) {
+            (dynamic_cast<NucDBCalculation*>(fCalculations.At(i)))->Print(opt);
+}
       }
 
       TList * GetCalculations(){ return(&fCalculations); }

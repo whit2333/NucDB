@@ -28,7 +28,8 @@
       int    npoints    = coords.size();//NPoints();
       double corrFactor = 1.0;
       bool   norm       = true;
-      if (Chi2 <= 0 || Ndf == 0) norm = false;
+      if (Chi2 <= 0 || Ndf == 0) { norm = false;
+}
       if (norm) {
         corrFactor = TMath::StudentQuantile(0.5 + cl/2, Ndf) * std::sqrt( Chi2/Ndf );
       } else {
@@ -83,7 +84,7 @@
     {
       Bool_t addStatus = TH1::AddDirectoryStatus();
       TH1::AddDirectory( kFALSE );
-      auto * res = (TH1*)h->Clone("confidence_interval");
+      auto * res = dynamic_cast<TH1*>(h->Clone("confidence_interval"));
       TH1::AddDirectory(addStatus);
 
       Int_t   xmax = h->GetNbinsX();

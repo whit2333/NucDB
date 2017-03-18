@@ -47,7 +47,8 @@ namespace NucDB{
 
       double W_Q2nu(double Q2, double nu, double M  ){
          double W2 = W2_Q2nu(Q2,nu,M);
-         if(W2<0.0) return(0.0);
+         if(W2<0.0) { return(0.0);
+}
          return( TMath::Sqrt( W2 ) );
       }
       double W_Q2nu_proton(double Q2, double nu) { return(W_Q2nu(Q2,nu)); }
@@ -59,7 +60,8 @@ namespace NucDB{
 
       double W_xQ2(double x, double Q2, double M  ){
          double W2 = W2_xQ2(x,Q2,M);
-         if(W2<0.0) return(0.0);
+         if(W2<0.0) { return(0.0);
+}
          return(TMath::Sqrt(W2 ) );
       }
       double W_xQ2_proton(double x, double Q2){ return(W_xQ2(x,Q2)); }
