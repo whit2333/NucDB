@@ -1,0 +1,61 @@
+#: table_doi: 10.17182/hepdata.27033.v1/t2
+#: name: Table 2
+#: description: Values of A2 and X*G2 from proton and deuterium target data at mean electron scattering angle of 5.5 degrees and incident energy 29.1 GeV. Errors shown are statistical only.
+
+#: data_file: Table2.yaml
+#: keyword reactions: E- DEUT --> E- X | E- P --> E- X
+#: keyword observables: A2 | G2
+#: keyword phrases: Inclusive | Spin Dependent Structure Function | Virtual Photon Asymmetry | Electron production | Neutral Current | Deep Inelastic Scattering
+#: keyword cmenergies: 7.448
+#: RE,E- P --> E- X
+#: THETA(P=3) [deg],5.5
+#: E(P=1) [GeV],29.1
+#: SQRT(S) [GeV],7.448
+'X','MEAN(NAME=Q**2) [GEV**2]','A2','error +','error -'
+0.061,2.7,0.033,0.036,-0.036
+0.098,3.5,0.029,0.009,-0.009
+0.155,4.4,0.02,0.008,-0.008
+0.245,5.3,0.042,0.011,-0.011
+0.38,6.1,0.035,0.019,-0.019
+0.58,6.7,0.107,0.045,-0.045
+0.78,7.0,-0.131,0.13,-0.13
+
+#: SYS,0.0016-0.0012*X////
+#: RE,E- P --> E- X
+#: THETA(P=3) [deg],5.5
+#: E(P=1) [GeV],29.1
+#: SQRT(S) [GeV],7.448
+'X','MEAN(NAME=Q**2) [GEV**2]','X*G2','error +','error -'
+0.061,2.7,0.045,0.061,-0.061
+0.098,3.5,0.019,0.013,-0.013
+0.155,4.4,-0.017,0.009,-0.009
+0.245,5.3,-0.021,0.008,-0.008
+0.38,6.1,-0.043,0.007,-0.007
+0.58,6.7,-0.02,0.006,-0.006
+0.78,7.0,-0.012,0.003,-0.003
+
+#: RE,E- DEUT --> E- X
+#: E(P=1) [GeV],29.1
+#: THETA(P=3) [deg],5.5
+'X','MEAN(NAME=Q**2) [GEV**2]','A2','error +','error -'
+0.061,2.7,0.059,0.052,-0.052
+0.098,3.5,0.0,0.014,-0.014
+0.155,4.4,0.024,0.012,-0.012
+0.245,5.3,0.037,0.017,-0.017
+0.38,6.1,0.086,0.032,-0.032
+0.58,6.7,0.137,0.082,-0.082
+0.78,7.0,0.444,0.232,-0.232
+
+#: SYS,0.0009-0.0009*X////
+#: RE,E- DEUT --> E- X
+#: E(P=1) [GeV],29.1
+#: THETA(P=3) [deg],5.5
+'X','MEAN(NAME=Q**2) [GEV**2]','X*G2','error +','error -'
+0.061,2.7,0.094,0.084,-0.084
+0.098,3.5,-0.009,0.018,-0.018
+0.155,4.4,0.012,0.012,-0.012
+0.245,5.3,0.0,0.011,-0.011
+0.38,6.1,0.002,0.01,-0.01
+0.58,6.7,-0.004,0.008,-0.008
+0.78,7.0,0.003,0.004,-0.004
+
