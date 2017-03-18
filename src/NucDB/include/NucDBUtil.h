@@ -124,7 +124,7 @@ namespace NucDB {
       int n = l->GetEntries();
       l->SetOwner(false);
       for(int i=0; i<n; i++){
-        T v = (T)l->At(i);
+        auto v = (T)l->At(i);
         result.push_back(v);
       }
       return result;
@@ -133,7 +133,7 @@ namespace NucDB {
   template<class T>
     TList* ToList(const std::vector<T>& v )
     {
-      TList * l = new TList();
+      auto * l = new TList();
       for(auto x: v){
         l->Add(x);
       }

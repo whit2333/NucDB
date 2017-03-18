@@ -35,7 +35,7 @@ NucDBMeasurement * NucDBExperiment::GetMeasurement(const char * name) {
 std::vector<NucDBMeasurement*> NucDBExperiment::GetMeasurements(NucDB::Process proc) {
    std::vector<NucDBMeasurement*> measList;
    for(int i = 0;i<fMeasurements.GetEntries();i++) {
-      NucDBMeasurement* meas = (NucDBMeasurement *)fMeasurements.At(i);
+      auto* meas = (NucDBMeasurement *)fMeasurements.At(i);
       if( meas->IsProcess(proc) ) {
          measList.push_back(meas);
       }
@@ -45,7 +45,7 @@ std::vector<NucDBMeasurement*> NucDBExperiment::GetMeasurements(NucDB::Process p
 //_____________________________________________________________________________
 
 void NucDBExperiment::PlotMeasurements(const char * var ){
-   TCanvas * c1 = new TCanvas( Form("%splots",GetName()),Form("%s plots",GetTitle() ) );
+   auto * c1 = new TCanvas( Form("%splots",GetName()),Form("%s plots",GetTitle() ) );
    c1->Divide(2,fMeasurements.GetEntries()/2);
    for(int i =0; i<fMeasurements.GetEntries();i++) {
       c1->cd(i+1);

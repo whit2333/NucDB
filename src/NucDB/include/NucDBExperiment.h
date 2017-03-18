@@ -40,7 +40,7 @@ class NucDBExperiment : public TNamed {
 
       /** Returns a new list containing all the refs from each measurement.  */
       TList * GetRefs(){
-         TList * refs         = new TList();
+         auto * refs         = new TList();
          NucDBMeasurement * m = nullptr;
          for(int i = 0;i<fMeasurements.GetEntries();i++){
             m = (NucDBMeasurement*)fMeasurements.At(i);

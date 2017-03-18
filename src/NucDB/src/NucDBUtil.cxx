@@ -126,7 +126,7 @@ namespace NucDB {
          return;
       }
       for(unsigned int i = 0; i<list->GetEntries();i++) {
-         NucDBMeasurement * mes = (NucDBMeasurement*)list->At(i);
+         auto * mes = (NucDBMeasurement*)list->At(i);
          mes->ApplyFilterWithBin(var);
       }
    }
@@ -140,9 +140,9 @@ namespace NucDB {
          std::cout << "Error null list" << std::endl;
          return nullptr;
       }
-      TList * filtered_list = new TList();
+      auto * filtered_list = new TList();
       for(unsigned int i = 0; i<list->GetEntries();i++) {
-         NucDBMeasurement * mes    = (NucDBMeasurement*)list->At(i);
+         auto * mes    = (NucDBMeasurement*)list->At(i);
          NucDBMeasurement * meas2  = mes->NewMeasurementWithFilter(var);
          if( meas2->GetNDataPoints() > 0 ) {
             filtered_list->Add(meas2);
@@ -217,9 +217,9 @@ namespace NucDB {
          return nullptr;
       }
       NucDBManager * dbman = NucDBManager::GetManager();
-      TMultiGraph * mg = new TMultiGraph();
+      auto * mg = new TMultiGraph();
       for(unsigned int i = 0; i<list->GetEntries();i++) {
-         NucDBMeasurement * mes = (NucDBMeasurement*)list->At(i);
+         auto * mes = (NucDBMeasurement*)list->At(i);
          TGraph * gr = mes->BuildGraph(var);
          if(gr) {
             Int_t color = mes->GetColor();//dbman->NextColor();
@@ -237,7 +237,7 @@ namespace NucDB {
    TMultiGraph * CreateMultiGraph(std::vector<NucDBMeasurement*> vec, const char * var){
       // creates a multi graph from a list of measurments
       NucDBManager * dbman = NucDBManager::GetManager();
-      TMultiGraph  * mg = new TMultiGraph();
+      auto  * mg = new TMultiGraph();
       for(auto mes : vec) {
          TGraphErrors * gr = mes->BuildGraph(var);
          if(gr) {
@@ -257,7 +257,7 @@ namespace NucDB {
    {
       // creates a multi graph from a list of measurments
       NucDBManager * dbman = NucDBManager::GetManager();
-      TMultiGraph  * mg = new TMultiGraph();
+      auto  * mg = new TMultiGraph();
       for(auto mes : vec) {
          TGraph * gr = mes->BuildKinematicGraph(var,var2);
          if(gr) {
@@ -285,7 +285,7 @@ namespace NucDB {
       }
 
       for(unsigned int i = 0; i<list->GetEntries();i++) {
-         NucDBMeasurement * mes = (NucDBMeasurement*)list->At(i);
+         auto * mes = (NucDBMeasurement*)list->At(i);
          TGraph * gr = nullptr;
          if(mg) {
             gr = (TGraph*)(mg->GetListOfGraphs()->At(i));
@@ -312,7 +312,7 @@ namespace NucDB {
 
       int i = 0;
       for(auto mes : vec) {
-         TGraph * gr = (TGraph*)(mg->GetListOfGraphs()->At(i));
+         auto * gr = (TGraph*)(mg->GetListOfGraphs()->At(i));
          if(!gr) {
             // just build the default graph for the style TODO: fixe this
            std::cout << " warning shouldn't be here in NucDB::FillLegend" <<std::endl;
@@ -432,9 +432,9 @@ namespace NucDB {
          return nullptr;
       }
 
-      NucDBMeasurement * merged_meas = new NucDBMeasurement(name,name);
+      auto * merged_meas = new NucDBMeasurement(name,name);
       for(int i = 0; i<meas_list->GetEntries();i++) {
-         NucDBMeasurement * aMeas = (NucDBMeasurement*)meas_list->At(i);
+         auto * aMeas = (NucDBMeasurement*)meas_list->At(i);
          merged_meas->AddDataPoints((TList*)aMeas->GetDataPoints()->Clone());
       }
       return merged_meas;
@@ -443,7 +443,7 @@ namespace NucDB {
 
    NucDBMeasurement * Merge(const std::vector<NucDBMeasurement*>& list , const char * name )
    {
-      NucDBMeasurement * merged_meas = new NucDBMeasurement(name,name);
+      auto * merged_meas = new NucDBMeasurement(name,name);
       for(auto m : list) {
          merged_meas->AddDataPoints((TList*)m->GetDataPoints()->Clone());
       }
@@ -463,7 +463,7 @@ namespace NucDB {
 
       NucDBDataPoint * mergedPoint = nullptr;
       for(unsigned int i = 0; i< points->GetEntries(); i++) {
-         NucDBDataPoint * point = (NucDBDataPoint*)points->At(i);
+         auto * point = (NucDBDataPoint*)points->At(i);
          if(i == 0){
             mergedPoint = new NucDBDataPoint(*point);
          } else {
@@ -475,13 +475,13 @@ namespace NucDB {
 
 //_____________________________________________________________________________
    TList * FilterDataPoints(TList * list, NucDBBinnedVariable * var){
-      TList * plist = new TList();
+      auto * plist = new TList();
       if(!var) {
          std::cout << "NULL NucDBVariable pointer" << std::endl;
          return list;
       }
       for(int i = 0; i < list->GetEntries();i++) {
-         NucDBDataPoint * point = dynamic_cast<NucDBDataPoint*>(list->At(i));
+         auto * point = dynamic_cast<NucDBDataPoint*>(list->At(i));
          if(!point) {
             std::cout << "list does not contain data points." <<std::endl;
             continue;
@@ -535,13 +535,13 @@ namespace NucDB {
       std::vector<NucDBDataPoint*> templist;
       Int_t n1 = list.GetEntries();
       for(int i = 0; i < list.GetEntries();i++) {
-         NucDBDataPoint * point = (NucDBDataPoint*)list.At(i);
+         auto * point = (NucDBDataPoint*)list.At(i);
          templist.push_back(point);
       }
       //std::sort (templist.begin(), templist.end(), CompareDataPoint );
       std::stable_sort (templist.begin(), templist.end(), CompareDataPoint );
       Int_t n2 =  templist.size();
-      TList * newlist  = new TList();
+      auto * newlist  = new TList();
       for(int i = 0; i< templist.size() ; i++ )  { 
          //templist[i]->Print();
          newlist->Add( new NucDBDataPoint( *(templist[i]))  );
@@ -581,7 +581,7 @@ namespace NucDB {
    {
      Bool_t addStatus = TH1::AddDirectoryStatus();
      TH1::AddDirectory( kFALSE );
-     TH1 * res = (TH1*)h->Clone("confidence_interval");
+     auto * res = (TH1*)h->Clone("confidence_interval");
      TH1::AddDirectory(addStatus);
 
      Int_t   xmax = h->GetNbinsX();

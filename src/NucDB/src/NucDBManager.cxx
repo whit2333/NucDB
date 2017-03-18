@@ -120,7 +120,7 @@ NucDBPaper * NucDBManager::GetPaper(const char * name) {
 TList * NucDBManager::GetMeasurements(const char * measurement)
 {
       TList * expList = GetExperiments(); 
-      TList * measList = new TList();
+      auto * measList = new TList();
       measList->Clear();
       for(int i = 0;i<expList->GetEntries();i++) {
          NucDBMeasurement * aMeas = ((NucDBExperiment*)expList->At(i))->GetMeasurement(measurement);
@@ -161,13 +161,13 @@ std::vector<NucDBMeasurement*>  NucDBManager::GetAllMeasurements(const char * me
 
       TList * NucDBManager::GetMeasurementCalculations(const char * measurement) {
    TList * papList = GetPapers(); 
-   TList * measList = new TList();
+   auto * measList = new TList();
    measList->Clear();
    for(int i = 0; i<papList->GetEntries(); i++) {
-      NucDBPaper * aPaper = (NucDBPaper*)papList->At(i);
+      auto * aPaper = (NucDBPaper*)papList->At(i);
       TList * calcs = aPaper->GetCalculations();
       for(int j = 0; j<calcs->GetEntries(); j++) {
-         NucDBCalculation * aCalc = (NucDBCalculation*)calcs->At(j);
+         auto * aCalc = (NucDBCalculation*)calcs->At(j);
          NucDBMeasurement * aMeas = aCalc->GetMeasurement(measurement);
          if(aMeas) measList->Add(aMeas);
       }
@@ -177,10 +177,10 @@ std::vector<NucDBMeasurement*>  NucDBManager::GetAllMeasurements(const char * me
 //_____________________________________________________________________________
 
 TMultiGraph *      NucDBManager::GetMultiGraph(const char * measurement, const char * var){
-   TMultiGraph * mg = new TMultiGraph();
+   auto * mg = new TMultiGraph();
    TList * meas = GetMeasurements(measurement);
    for(int i = 0 ; i < meas->GetEntries(); i++) {
-      NucDBMeasurement * am = (NucDBMeasurement*)meas->At(i);
+      auto * am = (NucDBMeasurement*)meas->At(i);
       TGraphErrors * gr = am->BuildGraph(var);
       mg->Add(gr,"p");
    }
@@ -188,10 +188,10 @@ TMultiGraph *      NucDBManager::GetMultiGraph(const char * measurement, const c
 }
 //_____________________________________________________________________________
 TMultiGraph *      NucDBManager::GetKinematicMultiGraph(const char * measurement, const char * var1 ,const char * var2 ){
-   TMultiGraph * mg   = new TMultiGraph();
+   auto * mg   = new TMultiGraph();
    TList       * meas = GetMeasurements(measurement);
    for(int i = 0 ; i < meas->GetEntries(); i++) {
-      NucDBMeasurement * am = (NucDBMeasurement*)meas->At(i);
+      auto * am = (NucDBMeasurement*)meas->At(i);
       TGraph * gr = am->BuildKinematicGraph(var1,var2);
       gr->SetFillColorAlpha(kRed,0.3);
       //gROOT->GetColor(40+i)->SetAlpha(1.0);
@@ -212,7 +212,7 @@ void NucDBManager::SavePaper(NucDBPaper * p) {
 void NucDBManager::SaveExperiment(NucDBExperiment * exp) {
       if(!fFile){ printf(" NO FILE OPENED!!! \n"); }
       // Check to see if experiment already exists
-      NucDBExperiment * anexp = (NucDBExperiment*)fExperiments->FindObject(exp->GetName());
+      auto * anexp = (NucDBExperiment*)fExperiments->FindObject(exp->GetName());
       // if it does not, then add it.
       if(exp != anexp) fExperiments->Add(exp);
       AddNewMeasurements(exp);
@@ -225,7 +225,7 @@ void   NucDBManager::AddNewMeasurements(NucDBExperiment * exp){
    TList * ms = exp->GetMeasurements();
    TObjString * mname = nullptr;
    for (int i = 0; i < ms->GetEntries(); i++) {
-      NucDBMeasurement * ameas = (NucDBMeasurement *) ms->At(i);
+      auto * ameas = (NucDBMeasurement *) ms->At(i);
       // find objstring if it exists
       mname = (TObjString*) fMeasurements->FindObject(ameas->GetName());
       // if there is no measurment by that name, at new objstring
@@ -284,23 +284,23 @@ Int_t NucDBManager::ListMeasurementsByExperiment(const char * measurement)  {
    if( !strcmp("",measurement) ) {
       TList * exps = GetExperiments();
       for(int i = 0; i< exps->GetEntries();i++){
-         NucDBExperiment * exp  = (NucDBExperiment*)exps->At(i);
+         auto * exp  = (NucDBExperiment*)exps->At(i);
          std::cout << " - " << exp->GetName() << "\n";
          TList * meas = exp->GetMeasurements();
          for(int j = 0; j<  meas->GetEntries();j++){
-            NucDBMeasurement * am = (NucDBMeasurement*)(meas->At(j));
+            auto * am = (NucDBMeasurement*)(meas->At(j));
             std::cout << "   - " << am->GetName() << "\n";
          }
       }
    } else {
       TList * exps = GetExperiments();
       for(int i = 0; i< exps->GetEntries();i++){
-         NucDBExperiment * exp  = (NucDBExperiment*)exps->At(i);
+         auto * exp  = (NucDBExperiment*)exps->At(i);
          if(exp->GetMeasurement(measurement) ) {
             std::cout << " - " << exp->GetName() << "\n";
             TList * meas = exp->GetMeasurements();
             for(int j = 0; j<  meas->GetEntries();j++){
-               NucDBMeasurement * am = (NucDBMeasurement*)(meas->At(j));
+               auto * am = (NucDBMeasurement*)(meas->At(j));
                std::cout << "   - " << am->GetName() << "\n";
             }
          }
@@ -317,10 +317,10 @@ Int_t NucDBManager::ListMeasurements(const char * n ) {
    std::pair<std::set<std::string>::iterator,bool> ret;
 
    for(int i=0;i<exps->GetEntries();i++) {
-      NucDBExperiment * anExp = (NucDBExperiment*)exps->At(i);
+      auto * anExp = (NucDBExperiment*)exps->At(i);
       TList * expMeas = anExp->GetMeasurements();
       for(int j=0;j<expMeas->GetEntries();j++) {
-         NucDBMeasurement * aMeas = (NucDBMeasurement*)expMeas->At(j);
+         auto * aMeas = (NucDBMeasurement*)expMeas->At(j);
          TString aName            = aMeas->GetName();
          TString aTitle           = aMeas->GetTitle();
          std::stringstream ss;
@@ -342,10 +342,10 @@ Int_t NucDBManager::ListMeasurements(const char * n ) {
 //_____________________________________________________________________________
 
 TList * NucDBManager::GetRefs() {
-      TList * refs = new TList();
+      auto * refs = new TList();
       TList * exps = GetExperiments();
       for(int i=0;i<exps->GetEntries();i++) {
-         NucDBExperiment * anExp = (NucDBExperiment*)exps->At(i);
+         auto * anExp = (NucDBExperiment*)exps->At(i);
          refs->AddAll(anExp->GetRefs());
       }
       refs->Print();
@@ -361,10 +361,10 @@ Int_t NucDBManager::ListCalculations(const char * n ) {
    std::pair<std::set<std::string>::iterator,bool> ret;
 
    for(int i=0;i<exps->GetEntries();i++) {
-      NucDBPaper * anExp = (NucDBPaper*)exps->At(i);
+      auto * anExp = (NucDBPaper*)exps->At(i);
       TList * expMeas = anExp->GetCalculations();
       for(int j=0;j<expMeas->GetEntries();j++) {
-         NucDBCalculation * aCalc = (NucDBCalculation*)expMeas->At(j);
+         auto * aCalc = (NucDBCalculation*)expMeas->At(j);
          TString aName            = aCalc->GetName();
          TString aTitle           = aCalc->GetTitle();
          std::stringstream ss;

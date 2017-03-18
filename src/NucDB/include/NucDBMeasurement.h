@@ -77,7 +77,7 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
       void PrintComments() const {
          TString prefix = " o ";
          for(int i = 0; i< fComments.GetEntries();i++){
-            TObjString * comment = (TObjString*)fComments.At(i);
+            auto * comment = (TObjString*)fComments.At(i);
             TString wrapped = prefix;
             wrapped += comment->String();
             wrapped = wordWrap(wrapped,50);
@@ -85,7 +85,7 @@ class NucDBMeasurement : public TNamed, public TAttLine, public TAttFill, public
          }
       }
       void AddComment(const char * c){
-         TObjString * comment = new TObjString(c);
+         auto * comment = new TObjString(c);
          fComments.Add(comment);
       }
       TList * GetComments(){ return &fComments; }

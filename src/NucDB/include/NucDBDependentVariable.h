@@ -65,7 +65,7 @@ class NucDBDependentVariable : public NucDBBinnedVariable {
 class NucDBThetaDV_rad  : public NucDBDependentVariable {
    public:
       NucDBThetaDV_rad(const char * n = "theta_rad",const char * t = "#theta (rad)") : NucDBDependentVariable(n,t) {
-         NucDBBinnedVariable    * th = new NucDBBinnedVariable("theta","#theta (deg)");
+         auto    * th = new NucDBBinnedVariable("theta","#theta (deg)");
          SetNDependentVariables(1);
          SetVariable(0,th);
          SetFunc1( &NucDB::Kine::to_radians );
@@ -78,7 +78,7 @@ class NucDBThetaDV_rad  : public NucDBDependentVariable {
 class NucDBThetaDV_deg  : public NucDBDependentVariable {
    public:
       NucDBThetaDV_deg(const char * n = "theta",const char * t = "#theta (deg)") : NucDBDependentVariable(n,t) {
-         NucDBBinnedVariable    * th = new NucDBBinnedVariable("theta_rad","#theta (rad)");
+         auto    * th = new NucDBBinnedVariable("theta_rad","#theta (rad)");
          SetNDependentVariables(1);
          SetVariable(0,th);
          SetFunc1( &NucDB::Kine::to_radians );
@@ -94,9 +94,9 @@ class NucDBThetaDV_deg  : public NucDBDependentVariable {
 class NucDBInvariantMassDV  : public NucDBDependentVariable {
    public:
       NucDBInvariantMassDV(const char * n = "W",const char * t = "W") : NucDBDependentVariable(n,t) {
-         NucDBBinnedVariable    * x  = new NucDBBinnedVariable("x","x");
+         auto    * x  = new NucDBBinnedVariable("x","x");
          x->SetBinValueSize(0.6,0.1);
-         NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+         auto    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
          Q2->SetBinValueSize(3.0,0.5);
          SetNDependentVariables(2);
          SetVariable(0,x);
@@ -111,8 +111,8 @@ class NucDBInvariantMassDV  : public NucDBDependentVariable {
 class NucDBInvariantMassDV_Q2nu  : public NucDBDependentVariable {
    public:
       NucDBInvariantMassDV_Q2nu(const char * n = "W",const char * t = "W") : NucDBDependentVariable(n,t) {
-         NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
-         NucDBBinnedVariable    * nu = new NucDBBinnedVariable("nu","nu");
+         auto    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+         auto    * nu = new NucDBBinnedVariable("nu","nu");
          SetNDependentVariables(2);
          SetVariable(0,Q2);
          SetVariable(1,nu);
@@ -126,8 +126,8 @@ class NucDBInvariantMassDV_Q2nu  : public NucDBDependentVariable {
 class NucDBW2DV_Q2nu  : public NucDBDependentVariable {
    public:
       NucDBW2DV_Q2nu(const char * n = "W2",const char * t = "W^{2}") : NucDBDependentVariable(n,t) {
-         NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
-         NucDBBinnedVariable    * nu = new NucDBBinnedVariable("nu","nu");
+         auto    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+         auto    * nu = new NucDBBinnedVariable("nu","nu");
          SetNDependentVariables(2);
          SetVariable(0,Q2);
          SetVariable(1,nu);
@@ -144,9 +144,9 @@ class NucDBW2DV_Q2nu  : public NucDBDependentVariable {
 class NucDBPhotonEnergyDV  : public NucDBDependentVariable {
    public:
       NucDBPhotonEnergyDV(const char * n = "nu",const char * t = "#nu") : NucDBDependentVariable(n,t) {
-         NucDBBinnedVariable    * x  = new NucDBBinnedVariable("x","x");
+         auto    * x  = new NucDBBinnedVariable("x","x");
          x->SetBinValueSize(0.6,0.1);
-         NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+         auto    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
          Q2->SetBinValueSize(3.0,0.5);
          SetNDependentVariables(2);
          SetVariable(0,x);
@@ -164,9 +164,9 @@ class NucDBPhotonEnergyDV  : public NucDBDependentVariable {
 class NucDBxBjorkenDV  : public NucDBDependentVariable {
    public:
       NucDBxBjorkenDV(const char * n = "x",const char * t = "x") : NucDBDependentVariable(n,t) {
-         NucDBBinnedVariable    * W  = new NucDBBinnedVariable("W","W");
+         auto    * W  = new NucDBBinnedVariable("W","W");
          W->SetBinValueSize(1.6,0.1);
-         NucDBBinnedVariable    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
+         auto    * Q2 = new NucDBBinnedVariable("Qsquared","Q^{2}");
          Q2->SetBinValueSize(3.0,0.5);
          SetNDependentVariables(2);
          SetVariable(0,W);
@@ -183,9 +183,9 @@ class NucDBxBjorkenDV  : public NucDBDependentVariable {
 class NucDBQ2DV_EEpTheta  : public NucDBDependentVariable {
    public:
       NucDBQ2DV_EEpTheta(const char * n = "Qsquared",const char * t = "Q^{2}") : NucDBDependentVariable(n,t) {
-         NucDBBinnedVariable    * Ebeam  = new NucDBBinnedVariable("E","E",1.0);
-         NucDBBinnedVariable    * Eprime = new NucDBBinnedVariable("Eprime","E'",0.0);
-         NucDBBinnedVariable    * theta  = new NucDBBinnedVariable("theta_rad","#theta",0.1);
+         auto    * Ebeam  = new NucDBBinnedVariable("E","E",1.0);
+         auto    * Eprime = new NucDBBinnedVariable("Eprime","E'",0.0);
+         auto    * theta  = new NucDBBinnedVariable("theta_rad","#theta",0.1);
          SetNDependentVariables(3);
          SetVariable(0,Ebeam);
          SetVariable(1,Eprime);

@@ -104,7 +104,7 @@ const NucDBDataPoint& NucDBDataPoint::operator+=(const NucDBDataPoint &v)
 
    // Merge the bins
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
-      NucDBBinnedVariable* binVar1 = (NucDBBinnedVariable*)fBinnedVariables.At(i); 
+      auto* binVar1 = (NucDBBinnedVariable*)fBinnedVariables.At(i); 
       NucDBBinnedVariable* binVar2 = v.GetBinVariable(binVar1->GetName()); 
       if(!binVar2){
          Error("NucDBDataPoint::operator+=","Could not find matching bin variable %s",binVar1->GetName());
@@ -141,7 +141,7 @@ const NucDBDataPoint& NucDBDataPoint::operator-=(const NucDBDataPoint &v)
 
    // Merge the bins
    for(int i=0; i<fBinnedVariables.GetEntries();i++) {
-      NucDBBinnedVariable* binVar1 = (NucDBBinnedVariable*)fBinnedVariables.At(i); 
+      auto* binVar1 = (NucDBBinnedVariable*)fBinnedVariables.At(i); 
       NucDBBinnedVariable* binVar2 = v.GetBinVariable(binVar1->GetName()); 
       if(!binVar2){
          Error("NucDBDataPoint::operator-=","Could not find matching bin variable");
@@ -300,7 +300,7 @@ void NucDBDataPoint::SetSortPriorities(const std::vector<std::string> & names)
 
 Int_t   NucDBDataPoint::Compare(const TObject *obj) const
 { 
-   NucDBDataPoint * dbobj = (NucDBDataPoint*)obj; 
+   auto * dbobj = (NucDBDataPoint*)obj; 
    if( (*this) > (*dbobj) ) return 1;
    if( (*this) < (*dbobj) ) return -1;
    return 0;
@@ -376,7 +376,7 @@ void NucDBDataPoint::AddVariable(NucDBVariable * var) {
 NucDBDependentVariable* NucDBDataPoint::GetDependentVariable(const char * name)
 {
    for(int i = 0;i<fBinnedVariables.GetEntries();i++) {
-      NucDBDependentVariable* var = dynamic_cast<NucDBDependentVariable*>(fBinnedVariables.At(i));
+      auto* var = dynamic_cast<NucDBDependentVariable*>(fBinnedVariables.At(i));
       if(!var) continue;
       if( !strcmp( var->GetName(),name) ) 
          return(var);

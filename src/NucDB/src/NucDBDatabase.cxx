@@ -13,7 +13,7 @@ void NucDBDatabase::Print(Option_t *option) const {
 void NucDBDatabase::ListExperiments() const {
       std::cout << "Experiments:\n";
       for(int i = 0; i< fExperiments.GetEntries();i++){
-         NucDBExperiment * exp  = (NucDBExperiment*)fExperiments.At(i);
+         auto * exp  = (NucDBExperiment*)fExperiments.At(i);
          std::cout << " - " << exp->GetName() << "\n";
       }
    }
@@ -22,7 +22,7 @@ void NucDBDatabase::ListExperiments() const {
 void NucDBDatabase::ListMeasurements() const {
       std::cout << "Measurements:\n";
       for(int i = 0; i< fMeasurements.GetEntries();i++){
-         TObjString * meas  = (TObjString*)fMeasurements.At(i);
+         auto * meas  = (TObjString*)fMeasurements.At(i);
          std::cout << " - " << meas->GetName() << "\n";
       }
    }
@@ -32,7 +32,7 @@ void NucDBDatabase::ListMeasurements() const {
 void NucDBDatabase::ListPapers() const {
       std::cout << "Papers:\n";
       for(int i = 0; i< fPapers.GetEntries();i++){
-         NucDBPaper * pap  = (NucDBPaper*)fPapers.At(i);
+         auto * pap  = (NucDBPaper*)fPapers.At(i);
          std::cout << " - " << pap->GetName() << "\n";
       }
    }

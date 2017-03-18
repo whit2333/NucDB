@@ -208,7 +208,7 @@ namespace NucDB {
   {
     Bool_t addStatus = TH1::AddDirectoryStatus();
     TH1::AddDirectory( kFALSE );
-    TH1 * res = (TH1*)h->Clone("confidence_interval");
+    auto * res = (TH1*)h->Clone("confidence_interval");
     TH1::AddDirectory(addStatus);
 
     Int_t   xmax = h->GetNbinsX();
