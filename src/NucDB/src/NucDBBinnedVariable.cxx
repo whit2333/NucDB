@@ -135,19 +135,13 @@ bool NucDBBinnedVariable::BinsOverlap(const NucDBBinnedVariable &var) const {
 //_____________________________________________________________________________
 
 bool NucDBBinnedVariable::Contains(double v) const {
-   if( ( v >= GetMinimum() ) && ( v < GetMaximum() ) ) { return true;
-}
-   return false;
+   return ( v >= GetMinimum() ) && ( v < GetMaximum() );
 }
 bool NucDBBinnedVariable::IsBelow(double v) const {
-   if( GetMaximum() < v ) { return true;
-}
-   return false;
+   return GetMaximum() < v;
 }
 bool NucDBBinnedVariable::IsAbove(double v) const {
-   if( GetMinimum() > v ) { return true;
-}
-   return false;
+   return GetMinimum() > v;
 }
 //_____________________________________________________________________________
 void NucDBBinnedVariable::SetBinValueSize(Double_t val, Double_t size) {

@@ -12,22 +12,37 @@
 
 #include "TMath.h"
 #include "Math/RichardsonDerivator.h"
+
 #include "Math/Error.h"
+
+//#include "TROOT.h"
+//#include "TThreadPool.h"
+//#include "TThread.h"
+#include "ROOT/TThreadExecutor.hxx"
 
 namespace NucDB {
 
   Chi2Function::Chi2Function(int dim, int npoint) : ROOT::Math::FitMethodFunction(dim, npoint) 
   { }
-//______________________________________________________________________________
+  //______________________________________________________________________________
 
-  Chi2Function::Chi2Function(int dim, int npoint, std::function<double(const double *,int)> f)
+  Chi2Function::Chi2Function(int dim,
+                             int npoint,
+                             std::function<double(const double *,int)> f)
     : ROOT::Math::FitMethodFunction(dim, npoint), fNucDBFCN(f)
-  {  }
-//______________________________________________________________________________
+  { }
+  //______________________________________________________________________________
 
-  Chi2Function::~Chi2Function()
-  = default;
-//______________________________________________________________________________
+  Chi2Function::Chi2Function(int dim,
+                             const std::vector<NucDBDataPoint*>& data,
+                             std::function<double(const double*, const NucDBDataPoint*)> f)
+    : ROOT::Math::FitMethodFunction(dim, data.size()), fDataPoints(data),
+    fNucDBFCN2(f)
+  { }
+  //______________________________________________________________________________
+  
+  Chi2Function::~Chi2Function() = default;
+  //______________________________________________________________________________
 
   Chi2Function*  Chi2Function::Clone() const
   { 
@@ -37,7 +52,7 @@ namespace NucDB {
   }
   //______________________________________________________________________________
 
-  double Chi2Function::DoEval(const double *p) const 
+  double Chi2Function::DoEval_old(const double *p) const 
   {
     double chi2 = 0.0;
     for(int ip = 0; ip< NPoints();ip++){
@@ -45,7 +60,24 @@ namespace NucDB {
     }
     return chi2;
   }
-//______________________________________________________________________________
+  //__________________________________________________________________________
+
+  double Chi2Function::DoEval(const double *p) const 
+  {
+    double chi2 =  0.0;
+    if(fDataPoints.size() > 0 ) {
+    ROOT::EnableImplicitMT(); // Tell ROOT you want to go parallel
+    ROOT::TThreadExecutor pool;
+    auto chi_squares = pool.Map(
+      [&](NucDBDataPoint* point){ return fNucDBFCN2(p, point); },
+      fDataPoints );
+      chi2 = pool.Reduce(chi_squares,[](auto a, auto b){ return a+b;});
+    } else {
+      chi2 = DoEval_old(p);
+    }
+    return chi2;
+  }
+  //______________________________________________________________________________
 
 
   /**      Method returning the data i-th contribution to the fit objective function
@@ -55,12 +87,14 @@ namespace NucDB {
    */
   double Chi2Function::DataElement(const double *x, unsigned int i, double *g) const
   {
-      return fNucDBFCN(x,i); 
+    return fNucDBFCN(x,i); 
   }
   //______________________________________________________________________________
 
-  std::vector<double> Chi2Function::GetConfidenceIntervals(const ROOT::Fit::FitResult& result, double cl,
-     std::function<double(const double *, const double * )> f, std::vector<NucDBDataPoint*> data_points)
+  std::vector<double> Chi2Function::GetConfidenceIntervals(const ROOT::Fit::FitResult& result,
+                                                           double cl,
+                                                           std::function<double(const double *, const double * )> f,
+                                                           std::vector<NucDBDataPoint*> data_points )
   {
     SetFunction(f);
     // use student quantile in case of normalized errors
@@ -69,13 +103,13 @@ namespace NucDB {
     double corrFactor = 1.0;
     bool norm = true;
     if (Chi2 <= 0 || Ndf == 0) { norm = false;
-}
+    }
     if (norm) {
       corrFactor = TMath::StudentQuantile(0.5 + cl/2, Ndf) * std::sqrt( Chi2/Ndf );
     } else {
       // value to go up in chi2 (1: 1 sigma error(CL=0.683) , 4: 2 sigma errors
       corrFactor = ROOT::Math::chisquared_quantile(cl, 1);
-}
+    }
 
     unsigned int ndim = 2;//NDim();
     unsigned int npar = result.NPar();
@@ -108,7 +142,7 @@ namespace NucDB {
       ROOT::Math::RichardsonDerivator d;
       for (unsigned int ipar = 0; ipar < npar; ++ipar) {
         ROOT::Math::OneDimParamFunctionAdapter<std::function<double(const double *, const double * )> > fadapter(
-            fModelFunction,&xpoint.front(), &params.front(), ipar );
+          fModelFunction,&xpoint.front(), &params.front(), ipar );
         d.SetFunction(fadapter);
         grad[ipar] = d(params[ipar] ); // evaluate df/dp
       }
@@ -133,8 +167,11 @@ namespace NucDB {
   }
   //______________________________________________________________________________
 
-  std::vector<double> Chi2Function::GetConfidenceIntervals(const ROOT::Fit::FitResult& result, double cl,
-      std::function<double(const double *, const double * )> f, std::vector<double> x1val, std::vector<double> x2val)
+  std::vector<double> Chi2Function::GetConfidenceIntervals(const ROOT::Fit::FitResult& result,
+                                                           double cl,
+                                                           std::function<double(const double *, const double * )> f,
+                                                           std::vector<double> x1val,
+                                                           std::vector<double> x2val)
   {
     SetFunction(f);
     // use student quantile in case of normalized errors
@@ -143,13 +180,13 @@ namespace NucDB {
     double corrFactor = 1.0;
     bool norm = true;
     if (Chi2 <= 0 || Ndf == 0) { norm = false;
-}
+    }
     if (norm) {
       corrFactor = TMath::StudentQuantile(0.5 + cl/2, Ndf) * std::sqrt( Chi2/Ndf );
     } else {
       // value to go up in chi2 (1: 1 sigma error(CL=0.683) , 4: 2 sigma errors
       corrFactor = ROOT::Math::chisquared_quantile(cl, 1);
-}
+    }
 
     unsigned int ndim = 2;//NDim();
     unsigned int npar = result.NPar();
@@ -182,7 +219,7 @@ namespace NucDB {
       ROOT::Math::RichardsonDerivator d;
       for (unsigned int ipar = 0; ipar < npar; ++ipar) {
         ROOT::Math::OneDimParamFunctionAdapter<std::function<double(const double *, const double * )> > fadapter(
-            fModelFunction, &xpoint.front(), &params.front(), ipar );
+          fModelFunction, &xpoint.front(), &params.front(), ipar );
         d.SetFunction(fadapter);
         grad[ipar] = d(params[ipar] ); // evaluate df/dp
       }
@@ -206,9 +243,9 @@ namespace NucDB {
     return res;
   }
   //______________________________________________________________________________
-  
+
   TH1*  Chi2Function::GetConfidenceIntervals(const ROOT::Fit::FitResult& result, double cl,
-      std::function<double(const double *, const double * )> f, const TH1 * h, double x2)
+                                             std::function<double(const double *, const double * )> f, const TH1 * h, double x2)
   {
     Bool_t addStatus = TH1::AddDirectoryStatus();
     TH1::AddDirectory( kFALSE );
@@ -249,4 +286,6 @@ namespace NucDB {
 
 
 }
+//__________________________________________________________________________
+
 

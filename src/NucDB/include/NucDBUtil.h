@@ -66,8 +66,8 @@ namespace NucDB {
   };
   std::ostream& operator<< (std::ostream & os, Process p);
 
-  int  SetColors( std::vector<NucDBMeasurement*>, std::vector<int>);
-  int  SetColors( std::vector<NucDBMeasurement*>, int);
+  int  SetColors( std::vector<NucDBMeasurement*> /*meas*/, std::vector<int> /*colors*/);
+  int  SetColors( std::vector<NucDBMeasurement*> /*meas*/, int /*color*/);
   int  SetLineColor(std::vector<NucDBMeasurement*> meas, int color) ;
 
   std::vector<int> GoodColors(int ncol=10,int offset=0);
@@ -75,7 +75,7 @@ namespace NucDB {
   void ApplyFilterOnList(NucDBBinnedVariable * var, TList * list);
 
   TList *                        FilterMeasurements( TList * list, NucDBBinnedVariable * var );
-  std::vector<NucDBMeasurement*> FilterMeasurements( std::vector<NucDBMeasurement*>, NucDBBinnedVariable * var );
+  std::vector<NucDBMeasurement*> FilterMeasurements( std::vector<NucDBMeasurement*> /*list*/, NucDBBinnedVariable * var );
 
   std::vector<double> Values( std::vector<NucDBDataPoint*> points );
   std::vector<double> Errors( std::vector<NucDBDataPoint*> points );
@@ -83,11 +83,11 @@ namespace NucDB {
   std::vector<double> BinSizes(   std::vector<NucDBDataPoint*> points, const char * var = "x");
 
   TMultiGraph * CreateMultiGraph(TList * list, const char * var);
-  TMultiGraph * CreateMultiGraph(std::vector<NucDBMeasurement*>, const char * var);
-  TMultiGraph * CreateMultiKineGraph(std::vector<NucDBMeasurement*>, const char * var, const char * var2);
+  TMultiGraph * CreateMultiGraph(std::vector<NucDBMeasurement*> /*vec*/, const char * var);
+  TMultiGraph * CreateMultiKineGraph(std::vector<NucDBMeasurement*> /*vec*/, const char * var, const char * var2);
 
   void FillLegend(TLegend * leg, TList * list, TMultiGraph * mg );
-  void FillLegend(TLegend * leg, std::vector<NucDBMeasurement*>, TMultiGraph * mg );
+  void FillLegend(TLegend * leg, std::vector<NucDBMeasurement*> /*vec*/, TMultiGraph * mg );
 
   /** From the list of measurement for the experiment name.
    *  Returns the first one found. Returns zero if not found.
@@ -101,7 +101,7 @@ namespace NucDB {
   std::vector<NucDBMeasurement*> RemoveExperiment(const char * name, std::vector<NucDBMeasurement*> meas_list);
 
   NucDBMeasurement * Merge(TList * meas_list, const char * name = "" );
-  NucDBMeasurement * Merge(const std::vector<NucDBMeasurement*>&, const char * name = "" );
+  NucDBMeasurement * Merge(const std::vector<NucDBMeasurement*>& /*list*/, const char * name = "" );
 
   /** Merge all the datapoints in the list into a single data point.
   */

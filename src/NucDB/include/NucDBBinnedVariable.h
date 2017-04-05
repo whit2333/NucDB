@@ -143,9 +143,9 @@ class NucDBBinnedVariable : public TNamed {
       bool operator==(const NucDBBinnedVariable &other) const {return(BinsOverlap(other));}
       bool operator!=(const NucDBBinnedVariable &other) const { return !(*this == other);}
 
-      bool Contains(double) const ;
-      bool IsAbove(double) const ;
-      bool IsBelow(double) const ;
+      bool Contains(double /*v*/) const ;
+      bool IsAbove(double /*v*/) const ;
+      bool IsBelow(double /*v*/) const ;
 
       Int_t       GetSortPriority() const {return fSortPriority;}
       void        SetSortPriority(Int_t v){fSortPriority=v;}

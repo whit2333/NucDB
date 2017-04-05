@@ -27,7 +27,7 @@ void add_DVCS_data(const char * fname, NucDBMeasurement * meas)
    double phi = 0;
    // ----------------------------------------------------------------
    //
-   afile = std::ifstream(fname);
+   auto afile = std::ifstream(fname);
 
    std::getline(afile, line);
    iss = std::stringstream(line);
